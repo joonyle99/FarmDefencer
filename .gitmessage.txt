@@ -41,7 +41,8 @@
 #
 # - 본문은 제목과 빈 줄로 구분
 # - '어떻게(How)' 보다는 '무엇(What)'과 '왜(Why)'에 중점
-# - 구체적인 이유나 해결한 문제의 맥락을 설명 (필요 시 72자 이하로 줄바꿈하여 작성)
+# - 구체적인 이유나 해결한 문제의 맥락을 설명
+# - 필요 시 72자 이하로 줄바꿈하여 작성
 #
 # 예시:
 #   This commit adds a teleportation system to the player controller,
