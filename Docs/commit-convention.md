@@ -60,3 +60,7 @@ Body
 목적지가 시각적으로 표시됩니다. 이 기능은 넓은 맵에서 빠른 이동을 통해 탐험을 
 더욱 원활하게 할 수 있도록 기획되었습니다.
 ```
+
+### 참고
+
+[Udacity Git Commit Message Style Guide](https://udacity.github.io/git-styleguide/)
