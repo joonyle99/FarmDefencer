@@ -14,6 +14,8 @@
 
 ![head_clean_option](/Pictures/head_clean_option.png) ![head_cracked_option](/Pictures/head_cracked_option.png)
 
+![](/Pictures/door_05_end_main0000.png)
+
 ## 버전 관리
 - 버전 관리가 필요한 경우, 에셋 이름 끝에 버전 번호를 포함시킵니다.
   - 예시: `enemy_tank_v1.prefab`, `skybox_desert_v1.1.png`
