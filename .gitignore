@@ -25,7 +25,7 @@
 
 # Visual Studio cache directory
 /FarmDefencer/.vs/
-/FarmDefencer/.vsconfig/
+/FarmDefencer/.vsconfig
 
 # Gradle cache directory
 /FarmDefencer/.gradle/
