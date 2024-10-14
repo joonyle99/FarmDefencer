@@ -70,3 +70,11 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# 유니티 자동 생성 파일 무시
+Library/
+Logs/
+Temp/
+Obj/
+Build/
+UserSettings/
