@@ -1,14 +1,8 @@
-################
 # [Type] Subject
-#
+# 아래줄에 [타입]과 [제목]을 작성해 주세요 :)
+
 # Body (선택사항)
-################
-
-# @아래줄에 [타입]과 [제목]을 작성해 주세요 :)@
-
-
-# @아래줄에 [본문]을 작성해 주세요 :)@
-
+# 아래줄에 [본문]을 작성해 주세요 :)
 
 ################
 # 타입: 커밋의 유형은 제목 내에 포함되며 다음 중 하나를 선택
@@ -30,10 +24,6 @@
 # - 불필요한 특수기호, 마침표 생략
 # - 제목에 타입을 포함하여 어떤 변경인지 명확하게 표현
 # - 커밋 메시지에서 변경 사항이 명확하게 드러나도록 작성
-#
-# 예시:
-#   [Feat] Add teleportation system for player movement
-#   [Fix] Fix player jump animation glitch on certain platforms
 ################
 
 ################
@@ -43,8 +33,4 @@
 # - '어떻게(How)' 보다는 '무엇(What)'과 '왜(Why)'에 중점
 # - 구체적인 이유나 해결한 문제의 맥락을 설명
 # - 필요 시 72자 이하로 줄바꿈하여 작성
-#
-# 예시:
-#   This commit adds a teleportation system to the player controller,
-#   allowing players to move between predefined points on the map.
 ################
