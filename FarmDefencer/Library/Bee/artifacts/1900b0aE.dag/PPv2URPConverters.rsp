@@ -115,9 +115,17 @@
 -define:ENABLE_TIMELINE
 -define:ENABLE_LEGACY_INPUT_MANAGER
 -define:TEXTCORE_FONT_ENGINE_1_5_OR_NEWER
+-define:DOTWEEN
+-define:USING_URP
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
 -define:UNITY_EDITOR_ONLY_COMPILATION
+-r:"Assets/External Asset/DoTween Pro/DemiLib/Core/DemiLib.dll"
+-r:"Assets/External Asset/DoTween Pro/DemiLib/Core/Editor/DemiEditor.dll"
+-r:"Assets/External Asset/DoTween Pro/DOTween/DOTween.dll"
+-r:"Assets/External Asset/DoTween Pro/DOTween/Editor/DOTweenEditor.dll"
+-r:"Assets/External Asset/DoTween Pro/DOTweenPro/DOTweenPro.dll"
+-r:"Assets/External Asset/DoTween Pro/DOTweenPro/Editor/DOTweenProEditor.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2022.3.50f1/Editor/Data/Managed/UnityEditor.Graphs.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2022.3.50f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2022.3.50f1/Editor/Data/Managed/UnityEngine/UnityEditor.DeviceSimulatorModule.dll"
@@ -351,6 +359,12 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.TestRunner.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
+-analyzer:"Assets/External Asset/DoTween Pro/DemiLib/Core/DemiLib.dll"
+-analyzer:"Assets/External Asset/DoTween Pro/DemiLib/Core/Editor/DemiEditor.dll"
+-analyzer:"Assets/External Asset/DoTween Pro/DOTween/DOTween.dll"
+-analyzer:"Assets/External Asset/DoTween Pro/DOTween/Editor/DOTweenEditor.dll"
+-analyzer:"Assets/External Asset/DoTween Pro/DOTweenPro/DOTweenPro.dll"
+-analyzer:"Assets/External Asset/DoTween Pro/DOTweenPro/Editor/DOTweenProEditor.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.50f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.50f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Library/PackageCache/com.unity.render-pipelines.universal@14.0.11/Editor/Converter/PPv2/EffectConverters/BloomConverter.cs"
