@@ -10,7 +10,7 @@
 ```
 [Type] Subject
 
-Body
+Body (생략 가능)
 ```
 
 ---
