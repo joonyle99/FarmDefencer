@@ -20,5 +20,5 @@
 
 ### 팜디펜서 바로가기
 
-- [Notion]([Docs/commit-convention.md](https://www.notion.so/114c46037fb98082bacffe20c5c968ec?pvs=4))
+- [Notion](https://www.notion.so/114c46037fb98082bacffe20c5c968ec?pvs=4)
 - []()
