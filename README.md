@@ -17,3 +17,8 @@
 커밋 메시지를 작성할 때는 [여기](Docs/commit-convention.md)를 참고해 주세요.
 
 ---
+
+### 팜디펜서 바로가기
+
+- [Notion]([Docs/commit-convention.md](https://www.notion.so/114c46037fb98082bacffe20c5c968ec?pvs=4))
+- []()
