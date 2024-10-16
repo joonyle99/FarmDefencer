@@ -1,10 +1,10 @@
 
-# 에셋 및 리소스 네이밍 규칙
+## 에셋 및 리소스 네이밍 규칙
 
 이 문서는 유니티 프로젝트에서 사용하는 에셋 및 리소스의 네이밍 규칙을 정의합니다.  
 이 지침을 따르면 프로젝트를 깔끔하고 체계적으로 관리할 수 있으며, 팀 간의 협업이 더욱 원활해집니다.
 
-## 일반 규칙
+### 일반 규칙
 
 - 에셋 및 리소스에 대한 명확하고 설명적인 이름을 사용합니다.
 - 모든 에셋 및 리소스의 이름은 **영문**으로 작성합니다.
@@ -12,14 +12,14 @@
 
 > **snake_case**: 단어 사이에 언더스코어를 사용합니다 (예: `player_character`, `enemy_tank`)
 
-## 예시
+### 예시
 
 ![head_clean_option](https://github.com/user-attachments/assets/e4912e91-c813-4e60-a290-edbd4eab069d)
 ##### head_clean_option.png
 ![head_cracked_option](https://github.com/user-attachments/assets/990a3657-1d95-45dd-8b1e-e0ab8e3ca1e5)
 ##### head_cracked_option.png
 
-## 폴더 구조
+### 폴더 구조
 
 - 에셋 및 리소스는 폴더 구조에 따라 파일의 유형을 명확히 구분합니다.
   - 예시: `Textures` 폴더에 있는 파일은 모두 텍스처 파일이므로 파일명에 `tex_` 프리픽스를 붙일 필요가 없습니다.
