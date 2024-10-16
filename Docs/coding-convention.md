@@ -10,39 +10,39 @@
 
 ### 2. 네이밍 규칙
 
-#### 2.1 **변수 및 필드**
+#### 2.1 변수 및 필드
 
-- **비공개 필드 (private)**: `_camelCase`를 사용하며, 접두어로 `_`를 붙입니다.
+- 비공개 필드 (private): `_camelCase`를 사용하며, 접두어로 `_`를 붙입니다.
   - 예시: `_currentScore`, `_maxValue`
 
 <br>
 
-- **보호된 필드 (protected)**: `camelCase`를 사용합니다.
+- 보호된 필드 (protected): `camelCase`를 사용합니다.
   - 예시: `targetAttackCount`, `attackCountRange`
 
 <br>
 
-- **공개 필드 (public)**: `PascalCase`를 사용하며, 프로퍼티(Property) 형식을 선호합니다.
+- 공개 필드 (public): `PascalCase`를 사용하며, 프로퍼티(Property) 형식을 선호합니다.
   - 예시: `MonsterName`, `MaxHp`
 
 <br>
 
-- **로컬 변수 및 매개 변수**: `camelCase`를 사용하여 작성합니다.
+- 로컬 변수 및 매개 변수: `camelCase`를 사용하여 작성합니다.
   - 예시: `userName`, `totalCount`
 
 <br>
 
-- **전역 상수**: `UPPER_CASE`를 사용하며, 각 단어는 언더스코어(`_`)로 구분합니다. `const` 키워드를 사용합니다.
+- 전역 상수: `UPPER_CASE`를 사용하며, 각 단어는 언더스코어(`_`)로 구분합니다. `const` 키워드를 사용합니다.
   - 예시: `MAX_RETRY_COUNT`, `DEFAULT_TIMEOUT`
 
-#### 2.2 **메서드 및 함수**
+#### 2.2 메서드 및 함수
 
-- **메서드**: `PascalCase`를 사용합니다.
+- 메서드: `PascalCase`를 사용합니다.
   - 예시: `CalculateScore()`, `GetUserName()`
 
-#### 2.3 **클래스 및 인터페이스**
+#### 2.3 클래스 및 인터페이스
 
-- **클래스**: `PascalCase`를 사용하며, 명사 또는 명사구로 작성합니다.
+- 클래스: `PascalCase`를 사용하며, 명사 또는 명사구로 작성합니다.
   - 예시: `PlayerManager`, `ScoreCalculator`
 
 <br>
@@ -50,14 +50,14 @@
 - **인터페이스**: `I` 접두어를 붙이고 `PascalCase`를 사용합니다.
   - 예시: `IUserService`, `ILogger`
 
-#### 2.4 **열거형 (Enum)**
+#### 2.4 열거형 (Enum)
 
-- **열거형 이름**: `PascalCase`를 사용합니다.
+- 열거형 이름: `PascalCase`를 사용합니다.
   - 예시: `GameState`, `UserRole`
 
 <br>
 
-- **열거형 멤버**: `PascalCase`를 사용합니다.
+- 열거형 멤버: `PascalCase`를 사용합니다.
   - 예시: `Playing`, `Paused`, `Stopped`
 
 ---
