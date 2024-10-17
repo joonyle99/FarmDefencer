@@ -1,37 +1,43 @@
 
-# 유니티 에셋 네이밍 규칙
+## 에셋 및 리소스 네이밍 규칙
 
-이 문서는 유니티 프로젝트에서 사용하는 에셋의 네이밍 규칙을 정의합니다.
+이 문서는 유니티 프로젝트에서 사용하는 에셋 및 리소스의 네이밍 규칙을 정의합니다.  
 이 지침을 따르면 프로젝트를 깔끔하고 체계적으로 관리할 수 있으며, 팀 간의 협업이 더욱 원활해집니다.
 
-## 일반 규칙
-- 모든 에셋 이름은 **영문**으로 작성합니다.
-- `/`, `\`, `@`, `#` 등 특수 문자는 사용하지 않습니다.
+### 일반 규칙
+
+- 에셋 및 리소스에 대한 명확하고 설명적인 이름을 사용합니다.
+- 모든 에셋 및 리소스의 이름은 **영문**으로 작성합니다.
 - **snake_case**를 사용하여 이름을 작성합니다.
-- 에셋에 대한 명확하고 설명적인 이름을 사용합니다.
 
 > **snake_case**: 단어 사이에 언더스코어를 사용합니다 (예: `player_character`, `enemy_tank`)
 
-![head_clean_option](/Pictures/head_clean_option.png) ![head_cracked_option](/Pictures/head_cracked_option.png)
+### 예시
 
-![](/Pictures/door_05_end_main0000.png)
+![head_clean_option](https://github.com/user-attachments/assets/e4912e91-c813-4e60-a290-edbd4eab069d)
+##### head_clean_option.png
+![head_cracked_option](https://github.com/user-attachments/assets/990a3657-1d95-45dd-8b1e-e0ab8e3ca1e5)
+##### head_cracked_option.png
 
-## 버전 관리
-- 버전 관리가 필요한 경우, 에셋 이름 끝에 버전 번호를 포함시킵니다.
-  - 예시: `enemy_tank_v1.prefab`, `skybox_desert_v1.1.png`
+### 폴더 구조
 
-## 폴더 구조
-- 일관된 폴더 구조를 유지하여 에셋을 보관합니다.
+- 에셋 및 리소스는 폴더 구조에 따라 파일의 유형을 명확히 구분합니다.
+  - 예시: `Textures` 폴더에 있는 파일은 모두 텍스처 파일이므로 파일명에 `tex_` 프리픽스를 붙일 필요가 없습니다.
   ```
   Assets/
-    ├── External Asset/
-    ├── Project Resources/
+    ├── External Assets/
+    ├── Project Assets/      // 유니티 내에서 제작하는 에셋 파일 (애니메이션, 머터리얼, 프리팹 등)
     │   ├── Animations/
-    │   ├── Prefabs/
+    │   |   ├── AnimatorControllers/
     │   ├── Materials/
-    │   └── Images/
+    │   |   ├── Shaders/  
+    │   ├── Meshs/
+    │   ├── Prefabs/
+    ├── Project Resources/   // 리소스 파일 (텍스처, 사운드, UI 등)
     │   └── Sounds/
-    ├── Resources/
+    │   └── Texture/
+    │   └── UI/
+    ├── Resources/           // 런타임으로 불러오기 위한 리소스 (Unity Resources API)
     ├── Scenes/
     ├── Scripts/
     .
