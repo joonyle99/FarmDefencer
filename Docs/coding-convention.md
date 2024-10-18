@@ -105,7 +105,7 @@ total += 10;
 public class Player
 {
     private int _score;
-    protected int ProtectedScore;
+    protected int protectedScore;
     public int Score => _score;
 }
 ```
