@@ -1,5 +1,5 @@
 {
-    "name": "player_input_actions",
+    "name": "PlayerInputActions",
     "maps": [
         {
             "name": "PlayerActionMap",
