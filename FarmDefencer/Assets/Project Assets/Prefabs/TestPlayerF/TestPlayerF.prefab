@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5889198786106134516}
-  - component: {fileID: 1490722746481204279}
   - component: {fileID: 1602709069722497396}
   - component: {fileID: 6871639789262496451}
   - component: {fileID: 7967239315561602502}
   - component: {fileID: 4956368070878987424}
+  - component: {fileID: 453972362371762412}
   m_Layer: 0
   m_Name: TestPlayerF
   m_TagString: Untagged
@@ -36,19 +36,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1490722746481204279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8913430023454592942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3460bb4b04e4e24469317398f6a8d0b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CameraMovementScale: 0.1
 --- !u!114 &1602709069722497396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +100,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
@@ -209,3 +196,18 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &453972362371762412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8913430023454592942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3460bb4b04e4e24469317398f6a8d0b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraMovementScale: 1
+  MousePosition: {x: 0, y: 0}
+  FarmObject: {fileID: 0}

@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 453972362371762412, guid: d72f5f52e5bd6db4cb58f9b05c13b898, type: 3}
+      propertyPath: FarmObject
+      value: 
+      objectReference: {fileID: 876821027}
     - target: {fileID: 5889198786106134516, guid: d72f5f52e5bd6db4cb58f9b05c13b898, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -137,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5889198786106134516, guid: d72f5f52e5bd6db4cb58f9b05c13b898, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 5889198786106134516, guid: d72f5f52e5bd6db4cb58f9b05c13b898, type: 3}
       propertyPath: m_LocalRotation.w
@@ -218,7 +222,7 @@ GameObject:
   - component: {fileID: 876821028}
   - component: {fileID: 876821029}
   m_Layer: 0
-  m_Name: farm
+  m_Name: Farm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,7 +258,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FieldPrefabs:
   - {fileID: 6243198216930902855, guid: 7d9ba4c9f16b2374097e1b72978e5ff5, type: 3}
-  - {fileID: 6243198216930902855, guid: d9f557db2a469cb44a389e47d683b8ed, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

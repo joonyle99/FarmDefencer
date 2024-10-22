@@ -88,6 +88,9 @@ TilemapRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -146,7 +149,7 @@ Transform:
   m_GameObject: {fileID: 6243198216930902855}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -153.57492, y: -222.38792, z: 7.684861}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -165,10 +168,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 843c4e47e154df64aad0704ce8d7abe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CropPrefab: {fileID: 1635913407549293086, guid: 80967953f536b5145b1cc1548c7d48ef, type: 3}
   FieldPosition: {x: 0, y: 0}
   FieldSize: {x: 5, y: 3}
   FlowedTile: {fileID: 11400000, guid: 3283182a5f53e934ca18a24f522d3934, type: 2}
-  CropTile: {fileID: 11400000, guid: de90b52990801b4479609edd38ab8197, type: 2}
 --- !u!1 &9117000323035247222
 GameObject:
   m_ObjectHideFlags: 0
