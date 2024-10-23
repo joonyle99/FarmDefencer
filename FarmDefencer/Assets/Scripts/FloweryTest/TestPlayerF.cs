@@ -24,7 +24,7 @@ namespace FloweryTest
         {
             // 해당 위치에 Crop이 있는지 확인하는 코드
             var mouseWorldPosition = GetComponent<Camera>().ScreenToWorldPoint(MousePosition);
-            if (FarmObject.GetComponent<Farm>().TryGetCrop(mouseWorldPosition, out var crop))
+            if (FarmObject.GetComponent<Farm>().TryFindCropAt(mouseWorldPosition, out var crop))
             {
                 Debug.Log($"찾았습니다: {crop.transform.position}");
             }
