@@ -12,3 +12,8 @@ public interface IHittable
 {
     public void Hit();
 }
+
+public interface ITargetingStrategy
+{
+    Target[] SelectTargets(Target[] targets);
+}

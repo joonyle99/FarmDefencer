@@ -5,15 +5,17 @@ public abstract class Tower : MonoBehaviour, IAttackable
 {
     [Header("──────── Tower ────────")]
 
+    [Space]
+
     [SerializeField] private TargetDetector _targetDetector;
 
     [Space]
     
     [SerializeField] private Bullet _bullet;
     [SerializeField] private Transform _firePoint;
-    [SerializeField] private ITargetingStrategy _targetingStrategy;
     [SerializeField] private float _intervalAttackTime = 0.5f;
-    [SerializeField] private float _elapsedAttackTime = 0f;
+
+    private float _elapsedAttackTime = 0f;
 
     protected virtual void Update()
     {
@@ -21,6 +23,7 @@ public abstract class Tower : MonoBehaviour, IAttackable
 
         if (_elapsedAttackTime >= _intervalAttackTime)
         {
+            // '= 0f'로 하지 않고 '-=' 연산을 하는 이유는 누적된 시간만큼 공격을 해야하기 때문
             _elapsedAttackTime -= _intervalAttackTime;
 
             Attack();
@@ -30,45 +33,28 @@ public abstract class Tower : MonoBehaviour, IAttackable
     // Basic Functions
     public virtual void Attack()
     {
-        var allTargets = _targetDetector.Targets.ToArray<Target>();
+        var allTargets = _targetDetector.Targets.ToArray();
 
-        /*
-        var selectedTargets = _targetingStrategy.SelectTargets(allTargets);
-
-        if (selectedTargets == null)
-        {
-            Debug.Log("There are no selectedTargets");
-            return;
-        }
-        */
-
-        // 1. Shooting
-        // -> 타워 디펜스에 등장하는 투사체의 종류를 살펴보자
-        // 
-        // 2. Instant Attack..?
+        // + TargetingStrategy를 이용해 타겟을 선택하는 로직 추가
 
         foreach (var target in allTargets)
         {
-            var vec = target.transform.position - _firePoint.position;
-            Debug.DrawRay(_firePoint.position, vec, Color.red, 0.5f);
+            var diffVec = target.transform.position - _firePoint.position;
+            var dirVec = diffVec.normalized;
 
-            var dir = vec.normalized;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            Debug.DrawRay(_firePoint.position, diffVec, Color.red, 0.5f);
 
-            var bullet = Instantiate(_bullet, _firePoint.position, Quaternion.Euler(0, 0, angle));
+            float angle = Mathf.Atan2(dirVec.y, dirVec.x) * Mathf.Rad2Deg;
+            Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
+
+            var bullet = Instantiate(_bullet, _firePoint.position, rotation);
 
             bullet.SetDamage(10);
             bullet.SetSpeed(15f);
-            bullet.SetDir(dir);
-            bullet.SetTarget(target);
+            bullet.SetTarget(target);   // should set target before shoot
+
             bullet.Shoot();
         }
-    }
-
-    // Targetting Strategy
-    public void SetTargetingStrategy(ITargetingStrategy targetingStrategy)
-    {
-        _targetingStrategy = targetingStrategy;
     }
 }
 
