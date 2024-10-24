@@ -58,7 +58,7 @@ public class Field : MonoBehaviour
             {
                 _tilemap.SetTile(new Vector3Int(xOffset, yOffset), FlowedTile);
 
-                var cropObjectPosition = new Vector3(transform.position.x + xOffset + 0.5f, transform.position.y + yOffset + 0.5f, transform.position.z - 1.0f);
+                var cropObjectPosition = new Vector3(transform.position.x + xOffset, transform.position.y + yOffset, transform.position.z - 1.0f);
                 var cropObject = Instantiate(CropPrefab);
                 var cropComponent = cropObject.GetComponent<Crop>();
                 cropObject.transform.parent = transform;
