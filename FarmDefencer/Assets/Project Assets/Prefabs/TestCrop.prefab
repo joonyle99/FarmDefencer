@@ -45,7 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8aee068defa0d4cbdc43deb9285d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  CropSprite: {fileID: 21300000, guid: ed6174cfc03074afa9523d9500a2c7c0, type: 3}
+  GrowthSecondsRequired: 5
+  WaterRequired: 3
+  AgeSeconds: 0
+  IsPlanted: 0
+  WaterStored: 0
 --- !u!212 &4896939865236253331
 SpriteRenderer:
   m_ObjectHideFlags: 0
