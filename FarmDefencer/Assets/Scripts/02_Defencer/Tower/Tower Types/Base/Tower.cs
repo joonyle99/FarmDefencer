@@ -42,7 +42,7 @@ public abstract class Tower : MonoBehaviour, IAttackable
             var diffVec = target.transform.position - _firePoint.position;
             var dirVec = diffVec.normalized;
 
-            Debug.DrawRay(_firePoint.position, diffVec, Color.red, 0.5f);
+            Debug.DrawRay(_firePoint.position, diffVec, Color.red, 0.1f);
 
             float angle = Mathf.Atan2(dirVec.y, dirVec.x) * Mathf.Rad2Deg;
             Quaternion rotation = Quaternion.Euler(0f, 0f, angle);

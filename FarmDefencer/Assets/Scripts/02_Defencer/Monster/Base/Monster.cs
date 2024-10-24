@@ -6,6 +6,6 @@ public abstract class Monster : Target
 
     public override void Hurt()
     {
-        Debug.Log("Monster Hurt");
+
     }
 }
