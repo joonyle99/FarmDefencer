@@ -24,7 +24,7 @@ git commit
 ```
 [Type] Subject
 
-Body
+Body (선택 사항)
 ```
 
 ---
