@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class BuildManager : MonoBehaviour
+public class BuildingManager : MonoBehaviour
 {
     public Tilemap tilemap;
 

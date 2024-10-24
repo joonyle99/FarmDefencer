@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7795371811409301431}
   - component: {fileID: 2413466238570828296}
   m_Layer: 0
-  m_Name: TestTilemap3
+  m_Name: TestTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
