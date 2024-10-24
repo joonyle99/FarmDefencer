@@ -7505,7 +7505,7 @@ GameObject:
   - component: {fileID: 1218197717}
   - component: {fileID: 1218197716}
   m_Layer: 0
-  m_Name: PathManager
+  m_Name: PathSupervisor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9097,6 +9097,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1493907265}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &308633403421422714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6079994235005530569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf0861119ea6934a88deaa3b8a78dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _towerPrefabs:
+  - {fileID: 9201104685301530374, guid: c33dac51bb3454542a08bdea32b29f79, type: 3}
 --- !u!1001 &2388893633597206132
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9154,12 +9168,45 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20e9a4561dd28f94996acde895b08146, type: 3}
+--- !u!4 &3040860334323333102
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6079994235005530569}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6079994235005530569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3040860334323333102}
+  - component: {fileID: 308633403421422714}
+  m_Layer: 0
+  m_Name: BuildSupervisor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 868308894}
   - {fileID: 1218197717}
+  - {fileID: 3040860334323333102}
   - {fileID: 860643004}
   - {fileID: 1493907265}
   - {fileID: 1090895761}

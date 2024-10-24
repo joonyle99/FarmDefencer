@@ -1,6 +1,9 @@
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// 적을 감지하고 공격하는 타워의 기본 동작을 정의합니다
+/// </summary>
 public abstract class Tower : MonoBehaviour, IAttackable
 {
     [Header("──────── Tower ────────")]

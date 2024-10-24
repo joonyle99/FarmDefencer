@@ -175,6 +175,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75ddb61fe38a23747975c594ce2ccc4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tower: {fileID: 9201104685301530374, guid: c33dac51bb3454542a08bdea32b29f79, type: 3}
   _spriteRenderer: {fileID: 5493607047888746186}
   _hoverColor: {r: 1, g: 1, b: 1, a: 0.78431374}

@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// 타워가 발사하는 투사체의 기본 동작을 정의합니다
+/// </summary>
 public abstract class Bullet : MonoBehaviour, IHittable
 {
     [Header("──────── Bullet ────────")]

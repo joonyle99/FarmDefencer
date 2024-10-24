@@ -1,12 +1,12 @@
 using UnityEngine;
 
 /// <summary>
-/// 게임의 전체적인 입력 시스템(PC Input / Mobile Input)을 관리합니다.
+/// 게임의 전체적인 사운드 시스템을 관리합니다.
 /// </summary>
 /// <remarks>
 /// Manager vs Supervisor에 대한 설명은 <see cref="ManagerVsSupervisor"/>를 참조하세요
 /// </remarks>
-public class InputManager : JoonyleGameDevKit.PersistentSingleton<InputManager>
+public class SoundManager : JoonyleGameDevKit.PersistentSingleton<SoundManager>
 {
 
 }

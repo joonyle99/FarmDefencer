@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// PathSupervisor에 의해 정의된 웨이포인트를 따라 게임오브젝트를 이동시키는 컴포넌트
+/// </summary>
 public class PathMovement : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 2f;
@@ -15,7 +18,7 @@ public class PathMovement : MonoBehaviour
     }
     private void Start()
     {
-        _targetWayPoint = PathManager.Instance.Path[_pathIndex];
+        _targetWayPoint = PathSupervisor.Instance.Path[_pathIndex];
 
         if (_targetWayPoint == null)
         {
@@ -33,13 +36,13 @@ public class PathMovement : MonoBehaviour
         {
             _pathIndex++;
 
-            if (_pathIndex == PathManager.Instance.Path.Length)
+            if (_pathIndex == PathSupervisor.Instance.Path.Length)
             {
                 Destroy(gameObject);
                 return;
             }
 
-            _targetWayPoint = PathManager.Instance.Path[_pathIndex];
+            _targetWayPoint = PathSupervisor.Instance.Path[_pathIndex];
         }
     }
     private void FixedUpdate()

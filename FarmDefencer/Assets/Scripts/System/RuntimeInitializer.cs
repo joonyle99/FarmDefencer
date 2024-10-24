@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace JoonyleGameDevKit
 {
+    /// <summary>
+    /// 런타임 초기화를 위한 클래스입니다
+    /// </summary>
     public static class RuntimeInitializer
     {
         private const string BOOTSTRAPPER_PREFAB_PATH = "Prefabs/Bootstrapper";
