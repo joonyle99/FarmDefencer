@@ -2,8 +2,10 @@ using UnityEngine;
 
 public sealed class BasicMonster : Monster
 {
-    public override void Hit()
+    public override void Hurt()
     {
-        Debug.Log("BasicMonster Hit");
+        base.Hurt();
+
+        Debug.Log("BasicMonster Hurt");
     }
 }

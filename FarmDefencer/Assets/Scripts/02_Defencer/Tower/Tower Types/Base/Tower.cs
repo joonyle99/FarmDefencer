@@ -1,24 +1,34 @@
 using System.Linq;
 using UnityEngine;
 
-public interface IAttackable
-{
-    public void Attack();
-}
-
 public abstract class Tower : MonoBehaviour, IAttackable
 {
-    private Transform _firePoint;
-    private TargetDetector _targetDetector;
-    private ITargetingStrategy _targetingStrategy;
+    [Header("──────── Tower ────────")]
 
-    public void SetTargetingStrategy(ITargetingStrategy targetingStrategy)
+    [SerializeField] private TargetDetector _targetDetector;
+
+    [Space]
+    
+    [SerializeField] private Bullet _bullet;
+    [SerializeField] private Transform _firePoint;
+    [SerializeField] private ITargetingStrategy _targetingStrategy;
+    [SerializeField] private float _intervalAttackTime = 0.5f;
+    [SerializeField] private float _elapsedAttackTime = 0f;
+
+    protected virtual void Update()
     {
-        _targetingStrategy = targetingStrategy;
+        _elapsedAttackTime += Time.deltaTime;
+
+        if (_elapsedAttackTime >= _intervalAttackTime)
+        {
+            _elapsedAttackTime -= _intervalAttackTime;
+
+            Attack();
+        }
     }
 
-    // 언제 공격을 할것인가?
-    public void Attack()
+    // Basic Functions
+    public virtual void Attack()
     {
         var allTargets = _targetDetector.Targets.ToArray<Target>();
 
@@ -32,14 +42,35 @@ public abstract class Tower : MonoBehaviour, IAttackable
         }
         */
 
+        // 1. Shooting
+        // -> 타워 디펜스에 등장하는 투사체의 종류를 살펴보자
+        // 
+        // 2. Instant Attack..?
+
         foreach (var target in allTargets)
         {
-            target.Hit();
+            var vec = target.transform.position - _firePoint.position;
+            Debug.DrawRay(_firePoint.position, vec, Color.red, 0.5f);
+
+            var dir = vec.normalized;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+            var bullet = Instantiate(_bullet, _firePoint.position, Quaternion.Euler(0, 0, angle));
+
+            bullet.SetDamage(10);
+            bullet.SetSpeed(15f);
+            bullet.SetDir(dir);
+            bullet.SetTarget(target);
+            bullet.Shoot();
         }
     }
-}
 
-/// 고려해야 하는 속성들
+    // Targetting Strategy
+    public void SetTargetingStrategy(ITargetingStrategy targetingStrategy)
+    {
+        _targetingStrategy = targetingStrategy;
+    }
+}
 
 // 타워의 체력
 // 타워의 방어력

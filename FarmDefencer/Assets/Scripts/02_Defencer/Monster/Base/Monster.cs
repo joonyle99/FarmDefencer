@@ -2,12 +2,10 @@ using UnityEngine;
 
 public abstract class Monster : Target
 {
-    // 공통 변수
+    // [Header("──────── Monster ────────")]
 
-    // 공통 함수
-
-    public override void Hit()
+    public override void Hurt()
     {
-        Debug.Log("Monster Hit");
+        Debug.Log("Monster Hurt");
     }
 }
