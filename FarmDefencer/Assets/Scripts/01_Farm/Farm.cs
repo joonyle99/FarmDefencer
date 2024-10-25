@@ -6,7 +6,6 @@ public class Farm : MonoBehaviour
 {
     public List<GameObject> FieldPrefabs;
 
-    private GameObject _fieldsObject; // field 인스턴스들을 자식 오브젝트로 가지는, farm의 자식 오브젝트
     private List<Field> _fields;
 
     /// <summary>
@@ -31,7 +30,6 @@ public class Farm : MonoBehaviour
 
     private void Awake()
     {
-        _fieldsObject = transform.Find("Fields").gameObject;
         _fields = new List<Field>();
 
         foreach (var fieldPrefab in FieldPrefabs)

@@ -34,14 +34,7 @@ namespace FloweryTest
                 return;
             }
 
-            if (crop.TryPlant())
-            {
-                Debug.Log("작물을 심었습니다.");
-            }
-            else
-            {
-                Debug.Log("작물이 이미 심어져 있습니다.");
-            }
+            crop.TryPlant();
         }
 
         public void OnHarvest()
@@ -53,14 +46,7 @@ namespace FloweryTest
                 return;
             }
 
-            if (crop.TryHarvest())
-            {
-                Debug.Log("작물을 수확했습니다.");
-            }
-            else
-            {
-                Debug.Log("작물을 수확할 수 없습니다.");
-            }
+            crop.TryHarvest();
         }
 
         public void OnWatering()
@@ -72,14 +58,7 @@ namespace FloweryTest
                 return;
             }
 
-            if (crop.TryWatering(1.0f))
-            {
-                Debug.Log("작물에 물을 줬습니다.");
-            }
-            else
-            {
-                Debug.Log("작물에 물을 줄 수 없습니다.");
-            }
+            crop.TryWatering(1.0f);
         }
 
         public void OnMouseClick(InputValue inputValue)
