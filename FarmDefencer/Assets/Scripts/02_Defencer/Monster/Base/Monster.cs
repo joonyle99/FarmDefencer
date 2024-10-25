@@ -1,12 +1,28 @@
 using UnityEngine;
 
-/// <summary>
-/// 타워의 공격 대상이 되는 몬스터의 기본 동작을 정의합니다
-/// </summary>
-public abstract class Monster : Target
+public abstract class Monster : Target, IProduct
 {
+    // [Header("──────── IProduct ────────")]
+    // [Space]
+
+    [SerializeField] private Factory _originFactory;
+    public Factory OriginFactory
+    {
+        get => _originFactory;
+        set => _originFactory = value;
+    }
+
+    public void SetOriginFactory(Factory originFactory)
+    {
+        _originFactory = originFactory;
+    }
+
     // [Header("──────── Monster ────────")]
+    // [Space]
 
     public override void Hurt() { }
-    public override void Die() { }
+    public override void Die()
+    {
+        OriginFactory.ReturnObject(this);
+    }
 }
