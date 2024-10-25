@@ -7,10 +7,9 @@ using UnityEngine;
 /// <remarks>
 /// - 클릭 시 BuildSupervisor에서 선택된 타워를 해당 위치에 건설합니다.
 /// </remarks>
-public class Plot : MonoBehaviour
+public class TowerSlot : MonoBehaviour
 {
     [Header("──────── Plot ────────")]
-
     [Space]
 
     [SerializeField] private SpriteRenderer _spriteRenderer;
