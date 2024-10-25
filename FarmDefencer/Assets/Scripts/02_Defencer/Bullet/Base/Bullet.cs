@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// 타워가 발사하는 투사체의 기본 동작을 정의합니다
 /// </summary>
-public abstract class Bullet : MonoBehaviour, IHittable
+public abstract class Bullet : MonoBehaviour
 {
     [Header("──────── Bullet ────────")]
 
@@ -64,17 +64,10 @@ public abstract class Bullet : MonoBehaviour, IHittable
     {
         if (_target == null)
         {
-            Debug.LogWarning("target is null");
+            Debug.LogWarning("There is no target");
             return;
         }
 
         _isTriggered = true;
-
-        // Debug.Log($"_isTriggered: {_isTriggered}, _target: {_target}, _speed: {_speed}");
-    }
-
-    public virtual void Hit()
-    {
-        throw new System.NotImplementedException();
     }
 }

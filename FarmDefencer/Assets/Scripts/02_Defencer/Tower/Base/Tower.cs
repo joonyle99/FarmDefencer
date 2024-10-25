@@ -1,13 +1,11 @@
-using System.Linq;
 using UnityEngine;
 
 /// <summary>
 /// 적을 감지하고 공격하는 타워의 기본 동작을 정의합니다
 /// </summary>
-public abstract class Tower : MonoBehaviour, IAttackable
+public abstract class Tower : MonoBehaviour
 {
     [Header("──────── Tower ────────")]
-
     [Space]
 
     [SerializeField] private TargetDetector _targetDetector;
@@ -20,7 +18,11 @@ public abstract class Tower : MonoBehaviour, IAttackable
 
     private float _elapsedAttackTime = 0f;
 
-    protected virtual void Update()
+    protected TargetDetector TargetDetector => _targetDetector;
+    protected Bullet Bullet => _bullet;
+    protected Transform FirePoint => _firePoint;
+
+    private void Update()
     {
         _elapsedAttackTime += Time.deltaTime;
 
@@ -34,31 +36,7 @@ public abstract class Tower : MonoBehaviour, IAttackable
     }
 
     // Basic Functions
-    public virtual void Attack()
-    {
-        var allTargets = _targetDetector.Targets.ToArray();
-
-        // + TargetingStrategy를 이용해 타겟을 선택하는 로직 추가
-
-        foreach (var target in allTargets)
-        {
-            var diffVec = target.transform.position - _firePoint.position;
-            var dirVec = diffVec.normalized;
-
-            Debug.DrawRay(_firePoint.position, diffVec, Color.red, 0.1f);
-
-            float angle = Mathf.Atan2(dirVec.y, dirVec.x) * Mathf.Rad2Deg;
-            Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
-
-            var bullet = Instantiate(_bullet, _firePoint.position, rotation);
-
-            bullet.SetDamage(10);
-            bullet.SetSpeed(15f);
-            bullet.SetTarget(target);   // should set target before shoot
-
-            bullet.Shoot();
-        }
-    }
+    protected abstract void Attack();
 }
 
 // 타워의 체력

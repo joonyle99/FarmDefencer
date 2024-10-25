@@ -6,7 +6,7 @@ using UnityEngine;
 /// <remarks>
 /// Manager vs Supervisor에 대한 설명은 <see cref="ManagerVsSupervisor"/>를 참조하세요
 /// </remarks>
-public class InputManager : JoonyleGameDevKit.PersistentSingleton<InputManager>
+public class InputManager : JoonyleGameDevKit.Singleton<InputManager>
 {
 
 }

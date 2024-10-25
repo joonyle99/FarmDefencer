@@ -10,10 +10,12 @@ public class PathMovement : MonoBehaviour
     private Transform _targetWayPoint;
     private int _pathIndex = 0;
 
+    private Monster _monster;           // TEMP
     private Rigidbody2D _rigidbody;
 
     private void Awake()
     {
+        _monster = GetComponent<Monster>();
         _rigidbody = GetComponent<Rigidbody2D>();
     }
     private void Start()
@@ -36,9 +38,11 @@ public class PathMovement : MonoBehaviour
         {
             _pathIndex++;
 
-            if (_pathIndex == PathSupervisor.Instance.Path.Length)
+            if (_pathIndex >= PathSupervisor.Instance.Path.Length)
             {
+                // ÇØ´ç °´Ã¼ÀÇ »ç¸Á
                 Destroy(gameObject);
+                // _monster.Die();
                 return;
             }
 
