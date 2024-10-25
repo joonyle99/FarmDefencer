@@ -10,7 +10,7 @@ namespace FloweryTest
         public GameObject FarmObject;
         private Farm _farmComponent;
         private bool _isLeftClicked;
-        
+        //
         public void OnCameraMove(InputValue inputValue)
         {
             if (_isLeftClicked)
