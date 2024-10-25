@@ -22,8 +22,8 @@ public class Field : MonoBehaviour
 	/// <returns>position에 해당하는 Crop이 존재할 경우 crop에 값이 할당되며 true 반환, 이외의 경우 crop에 null이 할당되며 false 반환</returns>
 	public bool TryFindCropAt(Vector2 position, [CanBeNull] out Crop crop)
 	{
-        if (position.x < transform.position.x || position.x > transform.position.x + FieldSize.x
-        || position.y < transform.position.y || position.y > transform.position.y + FieldSize.y)
+        if (position.x < transform.position.x - 0.5f || position.x > transform.position.x + FieldSize.x - 0.5f
+        || position.y < transform.position.y - 0.5f || position.y > transform.position.y + FieldSize.y - 0.5f)
         {
             crop = null;
             return false;
