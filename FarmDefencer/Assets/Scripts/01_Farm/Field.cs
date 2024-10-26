@@ -2,12 +2,15 @@ using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using static UnityEngine.Rendering.DebugUI;
 
 public class Field : MonoBehaviour
 {
     public GameObject CropPrefab;
-    public Vector2Int FieldPosition;
+    /// <summary>
+    /// Farm 오브젝트 위치에 대한 상대 위치입니다.
+    /// Field의 가장 왼쪽 아래 타일의 위치와 동일합니다.
+    /// </summary>
+    public Vector2Int FieldLocalPosition;
     public Vector2Int FieldSize;
     public TileBase FlowedTile;
 

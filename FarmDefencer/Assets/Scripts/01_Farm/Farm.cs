@@ -44,7 +44,7 @@ public class Farm : MonoBehaviour
             var fieldObject = Instantiate(fieldPrefab);
             var fieldComponent = fieldObject.GetComponent<Field>();
             fieldObject.transform.parent = transform;
-			fieldObject.transform.localPosition = new Vector3(fieldComponent.FieldPosition.x, fieldComponent.FieldPosition.y, transform.position.z - 1.0f);
+			fieldObject.transform.localPosition = new Vector3(fieldComponent.FieldLocalPosition.x, fieldComponent.FieldLocalPosition.y, transform.position.z - 1.0f);
             _fields.Add(fieldComponent);
         }
     }
