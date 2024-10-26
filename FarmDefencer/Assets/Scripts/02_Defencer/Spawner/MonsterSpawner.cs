@@ -2,11 +2,10 @@ using UnityEngine;
 
 public sealed class MonsterSpawner : Spawner
 {
-    protected override void SpawnObject()
+    protected override void Spawn()
     {
         Monster monster = Factory.GetObject<Monster>();
-        SpawnedObjects.Add(monster.gameObject);
-
+        monster.SetOriginFactory(Factory);
         monster.transform.position = transform.position;
     }
 }

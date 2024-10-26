@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Spawner : MonoBehaviour
@@ -9,16 +8,13 @@ public abstract class Spawner : MonoBehaviour
     [SerializeField] private Factory _factory;
     public Factory Factory => _factory;
 
-    [SerializeField] private List<GameObject> _spawnedObjects;
-    public List<GameObject> SpawnedObjects => _spawnedObjects;
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SpawnObject();
+            Spawn();
         }
     }
 
-    protected abstract void SpawnObject();
+    protected abstract void Spawn();
 }
