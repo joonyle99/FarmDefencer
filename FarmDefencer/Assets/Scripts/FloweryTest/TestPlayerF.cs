@@ -37,7 +37,19 @@ namespace FloweryTest
             crop.TryPlant();
         }
 
-        public void OnHarvest()
+		public void OnGrowUp()
+		{
+			// 작물 성장 코드
+			var mouseWorldPosition = GetComponent<Camera>().ScreenToWorldPoint(MousePosition);
+			if (!_farmComponent.TryFindCropAt(mouseWorldPosition, out var crop))
+			{
+				return;
+			}
+
+			crop.TryGrowUp();
+		}
+
+		public void OnHarvest()
         {
             // 작물 수확 코드
             var mouseWorldPosition = GetComponent<Camera>().ScreenToWorldPoint(MousePosition);

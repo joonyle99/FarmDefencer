@@ -20,8 +20,8 @@ public class CropStatusDisplay : MonoBehaviour
 
 	private void Update()
 	{
-		_waterStatus.text = $"{_crop.WaterStored:0.0}L/{_crop.WaterRequired:0.0}L";
-		_ageStatus.text = $"{_crop.AgeSeconds:0.0}s/{_crop.GrowthSecondsRequired:0.0}";
+		_waterStatus.text = $"{_crop.WaterStored:0.0}L";
+		_ageStatus.text = $"{_crop.CurrentStageAgeSeconds:0.0}s";
 
 		if (_crop.WaterStored == 0)
 		{
@@ -30,15 +30,6 @@ public class CropStatusDisplay : MonoBehaviour
 		else
 		{
 			_waterStatus.color = Color.cyan;
-		}
-
-		if (_crop.AgeSeconds > _crop.GrowthSecondsRequired)
-		{
-			_ageStatus.color = Color.green;
-		}
-		else
-		{
-			_ageStatus.color = Color.yellow;
 		}
 	}
 }

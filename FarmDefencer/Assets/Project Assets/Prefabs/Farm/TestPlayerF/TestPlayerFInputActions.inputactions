@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "GrowUp",
+                    "type": "Button",
+                    "id": "b5067872-2b8a-458f-a819-3309882114b4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -223,6 +232,17 @@
                     "processors": "",
                     "groups": ";PC(Debug)",
                     "action": "Watering",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be085a93-4180-40ac-9ba7-bf88da9ac342",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";PC(Debug)",
+                    "action": "GrowUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

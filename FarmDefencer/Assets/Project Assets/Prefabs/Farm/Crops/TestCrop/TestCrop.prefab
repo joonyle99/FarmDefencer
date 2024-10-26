@@ -46,12 +46,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8aee068defa0d4cbdc43deb9285d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CropSprite: {fileID: -781136586, guid: 97ff298f729af494e8eba7dcfbb0e1cc, type: 3}
-  GrowthSecondsRequired: 5
-  WaterRequired: 3
-  AgeSeconds: 0
-  IsPlanted: 0
+  CropStages:
+  - {fileID: 11400000, guid: c65f788ce9aa50c4780fb4708aa30838, type: 2}
+  - {fileID: 11400000, guid: a123ee218ce23b043a0411ab8ad63408, type: 2}
+  - {fileID: 11400000, guid: 5fe167d4960f17c4d888c9e2977de576, type: 2}
+  - {fileID: 11400000, guid: af9f2c527a814f94992ae8bb423d0b3d, type: 2}
+  CropLackWaterStage: {fileID: 11400000, guid: 19b3c974ea6a8e6458415b0052a79729, type: 2}
+  WaterLackDangerSeconds: 5
+  WaterLackDeadSeconds: 5
+  CurrentStageIndex: 0
+  CurrentStageAgeSeconds: 0
   WaterStored: 0
+  WaterWaitingSeconds: 0
 --- !u!212 &4896939865236253331
 SpriteRenderer:
   m_ObjectHideFlags: 0

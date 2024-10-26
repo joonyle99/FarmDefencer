@@ -301,8 +301,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC88C\uD074\uB9AD: \uC791\uBB3C \uC2EC\uAE30\n\uC6B0\uD074\uB9AD: \uC791\uBB3C
-    \uC218\uD655, \uBB3C \uC8FC\uAE30"
+  m_Text: "\uC88C\uD074\uB9AD: \uC791\uBB3C \uC2EC\uAE30, \uC131\uC7A5\uC2DC\uD0A4\uAE30\n\uC6B0\uD074\uB9AD:
+    \uC791\uBB3C \uC218\uD655, \uBB3C \uC8FC\uAE30"
 --- !u!222 &837150151
 CanvasRenderer:
   m_ObjectHideFlags: 0
