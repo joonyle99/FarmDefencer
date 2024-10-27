@@ -109,6 +109,8 @@ public class SortingChildrenEditor : Editor
             {
                 child.SetAsLastSibling();
             }
+
+            Debug.Log("Sorting Children");
         }
     }
 }

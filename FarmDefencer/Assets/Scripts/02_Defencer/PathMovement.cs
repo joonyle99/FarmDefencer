@@ -23,14 +23,17 @@ public class PathMovement : MonoBehaviour
     }
     private void Start()
     {
-        ResetWayPoint();
+        var startPoint = PathSupervisor.Instance.StartPoint;
 
-        if (_targetWayPoint == null)
+        if (startPoint == null)
         {
-            Debug.LogWarning("TargetWayPoint is null, you should set \'_targetWayPoint\' variable");
+            Debug.LogWarning("TargetWayPoint is null");
             return;
         }
 
+        transform.position = startPoint.position;
+
+        ResetWayPoint();
     }
     private void Update()
     {
@@ -68,5 +71,11 @@ public class PathMovement : MonoBehaviour
     {
         _pathIndex = 0;
         _targetWayPoint = PathSupervisor.Instance.Path[_pathIndex];
+
+        if (_targetWayPoint == null)
+        {
+            Debug.LogWarning("TargetWayPoint is null, you should set \'_targetWayPoint\' variable");
+            return;
+        }
     }
 }

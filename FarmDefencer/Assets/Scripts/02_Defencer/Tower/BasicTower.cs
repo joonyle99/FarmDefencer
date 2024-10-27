@@ -22,7 +22,7 @@ public sealed class BasicTower : Tower
             var bullet = Instantiate(Bullet, FirePoint.position, rotation);
 
             bullet.SetDamage(10);
-            bullet.SetSpeed(15f);
+            bullet.SetSpeed(30f);
             bullet.SetTarget(target);   // should set target before shoot
 
             bullet.Shoot();

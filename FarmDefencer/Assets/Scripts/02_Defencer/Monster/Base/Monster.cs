@@ -20,9 +20,19 @@ public abstract class Monster : Target, IProduct
     // [Header("──────── Monster ────────")]
     // [Space]
 
+    [SerializeField] private Detector<Tower> _towerDetector;
+
     public override void Hurt() { }
     public override void Die()
     {
         OriginFactory.ReturnObject(this);
+    }
+
+    // 만약 범위 안에 타워가 들어온다면 이동을 멈춰서 공격한다
+    // 가장 가까운 타워를 찾아서 공격한다
+    // 타겟이 사라졌다면 이동을 재개한다
+    public void Attack()
+    {
+        // _towerDetector.Targets
     }
 }

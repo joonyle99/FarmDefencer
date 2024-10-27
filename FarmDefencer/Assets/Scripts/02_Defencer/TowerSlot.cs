@@ -9,7 +9,7 @@ using UnityEngine;
 /// </remarks>
 public class TowerSlot : MonoBehaviour
 {
-    [Header("式式式式式式式式 Plot 式式式式式式式式")]
+    [Header("式式式式式式式式 Tower Slot 式式式式式式式式")]
     [Space]
 
     [SerializeField] private SpriteRenderer _spriteRenderer;
