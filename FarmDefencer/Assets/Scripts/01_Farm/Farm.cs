@@ -9,11 +9,11 @@ public class Farm : MonoBehaviour
     private List<Field> _fields;
 
     /// <summary>
-    /// 입력된 좌표에 해당되는 Crop을 검색해서 반환합니다.
+    /// <seealso cref="Field.TryFindCropAt(Vector2, out Crop)"/>을 해당 위치를 포함하는 Field에 대해 호출합니다.
     /// </summary>
     /// <param name="position"></param>
     /// <param name="crop"></param>
-    /// <returns>worldPosition에 해당하는 Crop이 존재할 경우 crop에 값이 할당되며 true 반환, 이외의 경우 crop에 null이 할당되며 false 반환</returns>
+    /// <returns></returns>
     public bool TryFindCropAt(Vector2 position, [CanBeNull] out Crop crop)
     {
         foreach (var field in _fields)
@@ -25,6 +25,27 @@ public class Farm : MonoBehaviour
         }
 
         crop = null;
+        return false;
+    }
+
+    /// <summary>
+    /// <seealso cref="Field.TryFindCropAt{T}(Vector2, out T)"/>을 해당 위치를 포함하는 Field에 대해 호출합니다.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="position"></param>
+    /// <param name="specializedCrop"></param>
+    /// <returns></returns>
+    public bool TryFindCropAt<T>(Vector2 position, [CanBeNull] out T specializedCrop) where T : class
+    {
+        foreach (var field in _fields)
+        {
+            if (field.TryFindCropAt<T>(position, out specializedCrop))
+            {
+                return true;
+            }
+        }
+
+        specializedCrop = null;
         return false;
     }
 

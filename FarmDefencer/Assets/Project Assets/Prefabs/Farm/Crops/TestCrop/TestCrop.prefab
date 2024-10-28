@@ -30,8 +30,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5130132559973664854}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6391946087727640227
@@ -43,15 +42,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1635913407549293086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b8aee068defa0d4cbdc43deb9285d2d, type: 3}
+  m_Script: {fileID: 11500000, guid: e8c9029c6d8ace940ad22b64b9dac971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CropStages:
-  - {fileID: 11400000, guid: c65f788ce9aa50c4780fb4708aa30838, type: 2}
-  - {fileID: 11400000, guid: a123ee218ce23b043a0411ab8ad63408, type: 2}
-  - {fileID: 11400000, guid: 5fe167d4960f17c4d888c9e2977de576, type: 2}
-  - {fileID: 11400000, guid: af9f2c527a814f94992ae8bb423d0b3d, type: 2}
-  CropLackWaterStage: {fileID: 11400000, guid: 19b3c974ea6a8e6458415b0052a79729, type: 2}
+  - CropSprite: {fileID: 2185865422229137852, guid: c62fbc13d000c3a44b365861596edcc7, type: 3}
+    GrowthSecondsRequired: 5
+    WaterRequired: 5
+  - CropSprite: {fileID: -2360516894548652956, guid: a1b2baeede864f947881b8b68de28cd7, type: 3}
+    GrowthSecondsRequired: 5
+    WaterRequired: 5
+  - CropSprite: {fileID: -4860010634957982478, guid: 6bbfa09fcf9c8334db0d22cbf2b11262, type: 3}
+    GrowthSecondsRequired: 5
+    WaterRequired: 5
+  - CropSprite: {fileID: -551104163447760808, guid: 3950844c1cd452749af50563d217002f, type: 3}
+    GrowthSecondsRequired: 0
+    WaterRequired: 0
+  CropLackWaterStage:
+    CropSprite: {fileID: 579628540815059721, guid: c663019061a422a4bbdc428297d78526, type: 3}
+    GrowthSecondsRequired: 0
+    WaterRequired: 0
   WaterLackDangerSeconds: 5
   WaterLackDeadSeconds: 5
   CurrentStageIndex: 0
@@ -113,69 +123,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &8811540840881708476
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1599736531553778387}
-    m_Modifications:
-    - target: {fileID: 4429578118323017194, guid: b048c09121bfb16498f953113566e33f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4429578118323017194, guid: b048c09121bfb16498f953113566e33f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4429578118323017194, guid: b048c09121bfb16498f953113566e33f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4429578118323017194, guid: b048c09121bfb16498f953113566e33f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4429578118323017194, guid: b048c09121bfb16498f953113566e33f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4429578118323017194, guid: b048c09121bfb16498f953113566e33f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4429578118323017194, guid: b048c09121bfb16498f953113566e33f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4429578118323017194, guid: b048c09121bfb16498f953113566e33f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4429578118323017194, guid: b048c09121bfb16498f953113566e33f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4429578118323017194, guid: b048c09121bfb16498f953113566e33f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7696343221090384934, guid: b048c09121bfb16498f953113566e33f, type: 3}
-      propertyPath: Crop
-      value: 
-      objectReference: {fileID: 6391946087727640227}
-    - target: {fileID: 9091739804046039422, guid: b048c09121bfb16498f953113566e33f, type: 3}
-      propertyPath: m_Name
-      value: CropStatusDisplay
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b048c09121bfb16498f953113566e33f, type: 3}
---- !u!4 &5130132559973664854 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4429578118323017194, guid: b048c09121bfb16498f953113566e33f, type: 3}
-  m_PrefabInstance: {fileID: 8811540840881708476}
-  m_PrefabAsset: {fileID: 0}

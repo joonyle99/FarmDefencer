@@ -44,6 +44,32 @@ public class Field : MonoBehaviour
         return false;
 	}
 
+    /// <summary>
+    /// 입력된 좌표에 해당하며 T를 구현하는 Crop을 검색해서 반환합니다.
+    /// 비 제네릭 메소드 TryFindCropAt()과 is/as를 통한 다운캐스팅을 모두 사용하는 방법에 대한 숏컷입니다.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="position"></param>
+    /// <param name="specializedCrop"></param>
+    /// <returns></returns>
+    public bool TryFindCropAt<T>(Vector2 position, [CanBeNull] out T specializedCrop) where T : class
+    {
+        if (!TryFindCropAt(position, out var crop))
+        {
+            specializedCrop = null;
+            return false;
+        }
+
+        if (crop is T specialized)
+        {
+            specializedCrop = specialized;
+            return true;
+        }
+
+        specializedCrop = null;
+        return false;
+    }
+
 	private void Awake()
     {
         _tilemap = GetComponentInChildren<Tilemap>();

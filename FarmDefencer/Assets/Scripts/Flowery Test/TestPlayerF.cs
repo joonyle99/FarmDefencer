@@ -1,3 +1,4 @@
+using CropInterfaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -65,12 +66,12 @@ namespace FloweryTest
         {
             // 물주기 코드
             var mouseWorldPosition = GetComponent<Camera>().ScreenToWorldPoint(MousePosition);
-            if (!_farmComponent.TryFindCropAt(mouseWorldPosition, out var crop))
+            if (!_farmComponent.TryFindCropAt<IWaterable>(mouseWorldPosition, out var waterableCrop))
             {
                 return;
             }
 
-            crop.TryWatering(1.0f);
+            waterableCrop.TryWatering(1.0f);
         }
 
         public void OnMouseClick(InputValue inputValue)
