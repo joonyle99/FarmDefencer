@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ public class Farm : MonoBehaviour
     /// <param name="position"></param>
     /// <param name="crop"></param>
     /// <returns></returns>
-    public bool TryFindCropAt(Vector2 position, [CanBeNull] out Crop crop)
+    public bool TryFindCropAt(Vector2 position, out Crop crop)
     {
         foreach (var field in _fields)
         {
@@ -35,7 +34,7 @@ public class Farm : MonoBehaviour
     /// <param name="position"></param>
     /// <param name="specializedCrop"></param>
     /// <returns></returns>
-    public bool TryFindCropAt<T>(Vector2 position, [CanBeNull] out T specializedCrop) where T : class
+    public bool TryFindCropAt<T>(Vector2 position, out T specializedCrop) where T : class
     {
         foreach (var field in _fields)
         {
