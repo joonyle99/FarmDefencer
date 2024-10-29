@@ -6,7 +6,7 @@ using System;
 /// <summary>
 /// 씨앗인 경우 그냥 심어지고, 다 자라면 그냥 수확되고, 성장할 때는 물만 필요로 하는 흔한 작물입니다.
 /// </summary>
-public class NormalCrop : Crop, IWaterable
+public abstract class NormalCrop : Crop, IWaterable
 {
     [Serializable]
     public struct CropStage
