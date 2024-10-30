@@ -15,6 +15,7 @@ namespace FloweryTest
 
         public void OnCameraMove(InputValue inputValue)
         {
+            return; // 물뿌리개 테스트 때문에 드래그시 화면이동 방지하였음. 추후 액션 겹치지 않게 처리해야 할듯
             if (_isLeftClicked)
             {
                 var scaledInputVector = inputValue.Get<Vector2>() * CameraMovementScale;
@@ -82,6 +83,17 @@ namespace FloweryTest
 
             waterableCrop.TryWatering(1.0f);
         }
+
+        public void OnWatering(Vector2Int tilePosition)
+        {
+			if (!_farmComponent.TryFindCropAt<IWaterable>(tilePosition, out var waterableCrop))
+			{
+				return;
+			}
+
+			waterableCrop.TryWatering(1.0f);
+            Debug.Log("물을 줬습니다");
+		}
 
         public void OnMouseClick(InputValue inputValue)
         {
