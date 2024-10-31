@@ -11,7 +11,7 @@ namespace FloweryTest
         public GameObject FarmObject;
         private Farm _farmComponent;
         private bool _isLeftClicked;
-        public CropDictionary CropDictionary;
+        public ProductDatabase ProductDatabase;
 
         public void OnCameraMove(InputValue inputValue)
         {
@@ -61,14 +61,9 @@ namespace FloweryTest
                 return;
             }
 
-            if (crop.TryHarvest())
+            if (crop.TryHarvest(out var harvestedEntry))
             {
-                if (!CropDictionary.TryGetCropName(crop, out var cropName))
-                {
-                    Debug.Log("알 수 없는 작물 이름");
-                    return;
-                }
-                Debug.Log($"{cropName}을(를) 수확했습니다.");
+                Debug.Log($"{harvestedEntry.UniqueId}을(를) 수확했습니다.");
             }
         }
 

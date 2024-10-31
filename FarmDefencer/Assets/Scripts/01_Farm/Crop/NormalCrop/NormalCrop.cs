@@ -17,6 +17,8 @@ public abstract class NormalCrop : Crop, IWaterable
 
         public float WaterConsumptionPerSecond => WaterRequired / GrowthSecondsRequired;
     }
+    [Header("설정값 - 수확시 수확될 Product의 Entry")]
+    public ProductEntry ProductEntryOnHarvest;
     [Header("설정값 - 작물 성장 단계들")]
     [Tooltip("성장 단계에 따라 순서대로 정의되어야 하며, 0단계는 씨앗 단계, 마지막 단계는 수확 단계여야 합니다. 빈 칸이 없어야 합니다.")]
     public CropStage[] CropStages;
@@ -62,14 +64,16 @@ public abstract class NormalCrop : Crop, IWaterable
     /// 마지막 단계인 경우 수확합니다.
     /// </summary>
     /// <returns></returns>
-    public override bool TryHarvest()
+    public override bool TryHarvest(out ProductEntry productEntry)
     {
         if (CurrentStageIndex == CropStages.Length - 1)
         {
             CurrentStageIndex = 0;
-            return true;
+            productEntry = ProductEntryOnHarvest;
+			return true;
         }
 
+        productEntry = null;
         return false;
     }
 

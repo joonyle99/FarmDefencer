@@ -26,7 +26,7 @@ public abstract class Crop : MonoBehaviour
     /// 작물 종류에 수확 조건이 다를 수 있습니다.
     /// </summary>
     /// <returns>모든 조건을 만족해 작물을 수확한 경우 true, 이외의 경우 false</returns>
-    public abstract bool TryHarvest();
+    public abstract bool TryHarvest(out ProductEntry productEntry);
 
     /// <summary>
     /// 작물을 성장시킵니다.

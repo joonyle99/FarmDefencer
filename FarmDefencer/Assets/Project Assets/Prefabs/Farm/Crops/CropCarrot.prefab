@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ed2400d4be45054aa4451c90734dac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ProductEntryOnHarvest: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
   CropStages:
   - CropSprite: {fileID: 2185865422229137852, guid: c62fbc13d000c3a44b365861596edcc7, type: 3}
     GrowthSecondsRequired: 5
