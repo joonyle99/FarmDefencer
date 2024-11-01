@@ -1,18 +1,17 @@
 using UnityEngine;
 
-/// <summary>
-/// 타워가 발사하는 투사체의 기본 동작을 정의합니다
-/// </summary>
-public abstract class Bullet : MonoBehaviour
+public abstract class Projectile : MonoBehaviour
 {
-    [Header("──────── Bullet ────────")]
+    [Header("──────── Projectile ────────")]
 
     [Space]
+
+    // Damager 클래스 사용하기
 
     [SerializeField] private int _damage = 5;
     [SerializeField] private float _speed = 5f;
     
-    private Target _target;
+    private Targetable _target;
     private bool _isTriggered = false;
 
     private Rigidbody2D _rigidbody;
@@ -39,7 +38,7 @@ public abstract class Bullet : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        var target = collision.GetComponent<Target>();
+        var target = collision.GetComponent<Targetable>();
         if (target != null && target == _target)
         {
             target.Hurt();
@@ -55,7 +54,7 @@ public abstract class Bullet : MonoBehaviour
     {
         _speed = speed;
     }
-    public void SetTarget(Target target)
+    public void SetTarget(Targetable target)
     {
         _target = target;
     }

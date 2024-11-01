@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Monster : Target, IProduct
+public abstract class Monster : Targetable, IProduct
 {
     // [Header("式式式式式式式式 IProduct 式式式式式式式式")]
     // [Space]
@@ -20,7 +20,7 @@ public abstract class Monster : Target, IProduct
     // [Header("式式式式式式式式 Monster 式式式式式式式式")]
     // [Space]
 
-    [SerializeField] private Detector<Tower> _towerDetector;
+    [SerializeField] private Targetter _targetter;
 
     public override void Hurt() { }
     public override void Die()

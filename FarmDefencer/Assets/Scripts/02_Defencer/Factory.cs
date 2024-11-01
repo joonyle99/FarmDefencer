@@ -1,6 +1,12 @@
 using UnityEngine;
 using JoonyleGameDevKit;
 
+public interface IProduct
+{
+    public Factory OriginFactory { get; set; }
+    public void SetOriginFactory(Factory originFactory);
+}
+
 /// <summary>
 /// 몬스터, 총알 등 자주 생성 및 삭제되는 오브젝트를 생성하고 관리합니다.
 /// </summary>
