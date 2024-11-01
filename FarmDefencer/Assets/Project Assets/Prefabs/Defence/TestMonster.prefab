@@ -250,6 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _originFactory: {fileID: 0}
+  _towerDetector: {fileID: 0}
 --- !u!114 &5287113402474360036
 MonoBehaviour:
   m_ObjectHideFlags: 0

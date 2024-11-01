@@ -1,6 +1,7 @@
 using System.Text.RegularExpressions;
 using System;
 using UnityEngine;
+using System.Linq;
 
 namespace JoonyleGameDevKit
 {
@@ -85,22 +86,48 @@ namespace JoonyleGameDevKit
         }
 
         // String
-        public static int ExtractNumber(this string str)
+        /// <summary>
+        /// 문자열에서 숫자를 찾아 추출한다
+        /// </summary>
+        public static int ExtractNumber(this string str, int defaultValue = 0)
         {
-            // 문자열에서 연속된 숫자를 찾는다
-            Match match = Regex.Match(str, @"\d+");
+            // 문자열 뒤에서부터 탐색을 시작한다
+            int stringEndIndex = str.Length - 1;
+            int numberStartIndex = -1;
 
-            if (match.Success)
+            for (int i = stringEndIndex; i >= 0; i--)
             {
-                // 찾은 숫자 문자열을 정수로 변환한다
-                if (int.TryParse(match.Value, out int result))
+                // 숫자를 찾은 경우
+                if (char.IsDigit(str[i]))
                 {
-                    return result;
+                    // 처음인 경우 인덱스를 기록한다
+                    if (numberStartIndex == -1)
+                    {
+                        numberStartIndex = i;
+                    }
+                }
+                // 문자를 찾은 경우
+                else
+                {
+                    // 이미 숫자를 기록한적이 있다면
+                    if (numberStartIndex != -1)
+                    {
+                        // 숫자 구간을 반환한다
+                        return int.Parse(str.Substring(i + 1, numberStartIndex - i));
+                    }
                 }
             }
 
+            // 예외: 문자열 전체가 숫자이거나 가장 앞에 숫자의 시작점이 있는 경우
+            if (numberStartIndex != -1)
+            {
+                return int.Parse(str.Substring(0, numberStartIndex + 1));
+            }
+
             // 숫자를 찾지 못했거나 변환에 실패한 경우 예외를 던진다
-            throw new ArgumentException("No valid number found in the input string.");
+            // throw new ArgumentException("No valid number found in the input string.");
+            Debug.LogWarning("No valid number found in the input string.\nThen return defaultValue");
+            return defaultValue;
         }
     }
 }
