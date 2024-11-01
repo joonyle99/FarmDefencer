@@ -1,9 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Farm : MonoBehaviour
 {
     public List<GameObject> FieldPrefabs;
+    public FarmClock FarmClock;
+    [Tooltip("ProductEntry와 그것이 수확된 위치인 Vector2Int를 의미합니다.")]
+    public UnityEvent<ProductEntry, Vector2Int> OnHarvest;
 
     private List<Field> _fields;
 
@@ -27,27 +31,6 @@ public class Farm : MonoBehaviour
         return false;
     }
 
-    /// <summary>
-    /// <seealso cref="Field.TryFindCropAt{T}(Vector2, out T)"/>을 해당 위치를 포함하는 Field에 대해 호출합니다.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="position"></param>
-    /// <param name="specializedCrop"></param>
-    /// <returns></returns>
-    public bool TryFindCropAt<T>(Vector2 position, out T specializedCrop) where T : class
-    {
-        foreach (var field in _fields)
-        {
-            if (field.TryFindCropAt<T>(position, out specializedCrop))
-            {
-                return true;
-            }
-        }
-
-        specializedCrop = null;
-        return false;
-    }
-
     private void Awake()
     {
         _fields = new List<Field>();
@@ -65,6 +48,8 @@ public class Farm : MonoBehaviour
             var fieldComponent = fieldObject.GetComponent<Field>();
             fieldObject.transform.parent = transform;
 			fieldObject.transform.localPosition = new Vector3(fieldComponent.FieldLocalPosition.x, fieldComponent.FieldLocalPosition.y, transform.position.z - 1.0f);
+            fieldComponent.FarmClock = FarmClock;
+            fieldComponent.OnHarvest = OnHarvest;
             _fields.Add(fieldComponent);
         }
     }

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4909483675425250203}
   - component: {fileID: 738135450724276457}
-  - component: {fileID: 8542032101820322466}
+  - component: {fileID: 3787861198745225257}
   m_Layer: 0
-  m_Name: CropCorn
+  m_Name: CropPotato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8542032101820322466
+--- !u!114 &3787861198745225257
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,24 +97,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 8248929270521535658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ca9e737c56f45646961372504830840, type: 3}
+  m_Script: {fileID: 11500000, guid: 9236c928443994544812fc3f2d7a3227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   FarmClock: {fileID: 0}
-  ProductEntry: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
+  ProductEntry: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
   _state: 0
-  MatureAgeSeconds: 60
+  MatureAgeSeconds: 30
   _growthAgeSeconds: 0
   _waterStored: 0
   _waterWaitingSeconds: 0
-  SeedSprite: {fileID: 2185865422229137852, guid: 1786c577db28cb846b67dc797950b9d2, type: 3}
-  Stage1BeforeWateringSprite: {fileID: -2360516894548652956, guid: a1b2baeede864f947881b8b68de28cd7, type: 3}
-  Stage1DeadSprite: {fileID: 5505145245838024403, guid: b80e3bc29c90f8549a65627bea3c3b77, type: 3}
-  Stage1AfterWateringSprite: {fileID: -2360516894548652956, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
-  Stage1GrowthSeconds: 30
-  Stage2BeforeWateringSprite: {fileID: -4860010634957982478, guid: 6bbfa09fcf9c8334db0d22cbf2b11262, type: 3}
-  Stage2DeadSprite: {fileID: -2979842216640344933, guid: 7dab286119adb244588a26c27c53c3fd, type: 3}
-  Stage2AfterWateringSprite: {fileID: -4860010634957982478, guid: bcc3df56fd2c4c24f875245d208a3eb3, type: 3}
-  MatureSprite: {fileID: -5645142870935734174, guid: 8851ae7ae4197674292e215b5104ecfd, type: 3}
-  NormalToDeadSeconds: 300
+  SeedSprite: {fileID: 2185865422229137852, guid: c62fbc13d000c3a44b365861596edcc7, type: 3}
+  JustPlantedSprite: {fileID: -2360516894548652956, guid: a1b2baeede864f947881b8b68de28cd7, type: 3}
+  DeadSprite: {fileID: 5505145245838024403, guid: b80e3bc29c90f8549a65627bea3c3b77, type: 3}
+  GrowingSprite: {fileID: -2360516894548652956, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
+  BudSprite: {fileID: -5645142870935734174, guid: 8851ae7ae4197674292e215b5104ecfd, type: 3}
+  PlantToDeadSeconds: 300
   DeadToSeedSeconds: 300
+  HarvestHoldTime: 2

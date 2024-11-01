@@ -31,42 +31,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Plant",
-                    "type": "Button",
-                    "id": "98e54083-e5f7-4521-b53c-f6d8728141f3",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Harvest",
-                    "type": "Button",
-                    "id": "0b864da4-82dc-4a66-900a-2a2050bc9b54",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Watering",
-                    "type": "Button",
-                    "id": "c8e417f4-5755-45a6-b927-30df30d63ed1",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "GrowUp",
-                    "type": "Button",
-                    "id": "b5067872-2b8a-458f-a819-3309882114b4",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -199,50 +163,6 @@
                     "processors": "",
                     "groups": ";PC(Debug)",
                     "action": "MouseClick",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5eeb2b9a-5216-4f42-8939-cc1081ca4f3b",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";PC(Debug)",
-                    "action": "Plant",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "db7ea1df-dedd-425a-885b-789187f2ab3a",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";PC(Debug)",
-                    "action": "Harvest",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "968d7974-22aa-4b9e-ba35-7178323187ed",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";PC(Debug)",
-                    "action": "Watering",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "be085a93-4180-40ac-9ba7-bf88da9ac342",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";PC(Debug)",
-                    "action": "GrowUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

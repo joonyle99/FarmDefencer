@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 
 public class Field : MonoBehaviour
 {
+    public FarmClock FarmClock;
+    public UnityEvent<ProductEntry, Vector2Int> OnHarvest;
     public GameObject CropPrefab;
     /// <summary>
     /// Farm 오브젝트 위치에 대한 상대 위치입니다.
@@ -39,35 +42,10 @@ public class Field : MonoBehaviour
                 return true;
             }
         }
+
         crop = null;
         return false;
 	}
-
-    /// <summary>
-    /// 입력된 좌표에 해당하며 T를 구현하는 Crop을 검색해서 반환합니다.
-    /// 비 제네릭 메소드 TryFindCropAt()과 is/as를 통한 다운캐스팅을 모두 사용하는 방법에 대한 숏컷입니다.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="position"></param>
-    /// <param name="specializedCrop"></param>
-    /// <returns></returns>
-    public bool TryFindCropAt<T>(Vector2 position, out T specializedCrop) where T : class
-    {
-        if (!TryFindCropAt(position, out var crop))
-        {
-            specializedCrop = null;
-            return false;
-        }
-
-        if (crop is T specialized)
-        {
-            specializedCrop = specialized;
-            return true;
-        }
-
-        specializedCrop = null;
-        return false;
-    }
 
 	private void Awake()
     {
@@ -91,8 +69,18 @@ public class Field : MonoBehaviour
                 var cropComponent = cropObject.GetComponent<Crop>();
                 cropObject.transform.parent = transform;
                 cropObject.transform.position = cropObjectPosition;
+               
                 _crops.Add(cropComponent);
             }
         }
     }
+
+	private void Start()
+	{
+		foreach (var crop in _crops)
+        {
+            crop.FarmClock = FarmClock;
+			crop.OnHarvest += () => OnHarvest.Invoke(crop.ProductEntry, crop.Position);
+		}
+	}
 }

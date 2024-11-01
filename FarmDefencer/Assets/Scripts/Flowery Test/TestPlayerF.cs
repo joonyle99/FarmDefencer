@@ -1,4 +1,3 @@
-using CropInterfaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,12 +10,12 @@ namespace FloweryTest
         public GameObject FarmObject;
         private Farm _farmComponent;
         private bool _isLeftClicked;
-        public ProductDatabase ProductDatabase;
+        public Camera Camera;
+        public WateringCan WateringCan;
 
         public void OnCameraMove(InputValue inputValue)
         {
-            return; // 물뿌리개 테스트 때문에 드래그시 화면이동 방지하였음. 추후 액션 겹치지 않게 처리해야 할듯
-            if (_isLeftClicked)
+            if (_isLeftClicked && !WateringCan.Using)
             {
                 var scaledInputVector = inputValue.Get<Vector2>() * CameraMovementScale;
                 transform.position += (Vector3)scaledInputVector;
@@ -28,72 +27,25 @@ namespace FloweryTest
             MousePosition = inputValue.Get<Vector2>();
         }
 
-        public void OnPlant()
-        {
-            // 작물 심기 코드
-            var mouseWorldPosition = GetComponent<Camera>().ScreenToWorldPoint(MousePosition);
-            if (!_farmComponent.TryFindCropAt(mouseWorldPosition, out var crop))
-            {
-                return;
-            }
-
-            crop.TryPlant();
-        }
-
-		public void OnGrowUp()
-		{
-			// 작물 성장 코드
-			var mouseWorldPosition = GetComponent<Camera>().ScreenToWorldPoint(MousePosition);
-			if (!_farmComponent.TryFindCropAt(mouseWorldPosition, out var crop))
-			{
-				return;
-			}
-
-			crop.TryGrowUp();
-		}
-
-		public void OnHarvest()
-        {
-            // 작물 수확 코드
-            var mouseWorldPosition = GetComponent<Camera>().ScreenToWorldPoint(MousePosition);
-            if (!_farmComponent.TryFindCropAt(mouseWorldPosition, out var crop))
-            {
-                return;
-            }
-
-            if (crop.TryHarvest(out var harvestedEntry))
-            {
-                Debug.Log($"{harvestedEntry.UniqueId}을(를) 수확했습니다.");
-            }
-        }
-
-        public void OnWatering()
-        {
-            // 물주기 코드
-            var mouseWorldPosition = GetComponent<Camera>().ScreenToWorldPoint(MousePosition);
-            if (!_farmComponent.TryFindCropAt<IWaterable>(mouseWorldPosition, out var waterableCrop))
-            {
-                return;
-            }
-
-            waterableCrop.TryWatering(1.0f);
-        }
-
-        public void OnWatering(Vector2Int tilePosition)
-        {
-			if (!_farmComponent.TryFindCropAt<IWaterable>(tilePosition, out var waterableCrop))
-			{
-				return;
-			}
-
-			waterableCrop.TryWatering(1.0f);
-            Debug.Log("물을 줬습니다");
-		}
-
         public void OnMouseClick(InputValue inputValue)
         {
             _isLeftClicked = inputValue.Get<float>() == 1;
+            if (_isLeftClicked)
+            {
+                if (_farmComponent.TryFindCropAt(Camera.ScreenToWorldPoint(MousePosition), out var crop))
+                {
+                    crop.OnTap();
+                }
+            }
         }
+
+        public void OnWatering(Vector2Int position)
+        {
+			if (_farmComponent.TryFindCropAt(position, out var crop))
+			{
+                crop.OnWatering();
+			}
+		}
 
         private void Awake()
         {

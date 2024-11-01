@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: ProductCarrot
   m_EditorClassIdentifier: 
   UniqueId: product_carrot
+  ProductSprite: {fileID: 21300000, guid: aaa2bface51641d44b9f218dd761cdd7, type: 3}

@@ -8,4 +8,5 @@ public class ProductEntry : ScriptableObject
     /// carrot, potato처럼 사용합니다.
     /// </summary>
     public string UniqueId;
+    public Sprite ProductSprite;
 }
