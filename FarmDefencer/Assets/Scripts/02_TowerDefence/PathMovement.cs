@@ -49,7 +49,7 @@ public class PathMovement : MonoBehaviour
             if (_pathIndex >= PathSupervisor.Instance.Path.Length)
             {
                 ResetWayPoint();
-                _monster.Die();
+                _monster.Kill();
 
                 return;
             }

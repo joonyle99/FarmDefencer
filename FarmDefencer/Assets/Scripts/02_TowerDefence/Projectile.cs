@@ -11,7 +11,7 @@ public abstract class Projectile : MonoBehaviour
     [SerializeField] private int _damage = 5;
     [SerializeField] private float _speed = 5f;
     
-    private Targetable _target;
+    private TargetableBehavior _target;
     private bool _isTriggered = false;
 
     private Rigidbody2D _rigidbody;
@@ -38,10 +38,10 @@ public abstract class Projectile : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        var target = collision.GetComponent<Targetable>();
+        var target = collision.GetComponent<TargetableBehavior>();
         if (target != null && target == _target)
         {
-            target.Hurt();
+            target.TakeDamage();
             Destroy(gameObject);
         }
     }
@@ -54,7 +54,7 @@ public abstract class Projectile : MonoBehaviour
     {
         _speed = speed;
     }
-    public void SetTarget(Targetable target)
+    public void SetTarget(TargetableBehavior target)
     {
         _target = target;
     }

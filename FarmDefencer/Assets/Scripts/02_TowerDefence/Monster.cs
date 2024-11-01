@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Monster : Targetable, IProduct
+public abstract class Monster : TargetableBehavior, IProduct
 {
     // [Header("式式式式式式式式 IProduct 式式式式式式式式")]
     // [Space]
@@ -20,10 +20,10 @@ public abstract class Monster : Targetable, IProduct
     // [Header("式式式式式式式式 Monster 式式式式式式式式")]
     // [Space]
 
-    [SerializeField] private Targetter _targetter;
+    [SerializeField] private TargetDetector _targetDetector;
 
-    public override void Hurt() { }
-    public override void Die()
+    public override void TakeDamage() { }
+    public override void Kill()
     {
         OriginFactory.ReturnObject(this);
     }
