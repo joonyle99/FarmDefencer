@@ -29,11 +29,11 @@ MonoBehaviour:
           iconNameOrGuid: 
         - colorIndex: 2
           iconNameOrGuid: 
-        - colorIndex: 3
+        - colorIndex: 6
           iconNameOrGuid: 
         - colorIndex: 4
           iconNameOrGuid: 
-        - colorIndex: 6
-          iconNameOrGuid: 
         - colorIndex: 8
+          iconNameOrGuid: 
+        - colorIndex: 3
           iconNameOrGuid: 
