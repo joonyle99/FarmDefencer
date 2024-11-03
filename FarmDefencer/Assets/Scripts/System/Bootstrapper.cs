@@ -21,8 +21,14 @@ using UnityEngine;
 /// 
 /// - 예: PathSupervisor, BuildSupervisor
 /// 
+/// Controller:
+/// - Supervisor가 '관리'하는 느낌이라면 Controller는 '제어'하는 느낌
+/// - 무언가 값을 제어하거나, 특정한 행동을 수행하는 클래스
+/// 
+/// - 예: DialogController, QuestController
+/// 
 /// </remarks>
-public static class ManagerVsSupervisor { }
+public class ManagerClassGuideline { }
 
 /// <summary>
 /// RuntimeInitializer에 의해 씬이 로드되기 전에 생성되며,
