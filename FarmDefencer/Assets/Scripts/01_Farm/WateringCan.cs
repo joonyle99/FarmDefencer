@@ -36,8 +36,7 @@ public class WateringCan : MonoBehaviour,
 	public Sprite WateringSprite;
 	public Sprite NormalSprite;
 
-	private Vector2Int _currentTilePosition; // OnDrag()에서 업데이트한 물뿌리개 타일 위치
-	private Vector2Int _lastTilePositon; // 이전 프레임에 이 물뿌리개가 있었던 타일 위치
+	private Vector2Int _currentTilePosition;
 	private float _elapsedTileTime; // 현재 타일에 있었던 시간
 	private Vector2 _initialScreenLocalPosition; // 이 물뿌리개를 사용하지 않을 때 위치할 화면 위치. 에디터 상에서 놓은 위치를 기억해서 사용함.
 	private RectTransform _rectTransform;
@@ -53,21 +52,25 @@ public class WateringCan : MonoBehaviour,
 		// 물뿌리개 위치를 현재 커서 위치로 옮기기
 		_rectTransform.position = pointerEventData.position;
 
-		// 물뿌리개의 월드 위치 구하기.
-		// pointerCurrentRaycast.worldPosition이 (0, 0, 0)을 반환해서, screenPosition을 얻은 후 이를 변환
-		var pointerScreenPosition = pointerEventData.pointerCurrentRaycast.screenPosition;
+		// 물뿌리개의 월드 위치 구하기
+		var pointerScreenPosition = pointerEventData.position;
 		var pointerWorldPosition = Camera.ScreenToWorldPoint(pointerScreenPosition);
 
 		var currentRoundX = Mathf.RoundToInt(pointerWorldPosition.x);
 		var currentRoundY = Mathf.RoundToInt(pointerWorldPosition.y);
-		_currentTilePosition = new Vector2Int(currentRoundX, currentRoundY);
+		var newTilePosition = new Vector2Int(currentRoundX, currentRoundY);
+
+		if (newTilePosition != _currentTilePosition)
+		{
+			_elapsedTileTime = 0.0f;
+		}
+		_currentTilePosition = newTilePosition;
 	}
 
 	private void Awake()
 	{
 		var tileX = Mathf.FloorToInt(transform.position.x);
 		var tileY = Mathf.FloorToInt(transform.position.y);
-		_lastTilePositon = new Vector2Int(tileX, tileY);
 		_elapsedTileTime = 0.0f;
 		_rectTransform = GetComponent<RectTransform>();
 		_initialScreenLocalPosition = _rectTransform.localPosition;
@@ -78,25 +81,15 @@ public class WateringCan : MonoBehaviour,
 	{
 		if (!Using)
 		{
+			_elapsedTileTime = 0.0f;
 			return;
-		}	
-
-		if (_currentTilePosition == _lastTilePositon)
-		{
-			var deltaTime = Time.deltaTime;
-			_elapsedTileTime += deltaTime;
-
-			if (_elapsedTileTime >= WateringTime)
-			{
-				_elapsedTileTime = 0.0f;
-				OnWatering.Invoke(_currentTilePosition);
-			}
 		}
-		else
+		_elapsedTileTime += Time.deltaTime;
+		if (_elapsedTileTime >= WateringTime)
 		{
 			_elapsedTileTime = 0.0f;
+			OnWatering.Invoke(_currentTilePosition);
 		}
-		_lastTilePositon = _currentTilePosition;
 	}
 
 	private void MoveToInitialPosition()
