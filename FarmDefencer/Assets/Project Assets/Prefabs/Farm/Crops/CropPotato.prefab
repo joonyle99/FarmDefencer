@@ -105,6 +105,8 @@ MonoBehaviour:
   _state: 0
   MatureAgeSeconds: 5
   _growthAgeSeconds: 0
+  LockSeconds: 5
+  _lockRemainingSeconds: 0
   _waterStored: 0
   _waterWaitingSeconds: 0
   SeedSprite: {fileID: 2185865422229137852, guid: c62fbc13d000c3a44b365861596edcc7, type: 3}
@@ -112,6 +114,7 @@ MonoBehaviour:
   DeadSprite: {fileID: 5505145245838024403, guid: b80e3bc29c90f8549a65627bea3c3b77, type: 3}
   GrowingSprite: {fileID: -2360516894548652956, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
   BudSprite: {fileID: -5645142870935734174, guid: 8851ae7ae4197674292e215b5104ecfd, type: 3}
+  LockedSprite: {fileID: 579628540815059721, guid: c663019061a422a4bbdc428297d78526, type: 3}
   PlantToDeadSeconds: 5
   DeadToSeedSeconds: 5
   HarvestHoldTime: 2

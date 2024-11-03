@@ -8,6 +8,7 @@ public class CropCarrot : Crop
 	public Sprite DeadSprite;
 	public Sprite GrowingSprite;
 	public Sprite BudSprite;
+	public Sprite LockedSprite;
 	[Space]
 	public float PlantToDeadSeconds = 300.0f;
 	public float DeadToSeedSeconds = 300.0f;
@@ -79,7 +80,7 @@ public class CropCarrot : Crop
 			{
 				if (WaterWaitingSeconds >= PlantToDeadSeconds+DeadToSeedSeconds)
 				{
-					State = CropState.Seed;
+					State = CropState.Locked;
 				}
 				else if (WaterWaitingSeconds >= PlantToDeadSeconds)
 				{
@@ -91,9 +92,17 @@ public class CropCarrot : Crop
 				}
 			}
 		}
-		else // State == CropState.Harvested
+		else if (State == CropState.Harvested)
 		{
 			_spriteRenderer.sprite = ProductEntry.ProductSprite;
+		}
+		else // Locked
+		{
+			_spriteRenderer.sprite = LockedSprite;
+			if (LockRemainingSeconds == 0.0f)
+			{
+				State = CropState.Seed;
+			}
 		}
 	}
 }

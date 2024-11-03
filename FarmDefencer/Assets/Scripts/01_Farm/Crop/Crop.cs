@@ -31,10 +31,16 @@ public abstract class Crop : MonoBehaviour
 				_growthAgeSeconds = 0.0f;
 				_waterStored = 0.0f;
 				_waterWaitingSeconds = 0.0f;
+				_lockRemainingSeconds = 0.0f;
 			}
-			else // Harvested
+			else if (value == CropState.Harvested)
 			{
+				_lockRemainingSeconds = 0.0f;
 				_growthAgeSeconds = MatureAgeSeconds;
+			}
+			else if (value == CropState.Locked)
+			{
+				_lockRemainingSeconds = LockSeconds;
 			}
 			_state = value;
 		}
@@ -66,6 +72,30 @@ public abstract class Crop : MonoBehaviour
 	}
 	[SerializeField]
 	private float _growthAgeSeconds;
+	/// <summary>
+	/// 작물의 패널티 시간 설정값
+	/// </summary>
+	public float LockSeconds = 60.0f;
+	/// <summary>
+	/// 작물의 남은 패널티 시간
+	/// </summary>
+	public float LockRemainingSeconds
+	{
+		get
+		{
+			return _lockRemainingSeconds;
+		}
+		private set
+		{
+			_lockRemainingSeconds = value;
+			if (_lockRemainingSeconds < 0.0f)
+			{
+				_lockRemainingSeconds = 0.0f;
+			}
+		}
+	}
+	[SerializeField]
+	private float _lockRemainingSeconds;
 	/// <summary>
 	/// 물 저장량 (모든 작물은 1.0초당 1.0의 물을 소비)
 	/// 물 주는 횟수 등을 조정하려면 물을 주는 양을 다르게 하면 될 것
@@ -141,7 +171,8 @@ public abstract class Crop : MonoBehaviour
 	{
 		Seed, // 터치하여 Planted 상태가 되길 기다리는 상태
 		Planted, // 성장중이거나, 죽었거나 하는 상태
-		Harvested // 100% 성장한 작물을 터치한 상태, 다시 터치하여 상자로 옮겨지길 기다리는 상태
+		Harvested, // 100% 성장한 작물을 터치한 상태, 다시 터치하여 상자로 옮겨지길 기다리는 상태
+		Locked // 작물 죽음 패널티 등으로 심기 동작이 잠긴 상태
 	}
 
 	protected virtual void Awake() { }
@@ -157,6 +188,12 @@ public abstract class Crop : MonoBehaviour
 		}
 
 		var deltaTime = Time.deltaTime;
+
+		if (State == CropState.Locked)
+		{
+			LockRemainingSeconds -= deltaTime;
+			return;
+		}
 
 		if (_waterStored < deltaTime)
 		{

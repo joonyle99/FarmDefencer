@@ -14,6 +14,7 @@ public class CropCorn : Crop
 	public Sprite Stage2AfterWateringSprite;
 	[Space]
 	public Sprite MatureSprite;
+	public Sprite LockedSprite;
 	[Space]
 	public float NormalToDeadSeconds = 300.0f;
 	public float DeadToSeedSeconds = 300.0f;
@@ -32,7 +33,7 @@ public class CropCorn : Crop
 				State = CropState.Harvested;
 			}
 		}
-		else // Harvested
+		else if (State == CropState.Harvested)
 		{
 			OnHarvest();
 			State = CropState.Seed;
@@ -100,7 +101,7 @@ public class CropCorn : Crop
 				{
 					if (WaterWaitingSeconds >= NormalToDeadSeconds + DeadToSeedSeconds)
 					{
-						State = CropState.Seed;
+						State = CropState.Locked;
 					}
 					else if (WaterWaitingSeconds >= NormalToDeadSeconds)
 					{
@@ -117,9 +118,17 @@ public class CropCorn : Crop
 				}
 			}
 		}
-		else // Harvested
+		else if (State == CropState.Harvested)
 		{
 			_spriteRenderer.sprite = ProductEntry.ProductSprite;
+		}
+		else if (State == CropState.Locked)
+		{
+			_spriteRenderer.sprite = LockedSprite;
+			if (LockRemainingSeconds == 0.0f)
+			{
+				State = CropState.Seed;
+			}
 		}
 	}
 }
