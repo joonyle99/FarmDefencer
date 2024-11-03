@@ -31,6 +31,28 @@ public class Farm : MonoBehaviour
         return false;
     }
 
+    public void TapAction(Vector2 position)
+    {
+        foreach (var field in _fields)
+        {
+			if (field.TryFindCropAt(position, out var crop))
+			{
+                crop.OnTap();
+			}
+		}
+    }
+
+    public void HoldingAction(Vector2 position, float holdTime)
+    {
+		foreach (var field in _fields)
+		{
+			if (field.TryFindCropAt(position, out var crop))
+			{
+                crop.OnHolding(holdTime);
+			}
+		}
+	}
+
     private void Awake()
     {
         _fields = new List<Field>();

@@ -39,7 +39,7 @@ public class CropCarrot : Crop
 		{
 			return;
 		}
-		if (WaterWaitingSeconds < PlantToDeadSeconds && WaterStored == 0.0f)
+		if (WaterWaitingSeconds < PlantToDeadSeconds + DeadToSeedSeconds && WaterStored == 0.0f)
 		{
 			WaterStored += MatureAgeSeconds * 1.1f; // 딱 맞아떨어지게 하면 99%에서 물 다시 달라고 할 수 있음
 		}

@@ -113,10 +113,10 @@ public abstract class Crop : MonoBehaviour
 	public virtual void OnTap() {}
 
 	/// <summary>
-	/// 이 작물을 길게 눌렀다 떼었을 때의 동작을 정의합니다.
+	/// 이 작물을 길게 누르고 있을 때의 동작을 정의합니다.
 	/// </summary>
 	/// <param name="holdTime"></param>
-	public virtual void OnHoldAndUp(float holdTime) {}
+	public virtual void OnHolding(float holdTime) {}
 	
 	/// <summary>
 	/// 이 작물에 물뿌리개의 물 주기 판정이 가해졌을 때의 동작을 정의합니다.

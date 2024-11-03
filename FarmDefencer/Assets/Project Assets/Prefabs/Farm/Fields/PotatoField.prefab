@@ -169,7 +169,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FarmClock: {fileID: 0}
-  CropPrefab: {fileID: 8248929270521535658, guid: 54bd1dde12187e6468a9d61370725a43, type: 3}
+  OnHarvest:
+    m_PersistentCalls:
+      m_Calls: []
+  CropPrefab: {fileID: 8248929270521535658, guid: 5bf2185754f8eef44827c6d9a08c9b58, type: 3}
   FieldLocalPosition: {x: 0, y: 6}
   FieldSize: {x: 5, y: 3}
   FlowedTile: {fileID: 11400000, guid: 3283182a5f53e934ca18a24f522d3934, type: 2}

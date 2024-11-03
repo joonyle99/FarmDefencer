@@ -42,10 +42,10 @@ public class CropCorn : Crop
 	public override void OnWatering()
 	{
 		if (State == CropState.Planted 
-			&& WaterWaitingSeconds < NormalToDeadSeconds
+			&& WaterWaitingSeconds < NormalToDeadSeconds + DeadToSeedSeconds
 			&& WaterStored == 0.0f)
 		{
-			WaterStored += GrowthAgeSeconds >= Stage1GrowthSeconds ? (MatureAgeSeconds - Stage1GrowthSeconds) * 1.05f : Stage1GrowthSeconds * 1.05f;
+			WaterStored += GrowthAgeSeconds >= Stage1GrowthSeconds ? (MatureAgeSeconds - Stage1GrowthSeconds) * 1.01f : Stage1GrowthSeconds * 1.01f;
 		}
 	}
 

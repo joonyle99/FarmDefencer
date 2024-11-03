@@ -103,7 +103,7 @@ MonoBehaviour:
   FarmClock: {fileID: 0}
   ProductEntry: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
   _state: 0
-  MatureAgeSeconds: 60
+  MatureAgeSeconds: 10
   _growthAgeSeconds: 0
   _waterStored: 0
   _waterWaitingSeconds: 0
@@ -111,10 +111,10 @@ MonoBehaviour:
   Stage1BeforeWateringSprite: {fileID: -2360516894548652956, guid: a1b2baeede864f947881b8b68de28cd7, type: 3}
   Stage1DeadSprite: {fileID: 5505145245838024403, guid: b80e3bc29c90f8549a65627bea3c3b77, type: 3}
   Stage1AfterWateringSprite: {fileID: -2360516894548652956, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
-  Stage1GrowthSeconds: 30
+  Stage1GrowthSeconds: 5
   Stage2BeforeWateringSprite: {fileID: -4860010634957982478, guid: 6bbfa09fcf9c8334db0d22cbf2b11262, type: 3}
   Stage2DeadSprite: {fileID: -2979842216640344933, guid: 7dab286119adb244588a26c27c53c3fd, type: 3}
   Stage2AfterWateringSprite: {fileID: -4860010634957982478, guid: bcc3df56fd2c4c24f875245d208a3eb3, type: 3}
   MatureSprite: {fileID: -5645142870935734174, guid: 8851ae7ae4197674292e215b5104ecfd, type: 3}
-  NormalToDeadSeconds: 300
-  DeadToSeedSeconds: 300
+  NormalToDeadSeconds: 5
+  DeadToSeedSeconds: 5

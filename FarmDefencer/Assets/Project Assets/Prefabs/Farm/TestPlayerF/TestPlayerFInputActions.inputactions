@@ -24,12 +24,21 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "MouseClick",
+                    "name": "Tap",
+                    "type": "Button",
+                    "id": "ec52ef3c-a03e-428a-bb16-d0ec481e883c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Hold",
                     "type": "Value",
-                    "id": "a0ad3900-b3bc-437e-80b4-5da827d6a314",
+                    "id": "4319d5e5-4895-4e3a-90d9-09ed7e710c85",
                     "expectedControlType": "Digital",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": true
                 }
             ],
@@ -157,12 +166,23 @@
                 },
                 {
                     "name": "",
-                    "id": "b97a78d6-4218-4998-bdfe-140e804fd87a",
+                    "id": "aec43232-a461-4642-b972-91a5a731eb71",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": ";PC(Debug)",
-                    "action": "MouseClick",
+                    "action": "Tap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "694e074f-c002-4963-a8f9-ee3beb3dd9e7",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Hold",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
