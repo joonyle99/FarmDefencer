@@ -20,13 +20,28 @@ public class WateringCan : MonoBehaviour,
 	[Header("물 주기 판정시 액션")]
 	public UnityEvent<Vector2Int> OnWatering;
 	public Camera Camera;
-	public bool Using { get; private set; }
+	private bool _using;
+	public bool Using
+	{
+		get
+		{
+			return _using;
+		}
+		private set
+		{
+			_using = value;
+			_image.sprite = _using ? WateringSprite : NormalSprite; 
+		}
+	}
+	public Sprite WateringSprite;
+	public Sprite NormalSprite;
 
 	private Vector2Int _currentTilePosition; // OnDrag()에서 업데이트한 물뿌리개 타일 위치
 	private Vector2Int _lastTilePositon; // 이전 프레임에 이 물뿌리개가 있었던 타일 위치
 	private float _elapsedTileTime; // 현재 타일에 있었던 시간
 	private Vector2 _initialScreenLocalPosition; // 이 물뿌리개를 사용하지 않을 때 위치할 화면 위치. 에디터 상에서 놓은 위치를 기억해서 사용함.
 	private RectTransform _rectTransform;
+	private Image _image;
 
 	public void OnPointerDown(PointerEventData eventData){ } // OnPointerUp 호출 가능하게 하려면 OnPointerDown이 필요함
 	public void OnPointerUp(PointerEventData pointerEventData) => MoveToInitialPosition();
@@ -56,6 +71,7 @@ public class WateringCan : MonoBehaviour,
 		_elapsedTileTime = 0.0f;
 		_rectTransform = GetComponent<RectTransform>();
 		_initialScreenLocalPosition = _rectTransform.localPosition;
+		_image = GetComponent<Image>();
 	}
 
 	private void Update()
