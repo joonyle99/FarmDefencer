@@ -41,7 +41,6 @@ public abstract class Projectile : MonoBehaviour
         var target = collision.GetComponent<TargetableBehavior>();
         if (target != null && target == _target)
         {
-            target.TakeDamage();
             Destroy(gameObject);
         }
     }

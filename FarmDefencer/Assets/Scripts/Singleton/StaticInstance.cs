@@ -15,6 +15,22 @@ namespace JoonyleGameDevKit
         /// 전역 변수가 아닌 정적 변수를 사용하여 유일성을 보장합니다.
         /// </remarks>
         public static T Instance { get; private set; }
+        public static bool IsInstanceExist
+        {
+            get
+            {
+                if (Instance == null)
+                {
+                    // throw new System.Exception("Instance is null");
+                    // Debug.LogWarning($"{Instance.GetType().Name} is null");
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
 
         protected virtual void Awake() => Instance = this as T;
 

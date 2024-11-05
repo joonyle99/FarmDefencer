@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -9,59 +10,81 @@ public sealed class Tower : TargetableBehavior
     [Space]
 
     [SerializeField] private TargetDetector _targetDetector;
-    public TargetDetector TargetDetector => _targetDetector;
 
-    //[Space]
-    
-    //[SerializeField] private Projectile _bullet;
-    //[SerializeField] private Transform _firePoint;
-    //[SerializeField] private float _intervalAttackTime = 0.5f;
+    [Space]
 
-    //private float _elapsedAttackTime = 0f;
+    [SerializeField] private Damager _damager;
+    [SerializeField] private Transform _firePoint;
+    [SerializeField] private float _intervalAttackTime = 0.5f;
 
-    //protected Projectile Bullet => _bullet;
-    //protected Transform FirePoint => _firePoint;
+    private float _elapsedAttackTime = 0f;
 
     private void Update()
     {
-        //_elapsedAttackTime += Time.deltaTime;
+        _elapsedAttackTime += Time.deltaTime;
 
-        //if (_elapsedAttackTime >= _intervalAttackTime)
-        //{
-        //    // '= 0f'로 하지 않고 '-=' 연산을 하는 이유는 누적된 시간만큼 공격을 해야하기 때문
-        //    _elapsedAttackTime -= _intervalAttackTime;
+        if (_elapsedAttackTime >= _intervalAttackTime)
+        {
+            // '= 0f'로 하지 않고 '-=' 연산을 하는 이유는 누적된 시간만큼 공격을 해야하기 때문
+            _elapsedAttackTime -= _intervalAttackTime;
 
-        //    Attack();
-        //}
+            Attack();
+        }
+    }
+
+    private TargetableBehavior CalcNearestTarget()
+    {
+        HashSet<TargetableBehavior> allTargets = _targetDetector.TargetsInRange;
+        TargetableBehavior nearestTarget = null;
+
+        var nearestDist = float.MaxValue;
+
+        foreach (var target in allTargets)
+        {
+            if (nearestTarget == null)
+            {
+                nearestTarget = target;
+                continue;
+            }
+
+            var targetDist = Vector3.SqrMagnitude(this.transform.position - target.transform.position);
+
+            if (targetDist < nearestDist)
+            {
+                nearestTarget = target;
+                nearestDist = targetDist;
+            }
+        }
+
+        return nearestTarget;
     }
 
     public void Attack()
     {
-        //TargetableBehavior[] allTargets = Targetter.TargetsInRange.ToArray<TargetableBehavior>();
+        var nearestTarget = CalcNearestTarget();
 
-        //foreach (Targetable target in allTargets)
-        //{
-        //    var diffVec = target.transform.position - FirePoint.position;
-        //    var dirVec = diffVec.normalized;
+        if (nearestTarget == null)
+        {
+            Debug.Log("there is no nearest target");
+            return;
+        }
 
-        //    Debug.DrawRay(FirePoint.position, diffVec, Color.red, 0.1f);
+        var diffVec = nearestTarget.transform.position - _firePoint.position;
+        var dirVec = diffVec.normalized;
 
-        //    float angle = Mathf.Atan2(dirVec.y, dirVec.x) * Mathf.Rad2Deg;
-        //    Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
+        // 이러한 방식으로 Tick()을 줘서 즉발이지만 발사체인 것처럼 개발하기
+        Debug.DrawRay(_firePoint.position, diffVec, Color.red, 0.1f);
 
-        //    var bullet = Instantiate(Bullet, FirePoint.position, rotation);
+        //float angle = Mathf.Atan2(dirVec.y, dirVec.x) * Mathf.Rad2Deg;
+        //Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
 
-        //    bullet.SetDamage(10);
-        //    bullet.SetSpeed(30f);
-        //    bullet.SetTarget(target);   // should set target before shoot
-
-        //    bullet.Shoot();
-        //}
+        _damager.SetDamage(10f);
+        _damager.HasDamaged(nearestTarget);
     }
 
-    public override void TakeDamage()
+    public override void TakeDamage(float damage)
     {
-        throw new System.NotImplementedException();
+        Debug.Log($"{this.gameObject.name} - take damage");
     }
 
     public override void Kill()

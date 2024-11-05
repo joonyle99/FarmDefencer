@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public abstract class Monster : TargetableBehavior, IProduct
+/// <summary>
+/// 
+/// </summary>
+public sealed class Monster : TargetableBehavior, IProduct
 {
     // [Header("──────── IProduct ────────")]
     // [Space]
@@ -20,19 +23,12 @@ public abstract class Monster : TargetableBehavior, IProduct
     // [Header("──────── Monster ────────")]
     // [Space]
 
-    [SerializeField] private TargetDetector _targetDetector;
-
-    public override void TakeDamage() { }
+    public override void TakeDamage(float damage)
+    {
+        Debug.Log($"{this.gameObject.name} - take damage");
+    }
     public override void Kill()
     {
-        OriginFactory.ReturnObject(this);
-    }
-
-    // 만약 범위 안에 타워가 들어온다면 이동을 멈춰서 공격한다
-    // 가장 가까운 타워를 찾아서 공격한다
-    // 타겟이 사라졌다면 이동을 재개한다
-    public void Attack()
-    {
-        // _towerDetector.Targets
+        OriginFactory.ReturnProduct(this);
     }
 }

@@ -23,6 +23,11 @@ public class PathMovement : MonoBehaviour
     }
     private void Start()
     {
+        if (PathSupervisor.IsInstanceExist == false)
+        {
+            return;
+        }
+        
         var startPoint = PathSupervisor.Instance.StartPoint;
 
         if (startPoint == null)

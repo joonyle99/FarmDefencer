@@ -1,5 +1,6 @@
 using UnityEngine;
 using JoonyleGameDevKit;
+using System.Collections.Generic;
 
 public interface IProduct
 {
@@ -8,22 +9,29 @@ public interface IProduct
 }
 
 /// <summary>
-/// 몬스터, 총알 등 자주 생성 및 삭제되는 오브젝트를 생성하고 관리합니다.
+/// 
 /// </summary>
 /// <remarks>
 /// 오브젝트 풀링 최적화 기법을 사용하여 가비지 컬렉션을 최소화합니다.
-/// 오브젝트 풀링에 사용되는 자료구조는 상속받는 클래스에서 구현합니다.
 /// </remarks>
-public abstract class Factory : MonoBehaviour
+public class Factory : MonoBehaviour
 {
     [Header("━━━━━━━━ Factory ━━━━━━━━")]
     [Space]
 
-    [SerializeField] private GameObject _objectPrefab;
-    [SerializeField] private string _objectName = "Object";
+    // 팩토리에서 생성하기 위한 오브젝트 목록
+    // [SerializeField] private List<GameObject> _productPrefabList = new List<GameObject>();
+
+    [SerializeField] private GameObject _productPrefab;
+    [SerializeField] private string _productName = "Product";
     [SerializeField] private int _poolCapacity = 100;
 
-    private GameObject _lastObject;
+    [Space]
+
+    [SerializeField] private List<GameObject> _pool = new List<GameObject>();
+    public List<GameObject> Pool => _pool;
+
+    private GameObject _lastProduct;
 
     private void Awake()
     {
@@ -35,14 +43,14 @@ public abstract class Factory : MonoBehaviour
         // 오브젝트 생성 후, 풀에 추가
         for (int i = 0; i < _poolCapacity; ++i)
         {
-            var newObj = Instantiate(_objectPrefab, Vector3.zero, Quaternion.identity);
+            var newObj = Instantiate(_productPrefab, Vector3.zero, Quaternion.identity);
 
-            newObj.gameObject.name = _objectName + " " + (i + 1).ToString();
+            newObj.gameObject.name = _productName + " " + (i + 1).ToString();
             newObj.gameObject.SetActive(false);
 
-            AddObject(newObj);
+            AddProduct(newObj);
 
-            _lastObject = newObj;
+            _lastProduct = newObj;
         }
     }
     private void ExtendPool()
@@ -54,25 +62,25 @@ public abstract class Factory : MonoBehaviour
         for (int i = 1; i <= halfOfCapacity; i++)
         {
             // 마지막 오브젝트의 이름에서 숫자를 추출해 네임 태그 생성
-            var lastNumber = _lastObject.name.ExtractNumber();
+            var lastNumber = _lastProduct.name.ExtractNumber();
             var nameTag = (lastNumber + 1).ToString();
 
-            CreateNewObject(nameTag);
+            CreateNewProduct(nameTag);
         }
     }
-    private void CreateNewObject(string nameTag)
+    private void CreateNewProduct(string nameTag)
     {
-        var newObj = Instantiate(_objectPrefab, Vector3.zero, Quaternion.identity);
+        var newObj = Instantiate(_productPrefab, Vector3.zero, Quaternion.identity);
 
-        newObj.gameObject.name = _objectName + " " + nameTag + " (Extended)";
+        newObj.gameObject.name = _productName + " " + nameTag + " (Extended)";
         newObj.gameObject.SetActive(false);
 
-        AddObject(newObj);
+        AddProduct(newObj);
 
-        _lastObject = newObj;
+        _lastProduct = newObj;
     }
 
-    public T GetObject<T>() where T : Component
+    public T GetProduct<T>() where T : Component
     {
         // 꺼낼 오브젝트가 없는 경우 풀을 확장한다
         if (IsEmptyPool())
@@ -82,15 +90,26 @@ public abstract class Factory : MonoBehaviour
         newObj.SetActive(true);
         return newObj.GetComponent<T>();
     }
-    public void ReturnObject(Component component)
+    public void ReturnProduct(Component component)
     {
         var oldObj = component.gameObject;
-        AddObject(oldObj);
+        AddProduct(oldObj);
         oldObj.SetActive(false);
     }
 
-    protected abstract void AddObject(GameObject obj);
-    protected abstract GameObject RemoveLast();
+    protected virtual void AddProduct(GameObject obj)
+    {
+        Pool.Add(obj);
+    }
+    protected virtual GameObject RemoveLast()
+    {
+        var obj = Pool[^1];
+        Pool.RemoveAt(Pool.Count - 1);
+        return obj;
+    }
 
-    public abstract bool IsEmptyPool();
+    public virtual bool IsEmptyPool()
+    {
+        return Pool.Count == 0;
+    }
 }
