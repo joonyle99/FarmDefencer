@@ -8,9 +8,25 @@ using UnityEngine;
 /// </remarks>
 public class PathSupervisor : JoonyleGameDevKit.Singleton<PathSupervisor>
 {
-    [SerializeField] private Transform _startPoint;
-    [SerializeField] private Transform[] _path;
+    [SerializeField] private Pathway[] _pathways;
 
-    public Transform StartPoint => _startPoint;
-    public Transform[] Path => _path;
+    private int _pathwayIndex = 0;
+    public int PathwayIndex
+    {
+        get => _pathwayIndex;
+        set
+        {
+            _pathwayIndex = value;
+
+            if (_pathwayIndex >= _pathways.Length)
+            {
+                _pathwayIndex = 0;
+            }
+        }
+    }
+
+    public Pathway GetCurrentPathway()
+    {
+        return _pathways[PathwayIndex++];
+    }
 }

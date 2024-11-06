@@ -32,51 +32,21 @@ public sealed class Tower : TargetableBehavior
         }
     }
 
-    private TargetableBehavior CalcNearestTarget()
-    {
-        HashSet<TargetableBehavior> allTargets = _targetDetector.TargetsInRange;
-        TargetableBehavior nearestTarget = null;
-
-        var nearestDist = float.MaxValue;
-
-        foreach (var target in allTargets)
-        {
-            if (nearestTarget == null)
-            {
-                nearestTarget = target;
-                continue;
-            }
-
-            var targetDist = Vector3.SqrMagnitude(this.transform.position - target.transform.position);
-
-            if (targetDist < nearestDist)
-            {
-                nearestTarget = target;
-                nearestDist = targetDist;
-            }
-        }
-
-        return nearestTarget;
-    }
-
     public void Attack()
     {
-        var nearestTarget = CalcNearestTarget();
+        var nearestTarget = _targetDetector.CalcNearestTarget();
 
         if (nearestTarget == null)
         {
-            Debug.Log("there is no nearest target");
             return;
         }
 
+        // 이러한 방식으로 Tick()을 줘서 즉발이지만 발사체인 것처럼 개발하기
         var diffVec = nearestTarget.transform.position - _firePoint.position;
         var dirVec = diffVec.normalized;
-
-        // 이러한 방식으로 Tick()을 줘서 즉발이지만 발사체인 것처럼 개발하기
         Debug.DrawRay(_firePoint.position, diffVec, Color.red, 0.1f);
-
-        //float angle = Mathf.Atan2(dirVec.y, dirVec.x) * Mathf.Rad2Deg;
-        //Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
+        float angle = Mathf.Atan2(dirVec.y, dirVec.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
 
         _damager.SetDamage(10f);
         _damager.HasDamaged(nearestTarget);
@@ -84,7 +54,7 @@ public sealed class Tower : TargetableBehavior
 
     public override void TakeDamage(float damage)
     {
-        Debug.Log($"{this.gameObject.name} - take damage");
+        Debug.Log($"<color=yellow>{this.gameObject.name}</color> take damage");
     }
 
     public override void Kill()

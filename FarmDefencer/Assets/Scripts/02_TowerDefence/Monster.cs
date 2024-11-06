@@ -23,9 +23,21 @@ public sealed class Monster : TargetableBehavior, IProduct
     // [Header("式式式式式式式式 Monster 式式式式式式式式")]
     // [Space]
 
+    private void Start()
+    {
+        // TEMP
+
+        /*
+        var pathMovement = GetComponent<PathMovement>();
+        var pathway = PathSupervisor.Instance.GetCurrentPathway();
+
+        pathMovement.Initialize(pathway);
+        */
+    }
+
     public override void TakeDamage(float damage)
     {
-        Debug.Log($"{this.gameObject.name} - take damage");
+        Debug.Log($"<color=orange>{this.gameObject.name}</color> take damage");
     }
     public override void Kill()
     {

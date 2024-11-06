@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 /// <summary>
 /// 
 /// </summary>
 public class TargetDetector : MonoBehaviour
 {
+    [SerializeField] private LayerMask _targetLayerMask;
+
     private const int BUCKET_CAPACITY = 100;
 
     private HashSet<TargetableBehavior> _targetsInRange = new HashSet<TargetableBehavior>(BUCKET_CAPACITY);
@@ -20,6 +23,30 @@ public class TargetDetector : MonoBehaviour
 
     public List<TargetableBehavior> DebugTargets = new List<TargetableBehavior>();
 
+    public TargetableBehavior CalcNearestTarget()
+    {
+        TargetableBehavior nearestTarget = null;
+        var nearestDist = float.MaxValue;
+
+        foreach (var target in _targetsInRange)
+        {
+            if (nearestTarget == null)
+            {
+                nearestTarget = target;
+                continue;
+            }
+
+            var targetDist = Vector3.SqrMagnitude(this.transform.position - target.transform.position);
+
+            if (targetDist < nearestDist)
+            {
+                nearestTarget = target;
+                nearestDist = targetDist;
+            }
+        }
+
+        return nearestTarget;
+    }
     private void UpdateDebugTargets()
     {
         // O(N)
@@ -36,33 +63,32 @@ public class TargetDetector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var target = collision.GetComponent<TargetableBehavior>();
-        if (target == null)
+        // check layer
+        if (((1 << collision.gameObject.layer) & _targetLayerMask.value) > 0)
         {
-            return;
-        }
-
-        // O(1)
-        if (TargetsInRange.Add(target))
-        {
-            OnEnterTarget?.Invoke(target);
-            UpdateDebugTargets();
+            // check targetable
+            if (collision.TryGetComponent<TargetableBehavior>(out var targetable))
+            {
+                // O(1)
+                if (TargetsInRange.Add(targetable))
+                {
+                    OnEnterTarget?.Invoke(targetable);
+                    UpdateDebugTargets();
+                }
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        var target = collision.GetComponent<TargetableBehavior>();
-        if (target == null)
+        if (collision.TryGetComponent<TargetableBehavior>(out var targetable))
         {
-            return;
-        }
-
-        // O(1)
-        if (TargetsInRange.Remove(target))
-        {
-            OntExitTarge?.Invoke(target);
-            UpdateDebugTargets();
+            // O(1)
+            if (TargetsInRange.Remove(targetable))
+            {
+                OntExitTarge?.Invoke(targetable);
+                UpdateDebugTargets();
+            }
         }
     }
 }

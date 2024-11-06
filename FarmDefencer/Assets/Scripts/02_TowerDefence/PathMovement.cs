@@ -5,45 +5,47 @@ using UnityEngine;
 /// </summary>
 public class PathMovement : MonoBehaviour
 {
-    [Header("Attributes")]
-    [Space]
-
+    [SerializeField] private Pathway _pathway;
     [SerializeField] private float _moveSpeed = 2f;
 
     private Transform _targetWayPoint;
     private int _pathIndex = 0;
 
-    private Monster _monster;
     private Rigidbody2D _rigidbody;
 
     private void Awake()
     {
-        _monster = GetComponent<Monster>();
         _rigidbody = GetComponent<Rigidbody2D>();
     }
     private void Start()
     {
-        if (PathSupervisor.IsInstanceExist == false)
+        if (_pathway == null)
         {
-            return;
+            // Debug.LogWarning("_pathway is null");
+            // return;
+            throw new System.Exception("_pathway is null");
         }
-        
-        var startPoint = PathSupervisor.Instance.StartPoint;
+
+        var startPoint = _pathway.StartPoint;
 
         if (startPoint == null)
         {
-            Debug.LogWarning("TargetWayPoint is null");
-            return;
+            // Debug.LogWarning("_targetWayPoint is null");
+            // return;
+            throw new System.Exception("_targetWayPoint is null");
         }
 
         transform.position = startPoint.position;
 
+        // TODO: 외부에서 Initialize를 호출하도록 수정하고 ResetWayPoint는 그 안에서 싫애하도록
         ResetWayPoint();
     }
     private void Update()
     {
         if (_targetWayPoint == null)
+        {
             return;
+        }
 
         // Arrived at the target waypoint
         if (Vector2.Distance(transform.position, _targetWayPoint.position) <= 0.1f)
@@ -51,31 +53,43 @@ public class PathMovement : MonoBehaviour
             _pathIndex++;
 
             // Arrived at the last waypoint
-            if (_pathIndex >= PathSupervisor.Instance.Path.Length)
+            if (_pathIndex >= _pathway.Path.Length)
             {
                 ResetWayPoint();
-                _monster.Kill();
+                Destroy(gameObject);
 
                 return;
             }
 
-            _targetWayPoint = PathSupervisor.Instance.Path[_pathIndex];
+            _targetWayPoint = _pathway.Path[_pathIndex];
         }
     }
     private void FixedUpdate()
     {
         if (_targetWayPoint == null)
+        {
             return;
+        }
 
         // Move to the target waypoint
         var dirVec = (_targetWayPoint.position - transform.position).normalized;
         _rigidbody.linearVelocity = dirVec * _moveSpeed;
     }
 
+    /// <summary>
+    /// 외부에서 이 컴포넌트를 초기화합니다.
+    /// e.g) _pathway.Initialize(pathway);
+    /// </summary>
+    public void Initialize(Pathway pathway)
+    {
+        _pathway = pathway;
+
+        ResetWayPoint();
+    }
     private void ResetWayPoint()
     {
         _pathIndex = 0;
-        _targetWayPoint = PathSupervisor.Instance.Path[_pathIndex];
+        _targetWayPoint = _pathway.Path[_pathIndex];
 
         if (_targetWayPoint == null)
         {
