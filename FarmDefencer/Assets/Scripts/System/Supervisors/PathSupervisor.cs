@@ -11,22 +11,12 @@ public class PathSupervisor : JoonyleGameDevKit.Singleton<PathSupervisor>
     [SerializeField] private Pathway[] _pathways;
 
     private int _pathwayIndex = 0;
-    public int PathwayIndex
-    {
-        get => _pathwayIndex;
-        set
-        {
-            _pathwayIndex = value;
 
-            if (_pathwayIndex >= _pathways.Length)
-            {
-                _pathwayIndex = 0;
-            }
-        }
-    }
-
-    public Pathway GetCurrentPathway()
+    public Pathway GetRandomPathway()
     {
-        return _pathways[PathwayIndex++];
+        _pathwayIndex += Random.Range(0, _pathways.Length);
+        _pathwayIndex %= _pathways.Length;
+
+        return _pathways[_pathwayIndex];
     }
 }

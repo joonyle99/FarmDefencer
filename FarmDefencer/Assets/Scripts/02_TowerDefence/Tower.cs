@@ -13,14 +13,21 @@ public sealed class Tower : TargetableBehavior
 
     [Space]
 
-    [SerializeField] private Damager _damager;
-    [SerializeField] private Transform _firePoint;
+    [SerializeField] private TowerHead _head;
+    [SerializeField] private Projectile _projectile;
+
+    [Space]
+
     [SerializeField] private float _intervalAttackTime = 0.5f;
 
+    private TargetableBehavior _currentTarget;
+    private Projectile _currentProjectile;
     private float _elapsedAttackTime = 0f;
 
     private void Update()
     {
+        UpdateDirection();
+
         _elapsedAttackTime += Time.deltaTime;
 
         if (_elapsedAttackTime >= _intervalAttackTime)
@@ -28,28 +35,47 @@ public sealed class Tower : TargetableBehavior
             // '= 0f'로 하지 않고 '-=' 연산을 하는 이유는 누적된 시간만큼 공격을 해야하기 때문
             _elapsedAttackTime -= _intervalAttackTime;
 
-            Attack();
+            UpdateTarget();
+
+            if (_currentTarget != null)
+            {
+                UpdateDirection();
+
+                Attack();
+            }
         }
     }
 
-    public void Attack()
+    public void UpdateTarget()
     {
-        var nearestTarget = _targetDetector.CalcNearestTarget();
-
-        if (nearestTarget == null)
+        _currentTarget = _targetDetector.CalcNearestTarget();
+    }
+    public void UpdateDirection()
+    {
+        if (_currentTarget == null)
         {
             return;
         }
 
-        // 이러한 방식으로 Tick()을 줘서 즉발이지만 발사체인 것처럼 개발하기
-        var diffVec = nearestTarget.transform.position - _firePoint.position;
-        var dirVec = diffVec.normalized;
-        Debug.DrawRay(_firePoint.position, diffVec, Color.red, 0.1f);
-        float angle = Mathf.Atan2(dirVec.y, dirVec.x) * Mathf.Rad2Deg;
-        Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
+        var dirVec = (_currentTarget.transform.position - _head.transform.position).normalized;
+        var targetAngle = Mathf.Atan2(dirVec.y, dirVec.x) * Mathf.Rad2Deg;
+        var targetRotation = Quaternion.Euler(0f, 0f, targetAngle + _head.StartAngle);
+        _head.transform.rotation = targetRotation;
+    }
 
-        _damager.SetDamage(10f);
-        _damager.HasDamaged(nearestTarget);
+    public void Attack()
+    {
+        _currentProjectile = Instantiate(_projectile, _head.Muzzle.position, _head.Muzzle.rotation);
+
+        if (_currentProjectile == null)
+        {
+            Debug.LogWarning($"projectile is null");
+            return;
+        }
+
+        _currentProjectile.SetDamage(10);
+        _currentProjectile.SetTarget(_currentTarget);
+        _currentProjectile.Shoot();
     }
 
     public override void TakeDamage(float damage)

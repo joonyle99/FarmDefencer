@@ -1,17 +1,15 @@
 using UnityEngine;
 
-public abstract class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
     [Header("──────── Projectile ────────")]
 
     [Space]
 
-    // Damager 클래스 사용하기
+    [SerializeField] private int _damage = 10;
+    [SerializeField] private float _speed = 20f;
 
-    [SerializeField] private int _damage = 5;
-    [SerializeField] private float _speed = 5f;
-    
-    private TargetableBehavior _target;
+    private TargetableBehavior _currentTarget;
     private bool _isTriggered = false;
 
     private Rigidbody2D _rigidbody;
@@ -22,25 +20,25 @@ public abstract class Projectile : MonoBehaviour
     }
     private void Update()
     {
-        
+        // TODO: _currentTarget가 사라지거나 어떠한 이유로 닿을 수 없다면 자동으로 파괴되는 기능이 있어야 한다
     }
     private void FixedUpdate()
     {
-        if (_isTriggered && _target != null)
+        if (_isTriggered && _currentTarget != null)
         {
-            var diffVec = _target.transform.position - transform.position;
+            var diffVec = _currentTarget.transform.position - transform.position;
             var velocity = diffVec.normalized * _speed;
 
             _rigidbody.linearVelocity = velocity;
-            // _rigidbody.AddForce(force);
         }
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         var target = collision.GetComponent<TargetableBehavior>();
-        if (target != null && target == _target)
+        if (target != null && target == _currentTarget)
         {
+            _currentTarget.TakeDamage(_damage);
             Destroy(gameObject);
         }
     }
@@ -55,12 +53,12 @@ public abstract class Projectile : MonoBehaviour
     }
     public void SetTarget(TargetableBehavior target)
     {
-        _target = target;
+        _currentTarget = target;
     }
 
     public void Shoot()
     {
-        if (_target == null)
+        if (_currentTarget == null)
         {
             Debug.LogWarning("There is no target");
             return;

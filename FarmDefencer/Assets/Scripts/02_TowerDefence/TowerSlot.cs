@@ -25,6 +25,11 @@ public class TowerSlot : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (_occupiedTower != null)
+        {
+            return;
+        }
+
         _spriteRenderer.color = _hoverColor;
     }
     private void OnMouseExit()
