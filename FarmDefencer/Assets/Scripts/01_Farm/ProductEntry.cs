@@ -9,4 +9,5 @@ public class ProductEntry : ScriptableObject
     /// </summary>
     public string UniqueId;
     public Sprite ProductSprite;
+    public int Price;
 }
