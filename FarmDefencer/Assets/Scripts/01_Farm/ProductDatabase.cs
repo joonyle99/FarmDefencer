@@ -12,6 +12,7 @@ public class ProductDatabase : ScriptableObject
 
 	private void Awake()
 	{
+		_lookupDictionary = new Dictionary<string, ProductEntry>();
 		foreach (var entry in Products)
 		{
 			if (entry == null)

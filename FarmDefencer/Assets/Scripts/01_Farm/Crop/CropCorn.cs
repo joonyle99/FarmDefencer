@@ -79,7 +79,7 @@ public class CropCorn : Crop
 				{
 					if (WaterWaitingSeconds >= NormalToDeadSeconds + DeadToSeedSeconds)
 					{
-						State = CropState.Seed;
+						State = CropState.Locked;
 					}
 					else if (WaterWaitingSeconds >= NormalToDeadSeconds)
 					{
