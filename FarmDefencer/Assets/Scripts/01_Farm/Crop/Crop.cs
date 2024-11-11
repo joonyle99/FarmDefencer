@@ -12,9 +12,8 @@ using UnityEngine.Events;
 /// <list type="bullet">작물이 죽을 조건이라면 State를 Seed로 조작(Crop은 작물의 State를 변경시키지 않음)</list>
 /// <list type="bullet">OnTap(), OnHoldAndUp()을 오버라이드해 작물 심기, 수확 등의 동작 정의</list>
 /// </summary>
-public abstract class Crop : MonoBehaviour
+public abstract class Crop : MonoBehaviour, IFarmUpdatable
 {
-	public FarmClock FarmClock;
 	public ProductEntry ProductEntry;
 	public UnityAction OnHarvest;
 	protected CropState State
@@ -25,6 +24,10 @@ public abstract class Crop : MonoBehaviour
 		}
 		set
 		{
+			if (_state == value)
+			{
+				return;
+			}
 			if (value == CropState.Seed
 				|| value == CropState.Planted)
 			{
@@ -117,6 +120,10 @@ public abstract class Crop : MonoBehaviour
 	}
 	[SerializeField]
 	private float _waterStored;
+	/// <summary>
+	/// 마지막 OnFarmUpdate()가 0.0이었으면 true, 이외의 경우 false로 세팅됩니다.
+	/// </summary>
+	protected bool Paused { get; private set; }
 
 	/// <summary>
 	/// 물이 없어서 기다리고 있었던 총 시간.
@@ -177,17 +184,9 @@ public abstract class Crop : MonoBehaviour
 
 	protected virtual void Awake() { }
 	protected virtual void Start() { }
-	protected virtual void Update()
+	public virtual void OnFarmUpdate(float deltaTime)
 	{
-		if (FarmClock.Paused
-			|| State == CropState.Seed
-			|| State == CropState.Harvested
-			|| _growthAgeSeconds >= MatureAgeSeconds)
-		{
-			return;
-		}
-
-		var deltaTime = Time.deltaTime;
+		Paused = deltaTime == 0.0f;
 
 		if (State == CropState.Locked)
 		{
@@ -201,7 +200,7 @@ public abstract class Crop : MonoBehaviour
 			_waterWaitingSeconds += deltaTime;
 			return;
 		}
-		_waterWaitingSeconds = 0.0f;
+
 		if (OnGrow(deltaTime))
 		{
 			GrowthAgeSeconds += deltaTime;

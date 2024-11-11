@@ -6,6 +6,11 @@ public class CropPotato : CropCarrot
 	public float HarvestHoldTime = 2.0f;
 	public override void OnTap()
 	{
+		if (Paused)
+		{
+			return;
+		}
+
 		// base.OnTap()는 동작이 달라 호출하지 않음
 		if (State == CropState.Seed)
 		{
@@ -20,6 +25,11 @@ public class CropPotato : CropCarrot
 
 	public override void OnHolding(float holdTime)
 	{
+		if (Paused)
+		{
+			return;
+		}
+
 		if (State == CropState.Planted
 			&& GrowthPercentage >= 100.0f
 			&& holdTime >= HarvestHoldTime)

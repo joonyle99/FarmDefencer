@@ -1,11 +1,11 @@
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
-namespace FloweryTest
+namespace FarmTest
 {
-    public class TestPlayerF : MonoBehaviour
+    public class FarmTestPlayer : MonoBehaviour
     {
         public float LongTapThreshold = 1.0f;
         public float CameraMovementScale = 1.0f;
@@ -13,9 +13,12 @@ namespace FloweryTest
         public GameObject FarmObject;
 		public Camera Camera;
         public WateringCan WateringCan;
+        public FarmClock FarmClock;
         private Farm _farmComponent;
+
 		private float _holdingTimeElapsed;
 		private bool _isPressing;
+        private TMP_Text _remainingDaytimeText;
 
 		// 위치 delta를 받음
         public void OnCameraMove(InputValue inputValue)
@@ -53,6 +56,8 @@ namespace FloweryTest
 
 		private void Update()
 		{
+            _remainingDaytimeText.text = $"Remaining Daytime: {FarmClock.RemainingDaytime:f2}s";
+
 			if (_isPressing)
             {
                 _holdingTimeElapsed += Time.deltaTime;
@@ -67,6 +72,21 @@ namespace FloweryTest
 		private void Awake()
         {
             _farmComponent = FarmObject.GetComponent<Farm>();
+            _remainingDaytimeText = transform.Find("Canvas/RemainingDaytimeText").GetComponent<TMP_Text>();
+            transform.Find("Canvas/DaytimeRandomSetButton")
+                .GetComponent<Button>()
+                .onClick.AddListener(() => FarmClock.SetRemainingDaytimeRandom(300.0f, 600.0f));
+            transform.Find("Canvas/Daytime5sSetButton").GetComponent<Button>()
+                .GetComponent<Button>()
+                .onClick.AddListener(() => FarmClock.SetRemainingDaytimeBy(5.0f));          
+            transform.Find("Canvas/PauseButton").GetComponent<Button>()
+                .GetComponent<Button>()
+                .onClick.AddListener(
+                () =>
+                {
+                    FarmClock.IsManuallyPaused = !FarmClock.IsManuallyPaused;
+                    transform.Find("Canvas/PauseButton").GetComponentInChildren<TMP_Text>().text = FarmClock.IsManuallyPaused ? "Play" : "Pause";
+                });
         }
     }
 }

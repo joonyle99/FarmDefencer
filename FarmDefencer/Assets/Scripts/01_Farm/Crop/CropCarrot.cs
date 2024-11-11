@@ -16,6 +16,11 @@ public class CropCarrot : Crop
 
 	public override void OnTap()
 	{
+		if (Paused)
+		{
+			return;
+		}
+
 		if (State == CropState.Seed)
 		{
 			State = CropState.Planted;
@@ -36,6 +41,11 @@ public class CropCarrot : Crop
 
 	public override void OnWatering()
 	{
+		if (Paused)
+		{
+			return;
+		}
+
 		if (State != CropState.Planted)
 		{
 			return;
@@ -50,15 +60,9 @@ public class CropCarrot : Crop
 	public override bool IsGrowing() => State == CropState.Planted && !IsDead();
 
 
-	protected override void Awake()
+	public override void OnFarmUpdate(float deltaTime)
 	{
-		base.Awake();
-		_spriteRenderer = GetComponent<SpriteRenderer>();
-	}
-
-	protected override void Update()
-	{
-		base.Update();
+		base.OnFarmUpdate(deltaTime);
 
 		if (State == CropState.Seed)
 		{
@@ -104,5 +108,11 @@ public class CropCarrot : Crop
 				State = CropState.Seed;
 			}
 		}
+	}
+
+	protected override void Awake()
+	{
+		base.Awake();
+		_spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 }

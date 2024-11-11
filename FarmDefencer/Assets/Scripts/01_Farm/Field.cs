@@ -3,9 +3,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 
-public class Field : MonoBehaviour
+public class Field : MonoBehaviour, IFarmUpdatable
 {
-    public FarmClock FarmClock;
     public UnityEvent<ProductEntry, Vector2Int> OnHarvest;
     public GameObject CropPrefab;
     /// <summary>
@@ -47,6 +46,14 @@ public class Field : MonoBehaviour
         return false;
 	}
 
+    public void OnFarmUpdate(float deltaTime)
+    {
+        foreach (var crop in _crops)
+        {
+            crop.OnFarmUpdate(deltaTime);
+        }
+    }
+
 	private void Awake()
     {
         _tilemap = GetComponentInChildren<Tilemap>();
@@ -79,7 +86,6 @@ public class Field : MonoBehaviour
 	{
 		foreach (var crop in _crops)
         {
-            crop.FarmClock = FarmClock;
 			crop.OnHarvest += () => OnHarvest.Invoke(crop.ProductEntry, crop.Position);
 		}
 	}

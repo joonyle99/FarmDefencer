@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UniqueId: product_corn
   ProductSprite: {fileID: 21300000, guid: de2c46a7a83d0924da5bb72a9cd5259a, type: 3}
+  Price: 5
