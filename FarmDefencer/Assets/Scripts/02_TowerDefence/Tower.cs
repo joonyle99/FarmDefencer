@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -9,24 +8,24 @@ public sealed class Tower : TargetableBehavior
     [Header("式式式式式式式式 Tower 式式式式式式式式")]
     [Space]
 
-    [SerializeField] private TargetDetector _targetDetector;
+    [SerializeField] private TargetDetector _detector;
 
     [Space]
 
+    [Header("Fire")]
     [SerializeField] private TowerHead _head;
     [SerializeField] private Projectile _projectile;
-
-    [Space]
-
     [SerializeField] private float _intervalAttackTime = 0.5f;
 
     private TargetableBehavior _currentTarget;
-    private Projectile _currentProjectile;
     private float _elapsedAttackTime = 0f;
 
     private void Update()
     {
-        UpdateDirection();
+        if (_currentTarget != null)
+        {
+            _head.LookAt(_currentTarget.transform.position);
+        }
 
         _elapsedAttackTime += Time.deltaTime;
 
@@ -39,7 +38,7 @@ public sealed class Tower : TargetableBehavior
 
             if (_currentTarget != null)
             {
-                UpdateDirection();
+                _head.LookAt(_currentTarget.transform.position);
 
                 Attack();
             }
@@ -48,41 +47,28 @@ public sealed class Tower : TargetableBehavior
 
     public void UpdateTarget()
     {
-        _currentTarget = _targetDetector.CalcNearestTarget();
-    }
-    public void UpdateDirection()
-    {
-        if (_currentTarget == null)
-        {
-            return;
-        }
-
-        var dirVec = (_currentTarget.transform.position - _head.transform.position).normalized;
-        var targetAngle = Mathf.Atan2(dirVec.y, dirVec.x) * Mathf.Rad2Deg;
-        var targetRotation = Quaternion.Euler(0f, 0f, targetAngle + _head.StartAngle);
-        _head.transform.rotation = targetRotation;
+        _currentTarget = _detector.GetFrontTarget();
     }
 
     public void Attack()
     {
-        _currentProjectile = Instantiate(_projectile, _head.Muzzle.position, _head.Muzzle.rotation);
+        var projectile = Instantiate(_projectile, _head.Muzzle.position, _head.Muzzle.rotation);
 
-        if (_currentProjectile == null)
+        if (projectile == null)
         {
             Debug.LogWarning($"projectile is null");
             return;
         }
 
-        _currentProjectile.SetDamage(10);
-        _currentProjectile.SetTarget(_currentTarget);
-        _currentProjectile.Shoot();
+        projectile.SetDamage(10);
+        projectile.SetTarget(_currentTarget);
+        projectile.Shoot();
     }
 
     public override void TakeDamage(float damage)
     {
         Debug.Log($"<color=yellow>{this.gameObject.name}</color> take damage");
     }
-
     public override void Kill()
     {
         throw new System.NotImplementedException();

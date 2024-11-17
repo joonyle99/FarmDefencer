@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1856f5fb396d8234c8904144892b0e14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetDetector: {fileID: 8030555983261524709}
+  _detector: {fileID: 8030555983261524709}
   _head: {fileID: 4316090972008233062}
   _projectile: {fileID: 6744073714266680951, guid: faa4fe957d0de1349a328fd551842340, type: 3}
   _intervalAttackTime: 0.5
