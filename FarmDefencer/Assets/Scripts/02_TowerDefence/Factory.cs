@@ -6,6 +6,9 @@ public interface IProduct
 {
     public Factory OriginFactory { get; set; }
     public void SetOriginFactory(Factory originFactory);
+
+    public GameObject GameObject { get; }
+    public Transform Transform { get; }
 }
 
 /// <summary>
@@ -19,7 +22,7 @@ public class Factory : MonoBehaviour
     [Header("━━━━━━━━ Factory ━━━━━━━━")]
     [Space]
 
-    // 팩토리에서 생성하기 위한 오브젝트 목록
+    // 팩토리에서 생성하기 위한 오브젝트 목록 (확장성을 고려하기 위함)
     // [SerializeField] private List<GameObject> _productPrefabList = new List<GameObject>();
 
     [SerializeField] private GameObject _productPrefab;
@@ -35,18 +38,21 @@ public class Factory : MonoBehaviour
 
     private void Awake()
     {
-        CreatePool();
+        InstantiatePool();
     }
 
-    private void CreatePool()
+    private void InstantiatePool()
     {
+        _pool = new List<GameObject>(_poolCapacity);
+
         // 오브젝트 생성 후, 풀에 추가
         for (int i = 0; i < _poolCapacity; ++i)
         {
             var newObj = Instantiate(_productPrefab, Vector3.zero, Quaternion.identity);
 
-            newObj.gameObject.name = _productName + " " + (i + 1).ToString();
-            newObj.gameObject.SetActive(false);
+            newObj.name = _productName + " " + (i + 1).ToString();
+            newObj.transform.SetParent(transform, false);
+            newObj.SetActive(false);
 
             AddProduct(newObj);
 
@@ -72,15 +78,16 @@ public class Factory : MonoBehaviour
     {
         var newObj = Instantiate(_productPrefab, Vector3.zero, Quaternion.identity);
 
-        newObj.gameObject.name = _productName + " " + nameTag + " (Extended)";
-        newObj.gameObject.SetActive(false);
+        newObj.name = _productName + " " + nameTag + " (Extended)";
+        newObj.transform.SetParent(transform, false);
+        newObj.SetActive(false);
 
         AddProduct(newObj);
 
         _lastProduct = newObj;
     }
 
-    public T GetProduct<T>() where T : Component
+    public T GetProduct<T>() where T : IProduct
     {
         // 꺼낼 오브젝트가 없는 경우 풀을 확장한다
         if (IsEmptyPool())
@@ -88,27 +95,34 @@ public class Factory : MonoBehaviour
 
         var newObj = RemoveLast();
         newObj.SetActive(true);
-        return newObj.GetComponent<T>();
+        var product = newObj.GetComponent<T>();
+        product.SetOriginFactory(this);
+
+        return product;
     }
-    public void ReturnProduct(Component component)
+    public void ReturnProduct(IProduct product)
     {
-        var oldObj = component.gameObject;
-        AddProduct(oldObj);
-        oldObj.SetActive(false);
+        product.GameObject.SetActive(false);
+        AddProduct(product.GameObject);
     }
 
-    protected virtual void AddProduct(GameObject obj)
+    protected void AddProduct(GameObject obj)
     {
         Pool.Add(obj);
     }
-    protected virtual GameObject RemoveLast()
+    protected GameObject RemoveLast()
     {
-        var obj = Pool[^1];
+        if (IsEmptyPool())
+        {
+            return null;
+        }
+
+        var obj = Pool[Pool.Count - 1];
         Pool.RemoveAt(Pool.Count - 1);
         return obj;
     }
 
-    public virtual bool IsEmptyPool()
+    public bool IsEmptyPool()
     {
         return Pool.Count == 0;
     }

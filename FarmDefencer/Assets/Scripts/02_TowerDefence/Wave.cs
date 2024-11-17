@@ -4,18 +4,15 @@ using UnityEngine;
 
 public class Wave : MonoBehaviour
 {
-    //[Header("收收收收收收收收 Wave 收收收收收收收收")]
-    //[Space]
-
-    //[SerializeField] private Factory _factory;
-    //public Factory Factory => _factory;
-
-    [SerializeField] private Monster _monster;
-    [SerializeField] private RangeFloat _spawnRange;
-
+    [Header("收收收收收收收收 Wave 收收收收收收收收")]
     [Space]
 
-    private float _waitTime = 0f;
+    [SerializeField] private Factory _factory;
+    public Factory Factory => _factory;
+
+    [SerializeField] private RangeFloat _waitTimeRange;
+    [SerializeField] private float _waitTime = 0f;
+
     private float _elapsedTime = 0f;
 
     private void Start()
@@ -25,16 +22,9 @@ public class Wave : MonoBehaviour
 
     protected void Spawn()
     {
-        Debug.Log("Monster Spawn");
-
-        //Monster monster = Factory.GetProduct<Monster>();
-        //monster.SetOriginFactory(Factory);
-        //monster.transform.position = transform.position;
-
-        var monster = Instantiate(_monster, Vector3.zero, Quaternion.identity);
+        var monster = _factory.GetProduct<Monster>();
         var pathMovement = monster.GetComponent<PathMovement>();
-        var targetPathway = PathSupervisor.Instance.GetRandomPathway();
-        pathMovement.Initialize(targetPathway);
+        pathMovement.Initialize(PathSupervisor.Instance.GetRandomPathway());
     }
 
     private IEnumerator SpawnCoroutine()
@@ -44,7 +34,7 @@ public class Wave : MonoBehaviour
             if (_elapsedTime >= _waitTime)
             {
                 _elapsedTime = 0f;
-                _waitTime = _spawnRange.Random();
+                _waitTime = _waitTimeRange.Random();
 
                 Spawn();
             }

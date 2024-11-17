@@ -8,36 +8,26 @@ public class PathMovement : MonoBehaviour
     [SerializeField] private Pathway _pathway;
     [SerializeField] private float _moveSpeed = 2f;
 
+    private Transform _startWayPoint;
     private Transform _targetWayPoint;
     private int _pathIndex = 0;
 
+    // references
+    private Monster _monster;
     private Rigidbody2D _rigidbody;
 
     private void Awake()
     {
+        _monster = GetComponent<Monster>();
         _rigidbody = GetComponent<Rigidbody2D>();
     }
-    private void Start()
+    private void OnEnable()
     {
         if (_pathway == null)
         {
-            // Debug.LogWarning("_pathway is null");
-            // return;
-            throw new System.Exception("_pathway is null");
+            return;
         }
 
-        var startPoint = _pathway.StartPoint;
-
-        if (startPoint == null)
-        {
-            // Debug.LogWarning("_targetWayPoint is null");
-            // return;
-            throw new System.Exception("_targetWayPoint is null");
-        }
-
-        transform.position = startPoint.position;
-
-        // TODO: 외부에서 Initialize를 호출하도록 수정하고 ResetWayPoint는 그 안에서 싫애하도록
         ResetWayPoint();
     }
     private void Update()
@@ -56,7 +46,7 @@ public class PathMovement : MonoBehaviour
             if (_pathIndex >= _pathway.Path.Length)
             {
                 ResetWayPoint();
-                Destroy(gameObject);
+                _monster.OriginFactory.ReturnProduct(_monster);
 
                 return;
             }
@@ -84,17 +74,35 @@ public class PathMovement : MonoBehaviour
     {
         _pathway = pathway;
 
+        if (_pathway == null)
+        {
+            throw new System.NullReferenceException("_pathway is null");
+        }
+
         ResetWayPoint();
     }
+    /// <summary>
+    /// 
+    /// </summary>
     private void ResetWayPoint()
     {
+        // start waypoint
+        _startWayPoint = _pathway.StartPoint;
+
+        if (_startWayPoint == null)
+        {
+            throw new System.NullReferenceException("_startWayPoint is null");
+        }
+
+        transform.position = _startWayPoint.position;
+
+        // target waypoint
         _pathIndex = 0;
         _targetWayPoint = _pathway.Path[_pathIndex];
 
         if (_targetWayPoint == null)
         {
-            Debug.LogWarning("TargetWayPoint is null, you should set \'_targetWayPoint\' variable");
-            return;
+            throw new System.NullReferenceException("_targetWayPoint is null");
         }
     }
 }
