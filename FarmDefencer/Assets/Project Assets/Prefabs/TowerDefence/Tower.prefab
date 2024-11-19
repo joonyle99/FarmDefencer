@@ -115,7 +115,7 @@ MonoBehaviour:
   _targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  DebugTargets: []
+  _targetsInRange: []
 --- !u!1 &7323561679821610874
 GameObject:
   m_ObjectHideFlags: 0

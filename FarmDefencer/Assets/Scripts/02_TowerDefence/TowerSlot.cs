@@ -44,14 +44,6 @@ public class TowerSlot : MonoBehaviour
             return;
         }
 
-        var towerToBuild = BuildSupervisor.Instance.GetSelectedTower();
-
-        if (towerToBuild == null)
-        {
-            Debug.LogWarning("There is no tower to build, you should select tower");
-            return;
-        }
-
-        _occupiedTower = Instantiate(towerToBuild, transform.position, Quaternion.identity);
+        _occupiedTower = BuildSupervisor.Instance.InstantiateTower(transform.position, Quaternion.identity);
     }
 }
