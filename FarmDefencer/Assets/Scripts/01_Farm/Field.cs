@@ -78,14 +78,21 @@ public class Field : MonoBehaviour, IFarmUpdatable
 
     private void OnAvailabilityChanged()
     {
-
-    }
+        var color = _isAvailable ? Color.white : new Color(0.3f, 0.3f, 0.3f, 1.0f);
+		for (int yOffset = 0; yOffset < FieldSize.y; yOffset++)
+		{
+			for (int xOffset = 0; xOffset < FieldSize.x; xOffset++)
+			{
+                _tilemap.SetTileFlags(new Vector3Int(xOffset, yOffset), TileFlags.None);
+				_tilemap.SetColor(new Vector3Int(xOffset, yOffset), color);
+			}
+		}
+	}
 
 	private void Awake()
     {
         _tilemap = GetComponentInChildren<Tilemap>();
         _crops = new List<Crop>();
-        IsAvailable = false;
 
         if (CropPrefab == null
             || !CropPrefab.TryGetComponent<Crop>(out var _))
@@ -110,7 +117,9 @@ public class Field : MonoBehaviour, IFarmUpdatable
                 _crops.Add(cropComponent);
             }
         }
-    }
+
+		IsAvailable = false;
+	}
 
 	private void Start()
 	{
