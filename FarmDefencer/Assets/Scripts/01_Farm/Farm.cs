@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class Farm : MonoBehaviour, IFarmUpdatable
 {
     public List<GameObject> FieldPrefabs;
-    [Tooltip("ProductEntry와 그것이 수확된 위치인 Vector2Int를 의미합니다.")]
+    [Tooltip("ProductEntry와 그것이 수확된 위치인 월드 좌표이자 타일 좌표 Vector2Int를 의미합니다.")]
     public UnityEvent<ProductEntry, Vector2Int> OnHarvest;
 
     private Field[] _fields;
