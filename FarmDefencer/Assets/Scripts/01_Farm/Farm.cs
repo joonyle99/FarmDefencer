@@ -18,7 +18,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
     /// </summary>
     public UnityEvent<ProductEntry, Vector2Int, UnityAction<bool>> OnTryItemify;
 
-    private Field[] _fields;
+    private Dictionary<string, Field> _fields;
 
 	/// <summary>
 	/// 해당 월드 좌표의 Crop을 검색합니다.
@@ -30,7 +30,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 	/// <returns></returns>
 	public bool TryFindCropAt(Vector2 position, out Crop crop)
 	{
-		foreach (var field in _fields)
+		foreach (var (_, field) in _fields)
 		{
 			if (field.TryFindCropAt(position, out crop))
 			{
@@ -44,8 +44,12 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 
 	public void TapAction(Vector2 position)
     {
-        foreach (var field in _fields)
+        foreach (var (_, field) in _fields)
         {
+			if (!field.IsAvailable)
+			{
+				continue;
+			}
 			if (field.TryFindCropAt(position, out var crop))
 			{
                 crop.OnTap();
@@ -55,8 +59,12 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 
     public void HoldingAction(Vector2 position, float holdTime)
     {
-		foreach (var field in _fields)
+		foreach (var (_, field) in _fields)
 		{
+			if (!field.IsAvailable)
+			{
+				continue;
+			}
 			if (field.TryFindCropAt(position, out var crop))
 			{
                 crop.OnHolding(holdTime);
@@ -66,8 +74,12 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 
 	public void WateringAction(Vector2 position)
 	{
-		foreach (var field in _fields)
+		foreach (var (_, field) in _fields)
 		{
+			if (!field.IsAvailable)
+			{
+				continue;
+			}
 			if (field.TryFindCropAt(position, out var crop))
 			{
 				crop.OnWatering();
@@ -77,15 +89,41 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 
 	public void OnFarmUpdate(float deltaTime)
     {
-        foreach (var field in _fields)
+        foreach (var (_, field) in _fields)
         {
-            field.OnFarmUpdate(deltaTime);
+			if (!field.IsAvailable)
+			{
+				continue;
+			}
+			field.OnFarmUpdate(deltaTime);
         }
     }
 
+	public bool GetFieldAvailability(string productUniqueId)
+	{
+		if (!_fields.TryGetValue(productUniqueId, out var field))
+		{
+			Debug.LogWarning($"Farm.GetFieldAvailability()의 인자로 전달된 productUniqueId {productUniqueId}(은)는 Farm._field에 존재하지 않습니다.");
+			return false;
+		}
+
+		return field.IsAvailable;
+	}
+
+	public void SetAvailability(string productUniqueId, bool value)
+	{
+		if (!_fields.TryGetValue(productUniqueId, out var field))
+		{
+			Debug.LogError($"Farm.SetAvailability()의 인자로 전달된 productUniqueId {productUniqueId}(은)는 Farm._field에 존재하지 않습니다.");
+			return;
+		}
+
+		field.IsAvailable = value;
+	}
+
 	private void Awake()
     {
-        _fields = new Field[FieldPrefabs.Count];
+        _fields = new Dictionary<string, Field>();
 
         for (int index = 0; index<FieldPrefabs.Count; index++)
         {
@@ -101,7 +139,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
             fieldObject.transform.parent = transform;
 			fieldObject.transform.localPosition = new Vector3(fieldComponent.FieldLocalPosition.x, fieldComponent.FieldLocalPosition.y, transform.position.z - 1.0f);
             fieldComponent.OnTryItemify.AddListener(OnTryItemify.Invoke);
-            _fields[index] = fieldComponent;
+            _fields.Add(fieldComponent.ProductEntry.UniqueId, fieldComponent);
         }
     }
 }

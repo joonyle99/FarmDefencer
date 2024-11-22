@@ -19,6 +19,24 @@ public class Field : MonoBehaviour, IFarmUpdatable
     public Vector2Int FieldSize;
     public TileBase FlowedTile;
 
+    /// <summary>
+    /// 이 Field에 심길 Crop의 ProductEntry입니다.
+    /// </summary>
+    public ProductEntry ProductEntry => _productEntry;
+    public bool IsAvailable
+    {
+        get
+        {
+            return _isAvailable;
+        }
+        set
+        {
+            _isAvailable = value;
+            OnAvailabilityChanged();
+        }
+    }
+    private bool _isAvailable;
+    private ProductEntry _productEntry;
     private Tilemap _tilemap;
     private List<Crop> _crops;
 
@@ -58,16 +76,24 @@ public class Field : MonoBehaviour, IFarmUpdatable
         }
     }
 
+    private void OnAvailabilityChanged()
+    {
+
+    }
+
 	private void Awake()
     {
         _tilemap = GetComponentInChildren<Tilemap>();
         _crops = new List<Crop>();
+        IsAvailable = false;
 
         if (CropPrefab == null
             || !CropPrefab.TryGetComponent<Crop>(out var _))
         {
             throw new MissingComponentException("Field에 지정된 CropPrefab이 null이거나 Crop 컴포넌트를 가지지 않습니다.");
         }
+
+        _productEntry = CropPrefab.GetComponent<Crop>().ProductEntry;
 
         for (int yOffset = 0; yOffset < FieldSize.y; yOffset++)
         {

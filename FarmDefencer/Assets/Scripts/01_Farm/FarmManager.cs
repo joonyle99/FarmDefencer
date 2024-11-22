@@ -28,5 +28,6 @@ public class FarmManager : MonoBehaviour
 	private void Start()
 	{
 		HarvestInventory.SetTodaysOrder(new System.Collections.Generic.List<(string, int)>{ ("product_carrot", 5), ("product_potato", 5), ("product_corn", 5) });
+		Farm.SetAvailability("product_carrot", true);
 	}
 }
