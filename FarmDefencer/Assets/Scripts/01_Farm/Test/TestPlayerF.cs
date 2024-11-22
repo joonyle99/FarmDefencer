@@ -38,10 +38,7 @@ namespace FarmTest
 
         public void OnWatering(Vector2Int position)
         {
-			if (_farmComponent.TryFindCropAt(position, out var crop))
-			{
-                crop.OnWatering();
-			}
+            _farmComponent.WateringAction(position);
 		}
 
 		public void OnTap()
