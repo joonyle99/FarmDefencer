@@ -9,30 +9,59 @@ public class HarvestInventory : MonoBehaviour
 	private Dictionary<string, HarvestBox> _harvestBoxes;
 
 	/// <summary>
-	/// 해당 농작물에 대한 획득 애니메이션을 재생합니다.
-	/// 애니메이션 종료 시 callback을 호출합니다.
+	/// 오늘의 주문을 설정합니다.
 	/// </summary>
-	/// <param name="productEntry"></param>
-	/// <param name="count"></param>
-	/// <param name="cropScreenPosition">애니메이션의 시작 화면 위치</param>
-	public void PlayHarvestAnimation(ProductEntry productEntry, int count, Vector2 cropScreenPosition, UnityAction callback)
+	/// <param name="quotas"></param>
+	public void SetTodaysOrder(List<(string, int)> quotas)
 	{
-		var harvestBox = _harvestBoxes[productEntry.UniqueId];
-		var toPosition = harvestBox.ScreenPosition;
-		HarvestAnimationPlayer.PlayAnimation(productEntry, cropScreenPosition, toPosition, callback);
+		foreach (var pair in quotas)
+		{
+			var productUniqueId = pair.Item1;
+			var count = pair.Item2;
+
+			if (!_harvestBoxes.TryGetValue(productUniqueId, out var harvestBox))
+			{
+				Debug.LogError($"HarvestInventory에 {productUniqueId}를 담는 HarvestBox가 존재하지 않습니다.");
+				continue;
+			}
+
+			harvestBox.Quota = count;
+		}
 	}
 
 	/// <summary>
-	/// 해당 농작물의 개수를 증가시킵니다.
+	/// 해당 엔트리에 대해 작물 획득 애니메이션을 재생하며 개수를 증가시킵니다.
+	/// 구체적으로는 애니메이션 종료 시 FillQuota(productEntry, 1)을 호출하게 합니다.
+	/// 만약 해당 농작물이 이미 할당량을 다 채운 경우 false를 반환하며 아무 작업도 하지 않습니다.
+	/// </summary>
+	/// <param name="productEntry"></param>
+	/// <param name="cropScreenPosition">애니메이션의 시작 화면 위치</param>
+	public bool TryBeginGather(ProductEntry productEntry, Vector2 cropScreenPosition)
+	{
+		var harvestBox = _harvestBoxes[productEntry.UniqueId];
+		if (harvestBox.Quota == 0)
+		{
+			return false;
+		}
+
+		var toPosition = harvestBox.ScreenPosition;
+		HarvestAnimationPlayer.PlayAnimation(productEntry, cropScreenPosition, toPosition, () => FillQuota(productEntry, 1));
+
+		return true;
+	}
+
+	/// <summary>
+	/// 해당 농작물의 할당량을 임의로 채웁니다.
 	/// 내부적으로 ResourceManager의 Gold를 증가시키는 메소드를 호출합니다.
+	/// <b>직접 호출하는 것은 디버그 목적으로만 사용해야 합니다.</b> 정상적인 게임 흐름은 TryBeginGather()를 이용하세요.
 	/// </summary>
 	/// <param name="productEntry"></param>
 	/// <param name="count"></param>
-	public void AddProduct(ProductEntry productEntry, int count)
+	public void FillQuota(ProductEntry productEntry, int count)
 	{
 		var harvestBox = _harvestBoxes[productEntry.UniqueId];
 		var price = productEntry.Price * count;
-		harvestBox.Count += count;
+		harvestBox.Quota -= count;
 		ResourceManager.Instance.EarnGold(price);
 	}
 
@@ -45,12 +74,12 @@ public class HarvestInventory : MonoBehaviour
 	public bool TryMinusProduct(ProductEntry productEntry, int count)
 	{
 		var harvestBox = _harvestBoxes[productEntry.UniqueId];
-		if (harvestBox.Count < count)
+		if (harvestBox.Quota < count)
 		{
 			return false;
 		}
 
-		harvestBox.Count -= count;
+		harvestBox.Quota -= count;
 		return true;
 	}
 

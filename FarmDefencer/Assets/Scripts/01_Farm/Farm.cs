@@ -5,8 +5,11 @@ using UnityEngine.Events;
 public class Farm : MonoBehaviour, IFarmUpdatable
 {
     public List<GameObject> FieldPrefabs;
-    [Tooltip("ProductEntry와 그것이 수확된 위치인 월드 좌표이자 타일 좌표 Vector2Int를 의미합니다.")]
-    public UnityEvent<ProductEntry, Vector2Int> OnHarvest;
+    
+    /// <summary>
+    /// <seealso cref="Field.OnTryItemify"/>를 참조하세요.
+    /// </summary>
+    public UnityEvent<ProductEntry, Vector2Int, UnityAction<bool>> OnTryItemify;
 
     private Field[] _fields;
 
@@ -77,7 +80,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
             var fieldComponent = fieldObject.GetComponent<Field>();
             fieldObject.transform.parent = transform;
 			fieldObject.transform.localPosition = new Vector3(fieldComponent.FieldLocalPosition.x, fieldComponent.FieldLocalPosition.y, transform.position.z - 1.0f);
-            fieldComponent.OnHarvest = OnHarvest;
+            fieldComponent.OnTryItemify.AddListener(OnTryItemify.Invoke);
             _fields[index] = fieldComponent;
         }
     }

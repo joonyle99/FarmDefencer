@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 9028878733977272200}
   - component: {fileID: 4421504448336962453}
   m_Layer: 5
-  m_Name: CropCountText
+  m_Name: CropQuotaText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProductEntry: {fileID: 0}
-  _count: 0
+  _quota: 0
 --- !u!1 &9131858695217385649
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,16 @@ using UnityEngine.Events;
 public abstract class Crop : MonoBehaviour, IFarmUpdatable
 {
 	public ProductEntry ProductEntry;
-	public UnityAction OnHarvest;
+	/// <summary>
+	/// 이 작물을 아이템화 시도할 때 호출되는 이벤트입니다. 
+	/// 아이템화란 작물로부터 수확 상자에 담기는 행동을 의미합니다.
+	/// <br/>
+	/// OnTryItemify&lt;afterItemify(isItemified)&gt;로 구성되며, 인자 콜백에 대해서는 아이템화에 성공했는지 여부를 전달하여 호출하면 됩니다.
+	/// 할당량을 초과해서 수확할 수 없기 때문에, 이를 검증하기 위한 이중 콜백 구조입니다.
+	/// <br/><br/>
+	/// 즉, OnTryItemify를 처리하는 측에서는 여유 공간이 있다면 afterItemify(true), 없다면 afterItemify(false) 하면 됩니다.
+	/// </summary>
+	public UnityEvent<UnityAction<bool>> OnTryItemify;
 	protected CropState State
 	{
 		get
@@ -160,6 +169,26 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	/// </summary>
 	public virtual void OnWatering() {}
 
+	/// <summary>
+	/// 작물을 아이템화 시도합니다. State가 Harvested가 아니라면 아무 일도 하지 않습니다.
+	/// OnTryItemify&lt;afterItemify&lt;bool&gt;&gt; 이벤트를 발생시키며, afterItemify 콜백으로는 bool이 true일 경우 작물을 씨앗 상태로 되돌리는 작업이 전달됩니다.
+	/// </summary>
+	protected void Itemify()
+	{
+		if (State != CropState.Harvested)
+		{
+			return;
+		}
+
+		OnTryItemify.Invoke(
+		(isItemified) =>
+		{
+			if (isItemified)
+			{
+				State = CropState.Seed;
+			}
+		});
+	}
 
 	/// <summary>
 	/// 작물의 성장 한 프레임당 호출(Crop.Update()에서)되며, 특수한 성장 조건을 검사하는 메소드입니다.
@@ -184,6 +213,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 
 	protected virtual void Awake() { }
 	protected virtual void Start() { }
+	
 	public virtual void OnFarmUpdate(float deltaTime)
 	{
 		Paused = deltaTime == 0.0f;

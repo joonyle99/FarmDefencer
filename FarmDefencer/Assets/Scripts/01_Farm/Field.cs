@@ -5,7 +5,11 @@ using UnityEngine.Tilemaps;
 
 public class Field : MonoBehaviour, IFarmUpdatable
 {
-    public UnityEvent<ProductEntry, Vector2Int> OnHarvest;
+    /// <summary>
+    /// 현재 작물의 엔트리, 월드 좌표이자 타일 좌표, 그리고 아이템화 결과 처리 콜백이 담겨지는 이벤트입니다.
+    /// <seealso cref="Crop.OnTryItemify"/>를 참조하세요.
+    /// </summary>
+    public UnityEvent<ProductEntry, Vector2Int, UnityAction<bool>> OnTryItemify;
     public GameObject CropPrefab;
     /// <summary>
     /// Farm 오브젝트 위치에 대한 상대 위치입니다.
@@ -86,7 +90,7 @@ public class Field : MonoBehaviour, IFarmUpdatable
 	{
 		foreach (var crop in _crops)
         {
-			crop.OnHarvest += () => OnHarvest.Invoke(crop.ProductEntry, crop.Position);
+			crop.OnTryItemify.AddListener((callback) => OnTryItemify.Invoke(crop.ProductEntry, crop.Position, callback));
 		}
 	}
 }

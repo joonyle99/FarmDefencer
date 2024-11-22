@@ -34,8 +34,7 @@ public class CropCarrot : Crop
 		}
 		else if (State == CropState.Harvested)
 		{
-			OnHarvest();
-			State = CropState.Seed;
+			Itemify();
 		}
 	}
 

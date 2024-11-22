@@ -1688,6 +1688,7 @@ MonoBehaviour:
   FarmClock: {fileID: 790447940}
   Farm: {fileID: 876821029}
   FarmTestPlayer: {fileID: 2048119098}
+  ProductDatabase: {fileID: 11400000, guid: 306ee76be7a6f2c4a962c5707f74017f, type: 2}
 --- !u!4 &1503578050
 Transform:
   m_ObjectHideFlags: 0
