@@ -5,11 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class Field : MonoBehaviour, IFarmUpdatable
 {
-    /// <summary>
-    /// 현재 작물의 엔트리, 월드 좌표이자 타일 좌표, 그리고 아이템화 결과 처리 콜백이 담겨지는 이벤트입니다.
-    /// <seealso cref="Crop.OnTryItemify"/>를 참조하세요.
-    /// </summary>
-    public UnityEvent<ProductEntry, Vector2Int, UnityAction<bool>> OnTryItemify;
     public GameObject CropPrefab;
     /// <summary>
     /// Farm 오브젝트 위치에 대한 상대 위치입니다.
@@ -76,7 +71,17 @@ public class Field : MonoBehaviour, IFarmUpdatable
         }
     }
 
-    private void OnAvailabilityChanged()
+	public void Init(
+        GameObject cropLockedDisplayPrefab,
+        UnityAction<ProductEntry, Vector2Int, UnityAction<bool>> onTryItemifyAction)
+	{
+		foreach (var crop in _crops)
+		{
+            crop.Init(cropLockedDisplayPrefab, (afterItemifyCallback) => onTryItemifyAction(ProductEntry, crop.Position, afterItemifyCallback));
+		}
+	}
+
+	private void OnAvailabilityChanged()
     {
         var color = _isAvailable ? Color.white : new Color(0.3f, 0.3f, 0.3f, 1.0f);
 		for (int yOffset = 0; yOffset < FieldSize.y; yOffset++)
@@ -119,13 +124,5 @@ public class Field : MonoBehaviour, IFarmUpdatable
         }
 
 		IsAvailable = false;
-	}
-
-	private void Start()
-	{
-		foreach (var crop in _crops)
-        {
-			crop.OnTryItemify.AddListener((callback) => OnTryItemify.Invoke(crop.ProductEntry, crop.Position, callback));
-		}
 	}
 }

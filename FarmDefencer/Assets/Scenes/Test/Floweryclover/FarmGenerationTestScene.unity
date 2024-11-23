@@ -1759,6 +1759,7 @@ MonoBehaviour:
   OnTryItemify:
     m_PersistentCalls:
       m_Calls: []
+  CropLockedDisplayPrefab: {fileID: 1973484278717387969, guid: 2a659d551d7e5a3428e7bbe4ee617c60, type: 3}
 --- !u!1 &1039453656
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,11 +12,19 @@ using UnityEngine.Events;
 public class Farm : MonoBehaviour, IFarmUpdatable
 {
     public List<GameObject> FieldPrefabs;
-    
-    /// <summary>
-    /// <seealso cref="Field.OnTryItemify"/>를 참조하세요.
-    /// </summary>
-    public UnityEvent<ProductEntry, Vector2Int, UnityAction<bool>> OnTryItemify;
+
+	/// <summary>
+	/// 작물을 아이템화 시도할 때 호출되는 이벤트입니다. 
+	/// 아이템화란 작물로부터 수확 상자에 담기는 행동을 의미합니다.
+	/// <br/>
+	/// OnTryItemify&lt;productEntry, cropWorldPosition, afterItemify(isItemified)&gt;로 구성되며, 
+	/// 이를 처리하는 핸들러는 인자 콜백 afterItemify에 대해 아이템화에 성공했는지 여부를 매개 변수로 전달하여 다시 호출하면 됩니다.
+	/// 할당량을 초과해서 수확할 수 없기 때문에, 이를 검증하기 위한 이중 콜백 구조입니다.
+	/// <br/><br/>
+	/// 즉, OnTryItemify를 처리하는 측에서는 여유 공간이 있다면 afterItemify(true), 없다면 afterItemify(false) 하면 됩니다.
+	/// </summary>
+	public UnityEvent<ProductEntry, Vector2Int, UnityAction<bool>> OnTryItemify;
+	public GameObject CropLockedDisplayPrefab;
 
     private Dictionary<string, Field> _fields;
 
@@ -125,6 +133,11 @@ public class Farm : MonoBehaviour, IFarmUpdatable
     {
         _fields = new Dictionary<string, Field>();
 
+		if (CropLockedDisplayPrefab == null || !CropLockedDisplayPrefab.TryGetComponent<CropLockedDisplay>(out var _))
+		{
+			throw new System.ArgumentException("Farm의 CropLockedDisplayPrefab None 오브젝트 또는 CropLockedDisplay 컴포넌트를 갖지 않는 오브젝트가 존재합니다.");
+		}
+
         for (int index = 0; index<FieldPrefabs.Count; index++)
         {
             var fieldPrefab = FieldPrefabs[index];
@@ -138,7 +151,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
             var fieldComponent = fieldObject.GetComponent<Field>();
             fieldObject.transform.parent = transform;
 			fieldObject.transform.localPosition = new Vector3(fieldComponent.FieldLocalPosition.x, fieldComponent.FieldLocalPosition.y, transform.position.z - 1.0f);
-            fieldComponent.OnTryItemify.AddListener(OnTryItemify.Invoke);
+			fieldComponent.Init(CropLockedDisplayPrefab, (productEntry, cropPosition, afterItemifyCallback) => OnTryItemify.Invoke(productEntry, cropPosition, afterItemifyCallback));
             _fields.Add(fieldComponent.ProductEntry.UniqueId, fieldComponent);
         }
     }

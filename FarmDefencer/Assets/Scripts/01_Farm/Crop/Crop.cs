@@ -15,23 +15,15 @@ using UnityEngine.Events;
 public abstract class Crop : MonoBehaviour, IFarmUpdatable
 {
 	public ProductEntry ProductEntry;
-	/// <summary>
-	/// 이 작물을 아이템화 시도할 때 호출되는 이벤트입니다. 
-	/// 아이템화란 작물로부터 수확 상자에 담기는 행동을 의미합니다.
-	/// <br/>
-	/// OnTryItemify&lt;afterItemify(isItemified)&gt;로 구성되며, 인자 콜백에 대해서는 아이템화에 성공했는지 여부를 전달하여 호출하면 됩니다.
-	/// 할당량을 초과해서 수확할 수 없기 때문에, 이를 검증하기 위한 이중 콜백 구조입니다.
-	/// <br/><br/>
-	/// 즉, OnTryItemify를 처리하는 측에서는 여유 공간이 있다면 afterItemify(true), 없다면 afterItemify(false) 하면 됩니다.
-	/// </summary>
-	public UnityEvent<UnityAction<bool>> OnTryItemify;
-	protected CropState State
+
+	private UnityAction<UnityAction<bool>> _onTryItemifyAction;
+	public CropState State
 	{
 		get
 		{
 			return _state;
 		}
-		set
+		protected set
 		{
 			if (_state == value)
 			{
@@ -152,6 +144,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	/// 이 Crop의 월드 XY 좌표를 반환합니다. 타일이기 때문에 Vector2Int로 반환합니다.
 	/// </summary>
 	public Vector2Int Position => new Vector2Int((int)transform.position.x, (int)transform.position.y);
+	private CropLockedDisplay _cropLockedDisplay;
 
 	/// <summary>
 	/// 이 작물이 짧게 터치되었을 때의 동작을 정의합니다.
@@ -180,7 +173,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 			return;
 		}
 
-		OnTryItemify.Invoke(
+		_onTryItemifyAction(
 		(isItemified) =>
 		{
 			if (isItemified)
@@ -203,7 +196,18 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	public abstract bool IsGrowing();
 	public override string ToString() => $"{this.GetType()} at {Position}, age {GrowthAgeSeconds}, water waiting {WaterWaitingSeconds}, state {State}";
 
-	protected enum CropState
+	public void Init(GameObject cropLockedDisplayPrefab, UnityAction<UnityAction<bool>> onTryItemifyAction)
+	{
+		var cropLockedDisplayObject = Instantiate(cropLockedDisplayPrefab);
+		cropLockedDisplayObject.transform.SetParent(transform, false);
+		cropLockedDisplayObject.transform.localPosition = new Vector2(0.0f, 0.0f);
+
+		_cropLockedDisplay = cropLockedDisplayObject.GetComponent<CropLockedDisplay>();
+		_cropLockedDisplay.Crop = this;
+		_onTryItemifyAction = onTryItemifyAction;
+	}
+
+	public enum CropState
 	{
 		Seed, // 터치하여 Planted 상태가 되길 기다리는 상태
 		Planted, // 성장중이거나, 죽었거나 하는 상태
@@ -211,12 +215,13 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 		Locked // 작물 죽음 패널티 등으로 심기 동작이 잠긴 상태
 	}
 
-	protected virtual void Awake() { }
-	protected virtual void Start() { }
+	protected virtual void Awake() {}
+	protected virtual void Start() {}
 	
 	public virtual void OnFarmUpdate(float deltaTime)
 	{
 		Paused = deltaTime == 0.0f;
+		_cropLockedDisplay.OnFarmUpdate(deltaTime);
 
 		if (State == CropState.Locked)
 		{
