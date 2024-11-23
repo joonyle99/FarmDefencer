@@ -34,6 +34,7 @@ public class Field : MonoBehaviour, IFarmUpdatable
     private ProductEntry _productEntry;
     private Tilemap _tilemap;
     private List<Crop> _crops;
+    private GameObject _fieldLockedDisplayObject;
 
 	/// <summary>
 	/// 입력된 좌표에 해당되는 Crop을 검색해서 반환합니다.
@@ -72,18 +73,26 @@ public class Field : MonoBehaviour, IFarmUpdatable
     }
 
 	public void Init(
+        GameObject fieldLockedDisplayPrefab,
         GameObject cropLockedDisplayPrefab,
         UnityAction<ProductEntry, Vector2Int, UnityAction<bool>> onTryItemifyAction)
 	{
+        _fieldLockedDisplayObject = Instantiate(fieldLockedDisplayPrefab);
+        _fieldLockedDisplayObject.SetActive(false);
+        _fieldLockedDisplayObject.transform.SetParent(transform, false);
+        _fieldLockedDisplayObject.transform.localPosition = new Vector2(FieldSize.x / 2, FieldSize.y / 2);
+
 		foreach (var crop in _crops)
 		{
             crop.Init(cropLockedDisplayPrefab, (afterItemifyCallback) => onTryItemifyAction(ProductEntry, crop.Position, afterItemifyCallback));
 		}
+
+        IsAvailable = false;
 	}
 
 	private void OnAvailabilityChanged()
     {
-        var color = _isAvailable ? Color.white : new Color(0.3f, 0.3f, 0.3f, 1.0f);
+        var color = _isAvailable ? Color.white : new Color(0.4f, 0.7f, 1.0f, 1.0f);
 		for (int yOffset = 0; yOffset < FieldSize.y; yOffset++)
 		{
 			for (int xOffset = 0; xOffset < FieldSize.x; xOffset++)
@@ -92,6 +101,8 @@ public class Field : MonoBehaviour, IFarmUpdatable
 				_tilemap.SetColor(new Vector3Int(xOffset, yOffset), color);
 			}
 		}
+
+		_fieldLockedDisplayObject.SetActive(!_isAvailable);
 	}
 
 	private void Awake()
@@ -122,7 +133,5 @@ public class Field : MonoBehaviour, IFarmUpdatable
                 _crops.Add(cropComponent);
             }
         }
-
-		IsAvailable = false;
 	}
 }

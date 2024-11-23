@@ -1759,6 +1759,7 @@ MonoBehaviour:
   OnTryItemify:
     m_PersistentCalls:
       m_Calls: []
+  FieldLockedDisplayPrefab: {fileID: 2657075444392720238, guid: ab87d65d04443bc4a970b54b1ed50285, type: 3}
   CropLockedDisplayPrefab: {fileID: 1973484278717387969, guid: 2a659d551d7e5a3428e7bbe4ee617c60, type: 3}
 --- !u!1 &1039453656
 GameObject:

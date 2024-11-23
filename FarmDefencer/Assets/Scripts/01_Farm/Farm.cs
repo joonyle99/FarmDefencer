@@ -24,6 +24,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 	/// 즉, OnTryItemify를 처리하는 측에서는 여유 공간이 있다면 afterItemify(true), 없다면 afterItemify(false) 하면 됩니다.
 	/// </summary>
 	public UnityEvent<ProductEntry, Vector2Int, UnityAction<bool>> OnTryItemify;
+	public GameObject FieldLockedDisplayPrefab;
 	public GameObject CropLockedDisplayPrefab;
 
     private Dictionary<string, Field> _fields;
@@ -151,7 +152,10 @@ public class Farm : MonoBehaviour, IFarmUpdatable
             var fieldComponent = fieldObject.GetComponent<Field>();
             fieldObject.transform.parent = transform;
 			fieldObject.transform.localPosition = new Vector3(fieldComponent.FieldLocalPosition.x, fieldComponent.FieldLocalPosition.y, transform.position.z - 1.0f);
-			fieldComponent.Init(CropLockedDisplayPrefab, (productEntry, cropPosition, afterItemifyCallback) => OnTryItemify.Invoke(productEntry, cropPosition, afterItemifyCallback));
+			fieldComponent.Init(
+				FieldLockedDisplayPrefab,
+				CropLockedDisplayPrefab,
+				(productEntry, cropPosition, afterItemifyCallback) => OnTryItemify.Invoke(productEntry, cropPosition, afterItemifyCallback));
             _fields.Add(fieldComponent.ProductEntry.UniqueId, fieldComponent);
         }
     }
