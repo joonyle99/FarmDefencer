@@ -1,18 +1,18 @@
 using UnityEngine;
 
-public sealed class DamageCollider : DamageZone
+public sealed class DamageTrigger : DamageZone
 {
     protected override void Awake()
     {
         base.Awake();
 
-        if (damageCollider.isTrigger == true)
+        if (damageCollider.isTrigger == false)
         {
-            Debug.LogError("Turn off the \'isTrigger\' checkbox");
+            Debug.LogError("Turn on the \'isTrigger\' checkbox");
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         var damager = collision.gameObject.GetComponent<Damager>();
 
@@ -21,7 +21,7 @@ public sealed class DamageCollider : DamageZone
             return;
         }
 
-        // Debug.Log($"onCollisionEnter - {this.gameObject.name}");
+        // Debug.Log($"onTriggerEnter - {this.gameObject.name}");
 
         damager.HasDamaged(demageableBehavior);
         Destroy(damager.gameObject);
