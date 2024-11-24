@@ -30,6 +30,32 @@ namespace JoonyleGameDevKit
             return new Vector3(v3.x + v2.x, v3.y + v2.y, v3.z);
         }
 
+        // VectorInt
+        public static Vector3 ToVector3(this Vector2Int vec, float z = 0)
+        {
+            return new Vector3(vec.x, vec.y, z);
+        }
+        public static Vector2 ToVector2(this Vector2Int vec)
+        {
+            return new Vector2(vec.x, vec.y);
+        }
+        public static Vector3Int ToVector3Int(this Vector2Int vec, int z = 0)
+        {
+            return new Vector3Int(vec.x, vec.y, z);
+        }
+        public static Vector3 ToVector3(this Vector3Int vec)
+        {
+            return new Vector3(vec.x, vec.y, vec.z);
+        }
+        public static Vector2 ToVector2(this Vector3Int vec)
+        {
+            return new Vector2(vec.x, vec.y);
+        }
+        public static Vector2Int ToVector2Int(this Vector3Int vec)
+        {
+            return new Vector2Int(vec.x, vec.y);
+        }
+
         // Random
         public static int RangeExcept(this System.Random random, int minInclusive, int maxExclusive, int except, int limitCount = 10)
         {
