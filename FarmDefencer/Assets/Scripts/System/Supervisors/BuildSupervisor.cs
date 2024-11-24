@@ -4,7 +4,7 @@ using UnityEngine;
 /// 타워 디펜스에서 타워의 건설을 관리합니다.
 /// </summary>
 /// <remarks>
-/// Supervisor 에 대한 설명은 <see cref="ManagerClassGuideline"/>를 참조하세요
+/// <see cref="ManagerClassGuideline"/>
 /// </remarks>
 public class BuildSupervisor : JoonyleGameDevKit.Singleton<BuildSupervisor>
 {
@@ -14,7 +14,7 @@ public class BuildSupervisor : JoonyleGameDevKit.Singleton<BuildSupervisor>
 
     public Tower InstantiateTower(Vector3 targetPos, Quaternion targetRot)
     {
-        var towerToBuild = GetSelectedTower();
+        var towerToBuild = _towerPrefabs[_selectedTowerIndex];
 
         // check select
         if (towerToBuild == null)
@@ -28,9 +28,11 @@ public class BuildSupervisor : JoonyleGameDevKit.Singleton<BuildSupervisor>
         // check build
         if (canBuild == false)
         {
-            Debug.LogWarning("You don't have enough gold to build this tower");
+            Debug.Log("You don't have enough gold to build this tower");
             return null;
         }
+
+        ResourceManager.Instance.SpendGold(towerToBuild.GetCost());
 
         var towerToReturn = Instantiate(towerToBuild, targetPos, targetRot);
 
@@ -42,9 +44,5 @@ public class BuildSupervisor : JoonyleGameDevKit.Singleton<BuildSupervisor>
         }
 
         return towerToReturn;
-    }
-    public Tower GetSelectedTower()
-    {
-        return _towerPrefabs[_selectedTowerIndex];
     }
 }

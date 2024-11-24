@@ -4,7 +4,7 @@ using UnityEngine;
 /// 게임에서 전역적으로 사용되는 리소스를 관리합니다.
 /// </summary>
 /// <remarks>
-/// Manager vs Supervisor 에 대한 설명은 <see cref="ManagerClassGuideline"/>를 참조하세요
+/// <see cref="ManagerClassGuideline"/>
 /// </remarks>
 public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>
 {
@@ -34,15 +34,15 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>
         {
             var amount = 100;
 
-            Debug.Log($"earn {amount} gold (<color=orange>current: {_gold}</color>)");
             EarnGold(amount);
+            Debug.Log($"earn {amount} gold (<color=orange>current: {_gold}</color>)");
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             var amount = 100;
 
-            Debug.Log($"spend {amount} gold (<color=orange>current: {_gold}</color>)");
             SpendGold(amount);
+            Debug.Log($"spend {amount} gold (<color=orange>current: {_gold}</color>)");
         }
 #endif
     }

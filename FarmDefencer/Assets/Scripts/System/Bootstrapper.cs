@@ -5,7 +5,7 @@ using UnityEngine;
 /// </summary>
 /// <remarks>
 /// 
-/// Manager는 일반적으로 더 큰 팀이나 부서를 감독하는 반면,
+/// Manager는 일반적으로 큰 팀이나 부서를 감독하는 반면,
 /// Supervisor는 일반적으로 더 작은 직원 그룹을 관리합니다.
 /// 
 /// Manager:
