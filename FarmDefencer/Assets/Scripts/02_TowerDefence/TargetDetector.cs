@@ -20,7 +20,7 @@ public class TargetDetector : MonoBehaviour
 
     public event Action<TargetableBehavior> OnEnterTarget;
     public event Action<TargetableBehavior> OntExitTarge;
-    public event Action<TargetableBehavior> OnAccquireTarget;       // when you get current target
+    // public event Action<TargetableBehavior> OnAccquireTarget;       // when you get current target
 
     // LEARNING POINT
     //

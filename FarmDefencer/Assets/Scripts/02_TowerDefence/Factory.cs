@@ -38,10 +38,10 @@ public class Factory : MonoBehaviour
 
     private void Awake()
     {
-        InstantiatePool();
+        InitializePool();
     }
 
-    private void InstantiatePool()
+    private void InitializePool()
     {
         _pool = new List<GameObject>(_poolCapacity);
 
@@ -93,7 +93,7 @@ public class Factory : MonoBehaviour
         if (IsEmptyPool())
             ExtendPool();
 
-        var newObj = RemoveLast();
+        var newObj = RemoveLastProduct();
         newObj.SetActive(true);
         var product = newObj.GetComponent<T>();
         product.SetOriginFactory(this);
@@ -110,7 +110,7 @@ public class Factory : MonoBehaviour
     {
         Pool.Add(obj);
     }
-    protected GameObject RemoveLast()
+    protected GameObject RemoveLastProduct()
     {
         if (IsEmptyPool())
         {

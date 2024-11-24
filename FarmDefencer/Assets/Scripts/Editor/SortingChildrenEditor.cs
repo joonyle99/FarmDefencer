@@ -27,11 +27,13 @@ public class SortingChildrenEditor : Editor
             // Array 클래스의 public static void Sort<T>(T[] array, Comparison<T> comparison) 이 호출된다
             // System.Array.Sort(children, (x, y) => string.Compare(x.name, y.name));
 
-            // 이름 기준으로 정렬되 Children 객체를 다시 부모 객체의 자식으로 설정
+            /*
+            // 이름 기준으로 정렬된 Children 객체를 다시 부모 객체의 자식으로 설정
             foreach (Transform child in children)
             {
                 child.SetAsLastSibling();
             }
+            */
 
             Debug.Log("Sorting Children");
         }

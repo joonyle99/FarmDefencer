@@ -3,10 +3,9 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [Header("──────── Projectile ────────")]
-
     [Space]
 
-    [SerializeField] private int _damage = 10;
+    [SerializeField] private Damager _damager;
     [SerializeField] private float _speed = 20f;
 
     private TargetableBehavior _currentTarget;
@@ -20,7 +19,11 @@ public class Projectile : MonoBehaviour
     }
     private void Update()
     {
-        // TODO: _currentTarget가 사라지거나 어떠한 이유로 닿을 수 없다면 자동으로 파괴되는 기능이 있어야 한다
+        if (_currentTarget == null || _currentTarget.gameObject.activeSelf == false)
+        {
+            Destroy(gameObject);
+            return;
+        }
     }
     private void FixedUpdate()
     {
@@ -33,20 +36,18 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    /*
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         var target = collision.GetComponent<TargetableBehavior>();
         if (target != null && target == _currentTarget)
         {
-            _currentTarget.TakeDamage(_damage);
-            Destroy(gameObject);
+            // _currentTarget.TakeDamage(_damage);
+            // Destroy(gameObject);
         }
     }
+    */
 
-    public void SetDamage(int damage)
-    {
-        _damage = damage;
-    }
     public void SetSpeed(float speed)
     {
         _speed = speed;

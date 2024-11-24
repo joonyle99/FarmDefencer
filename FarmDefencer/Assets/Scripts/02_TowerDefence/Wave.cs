@@ -10,21 +10,30 @@ public class Wave : MonoBehaviour
     [SerializeField] private Factory _factory;
     public Factory Factory => _factory;
 
+    [Space]
+
     [SerializeField] private RangeFloat _waitTimeRange;
     [SerializeField] private float _waitTime = 0f;
 
     private float _elapsedTime = 0f;
 
-    private void Start()
+    private bool _isTriggered = false;
+
+    private void Update()
     {
-        StartCoroutine(SpawnCoroutine());
+        if (Input.GetKeyDown(KeyCode.Space) && _isTriggered == false)
+        {
+            _isTriggered = true;
+            StartCoroutine(SpawnCoroutine());
+        }
     }
 
     protected void Spawn()
     {
         var monster = _factory.GetProduct<Monster>();
-        var pathMovement = monster.GetComponent<PathMovement>();
-        pathMovement.Initialize(PathSupervisor.Instance.GetRandomPathway());
+        var gridMovement = monster.GetComponent<GridMovement>();
+
+        gridMovement.Initialize();
     }
 
     private IEnumerator SpawnCoroutine()

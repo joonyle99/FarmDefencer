@@ -42,9 +42,14 @@ public sealed class Monster : TargetableBehavior, IProduct
         }
     }
 
+    private void OnEnable()
+    {
+        HP = 50;
+    }
     public override void TakeDamage(float damage)
     {
         HP -= (int)damage;
+        // Debug.Log($"<color=yellow>{this.gameObject.name}</color> take damage");
     }
     public override void Kill()
     {

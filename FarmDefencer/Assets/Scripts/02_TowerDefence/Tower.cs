@@ -14,7 +14,7 @@ public sealed class Tower : TargetableBehavior
 
     [Header("Build")]
     [SerializeField] private int _cost = 50;
-    private int level;
+    // private int levelIndex;
 
     [Space]
 
@@ -51,6 +51,10 @@ public sealed class Tower : TargetableBehavior
         }
     }
 
+    public int GetCost()
+    {
+        return _cost;
+    }
     public bool IsValidBuild(int gold)
     {
         if (gold >= _cost)
@@ -76,7 +80,6 @@ public sealed class Tower : TargetableBehavior
             return;
         }
 
-        projectile.SetDamage(10);
         projectile.SetTarget(_currentTarget);
         projectile.Shoot();
     }

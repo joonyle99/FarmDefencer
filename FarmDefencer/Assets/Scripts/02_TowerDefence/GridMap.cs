@@ -1,62 +1,253 @@
+using JoonyleGameDevKit;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public class GridMap : MonoBehaviour
+/// <summary>
+/// GridMap의 각 Cell은 이동할 수 있는 땅인지의 정보를 가지며,
+/// 타워 건설, 몬스터의 이동 경로 설정 등에 사용된다.
+/// </summary>
+public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
 {
-    public int Height;  // 세로
-    public int Width;   // 가로
+    [Header("──────── GridMap ────────")]
+    [Space]
 
-    private bool[,] _grid;
+    private Tilemap _tilemap;
+    private Vector2Int _size;
+    private Vector2Int _origin;
+    private int _height;
+    private int _width;
 
-    public void Initialize(int height, int width)
+    [Space]
+
+    [SerializeField] private TileBase _startTile;
+    private Vector2Int _startCellPoint;
+    public Vector2Int StartCellPoint => _startCellPoint;
+    public Vector3 StartWorldPoint => GetCellCenterWorld(StartCellPoint.ToVector3Int());
+    [SerializeField] private TileBase _endTile;
+    private Vector2Int _endCellPoint;
+    public Vector2Int EndCellPoint => _endCellPoint;
+    public Vector3 EndWorldPoint => GetCellCenterWorld(EndCellPoint.ToVector3Int());
+
+    [Space]
+
+    [SerializeField] private GridCell _gridCell;
+    [SerializeField] private List<GridCell> _gridPath;
+    public List<GridCell> GridPath => _gridPath;
+
+    private GridCell[,] _gridMap;
+
+    // 좌 상 우 하
+    private int[] _dx = new int[4] { -1, 0, 1, 0 };
+    private int[] _dy = new int[4] { 0, 1, 0, -1 };
+
+    protected override void Awake()
     {
-        _grid = new bool[height, width];
+        base.Awake();
 
-        this.Height = height;
-        this.Width = width;
+        _tilemap = GetComponent<Tilemap>();
+    }
 
-        for (int h = 0; h < Height; h++)
+    private void Start()
+    {
+        _size = _tilemap.size.ToVector2Int();
+        _origin = _tilemap.origin.ToVector2Int();
+
+        _height = _size.y;
+        _width = _size.x;
+
+        _startCellPoint = new Vector2Int(1, 1);
+        _endCellPoint = new Vector2Int(_width - 2, _height - 2);
+
+        _gridMap = new GridCell[_height, _width];
+
+        _tilemap.SetTile(_startCellPoint.ToVector3Int(), _startTile);
+        _tilemap.SetTile(_endCellPoint.ToVector3Int(), _endTile);
+
+        for (int h = 0; h < _height; h++)
         {
-            for (int w = 0; w < Width; w++)
+            for (int w = 0; w < _width; w++)
             {
-                if ((h + w) % 2 == 0)
+                var cellPos = new Vector2Int(w, h);
+                var worldPos = _tilemap.GetCellCenterWorld(cellPos.ToVector3Int());
+
+                _gridMap[h, w] = Instantiate(_gridCell, worldPos, Quaternion.identity, transform);
+
+                _gridMap[h, w].cellPosition = cellPos;
+                _gridMap[h, w].isMovable = true;
+                _gridMap[h, w].distanceCost = -1;
+
+                if (cellPos == _startCellPoint || cellPos == _endCellPoint)
                 {
-                    _grid[h, w] = true;
-                }
-                else
-                {
-                    _grid[h, w] = false;
+                    _gridMap[h, w].UnUsable();
                 }
             }
         }
     }
-
-    public void Set(int h, int w, bool to)
+    private void Update()
     {
-        if (IsValid(h, w) == true)
+        /*
+        if (Input.GetMouseButtonDown(0) == true)
         {
-            return;
+            var mousePos = Input.mousePosition;
+            var worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+            var cellPos = _tilemap.WorldToCell(worldPos);
+
+            Debug.Log($"x: {cellPos.x}, y: {cellPos.y}");
+        }
+        */
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            CalculateDistance(_startCellPoint);
+
+            DrawDistanceMap();
+
+            StartCoroutine(PingGridPathCoroutine());
+        }
+    }
+
+    // 
+    private void CalculateDistance(Vector2Int startPoint)
+    {
+        Queue<Vector2Int> queue = new Queue<Vector2Int>();
+
+        queue.Enqueue(startPoint);
+
+        _gridMap[startPoint.y, startPoint.x].distanceCost = 0;
+        // _gridMap[startPoint.y, startPoint.x].prevGridCell = _gridMap[startPoint.y, startPoint.x];
+
+        while (queue.Count > 0)
+        {
+            Vector2Int nowPos = queue.Dequeue();
+
+            if (nowPos == _endCellPoint)
+            {
+                // 도착했으므로 어느 Cell에서 왔는지 경로를 추적한다
+                TracePath(_gridMap[nowPos.y, nowPos.x]);
+                return;
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                Vector2Int nextPos = new Vector2Int(nowPos.x + _dx[i], nowPos.y + _dy[i]);
+
+                if (nextPos.x < 0 || nextPos.x >= _width || nextPos.y < 0 || nextPos.y >= _height) continue;
+                if (_gridMap[nextPos.y, nextPos.x].distanceCost != -1) continue;
+                if (_gridMap[nextPos.y, nextPos.x].isMovable == false && nextPos != _endCellPoint) continue;
+
+                queue.Enqueue(nextPos);
+
+                _gridMap[nextPos.y, nextPos.x].distanceCost = _gridMap[nowPos.y, nowPos.x].distanceCost + 1;
+                _gridMap[nextPos.y, nextPos.x].prevGridCell = _gridMap[nowPos.y, nowPos.x];
+            }
+        }
+    }
+    private void TracePath(GridCell endCell)
+    {
+        Debug.Log($"Start Trace (end cell: {endCell.gameObject.name})", endCell.gameObject);
+
+        _gridPath = new List<GridCell>();
+
+        var wayPoint = endCell;
+        _gridPath.Add(wayPoint);
+
+        while (true)
+        {
+            wayPoint = wayPoint.prevGridCell;
+            if (wayPoint == null) break;
+            _gridPath.Add(wayPoint);
         }
 
-        _grid[h, w] = to;
+        _gridPath.Reverse();
     }
-    public bool Get(int h, int w)
+
+    // 
+    public Vector3 GetCellCenterWorld(Vector3Int point)
     {
-        if (IsValid(h, w) == false)
-        {
-            return false;
-        }
-
-        return _grid[h, w];
+        return _tilemap.GetCellCenterWorld(point);
     }
 
-    public bool IsValid(int h, int w)
+    // editor
+    public void CompressTilemap()
     {
-        if (h < 0 || h >= Height || w < 0 || w >= Width)
-        {
-            Debug.LogWarning($"[{h}, {w}] is invalid index");
-            return false;
-        }
-
-        return _grid[h, w];
+        _tilemap = GetComponent<Tilemap>();
+        _tilemap.CompressBounds();
     }
+
+    // debug
+    private void DrawDistanceMap()
+    {
+        for (int h = 0; h < _height; h++)
+        {
+            for (int w = 0; w < _width; w++)
+            {
+                var number = _gridMap[h, w].distanceCost;
+                var stringNumber = number.ToString($"D{2}");
+
+                _gridMap[h, w].textMeshPro.text = stringNumber;
+            }
+        }
+    }
+    private IEnumerator PingGridMapCoroutine()
+    {
+        for (int h = 0; h < _height; h++)
+        {
+            for (int w = 0; w < _width; w++)
+            {
+                var origin = _gridMap[h, w].transform.localScale;
+
+                _gridMap[h, w].transform.localScale *= 1.7f;
+                yield return new WaitForSeconds(0.15f);
+                _gridMap[h, w].transform.localScale = origin;
+            }
+        }
+    }
+    private IEnumerator PingGridPathCoroutine()
+    {
+        for (int i = 0; i < _gridPath.Count; i++)
+        {
+            var origin = _gridPath[i].transform.localScale;
+
+            _gridPath[i].transform.localScale *= 1.7f;
+            yield return new WaitForSeconds(0.15f);
+            _gridPath[i].transform.localScale = origin;
+        }
+    }
+
+    //public void Initialize()
+    //{
+    //    var temp1 = _rightTop.transform.position;
+    //    var temp2 = _leftBottom.transform.position;
+
+    //    var temp3 = temp2 - temp1;
+
+    //    _width = _size.x;
+    //    _height = _size.y;
+
+    //    _grid = new GridCell[_height, _width];
+
+    //    for (int h = 0; h < _height; h++)
+    //    {
+    //        for (int w = 0; w < _width; w++)
+    //        {
+
+    //        }
+    //    }
+
+    //    _startPoint = new Vector2Int(1, 1);
+    //    _endPoint = new Vector2Int(_height - 2, _width - 2);
+    //}
+
+    //public bool IsValid(int h, int w)
+    //{
+    //    if (h < 0 || h >= _height || w < 0 || w >= _width)
+    //    {
+    //        Debug.LogWarning($"[{h}, {w}] is invalid index");
+    //        return false;
+    //    }
+
+    //    return true;
+    //}
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3481795329497583311}
   - component: {fileID: 7444625088565266660}
   - component: {fileID: 6744073714266680951}
+  - component: {fileID: 2493848825862227538}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 3
   m_Sprite: {fileID: -7845517406566146729, guid: bc518cbab155d054f9903a8d65c8b61a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -165,5 +166,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82f1c9576eca88547aac1a40b84b6c7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 5
+  _damager: {fileID: 2493848825862227538}
   _speed: 30
+--- !u!114 &2493848825862227538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5744434242594404492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f653d01a080cf14180258e45f5b8362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 10
