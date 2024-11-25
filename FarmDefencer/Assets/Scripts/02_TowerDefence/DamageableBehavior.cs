@@ -35,10 +35,12 @@ public abstract class DamageableBehavior : MonoBehaviour
         {
             throw new System.NullReferenceException($"You should add DamageZone component");
         }
+
+        _startHp = _hp;
     }
     protected virtual void Start()
     {
-        _startHp = _hp;
+
     }
 
     public abstract void TakeDamage(float damage);

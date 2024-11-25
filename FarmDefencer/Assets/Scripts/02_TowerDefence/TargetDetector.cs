@@ -45,7 +45,7 @@ public class TargetDetector : MonoBehaviour
 
     private void Start()
     {
-        DetectTargets();
+        // DetectTargets();
     }
     private void Update()
     {
@@ -58,12 +58,12 @@ public class TargetDetector : MonoBehaviour
         var cellPoint = GridMap.Instance.WorldToCell(this.transform.position);
 
         // 기준 타일에서 range 범위에 해당하는 타일을 찾는다
-        for(int h = -range; h <= range; h++)
+        for(int heightOffset = -range; heightOffset <= range; heightOffset++)
         {
-            for(int w = -range; w <= range; w++)
+            for(int widthOffset = -range; widthOffset <= range; widthOffset++)
             {
                 // var targetCellPoint = cellPoint + new Vector3Int(w, h, 0);
-                var targetcCell = GridMap.Instance.GetCell(w, h);
+                var targetcCell = GridMap.Instance.GetCell(widthOffset, heightOffset);
                 targetcCell.transform.localScale *= 2f;
 
                 // var targetWorldPoint = GridMap.Instance.GetCellCenterWorld(targetCellPoint);

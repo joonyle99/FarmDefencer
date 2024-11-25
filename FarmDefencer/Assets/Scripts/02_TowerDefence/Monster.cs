@@ -39,4 +39,10 @@ public sealed class Monster : TargetableBehavior, IProduct
     {
         OriginFactory.ReturnProduct(this);
     }
+
+    public void Survive()
+    {
+        Debug.Log($"몬스터가 생존했습니다.");
+        OriginFactory.ReturnProduct(this);
+    }
 }

@@ -45,6 +45,8 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
     private int[] _dx = new int[4] { -1, 0, 1, 0 };
     private int[] _dy = new int[4] { 0, 1, 0, -1 };
 
+    public LineRenderer debugLine;
+
     protected override void Awake()
     {
         base.Awake();
@@ -79,7 +81,7 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
                 _gridMap[h, w] = Instantiate(_gridCell, worldPos, Quaternion.identity, transform);
 
                 _gridMap[h, w].cellPosition = cellPos;
-                _gridMap[h, w].isMovable = true;
+                _gridMap[h, w].isUsable = true;
                 _gridMap[h, w].distanceCost = -1;
 
                 if (cellPos == _startCellPoint || cellPos == _endCellPoint)
@@ -139,7 +141,7 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
 
                 if (nextPos.x < 0 || nextPos.x >= _width || nextPos.y < 0 || nextPos.y >= _height) continue;
                 if (_gridMap[nextPos.y, nextPos.x].distanceCost != -1) continue;
-                if (_gridMap[nextPos.y, nextPos.x].isMovable == false && nextPos != _endCellPoint) continue;
+                if (_gridMap[nextPos.y, nextPos.x].isUsable == false && nextPos != _endCellPoint) continue;
 
                 queue.Enqueue(nextPos);
 
@@ -182,7 +184,10 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
     }
     public GridCell GetCell(int w, int h)
     {
-        if (IsValid(h, w) == false) return null;
+        if (IsValid(w, h) == false)
+        {
+            return null;
+        }
 
         return _gridMap[h, w];
     }
@@ -214,23 +219,29 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
         {
             for (int w = 0; w < _width; w++)
             {
-                var origin = _gridMap[h, w].transform.localScale;
+                var originScale = _gridMap[h, w].transform.localScale;
 
                 _gridMap[h, w].transform.localScale *= 1.7f;
                 yield return new WaitForSeconds(0.15f);
-                _gridMap[h, w].transform.localScale = origin;
+                _gridMap[h, w].transform.localScale = originScale;
             }
         }
     }
     private IEnumerator PingGridPathCoroutine()
     {
+        var lineObject = Instantiate(debugLine, Vector3.zero, Quaternion.identity);
+        lineObject.positionCount = 0;
+
         for (int i = 0; i < _gridPath.Count; i++)
         {
-            var origin = _gridPath[i].transform.localScale;
+            lineObject.positionCount = i + 1;
+            lineObject.SetPosition(i, _gridPath[i].transform.position);
+
+            var originScale = _gridPath[i].transform.localScale;
 
             _gridPath[i].transform.localScale *= 1.7f;
             yield return new WaitForSeconds(0.15f);
-            _gridPath[i].transform.localScale = origin;
+            _gridPath[i].transform.localScale = originScale;
         }
     }
 
@@ -258,11 +269,11 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
     //    _endPoint = new Vector2Int(_height - 2, _width - 2);
     //}
 
-    public bool IsValid(int h, int w)
+    public bool IsValid(int w, int h)
     {
-        if (h < 0 || h >= _height || w < 0 || w >= _width)
+        if (w < 0 || w >= _width || h < 0 || h >= _height)
         {
-            Debug.LogWarning($"[{h}, {w}] is invalid index");
+            Debug.LogWarning($"[{w}, {h}] is invalid index");
             return false;
         }
 

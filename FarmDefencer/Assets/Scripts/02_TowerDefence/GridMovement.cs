@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class GridMovement : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed = 2f;
+    [SerializeField] private float _moveSpeed = 1f;
+
+    public Vector2Int currentLookDir;
 
     private GridCell _targetGridCell;
     private int _pathIndex = 0;
@@ -13,8 +15,10 @@ public class GridMovement : MonoBehaviour
     private Monster _monster;
     private Rigidbody2D _rigidbody;
 
+#if UNITY_EDITOR
+    public float eTime;
     public float distance;
-    public float eTIme;
+#endif
 
     private void Awake()
     {
@@ -47,10 +51,24 @@ public class GridMovement : MonoBehaviour
                 _rigidbody.linearVelocity = Vector2.zero;
                 _targetGridCell = null;
 
+                // arrived
+                _monster.Survive();
+                _monster.Kill();
+
                 return;
             }
 
             _targetGridCell = GridMap.Instance.GridPath[_pathIndex];
+
+            // rotate
+            var targetLookDir = (_targetGridCell.transform.position - transform.position).normalized.ToVector2Int();
+            if (targetLookDir != currentLookDir)
+            {
+                var targetAngle = Vector2.SignedAngle(currentLookDir, targetLookDir);
+                transform.rotation = Quaternion.Euler(0f, 0f, transform.rotation.eulerAngles.z + targetAngle);
+
+                currentLookDir = targetLookDir;
+            }
         }
     }
     private void FixedUpdate()
@@ -60,18 +78,20 @@ public class GridMovement : MonoBehaviour
             return;
         }
 
-        // Move to the target waypoint
+        // move
         var dirVec = (_targetGridCell.transform.position - transform.position).normalized;
         _rigidbody.linearVelocity = dirVec * GridMap.Instance.UnitCellSize * _moveSpeed;
 
-        eTIme += Time.deltaTime;
+#if UNITY_EDITOR
+        eTime += Time.deltaTime;
         distance += _rigidbody.linearVelocity.magnitude * Time.deltaTime;
 
-        if(eTIme >= 1f)
+        if (eTime >= 1f)
         {
-            eTIme = 0f;
+            eTime = 0f;
             distance = 0f;
         }
+#endif
     }
 
     public void Initialize()
@@ -79,6 +99,24 @@ public class GridMovement : MonoBehaviour
         _pathIndex = 0;
         _targetGridCell = GridMap.Instance.GridPath[_pathIndex];
 
+        // monster 이미지의 앞쪽은 right 방향이다
+        currentLookDir = transform.right.ToVector2Int();
+
         transform.position = _targetGridCell.transform.position;
+
+        if (GridMap.Instance.GridPath.Count > 2)
+        {
+            var firstTarget = GridMap.Instance.GridPath[0];
+            var secondTarget = GridMap.Instance.GridPath[1];
+
+            var targetLookDir = (secondTarget.transform.position - firstTarget.transform.position).normalized.ToVector2Int();
+            if (targetLookDir != currentLookDir)
+            {
+                var targetAngle = Vector2.SignedAngle(currentLookDir, targetLookDir);
+                transform.rotation = Quaternion.Euler(0f, 0f, transform.rotation.eulerAngles.z + targetAngle);
+
+                currentLookDir = targetLookDir;
+            }
+        }
     }
 }

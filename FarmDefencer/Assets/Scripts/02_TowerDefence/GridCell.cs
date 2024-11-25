@@ -30,7 +30,7 @@ public class GridCell : MonoBehaviour
 
     [Space]
 
-    public bool isMovable;
+    public bool isUsable;
     public int distanceCost;
 
     private void Start()
@@ -40,6 +40,11 @@ public class GridCell : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (isUsable == false)
+        {
+            return;
+        }
+
         if (_occupiedTower != null)
         {
             return;
@@ -53,6 +58,11 @@ public class GridCell : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        if (isUsable == false)
+        {
+            return;
+        }
+
         if (_occupiedTower != null)
         {
             Debug.LogWarning("Already tower has occupied, you should build other plot place");
@@ -62,6 +72,7 @@ public class GridCell : MonoBehaviour
         Occupy();
     }
 
+    // sprite
     private void OnHover()
     {
         if (_spriteRenderer.color == _hoverColor)
@@ -80,15 +91,29 @@ public class GridCell : MonoBehaviour
 
         _spriteRenderer.color = _startColor;
     }
+    private void Appear()
+    {
+        var color = _spriteRenderer.color;
+        color.a = _startColor.a;
+        _spriteRenderer.color = color;
+    }
+    private void Disappear()
+    {
+        var color = _spriteRenderer.color;
+        color.a = 0f;
+        _spriteRenderer.color = color;
+    }
 
     public void Usable()
     {
-        isMovable = true;
+        isUsable = true;
+        Appear();
         // gameObject.SetActive(true);
     }
     public void UnUsable()
     {
-        isMovable = false;
+        isUsable = false;
+        Disappear();
         // gameObject.SetActive(false);
     }
 
