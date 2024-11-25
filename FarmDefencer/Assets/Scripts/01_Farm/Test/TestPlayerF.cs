@@ -14,6 +14,7 @@ namespace FarmTest
 		public Camera Camera;
         public WateringCan WateringCan;
         public FarmClock FarmClock;
+		public FarmManager FarmManager;
         private Farm _farmComponent;
 
 		private float _holdingTimeElapsed;
@@ -54,8 +55,8 @@ namespace FarmTest
         public void OnToggleAvailability()
         {
             var productUniqueId = transform.Find("Canvas/DebugFieldLockUnlock/ProductUniqueIdInputField").GetComponent<TMP_InputField>().text;
-            var currentAvailability = _farmComponent.GetFieldAvailability(productUniqueId);
-            _farmComponent.SetAvailability(productUniqueId, !currentAvailability);
+            var currentAvailability = FarmManager.GetAvailability(productUniqueId);
+            FarmManager.SetAvailability(productUniqueId, !currentAvailability);
         }
 
 		private void Update()

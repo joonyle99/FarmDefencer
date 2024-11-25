@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 4131539903086227037}
   - component: {fileID: 2216713729611218688}
   m_Layer: 0
-  m_Name: PotatoField
+  m_Name: FieldCucumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,13 +168,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3f4e49362e03f40887474469816bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FarmClock: {fileID: 0}
-  OnHarvest:
-    m_PersistentCalls:
-      m_Calls: []
-  CropPrefab: {fileID: 8248929270521535658, guid: 5bf2185754f8eef44827c6d9a08c9b58, type: 3}
-  FieldLocalPosition: {x: 0, y: 6}
-  FieldSize: {x: 5, y: 3}
+  CropPrefab: {fileID: 8248929270521535658, guid: 3f6d320c8a046914592820bb64a8b974, type: 3}
+  FieldLocalPosition: {x: 12, y: 0}
+  FieldSize: {x: 5, y: 2}
   FlowedTile: {fileID: 11400000, guid: 3283182a5f53e934ca18a24f522d3934, type: 2}
 --- !u!1 &9117000323035247222
 GameObject:

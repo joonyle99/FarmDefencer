@@ -80,7 +80,7 @@ public class Field : MonoBehaviour, IFarmUpdatable
         _fieldLockedDisplayObject = Instantiate(fieldLockedDisplayPrefab);
         _fieldLockedDisplayObject.SetActive(false);
         _fieldLockedDisplayObject.transform.SetParent(transform, false);
-        _fieldLockedDisplayObject.transform.localPosition = new Vector2(FieldSize.x / 2, FieldSize.y / 2);
+        _fieldLockedDisplayObject.transform.localPosition = new Vector2(FieldSize.x / 2.0f, FieldSize.y / 2.0f);
 
 		foreach (var crop in _crops)
 		{

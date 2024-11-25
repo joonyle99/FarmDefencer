@@ -119,7 +119,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 		return field.IsAvailable;
 	}
 
-	public void SetAvailability(string productUniqueId, bool value)
+	public void SetFieldAvailability(string productUniqueId, bool value)
 	{
 		if (!_fields.TryGetValue(productUniqueId, out var field))
 		{

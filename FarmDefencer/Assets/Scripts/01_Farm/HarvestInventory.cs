@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.Rendering.DebugUI;
 
 public class HarvestInventory : MonoBehaviour
 {
@@ -83,7 +84,27 @@ public class HarvestInventory : MonoBehaviour
 		return true;
 	}
 
+	public bool GetHarvestBoxAvailability(string productUniqueId)
+	{
+		if (!_harvestBoxes.TryGetValue(productUniqueId, out var harvestBox))
+		{
+			Debug.LogWarning($"Farm.GetHarvestBoxAvailability()의 인자로 전달된 productUniqueId {productUniqueId}(은)는 HarvestInventory._harvestBoxes에 존재하지 않습니다.");
+			return false;
+		}
 
+		return harvestBox.IsAvailable;
+	}
+
+	public void SetHarvestBoxAvailability(string productUniqueId, bool value)
+	{
+		if (!_harvestBoxes.TryGetValue(productUniqueId, out var harvestBox))
+		{
+			Debug.LogError($"Farm.SetHarvestBoxAvailability()의 인자로 전달된 productUniqueId {productUniqueId}(은)는 HarvestInventory._harvestBoxes에 존재하지 않습니다.");
+			return;
+		}
+
+		harvestBox.IsAvailable = value;
+	}
 	private void Awake()
 	{
 		_harvestBoxes = new Dictionary<string, HarvestBox>();

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4dd4d119d542f9e42a284dc9f0bd187e, type: 3}
-  m_Name: ProductPotato
+  m_Name: ProductCucumber
   m_EditorClassIdentifier: 
-  UniqueId: product_potato
-  ProductSprite: {fileID: 21300000, guid: fe7a6a26241e2db45b78ae14c8e61e44, type: 3}
-  Price: 3
+  UniqueId: product_cucumber
+  ProductSprite: {fileID: 21300000, guid: 5c318d942de22d74e97c4c4f56651571, type: 3}
+  Price: 1
