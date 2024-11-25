@@ -29,7 +29,10 @@ public sealed class Tower : TargetableBehavior
 
     private void Update()
     {
-        if (_currentTarget != null)
+        // update target every frame
+        UpdateTarget();
+
+        if (_currentTarget != null && _currentTarget.gameObject.activeSelf == true)
         {
             _head.LookAt(_currentTarget.transform.position);
         }
@@ -38,15 +41,10 @@ public sealed class Tower : TargetableBehavior
 
         if (_elapsedAttackTime >= _intervalAttackTime)
         {
-            // '= 0f'로 하지 않고 '-=' 연산을 하는 이유는 누적된 시간만큼 공격을 해야하기 때문
-            _elapsedAttackTime -= _intervalAttackTime;
+            _elapsedAttackTime = 0f;
 
-            UpdateTarget();
-
-            if (_currentTarget != null)
+            if (_currentTarget != null && _currentTarget.gameObject.activeSelf == true)
             {
-                _head.LookAt(_currentTarget.transform.position);
-
                 Attack();
             }
         }
