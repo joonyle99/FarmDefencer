@@ -82,6 +82,16 @@ public sealed class Tower : TargetableBehavior
         projectile.Shoot();
     }
 
+    // upgrade
+    public void UpgradeRateOfFire()
+    {
+
+    }
+    public void UpgradeDamage()
+    {
+
+    }
+
     public override void TakeDamage(float damage)
     {
         HP -= (int)damage;

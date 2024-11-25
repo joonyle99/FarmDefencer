@@ -57,6 +57,16 @@ public class Projectile : MonoBehaviour
         _currentTarget = target;
     }
 
+    // damager
+    public int GetDamage()
+    {
+        return _damager.GetDamage();
+    }
+    public void SetDamage(int damage)
+    {
+        _damager.SetDamage(damage);
+    }
+
     public void Shoot()
     {
         if (_currentTarget == null)

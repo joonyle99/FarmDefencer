@@ -5,9 +5,13 @@ public class Damager : MonoBehaviour
     [Header("式式式式式式式式 Damager 式式式式式式式式")]
     [Space]
 
-    [SerializeField] private float _damage = 10;
+    [SerializeField] private int _damage = 10;
 
-    public void SetDamage(float damage)
+    public int GetDamage()
+    {
+        return _damage;
+    }
+    public void SetDamage(int damage)
     {
         _damage = damage;
     }
