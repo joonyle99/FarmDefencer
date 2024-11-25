@@ -14,10 +14,13 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
     [Space]
 
     private Tilemap _tilemap;
-    private Vector2Int _size;
+    private Vector2Int _cellSize;
+    private Vector2Int _mapSize;
     private Vector2Int _origin;
     private int _height;
     private int _width;
+
+    public int UnitCellSize => _cellSize.x;
 
     [Space]
 
@@ -51,11 +54,12 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
 
     private void Start()
     {
-        _size = _tilemap.size.ToVector2Int();
+        _cellSize = _tilemap.cellSize.ToVector2Int();
+        _mapSize = _tilemap.size.ToVector2Int();
         _origin = _tilemap.origin.ToVector2Int();
 
-        _height = _size.y;
-        _width = _size.x;
+        _height = _mapSize.y;
+        _width = _mapSize.x;
 
         _startCellPoint = new Vector2Int(1, 1);
         _endCellPoint = new Vector2Int(_width - 2, _height - 2);
@@ -168,6 +172,20 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
     {
         return _tilemap.GetCellCenterWorld(point);
     }
+    public Vector3Int WorldToCell(Vector3 worldPos)
+    {
+        return _tilemap.WorldToCell(worldPos);
+    }
+    public TileBase GetTile(Vector3Int point)
+    {
+        return _tilemap.GetTile(point);
+    }
+    public GridCell GetCell(int w, int h)
+    {
+        if (IsValid(h, w) == false) return null;
+
+        return _gridMap[h, w];
+    }
 
     // editor
     public void CompressTilemap()
@@ -240,14 +258,14 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
     //    _endPoint = new Vector2Int(_height - 2, _width - 2);
     //}
 
-    //public bool IsValid(int h, int w)
-    //{
-    //    if (h < 0 || h >= _height || w < 0 || w >= _width)
-    //    {
-    //        Debug.LogWarning($"[{h}, {w}] is invalid index");
-    //        return false;
-    //    }
+    public bool IsValid(int h, int w)
+    {
+        if (h < 0 || h >= _height || w < 0 || w >= _width)
+        {
+            Debug.LogWarning($"[{h}, {w}] is invalid index");
+            return false;
+        }
 
-    //    return true;
-    //}
+        return true;
+    }
 }

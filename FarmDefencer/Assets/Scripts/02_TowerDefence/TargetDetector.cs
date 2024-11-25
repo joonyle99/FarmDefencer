@@ -16,6 +16,9 @@ public class TargetDetector : MonoBehaviour
     [SerializeField] private List<TargetableBehavior> _targetsInRange = new List<TargetableBehavior>(BUCKET_CAPACITY);
     public List<TargetableBehavior> TargetsInRange => _targetsInRange;
 
+    public int range = 3;
+
+
     private TargetableBehavior _currentTarget;
 
     public event Action<TargetableBehavior> OnEnterTarget;
@@ -40,6 +43,55 @@ public class TargetDetector : MonoBehaviour
         return _targetsInRange[0];
     }
 
+    private void Start()
+    {
+        DetectTargets();
+    }
+    private void Update()
+    {
+
+    }
+
+    private void DetectTargets()
+    {
+        // 이 TargetDetector가 속한 기준 타일을 선택한다
+        var cellPoint = GridMap.Instance.WorldToCell(this.transform.position);
+
+        // 기준 타일에서 range 범위에 해당하는 타일을 찾는다
+        for(int h = -range; h <= range; h++)
+        {
+            for(int w = -range; w <= range; w++)
+            {
+                // var targetCellPoint = cellPoint + new Vector3Int(w, h, 0);
+                var targetcCell = GridMap.Instance.GetCell(w, h);
+                targetcCell.transform.localScale *= 2f;
+
+                // var targetWorldPoint = GridMap.Instance.GetCellCenterWorld(targetCellPoint);
+
+                // 해당 타일에 있는 모든 타겟을 찾는다
+                // var targets = Physics2D.OverlapCircleAll(targetWorldPoint, GridMap.Instance.UnitCellSize, _targetLayerMask);
+
+                /*
+                foreach (var target in targets)
+                {
+                    if (target.TryGetComponent<TargetableBehavior>(out var targetable))
+                    {
+                        if (_targetsInRange.Contains(targetable) == false)
+                        {
+                            _targetsInRange.Add(targetable);
+                            OnEnterTarget?.Invoke(targetable);
+                        }
+                    }
+                }
+                */
+            }
+        }
+
+        // 각각의 타일에서 raycast 방식 (overlap이나) 으로 한 칸씩 targetLayer를 체크한다
+
+        // 만약 검출된다면 list에 추가한다
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // check layer
@@ -56,7 +108,6 @@ public class TargetDetector : MonoBehaviour
             }
         }
     }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.TryGetComponent<TargetableBehavior>(out var targetable))

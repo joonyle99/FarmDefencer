@@ -13,6 +13,9 @@ public class GridMovement : MonoBehaviour
     private Monster _monster;
     private Rigidbody2D _rigidbody;
 
+    public float distance;
+    public float eTIme;
+
     private void Awake()
     {
         _monster = GetComponent<Monster>();
@@ -59,7 +62,16 @@ public class GridMovement : MonoBehaviour
 
         // Move to the target waypoint
         var dirVec = (_targetGridCell.transform.position - transform.position).normalized;
-        _rigidbody.linearVelocity = dirVec * _moveSpeed;
+        _rigidbody.linearVelocity = dirVec * GridMap.Instance.UnitCellSize * _moveSpeed;
+
+        eTIme += Time.deltaTime;
+        distance += _rigidbody.linearVelocity.magnitude * Time.deltaTime;
+
+        if(eTIme >= 1f)
+        {
+            eTIme = 0f;
+            distance = 0f;
+        }
     }
 
     public void Initialize()

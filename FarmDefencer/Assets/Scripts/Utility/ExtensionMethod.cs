@@ -4,7 +4,7 @@ namespace JoonyleGameDevKit
 {
     public static class ExtensionMethod
     {
-        // Vector
+        // Vector2
         public static Vector2 ToVector2(this Vector3 vec)
         {
             return new Vector2(vec.x, vec.y);
@@ -13,6 +13,8 @@ namespace JoonyleGameDevKit
         {
             return new Vector2(vec.x, vec.z);
         }
+
+        // Vector3
         public static Vector3 ToVector3(this Vector2 vec, float z = 0)
         {
             return new Vector3(vec.x, vec.y, z);
@@ -30,7 +32,25 @@ namespace JoonyleGameDevKit
             return new Vector3(v3.x + v2.x, v3.y + v2.y, v3.z);
         }
 
-        // VectorInt
+        // Vector2Int
+        public static Vector2 ToVector2(this Vector3Int vec)
+        {
+            return new Vector2(vec.x, vec.y);
+        }
+        public static Vector2Int ToVector2Int(this Vector3Int vec)
+        {
+            return new Vector2Int(vec.x, vec.y);
+        }
+        public static Vector2Int ToVector2Int(this Vector2 vec)
+        {
+            return new Vector2Int(Mathf.RoundToInt(vec.x), Mathf.RoundToInt(vec.y));
+        }
+        public static Vector2Int ToVector2Int(this Vector3 vec)
+        {
+            return new Vector2Int(Mathf.RoundToInt(vec.x), Mathf.RoundToInt(vec.y));
+        }
+
+        // Vector3Int
         public static Vector3 ToVector3(this Vector2Int vec, float z = 0)
         {
             return new Vector3(vec.x, vec.y, z);
@@ -47,13 +67,13 @@ namespace JoonyleGameDevKit
         {
             return new Vector3(vec.x, vec.y, vec.z);
         }
-        public static Vector2 ToVector2(this Vector3Int vec)
+        public static Vector3Int ToVector3Int(this Vector3 vec)
         {
-            return new Vector2(vec.x, vec.y);
+            return new Vector3Int(Mathf.RoundToInt(vec.x), Mathf.RoundToInt(vec.y), Mathf.RoundToInt(vec.z));
         }
-        public static Vector2Int ToVector2Int(this Vector3Int vec)
+        public static Vector3Int ToVector3Int(this Vector2 vec)
         {
-            return new Vector2Int(vec.x, vec.y);
+            return new Vector3Int(Mathf.RoundToInt(vec.x), Mathf.RoundToInt(vec.y), 0);
         }
 
         // Random
