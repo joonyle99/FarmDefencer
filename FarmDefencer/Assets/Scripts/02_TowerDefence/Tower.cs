@@ -13,7 +13,8 @@ public sealed class Tower : TargetableBehavior
     [Space]
 
     [Header("Build")]
-    [SerializeField] private int _cost = 50;
+    [SerializeField] private int _cost = 10;
+    public int Cost => _cost;
     // private int levelIndex;
 
     [Space]
@@ -51,10 +52,7 @@ public sealed class Tower : TargetableBehavior
         }
     }
 
-    public int GetCost()
-    {
-        return _cost;
-    }
+    // build
     public bool IsValidBuild(int gold)
     {
         if (gold >= _cost)
@@ -65,12 +63,12 @@ public sealed class Tower : TargetableBehavior
         return false;
     }
 
-    public void UpdateTarget()
+    // fire
+    private void UpdateTarget()
     {
         _currentTarget = _detector.GetFrontTarget();
     }
-
-    public void Attack()
+    private void Attack()
     {
         var projectile = Instantiate(_projectile, _head.Muzzle.position, _head.Muzzle.rotation);
 
@@ -86,7 +84,7 @@ public sealed class Tower : TargetableBehavior
 
     public override void TakeDamage(float damage)
     {
-        Debug.Log($"<color=yellow>{this.gameObject.name}</color> take damage");
+        HP -= (int)damage;
     }
     public override void Kill()
     {

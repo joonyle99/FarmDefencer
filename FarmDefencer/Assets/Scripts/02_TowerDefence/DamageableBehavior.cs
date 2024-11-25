@@ -5,8 +5,27 @@ using UnityEngine;
 /// </summary>
 public abstract class DamageableBehavior : MonoBehaviour
 {
-    // [Header("式式式式式式式式 DamageableBehavior 式式式式式式式式")]
-    // [Space]
+    [Header("式式式式式式式式 DamageableBehavior 式式式式式式式式")]
+    [Space]
+
+    [SerializeField] private int _hp = 100;
+    public int HP
+    {
+        get => _hp;
+        set
+        {
+            _hp = value;
+
+            if (_hp < 0)
+            {
+                _hp = 0;
+                Kill();
+            }
+        }
+    }
+
+    private int _startHp;
+    public int StartHp => _startHp;
 
     protected virtual void Awake()
     {
@@ -16,6 +35,10 @@ public abstract class DamageableBehavior : MonoBehaviour
         {
             throw new System.NullReferenceException($"You should add DamageZone component");
         }
+    }
+    protected virtual void Start()
+    {
+        _startHp = _hp;
     }
 
     public abstract void TakeDamage(float damage);

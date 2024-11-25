@@ -23,33 +23,17 @@ public sealed class Monster : TargetableBehavior, IProduct
     public GameObject GameObject => this.gameObject;
     public Transform Transform => this.transform;
 
-    [Header("式式式式式式式式 Monster 式式式式式式式式")]
-    [Space]
-
-    private int _hp = 50;
-    public int HP
-    {
-        get => _hp;
-        set
-        {
-            _hp = value;
-
-            if (_hp < 0)
-            {
-                _hp = 0;
-                Kill();
-            }
-        }
-    }
+    //[Header("式式式式式式式式 Monster 式式式式式式式式")]
+    //[Space]
 
     private void OnEnable()
     {
-        HP = 50;
+        HP = StartHp;
     }
+
     public override void TakeDamage(float damage)
     {
         HP -= (int)damage;
-        // Debug.Log($"<color=yellow>{this.gameObject.name}</color> take damage");
     }
     public override void Kill()
     {

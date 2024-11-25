@@ -38,8 +38,41 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background3
+    uniqueID: 17785869
+    locked: 0
+  - name: Background2
+    uniqueID: 1229108509
+    locked: 0
+  - name: Background1
+    uniqueID: 1716835393
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: OverDefault1
+    uniqueID: 214604371
+    locked: 0
+  - name: OverDefault2
+    uniqueID: 141406357
+    locked: 0
+  - name: OverDefault3
+    uniqueID: 1362917987
+    locked: 0
+  - name: Foreground1
+    uniqueID: 954923641
+    locked: 0
+  - name: Foreground2
+    uniqueID: 3018106103
+    locked: 0
+  - name: Mask
+    uniqueID: 561053711
+    locked: 0
+  - name: VFX
+    uniqueID: 3846557413
+    locked: 0
+  - name: UI
+    uniqueID: 2343643093
     locked: 0
   m_RenderingLayers:
   - Default

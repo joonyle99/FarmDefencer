@@ -32,7 +32,7 @@ public class BuildSupervisor : JoonyleGameDevKit.Singleton<BuildSupervisor>
             return null;
         }
 
-        ResourceManager.Instance.SpendGold(towerToBuild.GetCost());
+        ResourceManager.Instance.SpendGold(towerToBuild.Cost);
 
         var towerToReturn = Instantiate(towerToBuild, targetPos, targetRot);
 
