@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class FarmManager : MonoBehaviour
 {
-	public HarvestInventory HarvestInventory;
+	public FarmUI FarmUI;
     public FarmClock FarmClock;
     public Farm Farm;
 	public FarmTestPlayer FarmTestPlayer;
@@ -16,10 +16,10 @@ public class FarmManager : MonoBehaviour
 	public void SetAvailability(string productUniqueId, bool value)
 	{
 		Farm.SetFieldAvailability(productUniqueId, value);
-		HarvestInventory.SetHarvestBoxAvailability(productUniqueId, value);
+		FarmUI.HarvestInventory.SetHarvestBoxAvailability(productUniqueId, value);
 	}
 
-	public bool GetAvailability(string productUniqueId) => HarvestInventory.GetHarvestBoxAvailability(productUniqueId);
+	public bool GetAvailability(string productUniqueId) => FarmUI.HarvestInventory.GetHarvestBoxAvailability(productUniqueId);
 
 	private void Awake()
 	{
@@ -28,7 +28,7 @@ public class FarmManager : MonoBehaviour
 			(productEntry, cropWorldPosition, afterItemifyCallback) =>
 			{
 				var cropScreenPosition = FarmTestPlayer.Camera.WorldToScreenPoint(new Vector3(cropWorldPosition.x, cropWorldPosition.y, 0)); 
-				var isItemified = HarvestInventory.TryBeginGather(productEntry, cropScreenPosition);
+				var isItemified = FarmUI.HarvestInventory.TryBeginGather(productEntry, cropScreenPosition);
 				afterItemifyCallback(isItemified);
 			});
 	}
@@ -44,6 +44,6 @@ public class FarmManager : MonoBehaviour
 		SetAvailability("product_sweetpotato", false);
 		SetAvailability("product_mushroom", false);
 
-		HarvestInventory.SetTodaysOrder(new System.Collections.Generic.List<(string, int)>{ ("product_carrot", 5), ("product_potato", 5), ("product_corn", 5) });
+		FarmUI.HarvestInventory.SetTodaysOrder(new System.Collections.Generic.List<(string, int)>{ ("product_carrot", 5), ("product_potato", 5), ("product_corn", 5) });
 	}
 }

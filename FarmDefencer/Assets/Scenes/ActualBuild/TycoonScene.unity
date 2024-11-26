@@ -972,8 +972,9 @@ GameObject:
   - component: {fileID: 257351985}
   - component: {fileID: 257351984}
   - component: {fileID: 257351983}
+  - component: {fileID: 257351987}
   m_Layer: 5
-  m_Name: UI
+  m_Name: FarmUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1065,6 +1066,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &257351987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257351982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6641db4cb19c14c9857de1cda7fdca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &268898844
 GameObject:
   m_ObjectHideFlags: 0
@@ -2981,7 +2994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911982a6f0e14bd4b88047c9f5a89f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HarvestInventory: {fileID: 2045554700}
+  FarmUI: {fileID: 257351987}
   FarmClock: {fileID: 790447940}
   Farm: {fileID: 876821029}
   FarmTestPlayer: {fileID: 2048119098}
@@ -3051,8 +3064,9 @@ GameObject:
   - component: {fileID: 1589993485}
   - component: {fileID: 1589993487}
   - component: {fileID: 1589993486}
+  - component: {fileID: 1589993488}
   m_Layer: 5
-  m_Name: Coins
+  m_Name: CoinsUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3116,6 +3130,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1589993484}
   m_CullTransparentMesh: 1
+--- !u!114 &1589993488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589993484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48c72c4d592c1f44ab4246125d7bbcea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1743981753
 GameObject:
   m_ObjectHideFlags: 0
@@ -3939,9 +3965,9 @@ Canvas:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 291073085}
   - {fileID: 1503578050}
   - {fileID: 876821028}
   - {fileID: 790447941}
   - {fileID: 1946812891}
-  - {fileID: 291073085}
   - {fileID: 257351986}
