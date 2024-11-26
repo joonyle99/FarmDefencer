@@ -196,6 +196,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 1
-  lookDirection: {x: 0, y: 0}
+  currentLookDir: {x: 0, y: 0}
   eTime: 0
   distance: 0
