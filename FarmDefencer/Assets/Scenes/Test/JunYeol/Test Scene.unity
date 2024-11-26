@@ -2063,8 +2063,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _factory: {fileID: 1944853641}
   _waitTimeRange:
-    Start: 1
-    End: 1
+    Start: 3
+    End: 3
   _waitTime: 0
 --- !u!4 &1944853640
 Transform:

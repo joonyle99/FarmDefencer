@@ -8,7 +8,7 @@ using UnityEngine;
 public class TargetDetector : MonoBehaviour
 {
     [SerializeField] private LayerMask _targetLayerMask;
-    private int _widthRange = 3;
+    private int _widthRange = 2;
     private int _heightRange = 1;
 
     [Space]
@@ -176,7 +176,7 @@ public class TargetDetector : MonoBehaviour
                 // debug
                 order++;
                 targetCell.DebugChangeColor(Color.blue);
-                targetCell.textMeshPro.text = order.ToString();
+                // targetCell.textMeshPro.text = order.ToString();
                 // JoonyleGameDevKit.Painter.DebugDrawPlus(targetCell.transform.position, Color.red, GridMap.Instance.UnitCellSize / 2f, 5f);
             }
         }

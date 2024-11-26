@@ -24,8 +24,14 @@ public class Wave : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && _isTriggered == false)
         {
             _isTriggered = true;
-            StartCoroutine(SpawnCoroutine());
+            StartCoroutine(ExcuteCoroutine());
         }
+    }
+
+    private IEnumerator ExcuteCoroutine()
+    {
+        yield return GridMap.Instance.ExcuteCoroutine();
+        yield return SpawnCoroutine();
     }
 
     protected void Spawn()

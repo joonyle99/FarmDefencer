@@ -100,15 +100,15 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
             Debug.Log($"x: {cellPos.x}, y: {cellPos.y}");
         }
         */
+    }
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            CalculateDistance(_startCellPoint);
+    public IEnumerator ExcuteCoroutine()
+    {
+        CalculateDistance(_startCellPoint);
 
-            DebugDistanceMap();
+        DebugDistanceMap();
 
-            StartCoroutine(PingGridPathCoroutine());
-        }
+        yield return PingGridPathCoroutine();
     }
 
     // path
