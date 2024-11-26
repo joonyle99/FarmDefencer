@@ -357,5 +357,5 @@ MonoBehaviour:
   textMeshPro: {fileID: 2978388220711460693}
   prevGridCell: {fileID: 0}
   cellPosition: {x: 0, y: 0}
-  isMovable: 0
+  isUsable: 0
   distanceCost: 0

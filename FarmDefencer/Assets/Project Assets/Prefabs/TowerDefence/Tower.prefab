@@ -116,6 +116,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _targetsInRange: []
+  range: 3
 --- !u!1 &7323561679821610874
 GameObject:
   m_ObjectHideFlags: 0
