@@ -22,16 +22,14 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
 
     public int UnitCellSize => _cellSize.x;
 
-    [Space]
-
     [SerializeField] private TileBase _startTile;
     private Vector2Int _startCellPoint;
     public Vector2Int StartCellPoint => _startCellPoint;
-    public Vector3 StartWorldPoint => GetCellCenterWorld(StartCellPoint.ToVector3Int());
+    public Vector3 StartWorldPoint => CellToWorld(StartCellPoint.ToVector3Int());
     [SerializeField] private TileBase _endTile;
     private Vector2Int _endCellPoint;
     public Vector2Int EndCellPoint => _endCellPoint;
-    public Vector3 EndWorldPoint => GetCellCenterWorld(EndCellPoint.ToVector3Int());
+    public Vector3 EndWorldPoint => CellToWorld(EndCellPoint.ToVector3Int());
 
     [Space]
 
@@ -41,7 +39,6 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
 
     private GridCell[,] _gridMap;
 
-    // аб ╩С ©Л го
     private int[] _dx = new int[4] { -1, 0, 1, 0 };
     private int[] _dy = new int[4] { 0, 1, 0, -1 };
 
@@ -108,13 +105,13 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
         {
             CalculateDistance(_startCellPoint);
 
-            DrawDistanceMap();
+            DebugDistanceMap();
 
             StartCoroutine(PingGridPathCoroutine());
         }
     }
 
-    // 
+    // path
     private void CalculateDistance(Vector2Int startPoint)
     {
         Queue<Vector2Int> queue = new Queue<Vector2Int>();
@@ -152,7 +149,7 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
     }
     private void TracePath(GridCell endCell)
     {
-        Debug.Log($"Start Trace (end cell: {endCell.gameObject.name})", endCell.gameObject);
+        // Debug.Log($"Start Trace (end cell: {endCell.gameObject.name})", endCell.gameObject);
 
         _gridPath = new List<GridCell>();
 
@@ -169,19 +166,17 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
         _gridPath.Reverse();
     }
 
-    // 
-    public Vector3 GetCellCenterWorld(Vector3Int point)
+    // convert
+    public Vector3 CellToWorld(Vector3Int cellPos)
     {
-        return _tilemap.GetCellCenterWorld(point);
+        return _tilemap.GetCellCenterWorld(cellPos);
     }
     public Vector3Int WorldToCell(Vector3 worldPos)
     {
         return _tilemap.WorldToCell(worldPos);
     }
-    public TileBase GetTile(Vector3Int point)
-    {
-        return _tilemap.GetTile(point);
-    }
+
+    // getter
     public GridCell GetCell(int w, int h)
     {
         if (IsValid(w, h) == false)
@@ -200,7 +195,7 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
     }
 
     // debug
-    private void DrawDistanceMap()
+    private void DebugDistanceMap()
     {
         for (int h = 0; h < _height; h++)
         {
@@ -244,30 +239,6 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
             _gridPath[i].transform.localScale = originScale;
         }
     }
-
-    //public void Initialize()
-    //{
-    //    var temp1 = _rightTop.transform.position;
-    //    var temp2 = _leftBottom.transform.position;
-
-    //    var temp3 = temp2 - temp1;
-
-    //    _width = _size.x;
-    //    _height = _size.y;
-
-    //    _grid = new GridCell[_height, _width];
-
-    //    for (int h = 0; h < _height; h++)
-    //    {
-    //        for (int w = 0; w < _width; w++)
-    //        {
-
-    //        }
-    //    }
-
-    //    _startPoint = new Vector2Int(1, 1);
-    //    _endPoint = new Vector2Int(_height - 2, _width - 2);
-    //}
 
     public bool IsValid(int w, int h)
     {

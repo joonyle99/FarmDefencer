@@ -35,7 +35,6 @@ public class Wave : MonoBehaviour
 
         gridMovement.Initialize();
     }
-
     private IEnumerator SpawnCoroutine()
     {
         while (true)

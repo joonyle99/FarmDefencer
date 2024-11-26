@@ -71,7 +71,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6564153582585416594}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -116,7 +116,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _targetsInRange: []
-  range: 3
+  range: 2
 --- !u!1 &7323561679821610874
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,88 +8,38 @@ using UnityEngine;
 public class TargetDetector : MonoBehaviour
 {
     [SerializeField] private LayerMask _targetLayerMask;
+    private int _widthRange = 3;
+    private int _heightRange = 1;
 
     [Space]
 
+    [SerializeField] private List<TargetableBehavior> _currentTargets = new List<TargetableBehavior>(BUCKET_CAPACITY);
+
     private const int BUCKET_CAPACITY = 100;
-
-    [SerializeField] private List<TargetableBehavior> _targetsInRange = new List<TargetableBehavior>(BUCKET_CAPACITY);
-    public List<TargetableBehavior> TargetsInRange => _targetsInRange;
-
-    public int range = 3;
-
 
     private TargetableBehavior _currentTarget;
 
     public event Action<TargetableBehavior> OnEnterTarget;
-    public event Action<TargetableBehavior> OntExitTarge;
+    public event Action<TargetableBehavior> OnExitTarget;
     // public event Action<TargetableBehavior> OnAccquireTarget;       // when you get current target
-
-    // LEARNING POINT
-    //
-    // Collider2D 컴포넌트
-    // -> Unity Physics Engine의 물리 연산과 함께 지속적으로 충돌을 체크한다
-    //
-    // Physics2D.OverlapCircleAll
-    // -> 물리 연산이 아닌, 충돌 체크만을 수행한다
 
     public TargetableBehavior GetFrontTarget()
     {
-        if (_targetsInRange.Count == 0)
+        if (_currentTargets.Count == 0)
         {
             return null;
         }
 
-        return _targetsInRange[0];
+        return _currentTargets[0];
     }
 
     private void Start()
     {
-        // DetectTargets();
+        DebugDrawRange();
     }
     private void Update()
     {
-
-    }
-
-    private void DetectTargets()
-    {
-        // 이 TargetDetector가 속한 기준 타일을 선택한다
-        var cellPoint = GridMap.Instance.WorldToCell(this.transform.position);
-
-        // 기준 타일에서 range 범위에 해당하는 타일을 찾는다
-        for(int heightOffset = -range; heightOffset <= range; heightOffset++)
-        {
-            for(int widthOffset = -range; widthOffset <= range; widthOffset++)
-            {
-                // var targetCellPoint = cellPoint + new Vector3Int(w, h, 0);
-                var targetcCell = GridMap.Instance.GetCell(widthOffset, heightOffset);
-                targetcCell.transform.localScale *= 2f;
-
-                // var targetWorldPoint = GridMap.Instance.GetCellCenterWorld(targetCellPoint);
-
-                // 해당 타일에 있는 모든 타겟을 찾는다
-                // var targets = Physics2D.OverlapCircleAll(targetWorldPoint, GridMap.Instance.UnitCellSize, _targetLayerMask);
-
-                /*
-                foreach (var target in targets)
-                {
-                    if (target.TryGetComponent<TargetableBehavior>(out var targetable))
-                    {
-                        if (_targetsInRange.Contains(targetable) == false)
-                        {
-                            _targetsInRange.Add(targetable);
-                            OnEnterTarget?.Invoke(targetable);
-                        }
-                    }
-                }
-                */
-            }
-        }
-
-        // 각각의 타일에서 raycast 방식 (overlap이나) 으로 한 칸씩 targetLayer를 체크한다
-
-        // 만약 검출된다면 list에 추가한다
+        DetectTargets();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -100,9 +50,9 @@ public class TargetDetector : MonoBehaviour
             // check targetable
             if (collision.TryGetComponent<TargetableBehavior>(out var targetable))
             {
-                if (_targetsInRange.Contains(targetable) == false)
+                if (_currentTargets.Contains(targetable) == false)
                 {
-                    _targetsInRange.Add(targetable);
+                    _currentTargets.Add(targetable);
                     OnEnterTarget?.Invoke(targetable);
                 }
             }
@@ -112,11 +62,131 @@ public class TargetDetector : MonoBehaviour
     {
         if (collision.TryGetComponent<TargetableBehavior>(out var targetable))
         {
-            if (TargetsInRange.Contains(targetable) == true)
+            if (_currentTargets.Contains(targetable) == true)
             {
-                _targetsInRange.Remove(targetable);
-                OntExitTarge?.Invoke(targetable);
+                _currentTargets.Remove(targetable);
+                OnExitTarget?.Invoke(targetable);
+            }
+        }
+    }
+
+    // 
+    private void DetectTargets()
+    {
+        // get origin cell
+        var thisCellPos = GridMap.Instance.WorldToCell(transform.position);
+
+        // new targets
+        var newDetectedTargets = new HashSet<TargetableBehavior>(BUCKET_CAPACITY);
+
+        // calc range
+        for (int widthOffset = -_widthRange; widthOffset <= _widthRange; widthOffset++)
+        {
+            for (int heightOffset = -_heightRange; heightOffset <= _heightRange; heightOffset++)
+            {
+                var offset = new Vector3Int(widthOffset, heightOffset, 0);
+                if (offset == Vector3Int.zero)
+                {
+                    continue;
+                }
+
+                var targetCellPos = thisCellPos + offset;
+
+                var targetCell = GridMap.Instance.GetCell(targetCellPos.x, targetCellPos.y);
+                if (targetCell == null)
+                {
+                    continue;
+                }
+
+                // overlap circle
+                var targetColliders = Physics2D.OverlapCircleAll(targetCell.transform.position, GridMap.Instance.UnitCellSize / 2f, _targetLayerMask);
+
+                // detected targets
+                foreach (var targetCollider in targetColliders)
+                {
+                    if (targetCollider.TryGetComponent<TargetableBehavior>(out var target))
+                    {
+                        if (newDetectedTargets.Contains(target) == true)
+                        {
+                            continue;
+                        }
+
+                        // 일단 넣어놔
+                        newDetectedTargets.Add(target);
+
+                        // 새로운 타겟이 발견되었다면 추가
+                        if (_currentTargets.Contains(target) == false)
+                        {
+                            _currentTargets.Add(target);
+                            OnEnterTarget?.Invoke(target);
+                        }
+                    }
+                }
+            }
+        }
+
+        // delete targets
+        var deletableTargets = new List<TargetableBehavior>();
+
+        // for out of range
+        foreach (var oldTarget in _currentTargets)
+        {
+            // 삭제 조건
+            // 1. 새로운 타겟들에 포함되지 않아야 한다. (왜냐하면 newTargets는 새롭게 탐지됐다는 것을 나타내기 때문이다.)
+            if (newDetectedTargets.Contains(oldTarget) == false)
+            {
+                deletableTargets.Add(oldTarget);
+            }
+        }
+
+        foreach (var deletableTarget in deletableTargets)
+        {
+            _currentTargets.Remove(deletableTarget);
+            OnExitTarget?.Invoke(deletableTarget);
+        }
+    }
+
+    // debug
+    private void DebugDrawRange()
+    {
+        var order = 0;
+
+        // get targetDetector's cell
+        var thisCellPos = GridMap.Instance.WorldToCell(transform.position);
+
+        // calc rectangle range
+        for (int widthOffset = -_widthRange; widthOffset <= _widthRange; widthOffset++)
+        {
+            for (int heightOffset = -_heightRange; heightOffset <= _heightRange; heightOffset++)
+            {
+                var offset = new Vector3Int(widthOffset, heightOffset, 0);
+                if (offset == Vector3Int.zero)
+                {
+                    continue;
+                }
+
+                var targetCellPos = thisCellPos + offset;
+
+                var targetCell = GridMap.Instance.GetCell(targetCellPos.x, targetCellPos.y);
+                if (targetCell == null)
+                {
+                    continue;
+                }
+
+                // debug
+                order++;
+                targetCell.DebugChangeColor(Color.blue);
+                targetCell.textMeshPro.text = order.ToString();
+                // JoonyleGameDevKit.Painter.DebugDrawPlus(targetCell.transform.position, Color.red, GridMap.Instance.UnitCellSize / 2f, 5f);
             }
         }
     }
 }
+
+// LEARNING POINT
+//
+// Collider2D 컴포넌트
+// -> Unity Physics Engine의 물리 연산과 함께 지속적으로 충돌을 체크한다
+//
+// Physics2D.OverlapCircleAll
+// -> 물리 연산이 아닌, 충돌 체크만을 수행한다

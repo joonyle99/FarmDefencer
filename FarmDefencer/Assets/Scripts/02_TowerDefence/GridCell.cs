@@ -127,4 +127,16 @@ public class GridCell : MonoBehaviour
             UnUsable();
         }
     }
+
+    // debug
+    public void DebugChangeColor(Color color)
+    {
+        if (_spriteRenderer.color == color)
+        {
+            return;
+        }
+
+        _spriteRenderer.color = color;
+        _startColor = _spriteRenderer.color;
+    }
 }

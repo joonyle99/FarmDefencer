@@ -38,6 +38,10 @@ public abstract class DamageableBehavior : MonoBehaviour
 
         _startHp = _hp;
     }
+    protected virtual void OnEnable()
+    {
+
+    }
     protected virtual void Start()
     {
 

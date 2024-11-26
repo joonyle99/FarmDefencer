@@ -26,8 +26,12 @@ public sealed class Monster : TargetableBehavior, IProduct
     //[Header("──────── Monster ────────")]
     //[Space]
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
+        // Debug.Log("Monster OnEnable()");
+
         HP = StartHp;
     }
 
@@ -42,7 +46,7 @@ public sealed class Monster : TargetableBehavior, IProduct
 
     public void Survive()
     {
-        Debug.Log($"몬스터가 생존했습니다.");
+        // Debug.Log($"몬스터가 생존했습니다.");
         OriginFactory.ReturnProduct(this);
     }
 }
