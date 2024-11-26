@@ -46,4 +46,10 @@ public class FarmManager : MonoBehaviour
 
 		FarmUI.HarvestInventory.SetTodaysOrder(new System.Collections.Generic.List<(string, int)>{ ("product_carrot", 5), ("product_potato", 5), ("product_corn", 5) });
 	}
+
+	private void Update()
+	{
+		var ratio = FarmClock.LengthOfDaytime == 0.0f ? 0.0f : FarmClock.RemainingDaytime / FarmClock.LengthOfDaytime;
+		FarmUI.TimerUI.SetClockhand(ratio);
+	}
 }

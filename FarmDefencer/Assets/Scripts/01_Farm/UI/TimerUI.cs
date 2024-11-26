@@ -16,7 +16,7 @@ public class TimerUI : MonoBehaviour
 	{
 		ratio = Mathf.Clamp01(ratio);
 
-		float angle = Mathf.Lerp(StartAngle, EndAngle, ratio);
+		float angle = Mathf.Lerp(EndAngle, StartAngle, ratio);
 
 		_clockHand.rectTransform.localRotation = Quaternion.Euler(0f, 0f, -angle); // UI의 Z축 회전
 	}

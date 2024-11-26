@@ -11,6 +11,7 @@ public class FarmUI : MonoBehaviour
 	private HarvestInventory _harvestInventory;
 	public HarvestInventory HarvestInventory => _harvestInventory;
 
+	public TimerUI TimerUI => _timerUI;
 	private TimerUI _timerUI;
 
 	private void Awake()

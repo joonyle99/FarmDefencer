@@ -30,6 +30,12 @@ public class FarmClock : MonoBehaviour
 			}
 		}
 	}
+
+	/// <summary>
+	/// 이번에 설정된 낮의 총 길이입니다.
+	/// </summary>
+	public float LengthOfDaytime { get; private set; }
+
 	/// <summary>
 	/// 유저의 일시정지 요청을 의미하는 변수입니다.
 	/// 이 값이 true면 RemainingDaytime > 0.0f여도 멈춥니다. 
@@ -39,8 +45,12 @@ public class FarmClock : MonoBehaviour
 
 	public IFarmUpdatable _farmUpdatable;
 
-	public void SetRemainingDaytimeBy(float daytime) => _remainingDaytime = daytime;
-	public void SetRemainingDaytimeRandom(float min, float max) => _remainingDaytime = Random.Range(min, max);
+	public void SetRemainingDaytimeBy(float daytime)
+	{
+		LengthOfDaytime = daytime;
+		_remainingDaytime = daytime;
+	}
+	public void SetRemainingDaytimeRandom(float min, float max) => SetRemainingDaytimeBy(Random.Range(min, max));
 	public void RegisterFarmUpdatableObject(IFarmUpdatable farmUpdatable) => _farmUpdatable = farmUpdatable;
 	private void Update()
 	{
