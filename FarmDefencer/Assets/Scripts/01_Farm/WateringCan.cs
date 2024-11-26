@@ -30,7 +30,7 @@ public class WateringCan : MonoBehaviour,
 		private set
 		{
 			_using = value;
-			_image.sprite = _using ? WateringSprite : NormalSprite; 
+			OnUsingStateChanged();
 		}
 	}
 	public Sprite WateringSprite;
@@ -42,7 +42,7 @@ public class WateringCan : MonoBehaviour,
 	private RectTransform _rectTransform;
 	private Image _image;
 
-	public void OnPointerDown(PointerEventData eventData){ } // OnPointerUp 호출 가능하게 하려면 OnPointerDown이 필요함
+	public void OnPointerDown(PointerEventData eventData) => OnDrag(eventData);
 	public void OnPointerUp(PointerEventData pointerEventData) => MoveToInitialPosition();
 	public void OnPointerExit(PointerEventData pointerEventData) => MoveToInitialPosition();
 
@@ -97,5 +97,10 @@ public class WateringCan : MonoBehaviour,
 		_rectTransform.localPosition = _initialScreenLocalPosition;
 		_elapsedTileTime = 0.0f;
 		Using = false;
+	}
+
+	private void OnUsingStateChanged()
+	{
+		_image.sprite = _using ? WateringSprite : NormalSprite;
 	}
 }
