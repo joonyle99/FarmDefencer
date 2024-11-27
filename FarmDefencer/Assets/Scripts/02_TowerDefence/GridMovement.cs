@@ -5,7 +5,7 @@ public class GridMovement : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 1f;
 
-    public Vector2Int currentLookDir;
+    // public Vector2Int currentLookDir;
 
     private GridCell _targetGridCell;
     private int _pathIndex = 0;
@@ -46,7 +46,10 @@ public class GridMovement : MonoBehaviour
 
             if (_pathIndex >= GridMap.Instance.GridPath.Count)
             {
-                if (_isFirst == true) _isFirst = false;
+                if (_isFirst == true)
+                {
+                    _isFirst = false;
+                }
 
                 _rigidbody.linearVelocity = Vector2.zero;
                 _targetGridCell = null;
@@ -105,8 +108,9 @@ public class GridMovement : MonoBehaviour
         // currentLookDir = transform.right.ToVector2Int();
 
         transform.position = _targetGridCell.transform.position;
+        // _rigidbody.MovePosition(_targetGridCell.transform.position);
 
-        _monster.SetAnimation(_monster.walkAnimationName, true);
+        _monster.SetAnimation(_monster.WalkAnimationName, true);
 
         /*
         if (GridMap.Instance.GridPath.Count > 2)

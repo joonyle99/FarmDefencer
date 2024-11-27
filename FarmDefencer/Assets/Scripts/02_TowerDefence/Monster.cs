@@ -27,17 +27,19 @@ public sealed class Monster : TargetableBehavior, IProduct
     [Header("──────── Monster ────────")]
     [Space]
 
-    [SpineAnimation]
-    public string dissappearAnimationName;
+    // TODO: animation을 관리하는 클래스를 따로 만들기
 
     [SpineAnimation]
-    public string idleAnimationName;
+    public string IdleAnimationName;
 
     [SpineAnimation]
-    public string walkAnimationName;
+    public string WalkAnimationName;
 
     [SpineAnimation]
-    public string walkDamagedAnimationName;
+    public string WalkDamagedAnimationName;
+
+    [SpineAnimation]
+    public string DissappearAnimationName;
 
     private SkeletonAnimation _skeletonAnimation;
 

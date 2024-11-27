@@ -100,7 +100,6 @@ namespace Spine.Unity.Examples {
 				spineAnimationState.SetAnimation(0, idleTurnAnimationName, false);
 				spineAnimationState.AddAnimation(0, idleAnimationName, true, 0);
 				yield return new WaitForSeconds(0.5f);
-
 			}
 		}
 

@@ -1,8 +1,8 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(GridMap))]
-public class GridMapEditor : Editor
+[CustomEditor(typeof(TilemapCompressor))]
+public class TilemapCompressorEditor : Editor
 {
     public override void OnInspectorGUI()
     {
@@ -12,7 +12,7 @@ public class GridMapEditor : Editor
 
         if (GUILayout.Button("Compress Tilemap"))
         {
-            GridMap t = target as GridMap;
+            TilemapCompressor t = target as TilemapCompressor;
             t.CompressTilemap();
         }
     }

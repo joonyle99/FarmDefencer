@@ -24,14 +24,14 @@ public class Wave : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && _isTriggered == false)
         {
             _isTriggered = true;
-            StartCoroutine(ExcuteCoroutine());
+            StartCoroutine(ProcessRoutine());
         }
     }
 
-    private IEnumerator ExcuteCoroutine()
+    private IEnumerator ProcessRoutine()
     {
-        yield return GridMap.Instance.ExcuteCoroutine();
-        yield return SpawnCoroutine();
+        yield return GridMap.Instance.FindPathRoutine();
+        yield return SpawnMonsterRoutine();
     }
 
     protected void Spawn()
@@ -41,7 +41,7 @@ public class Wave : MonoBehaviour
 
         gridMovement.Initialize();
     }
-    private IEnumerator SpawnCoroutine()
+    private IEnumerator SpawnMonsterRoutine()
     {
         while (true)
         {

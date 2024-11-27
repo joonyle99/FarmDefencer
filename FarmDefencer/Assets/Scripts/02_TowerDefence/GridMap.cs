@@ -60,8 +60,8 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
         _height = _mapSize.y;
         _width = _mapSize.x;
 
-        _startCellPoint = new Vector2Int(1, 1);
-        _endCellPoint = new Vector2Int(_width - 2, _height - 2);
+        _startCellPoint = new Vector2Int(1, _height - 2);
+        _endCellPoint = new Vector2Int(_width - 2, 1);
 
         _gridMap = new GridCell[_height, _width];
 
@@ -102,13 +102,13 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
         */
     }
 
-    public IEnumerator ExcuteCoroutine()
+    public IEnumerator FindPathRoutine()
     {
         CalculateDistance(_startCellPoint);
 
         DebugDistanceMap();
 
-        yield return PingGridPathCoroutine();
+        yield return DebugPingGridPathRoutine();
     }
 
     // path
@@ -119,19 +119,19 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
         queue.Enqueue(startPoint);
 
         _gridMap[startPoint.y, startPoint.x].distanceCost = 0;
-        // _gridMap[startPoint.y, startPoint.x].prevGridCell = _gridMap[startPoint.y, startPoint.x];
 
         while (queue.Count > 0)
         {
             Vector2Int nowPos = queue.Dequeue();
 
+            // endPoint: excute trace
             if (nowPos == _endCellPoint)
             {
-                // 도착했으므로 어느 Cell에서 왔는지 경로를 추적한다
                 TracePath(_gridMap[nowPos.y, nowPos.x]);
                 return;
             }
 
+            // check 4 direction
             for (int i = 0; i < 4; i++)
             {
                 Vector2Int nextPos = new Vector2Int(nowPos.x + _dx[i], nowPos.y + _dy[i]);
@@ -187,13 +187,6 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
         return _gridMap[h, w];
     }
 
-    // editor
-    public void CompressTilemap()
-    {
-        _tilemap = GetComponent<Tilemap>();
-        _tilemap.CompressBounds();
-    }
-
     // debug
     private void DebugDistanceMap()
     {
@@ -208,7 +201,7 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
             }
         }
     }
-    private IEnumerator PingGridMapCoroutine()
+    private IEnumerator DebugPingGridMapRoutine()
     {
         for (int h = 0; h < _height; h++)
         {
@@ -222,7 +215,7 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
             }
         }
     }
-    private IEnumerator PingGridPathCoroutine()
+    private IEnumerator DebugPingGridPathRoutine()
     {
         var lineObject = Instantiate(debugLine, Vector3.zero, Quaternion.identity);
         lineObject.positionCount = 0;
@@ -234,8 +227,8 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
 
             var originScale = _gridPath[i].transform.localScale;
 
-            _gridPath[i].transform.localScale *= 1.7f;
-            yield return new WaitForSeconds(0.15f);
+            _gridPath[i].transform.localScale *= 1.5f;
+            yield return new WaitForSeconds(0.1f);
             _gridPath[i].transform.localScale = originScale;
         }
     }
