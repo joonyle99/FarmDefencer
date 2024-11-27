@@ -115,8 +115,7 @@ MonoBehaviour:
   _targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  _targetsInRange: []
-  range: 2
+  _currentTargets: []
 --- !u!1 &7323561679821610874
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +342,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 100
-  _targettingPoint: {fileID: 0}
   _detector: {fileID: 8030555983261524709}
   _cost: 100
   _head: {fileID: 4316090972008233062}

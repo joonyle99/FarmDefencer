@@ -60,6 +60,7 @@ public class GridMovement : MonoBehaviour
 
             _targetGridCell = GridMap.Instance.GridPath[_pathIndex];
 
+            /*
             // rotate
             var targetLookDir = (_targetGridCell.transform.position - transform.position).normalized.ToVector2Int();
             if (targetLookDir != currentLookDir)
@@ -69,6 +70,7 @@ public class GridMovement : MonoBehaviour
 
                 currentLookDir = targetLookDir;
             }
+            */
         }
     }
     private void FixedUpdate()
@@ -100,10 +102,13 @@ public class GridMovement : MonoBehaviour
         _targetGridCell = GridMap.Instance.GridPath[_pathIndex];
 
         // monster 이미지의 앞쪽은 right 방향이다
-        currentLookDir = transform.right.ToVector2Int();
+        // currentLookDir = transform.right.ToVector2Int();
 
         transform.position = _targetGridCell.transform.position;
 
+        _monster.SetAnimation(_monster.walkAnimationName, true);
+
+        /*
         if (GridMap.Instance.GridPath.Count > 2)
         {
             var firstTarget = GridMap.Instance.GridPath[0];
@@ -118,5 +123,6 @@ public class GridMovement : MonoBehaviour
                 currentLookDir = targetLookDir;
             }
         }
+        */
     }
 }

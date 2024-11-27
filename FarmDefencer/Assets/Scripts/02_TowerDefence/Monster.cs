@@ -1,3 +1,4 @@
+using Spine.Unity;
 using UnityEngine;
 
 /// <summary>
@@ -23,9 +24,35 @@ public sealed class Monster : TargetableBehavior, IProduct
     public GameObject GameObject => this.gameObject;
     public Transform Transform => this.transform;
 
-    //[Header("──────── Monster ────────")]
-    //[Space]
+    [Header("──────── Monster ────────")]
+    [Space]
 
+    [SpineAnimation]
+    public string dissappearAnimationName;
+
+    [SpineAnimation]
+    public string idleAnimationName;
+
+    [SpineAnimation]
+    public string walkAnimationName;
+
+    [SpineAnimation]
+    public string walkDamagedAnimationName;
+
+    private SkeletonAnimation _skeletonAnimation;
+
+    private Spine.AnimationState _spineAnimationState;
+    private Spine.Skeleton _skeleton;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _skeletonAnimation = GetComponent<SkeletonAnimation>();
+
+        _spineAnimationState = _skeletonAnimation.AnimationState;
+        _skeleton = _skeletonAnimation.Skeleton;
+    }
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -33,6 +60,12 @@ public sealed class Monster : TargetableBehavior, IProduct
         // Debug.Log("Monster OnEnable()");
 
         HP = StartHp;
+    }
+    protected override void Start()
+    {
+        base.Start();
+
+        // Debug.Log("Monster Start()");
     }
 
     public override void TakeDamage(float damage)
@@ -48,5 +81,10 @@ public sealed class Monster : TargetableBehavior, IProduct
     {
         // Debug.Log($"몬스터가 생존했습니다.");
         OriginFactory.ReturnProduct(this);
+    }
+
+    public void SetAnimation(string animationName, bool loop)
+    {
+        _spineAnimationState.SetAnimation(0, animationName, loop);
     }
 }
