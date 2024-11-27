@@ -221,7 +221,10 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	public virtual void OnFarmUpdate(float deltaTime)
 	{
 		Paused = deltaTime == 0.0f;
-		_cropLockedDisplay.OnFarmUpdate(deltaTime);
+		if (_cropLockedDisplay != null)
+		{
+			_cropLockedDisplay.OnFarmUpdate(deltaTime);
+		}
 
 		if (State == CropState.Locked)
 		{

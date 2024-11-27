@@ -100,7 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca9e737c56f45646961372504830840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FarmClock: {fileID: 0}
   ProductEntry: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
   _state: 0
   MatureAgeSeconds: 10
@@ -109,14 +108,14 @@ MonoBehaviour:
   _lockRemainingSeconds: 0
   _waterStored: 0
   _waterWaitingSeconds: 0
-  SeedSprite: {fileID: 2185865422229137852, guid: 1786c577db28cb846b67dc797950b9d2, type: 3}
+  SeedSprite: {fileID: -781136586, guid: 97ff298f729af494e8eba7dcfbb0e1cc, type: 3}
   Stage1BeforeWateringSprite: {fileID: -2360516894548652956, guid: a1b2baeede864f947881b8b68de28cd7, type: 3}
-  Stage1DeadSprite: {fileID: 5505145245838024403, guid: b80e3bc29c90f8549a65627bea3c3b77, type: 3}
-  Stage1AfterWateringSprite: {fileID: -2360516894548652956, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
+  Stage1DeadSprite: {fileID: 1975751226, guid: 97ff298f729af494e8eba7dcfbb0e1cc, type: 3}
+  Stage1AfterWateringSprite: {fileID: 90113414, guid: ec5665dfba6481444be5fb363e3eb97c, type: 3}
   Stage1GrowthSeconds: 5
   Stage2BeforeWateringSprite: {fileID: -4860010634957982478, guid: 6bbfa09fcf9c8334db0d22cbf2b11262, type: 3}
-  Stage2DeadSprite: {fileID: -2979842216640344933, guid: 7dab286119adb244588a26c27c53c3fd, type: 3}
-  Stage2AfterWateringSprite: {fileID: -4860010634957982478, guid: bcc3df56fd2c4c24f875245d208a3eb3, type: 3}
+  Stage2DeadSprite: {fileID: 1975751226, guid: 97ff298f729af494e8eba7dcfbb0e1cc, type: 3}
+  Stage2AfterWateringSprite: {fileID: 712042276, guid: ec5665dfba6481444be5fb363e3eb97c, type: 3}
   MatureSprite: {fileID: -5645142870935734174, guid: 8851ae7ae4197674292e215b5104ecfd, type: 3}
   LockedSprite: {fileID: 579628540815059721, guid: c663019061a422a4bbdc428297d78526, type: 3}
   NormalToDeadSeconds: 5

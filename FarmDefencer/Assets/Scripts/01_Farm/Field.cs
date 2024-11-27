@@ -12,7 +12,6 @@ public class Field : MonoBehaviour, IFarmUpdatable
     /// </summary>
     public Vector2Int FieldLocalPosition;
     public Vector2Int FieldSize;
-    public TileBase FlowedTile;
 
     /// <summary>
     /// 이 Field에 심길 Crop의 ProductEntry입니다.
@@ -75,6 +74,7 @@ public class Field : MonoBehaviour, IFarmUpdatable
 	public void Init(
         GameObject fieldLockedDisplayPrefab,
         GameObject cropLockedDisplayPrefab,
+        TileBase flowedTile,
         UnityAction<ProductEntry, Vector2Int, UnityAction<bool>> onTryItemifyAction)
 	{
         _fieldLockedDisplayObject = Instantiate(fieldLockedDisplayPrefab);
@@ -82,12 +82,23 @@ public class Field : MonoBehaviour, IFarmUpdatable
         _fieldLockedDisplayObject.transform.SetParent(transform, false);
         _fieldLockedDisplayObject.transform.localPosition = new Vector2(FieldSize.x / 2.0f, FieldSize.y / 2.0f);
 
-		foreach (var crop in _crops)
-		{
-            crop.Init(cropLockedDisplayPrefab, (afterItemifyCallback) => onTryItemifyAction(ProductEntry, crop.Position, afterItemifyCallback));
-		}
-
         IsAvailable = false;
+
+		for (int yOffset = 0; yOffset < FieldSize.y; yOffset++)
+		{
+			for (int xOffset = 0; xOffset < FieldSize.x; xOffset++)
+			{
+				_tilemap.SetTile(new Vector3Int(xOffset, yOffset), flowedTile);
+				var cropObjectPosition = new Vector3(transform.position.x + xOffset, transform.position.y + yOffset, transform.position.z - 1.0f);
+				var cropObject = Instantiate(CropPrefab);
+				var cropComponent = cropObject.GetComponent<Crop>();
+				cropObject.transform.parent = transform;
+				cropObject.transform.position = cropObjectPosition;
+
+				cropComponent.Init(cropLockedDisplayPrefab, (afterItemifyCallback) => onTryItemifyAction(ProductEntry, cropComponent.Position, afterItemifyCallback));
+				_crops.Add(cropComponent);
+			}
+		}
 	}
 
 	private void OnAvailabilityChanged()
@@ -117,21 +128,5 @@ public class Field : MonoBehaviour, IFarmUpdatable
         }
 
         _productEntry = CropPrefab.GetComponent<Crop>().ProductEntry;
-
-        for (int yOffset = 0; yOffset < FieldSize.y; yOffset++)
-        {
-            for (int xOffset = 0; xOffset < FieldSize.x; xOffset++)
-            {
-                _tilemap.SetTile(new Vector3Int(xOffset, yOffset), FlowedTile);
-
-                var cropObjectPosition = new Vector3(transform.position.x + xOffset, transform.position.y + yOffset, transform.position.z - 1.0f);
-                var cropObject = Instantiate(CropPrefab);
-                var cropComponent = cropObject.GetComponent<Crop>();
-                cropObject.transform.parent = transform;
-                cropObject.transform.position = cropObjectPosition;
-               
-                _crops.Add(cropComponent);
-            }
-        }
 	}
 }

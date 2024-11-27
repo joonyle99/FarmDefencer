@@ -21,8 +21,12 @@ public class FarmUI : MonoBehaviour
 		_wateringCan = GetComponentInChildren<WateringCan>();
 		_harvestInventory = GetComponentInChildren<HarvestInventory>();
 		_timerUI = GetComponentInChildren<TimerUI>();
-		_timerUI.SetClockhand(0.5f);
-		_coinsUI.UpdateCoinText(ResourceManager.Instance.Gold);
 		ResourceManager.Instance.OnGoldChanged += _coinsUI.UpdateCoinText;
+	}
+
+	private void Start()
+	{
+		_coinsUI.UpdateCoinText(ResourceManager.Instance.Gold);
+		_timerUI.SetClockhand(0.5f);
 	}
 }

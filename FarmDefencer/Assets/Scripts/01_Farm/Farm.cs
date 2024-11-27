@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Tilemaps;
 
 /// <summary>
 /// 밭과 작물들로 구성된 농장을 의미하는 클래스입니다.
@@ -26,6 +27,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 	public UnityEvent<ProductEntry, Vector2Int, UnityAction<bool>> OnTryItemify;
 	public GameObject FieldLockedDisplayPrefab;
 	public GameObject CropLockedDisplayPrefab;
+	public TileBase FlowedTile;
 
     private Dictionary<string, Field> _fields;
 
@@ -155,6 +157,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 			fieldComponent.Init(
 				FieldLockedDisplayPrefab,
 				CropLockedDisplayPrefab,
+				FlowedTile,
 				(productEntry, cropPosition, afterItemifyCallback) => OnTryItemify.Invoke(productEntry, cropPosition, afterItemifyCallback));
             _fields.Add(fieldComponent.ProductEntry.UniqueId, fieldComponent);
         }
