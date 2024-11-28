@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -28,6 +27,10 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>
 
     public event System.Action<int> OnGoldChanged;
 
+    private void Start()
+    {
+        EarnGold(349);
+    }
     private void Update()
     {
 #if UNITY_EDITOR
@@ -48,6 +51,7 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>
 #endif
     }
 
+    // gold
     public void EarnGold(int amount)
     {
         Gold += amount;

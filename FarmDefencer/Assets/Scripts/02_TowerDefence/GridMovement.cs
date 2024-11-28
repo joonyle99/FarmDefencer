@@ -34,6 +34,11 @@ public class GridMovement : MonoBehaviour
     }
     private void Update()
     {
+        if (_monster.IsDead == true)
+        {
+            return;
+        }
+
         if (_targetGridCell == null)
         {
             return;
@@ -56,7 +61,6 @@ public class GridMovement : MonoBehaviour
 
                 // arrived
                 _monster.Survive();
-                _monster.Kill();
 
                 return;
             }
@@ -78,6 +82,11 @@ public class GridMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (_monster.IsDead == true)
+        {
+            return;
+        }
+
         if (_targetGridCell == null)
         {
             return;

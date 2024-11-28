@@ -12,6 +12,6 @@ public abstract class TargetableBehavior : DamageableBehavior
 
     protected override void OnEnable()
     {
-        // Debug.Log("TargetableBehavior OnEnable()");
+        base.OnEnable();
     }
 }

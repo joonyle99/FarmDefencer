@@ -22,14 +22,13 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
 
     public int UnitCellSize => _cellSize.x;
 
-    [SerializeField] private TileBase _startTile;
-    private Vector2Int _startCellPoint;
-    public Vector2Int StartCellPoint => _startCellPoint;
+    public Vector2Int StartCellPoint { get; private set; }
     public Vector3 StartWorldPoint => CellToWorld(StartCellPoint.ToVector3Int());
-    [SerializeField] private TileBase _endTile;
-    private Vector2Int _endCellPoint;
-    public Vector2Int EndCellPoint => _endCellPoint;
+    public Vector2Int EndCellPoint { get; private set; }
     public Vector3 EndWorldPoint => CellToWorld(EndCellPoint.ToVector3Int());
+
+    public GameObject startPointObject;
+    public GameObject endPointObject;
 
     [Space]
 
@@ -60,13 +59,13 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
         _height = _mapSize.y;
         _width = _mapSize.x;
 
-        _startCellPoint = new Vector2Int(1, _height - 2);
-        _endCellPoint = new Vector2Int(_width - 2, 1);
+        StartCellPoint = new Vector2Int(1, _height - 2);
+        EndCellPoint = new Vector2Int(_width - 2, 1);
 
         _gridMap = new GridCell[_height, _width];
 
-        _tilemap.SetTile(_startCellPoint.ToVector3Int(), _startTile);
-        _tilemap.SetTile(_endCellPoint.ToVector3Int(), _endTile);
+        var startObj = Instantiate(startPointObject, StartWorldPoint, Quaternion.identity);
+        var endObj = Instantiate(endPointObject, EndWorldPoint, Quaternion.identity);
 
         for (int h = 0; h < _height; h++)
         {
@@ -81,7 +80,7 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
                 _gridMap[h, w].isUsable = true;
                 _gridMap[h, w].distanceCost = -1;
 
-                if (cellPos == _startCellPoint || cellPos == _endCellPoint)
+                if (cellPos == StartCellPoint || cellPos == EndCellPoint)
                 {
                     _gridMap[h, w].UnUsable();
                 }
@@ -104,7 +103,7 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
 
     public IEnumerator FindPathRoutine()
     {
-        CalculateDistance(_startCellPoint);
+        CalculateDistance(StartCellPoint);
 
         DebugDistanceMap();
 
@@ -125,7 +124,7 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
             Vector2Int nowPos = queue.Dequeue();
 
             // endPoint: excute trace
-            if (nowPos == _endCellPoint)
+            if (nowPos == EndCellPoint)
             {
                 TracePath(_gridMap[nowPos.y, nowPos.x]);
                 return;
@@ -138,7 +137,7 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
 
                 if (nextPos.x < 0 || nextPos.x >= _width || nextPos.y < 0 || nextPos.y >= _height) continue;
                 if (_gridMap[nextPos.y, nextPos.x].distanceCost != -1) continue;
-                if (_gridMap[nextPos.y, nextPos.x].isUsable == false && nextPos != _endCellPoint) continue;
+                if (_gridMap[nextPos.y, nextPos.x].isUsable == false && nextPos != EndCellPoint) continue;
 
                 queue.Enqueue(nextPos);
 
@@ -237,7 +236,7 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
     {
         if (w < 0 || w >= _width || h < 0 || h >= _height)
         {
-            Debug.LogWarning($"[{w}, {h}] is invalid index");
+            // Debug.LogWarning($"[{w}, {h}] is invalid index");
             return false;
         }
 

@@ -10,12 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3148617212130695460}
   - component: {fileID: 1380989034864402756}
-  - component: {fileID: 3481795329497583311}
   - component: {fileID: 7444625088565266660}
   - component: {fileID: 2493848825862227538}
-  - component: {fileID: 6744073714266680951}
+  - component: {fileID: 5264179474769179215}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: ProjectileTick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,9 +76,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1362917987
-  m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingLayerID: 214604371
+  m_SortingLayer: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: -7845517406566146729, guid: bc518cbab155d054f9903a8d65c8b61a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -91,42 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &3481795329497583311
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5744434242594404492}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.2
 --- !u!50 &7444625088565266660
 Rigidbody2D:
   serializedVersion: 5
@@ -166,8 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f653d01a080cf14180258e45f5b8362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 10
---- !u!114 &6744073714266680951
+  _damage: 5
+--- !u!114 &5264179474769179215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,7 +139,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5744434242594404492}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82f1c9576eca88547aac1a40b84b6c7a, type: 3}
+  m_Script: {fileID: 11500000, guid: f2aa5ca52c40842449570046a5a8ae5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _damager: {fileID: 2493848825862227538}

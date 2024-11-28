@@ -8,8 +8,11 @@ using UnityEngine;
 public class TargetDetector : MonoBehaviour
 {
     [SerializeField] private LayerMask _targetLayerMask;
-    private int _widthRange = 2;
-    private int _heightRange = 1;
+
+    [Space]
+
+    [SerializeField] private int _widthRange = 1;
+    [SerializeField] private int _heightRange = 1;
 
     [Space]
 
@@ -35,7 +38,7 @@ public class TargetDetector : MonoBehaviour
 
     private void Start()
     {
-        DebugDrawRange();
+        DebugPaintRange();
     }
     private void Update()
     {
@@ -106,6 +109,11 @@ public class TargetDetector : MonoBehaviour
                 {
                     if (targetCollider.TryGetComponent<TargetableBehavior>(out var target))
                     {
+                        if (target.IsDead == true)
+                        {
+                            continue;
+                        }
+
                         if (newDetectedTargets.Contains(target) == true)
                         {
                             continue;
@@ -147,7 +155,7 @@ public class TargetDetector : MonoBehaviour
     }
 
     // debug
-    private void DebugDrawRange()
+    private void DebugPaintRange()
     {
         var order = 0;
 
@@ -160,11 +168,6 @@ public class TargetDetector : MonoBehaviour
             for (int heightOffset = -_heightRange; heightOffset <= _heightRange; heightOffset++)
             {
                 var offset = new Vector3Int(widthOffset, heightOffset, 0);
-                if (offset == Vector3Int.zero)
-                {
-                    continue;
-                }
-
                 var targetCellPos = thisCellPos + offset;
 
                 var targetCell = GridMap.Instance.GetCell(targetCellPos.x, targetCellPos.y);
@@ -176,6 +179,32 @@ public class TargetDetector : MonoBehaviour
                 // debug
                 order++;
                 targetCell.DebugChangeColor(Color.blue);
+                // targetCell.textMeshPro.text = order.ToString();
+                // JoonyleGameDevKit.Painter.DebugDrawPlus(targetCell.transform.position, Color.red, GridMap.Instance.UnitCellSize / 2f, 5f);
+            }
+        }
+    }
+    public void DebugEraseRange()
+    {
+        // get targetDetector's cell
+        var thisCellPos = GridMap.Instance.WorldToCell(transform.position);
+
+        // calc rectangle range
+        for (int widthOffset = -_widthRange; widthOffset <= _widthRange; widthOffset++)
+        {
+            for (int heightOffset = -_heightRange; heightOffset <= _heightRange; heightOffset++)
+            {
+                var offset = new Vector3Int(widthOffset, heightOffset, 0);
+                var targetCellPos = thisCellPos + offset;
+
+                var targetCell = GridMap.Instance.GetCell(targetCellPos.x, targetCellPos.y);
+                if (targetCell == null)
+                {
+                    continue;
+                }
+
+                // debug
+                targetCell.DebugResetColor();
                 // targetCell.textMeshPro.text = order.ToString();
                 // JoonyleGameDevKit.Painter.DebugDrawPlus(targetCell.transform.position, Color.red, GridMap.Instance.UnitCellSize / 2f, 5f);
             }

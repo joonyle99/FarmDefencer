@@ -8,6 +8,10 @@ public abstract class DamageableBehavior : MonoBehaviour
     [Header("式式式式式式式式 DamageableBehavior 式式式式式式式式")]
     [Space]
 
+    [SerializeField] private FloatingHealthBar _healthBar;
+
+    [Space]
+
     [SerializeField] private int _hp = 100;
     public int HP
     {
@@ -21,8 +25,16 @@ public abstract class DamageableBehavior : MonoBehaviour
                 _hp = 0;
                 Kill();
             }
+
+            if (_healthBar != null)
+            {
+                _healthBar.UpdateHealthBar((float)_hp, (float)_startHp);
+            }
         }
     }
+
+    [SerializeField] private bool _isDead;
+    public bool IsDead { get { return _isDead; } protected set { _isDead = value; } }
 
     private int _startHp;
     public int StartHp => _startHp;
@@ -40,13 +52,17 @@ public abstract class DamageableBehavior : MonoBehaviour
     }
     protected virtual void OnEnable()
     {
-
+        IsDead = false;
+        HP = StartHp;
     }
     protected virtual void Start()
     {
-
+        if (_healthBar != null)
+        {
+            _healthBar.UpdateHealthBar((float)_hp, (float)_startHp);
+        }
     }
 
-    public abstract void TakeDamage(float damage);
+    public abstract void TakeDamage(int damage);
     public abstract void Kill();
 }

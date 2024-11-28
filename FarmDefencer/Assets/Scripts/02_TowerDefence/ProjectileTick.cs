@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class ProjectileTick : MonoBehaviour
 {
-    [Header("式式式式式式式式 Projectile 式式式式式式式式")]
+    [Header("式式式式式式式式 ProjectileTick 式式式式式式式式")]
     [Space]
 
     [SerializeField] private Damager _damager;
@@ -11,12 +11,6 @@ public class Projectile : MonoBehaviour
     private TargetableBehavior _currentTarget;
     private bool _isTriggered = false;
 
-    private Rigidbody2D _rigidbody;
-
-    private void Awake()
-    {
-        _rigidbody = GetComponent<Rigidbody2D>();
-    }
     private void Update()
     {
         if (_currentTarget == null || _currentTarget.gameObject.activeSelf == false)
@@ -24,15 +18,20 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-    }
-    private void FixedUpdate()
-    {
-        if (_isTriggered && _currentTarget != null)
+
+        if (Vector3.Distance(_currentTarget.transform.position, transform.position) < 0.1f)
+        {
+            _damager.HasDamaged(_currentTarget);
+            Destroy(gameObject);
+            return;
+        }
+
+        if (_isTriggered)
         {
             var diffVec = _currentTarget.transform.position - transform.position;
             var velocity = diffVec.normalized * _speed;
-
-            _rigidbody.linearVelocity = velocity;
+            
+            transform.position += velocity * Time.deltaTime;
         }
     }
 

@@ -1,5 +1,7 @@
 using JoonyleGameDevKit;
 using System.Collections;
+using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Wave : MonoBehaviour
@@ -15,9 +17,24 @@ public class Wave : MonoBehaviour
     [SerializeField] private RangeFloat _waitTimeRange;
     [SerializeField] private float _waitTime = 0f;
 
-    private float _elapsedTime = 0f;
+    [Space]
+
+    public List<Monster> _waveMonsters = new List<Monster>();
+
+    private int _totalSpawnCount = 0;
+    private int _targetSpawnCount = 10;
+
+    public int TotalSpawnCount => _totalSpawnCount;
+    public int TargetSpawnCount => _targetSpawnCount;
+
+    public event System.Action<int> OnTotalSpawnCountChanged;
+
+    public bool CompleteSpawn => _totalSpawnCount >= _targetSpawnCount;
+    public bool CompleteWave => _waveMonsters.Count <= 0;
 
     private bool _isTriggered = false;
+
+    private float _elapsedTime = 0f;
 
     private void Update()
     {
@@ -36,24 +53,79 @@ public class Wave : MonoBehaviour
 
     protected void Spawn()
     {
+        if (CompleteSpawn)
+        {
+            return;
+        }
+
         var monster = _factory.GetProduct<Monster>();
         var gridMovement = monster.GetComponent<GridMovement>();
 
         gridMovement.Initialize();
+
+        _totalSpawnCount++;
+        OnTotalSpawnCountChanged?.Invoke(_totalSpawnCount);
+
+        monster.OnKilled -= RemoveWaveMonster;
+        monster.OnKilled += RemoveWaveMonster;
+
+        monster.OnSurvived -= RemoveWaveMonster;
+        monster.OnSurvived += RemoveWaveMonster;
+
+        AddWaveMonster(monster);
     }
     private IEnumerator SpawnMonsterRoutine()
     {
         while (true)
         {
-            if (_elapsedTime >= _waitTime)
+            if (CompleteSpawn == true && CompleteWave == true)
             {
-                _elapsedTime = 0f;
-                _waitTime = _waitTimeRange.Random();
+                yield return new WaitForSeconds(1f);
 
-                Spawn();
+                CompleteProcess();
+
+                yield break;
             }
-            _elapsedTime += Time.deltaTime;
+
+            if (CompleteSpawn == false)
+            {
+                if (_elapsedTime >= _waitTime)
+                {
+                    _elapsedTime = 0f;
+                    _waitTime = _waitTimeRange.Random();
+
+                    Spawn();
+                }
+            }
+
             yield return null;
+
+            _elapsedTime += Time.deltaTime;
         }
+    }
+
+    private void CompleteProcess()
+    {
+        Debug.Log("Complete Process !!!");
+
+        if (TowerDefenceManager.Instance.SurvivedMonsters.Count > 0)
+        {
+            // failure
+            EndingUI.Instance.ShowFailure();
+        }
+        else
+        {
+            // success
+            EndingUI.Instance.ShowSuccess();
+        }
+    }
+
+    private void AddWaveMonster(Monster monster)
+    {
+        _waveMonsters.Add(monster);
+    }
+    private void RemoveWaveMonster(Monster monster)
+    {
+        _waveMonsters.Remove(monster);
     }
 }
