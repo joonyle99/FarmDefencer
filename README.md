@@ -21,7 +21,7 @@
 ### 팜디펜서 바로가기
 
 - [Notion](https://www.notion.so/114c46037fb98082bacffe20c5c968ec?pvs=4)
-- []()
+- [Google Drive](https://drive.google.com/drive/folders/1RRaXThVDcAXXcrrAxhS-TFrmYbZP9Dma)
 
 ### 프로그래밍 레퍼런스
 
