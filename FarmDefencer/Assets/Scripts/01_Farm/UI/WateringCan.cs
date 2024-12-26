@@ -2,13 +2,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Spine.Unity;
 
 /// <summary>
 /// 물뿌리개입니다.
 /// UI의 형태로 구현되며 스크린 좌표로 유저의 입력을 받고, 월드 좌표로 Farm 등과 상호작용합니다.
 /// 한 타일에 WateringTime 이상 머물면 OnWatering 이벤트를 발생시키는 동작을 합니다.
 /// </summary>
-[RequireComponent(typeof(Image))]
 public class WateringCan : MonoBehaviour,
 	IDragHandler,
 	IPointerDownHandler,
@@ -33,14 +33,18 @@ public class WateringCan : MonoBehaviour,
 			OnUsingStateChanged();
 		}
 	}
-	public Sprite WateringSprite;
-	public Sprite NormalSprite;
 
 	private Vector2Int _currentTilePosition;
 	private float _elapsedTileTime; // 현재 타일에 있었던 시간
 	private Vector2 _initialScreenLocalPosition; // 이 물뿌리개를 사용하지 않을 때 위치할 화면 위치. 에디터 상에서 놓은 위치를 기억해서 사용함.
 	private RectTransform _rectTransform;
-	private Image _image;
+
+	[SpineAnimation]
+	public string WateringAnimationName;
+
+	private SkeletonGraphic _skeletonGraphic;
+	private Spine.AnimationState _spineAnimationState;
+	private Spine.Skeleton _skeleton;
 
 	public void OnPointerDown(PointerEventData eventData) => OnDrag(eventData);
 	public void OnPointerUp(PointerEventData pointerEventData) => MoveToInitialPosition();
@@ -74,7 +78,12 @@ public class WateringCan : MonoBehaviour,
 		_elapsedTileTime = 0.0f;
 		_rectTransform = GetComponent<RectTransform>();
 		_initialScreenLocalPosition = _rectTransform.localPosition;
-		_image = GetComponent<Image>();
+
+		_skeletonGraphic = GetComponent<SkeletonGraphic>();
+		_spineAnimationState = _skeletonGraphic.AnimationState;
+		_skeleton = _skeletonGraphic.Skeleton;
+
+		_spineAnimationState.SetEmptyAnimation(0, 0.1f);
 	}
 
 	private void Update()
@@ -101,6 +110,13 @@ public class WateringCan : MonoBehaviour,
 
 	private void OnUsingStateChanged()
 	{
-		_image.sprite = _using ? WateringSprite : NormalSprite;
+		if (_using)
+		{
+			_spineAnimationState.SetAnimation(0, WateringAnimationName, true);
+		}
+		else
+		{
+			_spineAnimationState.SetEmptyAnimation(0, 0.1f);
+		}
 	}
 }
