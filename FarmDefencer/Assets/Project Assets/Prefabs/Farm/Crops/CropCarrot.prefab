@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -108,11 +108,11 @@ MonoBehaviour:
   _lockRemainingSeconds: 0
   _waterStored: 0
   _waterWaitingSeconds: 0
-  SeedSprite: {fileID: -781136586, guid: 97ff298f729af494e8eba7dcfbb0e1cc, type: 3}
-  JustPlantedSprite: {fileID: 1350929240, guid: 97ff298f729af494e8eba7dcfbb0e1cc, type: 3}
-  DeadSprite: {fileID: -371204585, guid: ec5665dfba6481444be5fb363e3eb97c, type: 3}
-  GrowingSprite: {fileID: -5700461357804067669, guid: 2a27166a82b733040b64b26bb55e4e22, type: 3}
-  BudSprite: {fileID: -5645142870935734174, guid: 8851ae7ae4197674292e215b5104ecfd, type: 3}
+  SeedSprite: {fileID: -8306299516934490982, guid: c3ccb1d274efe034da6d17be35db96d7, type: 3}
+  JustPlantedSprite: {fileID: 8283948540272183631, guid: 11632c471d1fca84c8c126f09c5ef9b7, type: 3}
+  DeadSprite: {fileID: -7666930650782403411, guid: 97bd691e5e83cf8468de7a61e766b685, type: 3}
+  GrowingSprite: {fileID: -619267247784436514, guid: 1a34d90d6f24288418f0af7e1075b2ef, type: 3}
+  BudSprite: {fileID: 3244099961016166343, guid: 25c7b0a9b33edaa4aa8e5d141b40f68a, type: 3}
   LockedSprite: {fileID: 0}
   PlantToDeadSeconds: 5
   DeadToSeedSeconds: 5
