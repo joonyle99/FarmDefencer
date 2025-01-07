@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.55, y: 0.55, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -115,5 +115,5 @@ MonoBehaviour:
   BudSprite: {fileID: -5645142870935734174, guid: 8851ae7ae4197674292e215b5104ecfd, type: 3}
   LockedSprite: {fileID: 579628540815059721, guid: c663019061a422a4bbdc428297d78526, type: 3}
   PlantToDeadSeconds: 5
-  DeadToSeedSeconds: 5
+  DeadToLockSeconds: 300
   HarvestHoldTime: 2
