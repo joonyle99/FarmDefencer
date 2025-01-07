@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4909483675425250203}
   - component: {fileID: 738135450724276457}
-  - component: {fileID: 3787861198745225257}
+  - component: {fileID: 2356357649264989550}
   m_Layer: 0
   m_Name: CropCabbage
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.55, y: 0.55, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3787861198745225257
+--- !u!114 &2356357649264989550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,23 +97,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 8248929270521535658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9236c928443994544812fc3f2d7a3227, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c6d0183579c92248a447db75320527f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ProductEntry: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
   _state: 0
-  MatureAgeSeconds: 5
+  MatureAgeSeconds: 20
   _growthAgeSeconds: 0
-  LockSeconds: 5
+  LockSeconds: 60
   _lockRemainingSeconds: 0
   _waterStored: 0
   _waterWaitingSeconds: 0
-  SeedSprite: {fileID: 2185865422229137852, guid: c62fbc13d000c3a44b365861596edcc7, type: 3}
-  JustPlantedSprite: {fileID: -2360516894548652956, guid: a1b2baeede864f947881b8b68de28cd7, type: 3}
-  DeadSprite: {fileID: 5505145245838024403, guid: b80e3bc29c90f8549a65627bea3c3b77, type: 3}
-  GrowingSprite: {fileID: -2360516894548652956, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
-  BudSprite: {fileID: -5645142870935734174, guid: 8851ae7ae4197674292e215b5104ecfd, type: 3}
-  LockedSprite: {fileID: 579628540815059721, guid: c663019061a422a4bbdc428297d78526, type: 3}
-  PlantToDeadSeconds: 5
-  DeadToSeedSeconds: 5
-  HarvestHoldTime: 2
+  SeedSprite: {fileID: 9108210110304135379, guid: cd476129295bf35488970a7ab9874eea, type: 3}
+  Stage1BeforeWateringSprite: {fileID: 7163337446934043649, guid: 6f02de391efcdae4880706b5a2033e89, type: 3}
+  Stage1DeadSprite: {fileID: -3669741882301279548, guid: 86ade9aa1594ba9458982bed2b6530bf, type: 3}
+  Stage1AfterWateringSprite: {fileID: -7431639975308168539, guid: d277a1c6601dc624a9b745c06f63ef08, type: 3}
+  Stage1GrowthSeconds: 10
+  Stage2BeforeWateringSprite: {fileID: -1378995463599233203, guid: 42aef13b974d23a4c8fa4fd1c02c1efc, type: 3}
+  Stage2DeadSprite: {fileID: 3681791427279955028, guid: ddbd4317a23ccf240b3343744e802223, type: 3}
+  Stage2AfterWateringSprite: {fileID: -5321431602895988416, guid: 9f3d671f3c2fa4440a438beae60cf7c8, type: 3}
+  MatureSprite: {fileID: -8333321270782159142, guid: 85c660a3bae86a84aac821d876a6b14b, type: 3}
+  LockedSprite: {fileID: 0}
+  NormalToDeadSeconds: 300
+  DeadToSeedSeconds: 300

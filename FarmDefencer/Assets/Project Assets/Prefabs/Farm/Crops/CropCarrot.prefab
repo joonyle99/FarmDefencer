@@ -102,9 +102,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProductEntry: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
   _state: 0
-  MatureAgeSeconds: 5
+  MatureAgeSeconds: 15
   _growthAgeSeconds: 0
-  LockSeconds: 5
+  LockSeconds: 60
   _lockRemainingSeconds: 0
   _waterStored: 0
   _waterWaitingSeconds: 0
@@ -114,5 +114,5 @@ MonoBehaviour:
   GrowingSprite: {fileID: -619267247784436514, guid: 1a34d90d6f24288418f0af7e1075b2ef, type: 3}
   BudSprite: {fileID: 3244099961016166343, guid: 25c7b0a9b33edaa4aa8e5d141b40f68a, type: 3}
   LockedSprite: {fileID: 0}
-  PlantToDeadSeconds: 5
-  DeadToSeedSeconds: 5
+  PlantToDeadSeconds: 300
+  DeadToLockSeconds: 300
