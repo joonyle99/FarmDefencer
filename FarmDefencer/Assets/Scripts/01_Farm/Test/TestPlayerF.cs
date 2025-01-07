@@ -18,13 +18,14 @@ namespace FarmTest
         private Farm _farmComponent;
 
 		private float _holdingTimeElapsed;
-		private bool _isPressing;
+        private bool _isSingleHolding;
+		private bool _isDoubleHolding;
         private TMP_Text _remainingDaytimeText;
 
 		// 위치 delta를 받음
         public void OnCameraMove(InputValue inputValue)
         {
-            if (_isPressing && !WateringCan.Using)
+            if (_isDoubleHolding && !WateringCan.Using)
             {
                 var scaledInputVector = inputValue.Get<Vector2>() * CameraMovementScale;
                 transform.position += (Vector3)scaledInputVector;
@@ -42,17 +43,22 @@ namespace FarmTest
             _farmComponent.WateringAction(position);
 		}
 
-		public void OnTap()
+		public void OnSingleTap()
 		{
 			_farmComponent.TapAction(Camera.ScreenToWorldPoint(MousePosition));
 		}
 
-        public void OnHold(InputValue inputValue)
+        public void OnSingleHold(InputValue inputValue)
         {
-            _isPressing = inputValue.Get<float>() == 1;
+			_isSingleHolding = inputValue.Get<float>() == 1;
         }
 
-        public void OnToggleAvailability()
+		public void OnDoubleHold(InputValue inputValue)
+		{
+			_isDoubleHolding = inputValue.Get<float>() == 1;
+		}
+
+		public void OnToggleAvailability()
         {
             var productUniqueId = transform.Find("Canvas/DebugFieldLockUnlock/ProductUniqueIdInputField").GetComponent<TMP_InputField>().text;
             var currentAvailability = FarmManager.GetAvailability(productUniqueId);
@@ -63,7 +69,7 @@ namespace FarmTest
 		{
             _remainingDaytimeText.text = $"Remaining Daytime: {FarmClock.RemainingDaytime:f2}s";
 
-			if (_isPressing)
+			if (_isSingleHolding)
             {
                 _holdingTimeElapsed += Time.deltaTime;
                 _farmComponent.HoldingAction(Camera.ScreenToWorldPoint(MousePosition), _holdingTimeElapsed);

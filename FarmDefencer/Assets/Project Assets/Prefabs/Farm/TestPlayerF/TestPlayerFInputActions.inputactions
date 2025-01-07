@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Tap",
+                    "name": "SingleTap",
                     "type": "Button",
                     "id": "ec52ef3c-a03e-428a-bb16-d0ec481e883c",
                     "expectedControlType": "",
@@ -33,12 +33,21 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Hold",
+                    "name": "SingleHold",
                     "type": "Value",
                     "id": "4319d5e5-4895-4e3a-90d9-09ed7e710c85",
                     "expectedControlType": "Digital",
                     "processors": "",
                     "interactions": "Press(behavior=2)",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "DoubleHold",
+                    "type": "Value",
+                    "id": "54c9e419-7fab-46c8-b2b9-978683f823a0",
+                    "expectedControlType": "Digital",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": true
                 }
             ],
@@ -171,7 +180,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";PC(Debug)",
-                    "action": "Tap",
+                    "action": "SingleTap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -181,8 +190,19 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Hold",
+                    "groups": ";PC(Debug)",
+                    "action": "SingleHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "94382cc1-73e1-4d6c-b107-f7948d78ecfc",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";PC(Debug)",
+                    "action": "DoubleHold",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
