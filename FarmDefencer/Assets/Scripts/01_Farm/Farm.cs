@@ -30,6 +30,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 	public TileBase FlowedTile;
 
     private Dictionary<string, Field> _fields;
+	private bool _isFarmPaused;
 
 	/// <summary>
 	/// 해당 월드 좌표의 Crop을 검색합니다.
@@ -55,6 +56,11 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 
 	public void TapAction(Vector2 position)
     {
+		if (_isFarmPaused)
+		{
+			return;
+		}
+
         foreach (var (_, field) in _fields)
         {
 			if (!field.IsAvailable)
@@ -63,22 +69,28 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 			}
 			if (field.TryFindCropAt(position, out var crop))
 			{
-                crop.OnTap();
+                crop.OnSingleTap();
 			}
 		}
     }
 
-    public void HoldingAction(Vector2 position, float holdTime)
+    public void SingleHoldingAction(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float holdTime)
     {
+		if (_isFarmPaused)
+		{
+			return;
+		}
+
+
 		foreach (var (_, field) in _fields)
 		{
 			if (!field.IsAvailable)
 			{
 				continue;
 			}
-			if (field.TryFindCropAt(position, out var crop))
+			if (field.TryFindCropAt(initialPosition, out var crop))
 			{
-                crop.OnHolding(holdTime);
+                crop.OnSingleHolding(deltaPosition, isEnd, holdTime);
 			}
 		}
 	}
@@ -100,6 +112,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 
 	public void OnFarmUpdate(float deltaTime)
     {
+		_isFarmPaused = deltaTime == 0.0f;
         foreach (var (_, field) in _fields)
         {
 			if (!field.IsAvailable)

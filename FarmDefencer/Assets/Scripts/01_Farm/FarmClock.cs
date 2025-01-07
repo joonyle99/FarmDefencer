@@ -31,13 +31,19 @@ public class FarmClock : MonoBehaviour
 		}
 	}
 
+
+	/// <summary>
+	/// 낮 시간이 종료되어 시간이 멈췄거나, 아직 낮 시간이 남았어도 IsManuallyPaused가 true로 설정되어 일시정지 상태가 되었음을 의미합니다.
+	/// </summary>
+	public bool IsPaused { get; private set; }
+
 	/// <summary>
 	/// 이번에 설정된 낮의 총 길이입니다.
 	/// </summary>
 	public float LengthOfDaytime { get; private set; }
 
 	/// <summary>
-	/// 유저의 일시정지 요청을 의미하는 변수입니다.
+	/// 유저의 일시정지 요청 여부 의미하는 변수입니다.
 	/// 이 값이 true면 RemainingDaytime > 0.0f여도 멈춥니다. 
 	/// 이미 RemainingDaytime이 0.0f라면 아무 효과도 없습니다.
 	/// </summary>
@@ -54,7 +60,8 @@ public class FarmClock : MonoBehaviour
 	public void RegisterFarmUpdatableObject(IFarmUpdatable farmUpdatable) => _farmUpdatable = farmUpdatable;
 	private void Update()
 	{
-		var deltaTime = IsManuallyPaused || RemainingDaytime == 0.0f ? 0.0f : Time.deltaTime;
+		IsPaused = IsManuallyPaused || RemainingDaytime == 0.0f;
+		var deltaTime = IsPaused ? 0.0f : Time.deltaTime;
 		RemainingDaytime -= deltaTime;
 		_farmUpdatable?.OnFarmUpdate(deltaTime);
     }
