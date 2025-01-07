@@ -14,13 +14,8 @@ public class CropCarrot : Crop
 	public float DeadToLockSeconds = 300.0f;
 	private SpriteRenderer _spriteRenderer;
 
-	public override void OnTap()
+	public override void OnSingleTap()
 	{
-		if (Paused)
-		{
-			return;
-		}
-
 		if (State == CropState.Seed)
 		{
 			State = CropState.Planted;
@@ -40,11 +35,6 @@ public class CropCarrot : Crop
 
 	public override void OnWatering()
 	{
-		if (Paused)
-		{
-			return;
-		}
-
 		if (State != CropState.Planted)
 		{
 			return;

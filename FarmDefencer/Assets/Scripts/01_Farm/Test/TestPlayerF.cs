@@ -17,9 +17,10 @@ namespace FarmTest
 		public FarmManager FarmManager;
         private Farm _farmComponent;
 
-		private float _holdingTimeElapsed;
+		private float _singleHoldingTimeElapsed;
         private bool _isSingleHolding;
 		private bool _isDoubleHolding;
+        private Vector2 _singleHoldBeginPosition;
         private TMP_Text _remainingDaytimeText;
 
 		// 위치 delta를 받음
@@ -50,8 +51,15 @@ namespace FarmTest
 
         public void OnSingleHold(InputValue inputValue)
         {
-			_isSingleHolding = inputValue.Get<float>() == 1;
-        }
+            var currentHold = inputValue.Get<float>() == 1;
+
+			if (!_isSingleHolding && currentHold)
+            {
+				_singleHoldBeginPosition = MousePosition;
+			}
+
+            _isSingleHolding = currentHold;
+		}
 
 		public void OnDoubleHold(InputValue inputValue)
 		{
@@ -69,15 +77,26 @@ namespace FarmTest
 		{
             _remainingDaytimeText.text = $"Remaining Daytime: {FarmClock.RemainingDaytime:f2}s";
 
-			if (_isSingleHolding)
+            if (_isSingleHolding)
             {
-                _holdingTimeElapsed += Time.deltaTime;
-                _farmComponent.HoldingAction(Camera.ScreenToWorldPoint(MousePosition), _holdingTimeElapsed);
+                _singleHoldingTimeElapsed += Time.deltaTime;
+
+				_farmComponent.SingleHoldingAction(
+					Camera.ScreenToWorldPoint(_singleHoldBeginPosition),
+					MousePosition - _singleHoldBeginPosition,
+					false,
+					Time.deltaTime);
+                
             }
-            else
+            else if (_singleHoldingTimeElapsed > 0.0f) // Single Hold가 종료된 직후
             {
-                _holdingTimeElapsed = 0.0f;
-            }
+				_farmComponent.SingleHoldingAction(
+					Camera.ScreenToWorldPoint(_singleHoldBeginPosition),
+	                MousePosition - _singleHoldBeginPosition,
+	                true,
+					Time.deltaTime);
+                _singleHoldingTimeElapsed = 0.0f;
+			}
 		}
 
 		private void Awake()

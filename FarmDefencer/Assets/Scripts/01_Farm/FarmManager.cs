@@ -38,13 +38,24 @@ public class FarmManager : MonoBehaviour
 		SetAvailability("product_carrot", true);
 		SetAvailability("product_potato", true);
 		SetAvailability("product_corn", true);
-		SetAvailability("product_cabbage", false);
-		SetAvailability("product_cucumber", false);
-		SetAvailability("product_eggplant", false);
-		SetAvailability("product_sweetpotato", false);
-		SetAvailability("product_mushroom", false);
+		SetAvailability("product_cabbage", true);
+		SetAvailability("product_cucumber", true);
+		SetAvailability("product_eggplant", true);
+		SetAvailability("product_sweetpotato", true);
+		SetAvailability("product_mushroom", true);
 
-		FarmUI.HarvestInventory.SetTodaysOrder(new System.Collections.Generic.List<(string, int)>{ ("product_carrot", 5), ("product_potato", 5), ("product_corn", 5) });
+		FarmUI.HarvestInventory.SetTodaysOrder(
+			new System.Collections.Generic.List<(string, int)>
+			{
+				("product_carrot", 5),
+				("product_potato", 5), 
+				("product_corn", 5), 
+				("product_cabbage", 5), 
+				("product_cucumber", 5), 
+				("product_eggplant", 5), 
+				("product_sweetpotato", 5), 
+				("product_mushroom", 5),
+			});
 	}
 
 	private void Update()

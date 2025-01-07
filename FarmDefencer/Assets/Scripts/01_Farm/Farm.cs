@@ -61,7 +61,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 			return;
 		}
 
-        foreach (var (_, field) in _fields)
+		foreach (var (_, field) in _fields)
         {
 			if (!field.IsAvailable)
 			{
@@ -74,14 +74,12 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 		}
     }
 
-    public void SingleHoldingAction(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float holdTime)
+    public void SingleHoldingAction(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
     {
 		if (_isFarmPaused)
 		{
 			return;
 		}
-
-
 		foreach (var (_, field) in _fields)
 		{
 			if (!field.IsAvailable)
@@ -90,7 +88,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 			}
 			if (field.TryFindCropAt(initialPosition, out var crop))
 			{
-                crop.OnSingleHolding(deltaPosition, isEnd, holdTime);
+				crop.OnSingleHolding(deltaPosition, isEnd, deltaHoldTime);
 			}
 		}
 	}

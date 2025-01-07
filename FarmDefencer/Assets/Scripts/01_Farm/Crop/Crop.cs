@@ -149,13 +149,15 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	/// <summary>
 	/// 이 작물이 짧게 터치되었을 때의 동작을 정의합니다.
 	/// </summary>
-	public virtual void OnTap() {}
+	public virtual void OnSingleTap() {}
 
 	/// <summary>
-	/// 이 작물을 길게 누르고 있을 때의 동작을 정의합니다.
+	/// 이 작물에 대한 Single Holding 동작을 정의합니다.
 	/// </summary>
+	/// <param name="deltaPosition">첫 홀드 위치와 현재 홀드 위치의 차이입니다.</param>
+	/// <param name="isEnd">홀드가 종료되어 마지막 액션인 경우 true입니다.</param>
 	/// <param name="holdTime"></param>
-	public virtual void OnHolding(float holdTime) {}
+	public virtual void OnSingleHolding(Vector2 deltaPosition, bool isEnd, float deltaHoldTime) {}
 	
 	/// <summary>
 	/// 이 작물에 물뿌리개의 물 주기 판정이 가해졌을 때의 동작을 정의합니다.

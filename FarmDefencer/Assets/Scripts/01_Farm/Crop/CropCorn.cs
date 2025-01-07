@@ -20,13 +20,8 @@ public class CropCorn : Crop
 	public float DeadToSeedSeconds = 300.0f;
 	private SpriteRenderer _spriteRenderer;
 
-	public override void OnTap()
+	public override void OnSingleTap()
 	{
-		if (Paused)
-		{
-			return;
-		}
-
 		if (State == CropState.Seed)
 		{
 			State = CropState.Planted;
@@ -46,11 +41,6 @@ public class CropCorn : Crop
 
 	public override void OnWatering()
 	{
-		if (Paused)
-		{
-			return;
-		}
-
 		if (State == CropState.Planted 
 			&& WaterWaitingSeconds < NormalToDeadSeconds + DeadToSeedSeconds
 			&& WaterStored == 0.0f)
