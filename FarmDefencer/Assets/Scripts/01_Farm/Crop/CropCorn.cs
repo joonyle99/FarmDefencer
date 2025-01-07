@@ -15,6 +15,7 @@ public class CropCorn : Crop
 	[Space]
 	public Sprite MatureSprite;
 	public Sprite LockedSprite;
+	public Sprite HarvestedSprite;
 	[Space]
 	public float NormalToDeadSeconds = 300.0f;
 	public float DeadToSeedSeconds = 300.0f;
@@ -112,7 +113,7 @@ public class CropCorn : Crop
 		}
 		else if (State == CropState.Harvested)
 		{
-			_spriteRenderer.sprite = ProductEntry.ProductSprite;
+			_spriteRenderer.sprite = HarvestedSprite;
 		}
 		else if (State == CropState.Locked)
 		{

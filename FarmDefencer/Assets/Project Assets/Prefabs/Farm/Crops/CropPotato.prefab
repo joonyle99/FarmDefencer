@@ -114,6 +114,7 @@ MonoBehaviour:
   GrowingSprite: {fileID: -5780425549681805702, guid: ae7b9277c5bcd6743bc66ac166462c6d, type: 3}
   BudSprite: {fileID: 339328559792071645, guid: 3ec4f7c2ee05dcb468a84448f60f079a, type: 3}
   LockedSprite: {fileID: 579628540815059721, guid: c663019061a422a4bbdc428297d78526, type: 3}
+  HarvestedSprite: {fileID: -1894063774890498872, guid: 36fb9fb347a5bb54dbe0e071fd302b02, type: 3}
   PlantToDeadSeconds: 300
   DeadToLockSeconds: 300
   HarvestHoldTime: 2

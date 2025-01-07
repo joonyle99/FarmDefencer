@@ -118,5 +118,8 @@ MonoBehaviour:
   Stage2AfterWateringSprite: {fileID: -5321431602895988416, guid: 9f3d671f3c2fa4440a438beae60cf7c8, type: 3}
   MatureSprite: {fileID: -8333321270782159142, guid: 85c660a3bae86a84aac821d876a6b14b, type: 3}
   LockedSprite: {fileID: 0}
+  HarvestedSprite: {fileID: -8333321270782159142, guid: 85c660a3bae86a84aac821d876a6b14b, type: 3}
   NormalToDeadSeconds: 300
   DeadToSeedSeconds: 300
+  DeltaShakeCriterion: 100
+  ShakeCountCriterion: 4

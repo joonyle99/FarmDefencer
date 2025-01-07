@@ -9,6 +9,7 @@ public class CropCarrot : Crop
 	public Sprite GrowingSprite;
 	public Sprite BudSprite;
 	public Sprite LockedSprite;
+	public Sprite HarvestedSprite;
 	[Space]
 	public float PlantToDeadSeconds = 300.0f;
 	public float DeadToLockSeconds = 300.0f;
@@ -87,7 +88,7 @@ public class CropCarrot : Crop
 		}
 		else if (State == CropState.Harvested)
 		{
-			_spriteRenderer.sprite = ProductEntry.ProductSprite;
+			_spriteRenderer.sprite = HarvestedSprite;
 		}
 		else // Locked
 		{
