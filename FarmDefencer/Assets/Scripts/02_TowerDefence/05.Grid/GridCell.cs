@@ -140,7 +140,7 @@ public class GridCell : MonoBehaviour
 
     public void Occupy()
     {
-        _occupiedTower = BuildSupervisor.Instance.InstantiateTower(transform.position, Quaternion.identity);
+        _occupiedTower = DefenceContext.Current.BuildSystem.InstantiateTower(transform.position, Quaternion.identity);
         _occupiedTower.OccupyingGridCell(this);
 
         if (_occupiedTower != null)

@@ -4,9 +4,9 @@ using UnityEngine;
 /// 타워 디펜스에서 타워의 건설을 관리합니다.
 /// </summary>
 /// <remarks>
-/// <see cref="ManagerClassGuideline"/>
+/// 
 /// </remarks>
-public class BuildSupervisor : JoonyleGameDevKit.Singleton<BuildSupervisor>
+public class TowerBuildSystem : MonoBehaviour
 {
     [SerializeField] private Tower[] _towerPrefabs;
 

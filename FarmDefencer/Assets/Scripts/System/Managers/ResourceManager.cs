@@ -4,7 +4,7 @@ using UnityEngine;
 /// 게임에서 전역적으로 사용되는 리소스를 관리합니다.
 /// </summary>
 /// <remarks>
-/// <see cref="ManagerClassGuideline"/>
+/// 
 /// </remarks>
 public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>
 {

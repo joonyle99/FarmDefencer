@@ -49,7 +49,7 @@ public class GridMovement : MonoBehaviour
         {
             _pathIndex++;
 
-            if (_pathIndex >= GridMap.Instance.GridPath.Count)
+            if (_pathIndex >= DefenceContext.Current.GridMap.GridPath.Count)
             {
                 if (_isFirst == true)
                 {
@@ -65,7 +65,7 @@ public class GridMovement : MonoBehaviour
                 return;
             }
 
-            _targetGridCell = GridMap.Instance.GridPath[_pathIndex];
+            _targetGridCell = DefenceContext.Current.GridMap.GridPath[_pathIndex];
 
             /*
             // rotate
@@ -94,7 +94,7 @@ public class GridMovement : MonoBehaviour
 
         // move
         var dirVec = (_targetGridCell.transform.position - transform.position).normalized;
-        _rigidbody.linearVelocity = dirVec * GridMap.Instance.UnitCellSize * _moveSpeed;
+        _rigidbody.linearVelocity = dirVec * DefenceContext.Current.GridMap.UnitCellSize * _moveSpeed;
 
 #if UNITY_EDITOR
         eTime += Time.deltaTime;
@@ -111,7 +111,7 @@ public class GridMovement : MonoBehaviour
     public void Initialize()
     {
         _pathIndex = 0;
-        _targetGridCell = GridMap.Instance.GridPath[_pathIndex];
+        _targetGridCell = DefenceContext.Current.GridMap.GridPath[_pathIndex];
 
         // monster 이미지의 앞쪽은 right 방향이다
         // currentLookDir = transform.right.ToVector2Int();
@@ -122,10 +122,10 @@ public class GridMovement : MonoBehaviour
         _monster.SetAnimation(_monster.WalkAnimationName, true);
 
         /*
-        if (GridMap.Instance.GridPath.Count > 2)
+        if (DefenceContext.Current.GridMap.GridPath.Count > 2)
         {
-            var firstTarget = GridMap.Instance.GridPath[0];
-            var secondTarget = GridMap.Instance.GridPath[1];
+            var firstTarget = DefenceContext.Current.GridMap.GridPath[0];
+            var secondTarget = DefenceContext.Current.GridMap.GridPath[1];
 
             var targetLookDir = (secondTarget.transform.position - firstTarget.transform.position).normalized.ToVector2Int();
             if (targetLookDir != currentLookDir)

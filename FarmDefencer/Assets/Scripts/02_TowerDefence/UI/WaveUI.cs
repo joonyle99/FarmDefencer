@@ -21,7 +21,7 @@ public class WaveUI : MonoBehaviour
         // init all text
         SetTargetSpawnCountText(_waveSystem.TargetSpawnCount);
         SetTotalSpawnCountText(_waveSystem.TotalSpawnCount);
-        SetSurvivedCountText(TowerDefenceManager.Instance.SurvivedCount);
+        SetSurvivedCountText(_waveSystem.SurvivedCount);
 
         // subscribe event: target spawn count
         _waveSystem.OnTargetSpawnCountChanged -= SetTargetSpawnCountText;
@@ -31,14 +31,9 @@ public class WaveUI : MonoBehaviour
         _waveSystem.OnTotalSpawnCountChanged -= SetTotalSpawnCountText;
         _waveSystem.OnTotalSpawnCountChanged += SetTotalSpawnCountText;
 
-        if (TowerDefenceManager.Instance == null)
-        {
-            return;
-        }
-
         // subscribe event: survived count
-        TowerDefenceManager.Instance.OnSurvivedCountChanged -= SetSurvivedCountText;
-        TowerDefenceManager.Instance.OnSurvivedCountChanged += SetSurvivedCountText;
+        _waveSystem.OnSurvivedCountChanged -= SetSurvivedCountText;
+        _waveSystem.OnSurvivedCountChanged += SetSurvivedCountText;
     }
     private void OnDisable()
     {
@@ -53,13 +48,8 @@ public class WaveUI : MonoBehaviour
         // unsubscribe event: total spawn count
         _waveSystem.OnTotalSpawnCountChanged -= SetTotalSpawnCountText;
 
-        if (TowerDefenceManager.Instance == null)
-        {
-            return;
-        }
-
         // unsubscribe event: survived count
-        TowerDefenceManager.Instance.OnSurvivedCountChanged -= SetSurvivedCountText;
+        _waveSystem.OnSurvivedCountChanged -= SetSurvivedCountText;
     }
 
     public void SetTargetSpawnCountText(int count)

@@ -8,31 +8,35 @@ using UnityEngine.Tilemaps;
 /// GridMap의 각 Cell은 이동할 수 있는 땅인지의 정보를 가지며,
 /// 타워 건설, 몬스터의 이동 경로 설정 등에 사용된다.
 /// </summary>
-public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
+public class GridMap : MonoBehaviour
 {
     [Header("──────── GridMap ────────")]
     [Space]
 
     private Tilemap _tilemap;
+
     private Vector2Int _cellSize;
+    public int UnitCellSize => _cellSize.x;
+
     private Vector2Int _mapSize;
     private Vector2Int _origin;
+
     private int _height;
     private int _width;
-
-    public int UnitCellSize => _cellSize.x;
 
     public Vector2Int StartCellPoint { get; private set; }
     public Vector3 StartWorldPoint => CellToWorld(StartCellPoint.ToVector3Int());
     public Vector2Int EndCellPoint { get; private set; }
     public Vector3 EndWorldPoint => CellToWorld(EndCellPoint.ToVector3Int());
 
-    public GameObject startPointObject;
-    public GameObject endPointObject;
+    // temp for debug
+    public GameObject debugStartPointObject;
+    public GameObject debugEndPointObject;
+    public LineRenderer debugLine;
 
     [Space]
 
-    [SerializeField] private GridCell _gridCell;
+    [SerializeField] private GridCell _gridCellPrefab;
     [SerializeField] private List<GridCell> _gridPath;
     public List<GridCell> GridPath => _gridPath;
 
@@ -41,12 +45,8 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
     private int[] _dx = new int[4] { -1, 0, 1, 0 };
     private int[] _dy = new int[4] { 0, 1, 0, -1 };
 
-    public LineRenderer debugLine;
-
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
-
         _tilemap = GetComponent<Tilemap>();
     }
 
@@ -64,8 +64,8 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
 
         _gridMap = new GridCell[_height, _width];
 
-        var startObj = Instantiate(startPointObject, StartWorldPoint, Quaternion.identity);
-        var endObj = Instantiate(endPointObject, EndWorldPoint, Quaternion.identity);
+        var startObj = Instantiate(debugStartPointObject, StartWorldPoint, Quaternion.identity);
+        var endObj = Instantiate(debugEndPointObject, EndWorldPoint, Quaternion.identity);
 
         for (int h = 0; h < _height; h++)
         {
@@ -74,7 +74,7 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
                 var cellPos = new Vector2Int(w, h);
                 var worldPos = _tilemap.GetCellCenterWorld(cellPos.ToVector3Int());
 
-                _gridMap[h, w] = Instantiate(_gridCell, worldPos, Quaternion.identity, transform);
+                _gridMap[h, w] = Instantiate(_gridCellPrefab, worldPos, Quaternion.identity, transform);
 
                 _gridMap[h, w].cellPosition = cellPos;
                 _gridMap[h, w].isUsable = true;
@@ -86,19 +86,6 @@ public class GridMap : JoonyleGameDevKit.Singleton<GridMap> // temp singleton
                 }
             }
         }
-    }
-    private void Update()
-    {
-        /*
-        if (Input.GetMouseButtonDown(0) == true)
-        {
-            var mousePos = Input.mousePosition;
-            var worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-            var cellPos = _tilemap.WorldToCell(worldPos);
-
-            Debug.Log($"x: {cellPos.x}, y: {cellPos.y}");
-        }
-        */
     }
 
     public IEnumerator FindPathRoutine()

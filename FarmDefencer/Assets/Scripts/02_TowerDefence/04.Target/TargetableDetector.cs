@@ -77,7 +77,7 @@ public class TargetableDetector : MonoBehaviour
     private void DetectTargets()
     {
         // get origin cell
-        var thisCellPos = GridMap.Instance.WorldToCell(transform.position);
+        var thisCellPos = DefenceContext.Current.GridMap.WorldToCell(transform.position);
 
         // new targets
         var newDetectedTargets = new HashSet<TargetableBehavior>(BUCKET_CAPACITY);
@@ -95,14 +95,14 @@ public class TargetableDetector : MonoBehaviour
 
                 var targetCellPos = thisCellPos + offset;
 
-                var targetCell = GridMap.Instance.GetCell(targetCellPos.x, targetCellPos.y);
+                var targetCell = DefenceContext.Current.GridMap.GetCell(targetCellPos.x, targetCellPos.y);
                 if (targetCell == null)
                 {
                     continue;
                 }
 
                 // overlap circle
-                var targetColliders = Physics2D.OverlapCircleAll(targetCell.transform.position, GridMap.Instance.UnitCellSize / 2f, _targetLayerMask);
+                var targetColliders = Physics2D.OverlapCircleAll(targetCell.transform.position, DefenceContext.Current.GridMap.UnitCellSize / 2f, _targetLayerMask);
 
                 // detected targets
                 foreach (var targetCollider in targetColliders)
@@ -160,7 +160,7 @@ public class TargetableDetector : MonoBehaviour
         var order = 0;
 
         // get targetDetector's cell
-        var thisCellPos = GridMap.Instance.WorldToCell(transform.position);
+        var thisCellPos = DefenceContext.Current.GridMap.WorldToCell(transform.position);
 
         // calc rectangle range
         for (int widthOffset = -_widthRange; widthOffset <= _widthRange; widthOffset++)
@@ -170,7 +170,7 @@ public class TargetableDetector : MonoBehaviour
                 var offset = new Vector3Int(widthOffset, heightOffset, 0);
                 var targetCellPos = thisCellPos + offset;
 
-                var targetCell = GridMap.Instance.GetCell(targetCellPos.x, targetCellPos.y);
+                var targetCell = DefenceContext.Current.GridMap.GetCell(targetCellPos.x, targetCellPos.y);
                 if (targetCell == null)
                 {
                     continue;
@@ -180,14 +180,14 @@ public class TargetableDetector : MonoBehaviour
                 order++;
                 targetCell.DebugChangeColor(Color.blue);
                 // targetCell.textMeshPro.text = order.ToString();
-                // JoonyleGameDevKit.Painter.DebugDrawPlus(targetCell.transform.position, Color.red, GridMap.Instance.UnitCellSize / 2f, 5f);
+                // JoonyleGameDevKit.Painter.DebugDrawPlus(targetCell.transform.position, Color.red, DefenceContext.Current.GridMap.UnitCellSize / 2f, 5f);
             }
         }
     }
     public void DebugEraseRange()
     {
         // get targetDetector's cell
-        var thisCellPos = GridMap.Instance.WorldToCell(transform.position);
+        var thisCellPos = DefenceContext.Current.GridMap.WorldToCell(transform.position);
 
         // calc rectangle range
         for (int widthOffset = -_widthRange; widthOffset <= _widthRange; widthOffset++)
@@ -197,7 +197,7 @@ public class TargetableDetector : MonoBehaviour
                 var offset = new Vector3Int(widthOffset, heightOffset, 0);
                 var targetCellPos = thisCellPos + offset;
 
-                var targetCell = GridMap.Instance.GetCell(targetCellPos.x, targetCellPos.y);
+                var targetCell = DefenceContext.Current.GridMap.GetCell(targetCellPos.x, targetCellPos.y);
                 if (targetCell == null)
                 {
                     continue;
@@ -206,7 +206,7 @@ public class TargetableDetector : MonoBehaviour
                 // debug
                 targetCell.DebugResetColor();
                 // targetCell.textMeshPro.text = order.ToString();
-                // JoonyleGameDevKit.Painter.DebugDrawPlus(targetCell.transform.position, Color.red, GridMap.Instance.UnitCellSize / 2f, 5f);
+                // JoonyleGameDevKit.Painter.DebugDrawPlus(targetCell.transform.position, Color.red, DefenceContext.Current.GridMap.UnitCellSize / 2f, 5f);
             }
         }
     }

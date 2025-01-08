@@ -220,7 +220,7 @@ public sealed class Monster : TargetableBehavior, IProduct
 
         OnSurvived?.Invoke(this);
 
-        TowerDefenceManager.Instance.AddSurvivedMonster(_monsterName);
+        DefenceContext.Current.WaveSystem.AddSurvivedMonster(_monsterName);
 
         OriginFactory.ReturnProduct(this);
     }

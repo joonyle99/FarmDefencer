@@ -1,10 +1,26 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class EndingUI : JoonyleGameDevKit.Singleton<EndingUI>
+public class EndingUI : MonoBehaviour
 {
-    public GameObject success;
-    public GameObject failure;
+    [SerializeField] private Image _successImage;
+    [SerializeField] private Image _failureImage;
 
+    private void OnEnable()
+    {
+        DefenceContext.Current.WaveSystem.OnSuccess -= ShowSuccess;
+        DefenceContext.Current.WaveSystem.OnSuccess += ShowSuccess;
+
+        DefenceContext.Current.WaveSystem.OnFailure -= ShowFailure;
+        DefenceContext.Current.WaveSystem.OnFailure += ShowFailure;
+    }
+    private void OnDisable()
+    {
+        DefenceContext.Current.WaveSystem.OnSuccess -= ShowSuccess;
+        DefenceContext.Current.WaveSystem.OnFailure -= ShowFailure;
+    }
+
+#if UNITY_EDITOR
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && Input.GetKey(KeyCode.LeftShift))
@@ -18,21 +34,22 @@ public class EndingUI : JoonyleGameDevKit.Singleton<EndingUI>
             ShowFailure();
         }
     }
+#endif
 
     public void ShowSuccess()
     {
-        success.SetActive(true);
+        _successImage.gameObject.SetActive(true);
     }
     public void HideSuccess()
     {
-        success.SetActive(false);
+        _successImage.gameObject.SetActive(false);
     }
     public void ShowFailure()
     {
-        failure.SetActive(true);
+        _failureImage.gameObject.SetActive(true);
     }
     public void HideFailure()
     {
-        failure.SetActive(false);
+        _failureImage.gameObject.SetActive(false);
     }
 }

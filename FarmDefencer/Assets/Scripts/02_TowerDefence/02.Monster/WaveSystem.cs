@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class WaveSystem : MonoBehaviour
 {
-    [Header("收收收收收收收收 WaveSystem 收收收收收收收收")]
+    [Header("收收收收收收收收 Wave System 收收收收收收收收")]
     [Space]
 
     [SerializeField] private Factory _factory;              // wave system use factory for spawn spawnedMonster
@@ -15,10 +15,6 @@ public class WaveSystem : MonoBehaviour
 
     [SerializeField] private RangeFloat _waitTimeRange;
     [SerializeField] private float _waitTime = 0f;
-
-    [Space]
-
-    private List<Monster> _aliveMonsters = new List<Monster>();
 
     // target spawn count
     private int _targetSpawnCount = 10;
@@ -31,7 +27,6 @@ public class WaveSystem : MonoBehaviour
             OnTargetSpawnCountChanged?.Invoke(_targetSpawnCount);
         }
     }
-    public event System.Action<int> OnTargetSpawnCountChanged;
 
     // total spawn count
     private int _totalSpawnCount = 0;
@@ -44,32 +39,49 @@ public class WaveSystem : MonoBehaviour
             OnTotalSpawnCountChanged?.Invoke(_totalSpawnCount);
         }
     }
-    public event System.Action<int> OnTotalSpawnCountChanged;
 
-    // condition property
+    [Space]
+
+    private List<Monster> _fieldMonsters = new List<Monster>();
+    private List<string> _survivedMonsters = new List<string>();
+
+    public int FieldCount => _fieldMonsters.Count;
+    public int SurvivedCount => _survivedMonsters.Count;
+
     public bool CompleteSpawn => _totalSpawnCount >= TargetSpawnCount;      // all monsters are spawnedMonster
-    public bool CompleteWave => _aliveMonsters.Count <= 0;                  // all monsters are killed or survived
+    public bool CompleteWave => _fieldMonsters.Count <= 0;                  // all monsters are killed or survived
 
-    // 
+    public event System.Action<int> OnTargetSpawnCountChanged;
+    public event System.Action<int> OnTotalSpawnCountChanged;
+    public event System.Action<int> OnSurvivedCountChanged;
+
+    public event System.Action OnSuccess;
+    public event System.Action OnFailure;
+
     private bool _isTriggered = false;
     private float _elapsedTime = 0f;
 
     private void Update()
     {
-        // CHEAT: trigger wave system
+        // CHEAT: trigger wave
         if (Input.GetKeyDown(KeyCode.Space) && _isTriggered == false)
         {
             _isTriggered = true;
             StartCoroutine(WaveProcessRoutine());
         }
+
+        // CHEAT: fast clock
+        if (Input.GetMouseButton(0))
+        {
+            Time.timeScale = 3f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
     }
 
-    private IEnumerator WaveProcessRoutine()
-    {
-        yield return GridMap.Instance.FindPathRoutine();
-        yield return SpawnMonsterRoutine();
-    }
-
+    // wave process
     protected void Spawn()
     {
         if (CompleteSpawn)
@@ -90,7 +102,7 @@ public class WaveSystem : MonoBehaviour
 
         AddMonster(spawnedMonster);
     }
-    private IEnumerator SpawnMonsterRoutine()
+    private IEnumerator SpawnRoutine()
     {
         while (true)
         {
@@ -122,31 +134,48 @@ public class WaveSystem : MonoBehaviour
             _elapsedTime += Time.deltaTime;
         }
     }
+    private IEnumerator WaveProcessRoutine()
+    {
+        yield return DefenceContext.Current.GridMap.FindPathRoutine();
+        yield return SpawnRoutine();
+    }
 
+    //
     private void CompleteWaveProcess()
     {
         Debug.Log("Complete Wave Process !!!");
 
-        if (TowerDefenceManager.Instance.SurvivedCount > 0)
+        if (SurvivedCount == 0)
         {
-            // failure
-            EndingUI.Instance.ShowFailure();
+            OnSuccess?.Invoke();
         }
         else
         {
-            // success
-            EndingUI.Instance.ShowSuccess();
+            OnFailure?.Invoke();
         }
     }
 
+    // alive monsters
     private void AddMonster(Monster monster)
     {
-        _aliveMonsters.Add(monster);
+        _fieldMonsters.Add(monster);
 
         TotalSpawnCount++;
     }
     private void RemoveMonster(Monster monster)
     {
-        _aliveMonsters.Remove(monster);
+        _fieldMonsters.Remove(monster);
+    }
+
+    // survive monsters
+    public void AddSurvivedMonster(string monsterName)
+    {
+        _survivedMonsters.Add(monsterName);
+        OnSurvivedCountChanged?.Invoke(_survivedMonsters.Count);
+    }
+    public void RemoveSurvivedMonster(string monsterName)
+    {
+        _survivedMonsters.Remove(monsterName);
+        OnSurvivedCountChanged?.Invoke(_survivedMonsters.Count);
     }
 }
