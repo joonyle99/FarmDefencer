@@ -4491,15 +4491,15 @@ RectTransform:
   m_GameObject: {fileID: 2095539713}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 257351986}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 318, y: 220}
-  m_SizeDelta: {x: 594.76, y: 587.7313}
+  m_AnchoredPosition: {x: 322, y: 145.5}
+  m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2095539716
 CanvasRenderer:
@@ -4521,7 +4521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f6eef7e4bfacc408f0aeb259f79ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WateringTime: 1
+  WateringAnimationTimePoint: 0.5
   OnWatering:
     m_PersistentCalls:
       m_Calls:
@@ -4538,6 +4538,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   Camera: {fileID: 2048119097}
+  IdleAnimationName: idle
   WateringAnimationName: water
 --- !u!23 &2095539720
 MeshRenderer:
@@ -4562,7 +4563,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e234c3d84cebec844b299b913dcca1b8, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4612,12 +4613,12 @@ MonoBehaviour:
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
-  startingAnimation: 
+  startingAnimation: idle
   startingLoop: 0
   timeScale: 1
   freeze: 0
   layoutScaleMode: 0
-  referenceSize: {x: 594.76, y: 587.7313}
+  referenceSize: {x: 256, y: 256}
   pivotOffset: {x: -0.00061035156, y: -0.00024414062}
   referenceScale: 1
   layoutScale: 1

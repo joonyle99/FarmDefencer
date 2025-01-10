@@ -31,6 +31,7 @@ public class FarmManager : MonoBehaviour
 				var isItemified = FarmUI.HarvestInventory.TryBeginGather(productEntry, cropScreenPosition);
 				afterItemifyCallback(isItemified);
 			});
+		FarmUI.Init(FarmClock);
 	}
 
 	private void Start()

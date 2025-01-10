@@ -14,6 +14,11 @@ public class FarmUI : MonoBehaviour
 	public TimerUI TimerUI => _timerUI;
 	private TimerUI _timerUI;
 
+	public void Init(FarmClock farmClock)
+	{
+		_wateringCan.Init(farmClock);
+	}
+
 	private void Awake()
 	{
 		_coinsUI = GetComponentInChildren<CoinsUI>();
