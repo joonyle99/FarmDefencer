@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4909483675425250203}
   - component: {fileID: 738135450724276457}
-  - component: {fileID: 3787861198745225257}
+  - component: {fileID: -5765896772372299146}
   m_Layer: 0
   m_Name: CropCucumber
   m_TagString: Untagged
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3787861198745225257
+--- !u!114 &-5765896772372299146
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,23 +97,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 8248929270521535658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9236c928443994544812fc3f2d7a3227, type: 3}
+  m_Script: {fileID: 11500000, guid: b3a5ac7e8331df24cad19bb58a6f035a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ProductEntry: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
   _state: 0
-  MatureAgeSeconds: 5
+  MatureAgeSeconds: 30
   _growthAgeSeconds: 0
-  LockSeconds: 5
+  LockSeconds: 60
   _lockRemainingSeconds: 0
   _waterStored: 0
   _waterWaitingSeconds: 0
-  SeedSprite: {fileID: 2185865422229137852, guid: c62fbc13d000c3a44b365861596edcc7, type: 3}
-  JustPlantedSprite: {fileID: -2360516894548652956, guid: a1b2baeede864f947881b8b68de28cd7, type: 3}
-  DeadSprite: {fileID: 5505145245838024403, guid: b80e3bc29c90f8549a65627bea3c3b77, type: 3}
-  GrowingSprite: {fileID: -2360516894548652956, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
-  BudSprite: {fileID: -5645142870935734174, guid: 8851ae7ae4197674292e215b5104ecfd, type: 3}
-  LockedSprite: {fileID: 579628540815059721, guid: c663019061a422a4bbdc428297d78526, type: 3}
-  PlantToDeadSeconds: 5
-  DeadToLockSeconds: 300
-  HarvestHoldTime: 2
+  SeedSprite: {fileID: 7391129042975708553, guid: c82d61165378e1a438c001959b7ff831, type: 3}
+  Stage1BeforeWateringSprite: {fileID: 5169970296904740854, guid: 5e0bc8dcf004adf4e91d2f143cd1cc2a, type: 3}
+  Stage1DeadSprite: {fileID: -5765044233073359201, guid: c5456887a0fb6f149a99069d9e0dda34, type: 3}
+  Stage1AfterWateringSprite: {fileID: 2504396362891868477, guid: 1bb3676a4aa8fd64f8689fb5397b5116, type: 3}
+  Stage1GrowthSeconds: 15
+  BeforeShortTrellisSprite: {fileID: -1508817800329217220, guid: 0cbecd0e76baa3c42bae143cde2ad909, type: 3}
+  Stage2BeforeWateringSprite: {fileID: 968733346534869322, guid: 31ced9c90e3c55647a427102dbcde65a, type: 3}
+  Stage2DeadSprite: {fileID: -2444987322731586363, guid: 229c5e2d53c40914f8da197bd42c8b2b, type: 3}
+  Stage2AfterWateringSprite: {fileID: -4925550858667894425, guid: 73eade3f7c0c876409d2a6f1038d324b, type: 3}
+  BeforeLongTrellisSprite: {fileID: 4803123001326369256, guid: c1aa0056b6e31c54896d251b77c93880, type: 3}
+  MatureSprite: {fileID: 9115947542645699073, guid: 29d6e4a9c757e894090de830727b7392, type: 3}
+  LockedSprite: {fileID: 0}
+  HarvestedSprite: {fileID: -6340913843653661622, guid: 1f04500956bbe954093c562a6f7269da, type: 3}
+  NormalToDeadSeconds: 5
+  DeadToSeedSeconds: 5

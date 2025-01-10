@@ -8,9 +8,9 @@ using UnityEngine.Events;
 /// <b>구체적인 설명:</b> 이 클래스는 OnGrow()가 true를 반환하고, CropState가 Growing이며, WaterStored > 0.0f인 상황이라면 MatureAgeSeconds까지 GrowthAgeSeconds를 증가시키는 동작을 합니다. <br/><br/>
 /// 상속하는 클래스는 다음을 구현해야 할 것입니다: <br/>
 /// <list type="bullet">물을 제외한 성장 조건이 있을 경우 OnGrow()를 오버라이드</list>
-/// <list type="bullet">Update()에서 작물의 시각적 표현을 상태에 따라 업데이트</list>
+/// <list type="bullet">OnFarmUpdate()에서 작물의 시각적 표현을 상태에 따라 업데이트</list>
 /// <list type="bullet">작물이 죽을 조건이라면 State를 Seed로 조작(Crop은 작물의 State를 변경시키지 않음)</list>
-/// <list type="bullet">OnTap(), OnHoldAndUp()을 오버라이드해 작물 심기, 수확 등의 동작 정의</list>
+/// <list type="bullet">OnSingleTap(), OnSingleHolding() 등의 액션을 오버라이드해 작물 심기, 수확 등의 동작 정의</list>
 /// </summary>
 public abstract class Crop : MonoBehaviour, IFarmUpdatable
 {
@@ -220,6 +220,11 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	protected virtual void Awake() {}
 	protected virtual void Start() {}
 	
+	/// <summary>
+	/// State, WaterStored, OnGrow()의 값에 따라 GrowthAgeSeconds, WaterStored, WaterWaitingSeconds 값을 변경시키는 작업을 하는 메소드입니다.
+	/// <br/><br/>반드시 파생 클래스의 해당 메소드 구현부에서는 base.OnFarmUpdate()를 가장 먼저 호출하도록 오버라이드하세요.
+	/// </summary>
+	/// <param name="deltaTime"></param>
 	public virtual void OnFarmUpdate(float deltaTime)
 	{
 		Paused = deltaTime == 0.0f;
