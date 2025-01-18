@@ -1,7 +1,8 @@
-using UnityEngine; 
+using UnityEngine;
 
-public class CropCucumber : Crop
+public class CropEggplant : Crop
 {
+	public float DoubleTapCriterion = 0.5f;
 	public Sprite SeedSprite;
 	[Space]
 	public Sprite Stage1BeforeWateringSprite;
@@ -9,22 +10,24 @@ public class CropCucumber : Crop
 	public Sprite Stage1AfterWateringSprite;
 	public float Stage1GrowthSeconds = 30.0f;
 	[Space]
-	public Sprite BeforeShortTrellisSprite;
+	public Sprite BeforeTrellisSprite;
 	public Sprite Stage2BeforeWateringSprite;
 	public Sprite Stage2DeadSprite;
 	public Sprite Stage2AfterWateringSprite;
 	[Space]
-	public Sprite BeforeLongTrellisSprite;
+	public Sprite MatureFullLeavesSprite;
+	public Sprite MatureHalfLeafSprite;
 	public Sprite MatureSprite;
 	public Sprite LockedSprite;
 	public Sprite HarvestedSprite;
 	[Space]
 	public float NormalToDeadSeconds = 300.0f;
 	public float DeadToSeedSeconds = 300.0f;
-	private SpriteRenderer _spriteRenderer;
 
-	private bool _shortTrellisPlaced;
-	private bool _longTrellisPlaced;
+	private SpriteRenderer _spriteRenderer;
+	private bool _trellisPlaced;
+	private int _leavesRemaining;
+	private float _lastSingleTapTime;
 
 	public override void OnWatering()
 	{
@@ -38,28 +41,35 @@ public class CropCucumber : Crop
 
 	public override void OnSingleTap()
 	{
+		var currentTime = Time.time;
+		if (_lastSingleTapTime + DoubleTapCriterion > currentTime)
+		{
+			if (GrowthAgeSeconds >= MatureAgeSeconds && _leavesRemaining > 0)
+			{
+				_leavesRemaining -= 1;
+				_lastSingleTapTime = currentTime - DoubleTapCriterion; // 연속 입력 판정 방지
+				return; // 액션 소모
+			}
+		}
+		_lastSingleTapTime = currentTime;
+		
 		if (State == CropState.Seed)
 		{
 			State = CropState.Planted;
 		}
 		else if (State == CropState.Planted)
 		{
-			if (!_shortTrellisPlaced && !_longTrellisPlaced
-				&& GrowthAgeSeconds >= Stage1GrowthSeconds)
+			if (GrowthAgeSeconds >= Stage1GrowthSeconds
+				&& !_trellisPlaced)
 			{
-				_shortTrellisPlaced = true;
+				_trellisPlaced = true;
 			}
-			else if (_shortTrellisPlaced && !_longTrellisPlaced
-				&& GrowthAgeSeconds >= MatureAgeSeconds)
-			{
-				_longTrellisPlaced = true;
-			}
-			if (IsHarvestable)
+			if (IsHarvestable && _leavesRemaining == 0)
 			{
 				State = CropState.Harvested;
 			}
 		}
-		else if (State == CropState.Harvested && _shortTrellisPlaced && _longTrellisPlaced)
+		else if (State == CropState.Harvested)
 		{
 			Itemify();
 		}
@@ -67,7 +77,7 @@ public class CropCucumber : Crop
 
 	protected override bool OnGrow(float deltaTime)
 	{
-		if (GrowthAgeSeconds >= Stage1GrowthSeconds && !_shortTrellisPlaced) // 짧은 지지대 설치 이전에는 죽지 않음 일단
+		if (GrowthAgeSeconds >= Stage1GrowthSeconds && !_trellisPlaced) // 지지대 설치 이전에는 죽지 않음 일단
 		{
 			return false;
 		}
@@ -81,28 +91,37 @@ public class CropCucumber : Crop
 
 		if (State == CropState.Seed)
 		{
-			_shortTrellisPlaced = false;
-			_longTrellisPlaced = false;
+			_trellisPlaced = false;
 			_spriteRenderer.sprite = SeedSprite;
+			_leavesRemaining = 2;
 		}
 		else if (State == CropState.Planted)
 		{
 			if (GrowthAgeSeconds >= MatureAgeSeconds) // 모두 성장한 단계
 			{
-				if (!_longTrellisPlaced) // 긴 지지대 설치 이전 상태
+				if (_leavesRemaining == 2)
 				{
-					_spriteRenderer.sprite = BeforeLongTrellisSprite;
+					_spriteRenderer.sprite = MatureFullLeavesSprite;
 				}
-				else
+				else if (_leavesRemaining == 1)
+				{
+					_spriteRenderer.sprite = MatureHalfLeafSprite;
+				}
+				else if (_leavesRemaining == 0)
 				{
 					_spriteRenderer.sprite = MatureSprite;
+				}
+				else // 에러!
+				{
+					Debug.LogWarning($"잘못된 잎 개수: {_leavesRemaining}");
+					_leavesRemaining = 2;
 				}
 			}
 			else if (GrowthAgeSeconds >= Stage1GrowthSeconds) // 성장 2단계
 			{
-				if (!_shortTrellisPlaced) // 짧은 지지대 설치 이전 상태
+				if (!_trellisPlaced) // 짧은 지지대 설치 이전 상태
 				{
-					_spriteRenderer.sprite = BeforeShortTrellisSprite;
+					_spriteRenderer.sprite = BeforeTrellisSprite;
 				}
 				else if (WaterStored == 0.0f) // 물 안준 상태
 				{
