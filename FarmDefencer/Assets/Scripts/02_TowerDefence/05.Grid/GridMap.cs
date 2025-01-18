@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 /// <summary>
 /// GridMap의 각 Cell은 이동할 수 있는 땅인지의 정보를 가지며,
-/// 타워 건설, 몬스터의 이동 경로 설정 등에 사용된다.
+/// 타워 건설, 몬스터의 이동경로 설정 등에 사용된다.
 /// </summary>
 public class GridMap : MonoBehaviour
 {
@@ -48,10 +48,7 @@ public class GridMap : MonoBehaviour
     private void Awake()
     {
         _tilemap = GetComponent<Tilemap>();
-    }
 
-    private void Start()
-    {
         _cellSize = _tilemap.cellSize.ToVector2Int();
         _mapSize = _tilemap.size.ToVector2Int();
         _origin = _tilemap.origin.ToVector2Int();
@@ -63,7 +60,15 @@ public class GridMap : MonoBehaviour
         EndCellPoint = new Vector2Int(_width - 2, 1);
 
         _gridMap = new GridCell[_height, _width];
+    }
 
+    private void Start()
+    {
+        CreateGridMap();
+    }
+
+    private void CreateGridMap()
+    {
         var startObj = Instantiate(debugStartPointObject, StartWorldPoint, Quaternion.identity);
         var endObj = Instantiate(debugEndPointObject, EndWorldPoint, Quaternion.identity);
 

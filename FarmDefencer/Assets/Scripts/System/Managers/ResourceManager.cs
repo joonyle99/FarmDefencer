@@ -1,11 +1,8 @@
 using UnityEngine;
 
 /// <summary>
-/// 게임에서 전역적으로 사용되는 리소스를 관리합니다.
+/// 게임에서 사용되는 자원(Gold, ...) 관리합니다.
 /// </summary>
-/// <remarks>
-/// 
-/// </remarks>
 public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>
 {
     private int _gold;

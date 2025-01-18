@@ -19,7 +19,39 @@ public class DefenceContext : SceneContext
     }
 
     // defence reference
-    public GridMap GridMap { get; private set; }
-    public WaveSystem WaveSystem { get; private set; }
-    public TowerBuildSystem BuildSystem { get; private set; }
+    public GridMap GridMap;
+    public WaveSystem WaveSystem;
+    public TowerBuildSystem TowerBuildSystem;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        GridMap = FindFirstObjectByType<GridMap>();
+        WaveSystem = FindFirstObjectByType<WaveSystem>();
+        TowerBuildSystem = FindFirstObjectByType<TowerBuildSystem>();
+
+        if (GridMap != null && WaveSystem != null && TowerBuildSystem != null)
+        {
+            string log = "";
+
+            log += "DefenceContext is ready.\n";
+            log += $"============================\n";
+            log += $"{nameof(GridMap)} is ready.\n";
+            log += $"{nameof(WaveSystem)} is ready.\n";
+            log += $"{nameof(TowerBuildSystem)} is ready.\n";
+
+            Debug.Log(log);
+        }
+        else
+        {
+            Debug.LogError("DefenceContext is not ready.");
+        }
+    }
+    protected override void Start()
+    {
+        base.Start();
+
+        GameStateManager.Instance.ChangeState(GameState.Build);
+    }
 }
