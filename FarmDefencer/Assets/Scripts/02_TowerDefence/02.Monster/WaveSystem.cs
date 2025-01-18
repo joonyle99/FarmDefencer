@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 몬스터의 웨이브를 관리하는 시스템
+/// </summary>
 public class WaveSystem : MonoBehaviour
 {
     [Header("━━━━━━━━ Wave System ━━━━━━━━")]
@@ -71,11 +74,11 @@ public class WaveSystem : MonoBehaviour
         }
 
         // CHEAT: fast clock
-        if (Input.GetMouseButton(0))
+        if (Input.GetKey(KeyCode.BackQuote))
         {
             Time.timeScale = 3f;
         }
-        else
+        else if (Input.GetKeyUp(KeyCode.BackQuote))
         {
             Time.timeScale = 1f;
         }
