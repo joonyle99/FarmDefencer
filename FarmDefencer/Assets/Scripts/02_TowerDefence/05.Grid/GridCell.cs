@@ -74,6 +74,12 @@ public class GridCell : MonoBehaviour
             return;
         }
 
+        // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½Ç¼ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½
+        if (GameStateManager.Instance.CurrentState != GameState.Build)
+        {
+            return;
+        }
+
         if (_occupiedTower != null)
         {
             // °­È­ UI´Â ¾îµð¿¡ ¶ç¿ö¾ß ÇÏ´Â°¡..?

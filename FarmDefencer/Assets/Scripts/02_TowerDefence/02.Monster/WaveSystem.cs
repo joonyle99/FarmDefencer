@@ -136,6 +136,8 @@ public class WaveSystem : MonoBehaviour
     }
     private IEnumerator WaveProcessRoutine()
     {
+        GameStateManager.Instance.ChangeState(GameState.Wave);
+
         yield return DefenceContext.Current.GridMap.FindPathRoutine();
         yield return SpawnRoutine();
     }
@@ -143,7 +145,7 @@ public class WaveSystem : MonoBehaviour
     //
     private void CompleteWaveProcess()
     {
-        Debug.Log("Complete Wave Process !!!");
+        GameStateManager.Instance.ChangeState(GameState.End);
 
         if (SurvivedCount == 0)
         {
