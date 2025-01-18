@@ -85,8 +85,6 @@ public class CropCucumber : Crop
 		return true;
 	}
 
-	public override bool IsDead() => State == CropState.Planted && WaterWaitingSeconds >= NormalToDeadSeconds;
-	public override bool IsGrowing() => State == CropState.Planted && !IsDead();
 	public override void OnFarmUpdate(float deltaTime)
 	{
 		base.OnFarmUpdate(deltaTime);

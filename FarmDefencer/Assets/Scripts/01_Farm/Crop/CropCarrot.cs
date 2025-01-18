@@ -42,12 +42,9 @@ public class CropCarrot : Crop
 		}
 		if (WaterWaitingSeconds < PlantToDeadSeconds + DeadToLockSeconds && WaterStored == 0.0f)
 		{
-			WaterStored += MatureAgeSeconds * 1.1f; // µü ¸Â¾Æ¶³¾îÁö°Ô ÇÏ¸é 99%¿¡¼­ ¹° ´Ù½Ã ´Þ¶ó°í ÇÒ ¼ö ÀÖÀ½
+			WaterStored += MatureAgeSeconds * 1.1f; // ë”± ë§žì•„ë–¨ì–´ì§€ê²Œ í•˜ë©´ 99%ì—ì„œ ë¬¼ ë‹¤ì‹œ ë‹¬ë¼ê³  í•  ìˆ˜ ìžˆìŒ
 		}
 	}
-
-	public override bool IsDead() => State == CropState.Planted && WaterWaitingSeconds >= PlantToDeadSeconds;
-	public override bool IsGrowing() => State == CropState.Planted && !IsDead();
 
 
 	public override void OnFarmUpdate(float deltaTime)

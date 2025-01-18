@@ -50,8 +50,6 @@ public class CropCorn : Crop
 		}
 	}
 
-	public override bool IsDead() => State == CropState.Planted && WaterWaitingSeconds >= NormalToDeadSeconds;
-	public override bool IsGrowing() => State == CropState.Planted && !IsDead();
 	public override void OnFarmUpdate(float deltaTime)
 	{
 		base.OnFarmUpdate(deltaTime);
@@ -62,13 +60,13 @@ public class CropCorn : Crop
 		}
 		else if (State == CropState.Planted)
 		{
-			if (GrowthAgeSeconds >= MatureAgeSeconds) // ¸ğµÎ ¼ºÀåÇÑ ´Ü°è
+			if (GrowthAgeSeconds >= MatureAgeSeconds) // ëª¨ë‘ ì„±ì¥í•œ ë‹¨ê³„
 			{
 				_spriteRenderer.sprite = MatureSprite;
 			}
-			else if (GrowthAgeSeconds >= Stage1GrowthSeconds) // ¼ºÀå 2´Ü°è
+			else if (GrowthAgeSeconds >= Stage1GrowthSeconds) // ì„±ì¥ 2ë‹¨ê³„
 			{
-				if (WaterStored == 0.0f) // ¹° ¾ÈÁØ »óÅÂ
+				if (WaterStored == 0.0f) // ë¬¼ ì•ˆì¤€ ìƒíƒœ
 				{
 					if (WaterWaitingSeconds >= NormalToDeadSeconds + DeadToSeedSeconds)
 					{
@@ -83,14 +81,14 @@ public class CropCorn : Crop
 						_spriteRenderer.sprite = Stage2BeforeWateringSprite;
 					}
 				}
-				else // ¹° ÁØ »óÅÂ
+				else // ë¬¼ ì¤€ ìƒíƒœ
 				{
 					_spriteRenderer.sprite = Stage2AfterWateringSprite;
 				}
 			}
-			else // ¼ºÀå 1´Ü°è
+			else // ì„±ì¥ 1ë‹¨ê³„
 			{
-				if (WaterStored == 0.0f) // ¹° ¾ÈÁØ »óÅÂ
+				if (WaterStored == 0.0f) // ë¬¼ ì•ˆì¤€ ìƒíƒœ
 				{
 					if (WaterWaitingSeconds >= NormalToDeadSeconds + DeadToSeedSeconds)
 					{
@@ -105,7 +103,7 @@ public class CropCorn : Crop
 						_spriteRenderer.sprite = Stage1BeforeWateringSprite;
 					}
 				}
-				else // ¹° ÁØ »óÅÂ
+				else // ë¬¼ ì¤€ ìƒíƒœ
 				{
 					_spriteRenderer.sprite = Stage1AfterWateringSprite;
 				}

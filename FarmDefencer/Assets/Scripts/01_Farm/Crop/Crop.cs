@@ -198,8 +198,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	/// </summary>
 	/// <returns>조건이 충족되었다면 true</returns>
 	protected virtual bool OnGrow(float deltaTime) => true;
-	public abstract bool IsDead();
-	public abstract bool IsGrowing();
+
 	public override string ToString() => $"{this.GetType()} at {Position}, age {GrowthAgeSeconds}, water waiting {WaterWaitingSeconds}, state {State}";
 
 	public void Init(GameObject cropLockedDisplayPrefab, UnityAction<UnityAction<bool>> onTryItemifyAction)
