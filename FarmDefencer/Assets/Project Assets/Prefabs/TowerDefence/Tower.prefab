@@ -1103,7 +1103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6182143302401284964}
   - component: {fileID: 6719522870903036498}
-  - component: {fileID: 8030555983261524709}
+  - component: {fileID: 7505782182428129248}
   m_Layer: 2
   m_Name: TargetDetector
   m_TagString: Untagged
@@ -1162,7 +1162,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 2
---- !u!114 &8030555983261524709
+--- !u!114 &7505782182428129248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1171,7 +1171,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6564153582585416594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e3a0433ce217ae45aee8b0360a8a104, type: 3}
+  m_Script: {fileID: 11500000, guid: 50f4d69966ff6d441b7cb8a56e09bc49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _targetLayerMask:
@@ -1561,7 +1561,7 @@ MonoBehaviour:
   _healthBar: {fileID: 0}
   _hp: 100
   _isDead: 0
-  _detector: {fileID: 8030555983261524709}
+  _detector: {fileID: 7505782182428129248}
   _cost: 10
   UpgradeUIPanel: {fileID: 8359961825463992884}
   _maxLevel: 3

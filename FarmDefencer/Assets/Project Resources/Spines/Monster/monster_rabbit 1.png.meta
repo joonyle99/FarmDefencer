@@ -472,7 +472,21 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      monster_rabbit 1_0: -8278367498157364038
+      monster_rabbit 1_1: -3271133947937143953
+      monster_rabbit 1_10: -6667516304026492362
+      monster_rabbit 1_11: -1313471306672069093
+      monster_rabbit 1_12: 3232149580197500658
+      monster_rabbit 1_13: 3594908999315285221
+      monster_rabbit 1_2: -1222159399226209134
+      monster_rabbit 1_3: -6949112817336531549
+      monster_rabbit 1_4: -5475850740099014646
+      monster_rabbit 1_5: -2101807601872205177
+      monster_rabbit 1_6: -4085917798834778902
+      monster_rabbit 1_7: -3618645264341191467
+      monster_rabbit 1_8: 9046877413306470887
+      monster_rabbit 1_9: 1509988026972152109
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

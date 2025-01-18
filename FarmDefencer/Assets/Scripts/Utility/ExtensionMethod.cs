@@ -172,5 +172,20 @@ namespace JoonyleGameDevKit
             Debug.LogWarning("No valid number found in the input string.\nThen return defaultValue");
             return defaultValue;
         }
+
+        // GameState
+        public static string ToString(this GameState gameState)
+        {
+            return gameState switch
+            {
+                GameState.Normal => "Normal",
+                GameState.Pause => "Pause",
+                GameState.End => "End",
+                GameState.Water => "Water",
+                GameState.Build => "Build",
+                GameState.Wave => "Wave",
+                _ => "Unknown"
+            };
+        }
     }
 }

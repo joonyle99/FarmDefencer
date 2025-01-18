@@ -45,6 +45,7 @@ public class GridCell : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        // 현재 포인터가 GridCell 위에 있지 않다면(UI 요소 위에 있다면) 이벤트를 처리하지 않는다
         if (EventSystem.current.IsPointerOverGameObject() == true)
         {
             return;
@@ -59,6 +60,7 @@ public class GridCell : MonoBehaviour
     }
     private void OnMouseExit()
     {
+        // 현재 포인터가 GridCell 위에 있지 않다면(UI 요소 위에 있다면) 이벤트를 처리하지 않는다
         if (EventSystem.current.IsPointerOverGameObject() == true)
         {
             return;
@@ -69,7 +71,14 @@ public class GridCell : MonoBehaviour
 
     private void OnMouseDown()
     {
+        // 현재 포인터가 GridCell 위에 있지 않다면(UI 요소 위에 있다면) 이벤트를 처리하지 않는다
         if (EventSystem.current.IsPointerOverGameObject() == true)
+        {
+            return;
+        }
+
+        // 현재 타워 건설 상태가 아니라면 이벤트를 처리하지 않는다
+        if (GameStateManager.Instance.CurrentState != GameState.Build)
         {
             return;
         }
@@ -140,7 +149,7 @@ public class GridCell : MonoBehaviour
 
     public void Occupy()
     {
-        _occupiedTower = DefenceContext.Current.BuildSystem.InstantiateTower(transform.position, Quaternion.identity);
+        _occupiedTower = DefenceContext.Current.TowerBuildSystem.InstantiateTower(transform.position, Quaternion.identity);
         _occupiedTower.OccupyingGridCell(this);
 
         if (_occupiedTower != null)

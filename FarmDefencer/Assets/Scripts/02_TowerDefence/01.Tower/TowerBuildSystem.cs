@@ -1,13 +1,13 @@
 using UnityEngine;
 
 /// <summary>
-/// 타워 디펜스에서 타워의 건설을 관리합니다.
+/// 타워 건설을 관리하는 시스템
 /// </summary>
-/// <remarks>
-/// 
-/// </remarks>
 public class TowerBuildSystem : MonoBehaviour
 {
+    [Header("━━━━━━━━ Tower Build System ━━━━━━━━")]
+    [Space]
+
     [SerializeField] private Tower[] _towerPrefabs;
 
     private int _selectedTowerIndex = 0;
