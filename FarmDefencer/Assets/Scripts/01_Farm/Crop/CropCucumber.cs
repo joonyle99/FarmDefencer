@@ -74,9 +74,10 @@ public class CropCucumber : Crop
 			Itemify();
 		}
 	}
+
 	protected override bool OnGrow(float deltaTime)
 	{
-		if (GrowthAgeSeconds >= Stage1GrowthSeconds && _trellisState == TrellisState.None) // ÂªÀº ÁöÁö´ë ¼³Ä¡ ÀÌÀü¿¡´Â Á×Áö ¾ÊÀ½ ÀÏ´Ü
+		if (GrowthAgeSeconds >= Stage1GrowthSeconds && _trellisState == TrellisState.None) // ì§§ì€ ì§€ì§€ëŒ€ ì„¤ì¹˜ ì´ì „ì—ëŠ” ì£½ì§€ ì•ŠìŒ ì¼ë‹¨
 		{
 			return false;
 		}
@@ -97,9 +98,9 @@ public class CropCucumber : Crop
 		}
 		else if (State == CropState.Planted)
 		{
-			if (GrowthAgeSeconds >= MatureAgeSeconds) // ¸ğµÎ ¼ºÀåÇÑ ´Ü°è
+			if (GrowthAgeSeconds >= MatureAgeSeconds) // ëª¨ë‘ ì„±ì¥í•œ ë‹¨ê³„
 			{
-				if (_trellisState != TrellisState.Long) // ±ä ÁöÁö´ë ¼³Ä¡ ÀÌÀü »óÅÂ
+				if (_trellisState != TrellisState.Long) // ê¸´ ì§€ì§€ëŒ€ ì„¤ì¹˜ ì´ì „ ìƒíƒœ
 				{
 					_spriteRenderer.sprite = BeforeLongTrellisSprite;
 				}
@@ -108,13 +109,13 @@ public class CropCucumber : Crop
 					_spriteRenderer.sprite = MatureSprite;
 				}
 			}
-			else if (GrowthAgeSeconds >= Stage1GrowthSeconds) // ¼ºÀå 2´Ü°è
+			else if (GrowthAgeSeconds >= Stage1GrowthSeconds) // ì„±ì¥ 2ë‹¨ê³„
 			{
-				if (_trellisState != TrellisState.Short) // ÂªÀº ÁöÁö´ë ¼³Ä¡ ÀÌÀü »óÅÂ
+				if (_trellisState != TrellisState.Short) // ì§§ì€ ì§€ì§€ëŒ€ ì„¤ì¹˜ ì´ì „ ìƒíƒœ
 				{
 					_spriteRenderer.sprite = BeforeShortTrellisSprite;
 				}
-				else if (WaterStored == 0.0f) // ¹° ¾ÈÁØ »óÅÂ
+				else if (WaterStored == 0.0f) // ë¬¼ ì•ˆì¤€ ìƒíƒœ
 				{
 					if (WaterWaitingSeconds >= NormalToDeadSeconds + DeadToSeedSeconds)
 					{
@@ -129,14 +130,14 @@ public class CropCucumber : Crop
 						_spriteRenderer.sprite = Stage2BeforeWateringSprite;
 					}
 				}
-				else // ¹° ÁØ »óÅÂ
+				else // ë¬¼ ì¤€ ìƒíƒœ
 				{
 					_spriteRenderer.sprite = Stage2AfterWateringSprite;
 				}
 			}
-			else // ¼ºÀå 1´Ü°è
+			else // ì„±ì¥ 1ë‹¨ê³„
 			{
-				if (WaterStored == 0.0f) // ¹° ¾ÈÁØ »óÅÂ
+				if (WaterStored == 0.0f) // ë¬¼ ì•ˆì¤€ ìƒíƒœ
 				{
 					if (WaterWaitingSeconds >= NormalToDeadSeconds + DeadToSeedSeconds)
 					{
@@ -151,7 +152,7 @@ public class CropCucumber : Crop
 						_spriteRenderer.sprite = Stage1BeforeWateringSprite;
 					}
 				}
-				else // ¹° ÁØ »óÅÂ
+				else // ë¬¼ ì¤€ ìƒíƒœ
 				{
 					_spriteRenderer.sprite = Stage1AfterWateringSprite;
 				}

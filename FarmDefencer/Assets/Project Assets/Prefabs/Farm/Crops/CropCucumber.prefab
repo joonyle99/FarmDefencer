@@ -121,5 +121,5 @@ MonoBehaviour:
   MatureSprite: {fileID: 9115947542645699073, guid: 29d6e4a9c757e894090de830727b7392, type: 3}
   LockedSprite: {fileID: 0}
   HarvestedSprite: {fileID: -6340913843653661622, guid: 1f04500956bbe954093c562a6f7269da, type: 3}
-  NormalToDeadSeconds: 5
-  DeadToSeedSeconds: 5
+  NormalToDeadSeconds: 300
+  DeadToSeedSeconds: 300
