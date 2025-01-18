@@ -99,6 +99,11 @@ public class CropEggplant : Crop
 		{
 			if (GrowthAgeSeconds >= MatureAgeSeconds) // 모두 성장한 단계
 			{
+				if (GrowthAgeSeconds - deltaTime < MatureAgeSeconds) // 성장 직후 프레임이라면 물 초기화하기
+				{
+					WaterStored = 0.0f;
+				}
+
 				if (_leavesRemaining == 2)
 				{
 					_spriteRenderer.sprite = MatureFullLeavesSprite;
@@ -119,6 +124,11 @@ public class CropEggplant : Crop
 			}
 			else if (GrowthAgeSeconds >= Stage1GrowthSeconds) // 성장 2단계
 			{
+				if (GrowthAgeSeconds - deltaTime < Stage1GrowthSeconds) // 성장 직후 프레임이라면 물 초기화하기
+				{
+					WaterStored = 0.0f;
+				}
+
 				if (!_trellisPlaced) // 짧은 지지대 설치 이전 상태
 				{
 					_spriteRenderer.sprite = BeforeTrellisSprite;
