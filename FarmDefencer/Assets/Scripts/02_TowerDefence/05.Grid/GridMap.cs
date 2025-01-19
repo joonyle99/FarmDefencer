@@ -5,12 +5,12 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 /// <summary>
-/// GridMapÀÇ °¢ CellÀº ÀÌµ¿ÇÒ ¼ö ÀÖ´Â ¶¥ÀÎÁöÀÇ Á¤º¸¸¦ °¡Áö¸ç,
-/// Å¸¿ö °Ç¼³, ¸ó½ºÅÍÀÇ ÀÌµ¿°æ·Î ¼³Á¤ µî¿¡ »ç¿ëµÈ´Ù.
+/// GridMapì˜ ê° Cellì€ ì´ë™í•  ìˆ˜ ìˆëŠ” ë•…ì¸ì§€ì˜ ì •ë³´ë¥¼ ê°€ì§€ë©°,
+/// íƒ€ì›Œ ê±´ì„¤, ëª¬ìŠ¤í„°ì˜ ì´ë™ê²½ë¡œ ì„¤ì • ë“±ì— ì‚¬ìš©ëœë‹¤.
 /// </summary>
 public class GridMap : MonoBehaviour
 {
-    [Header("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ GridMap ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡")]
+    [Header("â”€â”€â”€â”€â”€â”€â”€â”€ GridMap â”€â”€â”€â”€â”€â”€â”€â”€")]
     [Space]
 
     private Tilemap _tilemap;
@@ -97,9 +97,11 @@ public class GridMap : MonoBehaviour
     {
         CalculateDistance(StartCellPoint);
 
-        DebugDistanceMap();
-
-        yield return DebugPingGridPathRoutine();
+        if (ConstantConfig.DEBUG == true)
+        {
+            DebugDistanceMap();
+            yield return DebugPingGridPathRoutine();
+        }
     }
 
     // path
