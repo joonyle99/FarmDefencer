@@ -1,3 +1,4 @@
+using Spine.Unity;
 using UnityEngine;
 
 /// <summary>
@@ -23,9 +24,26 @@ public sealed class Tower : TargetableBehavior
     [Space]
 
     [SerializeField] private int _maxLevel = 3;
+    public int MaxLevel => _maxLevel;
 
     [SerializeField] private int _currentLevel = 1;
-    public int CurrentLevel => _currentLevel;
+    public int CurrentLevel
+    {
+        get => _currentLevel;
+        set
+        {
+            _currentLevel = value;
+            
+            if (_currentLevel < 1)
+            {
+                _currentLevel = 1;
+            }
+            else if (_currentLevel > 3)
+            {
+                _currentLevel = 3;
+            }
+        }
+    }
 
     public int upgradeCost = 40;
 
@@ -42,6 +60,96 @@ public sealed class Tower : TargetableBehavior
     // level 3
     public float attackRate_3 = 0.5f;
     public int damage_3 = 40;
+
+    [Space]
+
+    [SerializeField] private SpineController _spineController;
+
+    [Space]
+
+    [SpineAnimation]
+    public string IdleAnimationName_1;
+    [SpineAnimation]
+    public string IdleAnimationName_2;
+    [SpineAnimation]
+    public string IdleAnimationName_3;
+
+    [Space]
+
+    [SpineAnimation]
+    public string AttackAnimationName_1;
+    [SpineAnimation]
+    public string AttackAnimationName_2;
+    [SpineAnimation]
+    public string AttackAnimationName_3;
+
+    [Space]
+
+    [SpineAnimation]
+    public string LevelUpAnimationName_1;
+    [SpineAnimation]
+    public string LevelUpAnimationName_2;
+
+    // animation property
+    [SpineAnimation]
+    public string IdleAnimation
+    {
+        get
+        {
+            if (CurrentLevel == 1)
+            {
+                return IdleAnimationName_1;
+            }
+            else if (CurrentLevel == 2)
+            {
+                return IdleAnimationName_2;
+            }
+            else if (CurrentLevel == 3)
+            {
+                return IdleAnimationName_3;
+            }
+
+            return IdleAnimationName_1;
+        }
+    }
+    [SpineAnimation]
+    public string AttackAnimation
+    {
+        get
+        {
+            if (CurrentLevel == 1)
+            {
+                return AttackAnimationName_1;
+            }
+            else if (CurrentLevel == 2)
+            {
+                return AttackAnimationName_2;
+            }
+            else if (CurrentLevel == 3)
+            {
+                return AttackAnimationName_3;
+            }
+
+            return AttackAnimationName_1;
+        }
+    }
+    [SpineAnimation]
+    public string LevelUpAnimation
+    {
+        get
+        {
+            if (CurrentLevel == 1)
+            {
+                return LevelUpAnimationName_1;
+            }
+            else if (CurrentLevel == 2)
+            {
+                return LevelUpAnimationName_2;
+            }
+
+            return LevelUpAnimationName_1;
+        }
+    }
 
     // Actions
     public event System.Action<int> OnLevelChanged;
@@ -66,6 +174,13 @@ public sealed class Tower : TargetableBehavior
         base.Awake();
 
         _currentAttackRate = attackRate_1;
+    }
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+        // animation
+        //_spineController.SetAnimation(IdleAnimationName_1, true);
     }
     private void Update()
     {
@@ -114,6 +229,10 @@ public sealed class Tower : TargetableBehavior
     }
     private void Attack()
     {
+        // animation
+        _spineController.SetAnimation(AttackAnimation, false);
+        _spineController.AddAnimation(IdleAnimation, true);
+
         var projectileTick = Instantiate(_projectileTick, _head.Muzzle.position, _head.Muzzle.rotation);
 
         if (projectileTick == null)
@@ -139,10 +258,7 @@ public sealed class Tower : TargetableBehavior
     // upgrade
     public void Upgrade()
     {
-        // 현재 레벨을 확인하고 그에 맞는 애니메이션을 재생
-
-
-        if (_currentLevel >= _maxLevel)
+        if (CurrentLevel >= MaxLevel)
         {
             Debug.Log("최고 레벨이므로 Upgrade할 수 없습니다");
             return;
@@ -156,8 +272,14 @@ public sealed class Tower : TargetableBehavior
 
         ResourceManager.Instance.SpendGold(upgradeCost);
 
-        _currentLevel++;
-        OnLevelChanged?.Invoke(_currentLevel);
+        // animation
+        _spineController.SetAnimation(LevelUpAnimation, false);
+
+        CurrentLevel++;
+        OnLevelChanged?.Invoke(CurrentLevel);
+
+        // animation
+        _spineController.AddAnimation(IdleAnimation, true);
 
         _cost += upgradeCost;
         OnCostChanged?.Invoke(_cost);
@@ -169,17 +291,17 @@ public sealed class Tower : TargetableBehavior
     }
     private void ReinforceRate()
     {
-        if (_currentLevel == 1)
+        if (CurrentLevel == 1)
         {
             _currentAttackRate = attackRate_1;
             OnAttackRateChanged?.Invoke(_currentAttackRate);
         }
-        else if (_currentLevel == 2)
+        else if (CurrentLevel == 2)
         {
             _currentAttackRate = attackRate_2;
             OnAttackRateChanged?.Invoke(_currentAttackRate);
         }
-        else if (_currentLevel == 3)
+        else if (CurrentLevel == 3)
         {
             _currentAttackRate = attackRate_3;
             OnAttackRateChanged?.Invoke(_currentAttackRate);
@@ -187,17 +309,17 @@ public sealed class Tower : TargetableBehavior
     }
     private void ReinforceDamage()
     {
-        if (_currentLevel == 1)
+        if (CurrentLevel == 1)
         {
             _projectileTick.SetDamage(damage_1);
             OnDamageChanged?.Invoke(_projectileTick.GetDamage());
         }
-        else if (_currentLevel == 2)
+        else if (CurrentLevel == 2)
         {
             _projectileTick.SetDamage(damage_2);
             OnDamageChanged?.Invoke(_projectileTick.GetDamage());
         }
-        else if (_currentLevel == 3)
+        else if (CurrentLevel == 3)
         {
             _projectileTick.SetDamage(damage_3);
             OnDamageChanged?.Invoke(_projectileTick.GetDamage());
