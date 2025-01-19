@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
-  m_Name: monster_rabbit_SkeletonData
+  m_Name: monster_capybara_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: 00a77e5e5508f1845930e82568c4c11c, type: 2}
+  - {fileID: 11400000, guid: 30d20f9664f4ab6428e9f756053bd072, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: 704a7289469090b42b282c5409cd67e8, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: e80ed0197c2a86d4e8a230ffcca43c67, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 0

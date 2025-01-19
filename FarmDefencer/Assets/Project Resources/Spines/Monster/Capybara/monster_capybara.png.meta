@@ -1,55 +1,55 @@
 fileFormatVersion: 2
-guid: 5d6b68548ec8e0b4f8a6ede14b99815a
+guid: e578ac1ae51264b4c9ca3051acc8e628
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8278367498157364038
-    second: monster_rabbit 1_0
+      213: 4689287431201020337
+    second: monster_capybara_0
   - first:
-      213: -3271133947937143953
-    second: monster_rabbit 1_1
+      213: -2728542991657065999
+    second: monster_capybara_1
   - first:
-      213: -1222159399226209134
-    second: monster_rabbit 1_2
+      213: 4725046273991653743
+    second: monster_capybara_2
   - first:
-      213: -6949112817336531549
-    second: monster_rabbit 1_3
+      213: 7453997978803938652
+    second: monster_capybara_3
   - first:
-      213: -5475850740099014646
-    second: monster_rabbit 1_4
+      213: 4878182984676683544
+    second: monster_capybara_4
   - first:
-      213: -2101807601872205177
-    second: monster_rabbit 1_5
+      213: -4136893679410353150
+    second: monster_capybara_5
   - first:
-      213: -4085917798834778902
-    second: monster_rabbit 1_6
+      213: -5798489361833394072
+    second: monster_capybara_6
   - first:
-      213: -3618645264341191467
-    second: monster_rabbit 1_7
+      213: -4137723091104437359
+    second: monster_capybara_7
   - first:
-      213: 9046877413306470887
-    second: monster_rabbit 1_8
+      213: -4930358762868933033
+    second: monster_capybara_8
   - first:
-      213: 1509988026972152109
-    second: monster_rabbit 1_9
+      213: -2866831215415951592
+    second: monster_capybara_9
   - first:
-      213: -6667516304026492362
-    second: monster_rabbit 1_10
+      213: -8549871290504196762
+    second: monster_capybara_10
   - first:
-      213: -1313471306672069093
-    second: monster_rabbit 1_11
+      213: -7016797952546942682
+    second: monster_capybara_11
   - first:
-      213: 3232149580197500658
-    second: monster_rabbit 1_12
+      213: -8837063799425645527
+    second: monster_capybara_12
   - first:
-      213: 3594908999315285221
-    second: monster_rabbit 1_13
+      213: -5654178629189746386
+    second: monster_capybara_13
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
-    sRGBTexture: 1
+    sRGBTexture: 0
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -85,7 +85,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 0
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -94,7 +94,7 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 1
+  alphaIsTransparency: 0
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
@@ -114,7 +114,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -152,13 +152,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: monster_rabbit 1_0
+      name: monster_capybara_0
       rect:
         serializedVersion: 2
         x: 1
-        y: 496
-        width: 37
-        height: 15
+        y: 406
+        width: 112
+        height: 105
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,20 +167,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: abce0300f945d1d80800000000000000
-      internalID: -8278367498157364038
+      spriteID: 1b9d072e212b31140800000000000000
+      internalID: 4689287431201020337
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_1
+      name: monster_capybara_1
       rect:
         serializedVersion: 2
-        x: 1
-        y: 423
-        width: 79
-        height: 73
+        x: 113
+        y: 406
+        width: 52
+        height: 58
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -189,42 +189,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f634c7c61099a92d0800000000000000
-      internalID: -3271133947937143953
+      spriteID: 1f126e30b94422ad0800000000000000
+      internalID: -2728542991657065999
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_2
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 423
-        width: 48
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 29c873e60840a0fe0800000000000000
-      internalID: -1222159399226209134
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: monster_rabbit 1_3
+      name: monster_capybara_2
       rect:
         serializedVersion: 2
         x: 2
-        y: 6
-        width: 534
-        height: 416
+        y: 4
+        width: 542
+        height: 401
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -233,20 +211,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3a5ca8ae5bacf8f90800000000000000
-      internalID: -6949112817336531549
+      spriteID: f693e844d8cb29140800000000000000
+      internalID: 4725046273991653743
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_4
+      name: monster_capybara_3
       rect:
         serializedVersion: 2
-        x: 537
-        y: 299
-        width: 24
-        height: 41
+        x: 545
+        y: 330
+        width: 15
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,20 +233,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a00a651a3ced104b0800000000000000
-      internalID: -5475850740099014646
+      spriteID: c55a6133babe17760800000000000000
+      internalID: 7453997978803938652
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_5
+      name: monster_capybara_4
       rect:
         serializedVersion: 2
-        x: 537
-        y: 260
-        width: 39
-        height: 39
+        x: 582
+        y: 327
+        width: 51
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -277,20 +255,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 78a01383f11e4d2e0800000000000000
-      internalID: -2101807601872205177
+      spriteID: 81f220f2499c2b340800000000000000
+      internalID: 4878182984676683544
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_6
+      name: monster_capybara_5
       rect:
         serializedVersion: 2
-        x: 537
-        y: 141
-        width: 110
-        height: 119
+        x: 631
+        y: 331
+        width: 14
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -299,19 +277,129 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aecc10bf867eb47c0800000000000000
-      internalID: -4085917798834778902
+      spriteID: 20cef25ed1dc696c0800000000000000
+      internalID: -4136893679410353150
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_7
+      name: monster_capybara_6
       rect:
         serializedVersion: 2
-        x: 576
-        y: 260
-        width: 32
+        x: 645
+        y: 327
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8600a0aa5a0a78fa0800000000000000
+      internalID: -5798489361833394072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_capybara_7
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 166
+        width: 153
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19be9cf65cad396c0800000000000000
+      internalID: -4137723091104437359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_capybara_8
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 3
+        width: 155
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75e76fbc3d8d39bb0800000000000000
+      internalID: -4930358762868933033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_capybara_9
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 119
+        width: 40
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81f712ed238f638d0800000000000000
+      internalID: -2866831215415951592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_capybara_10
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 3
+        width: 135
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66dcf264c51c85980800000000000000
+      internalID: -8549871290504196762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_capybara_11
+      rect:
+        serializedVersion: 2
+        x: 835
+        y: 65
+        width: 44
         height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -321,20 +409,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5d43bc2fd4df7cdc0800000000000000
-      internalID: -3618645264341191467
+      spriteID: 62150c150735f9e90800000000000000
+      internalID: -7016797952546942682
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_8
+      name: monster_capybara_12
       rect:
         serializedVersion: 2
-        x: 537
-        y: 5
-        width: 113
-        height: 136
+        x: 836
+        y: 4
+        width: 67
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -343,64 +431,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7e113a23317fc8d70800000000000000
-      internalID: 9046877413306470887
+      spriteID: 92445c19b417c5580800000000000000
+      internalID: -8837063799425645527
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_9
+      name: monster_capybara_13
       rect:
         serializedVersion: 2
-        x: 650
-        y: 5
-        width: 122
-        height: 126
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d21a4ca3c1e84f410800000000000000
-      internalID: 1509988026972152109
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: monster_rabbit 1_10
-      rect:
-        serializedVersion: 2
-        x: 772
-        y: 5
-        width: 127
-        height: 115
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 632206c5f393873a0800000000000000
-      internalID: -6667516304026492362
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: monster_rabbit 1_11
-      rect:
-        serializedVersion: 2
-        x: 899
-        y: 44
+        x: 904
+        y: 3
         width: 34
-        height: 34
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -409,52 +453,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b16a42f3ecc95cde0800000000000000
-      internalID: -1313471306672069093
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: monster_rabbit 1_12
-      rect:
-        serializedVersion: 2
-        x: 899
-        y: 5
-        width: 46
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2f699942be6eadc20800000000000000
-      internalID: 3232149580197500658
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: monster_rabbit 1_13
-      rect:
-        serializedVersion: 2
-        x: 945
-        y: 5
-        width: 32
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5e4ea0030bea3e130800000000000000
-      internalID: 3594908999315285221
+      spriteID: e214a8e6e725881b0800000000000000
+      internalID: -5654178629189746386
       vertices: []
       indices: 
       edges: []
@@ -473,20 +473,20 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      monster_rabbit 1_0: -8278367498157364038
-      monster_rabbit 1_1: -3271133947937143953
-      monster_rabbit 1_10: -6667516304026492362
-      monster_rabbit 1_11: -1313471306672069093
-      monster_rabbit 1_12: 3232149580197500658
-      monster_rabbit 1_13: 3594908999315285221
-      monster_rabbit 1_2: -1222159399226209134
-      monster_rabbit 1_3: -6949112817336531549
-      monster_rabbit 1_4: -5475850740099014646
-      monster_rabbit 1_5: -2101807601872205177
-      monster_rabbit 1_6: -4085917798834778902
-      monster_rabbit 1_7: -3618645264341191467
-      monster_rabbit 1_8: 9046877413306470887
-      monster_rabbit 1_9: 1509988026972152109
+      monster_capybara_0: 4689287431201020337
+      monster_capybara_1: -2728542991657065999
+      monster_capybara_10: -8549871290504196762
+      monster_capybara_11: -7016797952546942682
+      monster_capybara_12: -8837063799425645527
+      monster_capybara_13: -5654178629189746386
+      monster_capybara_2: 4725046273991653743
+      monster_capybara_3: 7453997978803938652
+      monster_capybara_4: 4878182984676683544
+      monster_capybara_5: -4136893679410353150
+      monster_capybara_6: -5798489361833394072
+      monster_capybara_7: -4137723091104437359
+      monster_capybara_8: -4930358762868933033
+      monster_capybara_9: -2866831215415951592
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

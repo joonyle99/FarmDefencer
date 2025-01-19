@@ -1,0 +1,546 @@
+fileFormatVersion: 2
+guid: d71ee25b3a61c84418a54d405ed4a7c1
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4505064561624832511
+    second: monster_squirrel_0
+  - first:
+      213: 1166150521389486183
+    second: monster_squirrel_1
+  - first:
+      213: -7947642376516518398
+    second: monster_squirrel_2
+  - first:
+      213: -1345317950683057588
+    second: monster_squirrel_3
+  - first:
+      213: -212887576329752274
+    second: monster_squirrel_4
+  - first:
+      213: 3751180722359519438
+    second: monster_squirrel_5
+  - first:
+      213: -7750589326735385103
+    second: monster_squirrel_6
+  - first:
+      213: -104718579109872771
+    second: monster_squirrel_7
+  - first:
+      213: 6317231245039385387
+    second: monster_squirrel_8
+  - first:
+      213: -1801777845189919154
+    second: monster_squirrel_9
+  - first:
+      213: -6587047244531899062
+    second: monster_squirrel_10
+  - first:
+      213: -6251039891151472968
+    second: monster_squirrel_11
+  - first:
+      213: 8625671454986714136
+    second: monster_squirrel_12
+  - first:
+      213: -3021997621230666666
+    second: monster_squirrel_13
+  - first:
+      213: 8745242859194989968
+    second: monster_squirrel_14
+  - first:
+      213: 4194465172934506195
+    second: monster_squirrel_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: monster_squirrel_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 326
+        width: 117
+        height: 185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff959d59954358e30800000000000000
+      internalID: 4505064561624832511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squirrel_1
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 327
+        width: 112
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7609e0e78bffe2010800000000000000
+      internalID: 1166150521389486183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squirrel_2
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 448
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20e34e1fd5d44b190800000000000000
+      internalID: -7947642376516518398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squirrel_3
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 326
+        width: 92
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c42749f9378745de0800000000000000
+      internalID: -1345317950683057588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squirrel_4
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 326
+        width: 33
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2175c390ebab0df0800000000000000
+      internalID: -212887576329752274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squirrel_5
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 315
+        width: 55
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec8488c0efede0430800000000000000
+      internalID: 3751180722359519438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squirrel_6
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 13
+        width: 354
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fdd00c5210607490800000000000000
+      internalID: -7750589326735385103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squirrel_7
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 283
+        width: 66
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7bb5c2d107fb8ef0800000000000000
+      internalID: -104718579109872771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squirrel_8
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 283
+        width: 24
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2b3294e8505ba750800000000000000
+      internalID: 6317231245039385387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squirrel_9
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 12
+        width: 252
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4e3945989ccef6e0800000000000000
+      internalID: -1801777845189919154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squirrel_10
+      rect:
+        serializedVersion: 2
+        x: 610
+        y: 230
+        width: 49
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a45e5f64e6b1694a0800000000000000
+      internalID: -6587047244531899062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squirrel_11
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 230
+        width: 39
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b6be13a658df39a0800000000000000
+      internalID: -6251039891151472968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squirrel_12
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 13
+        width: 302
+        height: 216
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81cb5bfcc7a84b770800000000000000
+      internalID: 8625671454986714136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squirrel_13
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 174
+        width: 33
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65c787abc25bf06d0800000000000000
+      internalID: -3021997621230666666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squirrel_14
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 140
+        width: 53
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09db6d0db085d5970800000000000000
+      internalID: 8745242859194989968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squirrel_15
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 12
+        width: 101
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d6328ff9dbb53a30800000000000000
+      internalID: 4194465172934506195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      monster_squirrel_0: 4505064561624832511
+      monster_squirrel_1: 1166150521389486183
+      monster_squirrel_10: -6587047244531899062
+      monster_squirrel_11: -6251039891151472968
+      monster_squirrel_12: 8625671454986714136
+      monster_squirrel_13: -3021997621230666666
+      monster_squirrel_14: 8745242859194989968
+      monster_squirrel_15: 4194465172934506195
+      monster_squirrel_2: -7947642376516518398
+      monster_squirrel_3: -1345317950683057588
+      monster_squirrel_4: -212887576329752274
+      monster_squirrel_5: 3751180722359519438
+      monster_squirrel_6: -7750589326735385103
+      monster_squirrel_7: -104718579109872771
+      monster_squirrel_8: 6317231245039385387
+      monster_squirrel_9: -1801777845189919154
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

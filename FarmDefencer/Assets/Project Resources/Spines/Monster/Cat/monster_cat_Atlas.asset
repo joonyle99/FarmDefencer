@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
-  m_Name: monster_rabbit_Atlas
+  m_Name: monster_cat_Atlas
   m_EditorClassIdentifier: 
   textureLoadingMode: 0
   onDemandTextureLoader: {fileID: 0}
-  atlasFile: {fileID: 4900000, guid: 9a8f1b0063e7ba744bc6399f3daf4313, type: 3}
+  atlasFile: {fileID: 4900000, guid: c334083f6ab72914faa46a2a75a020f5, type: 3}
   materials:
-  - {fileID: 2100000, guid: 086c4dddbbf7a5c45b26d26262b6748c, type: 2}
+  - {fileID: 2100000, guid: 767531e0ef7a8794f9d3355a78d2edf4, type: 2}

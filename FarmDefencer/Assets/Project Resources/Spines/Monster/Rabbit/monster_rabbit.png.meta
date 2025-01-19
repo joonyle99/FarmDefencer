@@ -201,8 +201,8 @@ TextureImporter:
         serializedVersion: 2
         x: 80
         y: 421
-        width: 48
-        height: 22
+        width: 34
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,8 +245,8 @@ TextureImporter:
         serializedVersion: 2
         x: 537
         y: 297
-        width: 24
-        height: 41
+        width: 38
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,7 +289,7 @@ TextureImporter:
         serializedVersion: 2
         x: 537
         y: 139
-        width: 96
+        width: 110
         height: 119
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -309,10 +309,10 @@ TextureImporter:
       name: monster_rabbit_7
       rect:
         serializedVersion: 2
-        x: 537
-        y: 3
-        width: 113
-        height: 136
+        x: 576
+        y: 258
+        width: 41
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -331,10 +331,10 @@ TextureImporter:
       name: monster_rabbit_8
       rect:
         serializedVersion: 2
-        x: 633
-        y: 139
-        width: 15
-        height: 37
+        x: 537
+        y: 3
+        width: 113
+        height: 136
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -399,8 +399,8 @@ TextureImporter:
         serializedVersion: 2
         x: 899
         y: 42
-        width: 34
-        height: 34
+        width: 32
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -443,8 +443,8 @@ TextureImporter:
         serializedVersion: 2
         x: 945
         y: 3
-        width: 32
-        height: 34
+        width: 48
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
