@@ -3,11 +3,11 @@ using UnityEngine.UI;
 
 public class FloatingHealthBar : MonoBehaviour
 {
-    [SerializeField] private Slider _slider;
+    [SerializeField] private Image _bar;
 
     public void UpdateHealthBar(float currentValue, float maxValue)
     {
         // 0 ~ 1
-        _slider.value = currentValue / maxValue;
+        _bar.fillAmount = currentValue / maxValue;
     }
 }
