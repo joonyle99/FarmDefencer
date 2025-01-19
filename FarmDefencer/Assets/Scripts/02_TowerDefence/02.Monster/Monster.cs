@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public sealed class Monster : TargetableBehavior, IProduct
 {
-    [Header("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ IProduct ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡")]
+    [Header("â”€â”€â”€â”€â”€â”€â”€â”€ IProduct â”€â”€â”€â”€â”€â”€â”€â”€")]
     [Space]
 
     [SerializeField] private Factory _originFactory;
@@ -26,7 +26,7 @@ public sealed class Monster : TargetableBehavior, IProduct
     public GameObject GameObject => this.gameObject;
     public Transform Transform => this.transform;
 
-    [Header("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ Monster ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡")]
+    [Header("â”€â”€â”€â”€â”€â”€â”€â”€ Monster â”€â”€â”€â”€â”€â”€â”€â”€")]
     [Space]
 
     [SerializeField] private string _monsterName;
@@ -88,7 +88,7 @@ public sealed class Monster : TargetableBehavior, IProduct
             return;
         }
 
-        // ÇöÀç ½ÇÇà ÁßÀÎ ¾Ö´Ï¸ŞÀÌ¼Ç È®ÀÎ
+        // í˜„ì¬ ì‹¤í–‰ ì¤‘ì¸ ì• ë‹ˆë©”ì´ì…˜ í™•ì¸
         var currentAnimation = _spineAnimationState.GetCurrent(0);
 
         if (currentAnimation != null
@@ -106,7 +106,7 @@ public sealed class Monster : TargetableBehavior, IProduct
     {
         IsDead = true;
 
-        // TEMP: ÀÌµ¿ ÁßÁö
+        // TEMP: ì´ë™ ì¤‘ì§€
         GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
 
         StartCoroutine(KillRoutine(DissappearAnimationName));
@@ -123,7 +123,7 @@ public sealed class Monster : TargetableBehavior, IProduct
     {
         IsDead = true;
 
-        // TEMP: ÀÌµ¿ ÁßÁö
+        // TEMP: ì´ë™ ì¤‘ì§€
         GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
 
         StartCoroutine(SurviveRoutine(DissappearAnimationName));
