@@ -3537,7 +3537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced2a14d91b3650498a756e5f2a637dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _productPrefab: {fileID: 4172481917644167003, guid: b609a46f20fffb240960410a710dd781, type: 3}
+  _productPrefab: {fileID: 4172481917644167003, guid: 0368e53d6bbcb594fb7cdbd8085058d7, type: 3}
   _productName: Monster
   _poolCapacity: 100
   _pool: []

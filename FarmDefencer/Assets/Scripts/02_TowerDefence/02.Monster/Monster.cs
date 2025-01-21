@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public sealed class Monster : TargetableBehavior, IProduct
+public abstract class Monster : TargetableBehavior, IProduct
 {
     [Header("──────── IProduct ────────")]
     [Space]
@@ -37,6 +37,9 @@ public sealed class Monster : TargetableBehavior, IProduct
     [SerializeField] private SpineController _spineController;
     public SpineController SpineController => _spineController;
 
+    [Space]
+
+    // default animation names
     [SpineAnimation]
     public string IdleAnimationName;
     [SpineAnimation]
@@ -46,6 +49,7 @@ public sealed class Monster : TargetableBehavior, IProduct
     [SpineAnimation]
     public string DissappearAnimationName;
 
+    // events
     public event System.Action<int> OnDamaged;
     public event System.Action<Monster> OnKilled;
     public event System.Action<Monster> OnSurvived;
@@ -64,6 +68,14 @@ public sealed class Monster : TargetableBehavior, IProduct
     }
     private void OnDisable()
     {
+        // stop all coroutines
+        // 1. TransparentRoutine
+        // 2. OpaqueRoutine
+        // 3. KillRoutine
+        // 4. SurviveRoutine
+        // 5. StunRoutine
+        StopAllCoroutines();
+
         OnDamaged = null;
         OnKilled = null;
         OnSurvived = null;
@@ -84,13 +96,14 @@ public sealed class Monster : TargetableBehavior, IProduct
 
         // 현재 실행 중인 애니메이션 확인
         var currentAnimation = _spineController.SpineAnimationState.GetCurrent(0);
-
         if (currentAnimation != null
             && currentAnimation.Animation.Name != WalkDamagedAnimationName)
         {
             _spineController.SetAnimation(WalkDamagedAnimationName, false);
             _spineController.AddAnimation(WalkAnimationName, true);
         }
+
+        //StartCoroutine(StunRoutine(StunDuration));
 
         HP -= damage;
 
