@@ -7,14 +7,14 @@ public class Field : MonoBehaviour, IFarmUpdatable
 {
     public GameObject CropPrefab;
     /// <summary>
-    /// Farm ¿ÀºêÁ§Æ® À§Ä¡¿¡ ´ëÇÑ »ó´ë À§Ä¡ÀÔ´Ï´Ù.
-    /// FieldÀÇ °¡Àå ¿ŞÂÊ ¾Æ·¡ Å¸ÀÏÀÇ À§Ä¡¿Í µ¿ÀÏÇÕ´Ï´Ù.
+    /// Farm ì˜¤ë¸Œì íŠ¸ ìœ„ì¹˜ì— ëŒ€í•œ ìƒëŒ€ ìœ„ì¹˜ì…ë‹ˆë‹¤.
+    /// Fieldì˜ ê°€ì¥ ì™¼ìª½ ì•„ë˜ íƒ€ì¼ì˜ ìœ„ì¹˜ì™€ ë™ì¼í•©ë‹ˆë‹¤.
     /// </summary>
     public Vector2Int FieldLocalPosition;
     public Vector2Int FieldSize;
 
     /// <summary>
-    /// ÀÌ Field¿¡ ½É±æ CropÀÇ ProductEntryÀÔ´Ï´Ù.
+    /// ì´ Fieldì— ì‹¬ê¸¸ Cropì˜ ProductEntryì…ë‹ˆë‹¤.
     /// </summary>
     public ProductEntry ProductEntry => _productEntry;
     public bool IsAvailable
@@ -36,11 +36,11 @@ public class Field : MonoBehaviour, IFarmUpdatable
     private GameObject _fieldLockedDisplayObject;
 
 	/// <summary>
-	/// ÀÔ·ÂµÈ ÁÂÇ¥¿¡ ÇØ´çµÇ´Â CropÀ» °Ë»öÇØ¼­ ¹İÈ¯ÇÕ´Ï´Ù.
+	/// ì…ë ¥ëœ ì¢Œí‘œì— í•´ë‹¹ë˜ëŠ” Cropì„ ê²€ìƒ‰í•´ì„œ ë°˜í™˜í•©ë‹ˆë‹¤.
 	/// </summary>
 	/// <param name="position"></param>
 	/// <param name="crop"></param>
-	/// <returns>position¿¡ ÇØ´çÇÏ´Â CropÀÌ Á¸ÀçÇÒ °æ¿ì crop¿¡ °ªÀÌ ÇÒ´çµÇ¸ç true ¹İÈ¯, ÀÌ¿ÜÀÇ °æ¿ì crop¿¡ nullÀÌ ÇÒ´çµÇ¸ç false ¹İÈ¯</returns>
+	/// <returns>positionì— í•´ë‹¹í•˜ëŠ” Cropì´ ì¡´ì¬í•  ê²½ìš° cropì— ê°’ì´ í• ë‹¹ë˜ë©° true ë°˜í™˜, ì´ì™¸ì˜ ê²½ìš° cropì— nullì´ í• ë‹¹ë˜ë©° false ë°˜í™˜</returns>
 	public bool TryFindCropAt(Vector2 position, out Crop crop)
 	{
         if (position.x < transform.position.x - 0.5f || position.x > transform.position.x + FieldSize.x - 0.5f
@@ -75,7 +75,7 @@ public class Field : MonoBehaviour, IFarmUpdatable
         GameObject fieldLockedDisplayPrefab,
         GameObject cropLockedDisplayPrefab,
         TileBase flowedTile,
-        UnityAction<ProductEntry, Vector2Int, UnityAction<bool>> onTryItemifyAction)
+        UnityAction<ProductEntry, Vector2Int, int, UnityAction<bool>> onTryItemifyAction)
 	{
         _fieldLockedDisplayObject = Instantiate(fieldLockedDisplayPrefab);
         _fieldLockedDisplayObject.SetActive(false);
@@ -95,7 +95,7 @@ public class Field : MonoBehaviour, IFarmUpdatable
 				cropObject.transform.parent = transform;
 				cropObject.transform.position = cropObjectPosition;
 
-				cropComponent.Init(cropLockedDisplayPrefab, (afterItemifyCallback) => onTryItemifyAction(ProductEntry, cropComponent.Position, afterItemifyCallback));
+				cropComponent.Init(cropLockedDisplayPrefab, (count, afterItemifyCallback) => onTryItemifyAction(ProductEntry, cropComponent.Position, count, afterItemifyCallback));
 				_crops.Add(cropComponent);
 			}
 		}
@@ -124,7 +124,7 @@ public class Field : MonoBehaviour, IFarmUpdatable
         if (CropPrefab == null
             || !CropPrefab.TryGetComponent<Crop>(out var _))
         {
-            throw new MissingComponentException("Field¿¡ ÁöÁ¤µÈ CropPrefabÀÌ nullÀÌ°Å³ª Crop ÄÄÆ÷³ÍÆ®¸¦ °¡ÁöÁö ¾Ê½À´Ï´Ù.");
+            throw new MissingComponentException("Fieldì— ì§€ì •ëœ CropPrefabì´ nullì´ê±°ë‚˜ Crop ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì§€ì§€ ì•ŠìŠµë‹ˆë‹¤.");
         }
 
         _productEntry = CropPrefab.GetComponent<Crop>().ProductEntry;

@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using static UnityEngine.Rendering.DebugUI;
 
 public class HarvestInventory : MonoBehaviour
 {
@@ -10,7 +8,7 @@ public class HarvestInventory : MonoBehaviour
 	private Dictionary<string, HarvestBox> _harvestBoxes;
 
 	/// <summary>
-	/// ¿À´ÃÀÇ ÁÖ¹®À» ¼³Á¤ÇÕ´Ï´Ù.
+	/// ì˜¤ëŠ˜ì˜ ì£¼ë¬¸ì„ ì„¤ì •í•©ë‹ˆë‹¤.
 	/// </summary>
 	/// <param name="quotas"></param>
 	public void SetTodaysOrder(List<(string, int)> quotas)
@@ -22,7 +20,7 @@ public class HarvestInventory : MonoBehaviour
 
 			if (!_harvestBoxes.TryGetValue(productUniqueId, out var harvestBox))
 			{
-				Debug.LogError($"HarvestInventory¿¡ {productUniqueId}¸¦ ´ã´Â HarvestBox°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+				Debug.LogError($"HarvestInventoryì— {productUniqueId}ë¥¼ ë‹´ëŠ” HarvestBoxê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 				continue;
 			}
 
@@ -31,30 +29,33 @@ public class HarvestInventory : MonoBehaviour
 	}
 
 	/// <summary>
-	/// ÇØ´ç ¿£Æ®¸®¿¡ ´ëÇØ ÀÛ¹° È¹µæ ¾Ö´Ï¸ŞÀÌ¼ÇÀ» Àç»ıÇÏ¸ç °³¼ö¸¦ Áõ°¡½ÃÅµ´Ï´Ù.
-	/// ±¸Ã¼ÀûÀ¸·Î´Â ¾Ö´Ï¸ŞÀÌ¼Ç Á¾·á ½Ã FillQuota(productEntry, 1)À» È£ÃâÇÏ°Ô ÇÕ´Ï´Ù.
-	/// ¸¸¾à ÇØ´ç ³óÀÛ¹°ÀÌ ÀÌ¹Ì ÇÒ´ç·®À» ´Ù Ã¤¿î °æ¿ì false¸¦ ¹İÈ¯ÇÏ¸ç ¾Æ¹« ÀÛ¾÷µµ ÇÏÁö ¾Ê½À´Ï´Ù.
+	/// í•´ë‹¹ ì—”íŠ¸ë¦¬ì— ëŒ€í•´ countë§Œí¼ íšë“ ì²˜ë¦¬í•˜ë©°, ì‘ë¬¼ íšë“ ì• ë‹ˆë©”ì´ì…˜ì„ ì¬ìƒí•©ë‹ˆë‹¤.
+	/// ë§Œì•½ í•´ë‹¹ ë†ì‘ë¬¼ì´ ì´ë¯¸ í• ë‹¹ëŸ‰ì„ ë‹¤ ì±„ìš´ ê²½ìš° falseë¥¼ ë°˜í™˜í•˜ë©° ì•„ë¬´ ì‘ì—…ë„ í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
+	/// countê°€ ë‚¨ì€ ê°œìˆ˜ë³´ë‹¤ ë§ì€ ê²½ìš°ì—ë„ ì¼ë‹¨ì€ 0ê°œë¡œ ë§Œë“­ë‹ˆë‹¤(ì˜ˆ: ì˜¤ëŠ˜ì˜ ìˆ˜í™•ì´ 2ê°œ ë‚¨ì€ ìƒí™©ì—ì„œ 3ê°œ ì‘ë¬¼ ìˆ˜í™•í•  ê²½ìš°, 3ê°œë¥¼ ëª¨ë‘ ìˆ˜í™•í•˜ì§€ë§Œ 2ê°œë§Œ íšë“ ì²˜ë¦¬).
 	/// </summary>
 	/// <param name="productEntry"></param>
-	/// <param name="cropScreenPosition">¾Ö´Ï¸ŞÀÌ¼ÇÀÇ ½ÃÀÛ È­¸é À§Ä¡</param>
-	public bool TryBeginGather(ProductEntry productEntry, Vector2 cropScreenPosition)
+	/// <param name="cropScreenPosition">ì• ë‹ˆë©”ì´ì…˜ì˜ ì‹œì‘ í™”ë©´ ìœ„ì¹˜</param>
+	/// <param name="count"></param>
+	public bool TryBeginGather(ProductEntry productEntry, Vector2 cropScreenPosition, int count)
 	{
+		Debug.Log($"Count was {count}");
 		var harvestBox = _harvestBoxes[productEntry.UniqueId];
 		if (harvestBox.Quota == 0)
 		{
 			return false;
 		}
 
-		var toPosition = harvestBox.ScreenPosition;
-		HarvestAnimationPlayer.PlayAnimation(productEntry, cropScreenPosition, toPosition, () => FillQuota(productEntry, 1));
+		count = Mathf.Min(count, harvestBox.Quota);
+		FillQuota(productEntry, count);
+		StartCoroutine(HarvestAnimationCoroutine(productEntry, cropScreenPosition, count)); // ì¼ë‹¨ì€ ê·¸ëŒ€ë¡œ í˜¸ì¶œ
 
 		return true;
 	}
 
 	/// <summary>
-	/// ÇØ´ç ³óÀÛ¹°ÀÇ ÇÒ´ç·®À» ÀÓÀÇ·Î Ã¤¿ó´Ï´Ù.
-	/// ³»ºÎÀûÀ¸·Î ResourceManagerÀÇ Gold¸¦ Áõ°¡½ÃÅ°´Â ¸Ş¼Òµå¸¦ È£ÃâÇÕ´Ï´Ù.
-	/// <b>Á÷Á¢ È£ÃâÇÏ´Â °ÍÀº µğ¹ö±× ¸ñÀûÀ¸·Î¸¸ »ç¿ëÇØ¾ß ÇÕ´Ï´Ù.</b> Á¤»óÀûÀÎ °ÔÀÓ Èå¸§Àº TryBeginGather()¸¦ ÀÌ¿ëÇÏ¼¼¿ä.
+	/// í•´ë‹¹ ë†ì‘ë¬¼ì˜ í• ë‹¹ëŸ‰ì„ ì„ì˜ë¡œ ì±„ì›ë‹ˆë‹¤.
+	/// ë‚´ë¶€ì ìœ¼ë¡œ ResourceManagerì˜ Goldë¥¼ ì¦ê°€ì‹œí‚¤ëŠ” ë©”ì†Œë“œë¥¼ í˜¸ì¶œí•©ë‹ˆë‹¤.
+	/// <b>ì§ì ‘ í˜¸ì¶œí•˜ëŠ” ê²ƒì€ ë””ë²„ê·¸ ëª©ì ìœ¼ë¡œë§Œ ì‚¬ìš©í•´ì•¼ í•©ë‹ˆë‹¤.</b> ì •ìƒì ì¸ ê²Œì„ íë¦„ì€ TryBeginGather()ë¥¼ ì´ìš©í•˜ì„¸ìš”.
 	/// </summary>
 	/// <param name="productEntry"></param>
 	/// <param name="count"></param>
@@ -67,8 +68,8 @@ public class HarvestInventory : MonoBehaviour
 	}
 
 	/// <summary>
-	/// ÇØ´ç ³óÀÛ¹°ÀÇ °³¼ö¸¦ °¨¼Ò½ÃÅµ´Ï´Ù.
-	/// ÇØ´ç °³¼ö¸¸Å­ º¸À¯ÇÏ°í ÀÖÁö ¾ÊÀ¸¸é false¸¦ ¹İÈ¯ÇÕ´Ï´Ù.
+	/// í•´ë‹¹ ë†ì‘ë¬¼ì˜ ê°œìˆ˜ë¥¼ ê°ì†Œì‹œí‚µë‹ˆë‹¤.
+	/// í•´ë‹¹ ê°œìˆ˜ë§Œí¼ ë³´ìœ í•˜ê³  ìˆì§€ ì•Šìœ¼ë©´ falseë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.
 	/// </summary>
 	/// <param name="productEntry"></param>
 	/// <param name="count"></param>
@@ -88,7 +89,7 @@ public class HarvestInventory : MonoBehaviour
 	{
 		if (!_harvestBoxes.TryGetValue(productUniqueId, out var harvestBox))
 		{
-			Debug.LogWarning($"Farm.GetHarvestBoxAvailability()ÀÇ ÀÎÀÚ·Î Àü´ŞµÈ productUniqueId {productUniqueId}(Àº)´Â HarvestInventory._harvestBoxes¿¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+			Debug.LogWarning($"Farm.GetHarvestBoxAvailability()ì˜ ì¸ìë¡œ ì „ë‹¬ëœ productUniqueId {productUniqueId}(ì€)ëŠ” HarvestInventory._harvestBoxesì— ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 			return false;
 		}
 
@@ -99,7 +100,7 @@ public class HarvestInventory : MonoBehaviour
 	{
 		if (!_harvestBoxes.TryGetValue(productUniqueId, out var harvestBox))
 		{
-			Debug.LogError($"Farm.SetHarvestBoxAvailability()ÀÇ ÀÎÀÚ·Î Àü´ŞµÈ productUniqueId {productUniqueId}(Àº)´Â HarvestInventory._harvestBoxes¿¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+			Debug.LogError($"Farm.SetHarvestBoxAvailability()ì˜ ì¸ìë¡œ ì „ë‹¬ëœ productUniqueId {productUniqueId}(ì€)ëŠ” HarvestInventory._harvestBoxesì— ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 			return;
 		}
 
@@ -113,16 +114,29 @@ public class HarvestInventory : MonoBehaviour
 			var harvestBoxTransform = transform.Find($"BoxArea/HarvestBox_{entry.UniqueId}");
 			if (harvestBoxTransform == null)
 			{
-				Debug.LogError($"HarvestInventory/BoxAreaÀÇ ÀÚ½ÄÁß¿¡ HarvestBox_{entry.UniqueId}°¡ ÇÊ¿äÇÕ´Ï´Ù.");
+				Debug.LogError($"HarvestInventory/BoxAreaì˜ ìì‹ì¤‘ì— HarvestBox_{entry.UniqueId}ê°€ í•„ìš”í•©ë‹ˆë‹¤.");
 				continue;
 			}
 			
 			if (!harvestBoxTransform.TryGetComponent<HarvestBox>(out var harvestBox))
 			{
-				Debug.LogError($"{harvestBoxTransform.gameObject.name}(Àº)´Â HarvestBox ÄÄÆ÷³ÍÆ®¸¦ °®Áö ¾Ê½À´Ï´Ù.");
+				Debug.LogError($"{harvestBoxTransform.gameObject.name}(ì€)ëŠ” HarvestBox ì»´í¬ë„ŒíŠ¸ë¥¼ ê°–ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 				continue;
 			}
 			_harvestBoxes.Add(entry.UniqueId, harvestBox);
 		}
+	}
+
+	private System.Collections.IEnumerator HarvestAnimationCoroutine(ProductEntry productEntry, Vector2 cropScreenPosition, int count)
+	{
+		var harvestBox = _harvestBoxes[productEntry.UniqueId];
+		var toPosition = harvestBox.ScreenPosition;
+
+		for (var i = 0; i < count; i++)
+		{
+			HarvestAnimationPlayer.PlayAnimation(productEntry, cropScreenPosition, toPosition, () => { });
+			yield return new WaitForSeconds(0.1f);
+		}
+		yield return null;
 	}
 }

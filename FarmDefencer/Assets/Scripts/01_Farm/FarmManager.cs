@@ -2,8 +2,8 @@ using FarmTest;
 using UnityEngine;
 
 /// <summary>
-/// Å¸ÀÌÄï ¾À ·Îµå Á÷ÈÄÀÇ µ¿ÀÛÀ» Á¤ÀÇÇÏ°í, ¿©·¯ ¿ÀºêÁ§Æ® °£ÀÇ Äİ¹é ±¸¼º ¹× ÀÇÁ¸¼º ÁÖÀÔÀ» ´ã´çÇÏµµ·Ï ¼³°èµÈ Å¬·¡½ºÀÔ´Ï´Ù.
-/// ÀæÀº ÀÌº¥Æ® »ç¿ë°ú Äİ¹é »ç¿ë½Ã Èå¸§ ÆÄ¾ÇÀÌ ¾î·Æ±â ¶§¹®¿¡ ÃÖ´ëÇÑ ÀÌ Å¬·¡½º°¡ Áß°£¿¡¼­ °ü°è¸¦ ±¸¼ºÇÏµµ·Ï ÇÕ´Ï´Ù.
+/// íƒ€ì´ì¿¤ ì”¬ ë¡œë“œ ì§í›„ì˜ ë™ì‘ì„ ì •ì˜í•˜ê³ , ì—¬ëŸ¬ ì˜¤ë¸Œì íŠ¸ ê°„ì˜ ì½œë°± êµ¬ì„± ë° ì˜ì¡´ì„± ì£¼ì…ì„ ë‹´ë‹¹í•˜ë„ë¡ ì„¤ê³„ëœ í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// ì¦ì€ ì´ë²¤íŠ¸ ì‚¬ìš©ê³¼ ì½œë°± ì‚¬ìš©ì‹œ íë¦„ íŒŒì•…ì´ ì–´ë µê¸° ë•Œë¬¸ì— ìµœëŒ€í•œ ì´ í´ë˜ìŠ¤ê°€ ì¤‘ê°„ì—ì„œ ê´€ê³„ë¥¼ êµ¬ì„±í•˜ë„ë¡ í•©ë‹ˆë‹¤.
 /// </summary>
 public class FarmManager : MonoBehaviour
 {
@@ -25,10 +25,10 @@ public class FarmManager : MonoBehaviour
 	{
 		FarmClock.RegisterFarmUpdatableObject(Farm);
 		Farm.OnTryItemify.AddListener(
-			(productEntry, cropWorldPosition, afterItemifyCallback) =>
+			(productEntry, cropWorldPosition, count, afterItemifyCallback) =>
 			{
 				var cropScreenPosition = FarmTestPlayer.Camera.WorldToScreenPoint(new Vector3(cropWorldPosition.x, cropWorldPosition.y, 0)); 
-				var isItemified = FarmUI.HarvestInventory.TryBeginGather(productEntry, cropScreenPosition);
+				var isItemified = FarmUI.HarvestInventory.TryBeginGather(productEntry, cropScreenPosition, count);
 				afterItemifyCallback(isItemified);
 			});
 		FarmUI.Init(FarmClock);

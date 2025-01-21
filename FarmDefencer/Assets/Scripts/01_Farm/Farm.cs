@@ -4,27 +4,27 @@ using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 
 /// <summary>
-/// ¹ç°ú ÀÛ¹°µé·Î ±¸¼ºµÈ ³óÀåÀ» ÀÇ¹ÌÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// FieldPrefabs¸¦ ¼³Á¤ÇØ ³óÀåÀ» ±¸¼ºÇÕ´Ï´Ù.
+/// ë°­ê³¼ ì‘ë¬¼ë“¤ë¡œ êµ¬ì„±ëœ ë†ì¥ì„ ì˜ë¯¸í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// FieldPrefabsë¥¼ ì„¤ì •í•´ ë†ì¥ì„ êµ¬ì„±í•©ë‹ˆë‹¤.
 /// <br/>
-/// ¿ÜºÎÀÇ ¸ğµç °´Ã¼µéÀº Field, Crop µî°ú Á÷Á¢ ¼ÒÅëÇÏÁö ¾Êµµ·Ï(¾Ë ÇÊ¿ä ¾øµµ·Ï) ¼³°èÇÏ¿´½À´Ï´Ù.
-/// Áï FarmÀÇ ÀÌº¥Æ®¿Í public ¸Ş¼Òµåµé¸¸ °í·ÁÇÏ¿© ´Ù¸¥ ½Ã½ºÅÛÀ» ¼³°èÇÏµµ·Ï ÃÖ¼ÒÇÑÀÇ API¸¸ ³ëÃâÇÏ¿´½À´Ï´Ù.
+/// ì™¸ë¶€ì˜ ëª¨ë“  ê°ì²´ë“¤ì€ Field, Crop ë“±ê³¼ ì§ì ‘ ì†Œí†µí•˜ì§€ ì•Šë„ë¡(ì•Œ í•„ìš” ì—†ë„ë¡) ì„¤ê³„í•˜ì˜€ìŠµë‹ˆë‹¤.
+/// ì¦‰ Farmì˜ ì´ë²¤íŠ¸ì™€ public ë©”ì†Œë“œë“¤ë§Œ ê³ ë ¤í•˜ì—¬ ë‹¤ë¥¸ ì‹œìŠ¤í…œì„ ì„¤ê³„í•˜ë„ë¡ ìµœì†Œí•œì˜ APIë§Œ ë…¸ì¶œí•˜ì˜€ìŠµë‹ˆë‹¤.
 /// </summary>
 public class Farm : MonoBehaviour, IFarmUpdatable
 {
     public List<GameObject> FieldPrefabs;
 
 	/// <summary>
-	/// ÀÛ¹°À» ¾ÆÀÌÅÛÈ­ ½ÃµµÇÒ ¶§ È£ÃâµÇ´Â ÀÌº¥Æ®ÀÔ´Ï´Ù. 
-	/// ¾ÆÀÌÅÛÈ­¶õ ÀÛ¹°·ÎºÎÅÍ ¼öÈ® »óÀÚ¿¡ ´ã±â´Â Çàµ¿À» ÀÇ¹ÌÇÕ´Ï´Ù.
+	/// ì‘ë¬¼ì„ ì•„ì´í…œí™” ì‹œë„í•  ë•Œ í˜¸ì¶œë˜ëŠ” ì´ë²¤íŠ¸ì…ë‹ˆë‹¤. 
+	/// ì•„ì´í…œí™”ë€ ì‘ë¬¼ë¡œë¶€í„° ìˆ˜í™• ìƒìì— ë‹´ê¸°ëŠ” í–‰ë™ì„ ì˜ë¯¸í•©ë‹ˆë‹¤.
 	/// <br/>
-	/// OnTryItemify&lt;productEntry, cropWorldPosition, afterItemify(isItemified)&gt;·Î ±¸¼ºµÇ¸ç, 
-	/// ÀÌ¸¦ Ã³¸®ÇÏ´Â ÇÚµé·¯´Â ÀÎÀÚ Äİ¹é afterItemify¿¡ ´ëÇØ ¾ÆÀÌÅÛÈ­¿¡ ¼º°øÇß´ÂÁö ¿©ºÎ¸¦ ¸Å°³ º¯¼ö·Î Àü´ŞÇÏ¿© ´Ù½Ã È£ÃâÇÏ¸é µË´Ï´Ù.
-	/// ÇÒ´ç·®À» ÃÊ°úÇØ¼­ ¼öÈ®ÇÒ ¼ö ¾ø±â ¶§¹®¿¡, ÀÌ¸¦ °ËÁõÇÏ±â À§ÇÑ ÀÌÁß Äİ¹é ±¸Á¶ÀÔ´Ï´Ù.
+	/// OnTryItemify&lt;productEntry, cropWorldPosition, afterItemify(isItemified)&gt;ë¡œ êµ¬ì„±ë˜ë©°, 
+	/// ì´ë¥¼ ì²˜ë¦¬í•˜ëŠ” í•¸ë“¤ëŸ¬ëŠ” ì¸ì ì½œë°± afterItemifyì— ëŒ€í•´ ì•„ì´í…œí™”ì— ì„±ê³µí–ˆëŠ”ì§€ ì—¬ë¶€ë¥¼ ë§¤ê°œ ë³€ìˆ˜ë¡œ ì „ë‹¬í•˜ì—¬ ë‹¤ì‹œ í˜¸ì¶œí•˜ë©´ ë©ë‹ˆë‹¤.
+	/// í• ë‹¹ëŸ‰ì„ ì´ˆê³¼í•´ì„œ ìˆ˜í™•í•  ìˆ˜ ì—†ê¸° ë•Œë¬¸ì—, ì´ë¥¼ ê²€ì¦í•˜ê¸° ìœ„í•œ ì´ì¤‘ ì½œë°± êµ¬ì¡°ì…ë‹ˆë‹¤.
 	/// <br/><br/>
-	/// Áï, OnTryItemify¸¦ Ã³¸®ÇÏ´Â Ãø¿¡¼­´Â ¿©À¯ °ø°£ÀÌ ÀÖ´Ù¸é afterItemify(true), ¾ø´Ù¸é afterItemify(false) ÇÏ¸é µË´Ï´Ù.
+	/// ì¦‰, OnTryItemifyë¥¼ ì²˜ë¦¬í•˜ëŠ” ì¸¡ì—ì„œëŠ” ì—¬ìœ  ê³µê°„ì´ ìˆë‹¤ë©´ afterItemify(true), ì—†ë‹¤ë©´ afterItemify(false) í•˜ë©´ ë©ë‹ˆë‹¤.
 	/// </summary>
-	public UnityEvent<ProductEntry, Vector2Int, UnityAction<bool>> OnTryItemify;
+	public UnityEvent<ProductEntry, Vector2Int, int, UnityAction<bool>> OnTryItemify;
 	public GameObject FieldLockedDisplayPrefab;
 	public GameObject CropLockedDisplayPrefab;
 	public TileBase FlowedTile;
@@ -33,9 +33,9 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 	private bool _isFarmPaused;
 
 	/// <summary>
-	/// ÇØ´ç ¿ùµå ÁÂÇ¥ÀÇ CropÀ» °Ë»öÇÕ´Ï´Ù.
-	/// Crop°ú ¿ÜºÎ ½Ã½ºÅÛÀÌ Á÷Á¢ »óÈ£ÀÛ¿ëÇÒ ÀÏÀº ¾ø±â ¶§¹®¿¡, <b>µğ¹ö±×¿ëÀ¸·Î¸¸ »ç¿ëÇÒ °ÍÀ» ±ÇÀåÇÕ´Ï´Ù. </b><br/><br/>
-	/// <seealso cref="Field.TryFindCropAt(Vector2, out Crop)"/>À» ÇØ´ç À§Ä¡¸¦ Æ÷ÇÔÇÏ´Â Field¿¡ ´ëÇØ È£ÃâÇÏ´Â µ¿ÀÛÀÔ´Ï´Ù.
+	/// í•´ë‹¹ ì›”ë“œ ì¢Œí‘œì˜ Cropì„ ê²€ìƒ‰í•©ë‹ˆë‹¤.
+	/// Cropê³¼ ì™¸ë¶€ ì‹œìŠ¤í…œì´ ì§ì ‘ ìƒí˜¸ì‘ìš©í•  ì¼ì€ ì—†ê¸° ë•Œë¬¸ì—, <b>ë””ë²„ê·¸ìš©ìœ¼ë¡œë§Œ ì‚¬ìš©í•  ê²ƒì„ ê¶Œì¥í•©ë‹ˆë‹¤. </b><br/><br/>
+	/// <seealso cref="Field.TryFindCropAt(Vector2, out Crop)"/>ì„ í•´ë‹¹ ìœ„ì¹˜ë¥¼ í¬í•¨í•˜ëŠ” Fieldì— ëŒ€í•´ í˜¸ì¶œí•˜ëŠ” ë™ì‘ì…ë‹ˆë‹¤.
 	/// </summary>
 	/// <param name="position"></param>
 	/// <param name="crop"></param>
@@ -125,7 +125,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 	{
 		if (!_fields.TryGetValue(productUniqueId, out var field))
 		{
-			Debug.LogWarning($"Farm.GetFieldAvailability()ÀÇ ÀÎÀÚ·Î Àü´ŞµÈ productUniqueId {productUniqueId}(Àº)´Â Farm._field¿¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+			Debug.LogWarning($"Farm.GetFieldAvailability()ì˜ ì¸ìë¡œ ì „ë‹¬ëœ productUniqueId {productUniqueId}(ì€)ëŠ” Farm._fieldì— ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 			return false;
 		}
 
@@ -136,7 +136,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 	{
 		if (!_fields.TryGetValue(productUniqueId, out var field))
 		{
-			Debug.LogError($"Farm.SetAvailability()ÀÇ ÀÎÀÚ·Î Àü´ŞµÈ productUniqueId {productUniqueId}(Àº)´Â Farm._field¿¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+			Debug.LogError($"Farm.SetAvailability()ì˜ ì¸ìë¡œ ì „ë‹¬ëœ productUniqueId {productUniqueId}(ì€)ëŠ” Farm._fieldì— ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 			return;
 		}
 
@@ -149,7 +149,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 
 		if (CropLockedDisplayPrefab == null || !CropLockedDisplayPrefab.TryGetComponent<CropLockedDisplay>(out var _))
 		{
-			throw new System.ArgumentException("FarmÀÇ CropLockedDisplayPrefab None ¿ÀºêÁ§Æ® ¶Ç´Â CropLockedDisplay ÄÄÆ÷³ÍÆ®¸¦ °®Áö ¾Ê´Â ¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÕ´Ï´Ù.");
+			throw new System.ArgumentException("Farmì˜ CropLockedDisplayPrefab None ì˜¤ë¸Œì íŠ¸ ë˜ëŠ” CropLockedDisplay ì»´í¬ë„ŒíŠ¸ë¥¼ ê°–ì§€ ì•ŠëŠ” ì˜¤ë¸Œì íŠ¸ê°€ ì¡´ì¬í•©ë‹ˆë‹¤.");
 		}
 
         for (int index = 0; index<FieldPrefabs.Count; index++)
@@ -158,7 +158,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
             if (fieldPrefab == null
                 || !fieldPrefab.TryGetComponent<Field>(out var _))
             {
-                throw new System.ArgumentException("FarmÀÇ FieldPrefabs¿¡ None ¿ÀºêÁ§Æ® ¶Ç´Â Field ÄÄÆ÷³ÍÆ®¸¦ °®Áö ¾Ê´Â ¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÕ´Ï´Ù.");
+                throw new System.ArgumentException("Farmì˜ FieldPrefabsì— None ì˜¤ë¸Œì íŠ¸ ë˜ëŠ” Field ì»´í¬ë„ŒíŠ¸ë¥¼ ê°–ì§€ ì•ŠëŠ” ì˜¤ë¸Œì íŠ¸ê°€ ì¡´ì¬í•©ë‹ˆë‹¤.");
             }
 
             var fieldObject = Instantiate(fieldPrefab);
@@ -169,7 +169,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 				FieldLockedDisplayPrefab,
 				CropLockedDisplayPrefab,
 				FlowedTile,
-				(productEntry, cropPosition, afterItemifyCallback) => OnTryItemify.Invoke(productEntry, cropPosition, afterItemifyCallback));
+				(productEntry, cropPosition, count, afterItemifyCallback) => OnTryItemify.Invoke(productEntry, cropPosition, count,afterItemifyCallback));
             _fields.Add(fieldComponent.ProductEntry.UniqueId, fieldComponent);
         }
     }

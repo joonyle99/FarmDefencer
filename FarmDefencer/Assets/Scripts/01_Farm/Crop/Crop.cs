@@ -16,7 +16,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 {
 	public ProductEntry ProductEntry;
 
-	private UnityAction<UnityAction<bool>> _onTryItemifyAction;
+	private UnityAction<int, UnityAction<bool>> _onTryItemifyAction;
 	public CropState State
 	{
 		get
@@ -172,7 +172,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	/// 작물을 아이템화 시도합니다. State가 Harvested가 아니라면 아무 일도 하지 않습니다.
 	/// OnTryItemify&lt;afterItemify&lt;bool&gt;&gt; 이벤트를 발생시키며, afterItemify 콜백으로는 bool이 true일 경우 작물을 씨앗 상태로 되돌리는 작업이 전달됩니다.
 	/// </summary>
-	protected void Itemify()
+	protected void Itemify(int count=1)
 	{
 		if (State != CropState.Harvested)
 		{
@@ -180,13 +180,15 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 		}
 
 		_onTryItemifyAction(
-		(isItemified) =>
-		{
-			if (isItemified)
+			count,
+			(isItemified) =>
 			{
-				State = CropState.Seed;
+				if (isItemified)
+				{
+					State = CropState.Seed;
+				}
 			}
-		});
+		);
 	}
 
 	/// <summary>
@@ -201,7 +203,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 
 	public override string ToString() => $"{this.GetType()} at {Position}, age {GrowthAgeSeconds}, water waiting {WaterWaitingSeconds}, state {State}";
 
-	public void Init(GameObject cropLockedDisplayPrefab, UnityAction<UnityAction<bool>> onTryItemifyAction)
+	public void Init(GameObject cropLockedDisplayPrefab, UnityAction<int, UnityAction<bool>> onTryItemifyAction)
 	{
 		var cropLockedDisplayObject = Instantiate(cropLockedDisplayPrefab);
 		cropLockedDisplayObject.transform.SetParent(transform, false);

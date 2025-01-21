@@ -185,10 +185,6 @@ public class CropCabbage : Crop
 
 	private void ShakeMotion(float deltaShake)
 	{
-		if (deltaShake != 0.0f)
-		{
-			Debug.Log(deltaShake);
-		}
 		_harvestCropLayerObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, Mathf.Atan(-deltaShake) * 30.0f / Mathf.PI);
 	}
 }
