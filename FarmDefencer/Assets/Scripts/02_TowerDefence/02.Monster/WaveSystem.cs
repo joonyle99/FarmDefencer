@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ¸ó½ºÅÍÀÇ ¿şÀÌºê¸¦ °ü¸®ÇÏ´Â ½Ã½ºÅÛ
+/// ëª¬ìŠ¤í„°ì˜ ì›¨ì´ë¸Œë¥¼ ê´€ë¦¬í•˜ëŠ” ì‹œìŠ¤í…œ
 /// </summary>
 public class WaveSystem : MonoBehaviour
 {
-    [Header("¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬ Wave System ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬")]
+    [Header("â”â”â”â”â”â”â”â” Wave System â”â”â”â”â”â”â”â”")]
     [Space]
 
     [SerializeField] private Factory _factory;              // wave system use factory for spawn spawnedMonster
@@ -87,7 +87,7 @@ public class WaveSystem : MonoBehaviour
     // wave process
     protected void Spawn()
     {
-        if (CompleteSpawn)
+        if (CompleteSpawn == true)
         {
             return;
         }
@@ -112,6 +112,7 @@ public class WaveSystem : MonoBehaviour
             // ending
             if (CompleteSpawn == true && CompleteWave == true)
             {
+                // wait a second
                 yield return new WaitForSeconds(1f);
 
                 CompleteWaveProcess();
@@ -150,13 +151,13 @@ public class WaveSystem : MonoBehaviour
     {
         GameStateManager.Instance.ChangeState(GameState.End);
 
-        if (SurvivedCount == 0)
+        if (SurvivedCount > 0)
         {
-            OnSuccess?.Invoke();
+            OnFailure?.Invoke();
         }
         else
         {
-            OnFailure?.Invoke();
+            OnSuccess?.Invoke();
         }
     }
 
