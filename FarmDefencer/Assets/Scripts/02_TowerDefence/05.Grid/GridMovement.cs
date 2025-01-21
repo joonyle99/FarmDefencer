@@ -113,13 +113,13 @@ public class GridMovement : MonoBehaviour
         _pathIndex = 0;
         _targetGridCell = DefenceContext.Current.GridMap.GridPath[_pathIndex];
 
-        // monster ÀÌ¹ÌÁöÀÇ ¾ÕÂÊÀº right ¹æÇâÀÌ´Ù
+        // monster ì´ë¯¸ì§€ì˜ ì•žìª½ì€ right ë°©í–¥ì´ë‹¤
         // currentLookDir = transform.right.ToVector2Int();
 
         transform.position = _targetGridCell.transform.position;
         // _rigidbody.MovePosition(_targetGridCell.transform.position);
 
-        _monster.SetAnimation(_monster.WalkAnimationName, true);
+        _monster.SpineController.SetAnimation(_monster.WalkAnimationName, true);
 
         /*
         if (DefenceContext.Current.GridMap.GridPath.Count > 2)

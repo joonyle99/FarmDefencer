@@ -265,6 +265,7 @@ GameObject:
   - component: {fileID: 3788177686576222563}
   - component: {fileID: 2399177187496544103}
   - component: {fileID: 1274855192584868659}
+  - component: {fileID: 7923479951364342952}
   - component: {fileID: 3216986904248962249}
   - component: {fileID: 1543992766888672360}
   - component: {fileID: 7300144381691796175}
@@ -390,6 +391,18 @@ MonoBehaviour:
   _animationName: idle
   loop: 1
   timeScale: 1
+--- !u!114 &7923479951364342952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4172481917644167003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61f64264dfc9b1f49ab5fda2efdc8920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!58 &3216986904248962249
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -498,6 +511,7 @@ MonoBehaviour:
   _isDead: 0
   _originFactory: {fileID: 0}
   _monsterName: "\uD1A0\uB07C"
+  _spineController: {fileID: 7923479951364342952}
   IdleAnimationName: idle
   WalkAnimationName: walk
   WalkDamagedAnimationName: walk_damaged

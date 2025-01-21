@@ -11,6 +11,10 @@ public class SpineController : MonoBehaviour
     private Spine.AnimationState _spineAnimationState;
     private Spine.Skeleton _skeleton;
 
+    public SkeletonAnimation SkeletonAnimation => _skeletonAnimation;
+    public Spine.AnimationState SpineAnimationState => _spineAnimationState;
+    public Spine.Skeleton Skeleton => _skeleton;
+
     private void Awake()
     {
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
