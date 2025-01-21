@@ -34,7 +34,7 @@ public class GridMovement : MonoBehaviour
     }
     private void Update()
     {
-        if (_monster.IsDead == true)
+        if (_monster.IsStun == true || _monster.IsDead == true)
         {
             return;
         }
@@ -82,8 +82,9 @@ public class GridMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (_monster.IsDead == true)
+        if (_monster.IsStun == true || _monster.IsDead == true)
         {
+            _rigidbody.linearVelocity = Vector2.zero;
             return;
         }
 

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -5,13 +6,14 @@ using UnityEngine;
 /// </summary>
 public abstract class DamageableBehavior : MonoBehaviour
 {
-    [Header("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ DamageableBehavior ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡")]
+    [Header("â”€â”€â”€â”€â”€â”€â”€â”€ DamageableBehavior â”€â”€â”€â”€â”€â”€â”€â”€")]
     [Space]
 
     [SerializeField] private FloatingHealthBar _healthBar;
 
     [Space]
 
+    // status
     [SerializeField] private int _hp = 100;
     public int HP
     {
@@ -26,16 +28,29 @@ public abstract class DamageableBehavior : MonoBehaviour
                 Kill();
             }
 
+            if (_hp < 50)
+            {
+                _healthBar.ChangeToRedBar();
+            }
+
             if (_healthBar != null)
             {
                 _healthBar.UpdateHealthBar((float)_hp, (float)_startHp);
             }
         }
     }
+    [SerializeField] private float _stunDuration = 0.1f;
+    public float StunDuration => _stunDuration;
 
+    [Space]
+
+    // state
     [SerializeField] private bool _isDead;
     public bool IsDead { get { return _isDead; } protected set { _isDead = value; } }
+    [SerializeField] private bool _isStun;
+    public bool IsStun { get { return _isStun; } protected set { _isStun = value; } }
 
+    // etc
     private int _startHp;
     public int StartHp => _startHp;
 
@@ -65,4 +80,12 @@ public abstract class DamageableBehavior : MonoBehaviour
 
     public abstract void TakeDamage(int damage);
     public abstract void Kill();
+
+    // status
+    public IEnumerator StunRoutine(float duration)
+    {
+        IsStun = true;
+        yield return new WaitForSeconds(duration);
+        IsStun = false;
+    }
 }
