@@ -12,6 +12,9 @@
 git config commit.template ".gitmessage.txt"
 ```
 
+> cf) git config --global --unset commit.template // 해제
+
+
 ##### 커멧 템플릿을 이용해 커밋하기
 ```
 git commit
