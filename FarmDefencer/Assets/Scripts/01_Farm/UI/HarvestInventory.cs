@@ -38,7 +38,6 @@ public class HarvestInventory : MonoBehaviour
 	/// <param name="count"></param>
 	public bool TryBeginGather(ProductEntry productEntry, Vector2 cropScreenPosition, int count)
 	{
-		Debug.Log($"Count was {count}");
 		var harvestBox = _harvestBoxes[productEntry.UniqueId];
 		if (harvestBox.Quota == 0)
 		{

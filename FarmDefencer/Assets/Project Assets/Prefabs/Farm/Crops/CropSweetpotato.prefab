@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4909483675425250203}
   - component: {fileID: 738135450724276457}
-  - component: {fileID: 3787861198745225257}
+  - component: {fileID: -3797436602998145901}
   m_Layer: 0
   m_Name: CropSweetpotato
   m_TagString: Untagged
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3787861198745225257
+--- !u!114 &-3797436602998145901
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,23 +97,46 @@ MonoBehaviour:
   m_GameObject: {fileID: 8248929270521535658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9236c928443994544812fc3f2d7a3227, type: 3}
+  m_Script: {fileID: 11500000, guid: 4dd0d117549271940989f2d24b554ae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ProductEntry: {fileID: 11400000, guid: bbf41d007f26d6049ba7c478bd5f3ecd, type: 2}
   _state: 0
-  MatureAgeSeconds: 5
+  MatureAgeSeconds: 55
   _growthAgeSeconds: 0
-  LockSeconds: 5
+  LockSeconds: 60
   _lockRemainingSeconds: 0
   _waterStored: 0
   _waterWaitingSeconds: 0
-  SeedSprite: {fileID: 2185865422229137852, guid: c62fbc13d000c3a44b365861596edcc7, type: 3}
-  JustPlantedSprite: {fileID: -2360516894548652956, guid: a1b2baeede864f947881b8b68de28cd7, type: 3}
-  DeadSprite: {fileID: 5505145245838024403, guid: b80e3bc29c90f8549a65627bea3c3b77, type: 3}
-  GrowingSprite: {fileID: -2360516894548652956, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
-  BudSprite: {fileID: -5645142870935734174, guid: 8851ae7ae4197674292e215b5104ecfd, type: 3}
-  LockedSprite: {fileID: 579628540815059721, guid: c663019061a422a4bbdc428297d78526, type: 3}
-  PlantToDeadSeconds: 5
-  DeadToLockSeconds: 300
-  HarvestHoldTime: 2
+  Stage0Sprite: {fileID: 2185865422229137852, guid: 1786c577db28cb846b67dc797950b9d2, type: 3}
+  Stage1BeforeWateringSprite: {fileID: -2360516894548652956, guid: a1b2baeede864f947881b8b68de28cd7, type: 3}
+  Stage1DeadSprite: {fileID: -2739807658926110822, guid: 18050bc5ddbcb9f4e8a573db7f543236, type: 3}
+  Stage1AfterWateringSprite: {fileID: 21300000, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
+  Stage1GrowthSeconds: 20
+  Stage2BeforeWateringSprite: {fileID: -4860010634957982478, guid: 6bbfa09fcf9c8334db0d22cbf2b11262, type: 3}
+  Stage2DeadSprite: {fileID: -2739807658926110822, guid: 18050bc5ddbcb9f4e8a573db7f543236, type: 3}
+  Stage2AfterWateringSprite: {fileID: 21300000, guid: bcc3df56fd2c4c24f875245d208a3eb3, type: 3}
+  Stage2GrowthSeconds: 20
+  Stage3BeforeWrapSprite: {fileID: 2698923072612728924, guid: 89bfc06b2985a7f489968759e3101eeb, type: 3}
+  Stage3AfterWrapSprite: {fileID: 21300000, guid: ef8c9855278e91647af4f7d36c970b3e, type: 3}
+  Stage3GrowthSeconds: 10
+  Stage4Sprite: {fileID: 21300000, guid: 482cf43ff69856743adb47a970272254, type: 3}
+  Stage4GrowthSeconds: 5
+  Stage5_X_Sprite: {fileID: 21300000, guid: c62fbc13d000c3a44b365861596edcc7, type: 3}
+  Stage5_O_Sprite: {fileID: 21300000, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
+  Stage5_OO_Sprite: {fileID: 21300000, guid: bcc3df56fd2c4c24f875245d208a3eb3, type: 3}
+  Stage5_OX_Sprite: {fileID: 21300000, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
+  Stage5_XO_Sprite: {fileID: 21300000, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
+  Stage5_XX_Sprite: {fileID: 21300000, guid: c62fbc13d000c3a44b365861596edcc7, type: 3}
+  Stage5_XXX_Sprite: {fileID: 21300000, guid: c62fbc13d000c3a44b365861596edcc7, type: 3}
+  Stage5_XXO_Sprite: {fileID: 21300000, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
+  Stage5_XOX_Sprite: {fileID: 21300000, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
+  Stage5_OXX_Sprite: {fileID: 21300000, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
+  Stage5_XOO_Sprite: {fileID: 21300000, guid: bcc3df56fd2c4c24f875245d208a3eb3, type: 3}
+  Stage5_OXO_Sprite: {fileID: 21300000, guid: bcc3df56fd2c4c24f875245d208a3eb3, type: 3}
+  Stage5_OOX_Sprite: {fileID: 21300000, guid: bcc3df56fd2c4c24f875245d208a3eb3, type: 3}
+  Stage5_OOO_Sprite: {fileID: 21300000, guid: ef8c9855278e91647af4f7d36c970b3e, type: 3}
+  LockedSprite: {fileID: 0}
+  HarvestedSprite: {fileID: 21300000, guid: cad8f864d730e7d46bccbe812f1d1c30, type: 3}
+  NormalToDeadSeconds: 300
+  DeadToSeedSeconds: 300

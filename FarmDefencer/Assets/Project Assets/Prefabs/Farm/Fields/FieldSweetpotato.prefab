@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CropPrefab: {fileID: 8248929270521535658, guid: 22978a5c18d0fff43ae9129b2fd8e036, type: 3}
-  FieldLocalPosition: {x: 9, y: 7}
+  FieldLocalPosition: {x: 6, y: 7}
   FieldSize: {x: 2, y: 4}
 --- !u!1001 &5517354188498359498
 PrefabInstance:
