@@ -9,7 +9,7 @@ namespace FarmTest
     {
         public float LongTapThreshold = 1.0f;
         public float CameraMovementScale = 1.0f;
-        public Vector2 MousePosition;
+        public Vector2 LastInteractScreenPosition;
         public GameObject FarmObject;
 		public Camera Camera;
         public FarmClock FarmClock;
@@ -32,24 +32,24 @@ namespace FarmTest
             }
         }
 
-		// 스크린 절대 좌표를 받음
-        public void OnMouseMove(InputValue inputValue)
+		// 현재 누르고 있는 스크린 절대 좌표를 받음
+        public void OnInteract(InputValue inputValue)
         {
-            MousePosition = inputValue.Get<Vector2>();
+            LastInteractScreenPosition = inputValue.Get<Vector2>();
         }
 
 		public void OnSingleTap()
 		{
-			_farmComponent.TapAction(Camera.ScreenToWorldPoint(MousePosition));
+			_farmComponent.TapAction(Camera.ScreenToWorldPoint(LastInteractScreenPosition));
 		}
 
         public void OnSingleHold(InputValue inputValue)
         {
-            var currentHold = inputValue.Get<float>() == 1;
+            var currentHold = inputValue.Get<float>() >= 0.5f;
 
 			if (!_isSingleHolding && currentHold)
             {
-				_singleHoldBeginPosition = MousePosition;
+				_singleHoldBeginPosition = LastInteractScreenPosition;
 			}
 
             _isSingleHolding = currentHold;
@@ -57,7 +57,7 @@ namespace FarmTest
 
 		public void OnDoubleHold(InputValue inputValue)
 		{
-			_isDoubleHolding = inputValue.Get<float>() == 1;
+			_isDoubleHolding = inputValue.Get<float>() >= 0.5f;
 		}
 
 		public void OnToggleAvailability()
@@ -77,7 +77,7 @@ namespace FarmTest
 
 				_farmComponent.SingleHoldingAction(
 					Camera.ScreenToWorldPoint(_singleHoldBeginPosition),
-					MousePosition - _singleHoldBeginPosition,
+					LastInteractScreenPosition - _singleHoldBeginPosition,
 					false,
 					Time.deltaTime);
                 
@@ -86,7 +86,7 @@ namespace FarmTest
             {
 				_farmComponent.SingleHoldingAction(
 					Camera.ScreenToWorldPoint(_singleHoldBeginPosition),
-	                MousePosition - _singleHoldBeginPosition,
+	                LastInteractScreenPosition - _singleHoldBeginPosition,
 	                true,
 					Time.deltaTime);
                 _singleHoldingTimeElapsed = 0.0f;

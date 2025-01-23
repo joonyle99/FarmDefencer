@@ -221,6 +221,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3f4e49362e03f40887474469816bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnHarvested:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlanted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWatered:
+    m_PersistentCalls:
+      m_Calls: []
   CropPrefab: {fileID: 8248929270521535658, guid: b2b422ce0e0c73d4a9db2c17c589f6ac, type: 3}
   FieldLocalPosition: {x: 11, y: 8}
   FieldSize: {x: 2, y: 5}
