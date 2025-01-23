@@ -117,35 +117,35 @@ MonoBehaviour:
   _lockRemainingSeconds: 0
   _waterStored: 0
   _waterWaitingSeconds: 0
-  Stage0Sprite: {fileID: 2185865422229137852, guid: 1786c577db28cb846b67dc797950b9d2, type: 3}
-  Stage1BeforeWateringSprite: {fileID: -2360516894548652956, guid: a1b2baeede864f947881b8b68de28cd7, type: 3}
-  Stage1DeadSprite: {fileID: -2739807658926110822, guid: 18050bc5ddbcb9f4e8a573db7f543236, type: 3}
-  Stage1AfterWateringSprite: {fileID: 21300000, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
+  Stage0Sprite: {fileID: 0}
+  Stage1BeforeWateringSprite: {fileID: -2926072093043426144, guid: adff25b7ded79e44e9e6521105146f8e, type: 3}
+  Stage1DeadSprite: {fileID: 8667131316060353084, guid: aa9d49020695b5a4489c182701c777e9, type: 3}
+  Stage1AfterWateringSprite: {fileID: -2935609776451076171, guid: 7b18db4b3dd471b43ab8dfd96b821ea2, type: 3}
   Stage1GrowthSeconds: 20
-  Stage2BeforeWateringSprite: {fileID: -4860010634957982478, guid: 6bbfa09fcf9c8334db0d22cbf2b11262, type: 3}
-  Stage2DeadSprite: {fileID: -2739807658926110822, guid: 18050bc5ddbcb9f4e8a573db7f543236, type: 3}
-  Stage2AfterWateringSprite: {fileID: 21300000, guid: bcc3df56fd2c4c24f875245d208a3eb3, type: 3}
+  Stage2BeforeWateringSprite: {fileID: 7360896723288083390, guid: c77df4ef5d6a5eb4783987f9d2469772, type: 3}
+  Stage2DeadSprite: {fileID: -1837152525124395075, guid: 3b3bad560977d52468550390a38d771d, type: 3}
+  Stage2AfterWateringSprite: {fileID: -680451588128437482, guid: ebb05c008ccc93742adabf41cad90847, type: 3}
   Stage2GrowthSeconds: 20
-  Stage3BeforeWrapSprite: {fileID: 2698923072612728924, guid: 89bfc06b2985a7f489968759e3101eeb, type: 3}
-  Stage3AfterWrapSprite: {fileID: 21300000, guid: ef8c9855278e91647af4f7d36c970b3e, type: 3}
+  Stage3BeforeWrapSprite: {fileID: -8072476731542956246, guid: 56ca345ce86a8504abb3d0e5f4bfec2c, type: 3}
+  Stage3AfterWrapSprite: {fileID: -7668523388517660598, guid: 8bc14c9180d0e76428b690e134c12eff, type: 3}
   Stage3GrowthSeconds: 10
-  Stage4Sprite: {fileID: 21300000, guid: 482cf43ff69856743adb47a970272254, type: 3}
+  Stage4Sprite: {fileID: -393943011667699732, guid: a26918cffb64425428c75149b79b107e, type: 3}
   Stage4GrowthSeconds: 5
-  Stage5_X_Sprite: {fileID: 21300000, guid: c62fbc13d000c3a44b365861596edcc7, type: 3}
-  Stage5_O_Sprite: {fileID: 21300000, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
-  Stage5_OO_Sprite: {fileID: 21300000, guid: bcc3df56fd2c4c24f875245d208a3eb3, type: 3}
-  Stage5_OX_Sprite: {fileID: 21300000, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
-  Stage5_XO_Sprite: {fileID: 21300000, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
-  Stage5_XX_Sprite: {fileID: 21300000, guid: c62fbc13d000c3a44b365861596edcc7, type: 3}
-  Stage5_XXX_Sprite: {fileID: 21300000, guid: c62fbc13d000c3a44b365861596edcc7, type: 3}
-  Stage5_XXO_Sprite: {fileID: 21300000, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
-  Stage5_XOX_Sprite: {fileID: 21300000, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
-  Stage5_OXX_Sprite: {fileID: 21300000, guid: 6ebdfa459b7b9564c9ba6281f263cf6b, type: 3}
-  Stage5_XOO_Sprite: {fileID: 21300000, guid: bcc3df56fd2c4c24f875245d208a3eb3, type: 3}
-  Stage5_OXO_Sprite: {fileID: 21300000, guid: bcc3df56fd2c4c24f875245d208a3eb3, type: 3}
-  Stage5_OOX_Sprite: {fileID: 21300000, guid: bcc3df56fd2c4c24f875245d208a3eb3, type: 3}
-  Stage5_OOO_Sprite: {fileID: 21300000, guid: ef8c9855278e91647af4f7d36c970b3e, type: 3}
+  Stage5_X_Sprite: {fileID: -1501239353019026789, guid: 1ccb20eee17787f41a9e0f397e67d87a, type: 3}
+  Stage5_O_Sprite: {fileID: 8851719432068433820, guid: 68b4429c1aee3664c89bd0db314c960d, type: 3}
+  Stage5_OO_Sprite: {fileID: -8974424302408145557, guid: e03e0272824bee24698d7b78b69e39bf, type: 3}
+  Stage5_OX_Sprite: {fileID: -6549051271431963970, guid: 3e713878f60aea34c9054be02731eec8, type: 3}
+  Stage5_XO_Sprite: {fileID: -6549051271431963970, guid: 3e713878f60aea34c9054be02731eec8, type: 3}
+  Stage5_XX_Sprite: {fileID: -2871083057967756941, guid: eee22def713719941ad31443c6a5bf77, type: 3}
+  Stage5_XXX_Sprite: {fileID: -8298802704867711590, guid: be12bd176e84d244d9c2408c5d1a0b70, type: 3}
+  Stage5_XXO_Sprite: {fileID: -5468782791774853274, guid: 898363a2890d4fd4781a5651b3ef8893, type: 3}
+  Stage5_XOX_Sprite: {fileID: -5468782791774853274, guid: 898363a2890d4fd4781a5651b3ef8893, type: 3}
+  Stage5_OXX_Sprite: {fileID: -5468782791774853274, guid: 898363a2890d4fd4781a5651b3ef8893, type: 3}
+  Stage5_XOO_Sprite: {fileID: 8346025296148574424, guid: c11d91e4ee01baf4d853605406d3e315, type: 3}
+  Stage5_OXO_Sprite: {fileID: 8346025296148574424, guid: c11d91e4ee01baf4d853605406d3e315, type: 3}
+  Stage5_OOX_Sprite: {fileID: 8346025296148574424, guid: c11d91e4ee01baf4d853605406d3e315, type: 3}
+  Stage5_OOO_Sprite: {fileID: 3900174459098693200, guid: 903fd32b17f7af5469a3ee2d6296de09, type: 3}
   LockedSprite: {fileID: 0}
-  HarvestedSprite: {fileID: 21300000, guid: cad8f864d730e7d46bccbe812f1d1c30, type: 3}
+  HarvestedSprite: {fileID: 6151279427029150262, guid: 9ea773bb6af578f4fa82bc2c0bcd135e, type: 3}
   NormalToDeadSeconds: 300
   DeadToSeedSeconds: 300

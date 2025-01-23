@@ -10,12 +10,12 @@
                     "type": "Value",
                     "id": "517c9ba2-cfd1-4ef5-9471-ecb5c70f0c61",
                     "expectedControlType": "Vector2",
-                    "processors": "InvertVector2",
+                    "processors": "InvertVector2,ScaleVector2(x=0.5)",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
-                    "name": "MouseMove",
+                    "name": "Interact",
                     "type": "Value",
                     "id": "58edcc13-703e-4865-ab07-34ac5c6e6ea7",
                     "expectedControlType": "Vector2",
@@ -36,7 +36,7 @@
                     "name": "SingleHold",
                     "type": "Value",
                     "id": "4319d5e5-4895-4e3a-90d9-09ed7e710c85",
-                    "expectedControlType": "Digital",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -45,7 +45,7 @@
                     "name": "DoubleHold",
                     "type": "Value",
                     "id": "54c9e419-7fab-46c8-b2b9-978683f823a0",
-                    "expectedControlType": "Digital",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -169,7 +169,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";PC(Debug)",
-                    "action": "MouseMove",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6dfae57-8b9d-45e8-8e13-04fde66da01e",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Mobile",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -180,6 +191,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";PC(Debug)",
+                    "action": "SingleTap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "422f35b3-e75f-4903-bf37-5831369d9c98",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Mobile",
                     "action": "SingleTap",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -197,11 +219,33 @@
                 },
                 {
                     "name": "",
+                    "id": "c5763549-f7b5-4aae-945c-f0942099e1b9",
+                    "path": "<Touchscreen>/pressure",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Mobile",
+                    "action": "SingleHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "94382cc1-73e1-4d6c-b107-f7948d78ecfc",
                     "path": "<Mouse>/middleButton",
                     "interactions": "",
                     "processors": "",
                     "groups": ";PC(Debug)",
+                    "action": "DoubleHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b364b182-df64-4ace-a018-999a3e9ac3ae",
+                    "path": "<Touchscreen>/touch*/Press",
+                    "interactions": "",
+                    "processors": "Scale",
+                    "groups": ";Mobile",
                     "action": "DoubleHold",
                     "isComposite": false,
                     "isPartOfComposite": false
