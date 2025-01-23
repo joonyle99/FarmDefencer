@@ -101,10 +101,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProductEntry: {fileID: 11400000, guid: bbf41d007f26d6049ba7c478bd5f3ecd, type: 2}
+  OnHarvested:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlanted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWatered:
+    m_PersistentCalls:
+      m_Calls: []
   _state: 0
   MatureAgeSeconds: 55
   _growthAgeSeconds: 0
-  LockSeconds: 60
+  LockSeconds: 0
   _lockRemainingSeconds: 0
   _waterStored: 0
   _waterWaitingSeconds: 0
