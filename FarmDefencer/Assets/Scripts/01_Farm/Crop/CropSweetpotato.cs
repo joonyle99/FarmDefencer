@@ -302,7 +302,14 @@ public class CropSweetpotato : Crop
 		}
 		else if (State == CropState.Harvested)
 		{
-			_spriteRenderer.sprite = HarvestedSprite;
+			if (_harvestedCount == 0)
+			{
+				State = CropState.Seed;
+			}
+			else
+			{ 		
+				_spriteRenderer.sprite = HarvestedSprite;
+			}
 		}
 		else if (State == CropState.Locked)
 		{

@@ -179,7 +179,14 @@ public class CropMushroom : Crop
 		}
 		else if (State == CropState.Harvested)
 		{
-			_spriteRenderer.sprite = HarvestedSprite;
+			if (_poisonous)
+			{
+				State = CropState.Seed;
+			}
+			else
+			{
+				_spriteRenderer.sprite = HarvestedSprite;
+			}
 		}
 		else if (State == CropState.Locked)
 		{
