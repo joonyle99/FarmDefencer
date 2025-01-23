@@ -68,7 +68,10 @@ public class CropSweetpotato : Crop
 				if (_tapCount >= 5)
 				{
 					State = CropState.Harvested;
-					OnHarvested.Invoke();
+					if (_harvestedCount > 0)
+					{
+						OnHarvested.Invoke();
+					}
 				}
 			}
 		}

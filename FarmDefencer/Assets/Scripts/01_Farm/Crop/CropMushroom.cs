@@ -37,7 +37,10 @@ public class CropMushroom : Crop
 			if (IsHarvestable)
 			{
 				State = CropState.Harvested;
-				OnHarvested.Invoke();
+				if (!_poisonous)
+				{
+					OnHarvested.Invoke();
+				}
 			}
 		}
 		else if (State == CropState.Harvested)
