@@ -16,6 +16,10 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 {
 	public ProductEntry ProductEntry;
 
+	public UnityEvent OnHarvested;
+	public UnityEvent OnPlanted;
+	public UnityEvent OnWatered;
+
 	private UnityAction<int, UnityAction<bool>> _onTryItemifyAction;
 	public CropState State
 	{

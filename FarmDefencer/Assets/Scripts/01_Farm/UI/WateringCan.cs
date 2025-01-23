@@ -5,9 +5,9 @@ using UnityEngine.UI;
 using Spine.Unity;
 
 /// <summary>
-/// ¹°»Ñ¸®°³ÀÔ´Ï´Ù.
-/// UIÀÇ ÇüÅÂ·Î ±¸ÇöµÇ¸ç ½ºÅ©¸° ÁÂÇ¥·Î À¯ÀúÀÇ ÀÔ·ÂÀ» ¹Ş°í, ¿ùµå ÁÂÇ¥·Î Farm µî°ú »óÈ£ÀÛ¿ëÇÕ´Ï´Ù.
-/// ÇÑ Å¸ÀÏ¿¡ WateringTime ÀÌ»ó ¸Ó¹°¸é OnWatering ÀÌº¥Æ®¸¦ ¹ß»ı½ÃÅ°´Â µ¿ÀÛÀ» ÇÕ´Ï´Ù.
+/// ë¬¼ë¿Œë¦¬ê°œì…ë‹ˆë‹¤.
+/// UIì˜ í˜•íƒœë¡œ êµ¬í˜„ë˜ë©° ìŠ¤í¬ë¦° ì¢Œí‘œë¡œ ìœ ì €ì˜ ì…ë ¥ì„ ë°›ê³ , ì›”ë“œ ì¢Œí‘œë¡œ Farm ë“±ê³¼ ìƒí˜¸ì‘ìš©í•©ë‹ˆë‹¤.
+/// í•œ íƒ€ì¼ì— WateringTime ì´ìƒ ë¨¸ë¬¼ë©´ OnWatering ì´ë²¤íŠ¸ë¥¼ ë°œìƒì‹œí‚¤ëŠ” ë™ì‘ì„ í•©ë‹ˆë‹¤.
 /// </summary>
 public class WateringCan : MonoBehaviour,
 	IDragHandler,
@@ -15,10 +15,10 @@ public class WateringCan : MonoBehaviour,
 	IPointerUpHandler,
 	IPointerExitHandler
 {
-	[Header("¹° ÁÖ±â ÆÇÁ¤ÀÌ °¡ÇØÁö´Â watering ¾Ö´Ï¸ŞÀÌ¼Ç¿¡¼­ÀÇ ½Ã°¢")]
+	[Header("ë¬¼ ì£¼ê¸° íŒì •ì´ ê°€í•´ì§€ëŠ” watering ì• ë‹ˆë©”ì´ì…˜ì—ì„œì˜ ì‹œê°")]
 	public float WateringAnimationTimePoint = 0.5f;
-	[Header("¹° ÁÖ±â ÆÇÁ¤½Ã ¾×¼Ç")]
-	public UnityEvent<Vector2Int> OnWatering;
+	[Header("ë¬¼ ì£¼ê¸° íŒì •ì‹œ ì•¡ì…˜")]
+	public UnityEvent<Vector2> OnWatering;
 	public Camera Camera;
 	private bool _using;
 	public bool Using
@@ -37,8 +37,8 @@ public class WateringCan : MonoBehaviour,
 		}
 	}
 
-	private Vector2Int _currentTilePosition;
-	private Vector2 _initialScreenLocalPosition; // ÀÌ ¹°»Ñ¸®°³¸¦ »ç¿ëÇÏÁö ¾ÊÀ» ¶§ À§Ä¡ÇÒ È­¸é À§Ä¡. ¿¡µğÅÍ »ó¿¡¼­ ³õÀº À§Ä¡¸¦ ±â¾ïÇØ¼­ »ç¿ëÇÔ.
+	private Vector2 _currentWateringWorldPosition;
+	private Vector2 _initialScreenLocalPosition; // ì´ ë¬¼ë¿Œë¦¬ê°œë¥¼ ì‚¬ìš©í•˜ì§€ ì•Šì„ ë•Œ ìœ„ì¹˜í•  í™”ë©´ ìœ„ì¹˜. ì—ë””í„° ìƒì—ì„œ ë†“ì€ ìœ„ì¹˜ë¥¼ ê¸°ì–µí•´ì„œ ì‚¬ìš©í•¨.
 	private RectTransform _rectTransform;
 	private FarmClock _farmClock;
 
@@ -50,7 +50,7 @@ public class WateringCan : MonoBehaviour,
 	private SkeletonGraphic _skeletonGraphic;
 	private Spine.AnimationState _spineAnimationState;
 	private Spine.Skeleton _skeleton;
-	private bool _isWateredThisTime; // ÀÌº¥Æ® Áßº¹ È£Ãâ ¹æÁö¿ë
+	private bool _isWateredThisTime; // ì´ë²¤íŠ¸ ì¤‘ë³µ í˜¸ì¶œ ë°©ì§€ìš©
 
 	public void OnPointerDown(PointerEventData eventData) => OnDrag(eventData);
 	public void OnPointerUp(PointerEventData pointerEventData) => MoveToInitialPosition();
@@ -68,18 +68,14 @@ public class WateringCan : MonoBehaviour,
 		}
 
 		Using = true;
-		// ¹°»Ñ¸®°³ À§Ä¡¸¦ ÇöÀç Ä¿¼­ À§Ä¡·Î ¿Å±â±â
+		// ë¬¼ë¿Œë¦¬ê°œ ìœ„ì¹˜ë¥¼ í˜„ì¬ ì»¤ì„œ ìœ„ì¹˜ë¡œ ì˜®ê¸°ê¸°
 		_rectTransform.position = pointerEventData.position;
 
-		// ¹°»Ñ¸®°³ÀÇ ¿ùµå À§Ä¡ ±¸ÇÏ±â
+		// ë¬¼ë¿Œë¦¬ê°œì˜ ì›”ë“œ ìœ„ì¹˜ êµ¬í•˜ê¸°
 		var pointerScreenPosition = pointerEventData.position;
 		var pointerWorldPosition = Camera.ScreenToWorldPoint(pointerScreenPosition);
 
-		var currentRoundX = Mathf.RoundToInt(pointerWorldPosition.x);
-		var currentRoundY = Mathf.RoundToInt(pointerWorldPosition.y);
-		var newTilePosition = new Vector2Int(currentRoundX, currentRoundY);
-
-		_currentTilePosition = newTilePosition;
+		_currentWateringWorldPosition = pointerWorldPosition;
 	}
 
 	public void Init(FarmClock farmClock)
@@ -118,7 +114,7 @@ public class WateringCan : MonoBehaviour,
 				if (!_isWateredThisTime)
 				{
 					_isWateredThisTime = true;
-					OnWatering.Invoke(_currentTilePosition);
+					OnWatering.Invoke(_currentWateringWorldPosition);
 				}
 			}
 		}

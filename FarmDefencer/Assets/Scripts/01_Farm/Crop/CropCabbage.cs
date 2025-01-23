@@ -34,6 +34,7 @@ public class CropCabbage : Crop
 		if (State == CropState.Seed)
 		{
 			State = CropState.Planted;
+			OnPlanted.Invoke();
 		}
 		else if (State == CropState.Harvested)
 		{
@@ -48,6 +49,7 @@ public class CropCabbage : Crop
 			&& WaterStored == 0.0f)
 		{
 			WaterStored += GrowthAgeSeconds >= Stage1GrowthSeconds ? (MatureAgeSeconds - Stage1GrowthSeconds) * 1.01f : Stage1GrowthSeconds * 1.01f;
+			OnWatered.Invoke();
 		}
 	}
 
@@ -85,6 +87,7 @@ public class CropCabbage : Crop
 				if (_shakeCount >= ShakeCountCriterion)
 				{
 					State = CropState.Harvested;
+					OnHarvested.Invoke();
 				}
 			}
 		}

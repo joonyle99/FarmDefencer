@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HarvestInventory : MonoBehaviour
 {
+	public UnityEvent OnGoldEarned;
 	public HarvestAnimationPlayer HarvestAnimationPlayer;
 	public ProductDatabase ProductDatabase;
 	private Dictionary<string, HarvestBox> _harvestBoxes;
@@ -64,6 +66,7 @@ public class HarvestInventory : MonoBehaviour
 		var price = productEntry.Price * count;
 		harvestBox.Quota -= count;
 		ResourceManager.Instance.EarnGold(price);
+		OnGoldEarned.Invoke();
 	}
 
 	/// <summary>

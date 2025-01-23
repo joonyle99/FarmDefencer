@@ -36,6 +36,7 @@ public class CropEggplant : Crop
 			&& WaterStored == 0.0f)
 		{
 			WaterStored += GrowthAgeSeconds >= Stage1GrowthSeconds ? (MatureAgeSeconds - Stage1GrowthSeconds) * 1.01f : Stage1GrowthSeconds * 1.01f;
+			OnWatered.Invoke();
 		}
 	}
 
@@ -56,6 +57,7 @@ public class CropEggplant : Crop
 		if (State == CropState.Seed)
 		{
 			State = CropState.Planted;
+			OnPlanted.Invoke();
 		}
 		else if (State == CropState.Planted)
 		{
@@ -67,6 +69,7 @@ public class CropEggplant : Crop
 			if (IsHarvestable && _leavesRemaining == 0)
 			{
 				State = CropState.Harvested;
+				OnHarvested.Invoke();
 			}
 		}
 		else if (State == CropState.Harvested)

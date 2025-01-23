@@ -12,7 +12,6 @@ namespace FarmTest
         public Vector2 MousePosition;
         public GameObject FarmObject;
 		public Camera Camera;
-        public WateringCan WateringCan;
         public FarmClock FarmClock;
 		public FarmManager FarmManager;
         private Farm _farmComponent;
@@ -23,26 +22,21 @@ namespace FarmTest
         private Vector2 _singleHoldBeginPosition;
         private TMP_Text _remainingDaytimeText;
 
-		// À§Ä¡ delta¸¦ ¹ŞÀ½
+		// ìœ„ì¹˜ deltaë¥¼ ë°›ìŒ
         public void OnCameraMove(InputValue inputValue)
         {
-            if (_isDoubleHolding && !WateringCan.Using)
+            if (_isDoubleHolding)
             {
                 var scaledInputVector = inputValue.Get<Vector2>() * CameraMovementScale;
                 transform.position += (Vector3)scaledInputVector;
             }
         }
 
-		// ½ºÅ©¸° Àı´ë ÁÂÇ¥¸¦ ¹ŞÀ½
+		// ìŠ¤í¬ë¦° ì ˆëŒ€ ì¢Œí‘œë¥¼ ë°›ìŒ
         public void OnMouseMove(InputValue inputValue)
         {
             MousePosition = inputValue.Get<Vector2>();
         }
-
-        public void OnWatering(Vector2Int position)
-        {
-            _farmComponent.WateringAction(position);
-		}
 
 		public void OnSingleTap()
 		{
@@ -88,7 +82,7 @@ namespace FarmTest
 					Time.deltaTime);
                 
             }
-            else if (_singleHoldingTimeElapsed > 0.0f) // Single Hold°¡ Á¾·áµÈ Á÷ÈÄ
+            else if (_singleHoldingTimeElapsed > 0.0f) // Single Holdê°€ ì¢…ë£Œëœ ì§í›„
             {
 				_farmComponent.SingleHoldingAction(
 					Camera.ScreenToWorldPoint(_singleHoldBeginPosition),

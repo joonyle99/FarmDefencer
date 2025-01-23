@@ -68,6 +68,7 @@ public class CropSweetpotato : Crop
 				if (_tapCount >= 5)
 				{
 					State = CropState.Harvested;
+					OnHarvested.Invoke();
 				}
 			}
 		}
@@ -90,6 +91,7 @@ public class CropSweetpotato : Crop
 			if (Mathf.Abs(deltaX) > 100.0f)
 			{
 				State = CropState.Planted;
+				OnPlanted.Invoke();
 			}
 		}
 		else if (State == CropState.Planted 
@@ -113,6 +115,7 @@ public class CropSweetpotato : Crop
 			&& WaterStored == 0.0f)
 		{
 			WaterStored += GrowthAgeSeconds >= Stage1GrowthSeconds ? (MatureAgeSeconds - Stage1GrowthSeconds) * 1.01f : Stage1GrowthSeconds * 1.01f;
+			OnWatered.Invoke();
 		}
 	}
 	protected override bool OnGrow(float deltaTime)

@@ -12,7 +12,10 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public class Farm : MonoBehaviour, IFarmUpdatable
 {
-    public List<GameObject> FieldPrefabs;
+	public UnityEvent OnHarvested;
+	public UnityEvent OnPlanted;
+	public UnityEvent OnWatered;
+	public List<GameObject> FieldPrefabs;
 
 	/// <summary>
 	/// 작물을 아이템화 시도할 때 호출되는 이벤트입니다. 
@@ -170,7 +173,12 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 				CropLockedDisplayPrefab,
 				FlowedTile,
 				(productEntry, cropPosition, count, afterItemifyCallback) => OnTryItemify.Invoke(productEntry, cropPosition, count,afterItemifyCallback));
-            _fields.Add(fieldComponent.ProductEntry.UniqueId, fieldComponent);
+
+			fieldComponent.OnHarvested.AddListener(OnHarvested.Invoke);
+			fieldComponent.OnWatered.AddListener(OnWatered.Invoke);
+			fieldComponent.OnPlanted.AddListener(OnPlanted.Invoke);
+
+			_fields.Add(fieldComponent.ProductEntry.UniqueId, fieldComponent);
         }
     }
 }

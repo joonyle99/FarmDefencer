@@ -12,6 +12,7 @@ public class FarmManager : MonoBehaviour
     public Farm Farm;
 	public FarmTestPlayer FarmTestPlayer;
 	public ProductDatabase ProductDatabase;
+	public FarmSoundManager FarmSoundManager;
 
 	public void SetAvailability(string productUniqueId, bool value)
 	{
@@ -31,7 +32,14 @@ public class FarmManager : MonoBehaviour
 				var isItemified = FarmUI.HarvestInventory.TryBeginGather(productEntry, cropScreenPosition, count);
 				afterItemifyCallback(isItemified);
 			});
+
+		Farm.OnHarvested.AddListener(() => { FarmSoundManager.PlaySfx("SFX_harvest"); });
+		Farm.OnPlanted.AddListener(() => { FarmSoundManager.PlaySfx("SFX_plant_seed"); });
+		Farm.OnWatered.AddListener(() => { FarmSoundManager.PlaySfx("SFX_water_oneshot"); });
+		FarmUI.HarvestInventory.OnGoldEarned.AddListener(() => { FarmSoundManager.PlaySfx("SFX_coin"); });
+
 		FarmUI.Init(FarmClock);
+		FarmUI.WateringCan.OnWatering.AddListener(Farm.WateringAction);
 	}
 
 	private void Start()
@@ -48,14 +56,14 @@ public class FarmManager : MonoBehaviour
 		FarmUI.HarvestInventory.SetTodaysOrder(
 			new System.Collections.Generic.List<(string, int)>
 			{
-				("product_carrot", 5),
-				("product_potato", 5), 
-				("product_corn", 5), 
-				("product_cabbage", 5), 
-				("product_cucumber", 5), 
-				("product_eggplant", 5), 
-				("product_sweetpotato", 5), 
-				("product_mushroom", 5),
+				("product_carrot", 99),
+				("product_potato", 99), 
+				("product_corn", 99), 
+				("product_cabbage", 99), 
+				("product_cucumber", 99), 
+				("product_eggplant", 99), 
+				("product_sweetpotato", 99), 
+				("product_mushroom", 99),
 			});
 	}
 

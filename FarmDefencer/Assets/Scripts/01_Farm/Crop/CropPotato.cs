@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// ¼öÈ® µ¿ÀÛÀ» Á¦¿ÜÇÑ ¸ğµç µ¿ÀÛÀÌ Carrot°ú µ¿ÀÏÇÏ¹Ç·Î ÇØ´ç ÄÚµå¸¦ Àç»ç¿ëÇÕ´Ï´Ù.
+/// ìˆ˜í™• ë™ì‘ì„ ì œì™¸í•œ ëª¨ë“  ë™ì‘ì´ Carrotê³¼ ë™ì¼í•˜ë¯€ë¡œ í•´ë‹¹ ì½”ë“œë¥¼ ì¬ì‚¬ìš©í•©ë‹ˆë‹¤.
 /// </summary>
 public class CropPotato : CropCarrot
 {
@@ -9,10 +9,11 @@ public class CropPotato : CropCarrot
 	private float _holdTimeElapsed;
 	public override void OnSingleTap()
 	{
-		// base.OnTap()´Â µ¿ÀÛÀÌ ´Ş¶ó È£ÃâÇÏÁö ¾ÊÀ½
+		// base.OnTap()ëŠ” ë™ì‘ì´ ë‹¬ë¼ í˜¸ì¶œí•˜ì§€ ì•ŠìŒ
 		if (State == CropState.Seed)
 		{
 			State = CropState.Planted;
+			OnPlanted.Invoke();
 		}
 		else if (State == CropState.Harvested)
 		{
@@ -34,6 +35,7 @@ public class CropPotato : CropCarrot
 			if (_holdTimeElapsed >= HarvestHoldTime)
 			{
 				State = CropState.Harvested;
+				OnHarvested.Invoke();
 			}
 		}
 	}

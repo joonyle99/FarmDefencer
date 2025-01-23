@@ -5,6 +5,10 @@ using UnityEngine.Tilemaps;
 
 public class Field : MonoBehaviour, IFarmUpdatable
 {
+    public UnityEvent OnHarvested;
+    public UnityEvent OnPlanted;
+    public UnityEvent OnWatered;
+
     public GameObject CropPrefab;
     /// <summary>
     /// Farm 오브젝트 위치에 대한 상대 위치입니다.
@@ -94,6 +98,10 @@ public class Field : MonoBehaviour, IFarmUpdatable
 				var cropComponent = cropObject.GetComponent<Crop>();
 				cropObject.transform.parent = transform;
 				cropObject.transform.position = cropObjectPosition;
+
+                cropComponent.OnHarvested.AddListener(OnHarvested.Invoke);
+                cropComponent.OnWatered.AddListener(OnWatered.Invoke);
+                cropComponent.OnPlanted.AddListener(OnPlanted.Invoke);
 
 				cropComponent.Init(cropLockedDisplayPrefab, (count, afterItemifyCallback) => onTryItemifyAction(ProductEntry, cropComponent.Position, count, afterItemifyCallback));
 				_crops.Add(cropComponent);
