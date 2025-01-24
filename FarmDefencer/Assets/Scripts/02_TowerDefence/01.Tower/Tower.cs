@@ -1,3 +1,4 @@
+using Spine;
 using Spine.Unity;
 using UnityEngine;
 
@@ -45,9 +46,13 @@ public sealed class Tower : TargetableBehavior
         }
     }
 
+    [Space]
+
     public int upgradeCost = 40;
 
     private GridCell _occupyingGridCell;
+
+    [Space]
 
     // level 1
     public float attackRate_1 = 1f;
@@ -169,6 +174,12 @@ public sealed class Tower : TargetableBehavior
     private TargetableBehavior _currentTarget;
     private float _elapsedAttackTime = 0f;
 
+    private bool _isAttacking = false;
+    private float _attackAnimationDuration_1 = 0f;
+    private float _attackAnimationDuration_2 = 0f;
+    private float _attackAnimationDuration_3 = 0f;
+    private float _tempElapsedTime = 0f;
+
     protected override void Awake()
     {
         base.Awake();
@@ -182,18 +193,65 @@ public sealed class Tower : TargetableBehavior
         // animation
         //_spineController.SetAnimation(IdleAnimationName_1, true);
     }
+    protected override void Start()
+    {
+        base.Start();
+
+        _projectileTick.SetDamage(damage_1);
+
+        _attackAnimationDuration_1 = _spineController.Skeleton.Data.FindAnimation(AttackAnimationName_1).Duration;
+        _attackAnimationDuration_2 = _spineController.Skeleton.Data.FindAnimation(AttackAnimationName_2).Duration;
+        _attackAnimationDuration_3 = _spineController.Skeleton.Data.FindAnimation(AttackAnimationName_3).Duration;
+
+        //Debug.Log(_attackAnimationDuration_1);
+        //Debug.Log(_attackAnimationDuration_2);
+        //Debug.Log(_attackAnimationDuration_3);
+    }
     private void Update()
     {
         // update target every frame
         UpdateTarget();
 
+        if (_isAttacking == true)
+        {
+            // 시간 체크
+            // ... 
+            _tempElapsedTime += Time.deltaTime;
+
+            if (CurrentLevel == 1)
+            {
+                if (_tempElapsedTime >= _attackAnimationDuration_1)
+                {
+                    _tempElapsedTime = 0f;
+                    _isAttacking = false;
+                }
+            }
+            else if (CurrentLevel == 2)
+            {
+                if (_tempElapsedTime >= _attackAnimationDuration_2)
+                {
+                    _tempElapsedTime = 0f;
+                    _isAttacking = false;
+                }
+            }
+            else if (CurrentLevel == 3)
+            {
+                if (_tempElapsedTime >= _attackAnimationDuration_3)
+                {
+                    _tempElapsedTime = 0f;
+                    _isAttacking = false;
+                }
+            }
+        }
+
+        // look at target
         if (_currentTarget != null && _currentTarget.gameObject.activeSelf == true)
         {
             _head.LookAt(_currentTarget.transform.position);
         }
 
+        // attack
         _elapsedAttackTime += Time.deltaTime;
-
         if (_elapsedAttackTime >= _currentAttackRate)
         {
             _elapsedAttackTime = 0f;
@@ -229,9 +287,15 @@ public sealed class Tower : TargetableBehavior
     }
     private void Attack()
     {
+        _isAttacking = true;
+
         // animation
         _spineController.SetAnimation(AttackAnimation, false);
         _spineController.AddAnimation(IdleAnimation, true);
+
+        // 공격 애니메이션은 바로 실행된다
+        // 그러므로 공격 애니메이션의 시간을 알아내어
+        // 그 시간 동안 대기 시간을 둔다
 
         var projectileTick = Instantiate(_projectileTick, _head.Muzzle.position, _head.Muzzle.rotation);
 
