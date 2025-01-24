@@ -3507,10 +3507,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _factory: {fileID: 1944853641}
   _waitTimeRange:
-    Start: 2
-    End: 2
+    Start: 1
+    End: 3
   _waitTime: 0
-  stageData: {fileID: 11400000, guid: 89b3ce57e465be248a1afcdf82c6d32c, type: 2}
+  stageData: {fileID: 0}
 --- !u!4 &1944853640
 Transform:
   m_ObjectHideFlags: 0
@@ -3538,12 +3538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced2a14d91b3650498a756e5f2a637dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _productPrefabList:
-  - {fileID: 4172481917644167003, guid: 58e1d33d6e27d6f499f928c32673ef4a, type: 3}
-  - {fileID: 4172481917644167003, guid: 4dcf527e597654e4799e2e212a0a49da, type: 3}
-  - {fileID: 4172481917644167003, guid: 19aebb7aec8d66b44938c9c7b1266771, type: 3}
-  - {fileID: 4172481917644167003, guid: 97399fbf276cc6f45ba6f0813de0e46c, type: 3}
-  - {fileID: 4172481917644167003, guid: 1265832eb0d602d409315addab1e8710, type: 3}
+  _productPrefabList: []
   _productPrefab: {fileID: 4172481917644167003, guid: 97399fbf276cc6f45ba6f0813de0e46c, type: 3}
   _productName: Monster
   _poolCapacity: 100

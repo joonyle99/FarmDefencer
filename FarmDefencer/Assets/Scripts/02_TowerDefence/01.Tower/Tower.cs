@@ -209,13 +209,8 @@ public sealed class Tower : TargetableBehavior
     }
     private void Update()
     {
-        // update target every frame
-        UpdateTarget();
-
         if (_isAttacking == true)
         {
-            // 시간 체크
-            // ... 
             _tempElapsedTime += Time.deltaTime;
 
             if (CurrentLevel == 1)
@@ -244,10 +239,14 @@ public sealed class Tower : TargetableBehavior
             }
         }
 
-        // look at target
-        if (_currentTarget != null && _currentTarget.gameObject.activeSelf == true)
+        if (_isAttacking == false)
         {
-            _head.LookAt(_currentTarget.transform.position);
+            // find
+            UpdateTarget();
+            if (_currentTarget != null && _currentTarget.gameObject.activeSelf == true)
+            {
+                _head.LookAt(_currentTarget.transform.position);
+            }
         }
 
         // attack
@@ -263,6 +262,11 @@ public sealed class Tower : TargetableBehavior
                 Attack();
             }
         }
+
+        // TODO
+        // 현재 문제점..
+        // 공격할 때 LooAt을 한다
+        // 최소한 공격 애니메이션은 끝나고 방향을 전환해야 한다
     }
 
     // build
