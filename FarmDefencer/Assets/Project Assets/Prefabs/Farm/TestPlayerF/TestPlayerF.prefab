@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5889198786106134516}
   - component: {fileID: 1602709069722497396}
   - component: {fileID: 6871639789262496451}
-  - component: {fileID: 7967239315561602502}
   - component: {fileID: 4956368070878987424}
   - component: {fileID: 453972362371762412}
   m_Layer: 0
@@ -117,41 +116,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &7967239315561602502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8913430023454592942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b8c96e2cdc154e848a3d9fe62464d42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CameraTargets:
-  - TargetTransform: {fileID: 5889198786106134516}
-    TargetInfluenceH: 1
-    TargetInfluenceV: 1
-    TargetOffset: {x: 0, y: 0}
-  CenterTargetOnStart: 0
-  Axis: 0
-  UpdateType: 0
-  FollowHorizontal: 1
-  HorizontalFollowSmoothness: 0.15
-  FollowVertical: 1
-  VerticalFollowSmoothness: 0.15
-  OffsetX: 0
-  OffsetY: 0
-  IsRelativeOffset: 1
-  ZoomWithFOV: 0
-  IgnoreTimeScale: 0
-  CurrentZoomTriggerID: 0
-  IsCameraPositionLeftBounded: 0
-  IsCameraPositionRightBounded: 0
-  IsCameraPositionTopBounded: 0
-  IsCameraPositionBottomBounded: 0
-  GameCamera: {fileID: 6871639789262496451}
 --- !u!114 &4956368070878987424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,11 +172,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3460bb4b04e4e24469317398f6a8d0b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BottomLeftPosition: {x: 0, y: 0}
+  TopRightPosition: {x: 23, y: 16}
   LongTapThreshold: 1
   CameraMovementScale: 1
-  MousePosition: {x: 0, y: 0}
+  LastInteractScreenPosition: {x: 0, y: 0}
   FarmObject: {fileID: 0}
   Camera: {fileID: 0}
-  WateringCan: {fileID: 0}
   FarmClock: {fileID: 0}
   FarmManager: {fileID: 0}

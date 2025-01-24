@@ -4185,8 +4185,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: e8a6567b52ceae34e8a10e98b4e58e77, type: 2}
     - target: {fileID: 453972362371762412, guid: d72f5f52e5bd6db4cb58f9b05c13b898, type: 3}
+      propertyPath: TopRightPosition.x
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 453972362371762412, guid: d72f5f52e5bd6db4cb58f9b05c13b898, type: 3}
+      propertyPath: TopRightPosition.y
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 453972362371762412, guid: d72f5f52e5bd6db4cb58f9b05c13b898, type: 3}
       propertyPath: CameraMovementScale
-      value: 1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1602709069722497396, guid: d72f5f52e5bd6db4cb58f9b05c13b898, type: 3}
       propertyPath: m_DefaultControlScheme
@@ -4198,7 +4206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5889198786106134516, guid: d72f5f52e5bd6db4cb58f9b05c13b898, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5889198786106134516, guid: d72f5f52e5bd6db4cb58f9b05c13b898, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4232,11 +4240,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7967239315561602502, guid: d72f5f52e5bd6db4cb58f9b05c13b898, type: 3}
+      propertyPath: FollowVertical
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967239315561602502, guid: d72f5f52e5bd6db4cb58f9b05c13b898, type: 3}
+      propertyPath: FollowHorizontal
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967239315561602502, guid: d72f5f52e5bd6db4cb58f9b05c13b898, type: 3}
+      propertyPath: VerticalFollowSmoothness
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967239315561602502, guid: d72f5f52e5bd6db4cb58f9b05c13b898, type: 3}
+      propertyPath: HorizontalFollowSmoothness
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8913430023454592942, guid: d72f5f52e5bd6db4cb58f9b05c13b898, type: 3}
       propertyPath: m_Name
       value: TestPlayerF
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7967239315561602502, guid: d72f5f52e5bd6db4cb58f9b05c13b898, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5889198786106134516, guid: d72f5f52e5bd6db4cb58f9b05c13b898, type: 3}

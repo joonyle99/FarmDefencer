@@ -7,6 +7,9 @@ namespace FarmTest
 {
     public class FarmTestPlayer : MonoBehaviour
     {
+        public Vector2 BottomLeftPosition = new Vector2(0.0f, 0.0f);
+        public Vector2 TopRightPosition = new Vector2(23.0f, 16.0f);
+
         public float LongTapThreshold = 1.0f;
         public float CameraMovementScale = 1.0f;
         public Vector2 LastInteractScreenPosition;
@@ -28,8 +31,12 @@ namespace FarmTest
             if (_isDoubleHolding)
             {
                 var scaledInputVector = inputValue.Get<Vector2>() * CameraMovementScale;
-                transform.position += (Vector3)scaledInputVector;
-            }
+                var newPosition = transform.position + (Vector3)scaledInputVector;
+				newPosition.x = Mathf.Clamp(newPosition.x, BottomLeftPosition.x, TopRightPosition.x);
+				newPosition.y = Mathf.Clamp(newPosition.y, BottomLeftPosition.y, TopRightPosition.y);
+				newPosition.z = -10.0f;
+				transform.position = newPosition;
+			}
         }
 
 		// 현재 누르고 있는 스크린 절대 좌표를 받음

@@ -144,7 +144,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   CropPrefab: {fileID: 8248929270521535658, guid: 3f6d320c8a046914592820bb64a8b974, type: 3}
-  FieldLocalPosition: {x: 15, y: 8}
+  FieldLocalPosition: {x: 15, y: 10}
   FieldSize: {x: 2, y: 5}
 --- !u!1 &7089821968022060668
 GameObject:
