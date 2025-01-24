@@ -14,8 +14,6 @@ public class WaveSystem : MonoBehaviour
     [SerializeField] private Factory _factory;              // wave system use factory for spawn spawnedMonster
     public Factory Factory => _factory;
 
-    [Space]
-
     [SerializeField] private RangeFloat _waitTimeRange;
     [SerializeField] private float _waitTime = 0f;
 
@@ -64,6 +62,10 @@ public class WaveSystem : MonoBehaviour
     private bool _isTriggered = false;
     private float _elapsedTime = 0f;
 
+    [Space]
+
+    public StageData stageData; // TEMP: 현재 1-1 스테이지에 대한 데이터만 존재함
+
     private void Update()
     {
         // CHEAT: trigger wave
@@ -107,36 +109,50 @@ public class WaveSystem : MonoBehaviour
     }
     private IEnumerator SpawnRoutine()
     {
-        while (true)
+        int waveCount = 1;
+
+        // 모든 웨이브를 순회한다
+        foreach (var wave in stageData.Waves)
         {
-            // ending
-            if (CompleteSpawn == true && CompleteWave == true)
+            var waveMonster = wave.WaveMonster;
+            var spawnCount = wave.SpawnCountRange.Random();
+
+            TargetSpawnCount = spawnCount;
+
+            Debug.Log($"Wave {waveCount++} Start");
+            Debug.Log($"Spawn Monster: {waveMonster.GetType()}, Spawn Count: {spawnCount}");
+
+            // 해당 웨이브 진입
+            // e.g) 토끼(8~12) + 토끼(4~6)
+            while (true)
             {
-                // wait a second
-                yield return new WaitForSeconds(1f);
+                // complete wave
+                if (CompleteSpawn == true)
+                {
+                    CompleteWaveProcess();
+                    break;
+                }
 
-                CompleteWaveProcess();
-
-                yield break;
-            }
-
-            // wave process
-            if (CompleteSpawn == false)
-            {
                 // wait time
                 if (_elapsedTime >= _waitTime)
                 {
                     _elapsedTime = 0f;
                     _waitTime = _waitTimeRange.Random();
 
-                    Spawn();
                 }
+
+                yield return null;
+
+                _elapsedTime += Time.deltaTime;
             }
 
-            yield return null;
-
-            _elapsedTime += Time.deltaTime;
+            // 다음 웨이브 대기
+            yield return new WaitForSeconds(2f);
         }
+
+        yield return new WaitUntil(() => CompleteWave == true);
+
+        CompleteStageProcess();
     }
     private IEnumerator WaveProcessRoutine()
     {
@@ -148,6 +164,10 @@ public class WaveSystem : MonoBehaviour
 
     //
     private void CompleteWaveProcess()
+    {
+        // Do Something
+    }
+    private void CompleteStageProcess()
     {
         GameStateManager.Instance.ChangeState(GameState.End);
 
