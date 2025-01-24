@@ -5,12 +5,11 @@ using UnityEngine;
 /// </summary>
 public abstract class TargetableBehavior : DamageableBehavior
 {
-    // [Header("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ TargetableBehavior ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡")]
-    // [Space]
     [Header("â”€â”€â”€â”€â”€â”€â”€â”€ TargetableBehavior â”€â”€â”€â”€â”€â”€â”€â”€")]
     [Space]
 
-    // public Transform _targettingPoint;
+    [SerializeField] private Transform _targetPoint;
+    public Transform TargetPoint => _targetPoint;
 
     protected override void OnEnable()
     {
