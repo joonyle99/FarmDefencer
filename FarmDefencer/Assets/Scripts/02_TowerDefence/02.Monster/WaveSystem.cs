@@ -109,50 +109,81 @@ public class WaveSystem : MonoBehaviour
     }
     private IEnumerator SpawnRoutine()
     {
-        int waveCount = 1;
+        //int waveCount = 1;
 
-        // 모든 웨이브를 순회한다
-        foreach (var wave in stageData.Waves)
+        //// 모든 웨이브를 순회한다
+        //foreach (var wave in stageData.Waves)
+        //{
+        //    var waveMonster = wave.WaveMonster;
+        //    var spawnCount = wave.SpawnCountRange.Random();
+
+        //    TargetSpawnCount = spawnCount;
+
+        //    Debug.Log($"Wave {waveCount++} Start");
+        //    Debug.Log($"Spawn Monster: {waveMonster.GetType()}, Spawn Count: {spawnCount}");
+
+        //    // 해당 웨이브 진입
+        //    // e.g) 토끼(8~12) + 토끼(4~6)
+        //    while (true)
+        //    {
+        //        // complete wave
+        //        if (CompleteSpawn == true)
+        //        {
+        //            CompleteWaveProcess();
+        //            break;
+        //        }
+
+        //        // wait time
+        //        if (_elapsedTime >= _waitTime)
+        //        {
+        //            _elapsedTime = 0f;
+        //            _waitTime = _waitTimeRange.Random();
+
+        //        }
+
+        //        yield return null;
+
+        //        _elapsedTime += Time.deltaTime;
+        //    }
+
+        //    // 다음 웨이브 대기
+        //    yield return new WaitForSeconds(2f);
+        //}
+
+        //yield return new WaitUntil(() => CompleteWave == true);
+
+        //CompleteStageProcess();
+
+        while (true)
         {
-            var waveMonster = wave.WaveMonster;
-            var spawnCount = wave.SpawnCountRange.Random();
-
-            TargetSpawnCount = spawnCount;
-
-            Debug.Log($"Wave {waveCount++} Start");
-            Debug.Log($"Spawn Monster: {waveMonster.GetType()}, Spawn Count: {spawnCount}");
-
-            // 해당 웨이브 진입
-            // e.g) 토끼(8~12) + 토끼(4~6)
-            while (true)
+            // ending
+            if (CompleteSpawn == true && CompleteWave == true)
             {
-                // complete wave
-                if (CompleteSpawn == true)
-                {
-                    CompleteWaveProcess();
-                    break;
-                }
+                // wait a second
+                yield return new WaitForSeconds(1f);
 
+                CompleteStageProcess();
+
+                yield break;
+            }
+
+            // wave process
+            if (CompleteSpawn == false)
+            {
                 // wait time
                 if (_elapsedTime >= _waitTime)
                 {
                     _elapsedTime = 0f;
                     _waitTime = _waitTimeRange.Random();
 
+                    Spawn();
                 }
-
-                yield return null;
-
-                _elapsedTime += Time.deltaTime;
             }
 
-            // 다음 웨이브 대기
-            yield return new WaitForSeconds(2f);
+            yield return null;
+
+            _elapsedTime += Time.deltaTime;
         }
-
-        yield return new WaitUntil(() => CompleteWave == true);
-
-        CompleteStageProcess();
     }
     private IEnumerator WaveProcessRoutine()
     {
