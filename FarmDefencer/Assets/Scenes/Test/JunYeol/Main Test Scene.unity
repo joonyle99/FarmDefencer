@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &11147215
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 11147216}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &11147216
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11147215}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.64, y: 7.53, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &121525041
 GameObject:
   m_ObjectHideFlags: 0
@@ -3537,7 +3568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced2a14d91b3650498a756e5f2a637dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _productPrefab: {fileID: 4172481917644167003, guid: 0368e53d6bbcb594fb7cdbd8085058d7, type: 3}
+  _productPrefab: {fileID: 4172481917644167003, guid: 97399fbf276cc6f45ba6f0813de0e46c, type: 3}
   _productName: Monster
   _poolCapacity: 100
   _pool: []
@@ -4543,3 +4574,4 @@ SceneRoots:
   - {fileID: 942855306}
   - {fileID: 1935451831}
   - {fileID: 1241557849}
+  - {fileID: 11147216}

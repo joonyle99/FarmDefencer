@@ -94,23 +94,28 @@ public abstract class Monster : TargetableBehavior, IProduct
             return;
         }
 
-        // 현재 실행 중인 애니메이션 확인
-        var currentAnimation = _spineController.SpineAnimationState.GetCurrent(0);
-        if (currentAnimation != null
-            && currentAnimation.Animation.Name != WalkDamagedAnimationName)
-        {
-            _spineController.SetAnimation(WalkDamagedAnimationName, false);
-            _spineController.AddAnimation(WalkAnimationName, true);
-        }
-
-        //StartCoroutine(StunRoutine(StunDuration));
-
         HP -= damage;
+
+        if (HP > 0)
+        {
+            // 현재 실행 중인 애니메이션 확인
+            var currentAnimation = _spineController.SpineAnimationState.GetCurrent(0);
+            if (currentAnimation != null
+                && currentAnimation.Animation.Name != WalkDamagedAnimationName)
+            {
+                _spineController.SetAnimation(WalkDamagedAnimationName, false);
+                _spineController.AddAnimation(WalkAnimationName, true);
+            }
+
+            //StartCoroutine(StunRoutine(StunDuration));
+        }
 
         OnDamaged?.Invoke(damage);
     }
     public override void Kill()
     {
+        Debug.Log("kill");
+
         IsDead = true;
 
         // TEMP: 이동 중지
@@ -189,6 +194,7 @@ public abstract class Monster : TargetableBehavior, IProduct
 
     private IEnumerator KillRoutine(string animationName)
     {
+        Debug.Log("kill routine");
         _spineController.SetAnimation(animationName, false);
 
         var animation = _spineController.Skeleton.Data.FindAnimation(animationName);

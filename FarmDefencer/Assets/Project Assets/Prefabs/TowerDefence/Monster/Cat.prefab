@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1543992766888672360}
   - component: {fileID: 7300144381691796175}
   - component: {fileID: 5287113402474360036}
-  - component: {fileID: 8488813293856363186}
+  - component: {fileID: 221480247723861646}
   - component: {fileID: 1519744171091044436}
   m_Layer: 7
   m_Name: Cat
@@ -241,7 +241,7 @@ MonoBehaviour:
   _moveSpeed: 1
   eTime: 0
   distance: 0
---- !u!114 &8488813293856363186
+--- !u!114 &221480247723861646
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -250,12 +250,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4172481917644167003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e6d2fb7eff501c48910adc226960246, type: 3}
+  m_Script: {fileID: 11500000, guid: fcd2e2220955f0a40bad1544d98b7755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 3657265616720998730}
   _hp: 100
-  _stunDuration: 0.05
+  _stunDuration: 0.03
   _isDead: 0
   _isStun: 0
   _originFactory: {fileID: 0}
