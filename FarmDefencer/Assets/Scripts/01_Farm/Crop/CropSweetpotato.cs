@@ -39,7 +39,9 @@ public class CropSweetpotato : Crop
 	public Sprite Stage5_OOO_Sprite;
 	[Space]
 	public Sprite LockedSprite;
-	public Sprite HarvestedSprite;
+	public Sprite Harvested1Sprite;
+	public Sprite Harvested2Sprite;
+	public Sprite Harvested3Sprite;
 	private int _harvestedCount;
 	[Space]
 	public float NormalToDeadSeconds = 300.0f;
@@ -310,8 +312,19 @@ public class CropSweetpotato : Crop
 				State = CropState.Seed;
 			}
 			else
-			{ 		
-				_spriteRenderer.sprite = HarvestedSprite;
+			{ 	
+				if (_harvestedCount == 1)
+				{
+					_spriteRenderer.sprite = Harvested1Sprite;
+				}
+				else if (_harvestedCount == 2)
+				{
+					_spriteRenderer.sprite = Harvested2Sprite;
+				}
+				else // 3
+				{
+					_spriteRenderer.sprite = Harvested3Sprite;
+				}
 			}
 		}
 		else if (State == CropState.Locked)

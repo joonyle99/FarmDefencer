@@ -146,6 +146,8 @@ MonoBehaviour:
   Stage5_OOX_Sprite: {fileID: 8346025296148574424, guid: c11d91e4ee01baf4d853605406d3e315, type: 3}
   Stage5_OOO_Sprite: {fileID: 3900174459098693200, guid: 903fd32b17f7af5469a3ee2d6296de09, type: 3}
   LockedSprite: {fileID: 0}
-  HarvestedSprite: {fileID: 6151279427029150262, guid: 9ea773bb6af578f4fa82bc2c0bcd135e, type: 3}
+  Harvested1Sprite: {fileID: 6151279427029150262, guid: 9ea773bb6af578f4fa82bc2c0bcd135e, type: 3}
+  Harvested2Sprite: {fileID: 6275712384507771880, guid: ccf408fc4685eab4fbf15b5b84da2e9c, type: 3}
+  Harvested3Sprite: {fileID: 8536362653482191216, guid: 50210f2e99b9b2e4886b9f67a95eae21, type: 3}
   NormalToDeadSeconds: 300
   DeadToSeedSeconds: 300
