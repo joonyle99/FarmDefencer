@@ -48,38 +48,39 @@ public class Factory : MonoBehaviour
     {
         _pool = new List<GameObject>(_poolCapacity);
 
-        // 5 / 100 : 20 -> 40 -> 60 -> 80 -> 100
-        var unit = _poolCapacity / _productPrefabList.Count;
-        Debug.Log("unit: " + unit);
-
         // 오브젝트 생성 후, 풀에 추가
-        foreach (var prefab in _productPrefabList)
+
+        // 1. 한 종류로만 풀 생성
+        for (int i = 0; i < _poolCapacity; ++i)
         {
-            // 프리팹을 종류별로 일정량씩 생성
-            for (int i = 0; i < unit; ++i)
-            {
-                var newObj = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-                newObj.name = _productName + " " + prefab.name + " " + (i + 1).ToString();
-                newObj.transform.SetParent(transform, false);
-                newObj.SetActive(false);
-                newObj.tag = prefab.name;
+            var newObj = Instantiate(_productPrefab, Vector3.zero, Quaternion.identity);
 
-                AddProduct(newObj);
+            newObj.name = _productName + " " + (i + 1).ToString();
+            newObj.transform.SetParent(transform, false);
+            newObj.SetActive(false);
 
-                _lastProduct = newObj;
-            }
+            AddProduct(newObj);
+
+            _lastProduct = newObj;
         }
-        //for (int i = 0; i < _poolCapacity; ++i)
+
+        // 2. 여러 종류로 풀 생성
+        //var unit = _poolCapacity / _productPrefabList.Count;
+        //foreach (var prefab in _productPrefabList)
         //{
-        //    var newObj = Instantiate(_productPrefab, Vector3.zero, Quaternion.identity);
+        //    // 프리팹을 종류별로 일정량씩 생성
+        //    for (int i = 0; i < unit; ++i)
+        //    {
+        //        var newObj = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+        //        newObj.name = _productName + " " + prefab.name + " " + (i + 1).ToString();
+        //        newObj.transform.SetParent(transform, false);
+        //        newObj.SetActive(false);
+        //        newObj.tag = prefab.name;
 
-        //    newObj.name = _productName + " " + (i + 1).ToString();
-        //    newObj.transform.SetParent(transform, false);
-        //    newObj.SetActive(false);
+        //        AddProduct(newObj);
 
-        //    AddProduct(newObj);
-
-        //    _lastProduct = newObj;
+        //        _lastProduct = newObj;
+        //    }
         //}
     }
     private void ExtendPool()
@@ -110,7 +111,7 @@ public class Factory : MonoBehaviour
         _lastProduct = newObj;
     }
 
-    public T GetProduct<T>(System.Type type) where T : IProduct
+    public T GetProduct<T>() where T : IProduct
     {
         // 꺼낼 오브젝트가 없는 경우 풀을 확장한다
         if (IsEmptyPool())

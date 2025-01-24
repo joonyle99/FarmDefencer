@@ -28,7 +28,7 @@ public abstract class DamageableBehavior : MonoBehaviour
 
             if (_hp < 0)
             {
-                Debug.Log("hp is 0");
+                //Debug.Log("hp is 0");
                 _hp = 0;
                 Kill();
             }

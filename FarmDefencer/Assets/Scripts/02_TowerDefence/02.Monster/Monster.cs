@@ -114,7 +114,7 @@ public abstract class Monster : TargetableBehavior, IProduct
     }
     public override void Kill()
     {
-        Debug.Log("kill");
+        //Debug.Log("kill");
 
         IsDead = true;
 
@@ -194,7 +194,7 @@ public abstract class Monster : TargetableBehavior, IProduct
 
     private IEnumerator KillRoutine(string animationName)
     {
-        Debug.Log("kill routine");
+        //Debug.Log("kill routine");
         _spineController.SetAnimation(animationName, false);
 
         var animation = _spineController.Skeleton.Data.FindAnimation(animationName);
