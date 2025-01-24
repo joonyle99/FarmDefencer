@@ -56,7 +56,7 @@ public class CropCucumber : Crop
 			{
 				_longTrellisPlaced = true;
 			}
-			if (IsHarvestable)
+			else if (IsHarvestable)
 			{
 				State = CropState.Harvested;
 				OnHarvested.Invoke();
