@@ -30,7 +30,8 @@ public class CropCucumber : Crop
 	{
 		if (State == CropState.Planted
 			&& WaterWaitingSeconds < NormalToDeadSeconds + DeadToSeedSeconds
-			&& WaterStored == 0.0f)
+			&& WaterStored == 0.0f
+			&& GrowthAgeSeconds < Stage1GrowthSeconds || _shortTrellisPlaced)
 		{
 			WaterStored += GrowthAgeSeconds >= Stage1GrowthSeconds ? (MatureAgeSeconds - Stage1GrowthSeconds) * 1.01f : Stage1GrowthSeconds * 1.01f;
 			OnWatered.Invoke();
@@ -56,7 +57,7 @@ public class CropCucumber : Crop
 			{
 				_longTrellisPlaced = true;
 			}
-			if (IsHarvestable)
+			else if (IsHarvestable)
 			{
 				State = CropState.Harvested;
 				OnHarvested.Invoke();
