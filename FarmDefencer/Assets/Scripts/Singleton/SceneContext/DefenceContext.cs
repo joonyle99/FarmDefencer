@@ -36,7 +36,7 @@ public class DefenceContext : SceneContext
             string log = "";
 
             log += "DefenceContext is ready.\n";
-            log += $"============================\n";
+            //log += $"============================\n";
             log += $"{nameof(GridMap)} is ready.\n";
             log += $"{nameof(WaveSystem)} is ready.\n";
             log += $"{nameof(TowerBuildSystem)} is ready.\n";

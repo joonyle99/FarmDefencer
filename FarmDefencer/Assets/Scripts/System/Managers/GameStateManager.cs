@@ -34,7 +34,7 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
         }
 
         CurrentState = nextState;
-        Debug.Log($"Current State: {CurrentState.ToString()}");
+        //Debug.Log($"Current State: {CurrentState.ToString()}");
 
         switch (CurrentState)
         {
