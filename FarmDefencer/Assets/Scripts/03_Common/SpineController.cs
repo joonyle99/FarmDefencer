@@ -22,7 +22,6 @@ public class SpineController : MonoBehaviour
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.Skeleton;
     }
-
     public void SetAnimation(string animationName, bool loop)
     {
         _spineAnimationState.SetAnimation(0, animationName, loop);

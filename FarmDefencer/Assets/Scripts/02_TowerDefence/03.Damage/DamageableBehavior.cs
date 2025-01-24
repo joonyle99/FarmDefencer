@@ -22,8 +22,13 @@ public abstract class DamageableBehavior : MonoBehaviour
         {
             _hp = value;
 
+            //debug
+            //var debugLabel = new GameObject("DebugLabel").AddComponent<DebugLabel>();
+            //debugLabel.SetLabel(HP.ToString(), 1.0f, transform.position, Color.white);
+
             if (_hp < 0)
             {
+                Debug.Log("hp is 0");
                 _hp = 0;
                 Kill();
             }
@@ -36,10 +41,11 @@ public abstract class DamageableBehavior : MonoBehaviour
             if (_healthBar != null)
             {
                 _healthBar.UpdateHealthBar((float)_hp, (float)_startHp);
+                //Debug.Log("_healthBar.UpdateHealthBar");
             }
         }
     }
-    [SerializeField] private float _stunDuration = 0.1f;
+    [SerializeField] private float _stunDuration = 0.03f;
     public float StunDuration => _stunDuration;
 
     [Space]
