@@ -3,15 +3,15 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 /// <summary>
-/// Å¸¿ö¸¦ °Ç¼³ÇÒ ¼ö ÀÖ´Â ºÎÁö¸¦ ³ªÅ¸³»´Â ÄÄÆ÷³ÍÆ®ÀÔ´Ï´Ù.
-/// ¸¶¿ì½ºÀÔ·Â ¹× ÅÍÄ¡ÀÔ·ÂÀ» ÅëÇØ Å¸¿ö °Ç¼³ ±â´ÉÀ» Á¦°øÇÕ´Ï´Ù
+/// íƒ€ì›Œë¥¼ ê±´ì„¤í•  ìˆ˜ ìˆëŠ” ë¶€ì§€ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ì»´í¬ë„ŒíŠ¸ì…ë‹ˆë‹¤.
+/// ë§ˆìš°ìŠ¤ì…ë ¥ ë° í„°ì¹˜ì…ë ¥ì„ í†µí•´ íƒ€ì›Œ ê±´ì„¤ ê¸°ëŠ¥ì„ ì œê³µí•©ë‹ˆë‹¤
 /// </summary>
 /// <remarks>
-/// - Å¬¸¯ ½Ã BuildSupervisor¿¡¼­ ¼±ÅÃµÈ Å¸¿ö¸¦ ÇØ´ç À§Ä¡¿¡ °Ç¼³ÇÕ´Ï´Ù.
+/// - í´ë¦­ ì‹œ BuildSupervisorì—ì„œ ì„ íƒëœ íƒ€ì›Œë¥¼ í•´ë‹¹ ìœ„ì¹˜ì— ê±´ì„¤í•©ë‹ˆë‹¤.
 /// </remarks>
 public class GridCell : MonoBehaviour
 {
-    [Header("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ GridCell ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡")]
+    [Header("â”€â”€â”€â”€â”€â”€â”€â”€ GridCell â”€â”€â”€â”€â”€â”€â”€â”€")]
     [Space]
 
     [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -45,7 +45,7 @@ public class GridCell : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        // ÇöÀç Æ÷ÀÎÅÍ°¡ GridCell À§¿¡ ÀÖÁö ¾Ê´Ù¸é(UI ¿ä¼Ò À§¿¡ ÀÖ´Ù¸é) ÀÌº¥Æ®¸¦ Ã³¸®ÇÏÁö ¾Ê´Â´Ù
+        // í˜„ì¬ í¬ì¸í„°ê°€ GridCell ìœ„ì— ìˆì§€ ì•Šë‹¤ë©´(UI ìš”ì†Œ ìœ„ì— ìˆë‹¤ë©´) ì´ë²¤íŠ¸ë¥¼ ì²˜ë¦¬í•˜ì§€ ì•ŠëŠ”ë‹¤
         if (EventSystem.current.IsPointerOverGameObject() == true)
         {
             return;
@@ -60,7 +60,7 @@ public class GridCell : MonoBehaviour
     }
     private void OnMouseExit()
     {
-        // ÇöÀç Æ÷ÀÎÅÍ°¡ GridCell À§¿¡ ÀÖÁö ¾Ê´Ù¸é(UI ¿ä¼Ò À§¿¡ ÀÖ´Ù¸é) ÀÌº¥Æ®¸¦ Ã³¸®ÇÏÁö ¾Ê´Â´Ù
+        // í˜„ì¬ í¬ì¸í„°ê°€ GridCell ìœ„ì— ìˆì§€ ì•Šë‹¤ë©´(UI ìš”ì†Œ ìœ„ì— ìˆë‹¤ë©´) ì´ë²¤íŠ¸ë¥¼ ì²˜ë¦¬í•˜ì§€ ì•ŠëŠ”ë‹¤
         if (EventSystem.current.IsPointerOverGameObject() == true)
         {
             return;
@@ -71,13 +71,13 @@ public class GridCell : MonoBehaviour
 
     private void OnMouseDown()
     {
-        // ÇöÀç Æ÷ÀÎÅÍ°¡ GridCell À§¿¡ ÀÖÁö ¾Ê´Ù¸é(UI ¿ä¼Ò À§¿¡ ÀÖ´Ù¸é) ÀÌº¥Æ®¸¦ Ã³¸®ÇÏÁö ¾Ê´Â´Ù
+        // í˜„ì¬ í¬ì¸í„°ê°€ GridCell ìœ„ì— ìˆì§€ ì•Šë‹¤ë©´(UI ìš”ì†Œ ìœ„ì— ìˆë‹¤ë©´) ì´ë²¤íŠ¸ë¥¼ ì²˜ë¦¬í•˜ì§€ ì•ŠëŠ”ë‹¤
         if (EventSystem.current.IsPointerOverGameObject() == true)
         {
             return;
         }
 
-        // ÇöÀç Å¸¿ö °Ç¼³ »óÅÂ°¡ ¾Æ´Ï¶ó¸é ÀÌº¥Æ®¸¦ Ã³¸®ÇÏÁö ¾Ê´Â´Ù
+        // í˜„ì¬ íƒ€ì›Œ ê±´ì„¤ ìƒíƒœê°€ ì•„ë‹ˆë¼ë©´ ì´ë²¤íŠ¸ë¥¼ ì²˜ë¦¬í•˜ì§€ ì•ŠëŠ”ë‹¤
         if (GameStateManager.Instance.CurrentState != GameState.Build)
         {
             return;
@@ -85,19 +85,19 @@ public class GridCell : MonoBehaviour
 
         if (_occupiedTower != null)
         {
-            // °­È­ UI´Â ¾îµğ¿¡ ¶ç¿ö¾ß ÇÏ´Â°¡..?
+            // ê°•í™” UIëŠ” ì–´ë””ì— ë„ì›Œì•¼ í•˜ëŠ”ê°€..?
 
-            // Å¸¿ö°¡ Á¡À¯µÇ¾î ÀÖ´Â »óÅÂ, Å¬¸¯ ½Ã °­È­ ¸Ş´º¸¦ ¶ç¿î´Ù
+            // íƒ€ì›Œê°€ ì ìœ ë˜ì–´ ìˆëŠ” ìƒíƒœ, í´ë¦­ ì‹œ ê°•í™” ë©”ë‰´ë¥¼ ë„ìš´ë‹¤
             _occupiedTower.ShowPanel();
         }
         else if (_occupiedTower == null && isUsable == true)
         {
-            // Å¸¿ö°¡ Á¡À¯µÇ¾î ÀÖÁö ¾Ê°í, »ç¿ëÇÒ ¼ö ÀÖ´Â »óÅÂ
+            // íƒ€ì›Œê°€ ì ìœ ë˜ì–´ ìˆì§€ ì•Šê³ , ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ìƒíƒœ
             Occupy();
         }
         else
         {
-            // Å¸¿ö°¡ Á¡À¯ÇÏ°í ÀÖÁö´Â ¾Ê°í, »ç¿ëÇÒ ¼ö ¾ø´Â »óÅÂ
+            // íƒ€ì›Œê°€ ì ìœ í•˜ê³  ìˆì§€ëŠ” ì•Šê³ , ì‚¬ìš©í•  ìˆ˜ ì—†ëŠ” ìƒíƒœ
             // e.g) start / end point
         }
     }

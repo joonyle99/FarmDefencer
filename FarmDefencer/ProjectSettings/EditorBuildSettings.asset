@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ActualBuild/Defence Scene.unity
     guid: 169625bc8ebd3514fb43735ae3c78c86
   m_configObjects: {}

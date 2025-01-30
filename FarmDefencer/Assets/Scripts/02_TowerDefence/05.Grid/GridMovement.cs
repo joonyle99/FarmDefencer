@@ -7,6 +7,7 @@ public class GridMovement : MonoBehaviour
 
     // public Vector2Int currentLookDir;
 
+
     private GridCell _targetGridCell;
     private int _pathIndex = 0;
     private bool _isFirst = true;
@@ -42,6 +43,20 @@ public class GridMovement : MonoBehaviour
         if (_targetGridCell == null)
         {
             return;
+        }
+
+        // flip sprite
+        if (_rigidbody.linearVelocityX < 0 && transform.localScale.x > 0)
+        {
+            var scale = transform.localScale;
+            scale.x *= -1; // x축 스케일 반전
+            transform.localScale = scale;
+        }
+        else if (_rigidbody.linearVelocityX > 0 && transform.localScale.x < 0)
+        {
+            var scale = transform.localScale;
+            scale.x *= -1; // x축 스케일 반전
+            transform.localScale = scale;
         }
 
         // check distance

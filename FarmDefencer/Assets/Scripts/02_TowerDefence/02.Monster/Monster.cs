@@ -207,7 +207,9 @@ public abstract class Monster : TargetableBehavior, IProduct
 
         OnKilled?.Invoke(this);
 
-        OriginFactory.ReturnProduct(this);
+        //TODO: 오브젝트 풀링은 현재는 안사용하고 있기 때문에 주석 처리
+        //OriginFactory.ReturnProduct(this);
+        Destroy(this.gameObject);
     }
     private IEnumerator SurviveRoutine(string animationName)
     {
@@ -225,6 +227,8 @@ public abstract class Monster : TargetableBehavior, IProduct
 
         DefenceContext.Current.WaveSystem.AddSurvivedMonster(_monsterName);
 
-        OriginFactory.ReturnProduct(this);
+        //TODO: 오브젝트 풀링은 현재는 안사용하고 있기 때문에 주석 처리
+        //OriginFactory.ReturnProduct(this);
+        Destroy(this.gameObject);
     }
 }

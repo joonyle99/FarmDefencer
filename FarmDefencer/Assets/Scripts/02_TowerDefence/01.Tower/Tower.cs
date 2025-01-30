@@ -18,15 +18,17 @@ public sealed class Tower : TargetableBehavior
     [SerializeField] private int _cost = 10;
     public int Cost => _cost;
 
+    private GridCell _occupyingGridCell;
+
     [Space]
 
-    public GameObject UpgradeUIPanel;
+    [Header("Upgrade")]
+    public UpgradePanel UpgradeUIPanel;
 
     [Space]
 
     [SerializeField] private int _maxLevel = 3;
     public int MaxLevel => _maxLevel;
-
     [SerializeField] private int _currentLevel = 1;
     public int CurrentLevel
     {
@@ -50,8 +52,6 @@ public sealed class Tower : TargetableBehavior
 
     public int upgradeCost = 40;
 
-    private GridCell _occupyingGridCell;
-
     [Space]
 
     // level 1
@@ -68,6 +68,7 @@ public sealed class Tower : TargetableBehavior
 
     [Space]
 
+    [Header("Animation")]
     [SerializeField] private SpineController _spineController;
 
     [Space]
@@ -78,24 +79,6 @@ public sealed class Tower : TargetableBehavior
     public string IdleAnimationName_2;
     [SpineAnimation]
     public string IdleAnimationName_3;
-
-    [Space]
-
-    [SpineAnimation]
-    public string AttackAnimationName_1;
-    [SpineAnimation]
-    public string AttackAnimationName_2;
-    [SpineAnimation]
-    public string AttackAnimationName_3;
-
-    [Space]
-
-    [SpineAnimation]
-    public string LevelUpAnimationName_1;
-    [SpineAnimation]
-    public string LevelUpAnimationName_2;
-
-    // animation property
     [SpineAnimation]
     public string IdleAnimation
     {
@@ -117,6 +100,15 @@ public sealed class Tower : TargetableBehavior
             return IdleAnimationName_1;
         }
     }
+
+    [Space]
+
+    [SpineAnimation]
+    public string AttackAnimationName_1;
+    [SpineAnimation]
+    public string AttackAnimationName_2;
+    [SpineAnimation]
+    public string AttackAnimationName_3;
     [SpineAnimation]
     public string AttackAnimation
     {
@@ -138,6 +130,13 @@ public sealed class Tower : TargetableBehavior
             return AttackAnimationName_1;
         }
     }
+
+    [Space]
+
+    [SpineAnimation]
+    public string LevelUpAnimationName_1;
+    [SpineAnimation]
+    public string LevelUpAnimationName_2;
     [SpineAnimation]
     public string LevelUpAnimation
     {
@@ -156,92 +155,87 @@ public sealed class Tower : TargetableBehavior
         }
     }
 
+    [Space]
+
+    [Header("Fire")]
+    [SerializeField] private TowerHead _head;
+    [SerializeField] private ProjectileTick _projectileTickPrefab;
+    private float _currentAttackRate;
+    public float CurrentAttackRate => _currentAttackRate;
+    private int _currentDamage;
+    public int CurrentDamage => _currentDamage;
+
+    private TargetableBehavior _currentTarget;
+    private float _attackWaitTimer = 0f;
+
+    private bool _isAttacking = false;
+    private float _attackAnimDuration_1;
+    private float _attackAnimDuration_2;
+    private float _attackAnimDuration_3;
+    private float _attackElapsedTime = 0f;
+
     // Actions
     public event System.Action<int> OnLevelChanged;
     public event System.Action<float> OnAttackRateChanged;
     public event System.Action<int> OnDamageChanged;
     public event System.Action<int> OnCostChanged;
 
-    [Space]
-
-    [Header("Fire")]
-    [SerializeField] private TowerHead _head;
-    [SerializeField] private ProjectileTick _projectileTick;
-    public ProjectileTick ProjectileTick => _projectileTick;
-    [SerializeField] private float _currentAttackRate;
-    public float CurrentAttackRate => _currentAttackRate;
-
-    private TargetableBehavior _currentTarget;
-    private float _elapsedAttackTime = 0f;
-
-    private bool _isAttacking = false;
-    private float _attackAnimationDuration_1 = 0f;
-    private float _attackAnimationDuration_2 = 0f;
-    private float _attackAnimationDuration_3 = 0f;
-    private float _tempElapsedTime = 0f;
-
     protected override void Awake()
     {
         base.Awake();
 
         _currentAttackRate = attackRate_1;
+        _currentDamage = damage_1;
     }
     protected override void OnEnable()
     {
         base.OnEnable();
-
-        // animation
-        //_spineController.SetAnimation(IdleAnimationName_1, true);
     }
     protected override void Start()
     {
         base.Start();
 
-        _projectileTick.SetDamage(damage_1);
+        UpgradeUIPanel.SetOwner(this);
 
-        _attackAnimationDuration_1 = _spineController.Skeleton.Data.FindAnimation(AttackAnimationName_1).Duration;
-        _attackAnimationDuration_2 = _spineController.Skeleton.Data.FindAnimation(AttackAnimationName_2).Duration;
-        _attackAnimationDuration_3 = _spineController.Skeleton.Data.FindAnimation(AttackAnimationName_3).Duration;
-
-        //Debug.Log(_attackAnimationDuration_1);
-        //Debug.Log(_attackAnimationDuration_2);
-        //Debug.Log(_attackAnimationDuration_3);
+        _attackAnimDuration_1 = _spineController.Skeleton.Data.FindAnimation(AttackAnimationName_1).Duration;
+        _attackAnimDuration_2 = _spineController.Skeleton.Data.FindAnimation(AttackAnimationName_2).Duration;
+        _attackAnimDuration_3 = _spineController.Skeleton.Data.FindAnimation(AttackAnimationName_3).Duration;
     }
     private void Update()
     {
         if (_isAttacking == true)
         {
-            _tempElapsedTime += Time.deltaTime;
+            _attackElapsedTime += Time.deltaTime;
 
             if (CurrentLevel == 1)
             {
-                if (_tempElapsedTime >= _attackAnimationDuration_1)
+                if (_attackElapsedTime >= _attackAnimDuration_1)
                 {
-                    _tempElapsedTime = 0f;
+                    _attackElapsedTime = 0f;
                     _isAttacking = false;
                 }
             }
             else if (CurrentLevel == 2)
             {
-                if (_tempElapsedTime >= _attackAnimationDuration_2)
+                if (_attackElapsedTime >= _attackAnimDuration_2)
                 {
-                    _tempElapsedTime = 0f;
+                    _attackElapsedTime = 0f;
                     _isAttacking = false;
                 }
             }
             else if (CurrentLevel == 3)
             {
-                if (_tempElapsedTime >= _attackAnimationDuration_3)
+                if (_attackElapsedTime >= _attackAnimDuration_3)
                 {
-                    _tempElapsedTime = 0f;
+                    _attackElapsedTime = 0f;
                     _isAttacking = false;
                 }
             }
         }
 
+        // find
         if (_isAttacking == false)
         {
-            // find
             UpdateTarget();
             if (_currentTarget != null && _currentTarget.gameObject.activeSelf == true)
             {
@@ -250,10 +244,10 @@ public sealed class Tower : TargetableBehavior
         }
 
         // attack
-        _elapsedAttackTime += Time.deltaTime;
-        if (_elapsedAttackTime >= _currentAttackRate)
+        _attackWaitTimer += Time.deltaTime;
+        if (_attackWaitTimer >= _currentAttackRate)
         {
-            _elapsedAttackTime = 0f;
+            _attackWaitTimer = 0f;
 
             if (_currentTarget != null
                 && _currentTarget.gameObject.activeSelf == true
@@ -301,7 +295,7 @@ public sealed class Tower : TargetableBehavior
         // 그러므로 공격 애니메이션의 시간을 알아내어
         // 그 시간 동안 대기 시간을 둔다
 
-        var projectileTick = Instantiate(_projectileTick, _head.Muzzle.position, _head.Muzzle.rotation);
+        var projectileTick = Instantiate(_projectileTickPrefab, _head.Muzzle.position, _head.Muzzle.rotation);
 
         if (projectileTick == null)
         {
@@ -310,17 +304,18 @@ public sealed class Tower : TargetableBehavior
         }
 
         projectileTick.SetTarget(_currentTarget);
+        projectileTick.SetDamage(_currentDamage);
         projectileTick.Shoot();
     }
 
     // panel
     public void ShowPanel()
     {
-        UpgradeUIPanel.SetActive(true);
+        UpgradeUIPanel.gameObject.SetActive(true);
     }
     public void HidePanel()
     {
-        UpgradeUIPanel.SetActive(false);
+        UpgradeUIPanel.gameObject.SetActive(false);
     }
 
     // upgrade
@@ -379,18 +374,18 @@ public sealed class Tower : TargetableBehavior
     {
         if (CurrentLevel == 1)
         {
-            _projectileTick.SetDamage(damage_1);
-            OnDamageChanged?.Invoke(_projectileTick.GetDamage());
+            _currentDamage = damage_1;
+            OnDamageChanged?.Invoke(_currentDamage);
         }
         else if (CurrentLevel == 2)
         {
-            _projectileTick.SetDamage(damage_2);
-            OnDamageChanged?.Invoke(_projectileTick.GetDamage());
+            _currentDamage = damage_2;
+            OnDamageChanged?.Invoke(_currentDamage);
         }
         else if (CurrentLevel == 3)
         {
-            _projectileTick.SetDamage(damage_3);
-            OnDamageChanged?.Invoke(_projectileTick.GetDamage());
+            _currentDamage = damage_3;
+            OnDamageChanged?.Invoke(_currentDamage);
         }
     }
 

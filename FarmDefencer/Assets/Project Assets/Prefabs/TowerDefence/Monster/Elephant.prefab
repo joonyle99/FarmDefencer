@@ -74,7 +74,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c557a8fc2e0857e44b9d01b9e90b1c19, type: 2}
+  - {fileID: 2100000, guid: 5c9f3888bd7dd274bbc246734bb0ef0d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -151,7 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f64264dfc9b1f49ab5fda2efdc8920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: 
 --- !u!58 &3216986904248962249
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -256,11 +255,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 3657265616720998730}
-  _hp: 200
+  _maxHp: 200
   _stunDuration: 0.03
   _isDead: 0
   _isStun: 0
-  _targetPoint: {fileID: 0}
+  _targetPoint: {fileID: 6219046591756985945}
   _originFactory: {fileID: 0}
   _monsterName: "\uCF54\uB07C\uB9AC"
   _spineController: {fileID: 7923479951364342952}

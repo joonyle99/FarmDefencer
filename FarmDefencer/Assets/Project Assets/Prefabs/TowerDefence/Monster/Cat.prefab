@@ -182,7 +182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f64264dfc9b1f49ab5fda2efdc8920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: 
 --- !u!58 &3216986904248962249
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -287,7 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 3657265616720998730}
-  _hp: 135
+  _maxHp: 135
   _stunDuration: 0.03
   _isDead: 0
   _isStun: 0

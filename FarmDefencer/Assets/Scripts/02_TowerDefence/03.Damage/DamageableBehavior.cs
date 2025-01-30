@@ -14,7 +14,9 @@ public abstract class DamageableBehavior : MonoBehaviour
     [Space]
 
     // status
-    [SerializeField] private int _hp = 100;
+    [SerializeField] private int _maxHp = 100;
+    public int MaxHp => _maxHp;
+    private int _hp;
     public int HP
     {
         get => _hp;
@@ -26,14 +28,14 @@ public abstract class DamageableBehavior : MonoBehaviour
             //var debugLabel = new GameObject("DebugLabel").AddComponent<DebugLabel>();
             //debugLabel.SetLabel(HP.ToString(), 1.0f, transform.position, Color.white);
 
-            if (_hp < 0)
+            if (_hp <= 0)
             {
                 //Debug.Log("hp is 0");
                 _hp = 0;
                 Kill();
             }
 
-            if (_hp < 50)
+            if (_hp <= _maxHp / 2)
             {
                 _healthBar.ChangeToRedBar();
             }
@@ -69,12 +71,13 @@ public abstract class DamageableBehavior : MonoBehaviour
             throw new System.NullReferenceException($"You should add DamageZone component");
         }
 
-        _startHp = _hp;
+        _startHp = MaxHp;
     }
     protected virtual void OnEnable()
     {
         IsDead = false;
-        HP = StartHp;
+
+        HP = MaxHp;
     }
     protected virtual void Start()
     {
