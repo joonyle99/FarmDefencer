@@ -81,6 +81,11 @@ public class WaveSystem : MonoBehaviour
             _isTriggered = true;
             StartCoroutine(WaveProcessRoutine());
         }
+        // CHEAT: re calculate path
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(DefenceContext.Current.GridMap.FindPathRoutine());
+        }
 
         // CHEAT: fast clock
         if (Input.GetKey(KeyCode.BackQuote))
@@ -127,8 +132,8 @@ public class WaveSystem : MonoBehaviour
 
             TargetSpawnCount = spawnCount;
 
-            Debug.Log($"Wave {waveCount++} Start");
-            Debug.Log($"Spawn Monster: {waveMonster.GetType()}, Spawn Count: {spawnCount}");
+            //Debug.Log($"Wave {waveCount++} Start");
+            //Debug.Log($"Spawn Monster: {waveMonster.GetType()}, Spawn Count: {spawnCount}");
 
             _currentSpawnCount = 0;
 
@@ -157,7 +162,7 @@ public class WaveSystem : MonoBehaviour
                 _elapsedTime += Time.deltaTime;
             }
 
-            Debug.Log("다음 웨이브 대기 중");
+            //Debug.Log("다음 웨이브 대기 중");
 
             // 다음 웨이브 대기
             yield return new WaitForSeconds(_waitWaveTime);
@@ -209,7 +214,7 @@ public class WaveSystem : MonoBehaviour
         GameStateManager.Instance.ChangeState(GameState.Wave);
 
         yield return DefenceContext.Current.GridMap.FindPathRoutine();
-        yield return SpawnRoutine();
+        //yield return SpawnRoutine();
     }
 
     //

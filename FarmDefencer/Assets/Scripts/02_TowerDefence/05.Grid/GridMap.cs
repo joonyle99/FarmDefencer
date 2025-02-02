@@ -102,7 +102,6 @@ public class GridMap : MonoBehaviour
 
         _gridMap = new GridCell[_height, _width];
     }
-
     private void Start()
     {
         CreateGridMap();
@@ -125,6 +124,7 @@ public class GridMap : MonoBehaviour
                 _gridMap[h, w].cellPosition = cellPos;
                 _gridMap[h, w].isUsable = true;
                 _gridMap[h, w].distanceCost = -1;
+                _gridMap[h, w].prevGridCell = null;
 
                 if (cellPos == StartCellPoint || cellPos == EndCellPoint)
                 {
@@ -133,10 +133,24 @@ public class GridMap : MonoBehaviour
             }
         }
     }
+    private void ResetPath()
+    {
+        // _gridMap 초기화
+        for (int h = 0; h < _height; h++)
+        {
+            for (int w = 0; w < _width; w++)
+            {
+                _gridMap[h, w].distanceCost = -1;
+                _gridMap[h, w].prevGridCell = null;
+            }
+        }
+    }
 
+    // shortest path finding by using bfs algorithm
     public IEnumerator FindPathRoutine()
     {
-        CalculateDistance(StartCellPoint);
+        ResetPath();
+        CalculatePath(StartCellPoint);
 
         if (ConstantConfig.DEBUG == true)
         {
@@ -145,14 +159,10 @@ public class GridMap : MonoBehaviour
 
         yield return DebugPingGridPathRoutine();
     }
-
-    // path
-    private void CalculateDistance(Vector2Int startPoint)
+    private void CalculatePath(Vector2Int startPoint)
     {
         Queue<Vector2Int> queue = new Queue<Vector2Int>();
-
         queue.Enqueue(startPoint);
-
         _gridMap[startPoint.y, startPoint.x].distanceCost = 0;
 
         while (queue.Count > 0)
@@ -255,24 +265,24 @@ public class GridMap : MonoBehaviour
         var lineObject = Instantiate(debugLine, Vector3.zero, Quaternion.identity);
         lineObject.positionCount = 0;
 
-        for (int i = 0; i < _gridPath.Count; i++)
+        // _gridPath를 복사
+        var copiedGridPath = new List<GridCell>(_gridPath);
+
+        for (int i = 0; i < copiedGridPath.Count; i++)
         {
+            //Debug.Log(copiedGridPath.Count);
             lineObject.positionCount = i + 1;
-            lineObject.SetPosition(i, _gridPath[i].transform.position);
+            lineObject.SetPosition(i, copiedGridPath[i].transform.position);
 
-            var originScale = _gridPath[i].transform.localScale;
+            var originScale = copiedGridPath[i].transform.localScale;
 
-            _gridPath[i].transform.localScale *= 1.5f;
+            copiedGridPath[i].transform.localScale = originScale * 1.5f;
             yield return new WaitForSeconds(0.1f);
-            _gridPath[i].transform.localScale = originScale;
+            copiedGridPath[i].transform.localScale = originScale;
         }
 
-        // 디버그 모드가 켜져있지 않다면 라인 렌더러를 제거합니다.
-        if (ConstantConfig.DEBUG == false)
-        {
-            yield return new WaitForSeconds(_debugLineDuration);
-            Destroy(lineObject.gameObject);
-        }
+        yield return new WaitForSeconds(_debugLineDuration);
+        Destroy(lineObject.gameObject);
     }
 
     public bool IsValid(int w, int h)

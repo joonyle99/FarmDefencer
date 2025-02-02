@@ -78,7 +78,8 @@ public class GridCell : MonoBehaviour
         }
 
         // 현재 타워 건설 상태가 아니라면 이벤트를 처리하지 않는다
-        if (GameStateManager.Instance.CurrentState != GameState.Build)
+        if (GameStateManager.Instance.CurrentState is not GameState.Build
+            && GameStateManager.Instance.CurrentState is not GameState.Wave)
         {
             return;
         }
