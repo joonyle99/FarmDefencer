@@ -151,10 +151,11 @@ public class GridCell : MonoBehaviour
     public void Occupy()
     {
         _occupiedTower = DefenceContext.Current.TowerBuildSystem.InstantiateTower(transform.position, Quaternion.identity);
-        _occupiedTower.OccupyingGridCell(this);
 
         if (_occupiedTower != null)
         {
+            _occupiedTower.OccupyingGridCell(this);
+
             OffHover();
             UnUsable();
         }
