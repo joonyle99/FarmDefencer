@@ -2,5 +2,5 @@ using UnityEngine;
 
 public class ConstantConfig : MonoBehaviour
 {
-    public const bool DEBUG = true;
+    public const bool DEBUG = false;
 }
