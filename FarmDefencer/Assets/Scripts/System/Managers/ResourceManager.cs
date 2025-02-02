@@ -13,7 +13,7 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>
         {
             _gold = value;
 
-            if (_gold < 0)
+            if (_gold <= 0)
             {
                 _gold = 0;
             }
@@ -52,7 +52,7 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>
 
     public void Initialize()
     {
-        EarnGold(300);
+        SetGold(200);
     }
 
     // gold
@@ -63,6 +63,10 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>
     public void SpendGold(int amount)
     {
         Gold -= amount;
+    }
+    public void SetGold(int amount)
+    {
+        Gold = amount;
     }
     public int GetGold()
     {
