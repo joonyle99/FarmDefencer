@@ -71,3 +71,6 @@
 # Temporary auto-generated Android Assets
 /FarmDefencer/[Aa]ssets/[Ss]treamingAssets/aa.meta
 /FarmDefencer/[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# 빌드 임시 파일
+/FarmDefencer/.utmp
