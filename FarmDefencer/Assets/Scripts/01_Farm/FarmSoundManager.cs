@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 using System;
 
 public class FarmSoundManager : MonoBehaviour
@@ -16,12 +15,14 @@ public class FarmSoundManager : MonoBehaviour
 	private AudioListener _audioListener;
 	private AudioSource _sfxAudioSource;
 
-	public void PlaySfx(string name)
+	private static FarmSoundManager _singleton;
+
+	public static void PlaySfx(string name)
 	{
 		int index = -1;
-		for (int i = 0; i<SfxDatas.Length; i++)
+		for (int i = 0; i<_singleton.SfxDatas.Length; i++)
 		{
-			if (SfxDatas[i].Name == name)
+			if (_singleton.SfxDatas[i].Name == name)
 			{
 				index = i;
 				break;
@@ -34,7 +35,7 @@ public class FarmSoundManager : MonoBehaviour
 			return;
 		}
 
-		var sfxData = SfxDatas[index];
+		var sfxData = _singleton.SfxDatas[index];
 		if (sfxData.AudioClips.Length == 0)
 		{
 			Debug.LogError($"FarmSoundManager.SfxDatas에 {name}에 대한 AudioClip이 존재하지 않습니다.");
@@ -44,11 +45,12 @@ public class FarmSoundManager : MonoBehaviour
 		var random = UnityEngine.Random.Range(0, sfxData.AudioClips.Length);
 		var audioClip = sfxData.AudioClips[random];
 
-		_sfxAudioSource.PlayOneShot(audioClip);
+		_singleton._sfxAudioSource.PlayOneShot(audioClip);
 	}
 
 	private void Awake()
 	{
+		_singleton = this;
 		_audioListener = GetComponent<AudioListener>();
 		_sfxAudioSource = GetComponent<AudioSource>();
 	}

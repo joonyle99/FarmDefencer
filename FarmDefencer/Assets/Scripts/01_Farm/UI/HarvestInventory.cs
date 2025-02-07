@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
+/// <summary>
+/// 자식으로 HarvestAnimationPlayer 오브젝트를 가져야 함.
+/// </summary>
 public class HarvestInventory : MonoBehaviour
 {
-	public UnityEvent OnGoldEarned;
-	public HarvestAnimationPlayer HarvestAnimationPlayer;
+	private HarvestAnimationPlayer _harvestAnimationPlayer;
 	public ProductDatabase ProductDatabase;
 	private Dictionary<string, HarvestBox> _harvestBoxes;
 
@@ -30,43 +31,36 @@ public class HarvestInventory : MonoBehaviour
 		}
 	}
 
+
+	
 	/// <summary>
-	/// 해당 엔트리에 대해 count만큼 획득 처리하며, 작물 획득 애니메이션을 재생합니다.
-	/// 만약 해당 농작물이 이미 할당량을 다 채운 경우 false를 반환하며 아무 작업도 하지 않습니다.
-	/// count가 남은 개수보다 많은 경우에도 일단은 0개로 만듭니다(예: 오늘의 수확이 2개 남은 상황에서 3개 작물 수확할 경우, 3개를 모두 수확하지만 2개만 획득 처리).
+	/// 요청한 개수와 남은 주문량 중 낮은 값만큼 수확 처리하는 메소드.
+	/// 내부적으로 수확 애니메이션 재생 코루틴을 실행함.
 	/// </summary>
 	/// <param name="productEntry"></param>
-	/// <param name="cropScreenPosition">애니메이션의 시작 화면 위치</param>
+	/// <param name="cropScreenPosition"></param>
 	/// <param name="count"></param>
-	public bool TryBeginGather(ProductEntry productEntry, Vector2 cropScreenPosition, int count)
+	/// <returns>실제 수확한 개수</returns>
+	public int Gather(ProductEntry productEntry, Vector2 cropPosition, int count)
 	{
 		var harvestBox = _harvestBoxes[productEntry.UniqueId];
 		if (harvestBox.Quota == 0)
 		{
-			return false;
+			return 0;
 		}
 
 		count = Mathf.Min(count, harvestBox.Quota);
-		FillQuota(productEntry, count);
-		StartCoroutine(HarvestAnimationCoroutine(productEntry, cropScreenPosition, count)); // 일단은 그대로 호출
 
-		return true;
-	}
-
-	/// <summary>
-	/// 해당 농작물의 할당량을 임의로 채웁니다.
-	/// 내부적으로 ResourceManager의 Gold를 증가시키는 메소드를 호출합니다.
-	/// <b>직접 호출하는 것은 디버그 목적으로만 사용해야 합니다.</b> 정상적인 게임 흐름은 TryBeginGather()를 이용하세요.
-	/// </summary>
-	/// <param name="productEntry"></param>
-	/// <param name="count"></param>
-	public void FillQuota(ProductEntry productEntry, int count)
-	{
-		var harvestBox = _harvestBoxes[productEntry.UniqueId];
-		var price = productEntry.Price * count;
+		var profit = productEntry.Price * count;
 		harvestBox.Quota -= count;
-		ResourceManager.Instance.EarnGold(price);
-		OnGoldEarned.Invoke();
+		ResourceManager.Instance.EarnGold(profit);
+		FarmSoundManager.PlaySfx("SFX_coin");
+
+		var cropScreenPosition = Camera.main.WorldToScreenPoint(cropPosition);
+
+		StartCoroutine(HarvestAnimationCoroutine(productEntry, cropScreenPosition, count));
+
+		return count;
 	}
 
 	/// <summary>
@@ -110,6 +104,7 @@ public class HarvestInventory : MonoBehaviour
 	}
 	private void Awake()
 	{
+		_harvestAnimationPlayer = GetComponentInChildren<HarvestAnimationPlayer>();
 		_harvestBoxes = new Dictionary<string, HarvestBox>();
 		foreach (var entry in ProductDatabase.Products)
 		{
@@ -136,7 +131,7 @@ public class HarvestInventory : MonoBehaviour
 
 		for (var i = 0; i < count; i++)
 		{
-			HarvestAnimationPlayer.PlayAnimation(productEntry, cropScreenPosition, toPosition, () => { });
+			_harvestAnimationPlayer.PlayAnimation(productEntry, cropScreenPosition, toPosition, () => { });
 			yield return new WaitForSeconds(0.1f);
 		}
 		yield return null;

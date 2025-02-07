@@ -1,26 +1,34 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Tilemaps;
+using System;
+using System.Collections.Generic;
 
+/// <summary>
+/// 0번 자식: 배경
+/// 1번 자식: 잠금 디스플레이
+/// </summary>
 public class Field : MonoBehaviour, IFarmUpdatable
 {
-    public UnityEvent OnHarvested;
-    public UnityEvent OnPlanted;
-    public UnityEvent OnWatered;
+	private Func<ProductEntry, Vector2, int, int> _harvestHandler;
+	public Func<ProductEntry, Vector2, int, int> HarvestHandler
+	{
+		get
+		{
+			return _harvestHandler;
+		}
+		set
+		{
+			_harvestHandler = value;
+			foreach (var crop in _crops)
+			{
+                crop.HarvestHandler = (count) => { return _harvestHandler(ProductEntry, crop.transform.position, count); };
+			}
+		}
+	}
+	public GameObject CropPrefab;
 
-    public GameObject CropPrefab;
-    /// <summary>
-    /// Farm 오브젝트 위치에 대한 상대 위치입니다.
-    /// Field의 가장 왼쪽 아래 타일의 위치와 동일합니다.
-    /// </summary>
-    public Vector2 FieldLocalPosition;
+    public ProductEntry ProductEntry;
     public Vector2Int FieldSize;
 
-    /// <summary>
-    /// 이 Field에 심길 Crop의 ProductEntry입니다.
-    /// </summary>
-    public ProductEntry ProductEntry => _productEntry;
     public bool IsAvailable
     {
         get
@@ -34,10 +42,9 @@ public class Field : MonoBehaviour, IFarmUpdatable
         }
     }
     private bool _isAvailable;
-    private ProductEntry _productEntry;
-    private Tilemap _tilemap;
     private List<Crop> _crops;
-    private GameObject _fieldLockedDisplayObject;
+    private SpriteRenderer _backgroundRenderer; // 0번 자식 오브젝트에 할당
+    private SpriteRenderer _fieldLockedRenderer; // 1번 자식 오브젝트에 할당
 
 	/// <summary>
 	/// 입력된 좌표에 해당되는 Crop을 검색해서 반환합니다.
@@ -47,24 +54,16 @@ public class Field : MonoBehaviour, IFarmUpdatable
 	/// <returns>position에 해당하는 Crop이 존재할 경우 crop에 값이 할당되며 true 반환, 이외의 경우 crop에 null이 할당되며 false 반환</returns>
 	public bool TryFindCropAt(Vector2 position, out Crop crop)
 	{
-        if (position.x < transform.position.x - 0.5f || position.x > transform.position.x + FieldSize.x - 0.5f
-        || position.y < transform.position.y - 0.5f || position.y > transform.position.y + FieldSize.y - 0.5f)
+        var localPosition = new Vector2Int(Mathf.RoundToInt(position.x - transform.position.x), Mathf.RoundToInt(position.y - transform.position.y));
+        if (localPosition.x < 0 || localPosition.x >= FieldSize.x
+            || localPosition.y < 0 || localPosition.y >= FieldSize.y)
         {
             crop = null;
             return false;
         }
 
-        foreach (var cropItem in _crops)
-        {
-            if (cropItem.IsLocatedAt(position))
-            {
-                crop = cropItem;
-                return true;
-            }
-        }
-
-        crop = null;
-        return false;
+        crop = _crops[localPosition.y * FieldSize.x + localPosition.x];
+		return true;
 	}
 
     public void OnFarmUpdate(float deltaTime)
@@ -75,66 +74,32 @@ public class Field : MonoBehaviour, IFarmUpdatable
         }
     }
 
-	public void Init(
-        GameObject fieldLockedDisplayPrefab,
-        GameObject cropLockedDisplayPrefab,
-        TileBase flowedTile,
-        UnityAction<ProductEntry, Vector2Int, int, UnityAction<bool>> onTryItemifyAction)
-	{
-        _fieldLockedDisplayObject = Instantiate(fieldLockedDisplayPrefab);
-        _fieldLockedDisplayObject.SetActive(false);
-        _fieldLockedDisplayObject.transform.SetParent(transform, false);
-        _fieldLockedDisplayObject.transform.localPosition = new Vector2(FieldSize.x / 2.0f, FieldSize.y / 2.0f);
-
-        IsAvailable = false;
-
-		for (int yOffset = 0; yOffset < FieldSize.y; yOffset++)
-		{
-			for (int xOffset = 0; xOffset < FieldSize.x; xOffset++)
-			{
-				_tilemap.SetTile(new Vector3Int(xOffset, yOffset), flowedTile);
-				var cropObjectPosition = new Vector3(transform.position.x + xOffset, transform.position.y + yOffset, transform.position.z - 1.0f);
-				var cropObject = Instantiate(CropPrefab);
-				var cropComponent = cropObject.GetComponent<Crop>();
-				cropObject.transform.parent = transform;
-				cropObject.transform.position = cropObjectPosition;
-
-                cropComponent.OnHarvested.AddListener(OnHarvested.Invoke);
-                cropComponent.OnWatered.AddListener(OnWatered.Invoke);
-                cropComponent.OnPlanted.AddListener(OnPlanted.Invoke);
-
-				cropComponent.Init(cropLockedDisplayPrefab, (count, afterItemifyCallback) => onTryItemifyAction(ProductEntry, cropComponent.Position, count, afterItemifyCallback));
-				_crops.Add(cropComponent);
-			}
-		}
-	}
-
 	private void OnAvailabilityChanged()
     {
-        var color = _isAvailable ? Color.white : new Color(0.4f, 0.7f, 1.0f, 1.0f);
-		for (int yOffset = 0; yOffset < FieldSize.y; yOffset++)
-		{
-			for (int xOffset = 0; xOffset < FieldSize.x; xOffset++)
-			{
-                _tilemap.SetTileFlags(new Vector3Int(xOffset, yOffset), TileFlags.None);
-				_tilemap.SetColor(new Vector3Int(xOffset, yOffset), color);
-			}
-		}
+        var backgroundColor = _isAvailable ? Color.white : new Color(0.0f, 0.0f, 0.0f, 0.0f);
+        var fieldLockedColor = _isAvailable ? new Color(0.0f, 0.0f, 0.0f, 0.0f) : Color.white;
 
-		_fieldLockedDisplayObject.SetActive(!_isAvailable);
+        _backgroundRenderer.color = backgroundColor;
+        _fieldLockedRenderer.color = fieldLockedColor;
 	}
 
 	private void Awake()
     {
-        _tilemap = GetComponentInChildren<Tilemap>();
         _crops = new List<Crop>();
+        _backgroundRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        _fieldLockedRenderer = transform.GetChild(1).GetComponent<SpriteRenderer>();
 
-        if (CropPrefab == null
-            || !CropPrefab.TryGetComponent<Crop>(out var _))
+        for (int yOffset = 0; yOffset < FieldSize.y; ++yOffset)
         {
-            throw new MissingComponentException("Field에 지정된 CropPrefab이 null이거나 Crop 컴포넌트를 가지지 않습니다.");
-        }
+            for (int xOffset = 0; xOffset < FieldSize.x; ++xOffset)
+            {
+                var cropObject = Instantiate(CropPrefab, transform);
 
-        _productEntry = CropPrefab.GetComponent<Crop>().ProductEntry;
+                var cropComponent = cropObject.GetComponent<Crop>();
+                cropObject.transform.localPosition = new Vector3(xOffset, yOffset, 0.0f);
+
+                _crops.Add(cropComponent);
+            }
+        }
 	}
 }

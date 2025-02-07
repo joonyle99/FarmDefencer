@@ -14,7 +14,6 @@ namespace FarmTest
         public float CameraMovementScale = 1.0f;
         public Vector2 LastInteractScreenPosition;
         public GameObject FarmObject;
-		public Camera Camera;
         public FarmClock FarmClock;
 		public FarmManager FarmManager;
         private Farm _farmComponent;
@@ -24,9 +23,10 @@ namespace FarmTest
 		private bool _isDoubleHolding;
         private Vector2 _singleHoldBeginPosition;
         private TMP_Text _remainingDaytimeText;
+		private Camera _camera;
 
 		// 위치 delta를 받음
-        public void OnCameraMove(InputValue inputValue)
+		public void OnCameraMove(InputValue inputValue)
         {
             if (_isDoubleHolding)
             {
@@ -47,7 +47,7 @@ namespace FarmTest
 
 		public void OnSingleTap()
 		{
-			_farmComponent.TapAction(Camera.ScreenToWorldPoint(LastInteractScreenPosition));
+			_farmComponent.TapAction(_camera.ScreenToWorldPoint(LastInteractScreenPosition));
 		}
 
         public void OnSingleHold(InputValue inputValue)
@@ -83,7 +83,7 @@ namespace FarmTest
                 _singleHoldingTimeElapsed += Time.deltaTime;
 
 				_farmComponent.SingleHoldingAction(
-					Camera.ScreenToWorldPoint(_singleHoldBeginPosition),
+					_camera.ScreenToWorldPoint(_singleHoldBeginPosition),
 					LastInteractScreenPosition - _singleHoldBeginPosition,
 					false,
 					Time.deltaTime);
@@ -92,7 +92,7 @@ namespace FarmTest
             else if (_singleHoldingTimeElapsed > 0.0f) // Single Hold가 종료된 직후
             {
 				_farmComponent.SingleHoldingAction(
-					Camera.ScreenToWorldPoint(_singleHoldBeginPosition),
+					_camera.ScreenToWorldPoint(_singleHoldBeginPosition),
 	                LastInteractScreenPosition - _singleHoldBeginPosition,
 	                true,
 					Time.deltaTime);
@@ -102,7 +102,9 @@ namespace FarmTest
 
 		private void Awake()
         {
-            _farmComponent = FarmObject.GetComponent<Farm>();
+            _camera = GetComponent<Camera>();
+            _camera.tag = "MainCamera";
+			_farmComponent = FarmObject.GetComponent<Farm>();
             _remainingDaytimeText = transform.Find("Canvas/DebugArea/DebugTimer/RemainingDaytimeText").GetComponent<TMP_Text>();
             transform.Find("Canvas/DebugArea/DebugTimer/DaytimeRandomSetButton")
                 .GetComponent<Button>()

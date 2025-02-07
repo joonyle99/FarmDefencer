@@ -1,39 +1,31 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Tilemaps;
 
 /// <summary>
-/// 밭과 작물들로 구성된 농장을 의미하는 클래스입니다.
-/// FieldPrefabs를 설정해 농장을 구성합니다.
-/// <br/>
-/// 외부의 모든 객체들은 Field, Crop 등과 직접 소통하지 않도록(알 필요 없도록) 설계하였습니다.
-/// 즉 Farm의 이벤트와 public 메소드들만 고려하여 다른 시스템을 설계하도록 최소한의 API만 노출하였습니다.
+/// 자식으로는 반드시 Field 오브젝트만 가지게 할 것.
 /// </summary>
 public class Farm : MonoBehaviour, IFarmUpdatable
 {
-	public UnityEvent OnHarvested;
-	public UnityEvent OnPlanted;
-	public UnityEvent OnWatered;
-	public List<GameObject> FieldPrefabs;
+	private Func<ProductEntry, Vector2, int, int> _harvestHandler;
+	public Func<ProductEntry, Vector2, int, int> HarvestHandler
+	{
+		get
+		{
+			return _harvestHandler;
+		}
+		set
+		{
+			_harvestHandler = value;
+			foreach (var field in _fields)
+			{
+				field.HarvestHandler = value;
+			}
+		}
+	}
 
-	/// <summary>
-	/// 작물을 아이템화 시도할 때 호출되는 이벤트입니다. 
-	/// 아이템화란 작물로부터 수확 상자에 담기는 행동을 의미합니다.
-	/// <br/>
-	/// OnTryItemify&lt;productEntry, cropWorldPosition, afterItemify(isItemified)&gt;로 구성되며, 
-	/// 이를 처리하는 핸들러는 인자 콜백 afterItemify에 대해 아이템화에 성공했는지 여부를 매개 변수로 전달하여 다시 호출하면 됩니다.
-	/// 할당량을 초과해서 수확할 수 없기 때문에, 이를 검증하기 위한 이중 콜백 구조입니다.
-	/// <br/><br/>
-	/// 즉, OnTryItemify를 처리하는 측에서는 여유 공간이 있다면 afterItemify(true), 없다면 afterItemify(false) 하면 됩니다.
-	/// </summary>
-	public UnityEvent<ProductEntry, Vector2Int, int, UnityAction<bool>> OnTryItemify;
-	public GameObject FieldLockedDisplayPrefab;
-	public GameObject CropLockedDisplayPrefab;
-	public TileBase FlowedTile;
-
-    private Dictionary<string, Field> _fields;
 	private bool _isFarmPaused;
+	private List<Field> _fields;
 
 	/// <summary>
 	/// 해당 월드 좌표의 Crop을 검색합니다.
@@ -45,7 +37,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 	/// <returns></returns>
 	public bool TryFindCropAt(Vector2 position, out Crop crop)
 	{
-		foreach (var (_, field) in _fields)
+		foreach (var field in _fields)
 		{
 			if (field.TryFindCropAt(position, out crop))
 			{
@@ -64,7 +56,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 			return;
 		}
 
-		foreach (var (_, field) in _fields)
+		foreach (var field in _fields)
         {
 			if (!field.IsAvailable)
 			{
@@ -83,7 +75,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 		{
 			return;
 		}
-		foreach (var (_, field) in _fields)
+		foreach (var field in _fields)
 		{
 			if (!field.IsAvailable)
 			{
@@ -98,7 +90,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 
 	public void WateringAction(Vector2 position)
 	{
-		foreach (var (_, field) in _fields)
+		foreach (var field in _fields)
 		{
 			if (!field.IsAvailable)
 			{
@@ -114,7 +106,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 	public void OnFarmUpdate(float deltaTime)
     {
 		_isFarmPaused = deltaTime == 0.0f;
-        foreach (var (_, field) in _fields)
+        foreach (var field in _fields)
         {
 			if (!field.IsAvailable)
 			{
@@ -126,59 +118,43 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 
 	public bool GetFieldAvailability(string productUniqueId)
 	{
-		if (!_fields.TryGetValue(productUniqueId, out var field))
+		foreach (var field in _fields)
 		{
-			Debug.LogWarning($"Farm.GetFieldAvailability()의 인자로 전달된 productUniqueId {productUniqueId}(은)는 Farm._field에 존재하지 않습니다.");
-			return false;
+			if (field.ProductEntry.UniqueId == productUniqueId)
+			{
+				return field.IsAvailable;
+			}
 		}
 
-		return field.IsAvailable;
+		Debug.LogError($"Farm이 {productUniqueId}에 해당하는 Field를 가지고 있지 않습니다.");
+		return false;
 	}
 
 	public void SetFieldAvailability(string productUniqueId, bool value)
 	{
-		if (!_fields.TryGetValue(productUniqueId, out var field))
+		foreach (var field in _fields)
 		{
-			Debug.LogError($"Farm.SetAvailability()의 인자로 전달된 productUniqueId {productUniqueId}(은)는 Farm._field에 존재하지 않습니다.");
-			return;
+			if (field.ProductEntry.UniqueId == productUniqueId)
+			{
+				field.IsAvailable = value;
+				return;
+			}
 		}
 
-		field.IsAvailable = value;
+		Debug.LogError($"Farm이 {productUniqueId}에 해당하는 Field를 가지고 있지 않습니다.");
 	}
 
 	private void Awake()
     {
-        _fields = new Dictionary<string, Field>();
+		_fields = new List<Field>();
 
-		if (CropLockedDisplayPrefab == null || !CropLockedDisplayPrefab.TryGetComponent<CropLockedDisplay>(out var _))
+		for (int childIndex = 0; childIndex < transform.childCount; ++childIndex)
 		{
-			throw new System.ArgumentException("Farm의 CropLockedDisplayPrefab None 오브젝트 또는 CropLockedDisplay 컴포넌트를 갖지 않는 오브젝트가 존재합니다.");
+			var childObject = transform.GetChild(childIndex);
+			var fieldComponent = childObject.GetComponent<Field>();
+			fieldComponent.HarvestHandler = HarvestHandler;
+
+			_fields.Add(fieldComponent);
 		}
-
-        for (int index = 0; index<FieldPrefabs.Count; index++)
-        {
-            var fieldPrefab = FieldPrefabs[index];
-            if (fieldPrefab == null
-                || !fieldPrefab.TryGetComponent<Field>(out var _))
-            {
-                throw new System.ArgumentException("Farm의 FieldPrefabs에 None 오브젝트 또는 Field 컴포넌트를 갖지 않는 오브젝트가 존재합니다.");
-            }
-
-            var fieldObject = Instantiate(fieldPrefab);
-            var fieldComponent = fieldObject.GetComponent<Field>();
-            fieldObject.transform.parent = transform;
-			fieldObject.transform.localPosition = new Vector3(fieldComponent.FieldLocalPosition.x, fieldComponent.FieldLocalPosition.y, transform.position.z - 1.0f);
-			fieldComponent.Init(
-				FieldLockedDisplayPrefab,
-				CropLockedDisplayPrefab,
-				FlowedTile,
-				(productEntry, cropPosition, count, afterItemifyCallback) => OnTryItemify.Invoke(productEntry, cropPosition, count,afterItemifyCallback));
-
-			fieldComponent.OnHarvested.AddListener(OnHarvested.Invoke);
-			fieldComponent.OnWatered.AddListener(OnWatered.Invoke);
-			fieldComponent.OnPlanted.AddListener(OnPlanted.Invoke);
-
-			_fields.Add(fieldComponent.ProductEntry.UniqueId, fieldComponent);
-        }
     }
 }

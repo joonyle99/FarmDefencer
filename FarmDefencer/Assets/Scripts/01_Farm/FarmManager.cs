@@ -24,19 +24,8 @@ public class FarmManager : MonoBehaviour
 
 	private void Awake()
 	{
+		Farm.HarvestHandler = FarmUI.HarvestInventory.Gather;
 		FarmClock.RegisterFarmUpdatableObject(Farm);
-		Farm.OnTryItemify.AddListener(
-			(productEntry, cropWorldPosition, count, afterItemifyCallback) =>
-			{
-				var cropScreenPosition = FarmTestPlayer.Camera.WorldToScreenPoint(new Vector3(cropWorldPosition.x, cropWorldPosition.y, 0)); 
-				var isItemified = FarmUI.HarvestInventory.TryBeginGather(productEntry, cropScreenPosition, count);
-				afterItemifyCallback(isItemified);
-			});
-
-		Farm.OnHarvested.AddListener(() => { FarmSoundManager.PlaySfx("SFX_harvest"); });
-		Farm.OnPlanted.AddListener(() => { FarmSoundManager.PlaySfx("SFX_plant_seed"); });
-		Farm.OnWatered.AddListener(() => { FarmSoundManager.PlaySfx("SFX_water_oneshot"); });
-		FarmUI.HarvestInventory.OnGoldEarned.AddListener(() => { FarmSoundManager.PlaySfx("SFX_coin"); });
 
 		FarmUI.Init(FarmClock);
 		FarmUI.WateringCan.OnWatering.AddListener(Farm.WateringAction);
@@ -45,25 +34,25 @@ public class FarmManager : MonoBehaviour
 	private void Start()
 	{
 		SetAvailability("product_carrot", true);
-		SetAvailability("product_potato", true);
-		SetAvailability("product_corn", true);
-		SetAvailability("product_cabbage", true);
-		SetAvailability("product_cucumber", true);
-		SetAvailability("product_eggplant", true);
-		SetAvailability("product_sweetpotato", true);
-		SetAvailability("product_mushroom", true);
+		//SetAvailability("product_potato", true);
+		//SetAvailability("product_corn", true);
+		//SetAvailability("product_cabbage", true);
+		//SetAvailability("product_cucumber", true);
+		//SetAvailability("product_eggplant", true);
+		//SetAvailability("product_sweetpotato", true);
+		//SetAvailability("product_mushroom", true);
 
 		FarmUI.HarvestInventory.SetTodaysOrder(
 			new System.Collections.Generic.List<(string, int)>
 			{
 				("product_carrot", 99),
-				("product_potato", 99), 
-				("product_corn", 99), 
-				("product_cabbage", 99), 
-				("product_cucumber", 99), 
-				("product_eggplant", 99), 
-				("product_sweetpotato", 99), 
-				("product_mushroom", 99),
+				//("product_potato", 99), 
+				//("product_corn", 99), 
+				//("product_cabbage", 99), 
+				//("product_cucumber", 99), 
+				//("product_eggplant", 99), 
+				//("product_sweetpotato", 99), 
+				//("product_mushroom", 99),
 			});
 	}
 
