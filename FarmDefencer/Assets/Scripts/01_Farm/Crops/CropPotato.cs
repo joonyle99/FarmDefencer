@@ -22,6 +22,7 @@ public class CropPotato : Crop
 	{
 		if (_isSeed)
 		{
+			FarmSoundManager.PlaySfx("SFX_plant_seed");
 			_isSeed = false;
 		}
 		else if (_harvested)
@@ -42,6 +43,7 @@ public class CropPotato : Crop
 			{
 				_holdingTime = 0.0f;
 				_harvested = true;
+				FarmSoundManager.PlaySfx("SFX_harvest");
 			}
 		}
 

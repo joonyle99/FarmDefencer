@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3962916044717342706}
   - component: {fileID: 6026670487540730573}
-  - component: {fileID: 7482850677902319552}
+  - component: {fileID: 1107490881235973426}
   m_Layer: 0
-  m_Name: CropPotato
+  m_Name: CropCorn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7482850677902319552
+--- !u!114 &1107490881235973426
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,16 +97,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 7695424892220933664}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb44d94f789163e46b0b2f8027436c11, type: 3}
+  m_Script: {fileID: 11500000, guid: cefd83b35bc9e7041a661b251b805a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   WaterWaitingDeadSeconds: 300
   WaterWaitingResetSeconds: 300
-  SeedSprite: {fileID: 5648000857520084944, guid: 331e30d953f60f14abd2063867f228a0, type: 3}
-  MatureSprite: {fileID: 339328559792071645, guid: 3ec4f7c2ee05dcb468a84448f60f079a, type: 3}
-  BeforeWaterSprite: {fileID: 1172758213145252511, guid: b3b2018b693a58d499b2c7ea31404985, type: 3}
-  DeadSprite: {fileID: 8680457158381878835, guid: eeb5e3b9cb2b54a4c91e7872bd2d95cb, type: 3}
-  GrowingSprite: {fileID: -5780425549681805702, guid: ae7b9277c5bcd6743bc66ac166462c6d, type: 3}
-  HarvestedSprite: {fileID: -1894063774890498872, guid: 36fb9fb347a5bb54dbe0e071fd302b02, type: 3}
-  MatureSeconds: 20
-  HarvestHoldTime: 2
+  SeedSprite: {fileID: -769777141352692519, guid: 6bf4dd8c713e1bd4ea96225144d54b44, type: 3}
+  Stage1BeforeWateringSprite: {fileID: 224499079764585744, guid: ffbc55fea0975894fac21688d35c6a00, type: 3}
+  Stage1DeadSprite: {fileID: 8050758580740907669, guid: 25ab24494d405fe459dfc03d8471550e, type: 3}
+  Stage1AfterWateringSprite: {fileID: 4127572791758599202, guid: 77a4f4358a9ac4c4cb65c37f5f2cc6d4, type: 3}
+  Stage1GrowthSeconds: 15
+  Stage2BeforeWateringSprite: {fileID: -7349923331030695169, guid: b0825ac76517893478876fd9712084a2, type: 3}
+  Stage2DeadSprite: {fileID: 7553598280831887322, guid: 9de26b9601e85e044b4bd31deb138627, type: 3}
+  Stage2AfterWateringSprite: {fileID: 8801913211351782171, guid: 2a069e253f9dc00449f80ca32e0fed7f, type: 3}
+  Stage2GrowthSeconds: 15
+  MatureSprite: {fileID: 8232014692696457056, guid: 8c32f40cec3fc4c4cb0e91b611c07fc7, type: 3}
+  HarvestedSprite: {fileID: -7474539987137545531, guid: 1b23b02addf581e4493ca907abcc9206, type: 3}

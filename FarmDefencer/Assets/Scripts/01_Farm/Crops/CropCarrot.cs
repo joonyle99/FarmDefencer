@@ -13,17 +13,18 @@ public class CropCarrot : Crop
 
 	private SpriteRenderer _spriteRenderer;
 	private bool _isSeed;
-	private bool _watered;
 	private bool _harvested;
 
 	public override void OnSingleTap()
 	{
 		if (_isSeed)
 		{
+			FarmSoundManager.PlaySfx("SFX_plant_seed");
 			_isSeed = false;
 		}
 		else if (growthSeconds >= MatureSeconds && !_harvested)
 		{
+			FarmSoundManager.PlaySfx("SFX_harvest");
 			_harvested = true;
 		}
 		else if (_harvested)
@@ -37,10 +38,10 @@ public class CropCarrot : Crop
 
 	public override void OnWatering()
 	{
-		if (!_isSeed && !_watered)
+		if (!_isSeed && !watered)
 		{
 			waterWaitingSeconds = 0.0f;
-			_watered = true;
+			watered = true;
 			FarmSoundManager.PlaySfx("SFX_water_oneshot");
 		}
 	}
@@ -49,7 +50,7 @@ public class CropCarrot : Crop
 	{
 		if (_isSeed)
 		{
-			_watered = false;
+			watered = false;
 			_harvested = false;
 			waterWaitingSeconds = 0.0f;
 			growthSeconds = 0.0f;
@@ -82,7 +83,7 @@ public class CropCarrot : Crop
 			return;
 		}
 
-		if (!_watered)
+		if (!watered)
 		{
 			waterWaitingSeconds += deltaTime;
 
@@ -128,7 +129,7 @@ public class CropCarrot : Crop
 	{
 		_spriteRenderer = GetComponent<SpriteRenderer>();
 		_isSeed = true;
-		_watered = false;
+		watered = false;
 		_harvested = false;
 	}
 }

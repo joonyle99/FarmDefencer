@@ -10,6 +10,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 
 	protected float waterWaitingSeconds;
 	protected float growthSeconds;
+	protected bool watered;
 
 	public virtual void OnSingleTap() { }
 
