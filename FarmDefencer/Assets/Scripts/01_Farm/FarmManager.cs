@@ -34,7 +34,7 @@ public class FarmManager : MonoBehaviour
 	private void Start()
 	{
 		SetAvailability("product_carrot", true);
-		//SetAvailability("product_potato", true);
+		SetAvailability("product_potato", true);
 		//SetAvailability("product_corn", true);
 		//SetAvailability("product_cabbage", true);
 		//SetAvailability("product_cucumber", true);
@@ -46,7 +46,7 @@ public class FarmManager : MonoBehaviour
 			new System.Collections.Generic.List<(string, int)>
 			{
 				("product_carrot", 99),
-				//("product_potato", 99), 
+				("product_potato", 99), 
 				//("product_corn", 99), 
 				//("product_cabbage", 99), 
 				//("product_cucumber", 99), 

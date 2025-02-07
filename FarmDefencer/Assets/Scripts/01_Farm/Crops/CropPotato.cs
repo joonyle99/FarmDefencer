@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CropCarrot : Crop
+public class CropPotato : Crop
 {
 	public Sprite SeedSprite;
 	public Sprite MatureSprite;
@@ -9,12 +9,14 @@ public class CropCarrot : Crop
 	public Sprite GrowingSprite;
 	public Sprite HarvestedSprite;
 
-	public float MatureSeconds = 15.0f;
+	public float MatureSeconds = 20.0f;
+	public float HarvestHoldTime = 2.0f;
 
 	private SpriteRenderer _spriteRenderer;
 	private bool _isSeed;
 	private bool _watered;
 	private bool _harvested;
+	private float _holdingTime;
 
 	public override void OnSingleTap()
 	{
@@ -22,16 +24,30 @@ public class CropCarrot : Crop
 		{
 			_isSeed = false;
 		}
-		else if (growthSeconds >= MatureSeconds && !_harvested)
-		{
-			_harvested = true;
-		}
 		else if (_harvested)
 		{
 			if (HarvestHandler(1) > 0)
 			{
 				_isSeed = true;
 			}
+		}
+	}
+
+	public override void OnSingleHolding(Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
+	{
+		if (growthSeconds >= MatureSeconds && !_harvested)
+		{
+			_holdingTime += deltaHoldTime;
+			if (_holdingTime >= HarvestHoldTime)
+			{
+				_holdingTime = 0.0f;
+				_harvested = true;
+			}
+		}
+
+		if (isEnd)
+		{
+			_holdingTime = 0.0f;
 		}
 	}
 
@@ -53,6 +69,7 @@ public class CropCarrot : Crop
 			_harvested = false;
 			waterWaitingSeconds = 0.0f;
 			growthSeconds = 0.0f;
+			_holdingTime = 0.0f;
 
 			if (_spriteRenderer.sprite != SeedSprite)
 			{
@@ -71,7 +88,7 @@ public class CropCarrot : Crop
 
 			return;
 		}
-	
+
 		if (growthSeconds >= MatureSeconds)
 		{
 			if (_spriteRenderer.sprite != MatureSprite)
@@ -130,5 +147,6 @@ public class CropCarrot : Crop
 		_isSeed = true;
 		_watered = false;
 		_harvested = false;
+		_holdingTime = 0.0f;
 	}
 }
