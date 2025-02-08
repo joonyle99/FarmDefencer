@@ -27,9 +27,4 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	public virtual void OnWatering() { }
 
 	public abstract void OnFarmUpdate(float deltaTime);
-
-	private void Awake()
-	{
-		
-	}
 }
