@@ -41,7 +41,7 @@ public class FarmManager : MonoBehaviour
 		SetAvailability("product_cucumber", true);
 		SetAvailability("product_eggplant", true);
 		SetAvailability("product_sweetpotato", true);
-		//SetAvailability("product_mushroom", true);
+		SetAvailability("product_mushroom", true);
 
 		FarmUI.HarvestInventory.SetTodaysOrder(
 			new System.Collections.Generic.List<(string, int)>
@@ -53,7 +53,7 @@ public class FarmManager : MonoBehaviour
 				("product_cucumber", 99), 
 				("product_eggplant", 99), 
 				("product_sweetpotato", 3), 
-				//("product_mushroom", 99),
+				("product_mushroom", 99),
 			});
 	}
 
