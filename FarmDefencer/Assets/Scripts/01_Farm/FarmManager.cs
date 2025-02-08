@@ -39,7 +39,7 @@ public class FarmManager : MonoBehaviour
 		SetAvailability("product_corn", true);
 		SetAvailability("product_cabbage", true);
 		SetAvailability("product_cucumber", true);
-		//SetAvailability("product_eggplant", true);
+		SetAvailability("product_eggplant", true);
 		//SetAvailability("product_sweetpotato", true);
 		//SetAvailability("product_mushroom", true);
 
@@ -51,7 +51,7 @@ public class FarmManager : MonoBehaviour
 				("product_corn", 99), 
 				("product_cabbage", 99), 
 				("product_cucumber", 99), 
-				//("product_eggplant", 99), 
+				("product_eggplant", 99), 
 				//("product_sweetpotato", 99), 
 				//("product_mushroom", 99),
 			});
