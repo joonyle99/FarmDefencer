@@ -152,7 +152,6 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 		{
 			var childObject = transform.GetChild(childIndex);
 			var fieldComponent = childObject.GetComponent<Field>();
-			fieldComponent.HarvestHandler = HarvestHandler;
 
 			_fields.Add(fieldComponent);
 		}

@@ -24,7 +24,6 @@ public class FarmManager : MonoBehaviour
 
 	private void Awake()
 	{
-		Farm.HarvestHandler = FarmUI.HarvestInventory.Gather;
 		FarmClock.RegisterFarmUpdatableObject(Farm);
 
 		FarmUI.Init(FarmClock);
@@ -33,10 +32,12 @@ public class FarmManager : MonoBehaviour
 
 	private void Start()
 	{
+		Farm.HarvestHandler = FarmUI.HarvestInventory.Gather;
+
 		SetAvailability("product_carrot", true);
 		SetAvailability("product_potato", true);
 		SetAvailability("product_corn", true);
-		//SetAvailability("product_cabbage", true);
+		SetAvailability("product_cabbage", true);
 		//SetAvailability("product_cucumber", true);
 		//SetAvailability("product_eggplant", true);
 		//SetAvailability("product_sweetpotato", true);
@@ -48,7 +49,7 @@ public class FarmManager : MonoBehaviour
 				("product_carrot", 99),
 				("product_potato", 99), 
 				("product_corn", 99), 
-				//("product_cabbage", 99), 
+				("product_cabbage", 99), 
 				//("product_cucumber", 99), 
 				//("product_eggplant", 99), 
 				//("product_sweetpotato", 99), 
