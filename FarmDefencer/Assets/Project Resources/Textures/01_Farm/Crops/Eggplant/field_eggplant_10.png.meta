@@ -116,7 +116,7 @@ TextureImporter:
       name: field_eggplant_10_0
       rect:
         serializedVersion: 2
-        x: 47
+        x: 42
         y: 39
         width: 73
         height: 107
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      field_eggplant_10_0: 8105551158342040979
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
