@@ -47,6 +47,7 @@ public class CropCorn : Crop
 		if (!_isSeed && !watered)
 		{
 			watered = true;
+			waterWaitingSeconds = 0.0f;
 			FarmSoundManager.PlaySfx("SFX_water_oneshot");
 		}
 	}
