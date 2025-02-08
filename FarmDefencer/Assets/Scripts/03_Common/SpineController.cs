@@ -22,9 +22,10 @@ public class SpineController : MonoBehaviour
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.Skeleton;
     }
-
     public void SetAnimation(string animationName, bool loop)
     {
+        // 현재 애니메이션이 이미 실행 중이라면 중복 실행하지 않는다
+        if (_skeletonAnimation.AnimationName == animationName) return;
         _spineAnimationState.SetAnimation(0, animationName, loop);
     }
     public void AddAnimation(string animationName, bool loop, float delay = 0f)

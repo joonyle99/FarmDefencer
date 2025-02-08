@@ -1,0 +1,572 @@
+fileFormatVersion: 2
+guid: f99582997d5beca4bb0c8ea1ced93d05
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9220702712917976310
+    second: monster_elephant_0
+  - first:
+      213: 5771997050999009704
+    second: monster_elephant_1
+  - first:
+      213: -167803144179860355
+    second: monster_elephant_2
+  - first:
+      213: -8501205954516912543
+    second: monster_elephant_3
+  - first:
+      213: -4118211155320254861
+    second: monster_elephant_4
+  - first:
+      213: 6836778219511315610
+    second: monster_elephant_5
+  - first:
+      213: -8452825020515959715
+    second: monster_elephant_6
+  - first:
+      213: -3349419485418860410
+    second: monster_elephant_7
+  - first:
+      213: 1085048633401997370
+    second: monster_elephant_8
+  - first:
+      213: -4359171113386568416
+    second: monster_elephant_9
+  - first:
+      213: -1472900356168093962
+    second: monster_elephant_10
+  - first:
+      213: -3396398739017988321
+    second: monster_elephant_11
+  - first:
+      213: 2054387465890802406
+    second: monster_elephant_12
+  - first:
+      213: 8804953607773475860
+    second: monster_elephant_13
+  - first:
+      213: -2261566812862555755
+    second: monster_elephant_14
+  - first:
+      213: -5454168271508398725
+    second: monster_elephant_15
+  - first:
+      213: 7943910889885792453
+    second: monster_elephant_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: monster_elephant_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 310
+        width: 221
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0b1b096cbb790080800000000000000
+      internalID: -9220702712917976310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_elephant_1
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 310
+        width: 164
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a1f56d8cb04a1050800000000000000
+      internalID: 5771997050999009704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_elephant_2
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 288
+        width: 173
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7c37feede7dbadf0800000000000000
+      internalID: -167803144179860355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_elephant_3
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 465
+        width: 50
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1667596c936a50a80800000000000000
+      internalID: -8501205954516912543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_elephant_4
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 364
+        width: 155
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37ec51106cc29d6c0800000000000000
+      internalID: -4118211155320254861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_elephant_5
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 393
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9c791e519d11ee50800000000000000
+      internalID: 6836778219511315610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_elephant_6
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 364
+        width: 70
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5cbc97cd6881ba80800000000000000
+      internalID: -8452825020515959715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_elephant_7
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 241
+        width: 108
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68056d759b87481d0800000000000000
+      internalID: -3349419485418860410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_elephant_8
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 2
+        width: 362
+        height: 307
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a38f2f5bbfdde0f00800000000000000
+      internalID: 1085048633401997370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_elephant_9
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 287
+        width: 67
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 025137fd7fc1183c0800000000000000
+      internalID: -4359171113386568416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_elephant_10
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 242
+        width: 225
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6feed090ee43f8be0800000000000000
+      internalID: -1472900356168093962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_elephant_11
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 3
+        width: 278
+        height: 283
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f178f3d77519dd0d0800000000000000
+      internalID: -3396398739017988321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_elephant_12
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 3
+        width: 183
+        height: 237
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6eaaf6ff386a28c10800000000000000
+      internalID: 2054387465890802406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_elephant_13
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 3
+        width: 139
+        height: 237
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 414d127d7aa713a70800000000000000
+      internalID: 8804953607773475860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_elephant_14
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 130
+        width: 39
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 599d38b47fc4d90e0800000000000000
+      internalID: -2261566812862555755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_elephant_15
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 66
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7d198fbad6ee44b0800000000000000
+      internalID: -5454168271508398725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_elephant_16
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 2
+        width: 49
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c8fffe9dd07e3e60800000000000000
+      internalID: 7943910889885792453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      monster_elephant_0: -9220702712917976310
+      monster_elephant_1: 5771997050999009704
+      monster_elephant_10: -1472900356168093962
+      monster_elephant_11: -3396398739017988321
+      monster_elephant_12: 2054387465890802406
+      monster_elephant_13: 8804953607773475860
+      monster_elephant_14: -2261566812862555755
+      monster_elephant_15: -5454168271508398725
+      monster_elephant_16: 7943910889885792453
+      monster_elephant_2: -167803144179860355
+      monster_elephant_3: -8501205954516912543
+      monster_elephant_4: -4118211155320254861
+      monster_elephant_5: 6836778219511315610
+      monster_elephant_6: -8452825020515959715
+      monster_elephant_7: -3349419485418860410
+      monster_elephant_8: 1085048633401997370
+      monster_elephant_9: -4359171113386568416
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

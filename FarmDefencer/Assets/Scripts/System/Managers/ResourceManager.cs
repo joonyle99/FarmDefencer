@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// °ÔÀÓ¿¡¼­ »ç¿ëµÇ´Â ÀÚ¿ø(Gold, ...) °ü¸®ÇÕ´Ï´Ù.
+/// ê²Œì„ì—ì„œ ì‚¬ìš©ë˜ëŠ” ìì›(Gold, ...) ê´€ë¦¬í•©ë‹ˆë‹¤.
 /// </summary>
 public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>
 {
@@ -13,7 +13,7 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>
         {
             _gold = value;
 
-            if (_gold < 0)
+            if (_gold <= 0)
             {
                 _gold = 0;
             }
@@ -26,11 +26,12 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>
 
     private void Start()
     {
-        EarnGold(349);
+        Initialize();
     }
     private void Update()
     {
 #if UNITY_EDITOR
+        // CHEAT: Earn Gold
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             var amount = 100;
@@ -38,6 +39,7 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>
             EarnGold(amount);
             Debug.Log($"earn {amount} gold (<color=orange>current: {_gold}</color>)");
         }
+        // CHEAT: Spend Gold
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             var amount = 100;
@@ -48,6 +50,11 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>
 #endif
     }
 
+    public void Initialize()
+    {
+        SetGold(200);
+    }
+
     // gold
     public void EarnGold(int amount)
     {
@@ -56,6 +63,10 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>
     public void SpendGold(int amount)
     {
         Gold -= amount;
+    }
+    public void SetGold(int amount)
+    {
+        Gold = amount;
     }
     public int GetGold()
     {

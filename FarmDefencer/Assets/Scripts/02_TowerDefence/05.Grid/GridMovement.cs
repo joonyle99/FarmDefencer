@@ -1,12 +1,12 @@
 using JoonyleGameDevKit;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GridMovement : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 1f;
 
-    // public Vector2Int currentLookDir;
-
+    private GridCell _currentGridCell;
     private GridCell _targetGridCell;
     private int _pathIndex = 0;
     private bool _isFirst = true;
@@ -44,6 +44,20 @@ public class GridMovement : MonoBehaviour
             return;
         }
 
+        // flip sprite
+        if (_rigidbody.linearVelocityX < 0 && transform.localScale.x > 0)
+        {
+            var scale = transform.localScale;
+            scale.x *= -1; // x축 스케일 반전
+            transform.localScale = scale;
+        }
+        else if (_rigidbody.linearVelocityX > 0 && transform.localScale.x < 0)
+        {
+            var scale = transform.localScale;
+            scale.x *= -1; // x축 스케일 반전
+            transform.localScale = scale;
+        }
+
         // check distance
         if (Vector2.Distance(_targetGridCell.transform.position, transform.position) < 0.1f)
         {
@@ -65,19 +79,8 @@ public class GridMovement : MonoBehaviour
                 return;
             }
 
+            _currentGridCell = _targetGridCell;
             _targetGridCell = DefenceContext.Current.GridMap.GridPath[_pathIndex];
-
-            /*
-            // rotate
-            var targetLookDir = (_targetGridCell.transform.position - transform.position).normalized.ToVector2Int();
-            if (targetLookDir != currentLookDir)
-            {
-                var targetAngle = Vector2.SignedAngle(currentLookDir, targetLookDir);
-                transform.rotation = Quaternion.Euler(0f, 0f, transform.rotation.eulerAngles.z + targetAngle);
-
-                currentLookDir = targetLookDir;
-            }
-            */
         }
     }
     private void FixedUpdate()
@@ -98,6 +101,7 @@ public class GridMovement : MonoBehaviour
         _rigidbody.linearVelocity = dirVec * DefenceContext.Current.GridMap.UnitCellSize * _moveSpeed;
 
 #if UNITY_EDITOR
+        // 몬스터 1초당 이동거리 계산
         eTime += Time.deltaTime;
         distance += _rigidbody.linearVelocity.magnitude * Time.deltaTime;
 
@@ -111,32 +115,38 @@ public class GridMovement : MonoBehaviour
 
     public void Initialize()
     {
+        // 이것도 무조건 0번째 _pathIndex면 안되고, 예를 들어 17개의 way point 중 5번째 way point에 현재 있다면 _targetGridCell를 6번째 way point로 설정해야함
+        // 만약 몬스터가 grid path 위를 이동 중이었다면, 중간 지점에서 이동할 수 있도록 해야하는데,,
+
+        // DefenceContext.Current.GridMap.GridPath 중 현재 위치에서 가장 가까운 grid cell을 찾아서 그 cell을 _currentGridCell로 설정
+
+        var gridPath = DefenceContext.Current.GridMap.GridPath;
+        //var closestDistance = float.MaxValue;
+        //var closestIndex = -1;
+        //for (int i = gridPath.Count - 1; i > 0; i--)
+        //{
+        //    var gridCell = gridPath[i];
+        //    var distance = Vector2.Distance(gridCell.transform.position, transform.position);
+        //    if (distance <= closestDistance)
+        //    {
+        //        closestDistance = distance;
+        //        closestIndex = i;
+        //    }
+        //}
+
+        //if (closestIndex == -1)
+        //{
+        //    Debug.LogError("closest is invalid");
+        //    return;
+        //}
+
+        //_pathIndex = closestIndex;
+        //_currentGridCell = gridPath[_pathIndex];
+
         _pathIndex = 0;
-        _targetGridCell = DefenceContext.Current.GridMap.GridPath[_pathIndex];
-
-        // monster 이미지의 앞쪽은 right 방향이다
-        // currentLookDir = transform.right.ToVector2Int();
-
-        transform.position = _targetGridCell.transform.position;
-        // _rigidbody.MovePosition(_targetGridCell.transform.position);
+        _targetGridCell = gridPath[_pathIndex];
 
         _monster.SpineController.SetAnimation(_monster.WalkAnimationName, true);
-
-        /*
-        if (DefenceContext.Current.GridMap.GridPath.Count > 2)
-        {
-            var firstTarget = DefenceContext.Current.GridMap.GridPath[0];
-            var secondTarget = DefenceContext.Current.GridMap.GridPath[1];
-
-            var targetLookDir = (secondTarget.transform.position - firstTarget.transform.position).normalized.ToVector2Int();
-            if (targetLookDir != currentLookDir)
-            {
-                var targetAngle = Vector2.SignedAngle(currentLookDir, targetLookDir);
-                transform.rotation = Quaternion.Euler(0f, 0f, transform.rotation.eulerAngles.z + targetAngle);
-
-                currentLookDir = targetLookDir;
-            }
-        }
-        */
+        transform.position = _targetGridCell.transform.position;
     }
 }

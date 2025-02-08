@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ProjectileTick : MonoBehaviour
 {
-    [Header("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ ProjectileTick ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡")]
+    [Header("â”€â”€â”€â”€â”€â”€â”€â”€ ProjectileTick â”€â”€â”€â”€â”€â”€â”€â”€")]
     [Space]
 
     [SerializeField] private Damager _damager;
@@ -19,7 +19,7 @@ public class ProjectileTick : MonoBehaviour
             return;
         }
 
-        if (Vector3.Distance(_currentTarget.transform.position, transform.position) < 0.1f)
+        if (Vector3.Distance(_currentTarget.TargetPoint.position, transform.position) < 0.1f)
         {
             _damager.HasDamaged(_currentTarget);
             Destroy(gameObject);
@@ -28,7 +28,7 @@ public class ProjectileTick : MonoBehaviour
 
         if (_isTriggered)
         {
-            var diffVec = _currentTarget.transform.position - transform.position;
+            var diffVec = _currentTarget.TargetPoint.position - transform.position;
             var velocity = diffVec.normalized * _speed;
             
             transform.position += velocity * Time.deltaTime;

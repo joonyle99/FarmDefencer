@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2721737453659475953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8056559261859085462}
+  m_Layer: 7
+  m_Name: Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8056559261859085462
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2721737453659475953}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.74, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 693835973689949412}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4172481917644167003
 GameObject:
   m_ObjectHideFlags: 0
@@ -17,7 +48,7 @@ GameObject:
   - component: {fileID: 1543992766888672360}
   - component: {fileID: 7300144381691796175}
   - component: {fileID: 5287113402474360036}
-  - component: {fileID: 8488813293856363186}
+  - component: {fileID: 221480247723861646}
   - component: {fileID: 1519744171091044436}
   m_Layer: 7
   m_Name: Cat
@@ -40,6 +71,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 559721783228163092}
+  - {fileID: 8056559261859085462}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3788177686576222563
@@ -241,7 +273,7 @@ MonoBehaviour:
   _moveSpeed: 1
   eTime: 0
   distance: 0
---- !u!114 &8488813293856363186
+--- !u!114 &221480247723861646
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -250,14 +282,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4172481917644167003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e6d2fb7eff501c48910adc226960246, type: 3}
+  m_Script: {fileID: 11500000, guid: fcd2e2220955f0a40bad1544d98b7755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 3657265616720998730}
-  _hp: 100
-  _stunDuration: 0.05
+  _maxHp: 135
+  _stunDuration: 0.03
   _isDead: 0
   _isStun: 0
+  _targetPoint: {fileID: 8056559261859085462}
   _originFactory: {fileID: 0}
   _monsterName: "\uACE0\uC591\uC774"
   _spineController: {fileID: 7923479951364342952}

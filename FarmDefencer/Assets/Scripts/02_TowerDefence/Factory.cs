@@ -15,16 +15,15 @@ public interface IProduct
 /// 
 /// </summary>
 /// <remarks>
-/// ¿ÀºêÁ§Æ® Ç®¸µ ÃÖÀûÈ­ ±â¹ıÀ» »ç¿ëÇÏ¿© °¡ºñÁö ÄÃ·º¼ÇÀ» ÃÖ¼ÒÈ­ÇÕ´Ï´Ù.
+/// ì˜¤ë¸Œì íŠ¸ í’€ë§ ìµœì í™” ê¸°ë²•ì„ ì‚¬ìš©í•˜ì—¬ ê°€ë¹„ì§€ ì»¬ë ‰ì…˜ì„ ìµœì†Œí™”í•©ë‹ˆë‹¤.
 /// </remarks>
 public class Factory : MonoBehaviour
 {
-    [Header("¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬ Factory ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬")]
+    [Header("â”â”â”â”â”â”â”â” Factory â”â”â”â”â”â”â”â”")]
     [Space]
 
-    // ÆÑÅä¸®¿¡¼­ »ı¼ºÇÏ±â À§ÇÑ ¿ÀºêÁ§Æ® ¸ñ·Ï (È®Àå¼ºÀ» °í·ÁÇÏ±â À§ÇÔ)
-    // [SerializeField] private List<GameObject> _productPrefabList = new List<GameObject>();
-
+    // íŒ©í† ë¦¬ì—ì„œ ìƒì„±í•˜ê¸° ìœ„í•œ ì˜¤ë¸Œì íŠ¸ ëª©ë¡ (í™•ì¥ì„±ì„ ê³ ë ¤í•˜ê¸° ìœ„í•¨)
+    [SerializeField] private List<GameObject> _productPrefabList = new List<GameObject>();
     [SerializeField] private GameObject _productPrefab;
     [SerializeField] private string _productName = "Product";
     [SerializeField] private int _poolCapacity = 100;
@@ -38,6 +37,10 @@ public class Factory : MonoBehaviour
 
     private void Awake()
     {
+        //InitializePool();
+    }
+    private void Start()
+    {
         InitializePool();
     }
 
@@ -45,7 +48,9 @@ public class Factory : MonoBehaviour
     {
         _pool = new List<GameObject>(_poolCapacity);
 
-        // ¿ÀºêÁ§Æ® »ı¼º ÈÄ, Ç®¿¡ Ãß°¡
+        // ì˜¤ë¸Œì íŠ¸ ìƒì„± í›„, í’€ì— ì¶”ê°€
+
+        // 1. í•œ ì¢…ë¥˜ë¡œë§Œ í’€ ìƒì„±
         for (int i = 0; i < _poolCapacity; ++i)
         {
             var newObj = Instantiate(_productPrefab, Vector3.zero, Quaternion.identity);
@@ -58,16 +63,35 @@ public class Factory : MonoBehaviour
 
             _lastProduct = newObj;
         }
+
+        // 2. ì—¬ëŸ¬ ì¢…ë¥˜ë¡œ í’€ ìƒì„±
+        //var unit = _poolCapacity / _productPrefabList.Count;
+        //foreach (var prefab in _productPrefabList)
+        //{
+        //    // í”„ë¦¬íŒ¹ì„ ì¢…ë¥˜ë³„ë¡œ ì¼ì •ëŸ‰ì”© ìƒì„±
+        //    for (int i = 0; i < unit; ++i)
+        //    {
+        //        var newObj = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+        //        newObj.name = _productName + " " + prefab.name + " " + (i + 1).ToString();
+        //        newObj.transform.SetParent(transform, false);
+        //        newObj.SetActive(false);
+        //        newObj.tag = prefab.name;
+
+        //        AddProduct(newObj);
+
+        //        _lastProduct = newObj;
+        //    }
+        //}
     }
     private void ExtendPool()
     {
-        // ±âÁ¸ Ç® ¿ë·®ÀÇ Àı¹İ¸¸Å­ È®Àå
+        // ê¸°ì¡´ í’€ ìš©ëŸ‰ì˜ ì ˆë°˜ë§Œí¼ í™•ì¥
         var halfOfCapacity = _poolCapacity / 2;
         _poolCapacity += halfOfCapacity;
 
         for (int i = 1; i <= halfOfCapacity; i++)
         {
-            // ¸¶Áö¸· ¿ÀºêÁ§Æ®ÀÇ ÀÌ¸§¿¡¼­ ¼ıÀÚ¸¦ ÃßÃâÇØ ³×ÀÓ ÅÂ±× »ı¼º
+            // ë§ˆì§€ë§‰ ì˜¤ë¸Œì íŠ¸ì˜ ì´ë¦„ì—ì„œ ìˆ«ìë¥¼ ì¶”ì¶œí•´ ë„¤ì„ íƒœê·¸ ìƒì„±
             var lastNumber = _lastProduct.name.ExtractNumber();
             var nameTag = (lastNumber + 1).ToString();
 
@@ -89,7 +113,7 @@ public class Factory : MonoBehaviour
 
     public T GetProduct<T>() where T : IProduct
     {
-        // ²¨³¾ ¿ÀºêÁ§Æ®°¡ ¾ø´Â °æ¿ì Ç®À» È®ÀåÇÑ´Ù
+        // êº¼ë‚¼ ì˜¤ë¸Œì íŠ¸ê°€ ì—†ëŠ” ê²½ìš° í’€ì„ í™•ì¥í•œë‹¤
         if (IsEmptyPool())
             ExtendPool();
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -25,6 +26,17 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     {
         ChangeState(GameState.Normal);
     }
+    private void Update()
+    {
+        // CHEAT: Scene Reload
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Scene currentScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentScene.name);
+
+            ResourceManager.Instance.Initialize();
+        }
+    }
 
     public void ChangeState(GameState nextState)
     {
@@ -34,14 +46,13 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
         }
 
         CurrentState = nextState;
-        Debug.Log($"Current State: {CurrentState.ToString()}");
+        //Debug.Log($"Current State: {CurrentState.ToString()}");
 
         switch (CurrentState)
         {
             case GameState.Normal:
                 HandleNormalState();
                 break;
-
             case GameState.Pause:
                 HandlePauseState();
                 break;

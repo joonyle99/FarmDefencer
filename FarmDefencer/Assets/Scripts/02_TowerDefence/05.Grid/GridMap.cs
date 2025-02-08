@@ -24,15 +24,19 @@ public class GridMap : MonoBehaviour
     private int _height;
     private int _width;
 
+    // start / end point
     public Vector2Int StartCellPoint { get; private set; }
     public Vector3 StartWorldPoint => CellToWorld(StartCellPoint.ToVector3Int());
     public Vector2Int EndCellPoint { get; private set; }
     public Vector3 EndWorldPoint => CellToWorld(EndCellPoint.ToVector3Int());
+    private Vector2Int[] _possiblePoints;
+    private Vector2Int[] _oppositePoints;
 
     // temp for debug
     public GameObject debugStartPointObject;
     public GameObject debugEndPointObject;
     public LineRenderer debugLine;
+    private float _debugLineDuration = 0.3f;
 
     [Space]
 
@@ -56,12 +60,48 @@ public class GridMap : MonoBehaviour
         _height = _mapSize.y;
         _width = _mapSize.x;
 
-        StartCellPoint = new Vector2Int(1, _height - 2);
-        EndCellPoint = new Vector2Int(_width - 2, 1);
+        var minX = 1;
+        var minY = 1;
+        var maxX = _width - 2;
+        var maxY = _height - 2;
+        var halfX = (minX + maxX) / 2;
+        var halfY = (minY + maxY) / 2;
+
+        _possiblePoints = new Vector2Int[]
+        {
+            new(minX, minY),
+            new(minX, maxY),
+            new(maxX, minY),
+            new(maxX, maxY),
+            new(minX, halfY),
+            new(halfX, minY),
+            new(maxX, halfY),
+            new(halfX, maxY)
+        };
+
+        //for (int i = 0; i < 8; i++)
+        //{
+        //    Painter.DebugDrawPlus(CellToWorld(_possiblePoints[i].ToVector3Int()));
+        //}
+
+        _oppositePoints = new Vector2Int[]
+        {
+            new(maxX, maxY),
+            new(maxX, minY),
+            new(minX, maxY),
+            new(minX, minY),
+            new(maxX, halfY),
+            new(halfX, maxY),
+            new(minX, halfY),
+            new(halfX, minY)
+        };
+
+        int pointIndex = Random.Range(0, _possiblePoints.Length);
+        StartCellPoint = _possiblePoints[pointIndex];
+        EndCellPoint = _oppositePoints[pointIndex];
 
         _gridMap = new GridCell[_height, _width];
     }
-
     private void Start()
     {
         CreateGridMap();
@@ -84,6 +124,7 @@ public class GridMap : MonoBehaviour
                 _gridMap[h, w].cellPosition = cellPos;
                 _gridMap[h, w].isUsable = true;
                 _gridMap[h, w].distanceCost = -1;
+                _gridMap[h, w].prevGridCell = null;
 
                 if (cellPos == StartCellPoint || cellPos == EndCellPoint)
                 {
@@ -92,25 +133,36 @@ public class GridMap : MonoBehaviour
             }
         }
     }
+    private void ResetPath()
+    {
+        // _gridMap 초기화
+        for (int h = 0; h < _height; h++)
+        {
+            for (int w = 0; w < _width; w++)
+            {
+                _gridMap[h, w].distanceCost = -1;
+                _gridMap[h, w].prevGridCell = null;
+            }
+        }
+    }
 
+    // shortest path finding by using bfs algorithm
     public IEnumerator FindPathRoutine()
     {
-        CalculateDistance(StartCellPoint);
+        ResetPath();
+        CalculatePath(StartCellPoint);
 
         if (ConstantConfig.DEBUG == true)
         {
             DebugDistanceMap();
-            yield return DebugPingGridPathRoutine();
         }
-    }
 
-    // path
-    private void CalculateDistance(Vector2Int startPoint)
+        yield return DebugPingGridPathRoutine();
+    }
+    private void CalculatePath(Vector2Int startPoint)
     {
         Queue<Vector2Int> queue = new Queue<Vector2Int>();
-
         queue.Enqueue(startPoint);
-
         _gridMap[startPoint.y, startPoint.x].distanceCost = 0;
 
         while (queue.Count > 0)
@@ -213,24 +265,31 @@ public class GridMap : MonoBehaviour
         var lineObject = Instantiate(debugLine, Vector3.zero, Quaternion.identity);
         lineObject.positionCount = 0;
 
-        for (int i = 0; i < _gridPath.Count; i++)
+        // _gridPath를 복사
+        var copiedGridPath = new List<GridCell>(_gridPath);
+
+        for (int i = 0; i < copiedGridPath.Count; i++)
         {
+            //Debug.Log(copiedGridPath.Count);
             lineObject.positionCount = i + 1;
-            lineObject.SetPosition(i, _gridPath[i].transform.position);
+            lineObject.SetPosition(i, copiedGridPath[i].transform.position);
 
-            var originScale = _gridPath[i].transform.localScale;
+            var originScale = copiedGridPath[i].transform.localScale;
 
-            _gridPath[i].transform.localScale *= 1.5f;
+            copiedGridPath[i].transform.localScale = originScale * 1.5f;
             yield return new WaitForSeconds(0.1f);
-            _gridPath[i].transform.localScale = originScale;
+            copiedGridPath[i].transform.localScale = originScale;
         }
+
+        yield return new WaitForSeconds(_debugLineDuration);
+        Destroy(lineObject.gameObject);
     }
 
     public bool IsValid(int w, int h)
     {
         if (w < 0 || w >= _width || h < 0 || h >= _height)
         {
-            // Debug.LogWarning($"[{w}, {h}] is invalid index");
+            // Debug.LogWarning($"[{w}, {h}] is invalid pointIndex");
             return false;
         }
 

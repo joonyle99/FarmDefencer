@@ -16,6 +16,8 @@ public class EndingUI : MonoBehaviour
     }
     private void OnDisable()
     {
+        if (DefenceContext.Current == null) return;
+
         DefenceContext.Current.WaveSystem.OnSuccess -= ShowSuccess;
         DefenceContext.Current.WaveSystem.OnFailure -= ShowFailure;
     }
