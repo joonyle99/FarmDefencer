@@ -1,6 +1,7 @@
 using JoonyleGameDevKit;
 using System.Collections.Generic;
 using UnityEngine;
+using VInspector.Libs;
 
 public class GridMovement : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GridMovement : MonoBehaviour
     private GridCell _targetGridCell;
     private int _currentPathIndex = 0;
     private bool _isFirst = true;
+
+    private List<GridCell> _gridPath;
 
     // references
     private Monster _monster;
@@ -63,7 +66,7 @@ public class GridMovement : MonoBehaviour
         {
             _currentPathIndex++;
 
-            if (_currentPathIndex >= DefenceContext.Current.GridMap.GridPath.Count)
+            if (_currentPathIndex >= _gridPath.Count)
             {
                 if (_isFirst == true)
                 {
@@ -80,7 +83,7 @@ public class GridMovement : MonoBehaviour
             }
 
             _currentGridCell = _targetGridCell;
-            _targetGridCell = DefenceContext.Current.GridMap.GridPath[_currentPathIndex];
+            _targetGridCell = _gridPath[_currentPathIndex];
         }
     }
     private void FixedUpdate()
@@ -138,6 +141,8 @@ public class GridMovement : MonoBehaviour
             return;
         }
 
+        _gridPath = gridPath;
+
         // 걷기 애니메이션
         _monster.SpineController.SetAnimation(_monster.WalkAnimationName, true);
 
@@ -146,8 +151,45 @@ public class GridMovement : MonoBehaviour
     }
     public void ReCalculatePath()
     {
+        // TODO: _currentGridCell과 _targetGridCell을 이렇게 초기화 하면 출발지로 잠시 돌아갔다가 다시 목적지로 가는데,,
+        // 어떻게 하면 최대한 자연스럽게 움직이게 할 수 있을까?
+
+        // 다음 목적지를 기준으로 현재 위치 (Position) 에서 가깝다면 그대로 두고,
+        // 현재 Cell 에서 가깝다면 현재 Cell로 이동했다가 가도록 한다.
+
+        _currentPathIndex = 0;
+
         var gridMap = DefenceContext.Current.GridMap;
-        var originGridMap = gridMap.MyGridMap;
-        var copiedGridMap = new GridCell[originGridMap.GetLength(0), originGridMap.GetLength(1)];
+        var gridPath = gridMap.CalculatePath(_currentGridCell.cellPosition, gridMap.EndCellPoint);
+
+        if (gridPath == null || gridPath.Count < 2)
+        {
+            Debug.LogError("grid path is invalid");
+            return;
+        }
+
+        _currentGridCell = gridPath[_currentPathIndex];
+        if (_currentGridCell == null)
+        {
+            Debug.LogError("current grid cell is null");
+            return;
+        }
+
+        _targetGridCell = gridPath[_currentPathIndex + 1];
+        if (_targetGridCell == null)
+        {
+            Debug.LogError("target grid cell is null");
+            return;
+        }
+
+        // 가까운 곳으로 간다
+        var currGridCellPosToTarget = Vector2.Distance(_currentGridCell.worldPosition, _targetGridCell.worldPosition);
+        var currObjectPosToTarget = Vector2.Distance(transform.position, _targetGridCell.worldPosition);
+        if (currGridCellPosToTarget < currObjectPosToTarget)
+        {
+            _targetGridCell = _currentGridCell;
+        }
+
+        _gridPath = gridPath;
     }
 }

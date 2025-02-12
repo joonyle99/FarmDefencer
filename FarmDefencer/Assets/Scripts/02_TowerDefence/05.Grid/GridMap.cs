@@ -137,24 +137,13 @@ public class GridMap : MonoBehaviour
             }
         }
     }
-    private void ResetPath()
-    {
-        // _myGridMap 초기화
-        for (int h = 0; h < _height; h++)
-        {
-            for (int w = 0; w < _width; w++)
-            {
-                _myGridMap[h, w].distanceCost = -1;
-                _myGridMap[h, w].prevGridCell = null;
-            }
-        }
-    }
 
     // shortest path finding by using bfs algorithm
     public IEnumerator FindPathRoutine()
     {
-        ResetPath();
-        CalculatePath(StartCellPoint);
+        // TODO: 경로 다시 찾을 때마다 같은 타워 배치 상태임에도 최단 거리가 계속 변경되는 이유 찾기
+
+        _gridPath = CalculatePath(StartCellPoint, EndCellPoint);
 
         // 현재 필드 위 몬스터들의 경로를 재계산한다
         if (DefenceContext.Current.WaveSystem.FieldCount > 0)
@@ -163,63 +152,14 @@ public class GridMap : MonoBehaviour
             DefenceContext.Current.WaveSystem.ReCalculatePath();
         }
 
+        //yield return null;
+
         if (ConstantConfig.DEBUG == true)
         {
             DebugDistanceMap();
         }
 
         yield return DebugPingGridPathRoutine();
-    }
-    private void CalculatePath(Vector2Int startPoint)
-    {
-        Queue<Vector2Int> queue = new Queue<Vector2Int>();
-        queue.Enqueue(startPoint);
-        _myGridMap[startPoint.y, startPoint.x].distanceCost = 0;
-
-        while (queue.Count > 0)
-        {
-            Vector2Int nowPos = queue.Dequeue();
-
-            // endPoint: excute trace
-            if (nowPos == EndCellPoint)
-            {
-                TracePath(_myGridMap[nowPos.y, nowPos.x]);
-                return;
-            }
-
-            // check 4 direction
-            for (int i = 0; i < 4; i++)
-            {
-                Vector2Int nextPos = new Vector2Int(nowPos.x + _dx[i], nowPos.y + _dy[i]);
-
-                if (nextPos.x < 0 || nextPos.x >= _width || nextPos.y < 0 || nextPos.y >= _height) continue;
-                if (_myGridMap[nextPos.y, nextPos.x].distanceCost != -1) continue;
-                if (_myGridMap[nextPos.y, nextPos.x].isUsable == false && nextPos != EndCellPoint) continue;
-
-                queue.Enqueue(nextPos);
-
-                _myGridMap[nextPos.y, nextPos.x].distanceCost = _myGridMap[nowPos.y, nowPos.x].distanceCost + 1;
-                _myGridMap[nextPos.y, nextPos.x].prevGridCell = _myGridMap[nowPos.y, nowPos.x];
-            }
-        }
-    }
-    private void TracePath(GridCell endCell)
-    {
-        // Debug.Log($"Start Trace (end cell: {endCell.gameObject.name})", endCell.gameObject);
-
-        _gridPath = new List<GridCell>();
-
-        var wayPoint = endCell;
-        _gridPath.Add(wayPoint);
-
-        while (true)
-        {
-            wayPoint = wayPoint.prevGridCell;
-            if (wayPoint == null) break;
-            _gridPath.Add(wayPoint);
-        }
-
-        _gridPath.Reverse();
     }
 
     // convert
@@ -309,5 +249,76 @@ public class GridMap : MonoBehaviour
         }
 
         return true;
+    }
+
+    // 
+    public void ResetPath()
+    {
+        // _myGridMap 초기화
+        for (int h = 0; h < _height; h++)
+        {
+            for (int w = 0; w < _width; w++)
+            {
+                _myGridMap[h, w].distanceCost = -1;
+                _myGridMap[h, w].prevGridCell = null;
+            }
+        }
+    }
+    public List<GridCell> CalculatePath(Vector2Int startCellPoint, Vector2Int endCellPoint)
+    {
+        ResetPath();
+
+        Queue<Vector2Int> queue = new Queue<Vector2Int>();
+        queue.Enqueue(startCellPoint);
+        _myGridMap[startCellPoint.y, startCellPoint.x].distanceCost = 0;
+
+        while (queue.Count > 0)
+        {
+            Vector2Int nowPos = queue.Dequeue();
+
+            // endCellPoint: excute trace
+            if (nowPos == endCellPoint)
+            {
+                var gridPath = TracePath(_myGridMap[nowPos.y, nowPos.x]);
+                return gridPath;
+            }
+
+            // check 4 direction
+            for (int i = 0; i < 4; i++)
+            {
+                Vector2Int nextPos = new Vector2Int(nowPos.x + _dx[i], nowPos.y + _dy[i]);
+
+                if (nextPos.x < 0 || nextPos.x >= _width || nextPos.y < 0 || nextPos.y >= _height) continue;
+                if (_myGridMap[nextPos.y, nextPos.x].distanceCost != -1) continue;
+                if (_myGridMap[nextPos.y, nextPos.x].isUsable == false && nextPos != endCellPoint) continue;
+
+                queue.Enqueue(nextPos);
+
+                _myGridMap[nextPos.y, nextPos.x].distanceCost = _myGridMap[nowPos.y, nowPos.x].distanceCost + 1;
+                _myGridMap[nextPos.y, nextPos.x].prevGridCell = _myGridMap[nowPos.y, nowPos.x];
+            }
+        }
+
+        return null;
+    }
+    public List<GridCell> TracePath(GridCell endCell)
+    {
+        // Debug.Log($"Start Trace (end cell: {endCell.gameObject.name})", endCell.gameObject);
+
+        var gridPath = new List<GridCell>();
+
+        var wayPoint = endCell;
+        gridPath.Add(wayPoint);
+
+        while (true)
+        {
+            wayPoint = wayPoint.prevGridCell;
+            if (wayPoint == null) break;
+            gridPath.Add(wayPoint);
+        }
+
+        gridPath.Reverse();
+
+        return gridPath;
     }
 }
