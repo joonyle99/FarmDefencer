@@ -22,7 +22,9 @@ public class GridMap : MonoBehaviour
     private Vector2Int _origin;
 
     private int _height;
+    public int Height => _height;
     private int _width;
+    public int Width => _width;
 
     // start / end point
     public Vector2Int StartCellPoint { get; private set; }
@@ -44,7 +46,8 @@ public class GridMap : MonoBehaviour
     [SerializeField] private List<GridCell> _gridPath;
     public List<GridCell> GridPath => _gridPath;
 
-    private GridCell[,] _gridMap;
+    private GridCell[,] _myGridMap;
+    public GridCell[,] MyGridMap => _myGridMap;
 
     private int[] _dx = new int[4] { -1, 0, 1, 0 };
     private int[] _dy = new int[4] { 0, 1, 0, -1 };
@@ -100,7 +103,7 @@ public class GridMap : MonoBehaviour
         StartCellPoint = _possiblePoints[pointIndex];
         EndCellPoint = _oppositePoints[pointIndex];
 
-        _gridMap = new GridCell[_height, _width];
+        _myGridMap = new GridCell[_height, _width];
     }
     private void Start()
     {
@@ -119,29 +122,30 @@ public class GridMap : MonoBehaviour
                 var cellPos = new Vector2Int(w, h);
                 var worldPos = _tilemap.GetCellCenterWorld(cellPos.ToVector3Int());
 
-                _gridMap[h, w] = Instantiate(_gridCellPrefab, worldPos, Quaternion.identity, transform);
+                _myGridMap[h, w] = Instantiate(_gridCellPrefab, worldPos, Quaternion.identity, transform);
 
-                _gridMap[h, w].cellPosition = cellPos;
-                _gridMap[h, w].isUsable = true;
-                _gridMap[h, w].distanceCost = -1;
-                _gridMap[h, w].prevGridCell = null;
+                _myGridMap[h, w].cellPosition = cellPos;
+                _myGridMap[h, w].worldPosition = worldPos;
+                _myGridMap[h, w].isUsable = true;
+                _myGridMap[h, w].distanceCost = -1;
+                _myGridMap[h, w].prevGridCell = null;
 
                 if (cellPos == StartCellPoint || cellPos == EndCellPoint)
                 {
-                    _gridMap[h, w].UnUsable();
+                    _myGridMap[h, w].UnUsable();
                 }
             }
         }
     }
     private void ResetPath()
     {
-        // _gridMap 초기화
+        // _myGridMap 초기화
         for (int h = 0; h < _height; h++)
         {
             for (int w = 0; w < _width; w++)
             {
-                _gridMap[h, w].distanceCost = -1;
-                _gridMap[h, w].prevGridCell = null;
+                _myGridMap[h, w].distanceCost = -1;
+                _myGridMap[h, w].prevGridCell = null;
             }
         }
     }
@@ -151,6 +155,13 @@ public class GridMap : MonoBehaviour
     {
         ResetPath();
         CalculatePath(StartCellPoint);
+
+        // 현재 필드 위 몬스터들의 경로를 재계산한다
+        if (DefenceContext.Current.WaveSystem.FieldCount > 0)
+        {
+            //Debug.Log(DefenceContext.Current.WaveSystem.FieldCount);
+            DefenceContext.Current.WaveSystem.ReCalculatePath();
+        }
 
         if (ConstantConfig.DEBUG == true)
         {
@@ -163,7 +174,7 @@ public class GridMap : MonoBehaviour
     {
         Queue<Vector2Int> queue = new Queue<Vector2Int>();
         queue.Enqueue(startPoint);
-        _gridMap[startPoint.y, startPoint.x].distanceCost = 0;
+        _myGridMap[startPoint.y, startPoint.x].distanceCost = 0;
 
         while (queue.Count > 0)
         {
@@ -172,7 +183,7 @@ public class GridMap : MonoBehaviour
             // endPoint: excute trace
             if (nowPos == EndCellPoint)
             {
-                TracePath(_gridMap[nowPos.y, nowPos.x]);
+                TracePath(_myGridMap[nowPos.y, nowPos.x]);
                 return;
             }
 
@@ -182,13 +193,13 @@ public class GridMap : MonoBehaviour
                 Vector2Int nextPos = new Vector2Int(nowPos.x + _dx[i], nowPos.y + _dy[i]);
 
                 if (nextPos.x < 0 || nextPos.x >= _width || nextPos.y < 0 || nextPos.y >= _height) continue;
-                if (_gridMap[nextPos.y, nextPos.x].distanceCost != -1) continue;
-                if (_gridMap[nextPos.y, nextPos.x].isUsable == false && nextPos != EndCellPoint) continue;
+                if (_myGridMap[nextPos.y, nextPos.x].distanceCost != -1) continue;
+                if (_myGridMap[nextPos.y, nextPos.x].isUsable == false && nextPos != EndCellPoint) continue;
 
                 queue.Enqueue(nextPos);
 
-                _gridMap[nextPos.y, nextPos.x].distanceCost = _gridMap[nowPos.y, nowPos.x].distanceCost + 1;
-                _gridMap[nextPos.y, nextPos.x].prevGridCell = _gridMap[nowPos.y, nowPos.x];
+                _myGridMap[nextPos.y, nextPos.x].distanceCost = _myGridMap[nowPos.y, nowPos.x].distanceCost + 1;
+                _myGridMap[nextPos.y, nextPos.x].prevGridCell = _myGridMap[nowPos.y, nowPos.x];
             }
         }
     }
@@ -212,6 +223,10 @@ public class GridMap : MonoBehaviour
     }
 
     // convert
+    public void CellToWorld(GridCell cell)
+    {
+
+    }
     public Vector3 CellToWorld(Vector3Int cellPos)
     {
         return _tilemap.GetCellCenterWorld(cellPos);
@@ -229,7 +244,7 @@ public class GridMap : MonoBehaviour
             return null;
         }
 
-        return _gridMap[h, w];
+        return _myGridMap[h, w];
     }
 
     // debug
@@ -239,10 +254,10 @@ public class GridMap : MonoBehaviour
         {
             for (int w = 0; w < _width; w++)
             {
-                var number = _gridMap[h, w].distanceCost;
+                var number = _myGridMap[h, w].distanceCost;
                 var stringNumber = number.ToString($"D{2}");
 
-                _gridMap[h, w].textMeshPro.text = stringNumber;
+                _myGridMap[h, w].textMeshPro.text = stringNumber;
             }
         }
     }
@@ -252,11 +267,11 @@ public class GridMap : MonoBehaviour
         {
             for (int w = 0; w < _width; w++)
             {
-                var originScale = _gridMap[h, w].transform.localScale;
+                var originScale = _myGridMap[h, w].transform.localScale;
 
-                _gridMap[h, w].transform.localScale *= 1.7f;
+                _myGridMap[h, w].transform.localScale *= 1.7f;
                 yield return new WaitForSeconds(0.15f);
-                _gridMap[h, w].transform.localScale = originScale;
+                _myGridMap[h, w].transform.localScale = originScale;
             }
         }
     }

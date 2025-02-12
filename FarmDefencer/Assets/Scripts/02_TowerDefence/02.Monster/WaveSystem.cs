@@ -214,7 +214,7 @@ public class WaveSystem : MonoBehaviour
         GameStateManager.Instance.ChangeState(GameState.Wave);
 
         yield return DefenceContext.Current.GridMap.FindPathRoutine();
-        //yield return SpawnRoutine();
+        yield return SpawnRoutine();
     }
 
     //
@@ -246,6 +246,17 @@ public class WaveSystem : MonoBehaviour
     private void RemoveMonster(Monster monster)
     {
         _fieldMonsters.Remove(monster);
+    }
+    public void ReCalculatePath()
+    {
+        foreach (var fieldMonster in _fieldMonsters)
+        {
+            var movemnet = fieldMonster.GetComponent<GridMovement>();
+            if (movemnet != null)
+            {
+                movemnet.ReCalculatePath();
+            }
+        }
     }
 
     // survive monsters

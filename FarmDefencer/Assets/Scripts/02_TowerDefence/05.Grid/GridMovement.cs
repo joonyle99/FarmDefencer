@@ -1,6 +1,6 @@
 using JoonyleGameDevKit;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class GridMovement : MonoBehaviour
 {
@@ -8,7 +8,7 @@ public class GridMovement : MonoBehaviour
 
     private GridCell _currentGridCell;
     private GridCell _targetGridCell;
-    private int _pathIndex = 0;
+    private int _currentPathIndex = 0;
     private bool _isFirst = true;
 
     // references
@@ -61,9 +61,9 @@ public class GridMovement : MonoBehaviour
         // check distance
         if (Vector2.Distance(_targetGridCell.transform.position, transform.position) < 0.1f)
         {
-            _pathIndex++;
+            _currentPathIndex++;
 
-            if (_pathIndex >= DefenceContext.Current.GridMap.GridPath.Count)
+            if (_currentPathIndex >= DefenceContext.Current.GridMap.GridPath.Count)
             {
                 if (_isFirst == true)
                 {
@@ -80,7 +80,7 @@ public class GridMovement : MonoBehaviour
             }
 
             _currentGridCell = _targetGridCell;
-            _targetGridCell = DefenceContext.Current.GridMap.GridPath[_pathIndex];
+            _targetGridCell = DefenceContext.Current.GridMap.GridPath[_currentPathIndex];
         }
     }
     private void FixedUpdate()
@@ -115,38 +115,39 @@ public class GridMovement : MonoBehaviour
 
     public void Initialize()
     {
-        // 이것도 무조건 0번째 _pathIndex면 안되고, 예를 들어 17개의 way point 중 5번째 way point에 현재 있다면 _targetGridCell를 6번째 way point로 설정해야함
-        // 만약 몬스터가 grid path 위를 이동 중이었다면, 중간 지점에서 이동할 수 있도록 해야하는데,,
-
-        // DefenceContext.Current.GridMap.GridPath 중 현재 위치에서 가장 가까운 grid cell을 찾아서 그 cell을 _currentGridCell로 설정
+        _currentPathIndex = 0;
 
         var gridPath = DefenceContext.Current.GridMap.GridPath;
-        //var closestDistance = float.MaxValue;
-        //var closestIndex = -1;
-        //for (int i = gridPath.Count - 1; i > 0; i--)
-        //{
-        //    var gridCell = gridPath[i];
-        //    var distance = Vector2.Distance(gridCell.transform.position, transform.position);
-        //    if (distance <= closestDistance)
-        //    {
-        //        closestDistance = distance;
-        //        closestIndex = i;
-        //    }
-        //}
+        if (gridPath == null || gridPath.Count < 2)
+        {
+            Debug.LogError("grid path is invalid");
+            return;
+        }
 
-        //if (closestIndex == -1)
-        //{
-        //    Debug.LogError("closest is invalid");
-        //    return;
-        //}
+        _currentGridCell = gridPath[_currentPathIndex];
+        if (_currentGridCell == null)
+        {
+            Debug.LogError("current grid cell is null");
+            return;
+        }
 
-        //_pathIndex = closestIndex;
-        //_currentGridCell = gridPath[_pathIndex];
+        _targetGridCell = gridPath[_currentPathIndex + 1];
+        if (_targetGridCell == null)
+        {
+            Debug.LogError("target grid cell is null");
+            return;
+        }
 
-        _pathIndex = 0;
-        _targetGridCell = gridPath[_pathIndex];
-
+        // 걷기 애니메이션
         _monster.SpineController.SetAnimation(_monster.WalkAnimationName, true);
-        transform.position = _targetGridCell.transform.position;
+
+        // 위치 초기화
+        transform.position = _currentGridCell.transform.position;
+    }
+    public void ReCalculatePath()
+    {
+        var gridMap = DefenceContext.Current.GridMap;
+        var originGridMap = gridMap.MyGridMap;
+        var copiedGridMap = new GridCell[originGridMap.GetLength(0), originGridMap.GetLength(1)];
     }
 }

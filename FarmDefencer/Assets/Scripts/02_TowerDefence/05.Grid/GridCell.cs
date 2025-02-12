@@ -29,6 +29,7 @@ public class GridCell : MonoBehaviour
 
     public GridCell prevGridCell;
     public Vector2Int cellPosition;
+    public Vector3 worldPosition;
 
     [Space]
 
