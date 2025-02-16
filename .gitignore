@@ -24,6 +24,7 @@
 /FarmDefencer/[Aa]ssets/Plugins/Editor/JetBrains*
 
 # Visual Studio cache directory
+/.vs/
 /FarmDefencer/.vs/
 /FarmDefencer/.vsconfig
 
