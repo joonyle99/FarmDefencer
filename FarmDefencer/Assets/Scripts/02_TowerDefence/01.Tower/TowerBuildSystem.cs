@@ -1,18 +1,18 @@
 using UnityEngine;
 
 /// <summary>
-/// Å¸¿ö °Ç¼³À» °ü¸®ÇÏ´Â ½Ã½ºÅÛ
+/// íƒ€ì›Œ ê±´ì„¤ì„ ê´€ë¦¬í•˜ëŠ” ì‹œìŠ¤í…œ
 /// </summary>
 public class TowerBuildSystem : MonoBehaviour
 {
-    [Header("¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬ Tower Build System ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬")]
+    [Header("â”â”â”â”â”â”â”â” Tower Build System â”â”â”â”â”â”â”â”")]
     [Space]
 
     [SerializeField] private Tower[] _towerPrefabs;
 
     private int _selectedTowerIndex = 0;
 
-    public Tower InstantiateTower(Vector3 targetPos, Quaternion targetRot)
+    public Tower CheckSelectedTower()
     {
         var towerToBuild = _towerPrefabs[_selectedTowerIndex];
 
@@ -32,17 +32,21 @@ public class TowerBuildSystem : MonoBehaviour
             return null;
         }
 
+        return towerToBuild;
+    }
+    public Tower InstantiateTower(Tower towerToBuild, Vector3 targetPos, Quaternion targetRot)
+    {
         ResourceManager.Instance.SpendGold(towerToBuild.Cost);
 
-        var towerToReturn = Instantiate(towerToBuild, targetPos, targetRot);
+        var towerToInstance = Instantiate(towerToBuild, targetPos, targetRot);
 
         // check instantiate
-        if (towerToReturn == null)
+        if (towerToInstance == null)
         {
             Debug.LogWarning("There is no tower to return, you should verify that the GameObject has been created");
             return null;
         }
 
-        return towerToReturn;
+        return towerToInstance;
     }
 }
