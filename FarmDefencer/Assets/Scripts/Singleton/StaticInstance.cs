@@ -9,10 +9,10 @@ namespace JoonyleGameDevKit
     public abstract class StaticInstance<T> : MonoBehaviour where T : MonoBehaviour
     {
         /// <summary>
-        /// ¾îµğ¿¡¼­³ª Á¢±ÙÇÒ ¼ö ÀÖ´Â Á¤Àû ÀÎ½ºÅÏ½º
+        /// ì–´ë””ì—ì„œë‚˜ ì ‘ê·¼í•  ìˆ˜ ìˆëŠ” ì •ì  ì¸ìŠ¤í„´ìŠ¤
         /// </summary>
         /// <remarks>
-        /// Àü¿ª º¯¼ö°¡ ¾Æ´Ñ Á¤Àû º¯¼ö¸¦ »ç¿ëÇÏ¿© À¯ÀÏ¼ºÀ» º¸ÀåÇÕ´Ï´Ù.
+        /// ì „ì—­ ë³€ìˆ˜ê°€ ì•„ë‹Œ ì •ì  ë³€ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ ìœ ì¼ì„±ì„ ë³´ì¥í•©ë‹ˆë‹¤.
         /// </remarks>
         public static T Instance { get; private set; }
         public static bool IsInstanceExist
@@ -49,7 +49,7 @@ namespace JoonyleGameDevKit
     {
         protected override void Awake()
         {
-            // ÀÌ¹Ì ÀÎ½ºÅÏ½º°¡ Á¸ÀçÇÏ¸é this °´Ã¼¸¦ ÆÄ±«ÇÏ¿© '½Ì±ÛÅæ'À» º¸ÀåÇÕ´Ï´Ù.
+            // ì´ë¯¸ ì¸ìŠ¤í„´ìŠ¤ê°€ ì¡´ì¬í•˜ë©´ this ê°ì²´ë¥¼ íŒŒê´´í•˜ì—¬ 'ì‹±ê¸€í†¤'ì„ ë³´ì¥í•©ë‹ˆë‹¤.
             if (Instance != null)
             {
                 Destroy(this.gameObject);
@@ -70,7 +70,7 @@ namespace JoonyleGameDevKit
         {
             base.Awake();
 
-            // ÇØ´ç ½Ì±ÛÅæ °´Ã¼¸¦ ¾ÀÀÌ º¯°æµÇ¾îµµ ÆÄ±«µÇÁö ¾Êµµ·Ï ¼³Á¤ÇÕ´Ï´Ù.
+            // í•´ë‹¹ ì‹±ê¸€í†¤ ê°ì²´ë¥¼ ì”¬ì´ ë³€ê²½ë˜ì–´ë„ íŒŒê´´ë˜ì§€ ì•Šë„ë¡ ì„¤ì •í•©ë‹ˆë‹¤.
             DontDestroyOnLoad(gameObject);
         }
     }

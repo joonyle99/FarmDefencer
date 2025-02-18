@@ -9,10 +9,10 @@ public class DefenceContext : SceneContext
         {
             var current = Instance as DefenceContext;
 
-            if (current == null)
-            {
-                throw new NullReferenceException("The DefenceContext Instance is null.");
-            }
+            //if (current == null)
+            //{
+            //    throw new NullReferenceException("The DefenceContext Instance is null.");
+            //}
 
             return current;
         }
