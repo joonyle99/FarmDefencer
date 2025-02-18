@@ -52,6 +52,7 @@ public class WaveSystem : MonoBehaviour
     [Space]
 
     private List<Monster> _fieldMonsters = new List<Monster>();
+    public List<Monster> FieldMonsters => _fieldMonsters;
     private List<string> _survivedMonsters = new List<string>();
 
     public int FieldCount => _fieldMonsters.Count;
@@ -81,18 +82,23 @@ public class WaveSystem : MonoBehaviour
             _isTriggered = true;
             StartCoroutine(WaveProcessRoutine());
         }
-        // CHEAT: re calculate path
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            StartCoroutine(DefenceContext.Current.GridMap.FindPathRoutine());
-        }
 
         // CHEAT: fast clock
-        if (Input.GetKey(KeyCode.BackQuote))
+        if (Input.GetKey(KeyCode.RightBracket))
         {
             Time.timeScale = 3f;
         }
-        else if (Input.GetKeyUp(KeyCode.BackQuote))
+        else if (Input.GetKeyUp(KeyCode.RightBracket))
+        {
+            Time.timeScale = 1f;
+        }
+
+        // CHEAT: slow clock
+        if (Input.GetKey(KeyCode.LeftBracket))
+        {
+            Time.timeScale = 0.3f;
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftBracket))
         {
             Time.timeScale = 1f;
         }
@@ -213,7 +219,7 @@ public class WaveSystem : MonoBehaviour
     {
         GameStateManager.Instance.ChangeState(GameState.Wave);
 
-        yield return DefenceContext.Current.GridMap.FindPathRoutine();
+        yield return DefenceContext.Current.GridMap.FindPathOnStart();
         yield return SpawnRoutine();
     }
 
@@ -247,16 +253,19 @@ public class WaveSystem : MonoBehaviour
     {
         _fieldMonsters.Remove(monster);
     }
-    public void ReCalculatePath()
+    public bool CalculateEachPaths()
     {
         foreach (var fieldMonster in _fieldMonsters)
         {
             var movemnet = fieldMonster.GetComponent<GridMovement>();
             if (movemnet != null)
             {
-                movemnet.ReCalculatePath();
+                bool result = movemnet.CalcEachGridPath();
+                if (result == false) return false;
             }
         }
+
+        return true;
     }
 
     // survive monsters
