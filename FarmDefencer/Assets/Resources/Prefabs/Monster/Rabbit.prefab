@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2166934843460624845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 325706902821444277}
+  m_Layer: 7
+  m_Name: Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &325706902821444277
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2166934843460624845}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.47, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 693835973689949412}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4172481917644167003
 GameObject:
   m_ObjectHideFlags: 0
@@ -17,10 +48,10 @@ GameObject:
   - component: {fileID: 1543992766888672360}
   - component: {fileID: 7300144381691796175}
   - component: {fileID: 5287113402474360036}
-  - component: {fileID: 1115794259428524055}
+  - component: {fileID: 8488813293856363186}
   - component: {fileID: 1519744171091044436}
   m_Layer: 7
-  m_Name: Capybara
+  m_Name: Rabbit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +71,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 559721783228163092}
-  - {fileID: 6219046591756985945}
+  - {fileID: 325706902821444277}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3788177686576222563
@@ -74,7 +105,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c557a8fc2e0857e44b9d01b9e90b1c19, type: 2}
+  - {fileID: 2100000, guid: 086c4dddbbf7a5c45b26d26262b6748c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: bfdea363165221d40ba6f906e5703acf, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: e4251588495513646beb99ce1ebfdd6f, type: 2}
   initialSkinName: 
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
@@ -242,7 +273,7 @@ MonoBehaviour:
   _moveSpeed: 1
   eTime: 0
   distance: 0
---- !u!114 &1115794259428524055
+--- !u!114 &8488813293856363186
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,17 +282,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 4172481917644167003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b2acef0a5c914d4ea96d810f1f1c010, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e6d2fb7eff501c48910adc226960246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 3657265616720998730}
-  _maxHp: 185
+  _maxHp: 100
   _stunDuration: 0.03
   _isDead: 0
   _isStun: 0
-  _targetPoint: {fileID: 6219046591756985945}
+  _targetPoint: {fileID: 325706902821444277}
   _originFactory: {fileID: 0}
-  _monsterName: "\uCE74\uD53C\uBC14\uB77C"
+  _monsterName: Rabbit
   _spineController: {fileID: 7923479951364342952}
   IdleAnimationName: idle
   WalkAnimationName: walk
@@ -279,37 +310,6 @@ SortingGroup:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_SortAtRoot: 0
---- !u!1 &6488918020086107474
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6219046591756985945}
-  m_Layer: 7
-  m_Name: Center
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6219046591756985945
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6488918020086107474}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.8, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 693835973689949412}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6505670202219218649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -318,6 +318,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 693835973689949412}
     m_Modifications:
+    - target: {fileID: 720290982818461378, guid: ac73a8c8d91c83842bec0255423aebde, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6740850065851687629, guid: ac73a8c8d91c83842bec0255423aebde, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

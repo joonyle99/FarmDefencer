@@ -265,7 +265,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4172481917644167003}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a18c4236f6596f46afedecd77bac26a, type: 3}
   m_Name: 
@@ -292,7 +292,7 @@ MonoBehaviour:
   _isStun: 0
   _targetPoint: {fileID: 8056559261859085462}
   _originFactory: {fileID: 0}
-  _monsterName: "\uACE0\uC591\uC774"
+  _monsterName: Cat
   _spineController: {fileID: 7923479951364342952}
   IdleAnimationName: idle
   WalkAnimationName: walk
