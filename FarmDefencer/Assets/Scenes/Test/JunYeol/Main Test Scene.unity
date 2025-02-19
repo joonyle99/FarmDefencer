@@ -3887,9 +3887,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _factory: {fileID: 1944853641}
   _waitSpawnTimeRange:
-    Start: 50
-    End: 50
-  _waitWaveTime: 50
+    Start: 1
+    End: 2
+  _waitWaveTime: 3
   stageData: {fileID: 11400000, guid: a79d7d6ba973ac240b076a1bb5ca99ca, type: 2}
 --- !u!4 &1944853640
 Transform:
@@ -4012,7 +4012,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c06fdb689b667af4b83d04ccd1beeb06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 8016940742814412144, guid: c33dac51bb3454542a08bdea32b29f79, type: 3}
 --- !u!1 &2017358601
 GameObject:
   m_ObjectHideFlags: 0

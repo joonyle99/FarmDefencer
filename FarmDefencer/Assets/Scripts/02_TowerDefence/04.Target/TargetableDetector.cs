@@ -119,10 +119,10 @@ public class TargetableDetector : MonoBehaviour
                             continue;
                         }
 
-                        // �ϴ� �־��
+                        // 일단 넣어놔
                         newDetectedTargets.Add(target);
 
-                        // ���ο� Ÿ���� �߰ߵǾ��ٸ� �߰�
+                        // 새로운 타겟이 발견되었다면 추가
                         if (_currentTargets.Contains(target) == false)
                         {
                             _currentTargets.Add(target);
@@ -139,8 +139,8 @@ public class TargetableDetector : MonoBehaviour
         // for out of range
         foreach (var oldTarget in _currentTargets)
         {
-            // ���� ����
-            // 1. ���ο� Ÿ�ٵ鿡 ���Ե��� �ʾƾ� �Ѵ�. (�ֳ��ϸ� newTargets�� ���Ӱ� Ž���ƴٴ� ���� ��Ÿ���� �����̴�.)
+            // 삭제 조건
+            // 1. 새로운 타겟들에 포함되지 않아야 한다. (왜냐하면 newTargets는 새롭게 탐지됐다는 것을 나타내기 때문이다.)
             if (newDetectedTargets.Contains(oldTarget) == false)
             {
                 deletableTargets.Add(oldTarget);
@@ -179,7 +179,7 @@ public class TargetableDetector : MonoBehaviour
                 // debug
                 order++;
                 targetCell.DebugChangeColor(Color.blue);
-                // targetCell.textMeshPro.text = order.ToString();
+                // targetCell.distanceCostText.text = order.ToString();
                 // JoonyleGameDevKit.Painter.DebugDrawPlus(targetCell.transform.position, Color.red, DefenceContext.Current.GridMap.UnitCellSize / 2f, 5f);
             }
         }
@@ -205,7 +205,7 @@ public class TargetableDetector : MonoBehaviour
 
                 // debug
                 targetCell.DebugResetColor();
-                // targetCell.textMeshPro.text = order.ToString();
+                // targetCell.distanceCostText.text = order.ToString();
                 // JoonyleGameDevKit.Painter.DebugDrawPlus(targetCell.transform.position, Color.red, DefenceContext.Current.GridMap.UnitCellSize / 2f, 5f);
             }
         }
@@ -214,8 +214,8 @@ public class TargetableDetector : MonoBehaviour
 
 // LEARNING POINT
 //
-// Collider2D ������Ʈ
-// -> Unity Physics Engine�� ���� ����� �Բ� ���������� �浹�� üũ�Ѵ�
+// Collider2D 컴포넌트
+// -> Unity Physics Engine의 물리 연산과 함께 지속적으로 충돌을 체크한다
 //
 // Physics2D.OverlapCircleAll
-// -> ���� ������ �ƴ�, �浹 üũ���� �����Ѵ�
+// -> 물리 연산이 아닌, 충돌 체크만을 수행한다

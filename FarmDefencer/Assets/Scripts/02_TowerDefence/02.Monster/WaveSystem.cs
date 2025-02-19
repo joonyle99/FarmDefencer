@@ -257,6 +257,10 @@ public class WaveSystem : MonoBehaviour
     {
         foreach (var fieldMonster in _fieldMonsters)
         {
+            if (fieldMonster.IsDead == true)
+            {
+                continue;
+            }
             var movemnet = fieldMonster.GetComponent<GridMovement>();
             if (movemnet != null)
             {

@@ -12,7 +12,7 @@ public class TowerBuildSystem : MonoBehaviour
 
     private int _selectedTowerIndex = 0;
 
-    public Tower CheckSelectedTower()
+    public Tower CheckTower()
     {
         var towerToBuild = _towerPrefabs[_selectedTowerIndex];
 

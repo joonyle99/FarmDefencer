@@ -23,7 +23,8 @@ public class GridCell : MonoBehaviour
 
     [Space]
 
-    public TextMeshPro textMeshPro;
+    public TextMeshPro distanceCostText;
+    public TextMeshPro isUsableText;
 
     [Space]
 
@@ -33,8 +34,8 @@ public class GridCell : MonoBehaviour
 
     [Space]
 
-    public bool isUsable;
     public int distanceCost;
+    public bool isUsable;
 
     private int _changedColorReferenceCount = 0;
 
@@ -42,6 +43,15 @@ public class GridCell : MonoBehaviour
     {
         _initColor = _spriteRenderer.color;
         _startColor = _spriteRenderer.color;
+
+        distanceCostText.text = "";
+        isUsableText.text = "";
+    }
+    private void Update()
+    {
+        distanceCostText.text = distanceCost.ToString($"D{2}");
+        isUsableText.text = isUsable.ToString();
+        isUsableText.color = (isUsable == true) ? Color.blue : Color.red;
     }
 
     private void OnMouseEnter()
@@ -52,6 +62,7 @@ public class GridCell : MonoBehaviour
             return;
         }
 
+        // 타워가 설치되어 있거나 사용할 수 없는 상태라면 이벤트를 처리하지 않는다
         if (_occupiedTower != null || isUsable == false)
         {
             return;
@@ -72,12 +83,6 @@ public class GridCell : MonoBehaviour
 
     private void OnMouseDown()
     {
-        // 현재 포인터가 GridCell 위에 있지 않다면(UI 요소 위에 있다면) 이벤트를 처리하지 않는다
-        if (EventSystem.current.IsPointerOverGameObject() == true)
-        {
-            return;
-        }
-
         // 현재 타워 건설 상태가 아니라면 이벤트를 처리하지 않는다
         if (GameStateManager.Instance.CurrentState is not GameState.Build
             && GameStateManager.Instance.CurrentState is not GameState.Wave)
@@ -85,22 +90,83 @@ public class GridCell : MonoBehaviour
             return;
         }
 
+        // 현재 포인터가 GridCell 위 (UI 요소 위) 에 있지 않다면 이벤트를 처리하지 않는다
+        if (EventSystem.current.IsPointerOverGameObject() == true)
+        {
+            return;
+        }
+
+        // GridMap에 현재 클릭된 GridCell을 저장
+        DefenceContext.Current.GridMap.ClickedCell = this;
+
+        // 타워가 설치되어 있다면 패널을 보여준다
         if (_occupiedTower != null)
         {
-            // 강화 UI는 어디에 띄워야 하는가..?
-
-            // 타워가 점유되어 있는 상태, 클릭 시 강화 메뉴를 띄운다
             _occupiedTower.ShowPanel();
         }
+        // 타워가 설치되어 있지 않다면 설치를 시도한다
         else if (_occupiedTower == null && isUsable == true)
         {
-            // 타워가 점유되어 있지 않고, 사용할 수 있는 상태
-            Occupy();
+            TowerBuildSystem towerBuildSystem = DefenceContext.Current.TowerBuildSystem;
+
+            // 1. 설치할 타워의 유효성 및 건설 가능 여부 확인
+            Tower towerToBuild = towerBuildSystem.CheckTower();
+            if (towerToBuild == null)
+            {
+                Debug.Log("towerToBuild is invalid");
+                return;
+            }
+
+            if (GameStateManager.Instance.CurrentState is GameState.Wave)
+            {
+                var gridMap = DefenceContext.Current.GridMap;
+                var fieldMonsters = DefenceContext.Current.WaveSystem.FieldMonsters;
+
+                // 현재 클릭된 GridCell에 몬스터가 있는지 확인
+                foreach (var fieldMonster in fieldMonsters)
+                {
+                    bool isInCell = gridMap.IsTargetInCell(fieldMonster.transform.position, this);
+                    if (isInCell == true)
+                    {
+                        Debug.Log("a monster is in this grid cell");
+                        return;
+                    }
+                }
+
+                // 현재 GridCell의 isUsable = false하는 이유는
+                // 타워를 설치하려고 하는 곳을 경로 타일로 사용하지 않도록 하기 위함
+                isUsable = false;
+
+                bool result = gridMap.FindPath();
+                if (result == false)
+                {
+                    isUsable = true;
+
+                    Debug.Log("failed to find path (origin path or each path)");
+                    return;
+                }
+
+                isUsable = true;
+            }
+
+            // 2. 설치할 타워의 인스턴스 생성 가능 여부 확인
+            Tower towerToInstance = towerBuildSystem.InstantiateTower(towerToBuild, this.worldPosition, Quaternion.identity);
+            if (towerToInstance == null)
+            {
+                Debug.Log("towerToInstance is invalid");
+                return;
+            }
+
+            Occupy(towerToInstance);
+
+            OffHover();
+            UnUsable();
         }
         else
         {
             // 타워가 점유하고 있지는 않고, 사용할 수 없는 상태
             // e.g) start / end point
+            Debug.Log($"here is start / end point");
         }
     }
 
@@ -149,17 +215,10 @@ public class GridCell : MonoBehaviour
         // gameObject.SetActive(false);
     }
 
-    public void Occupy()
+    public void Occupy(Tower tower)
     {
-        _occupiedTower = DefenceContext.Current.TowerBuildSystem.InstantiateTower(transform.position, Quaternion.identity);
-
-        if (_occupiedTower != null)
-        {
-            _occupiedTower.OccupyingGridCell(this);
-
-            OffHover();
-            UnUsable();
-        }
+        _occupiedTower = tower;
+        _occupiedTower.OccupyingGridCell(this);
     }
     public void DeleteOccupiedTower()
     {

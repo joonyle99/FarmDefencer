@@ -7,16 +7,16 @@ public class GridMovement : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 1f;
 
-    private GridCell _currentGridCell;
-    private GridCell _targetGridCell;
-    private int _currentPathIndex = 0;
+    private GridCell _currGridCell;
+    private GridCell _nextGridCell;
+    private int _pathIndex = 0;
     private bool _isFirst = true;
-
-    private List<GridCell> _gridPath;
 
     // references
     private Monster _monster;
     private Rigidbody2D _rigidbody;
+
+    private List<GridCell> _eachGridPath;
 
 #if UNITY_EDITOR
     public float eTime;
@@ -42,7 +42,7 @@ public class GridMovement : MonoBehaviour
             return;
         }
 
-        if (_targetGridCell == null)
+        if (_nextGridCell == null)
         {
             return;
         }
@@ -62,11 +62,11 @@ public class GridMovement : MonoBehaviour
         }
 
         // check distance
-        if (Vector2.Distance(_targetGridCell.transform.position, transform.position) < 0.1f)
+        if (Vector2.Distance(transform.position, _nextGridCell.worldPosition) <= 0.05f)
         {
-            _currentPathIndex++;
+            _pathIndex++;
 
-            if (_currentPathIndex >= _gridPath.Count)
+            if (_pathIndex >= _eachGridPath.Count)
             {
                 if (_isFirst == true)
                 {
@@ -74,7 +74,7 @@ public class GridMovement : MonoBehaviour
                 }
 
                 _rigidbody.linearVelocity = Vector2.zero;
-                _targetGridCell = null;
+                _nextGridCell = null;
 
                 // arrived
                 _monster.Survive();
@@ -82,8 +82,8 @@ public class GridMovement : MonoBehaviour
                 return;
             }
 
-            _currentGridCell = _targetGridCell;
-            _targetGridCell = _gridPath[_currentPathIndex];
+            _currGridCell = _nextGridCell;
+            _nextGridCell = _eachGridPath[_pathIndex];
         }
     }
     private void FixedUpdate()
@@ -94,13 +94,13 @@ public class GridMovement : MonoBehaviour
             return;
         }
 
-        if (_targetGridCell == null)
+        if (_nextGridCell == null)
         {
             return;
         }
 
         // move
-        var dirVec = (_targetGridCell.transform.position - transform.position).normalized;
+        var dirVec = (_nextGridCell.worldPosition - transform.position).normalized;
         _rigidbody.linearVelocity = dirVec * DefenceContext.Current.GridMap.UnitCellSize * _moveSpeed;
 
 #if UNITY_EDITOR
@@ -118,78 +118,160 @@ public class GridMovement : MonoBehaviour
 
     public void Initialize()
     {
-        _currentPathIndex = 0;
-
-        var gridPath = DefenceContext.Current.GridMap.GridPath;
-        if (gridPath == null || gridPath.Count < 2)
+        bool result = UseOriginGridPath();
+        if (result == false)
         {
-            Debug.LogError("grid path is invalid");
+            Debug.LogError("failed to calculate");
             return;
         }
-
-        _currentGridCell = gridPath[_currentPathIndex];
-        if (_currentGridCell == null)
-        {
-            Debug.LogError("current grid cell is null");
-            return;
-        }
-
-        _targetGridCell = gridPath[_currentPathIndex + 1];
-        if (_targetGridCell == null)
-        {
-            Debug.LogError("target grid cell is null");
-            return;
-        }
-
-        _gridPath = gridPath;
 
         // 걷기 애니메이션
         _monster.SpineController.SetAnimation(_monster.WalkAnimationName, true);
 
         // 위치 초기화
-        transform.position = _currentGridCell.transform.position;
+        transform.position = _currGridCell.transform.position;
     }
-    public void ReCalculatePath()
+    public bool UseOriginGridPath()
     {
-        // TODO: _currentGridCell과 _targetGridCell을 이렇게 초기화 하면 출발지로 잠시 돌아갔다가 다시 목적지로 가는데,,
-        // 어떻게 하면 최대한 자연스럽게 움직이게 할 수 있을까?
+        var originGridPath = DefenceContext.Current.GridMap.OriginGridPath;
+        if (originGridPath == null || originGridPath.Count < 2)
+        {
+            Debug.LogError("origin grid path is invalid");
+            return false;
+        }
 
-        // 다음 목적지를 기준으로 현재 위치 (Position) 에서 가깝다면 그대로 두고,
-        // 현재 Cell 에서 가깝다면 현재 Cell로 이동했다가 가도록 한다.
+        int tempPathIndex = 0;
+        GridCell tempCurrGridCell = null;
+        GridCell tempNextGridCell = null;
 
-        _currentPathIndex = 0;
+        tempCurrGridCell = originGridPath[tempPathIndex++]; // index = 0
+        if (tempCurrGridCell == null)
+        {
+            Debug.Log("curr grid cell is null");
+            return false;
+        }
 
+        tempNextGridCell = originGridPath[tempPathIndex]; // index = 1
+        if (tempNextGridCell == null)
+        {
+            Debug.Log("next grid cell is null");
+            return false;
+        }
+
+        _pathIndex = tempPathIndex;
+        _currGridCell = tempCurrGridCell;
+        _nextGridCell = tempNextGridCell;
+        _eachGridPath = originGridPath;
+
+        return true;
+    }
+    public bool CalcEachGridPath()
+    {
         var gridMap = DefenceContext.Current.GridMap;
-        var gridPath = gridMap.CalculatePath(_currentGridCell.cellPosition, gridMap.EndCellPoint);
 
-        if (gridPath == null || gridPath.Count < 2)
+        // 다음 목적지에는 타워를 설치할 수 없다
+        if (gridMap.ClickedCell == _nextGridCell)
         {
-            Debug.LogError("grid path is invalid");
-            return;
+            Debug.Log("cannot be installed in the next grid cell.");
+            return false;
         }
 
-        _currentGridCell = gridPath[_currentPathIndex];
-        if (_currentGridCell == null)
+        var eachGridPath = gridMap.CalculateEachPath(_currGridCell.cellPosition, gridMap.EndCellPoint);
+        if (eachGridPath == null || eachGridPath.Count == 0)
         {
-            Debug.LogError("current grid cell is null");
-            return;
+            Debug.Log("each grid path is invalid");
+            return false;
+        }
+        if (eachGridPath.Count == 1)
+        {
+            Debug.Log("each grid path only has one way point");
+            return false;
         }
 
-        _targetGridCell = gridPath[_currentPathIndex + 1];
-        if (_targetGridCell == null)
+        // 굳이 경로를 바꿀 필요가 없는 경우
+        // _eachGridPath에서 남아있는 경로의 개수를 구해야지,,
+        // if (eachGridPath.Count >= _eachGridPath.Count - _pathIndex)
+        // {
+        //     //Debug.Log($"eachGridPath.Count: {eachGridPath.Count} / _eachGridPath.Count: {_eachGridPath.Count}");
+        //     //StartCoroutine(gridMap.DrawPathRoutine(eachGridPath, Color.red));
+        //     //StartCoroutine(gridMap.DrawPathRoutine(_eachGridPath, Color.blue));
+           
+        //     Debug.Log("no need to change path");
+        //     return true;
+        // }
+
+        int tempPathIndex = 0;
+        GridCell tempCurrGridCell = null;
+        GridCell tempNextGridCell = null;
+
+        // TODO: 이게 무조건 반대 방향으로 가도록 하면 안되지 준열아
+        // 가려던 방향이 더 가깝다면 거기로 가도록 해야지 .. 바보야
+        // 방향 전환이 필요한 경우
+        var newNextGridCell = eachGridPath[1];
+        if (newNextGridCell != _nextGridCell)
         {
-            Debug.LogError("target grid cell is null");
-            return;
+            // 여기서 newNextGridCell은 사용하지 않는다
+            // _nextGridCell -> _currGridCell -> newNextGridCell
+            // 이 순서대로 가게될 것이기 때문이다
+            // eachGridPath[0]은 _currGridCell이기 때문에
+            // tempPathIndex 또한 0으로 맞춰줘야 한다
+            tempCurrGridCell = _nextGridCell;
+            tempNextGridCell = _currGridCell;
+        }
+        // 방향 전환이 필요하지 않은 경우
+        else
+        {
+            tempCurrGridCell = eachGridPath[tempPathIndex++];
+            if (tempCurrGridCell == null)
+            {
+                Debug.Log("curr grid cell is null");
+                return false;
+            }
+
+            tempNextGridCell = eachGridPath[tempPathIndex];
+            if (tempNextGridCell == null)
+            {
+                Debug.Log("next grid cell is null");
+                return false;
+            }
         }
 
-        // 가까운 곳으로 간다
-        var currGridCellPosToTarget = Vector2.Distance(_currentGridCell.worldPosition, _targetGridCell.worldPosition);
-        var currObjectPosToTarget = Vector2.Distance(transform.position, _targetGridCell.worldPosition);
-        if (currGridCellPosToTarget < currObjectPosToTarget)
+        _pathIndex = tempPathIndex;
+        _currGridCell = tempCurrGridCell;
+        _nextGridCell = tempNextGridCell;
+        _eachGridPath = eachGridPath;
+
+        //StartCoroutine(gridMap.DrawPathRoutine(_eachGridPath, Color.blue));
+
+        return true;
+    }
+
+    public bool ContainCellInPath(List<GridCell> gridPath, GridCell gridCell)
+    {
+        if (gridPath == null || gridPath.Count == 0)
         {
-            _targetGridCell = _currentGridCell;
+            return false;
         }
 
-        _gridPath = gridPath;
+        return _eachGridPath.Contains(gridCell);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (_currGridCell != null)
+        {
+            //var dir = _currGridCell.worldPosition - transform.position;
+            //JoonyleGameDevKit.Painter.GizmosDrawArrow(transform.position, dir, bodyColor: Color.blue, headColor: Color.blue);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, _currGridCell.worldPosition);
+        }
+
+        if (_nextGridCell != null)
+        {
+            //var dir = _nextGridCell.worldPosition - transform.position;
+            //JoonyleGameDevKit.Painter.GizmosDrawArrow(transform.position, dir, bodyColor: Color.red, headColor: Color.red);
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, _nextGridCell.worldPosition);
+        }
     }
 }

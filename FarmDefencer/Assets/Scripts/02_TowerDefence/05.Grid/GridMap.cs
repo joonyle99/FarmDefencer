@@ -26,7 +26,7 @@ public class GridMap : MonoBehaviour
     private int _width;
     public int Width => _width;
 
-    // start / end point
+    // start / end targetPos
     public Vector2Int StartCellPoint { get; private set; }
     public Vector3 StartWorldPoint => CellToWorld(StartCellPoint.ToVector3Int());
     public Vector2Int EndCellPoint { get; private set; }
@@ -43,14 +43,16 @@ public class GridMap : MonoBehaviour
     [Space]
 
     [SerializeField] private GridCell _gridCellPrefab;
-    [SerializeField] private List<GridCell> _gridPath;
-    public List<GridCell> GridPath => _gridPath;
+    [SerializeField] private List<GridCell> _originGridPath;
+    public List<GridCell> OriginGridPath => _originGridPath;
 
     private GridCell[,] _myGridMap;
     public GridCell[,] MyGridMap => _myGridMap;
 
     private int[] _dx = new int[4] { -1, 0, 1, 0 };
     private int[] _dy = new int[4] { 0, 1, 0, -1 };
+
+    public GridCell ClickedCell = null;
 
     private void Awake()
     {
@@ -123,14 +125,15 @@ public class GridMap : MonoBehaviour
                 var worldPos = _tilemap.GetCellCenterWorld(cellPos.ToVector3Int());
 
                 _myGridMap[h, w] = Instantiate(_gridCellPrefab, worldPos, Quaternion.identity, transform);
-
+                _myGridMap[h, w].name = $"{_myGridMap[h, w].name} [{w}, {h}]";
                 _myGridMap[h, w].cellPosition = cellPos;
                 _myGridMap[h, w].worldPosition = worldPos;
                 _myGridMap[h, w].isUsable = true;
                 _myGridMap[h, w].distanceCost = -1;
                 _myGridMap[h, w].prevGridCell = null;
 
-                if (cellPos == StartCellPoint || cellPos == EndCellPoint)
+                if (cellPos == EndCellPoint)
+                //if (cellPos == StartCellPoint || cellPos == EndCellPoint)
                 {
                     _myGridMap[h, w].UnUsable();
                 }
@@ -139,27 +142,40 @@ public class GridMap : MonoBehaviour
     }
 
     // shortest path finding by using bfs algorithm
-    public IEnumerator FindPathRoutine()
+    public IEnumerator FindPathOnStart()
     {
-        // TODO: 경로 다시 찾을 때마다 같은 타워 배치 상태임에도 최단 거리가 계속 변경되는 이유 찾기
-
-        _gridPath = CalculatePath(StartCellPoint, EndCellPoint);
-
-        // 현재 필드 위 몬스터들의 경로를 재계산한다
-        if (DefenceContext.Current.WaveSystem.FieldCount > 0)
+        var originGridPath = CalculateOriginPath();
+        if (originGridPath == null || originGridPath.Count < 2)
         {
-            //Debug.Log(DefenceContext.Current.WaveSystem.FieldCount);
-            DefenceContext.Current.WaveSystem.ReCalculatePath();
+            Debug.LogError("origin grid path is invalid");
+            yield break;
         }
 
-        //yield return null;
+        _originGridPath = originGridPath;
 
-        if (ConstantConfig.DEBUG == true)
+        yield return DrawPathRoutine(_originGridPath);
+    }
+    public bool FindPath()
+    {
+        var newOriginGridPath = CalculateOriginPath();
+        if (newOriginGridPath == null || newOriginGridPath.Count < 2)
         {
-            DebugDistanceMap();
+            Debug.LogError("new origin grid path is invalid");
+            return false;
         }
 
-        yield return DebugPingGridPathRoutine();
+        var result = DefenceContext.Current.WaveSystem.CalculateEachPaths();
+        if (result == false)
+        {
+            Debug.Log("each grid paths are invalid");
+            return false;
+        }
+
+        _originGridPath = newOriginGridPath;
+
+        //StartCoroutine(DrawPathRoutine(_originGridPath));
+
+        return true;
     }
 
     // convert
@@ -186,87 +202,57 @@ public class GridMap : MonoBehaviour
 
         return _myGridMap[h, w];
     }
-
-    // debug
-    private void DebugDistanceMap()
+    
+    // path finding
+    public List<GridCell> CalculateOriginPath()
     {
-        for (int h = 0; h < _height; h++)
-        {
-            for (int w = 0; w < _width; w++)
-            {
-                var number = _myGridMap[h, w].distanceCost;
-                var stringNumber = number.ToString($"D{2}");
+        // distanceCost, prevGridCell 초기화
+        ResetGridMap();
 
-                _myGridMap[h, w].textMeshPro.text = stringNumber;
+        Queue<Vector2Int> queue = new Queue<Vector2Int>();
+        queue.Enqueue(StartCellPoint);
+
+        // 시작 지점의 거리 비용은 0으로 초기화
+        _myGridMap[StartCellPoint.y, StartCellPoint.x].distanceCost = 0;
+
+        while (queue.Count > 0)
+        {
+            Vector2Int nowPos = queue.Dequeue();
+
+            // endCellPoint: excute trace
+            if (nowPos == EndCellPoint)
+            {
+                var newGridPath = TracePath(_myGridMap[nowPos.y, nowPos.x]);
+                return newGridPath;
+            }
+
+            // check 4 direction
+            for (int i = 0; i < 4; i++)
+            {
+                Vector2Int nextPos = new Vector2Int(nowPos.x + _dx[i], nowPos.y + _dy[i]);
+
+                if (nextPos.x < 0 || nextPos.x >= _width || nextPos.y < 0 || nextPos.y >= _height) continue;
+                if (_myGridMap[nextPos.y, nextPos.x].distanceCost != -1) continue;
+                if (_myGridMap[nextPos.y, nextPos.x].isUsable == false && nextPos != EndCellPoint) continue;
+
+                queue.Enqueue(nextPos);
+
+                _myGridMap[nextPos.y, nextPos.x].distanceCost = _myGridMap[nowPos.y, nowPos.x].distanceCost + 1;
+                _myGridMap[nextPos.y, nextPos.x].prevGridCell = _myGridMap[nowPos.y, nowPos.x];
             }
         }
+
+        return null;
     }
-    private IEnumerator DebugPingGridMapRoutine()
+    public List<GridCell> CalculateEachPath(Vector2Int startCellPoint, Vector2Int endCellPoint)
     {
-        for (int h = 0; h < _height; h++)
+        if (_myGridMap[startCellPoint.y, startCellPoint.x].isUsable == false
+            || startCellPoint == endCellPoint)
         {
-            for (int w = 0; w < _width; w++)
-            {
-                var originScale = _myGridMap[h, w].transform.localScale;
-
-                _myGridMap[h, w].transform.localScale *= 1.7f;
-                yield return new WaitForSeconds(0.15f);
-                _myGridMap[h, w].transform.localScale = originScale;
-            }
-        }
-    }
-    private IEnumerator DebugPingGridPathRoutine()
-    {
-        var lineObject = Instantiate(debugLine, Vector3.zero, Quaternion.identity);
-        lineObject.positionCount = 0;
-
-        // _gridPath를 복사
-        var copiedGridPath = new List<GridCell>(_gridPath);
-
-        for (int i = 0; i < copiedGridPath.Count; i++)
-        {
-            //Debug.Log(copiedGridPath.Count);
-            lineObject.positionCount = i + 1;
-            lineObject.SetPosition(i, copiedGridPath[i].transform.position);
-
-            var originScale = copiedGridPath[i].transform.localScale;
-
-            copiedGridPath[i].transform.localScale = originScale * 1.5f;
-            yield return new WaitForSeconds(0.1f);
-            copiedGridPath[i].transform.localScale = originScale;
+            return null;
         }
 
-        yield return new WaitForSeconds(_debugLineDuration);
-        Destroy(lineObject.gameObject);
-    }
-
-    public bool IsValid(int w, int h)
-    {
-        if (w < 0 || w >= _width || h < 0 || h >= _height)
-        {
-            // Debug.LogWarning($"[{w}, {h}] is invalid pointIndex");
-            return false;
-        }
-
-        return true;
-    }
-
-    // 
-    public void ResetPath()
-    {
-        // _myGridMap 초기화
-        for (int h = 0; h < _height; h++)
-        {
-            for (int w = 0; w < _width; w++)
-            {
-                _myGridMap[h, w].distanceCost = -1;
-                _myGridMap[h, w].prevGridCell = null;
-            }
-        }
-    }
-    public List<GridCell> CalculatePath(Vector2Int startCellPoint, Vector2Int endCellPoint)
-    {
-        ResetPath();
+        ResetGridMap();
 
         Queue<Vector2Int> queue = new Queue<Vector2Int>();
         queue.Enqueue(startCellPoint);
@@ -279,8 +265,8 @@ public class GridMap : MonoBehaviour
             // endCellPoint: excute trace
             if (nowPos == endCellPoint)
             {
-                var gridPath = TracePath(_myGridMap[nowPos.y, nowPos.x]);
-                return gridPath;
+                var newGridPath = TracePath(_myGridMap[nowPos.y, nowPos.x]);
+                return newGridPath;
             }
 
             // check 4 direction
@@ -303,7 +289,7 @@ public class GridMap : MonoBehaviour
     }
     public List<GridCell> TracePath(GridCell endCell)
     {
-        // Debug.Log($"Start Trace (end cell: {endCell.gameObject.name})", endCell.gameObject);
+        // Debug.Log($"Start Trace (end targetCellPos: {endCell.gameObject.name})", endCell.gameObject);
 
         var gridPath = new List<GridCell>();
 
@@ -320,5 +306,65 @@ public class GridMap : MonoBehaviour
         gridPath.Reverse();
 
         return gridPath;
+    }
+
+    // etc
+    public void ResetGridMap()
+    {
+        // myGridMap 초기화
+        for (int h = 0; h < _height; h++)
+        {
+            for (int w = 0; w < _width; w++)
+            {
+                _myGridMap[h, w].distanceCost = -1;
+                _myGridMap[h, w].prevGridCell = null;
+            }
+        }
+    }
+    public bool IsValid(int w, int h)
+    {
+        if (w < 0 || w >= _width || h < 0 || h >= _height)
+        {
+            // Debug.LogWarning($"[{w}, {h}] is invalid pointIndex");
+            return false;
+        }
+
+        return true;
+    }
+    public bool IsTargetInCell(Vector3 targetPos, GridCell gridCell)
+    {
+        var targetCellPos = _tilemap.WorldToCell(targetPos).ToVector2Int();
+        var thisCellPos = gridCell.cellPosition;
+        return targetCellPos == thisCellPos;
+    }
+    public IEnumerator DrawPathRoutine(List<GridCell> gridPath, Color? endColor = null)
+    {
+        var lineObject = Instantiate(debugLine, Vector3.zero, Quaternion.identity);
+        lineObject.positionCount = 0;
+
+        if (endColor != null)
+        {
+            lineObject.endColor = endColor.Value;
+        }
+
+        // gridPath를 복사해야 한다.
+        // 전달 받은 gridPath는 참조형 변수이기 때문에 변경되면 Draw Path도 변경된다
+        var copiedGridPath = new List<GridCell>(gridPath);
+
+        for (int i = 0; i < copiedGridPath.Count; i++)
+        {
+            //Debug.Log(copiedGridPath.Count);
+            lineObject.positionCount = i + 1;
+            lineObject.SetPosition(i, copiedGridPath[i].transform.position);
+
+            var originScale = copiedGridPath[i].transform.localScale;
+
+            copiedGridPath[i].transform.localScale = originScale * 1.5f;
+            yield return new WaitForSeconds(0.1f);
+            copiedGridPath[i].transform.localScale = originScale;
+        }
+
+        yield return new WaitForSeconds(_debugLineDuration);
+        Destroy(lineObject.gameObject);
     }
 }
