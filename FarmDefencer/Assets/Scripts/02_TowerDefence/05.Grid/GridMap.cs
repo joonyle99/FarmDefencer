@@ -49,6 +49,8 @@ public class GridMap : MonoBehaviour
     private GridCell[,] _myGridMap;
     public GridCell[,] MyGridMap => _myGridMap;
 
+    private int[,] _prevDistanceCost;
+
     private int[] _dx = new int[4] { -1, 0, 1, 0 };
     private int[] _dy = new int[4] { 0, 1, 0, -1 };
 
@@ -106,6 +108,7 @@ public class GridMap : MonoBehaviour
         EndCellPoint = _oppositePoints[pointIndex];
 
         _myGridMap = new GridCell[_height, _width];
+        _prevDistanceCost = new int[_height, _width];
     }
     private void Start()
     {
@@ -148,6 +151,7 @@ public class GridMap : MonoBehaviour
         if (originGridPath == null || originGridPath.Count < 2)
         {
             Debug.LogError("origin grid path is invalid");
+            LoadPrevDistanceCost();
             yield break;
         }
 
@@ -161,6 +165,7 @@ public class GridMap : MonoBehaviour
         if (newOriginGridPath == null || newOriginGridPath.Count < 2)
         {
             Debug.LogError("new origin grid path is invalid");
+            LoadPrevDistanceCost();
             return false;
         }
 
@@ -168,6 +173,7 @@ public class GridMap : MonoBehaviour
         if (result == false)
         {
             Debug.Log("each grid paths are invalid");
+            LoadPrevDistanceCost();
             return false;
         }
 
@@ -206,7 +212,7 @@ public class GridMap : MonoBehaviour
     // path finding
     public List<GridCell> CalculateOriginPath()
     {
-        // distanceCost, prevGridCell 초기화
+        SavePrevDistanceCost();
         ResetGridMap();
 
         Queue<Vector2Int> queue = new Queue<Vector2Int>();
@@ -252,6 +258,7 @@ public class GridMap : MonoBehaviour
             return null;
         }
 
+        SavePrevDistanceCost();
         ResetGridMap();
 
         Queue<Vector2Int> queue = new Queue<Vector2Int>();
@@ -309,8 +316,34 @@ public class GridMap : MonoBehaviour
     }
 
     // etc
+    public void SavePrevDistanceCost()
+    {
+        Debug.Log("SavePrevDistanceCost");
+
+        for (int h = 0; h < _height; h++)
+        {
+            for (int w = 0; w < _width; w++)
+            {
+                _prevDistanceCost[h, w] = _myGridMap[h, w].distanceCost;
+            }
+        }
+    }
+    public void LoadPrevDistanceCost()
+    {
+        Debug.Log("LoadPrevDistanceCost");
+
+        for (int h = 0; h < _height; h++)
+        {
+            for (int w = 0; w < _width; w++)
+            {
+                _myGridMap[h, w].distanceCost = _prevDistanceCost[h, w];
+            }
+        }
+    }
     public void ResetGridMap()
     {
+        Debug.Log("ResetGridMap");
+
         // myGridMap 초기화
         for (int h = 0; h < _height; h++)
         {

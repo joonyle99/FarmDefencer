@@ -265,7 +265,10 @@ public class WaveSystem : MonoBehaviour
             if (movemnet != null)
             {
                 bool result = movemnet.CalcEachGridPath();
-                if (result == false) return false;
+                if (result == false)
+                {
+                    return false;
+                }
             }
         }
 

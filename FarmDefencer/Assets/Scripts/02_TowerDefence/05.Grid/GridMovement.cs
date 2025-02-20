@@ -177,14 +177,10 @@ public class GridMovement : MonoBehaviour
         }
 
         var eachGridPath = gridMap.CalculateEachPath(_currGridCell.cellPosition, gridMap.EndCellPoint);
-        if (eachGridPath == null || eachGridPath.Count == 0)
+        if (eachGridPath == null || eachGridPath.Count < 2)
         {
             Debug.Log("each grid path is invalid");
-            return false;
-        }
-        if (eachGridPath.Count == 1)
-        {
-            Debug.Log("each grid path only has one way point");
+            DefenceContext.Current.GridMap.LoadPrevDistanceCost();
             return false;
         }
 
