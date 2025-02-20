@@ -151,7 +151,7 @@ public class GridMap : MonoBehaviour
         if (originGridPath == null || originGridPath.Count < 2)
         {
             Debug.LogError("origin grid path is invalid");
-            LoadPrevDistanceCost();
+            //LoadPrevDistanceCost();
             yield break;
         }
 
@@ -165,7 +165,7 @@ public class GridMap : MonoBehaviour
         if (newOriginGridPath == null || newOriginGridPath.Count < 2)
         {
             Debug.LogError("new origin grid path is invalid");
-            LoadPrevDistanceCost();
+            //LoadPrevDistanceCost();
             return false;
         }
 
@@ -173,7 +173,7 @@ public class GridMap : MonoBehaviour
         if (result == false)
         {
             Debug.Log("each grid paths are invalid");
-            LoadPrevDistanceCost();
+            //LoadPrevDistanceCost();
             return false;
         }
 
@@ -212,7 +212,7 @@ public class GridMap : MonoBehaviour
     // path finding
     public List<GridCell> CalculateOriginPath()
     {
-        SavePrevDistanceCost();
+        //SavePrevDistanceCost();
         ResetGridMap();
 
         Queue<Vector2Int> queue = new Queue<Vector2Int>();
@@ -258,7 +258,7 @@ public class GridMap : MonoBehaviour
             return null;
         }
 
-        SavePrevDistanceCost();
+        //SavePrevDistanceCost();
         ResetGridMap();
 
         Queue<Vector2Int> queue = new Queue<Vector2Int>();

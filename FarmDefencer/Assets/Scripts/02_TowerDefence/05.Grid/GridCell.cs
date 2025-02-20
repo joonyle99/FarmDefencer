@@ -49,9 +49,9 @@ public class GridCell : MonoBehaviour
     }
     private void Update()
     {
-        distanceCostText.text = distanceCost.ToString($"D{2}");
-        isUsableText.text = isUsable.ToString();
-        isUsableText.color = (isUsable == true) ? Color.blue : Color.red;
+        //distanceCostText.text = distanceCost.ToString($"D{2}");
+        //isUsableText.text = isUsable.ToString();
+        //isUsableText.color = (isUsable == true) ? Color.blue : Color.red;
     }
 
     private void OnMouseEnter()

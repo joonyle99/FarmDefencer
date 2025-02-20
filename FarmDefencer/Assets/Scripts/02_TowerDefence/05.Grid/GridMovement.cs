@@ -180,7 +180,7 @@ public class GridMovement : MonoBehaviour
         if (eachGridPath == null || eachGridPath.Count < 2)
         {
             Debug.Log("each grid path is invalid");
-            DefenceContext.Current.GridMap.LoadPrevDistanceCost();
+            //DefenceContext.Current.GridMap.LoadPrevDistanceCost();
             return false;
         }
 
