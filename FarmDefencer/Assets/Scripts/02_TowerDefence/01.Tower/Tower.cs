@@ -57,14 +57,23 @@ public sealed class Tower : TargetableBehavior
     // level 1
     public float attackRate_1 = 1f;
     public int damage_1 = 5;
+    public int sellCost_1 = 5;
+
+    [Space]
 
     // level 2
     public float attackRate_2 = 0.8f;
     public int damage_2 = 20;
+    public int sellCost_2 = 37;
+
+    [Space]
 
     // level 3
     public float attackRate_3 = 0.5f;
     public int damage_3 = 40;
+    public int sellCost_3 = 89;
+
+    [Space]
 
     [Space]
 
@@ -397,7 +406,20 @@ public sealed class Tower : TargetableBehavior
         _occupyingGridCell.DeleteOccupiedTower();
 
         // return gold
-        ResourceManager.Instance.EarnGold(_cost / 2);
+        var sellCost = 0;
+        if (CurrentLevel == 1)
+        {
+            sellCost = sellCost_1;
+        }
+        else if (CurrentLevel == 2)
+        {
+            sellCost = sellCost_2;
+        }
+        else if (CurrentLevel == 3)
+        {
+            sellCost = sellCost_3;
+        }
+        ResourceManager.Instance.EarnGold(sellCost);
 
         // detector
         _detector.DebugEraseRange();
