@@ -47,18 +47,54 @@ public class GridMovement : MonoBehaviour
             return;
         }
 
-        // flip sprite
-        if (_rigidbody.linearVelocityX < 0 && transform.localScale.x > 0)
+        // TODO: Update에서 방향 설정을 매번 해주는 게 맞는 지는 모르겠다..
+
+        float horizontalVelocity = _rigidbody.linearVelocityX;
+        float threshold = 0.1f; // Define a threshold for near-zero horizontal movement
+
+        // 1. flip sprite based on linear velocity
+        if (Mathf.Abs(horizontalVelocity) > threshold)
         {
-            var scale = transform.localScale;
-            scale.x *= -1; // x축 스케일 반전
-            transform.localScale = scale;
+            if (_rigidbody.linearVelocityX < 0 && transform.localScale.x > 0)
+            {
+                var scale = transform.localScale;
+                scale.x *= -1; // x축 스케일 반전
+                transform.localScale = scale;
+            }
+            else if (_rigidbody.linearVelocityX > 0 && transform.localScale.x < 0)
+            {
+                var scale = transform.localScale;
+                scale.x *= -1; // x축 스케일 반전
+                transform.localScale = scale;
+            }
+            else
+            {
+                // nothing
+            }
         }
-        else if (_rigidbody.linearVelocityX > 0 && transform.localScale.x < 0)
+        // 2. flip sprite based on target direction
+        else
         {
-            var scale = transform.localScale;
-            scale.x *= -1; // x축 스케일 반전
-            transform.localScale = scale;
+            GridCell endGridCell = _eachGridPath[^1];
+            Vector3 targetPosition = endGridCell.worldPosition;
+            Vector3 direction = targetPosition - transform.position;
+
+            if (direction.x < 0 && transform.localScale.x > 0)
+            {
+                var scale = transform.localScale;
+                scale.x *= -1;
+                transform.localScale = scale;
+            }
+            else if (direction.x > 0 && transform.localScale.x < 0)
+            {
+                var scale = transform.localScale;
+                scale.x *= -1;
+                transform.localScale = scale;
+            }
+            else
+            {
+                // nothing
+            }
         }
 
         // check distance
