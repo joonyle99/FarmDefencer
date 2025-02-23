@@ -1,11 +1,10 @@
-using Spine;
 using Spine.Unity;
 using UnityEngine;
 
 /// <summary>
 /// 
 /// </summary>
-public sealed class Tower : TargetableBehavior
+public abstract class Tower : TargetableBehavior
 {
     [Header("──────── Tower ────────")]
     [Space]
@@ -169,6 +168,7 @@ public sealed class Tower : TargetableBehavior
     [Header("Fire")]
     [SerializeField] private TowerHead _head;
     [SerializeField] private ProjectileTick _projectileTickPrefab;
+
     private float _currentAttackRate;
     public float CurrentAttackRate => _currentAttackRate;
     private int _currentDamage;

@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef6080c1bf747a498520d7c748d262d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tower: {fileID: 5481267776285342052}
+  tower: {fileID: 2363259571219213461}
   levelText: {fileID: 5452563909937772322}
   attackRateText: {fileID: 6595185119455024861}
   damageText: {fileID: 7346579493683085739}
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5481267776285342052}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Tower, Assembly-CSharp
         m_MethodName: Upgrade
         m_Mode: 1
@@ -1428,7 +1428,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5481267776285342052}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Tower, Assembly-CSharp
         m_MethodName: Sell
         m_Mode: 1
@@ -1742,11 +1742,11 @@ GameObject:
   - component: {fileID: 6566107183723906193}
   - component: {fileID: 5983989570294867973}
   - component: {fileID: 3661977379965913437}
-  - component: {fileID: 5481267776285342052}
+  - component: {fileID: 2363259571219213461}
   - component: {fileID: 5803083254459691797}
   - component: {fileID: 8739588272964975750}
   m_Layer: 6
-  m_Name: Tower
+  m_Name: Tower01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1857,8 +1857,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6bd4cbf5e8141428ad86564abcd0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  demageableBehavior: {fileID: 5481267776285342052}
---- !u!114 &5481267776285342052
+  demageableBehavior: {fileID: 0}
+--- !u!114 &2363259571219213461
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1867,12 +1867,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8016940742814412144}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1856f5fb396d8234c8904144892b0e14, type: 3}
+  m_Script: {fileID: 11500000, guid: 9851108c98df8e2488ff066e35e695ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 0}
   _maxHp: 100
-  _stunDuration: 0.1
+  _stunDuration: 0.03
   _isDead: 0
   _isStun: 0
   _targetPoint: {fileID: 0}
@@ -1884,10 +1884,13 @@ MonoBehaviour:
   upgradeCost: 40
   attackRate_1: 1
   damage_1: 5
+  sellCost_1: 5
   attackRate_2: 0.8
   damage_2: 20
+  sellCost_2: 37
   attackRate_3: 0.5
   damage_3: 40
+  sellCost_3: 89
   _spineController: {fileID: 1928018848388447381}
   IdleAnimationName_1: idle_Lv1
   IdleAnimationName_2: idle_Lv2

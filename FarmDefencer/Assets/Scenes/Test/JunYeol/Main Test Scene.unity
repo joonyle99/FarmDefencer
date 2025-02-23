@@ -2314,7 +2314,6 @@ GameObject:
   m_Component:
   - component: {fileID: 868308894}
   - component: {fileID: 868308893}
-  - component: {fileID: 868308891}
   - component: {fileID: 868308890}
   m_Layer: 0
   m_Name: MainCamera
@@ -2368,14 +2367,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!81 &868308891
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 868308889}
-  m_Enabled: 1
 --- !u!20 &868308893
 Camera:
   m_ObjectHideFlags: 0
@@ -5018,7 +5009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _towerPrefabs:
-  - {fileID: 5481267776285342052, guid: c33dac51bb3454542a08bdea32b29f79, type: 3}
+  - {fileID: 2363259571219213461, guid: c33dac51bb3454542a08bdea32b29f79, type: 3}
 --- !u!4 &2140410227
 Transform:
   m_ObjectHideFlags: 0
