@@ -190,20 +190,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WaterWaitingDeadSeconds: 300
   WaterWaitingResetSeconds: 300
-  PlantRubbingCriterion: 10
   Stage1BeforeWaterSprite: {fileID: -2926072093043426144, guid: adff25b7ded79e44e9e6521105146f8e, type: 3}
   Stage1DeadSprite: {fileID: 8667131316060353084, guid: aa9d49020695b5a4489c182701c777e9, type: 3}
   Stage1AfterWaterSprite: {fileID: -2935609776451076171, guid: 7b18db4b3dd471b43ab8dfd96b821ea2, type: 3}
-  Stage1GrowthSeconds: 20
   Stage2BeforeWaterSprite: {fileID: 7360896723288083390, guid: c77df4ef5d6a5eb4783987f9d2469772, type: 3}
   Stage2DeadSprite: {fileID: -1837152525124395075, guid: 3b3bad560977d52468550390a38d771d, type: 3}
   Stage2AfterWaterSprite: {fileID: -680451588128437482, guid: ebb05c008ccc93742adabf41cad90847, type: 3}
-  Stage2GrowthSeconds: 20
   Stage3BeforeWrapSprite: {fileID: -8072476731542956246, guid: 56ca345ce86a8504abb3d0e5f4bfec2c, type: 3}
   Stage3AfterWrapSprite: {fileID: -7668523388517660598, guid: 8bc14c9180d0e76428b690e134c12eff, type: 3}
-  Stage3GrowthSeconds: 10
   Stage4Sprite: {fileID: -393943011667699732, guid: a26918cffb64425428c75149b79b107e, type: 3}
-  Stage4GrowthSeconds: 5
   Stage5_X_Sprite: {fileID: -1501239353019026789, guid: 1ccb20eee17787f41a9e0f397e67d87a, type: 3}
   Stage5_O_Sprite: {fileID: 8851719432068433820, guid: 68b4429c1aee3664c89bd0db314c960d, type: 3}
   Stage5_OO_Sprite: {fileID: -8974424302408145557, guid: e03e0272824bee24698d7b78b69e39bf, type: 3}

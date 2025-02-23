@@ -141,7 +141,6 @@ MonoBehaviour:
   DeadSprite: {fileID: -7666930650782403411, guid: 97bd691e5e83cf8468de7a61e766b685, type: 3}
   GrowingSprite: {fileID: -619267247784436514, guid: 1a34d90d6f24288418f0af7e1075b2ef, type: 3}
   HarvestedSprite: {fileID: -4431930551636028851, guid: 3341125b2246c7d48a7d07f456e600a7, type: 3}
-  MatureSeconds: 15
 --- !u!212 &6026670487540730573
 SpriteRenderer:
   m_ObjectHideFlags: 0

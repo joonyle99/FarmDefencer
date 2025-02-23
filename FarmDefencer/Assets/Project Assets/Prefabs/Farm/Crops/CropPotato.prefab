@@ -196,5 +196,3 @@ MonoBehaviour:
   DeadSprite: {fileID: 8680457158381878835, guid: eeb5e3b9cb2b54a4c91e7872bd2d95cb, type: 3}
   GrowingSprite: {fileID: -5780425549681805702, guid: ae7b9277c5bcd6743bc66ac166462c6d, type: 3}
   HarvestedSprite: {fileID: -1894063774890498872, guid: 36fb9fb347a5bb54dbe0e071fd302b02, type: 3}
-  MatureSeconds: 20
-  HarvestHoldTime: 2

@@ -41,15 +41,17 @@ public class CropEggplant : Crop
 		}
 	}
 
-	public override void OnSingleTap()
+	public override void OnSingleTap(Vector2 worldPosition)
 	{
 		var currentTime = Time.time;
 		if (_lastSingleTapTime + DoubleTapCriterion > currentTime)
 		{
 			if (growthSeconds >= Stage1GrowthSeconds + Stage2GrowthSeconds && _leavesRemaining > 0)
 			{
+				EffectPlayer.PlayTabEffect(worldPosition);
 				_leavesRemaining -= 1;
 				_lastSingleTapTime = currentTime - DoubleTapCriterion; // 연속 입력 판정 방지
+				EffectPlayer.PlayVfx("SoilDust", transform.position);
 				return; // 액션 소모
 			}
 		}
@@ -59,6 +61,7 @@ public class CropEggplant : Crop
 		{
 			_isSeed = false;
 			SoundManager.PlaySfx("SFX_plant_seed");
+			EffectPlayer.PlayTabEffect(worldPosition);
 		}
 		else if (growthSeconds >= Stage1GrowthSeconds
 			&& !_trellisPlaced)
@@ -69,12 +72,14 @@ public class CropEggplant : Crop
 		{
 			_harvested = true;
 			SoundManager.PlaySfx("SFX_harvest");
+			EffectPlayer.PlayTabEffect(worldPosition);
 		}
 		else if (_harvested)
 		{
 			if (HarvestHandler(1) > 0)
 			{
 				_isSeed = true;
+				EffectPlayer.PlayTabEffect(worldPosition);
 			}
 		}
 	}

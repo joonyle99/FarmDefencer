@@ -1,0 +1,915 @@
+fileFormatVersion: 2
+guid: c9e8c729329af8848981d5acf46f7a42
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1167080648505636659
+    second: soil_particle_194x182_0
+  - first:
+      213: 4949539193185419316
+    second: soil_particle_194x182_1
+  - first:
+      213: 8282327171540043920
+    second: soil_particle_194x182_2
+  - first:
+      213: 5458795657769093683
+    second: soil_particle_194x182_3
+  - first:
+      213: 2006103484690165248
+    second: soil_particle_194x182_4
+  - first:
+      213: -2300359693178611844
+    second: soil_particle_194x182_5
+  - first:
+      213: 6599707477027354157
+    second: soil_particle_194x182_6
+  - first:
+      213: 2830383561980797252
+    second: soil_particle_194x182_7
+  - first:
+      213: 311235536704775990
+    second: soil_particle_194x182_8
+  - first:
+      213: 5819942507343363689
+    second: soil_particle_194x182_9
+  - first:
+      213: 5320623907781452408
+    second: soil_particle_194x182_10
+  - first:
+      213: -616752988448187353
+    second: soil_particle_194x182_11
+  - first:
+      213: -5609351286990746739
+    second: soil_particle_194x182_12
+  - first:
+      213: -5429142453396535749
+    second: soil_particle_194x182_13
+  - first:
+      213: 4956377822536615918
+    second: soil_particle_194x182_14
+  - first:
+      213: 1567805923356820814
+    second: soil_particle_194x182_15
+  - first:
+      213: -3680479310108727518
+    second: soil_particle_194x182_16
+  - first:
+      213: 112149825764418788
+    second: soil_particle_194x182_17
+  - first:
+      213: 5760121050096192271
+    second: soil_particle_194x182_18
+  - first:
+      213: 2573970566592598269
+    second: soil_particle_194x182_19
+  - first:
+      213: 4545084914866820772
+    second: soil_particle_194x182_20
+  - first:
+      213: -8611785609277099574
+    second: soil_particle_194x182_21
+  - first:
+      213: -6131983638415515828
+    second: soil_particle_194x182_22
+  - first:
+      213: -4435624999551095140
+    second: soil_particle_194x182_23
+  - first:
+      213: -1352428953611935796
+    second: soil_particle_194x182_24
+  - first:
+      213: 1228728335829526826
+    second: soil_particle_194x182_25
+  - first:
+      213: 4705888159697550417
+    second: soil_particle_194x182_26
+  - first:
+      213: -8156380125966907348
+    second: soil_particle_194x182_27
+  - first:
+      213: 2172820074675325981
+    second: soil_particle_194x182_28
+  - first:
+      213: 5772734407394756176
+    second: soil_particle_194x182_29
+  - first:
+      213: 510198395428081794
+    second: soil_particle_194x182_30
+  - first:
+      213: -5470538483329865518
+    second: soil_particle_194x182_31
+  - first:
+      213: -5843131495426546693
+    second: soil_particle_194x182_32
+  - first:
+      213: 8974201218588753396
+    second: soil_particle_194x182_33
+  - first:
+      213: 5841810736572332782
+    second: soil_particle_194x182_34
+  - first:
+      213: 9070060798952069150
+    second: soil_particle_194x182_35
+  - first:
+      213: 8640413595776823816
+    second: soil_particle_194x182_36
+  - first:
+      213: -5000814663492243691
+    second: soil_particle_194x182_37
+  - first:
+      213: 6061019118264298387
+    second: soil_particle_194x182_38
+  - first:
+      213: 2970276656022696786
+    second: soil_particle_194x182_39
+  - first:
+      213: -7181382931292187555
+    second: soil_particle_194x182_40
+  - first:
+      213: -6087065392180073100
+    second: soil_particle_194x182_41
+  - first:
+      213: -4494657547184913073
+    second: soil_particle_194x182_42
+  - first:
+      213: -8700102867270626477
+    second: soil_particle_194x182_43
+  - first:
+      213: 3424658278520747372
+    second: soil_particle_194x182_44
+  - first:
+      213: -9095551456401930576
+    second: soil_particle_194x182_45
+  - first:
+      213: 2111587149501955387
+    second: soil_particle_194x182_46
+  - first:
+      213: 2502480988795114369
+    second: soil_particle_194x182_47
+  - first:
+      213: -114827021834652421
+    second: soil_particle_194x182_48
+  - first:
+      213: 4590756267039661304
+    second: soil_particle_194x182_49
+  - first:
+      213: -1503616935466320078
+    second: soil_particle_194x182_50
+  - first:
+      213: -8681718196784927919
+    second: soil_particle_194x182_51
+  - first:
+      213: 3094267675530241240
+    second: soil_particle_194x182_52
+  - first:
+      213: 7375611162672453139
+    second: soil_particle_194x182_53
+  - first:
+      213: 3769063790525249859
+    second: soil_particle_194x182_54
+  - first:
+      213: -5922333534663777971
+    second: soil_particle_194x182_55
+  - first:
+      213: -4523583273020096421
+    second: soil_particle_194x182_56
+  - first:
+      213: 8344152602213321531
+    second: soil_particle_194x182_57
+  - first:
+      213: 7449121649175353093
+    second: soil_particle_194x182_58
+  - first:
+      213: -5373764909935956256
+    second: soil_particle_194x182_59
+  - first:
+      213: 4480930966370226547
+    second: soil_particle_194x182_60
+  - first:
+      213: 3078112970259522062
+    second: soil_particle_194x182_61
+  - first:
+      213: 3299059394398472399
+    second: soil_particle_194x182_62
+  - first:
+      213: -6890976110464293664
+    second: soil_particle_194x182_63
+  - first:
+      213: 2883949342594006508
+    second: soil_particle_194x182_64
+  - first:
+      213: -266889371993343913
+    second: soil_particle_194x182_65
+  - first:
+      213: 6408809750063767156
+    second: soil_particle_194x182_66
+  - first:
+      213: 1928838475007911234
+    second: soil_particle_194x182_67
+  - first:
+      213: 5894557131357224668
+    second: soil_particle_194x182_68
+  - first:
+      213: -2336307765080091426
+    second: soil_particle_194x182_69
+  - first:
+      213: 1204696687138948947
+    second: soil_particle_194x182_70
+  - first:
+      213: 2377134021860265260
+    second: soil_particle_194x182_71
+  - first:
+      213: 3893603874753997620
+    second: soil_particle_194x182_72
+  - first:
+      213: 5076770392127883489
+    second: soil_particle_194x182_73
+  - first:
+      213: 1974749770745302251
+    second: soil_particle_194x182_74
+  - first:
+      213: 3876865081327470163
+    second: soil_particle_194x182_75
+  - first:
+      213: -5360445800812267301
+    second: soil_particle_194x182_76
+  - first:
+      213: 7427759463756770285
+    second: soil_particle_194x182_77
+  - first:
+      213: -7416435331488395929
+    second: soil_particle_194x182_78
+  - first:
+      213: -5879584607868735954
+    second: soil_particle_194x182_79
+  - first:
+      213: 3660588210105061059
+    second: soil_particle_194x182_80
+  - first:
+      213: -2559543797922190762
+    second: soil_particle_194x182_81
+  - first:
+      213: 1057673036770800075
+    second: soil_particle_194x182_82
+  - first:
+      213: -1833503070358321099
+    second: soil_particle_194x182_83
+  - first:
+      213: -2908602136837234338
+    second: soil_particle_194x182_84
+  - first:
+      213: -7239156674853758364
+    second: soil_particle_194x182_85
+  - first:
+      213: -1544654170847543331
+    second: soil_particle_194x182_86
+  - first:
+      213: 6364098727504289528
+    second: soil_particle_194x182_87
+  - first:
+      213: -3977286740085854581
+    second: soil_particle_194x182_88
+  - first:
+      213: 7821784816781656548
+    second: soil_particle_194x182_89
+  - first:
+      213: 1878693931423624647
+    second: soil_particle_194x182_90
+  - first:
+      213: 5636351581399059562
+    second: soil_particle_194x182_91
+  - first:
+      213: 1365670866053111294
+    second: soil_particle_194x182_92
+  - first:
+      213: -7774962569171754144
+    second: soil_particle_194x182_93
+  - first:
+      213: -3536883168875212148
+    second: soil_particle_194x182_94
+  - first:
+      213: -843103403981843642
+    second: soil_particle_194x182_95
+  - first:
+      213: -3012609982693338184
+    second: soil_particle_194x182_96
+  - first:
+      213: -3693542777280560268
+    second: soil_particle_194x182_97
+  - first:
+      213: -2286259973688575961
+    second: soil_particle_194x182_98
+  - first:
+      213: -7752260727647855727
+    second: soil_particle_194x182_99
+  - first:
+      213: -8307059331782322373
+    second: soil_particle_194x182_100
+  - first:
+      213: 2987359569040756083
+    second: soil_particle_194x182_101
+  - first:
+      213: -8036019323395791157
+    second: soil_particle_194x182_102
+  - first:
+      213: 5320627478069725164
+    second: soil_particle_194x182_103
+  - first:
+      213: -7514687826303712683
+    second: soil_particle_194x182_104
+  - first:
+      213: -7159668833911562885
+    second: soil_particle_194x182_105
+  - first:
+      213: -7348376172843188765
+    second: soil_particle_194x182_106
+  - first:
+      213: -691516590105388665
+    second: soil_particle_194x182_107
+  - first:
+      213: -6129782178117071198
+    second: soil_particle_194x182_108
+  - first:
+      213: -6219685334825490271
+    second: soil_particle_194x182_109
+  - first:
+      213: 5905705823389438129
+    second: soil_particle_194x182_110
+  - first:
+      213: -7998005046185118776
+    second: soil_particle_194x182_111
+  - first:
+      213: 3964155939068842059
+    second: soil_particle_194x182_112
+  - first:
+      213: 3705229852331795257
+    second: soil_particle_194x182_113
+  - first:
+      213: 4508638445506154294
+    second: soil_particle_194x182_114
+  - first:
+      213: 6770011823181757755
+    second: soil_particle_194x182_115
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: soil_particle_194x182_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 728
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c3a4c69853f162418d416905489c283
+      internalID: -1360706150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_particle_194x182_1
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 728
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0f89a0c2f9c5b4428e592b1d6867e12
+      internalID: 1042718695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_particle_194x182_2
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 728
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c9b0a133b2e3fa46bab3ebe9f3d7846
+      internalID: 2083926067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_particle_194x182_3
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 728
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4aaa58e46402cd46873811bb4e55ebe
+      internalID: 522362551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_particle_194x182_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 546
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 175d662eac8845640ad2e47c0396828c
+      internalID: -981294561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_particle_194x182_5
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 546
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11d3db85a2b57e8448770548c7d941e8
+      internalID: -1806450881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_particle_194x182_6
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 546
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7e9538979ded9d42b88ab04c0d5c8ff
+      internalID: 1279397496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_particle_194x182_7
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 546
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd81680ccf36d5243a2465a2b3ba589c
+      internalID: -1858039295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_particle_194x182_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 364
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99abebd604af2ca488b1dda890a08a87
+      internalID: 1725579836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_particle_194x182_9
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 364
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: faf8b579a8208b849a3d3e734cb69010
+      internalID: 859095816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_particle_194x182_10
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 364
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e777c15b2d080cd44b066a9291b0698c
+      internalID: 1738367817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_particle_194x182_11
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 364
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4d7760f883871c419e74ffe3322673d
+      internalID: 666686520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_particle_194x182_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 182
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a53218f53dc6c614f8aac404637b45cc
+      internalID: -1781386900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_particle_194x182_13
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 182
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfc2faa9120ec9b449c306294d6b0d56
+      internalID: 1634751944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_particle_194x182_14
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 182
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2934e1ded14e9dc40977c5714aca74b5
+      internalID: 1025575803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_particle_194x182_15
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 182
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5106d0fdf0f44fd4fbd7a93bf481dde7
+      internalID: 266258346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_particle_194x182_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24b9b9f93b2f98742b3d9f2bde121aac
+      internalID: 918225110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_particle_194x182_17
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 0
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76c6797d2b523dc4893c4a5a825efeaf
+      internalID: -343458783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_particle_194x182_18
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 0
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53756fd5e06d4a54582a697651f3c4b7
+      internalID: -482860373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: ecc8f93092d1ab8468563bac3634c738
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      soil_particle_194x182_0: -1360706150
+      soil_particle_194x182_1: 1042718695
+      soil_particle_194x182_10: 1738367817
+      soil_particle_194x182_11: 666686520
+      soil_particle_194x182_12: -1781386900
+      soil_particle_194x182_13: 1634751944
+      soil_particle_194x182_14: 1025575803
+      soil_particle_194x182_15: 266258346
+      soil_particle_194x182_16: 918225110
+      soil_particle_194x182_17: -343458783
+      soil_particle_194x182_18: -482860373
+      soil_particle_194x182_2: 2083926067
+      soil_particle_194x182_3: 522362551
+      soil_particle_194x182_4: -981294561
+      soil_particle_194x182_5: -1806450881
+      soil_particle_194x182_6: 1279397496
+      soil_particle_194x182_7: -1858039295
+      soil_particle_194x182_8: 1725579836
+      soil_particle_194x182_9: 859095816
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

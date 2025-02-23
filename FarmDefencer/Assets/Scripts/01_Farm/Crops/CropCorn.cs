@@ -22,15 +22,17 @@ public class CropCorn : Crop
 	private bool _harvested;
 	private SpriteRenderer _spriteRenderer;
 
-	public override void OnSingleTap()
+	public override void OnSingleTap(Vector2 position)
 	{
 		if (_isSeed)
 		{
+			EffectPlayer.PlayTabEffect(position);
 			SoundManager.PlaySfx("SFX_plant_seed");
 			_isSeed = false;
 		}
 		else if (growthSeconds >= Stage1GrowthSeconds + Stage2GrowthSeconds && !_harvested)
 		{
+			EffectPlayer.PlayTabEffect(position);
 			SoundManager.PlaySfx("SFX_harvest");
 			_harvested = true;
 		}
@@ -38,6 +40,7 @@ public class CropCorn : Crop
 		{
 			if (HarvestHandler(1)>0)
 			{
+				EffectPlayer.PlayTabEffect(position);
 				_isSeed = true;
 			}
 		}

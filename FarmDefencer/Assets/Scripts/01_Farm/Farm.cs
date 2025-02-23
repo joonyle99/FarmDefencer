@@ -64,7 +64,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 			}
 			if (field.TryFindCropAt(position, out var crop))
 			{
-                crop.OnSingleTap();
+                crop.OnSingleTap(position);
 			}
 		}
     }
@@ -83,7 +83,7 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 			}
 			if (field.TryFindCropAt(initialPosition, out var crop))
 			{
-				crop.OnSingleHolding(deltaPosition, isEnd, deltaHoldTime);
+				crop.OnSingleHolding(initialPosition, deltaPosition, isEnd, deltaHoldTime);
 			}
 		}
 	}

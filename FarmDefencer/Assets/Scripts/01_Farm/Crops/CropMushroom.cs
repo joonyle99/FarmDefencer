@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CropMushroom : Crop
 {
-	private const float PlantRubbingCriterion = 5.0f; // 밭 문지르기 동작 판정 기준 (가로 방향 위치 델타)
+	private const float PlantRubbingCriterion = 0.25f; // 밭 문지르기 동작 판정 기준 (가로 방향 위치 델타)
 	private const float Stage1GrowthSeconds = 15.0f;
 	private const float Stage2GrowthSeconds = 15.0f;
 	private const float Stage3GrowthSeconds = 10.0f;
@@ -41,12 +41,13 @@ public class CropMushroom : Crop
 	private bool _boom;
 	private float _boomElapsedTime;
 
-	public override void OnSingleTap()
+	public override void OnSingleTap(Vector2 worldPosition)
 {
 		if (!_harvested
 			&& growthSeconds >= Stage1GrowthSeconds + Stage2GrowthSeconds + Stage3GrowthSeconds)
 		{
 			_harvested = true;
+			EffectPlayer.PlayTabEffect(worldPosition);
 			SoundManager.PlaySfx("SFX_harvest");
 		}
 		else if (_harvested)
@@ -62,16 +63,22 @@ public class CropMushroom : Crop
 			}
 			_lastTapTime = currentTime;
 
-			if (_tapCount >= 5)
+			if (_tapCount < 5)
 			{
-				if (_poisonous)
+				EffectPlayer.PlayTabEffect(worldPosition);
+			}
+			else
+			{
+				if (_poisonous && !_boom)
 				{
+					EffectPlayer.PlayTabEffect(worldPosition);
 					_boom = true;
 				}
 				else
 				{
 					if (HarvestHandler(1) > 0)
 					{
+						EffectPlayer.PlayTabEffect(worldPosition);
 						_isSeed = true;
 					}
 				}
@@ -79,7 +86,7 @@ public class CropMushroom : Crop
 		}
 	}
 
-	public override void OnSingleHolding(Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
+	public override void OnSingleHolding(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
 	{
 		if (isEnd)
 		{
@@ -88,6 +95,7 @@ public class CropMushroom : Crop
 
 		if (_isSeed)
 		{
+			EffectPlayer.PlayHoldEffect(initialPosition + deltaPosition);
 			var deltaX = deltaPosition.x;
 			if (Mathf.Abs(deltaX) > PlantRubbingCriterion)
 			{
@@ -98,6 +106,7 @@ public class CropMushroom : Crop
 		else if (!_inoculated
 			&&growthSeconds >= Stage1GrowthSeconds + Stage2GrowthSeconds)
 		{
+			EffectPlayer.PlayHoldEffect(initialPosition + deltaPosition);
 			_holdingTime += deltaHoldTime;
 			if (_holdingTime >= InoculationHoldingTime)
 			{

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// 0번 자식에 수확 단계 흙을 표시하기 위한 SpriteRenderer 오브젝트를 할당하고,
@@ -6,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class CropCabbage : Crop
 {
-	private const float DeltaShakeCriterion = 5.0f; // 배추 수확단계 흔들기 기준 (가로 방향 위치 델타)
+	private const float DeltaShakeCriterion = 0.25f; // 배추 수확단계 흔들기 기준 (가로 방향 위치 델타)
 	private const int ShakeCountCriterion = 4; // 배추 수확 흔들기 횟수 기준
 	private const float Stage1GrowthSeconds = 10.0f;
 	private const float Stage2GrowthSeconds = 10.0f;
@@ -32,17 +33,19 @@ public class CropCabbage : Crop
 	private bool _isSeed;
 	private bool _harvested;
 
-	public override void OnSingleTap()
+	public override void OnSingleTap(Vector2 worldPosition)
 	{
 		if (_isSeed)
 		{
 			_isSeed = false;
+			EffectPlayer.PlayTabEffect(worldPosition);
 			SoundManager.PlaySfx("SFX_plant_seed");
 		}
 		else if (_harvested)
 		{
 			if (HarvestHandler(1) > 0)
 			{
+				EffectPlayer.PlayTabEffect(worldPosition); 
 				_isSeed = true;
 			}
 		}
@@ -58,7 +61,7 @@ public class CropCabbage : Crop
 		}
 	}
 
-	public override void OnSingleHolding(Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
+	public override void OnSingleHolding(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
 	{
 		if (isEnd)
 		{
@@ -72,10 +75,12 @@ public class CropCabbage : Crop
 		{
 			var deltaShake = deltaPosition.x;
 			ShakeMotion(deltaShake);
+			EffectPlayer.PlayHoldEffect(initialPosition + deltaPosition);
 			if (Mathf.Abs(deltaShake) > DeltaShakeCriterion)
 			{
 				if (_shakeCount == 0)
 				{
+					EffectPlayer.PlayVfx("SoilParticle", transform.position);
 					_shakeCount += 1;
 					_wasLastShakeLeft = deltaShake < 0.0f;
 				}
@@ -84,6 +89,7 @@ public class CropCabbage : Crop
 					if (deltaShake < 0.0f && !_wasLastShakeLeft
 						|| deltaShake > 0.0f && _wasLastShakeLeft)
 					{
+						EffectPlayer.PlayVfx("SoilParticle", transform.position);
 						_shakeCount += 1;
 						_wasLastShakeLeft = !_wasLastShakeLeft;
 					}
@@ -221,6 +227,6 @@ public class CropCabbage : Crop
 
 	private void ShakeMotion(float deltaShake)
 	{
-		_harvestCropLayerObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, Mathf.Atan(-deltaShake) * 20.0f / Mathf.PI);
+		_harvestCropLayerObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, Mathf.Atan(-deltaShake) * 90.0f / Mathf.PI);
 	}
 }

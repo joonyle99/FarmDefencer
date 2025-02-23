@@ -12,7 +12,7 @@ namespace FarmTest
 
         public float LongTapThreshold = 1.0f;
         public float CameraMovementScale = 1.0f;
-        public Vector2 LastInteractScreenPosition;
+        public Vector2 LastInteractWorldPosition;
         public GameObject FarmObject;
         public FarmClock FarmClock;
 		public FarmManager FarmManager;
@@ -21,7 +21,7 @@ namespace FarmTest
 		private float _singleHoldingTimeElapsed;
         private bool _isSingleHolding;
 		private bool _isDoubleHolding;
-        private Vector2 _singleHoldBeginPosition;
+        private Vector2 _singleHoldBeginWorldPosition;
         private TMP_Text _remainingDaytimeText;
 		private Camera _camera;
 
@@ -42,12 +42,12 @@ namespace FarmTest
 		// 현재 누르고 있는 스크린 절대 좌표를 받음
         public void OnInteract(InputValue inputValue)
         {
-            LastInteractScreenPosition = inputValue.Get<Vector2>();
+            LastInteractWorldPosition = _camera.ScreenToWorldPoint(inputValue.Get<Vector2>());
         }
 
 		public void OnSingleTap()
 		{
-			_farmComponent.TapAction(_camera.ScreenToWorldPoint(LastInteractScreenPosition));
+			_farmComponent.TapAction(LastInteractWorldPosition);
 		}
 
         public void OnSingleHold(InputValue inputValue)
@@ -56,7 +56,7 @@ namespace FarmTest
 
 			if (!_isSingleHolding && currentHold)
             {
-				_singleHoldBeginPosition = LastInteractScreenPosition;
+				_singleHoldBeginWorldPosition = LastInteractWorldPosition;
 			}
 
             _isSingleHolding = currentHold;
@@ -83,8 +83,8 @@ namespace FarmTest
                 _singleHoldingTimeElapsed += Time.deltaTime;
 
 				_farmComponent.SingleHoldingAction(
-					_camera.ScreenToWorldPoint(_singleHoldBeginPosition),
-					LastInteractScreenPosition - _singleHoldBeginPosition,
+					_singleHoldBeginWorldPosition,
+					LastInteractWorldPosition - _singleHoldBeginWorldPosition,
 					false,
 					Time.deltaTime);
                 
@@ -92,8 +92,8 @@ namespace FarmTest
             else if (_singleHoldingTimeElapsed > 0.0f) // Single Hold가 종료된 직후
             {
 				_farmComponent.SingleHoldingAction(
-					_camera.ScreenToWorldPoint(_singleHoldBeginPosition),
-	                LastInteractScreenPosition - _singleHoldBeginPosition,
+					_singleHoldBeginWorldPosition,
+	                LastInteractWorldPosition - _singleHoldBeginWorldPosition,
 	                true,
 					Time.deltaTime);
                 _singleHoldingTimeElapsed = 0.0f;

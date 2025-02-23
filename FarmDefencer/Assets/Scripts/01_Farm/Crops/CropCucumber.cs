@@ -37,27 +37,31 @@ public class CropCucumber : Crop
 		}
 	}
 
-	public override void OnSingleTap()
+	public override void OnSingleTap(Vector2 worldPosition)
 	{
 		if (_isSeed)
 		{
 			_isSeed = false;
+			EffectPlayer.PlayTabEffect(worldPosition);
 			SoundManager.PlaySfx("SFX_plant_seed");
 		}
 		else if (!_shortTrellisPlaced && !_longTrellisPlaced
 				&& growthSeconds >= Stage1GrowthSeconds)
 		{
+			EffectPlayer.PlayTabEffect(worldPosition);
 			_shortTrellisPlaced = true;
 		}
 		else if (_shortTrellisPlaced && !_longTrellisPlaced
 			&& growthSeconds >= Stage1GrowthSeconds + Stage2GrowthSeconds)
 		{
+			EffectPlayer.PlayTabEffect(worldPosition);
 			_longTrellisPlaced = true;
 		}
 		else if (!_harvested 
 			&&_shortTrellisPlaced && _longTrellisPlaced
 			&& growthSeconds >= Stage1GrowthSeconds + Stage2GrowthSeconds)
 		{
+			EffectPlayer.PlayTabEffect(worldPosition);
 			SoundManager.PlaySfx("SFX_harvest");
 			_harvested = true;
 		}
@@ -65,6 +69,7 @@ public class CropCucumber : Crop
 		{
 			if (HarvestHandler(1) > 0)
 			{
+				EffectPlayer.PlayTabEffect(worldPosition);
 				_isSeed = true;
 			}
 		}

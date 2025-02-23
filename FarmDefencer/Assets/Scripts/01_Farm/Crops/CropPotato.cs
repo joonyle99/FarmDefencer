@@ -18,10 +18,11 @@ public class CropPotato : Crop
 	private bool _harvested;
 	private float _holdingTime;
 
-	public override void OnSingleTap()
+	public override void OnSingleTap(Vector2 position)
 	{
 		if (_isSeed)
 		{
+			EffectPlayer.PlayTabEffect(position);
 			SoundManager.PlaySfx("SFX_plant_seed");
 			_isSeed = false;
 		}
@@ -34,15 +35,17 @@ public class CropPotato : Crop
 		}
 	}
 
-	public override void OnSingleHolding(Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
+	public override void OnSingleHolding(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
 	{
 		if (growthSeconds >= MatureSeconds && !_harvested)
 		{
+			EffectPlayer.PlayHoldEffect(initialPosition + deltaPosition);
 			_holdingTime += deltaHoldTime;
 			if (_holdingTime >= HarvestHoldTime)
 			{
 				_holdingTime = 0.0f;
 				_harvested = true;
+				EffectPlayer.PlayVfx("SoilParticle", transform.position);
 				SoundManager.PlaySfx("SFX_harvest");
 			}
 		}

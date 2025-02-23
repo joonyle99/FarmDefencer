@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CropSweetpotato : Crop
 {
-	private const float PlantRubbingCriterion = 5.0f; // 밭 문지르기 동작 판정 기준 (가로 방향 위치 델타)
+	private const float PlantRubbingCriterion = 0.25f; // 밭 문지르기 동작 판정 기준 (가로 방향 위치 델타)
 	private const float Stage1GrowthSeconds = 15.0f;
 	private const float Stage2GrowthSeconds = 15.0f;
 	private const float Stage3GrowthSeconds = 10.0f;
@@ -52,11 +52,12 @@ public class CropSweetpotato : Crop
 	private bool _isSeed;
 	private bool _harvested;
 
-	public override void OnSingleTap()
+	public override void OnSingleTap(Vector2 worldPosition)
 	{
 		if (!_harvested &&
 			growthSeconds >= Stage1GrowthSeconds + Stage2GrowthSeconds + Stage3GrowthSeconds + Stage4GrowthSeconds )
 		{
+			EffectPlayer.PlayTabEffect(worldPosition);
 			var currentTime = Time.time;
 			if (_lastSingleTapTime + 0.3f > currentTime)
 			{
@@ -79,12 +80,13 @@ public class CropSweetpotato : Crop
 			_sweetpotatoCount -= itemizedCount;
 			if (_sweetpotatoCount <= 0)
 			{
+				EffectPlayer.PlayTabEffect(worldPosition);
 				_isSeed = true;
 			}
 		}
 	}
 
-	public override void OnSingleHolding(Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
+	public override void OnSingleHolding(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
 	{
 		if (isEnd)
 		{
@@ -94,6 +96,7 @@ public class CropSweetpotato : Crop
 		if (_isSeed)
 		{
 			var deltaX = deltaPosition.x;
+			EffectPlayer.PlayHoldEffect(initialPosition + deltaPosition);
 			if (Mathf.Abs(deltaX) > PlantRubbingCriterion)
 			{
 				_isSeed = false;
@@ -104,10 +107,12 @@ public class CropSweetpotato : Crop
 			&& growthSeconds >= Stage1GrowthSeconds + Stage2GrowthSeconds)
 		{
 			_holdingTime += deltaHoldTime;
+			EffectPlayer.PlayHoldEffect(initialPosition + deltaPosition);
 			if (_holdingTime >= 2.0f)
 			{
 				_wrapped = true;
 				_holdingTime = 0.0f;
+				EffectPlayer.PlayVfx("SoilDust", transform.position);
 			}
 		}
 	}

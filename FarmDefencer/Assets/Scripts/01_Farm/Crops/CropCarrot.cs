@@ -16,15 +16,17 @@ public class CropCarrot : Crop
 	private bool _isSeed;
 	private bool _harvested;
 
-	public override void OnSingleTap()
+	public override void OnSingleTap(Vector2 worldPosition)
 	{
 		if (_isSeed)
 		{
+			EffectPlayer.PlayTabEffect(worldPosition);
 			SoundManager.PlaySfx("SFX_plant_seed");
 			_isSeed = false;
 		}
 		else if (growthSeconds >= MatureSeconds && !_harvested)
 		{
+			EffectPlayer.PlayTabEffect(worldPosition);
 			SoundManager.PlaySfx("SFX_harvest");
 			_harvested = true;
 		}
@@ -32,6 +34,7 @@ public class CropCarrot : Crop
 		{
 			if (HarvestHandler(1) > 0)
 			{
+				EffectPlayer.PlayTabEffect(worldPosition);
 				_isSeed = true;
 			}
 		}

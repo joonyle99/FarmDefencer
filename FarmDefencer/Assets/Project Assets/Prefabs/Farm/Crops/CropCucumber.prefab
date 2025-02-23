@@ -194,12 +194,10 @@ MonoBehaviour:
   Stage1BeforeWateringSprite: {fileID: 5169970296904740854, guid: 5e0bc8dcf004adf4e91d2f143cd1cc2a, type: 3}
   Stage1DeadSprite: {fileID: -5765044233073359201, guid: c5456887a0fb6f149a99069d9e0dda34, type: 3}
   Stage1AfterWateringSprite: {fileID: 2504396362891868477, guid: 1bb3676a4aa8fd64f8689fb5397b5116, type: 3}
-  Stage1GrowthSeconds: 15
   BeforeShortTrellisSprite: {fileID: -1508817800329217220, guid: 0cbecd0e76baa3c42bae143cde2ad909, type: 3}
   Stage2BeforeWateringSprite: {fileID: 968733346534869322, guid: 31ced9c90e3c55647a427102dbcde65a, type: 3}
   Stage2DeadSprite: {fileID: -2444987322731586363, guid: 229c5e2d53c40914f8da197bd42c8b2b, type: 3}
   Stage2AfterWateringSprite: {fileID: -4925550858667894425, guid: 73eade3f7c0c876409d2a6f1038d324b, type: 3}
-  Stage2GrowthSeconds: 15
   BeforeLongTrellisSprite: {fileID: 4803123001326369256, guid: c1aa0056b6e31c54896d251b77c93880, type: 3}
   MatureSprite: {fileID: 9115947542645699073, guid: 29d6e4a9c757e894090de830727b7392, type: 3}
   HarvestedSprite: {fileID: -6340913843653661622, guid: 1f04500956bbe954093c562a6f7269da, type: 3}
