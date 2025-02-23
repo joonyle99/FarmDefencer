@@ -47,7 +47,7 @@ public class CropMushroom : Crop
 			&& growthSeconds >= Stage1GrowthSeconds + Stage2GrowthSeconds + Stage3GrowthSeconds)
 		{
 			_harvested = true;
-			FarmSoundManager.PlaySfx("SFX_harvest");
+			SoundManager.PlaySfx("SFX_harvest");
 		}
 		else if (_harvested)
 		{
@@ -92,7 +92,7 @@ public class CropMushroom : Crop
 			if (Mathf.Abs(deltaX) > PlantRubbingCriterion)
 			{
 				_isSeed = false;
-				FarmSoundManager.PlaySfx("SFX_plant_seed");
+				SoundManager.PlaySfx("SFX_plant_seed");
 			}
 		}
 		else if (!_inoculated
@@ -114,7 +114,7 @@ public class CropMushroom : Crop
 		{
 			watered = true;
 			waterWaitingSeconds = 0.0f;
-			FarmSoundManager.PlaySfx("SFX_water_oneshot");
+			SoundManager.PlaySfx("SFX_water_oneshot");
 		}
 	}
 

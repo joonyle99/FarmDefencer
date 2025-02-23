@@ -37,7 +37,7 @@ public class CropEggplant : Crop
 		{
 			watered = true;
 			waterWaitingSeconds = 0.0f;
-			FarmSoundManager.PlaySfx("SFX_water_oneshot");
+			SoundManager.PlaySfx("SFX_water_oneshot");
 		}
 	}
 
@@ -58,7 +58,7 @@ public class CropEggplant : Crop
 		if (_isSeed)
 		{
 			_isSeed = false;
-			FarmSoundManager.PlaySfx("SFX_plant_seed");
+			SoundManager.PlaySfx("SFX_plant_seed");
 		}
 		else if (growthSeconds >= Stage1GrowthSeconds
 			&& !_trellisPlaced)
@@ -68,7 +68,7 @@ public class CropEggplant : Crop
 		else if (!_harvested && growthSeconds >= Stage1GrowthSeconds + Stage2GrowthSeconds && _leavesRemaining == 0)
 		{
 			_harvested = true;
-			FarmSoundManager.PlaySfx("SFX_harvest");
+			SoundManager.PlaySfx("SFX_harvest");
 		}
 		else if (_harvested)
 		{

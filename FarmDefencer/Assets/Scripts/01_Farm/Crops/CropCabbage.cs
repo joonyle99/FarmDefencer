@@ -37,7 +37,7 @@ public class CropCabbage : Crop
 		if (_isSeed)
 		{
 			_isSeed = false;
-			FarmSoundManager.PlaySfx("SFX_plant_seed");
+			SoundManager.PlaySfx("SFX_plant_seed");
 		}
 		else if (_harvested)
 		{
@@ -54,7 +54,7 @@ public class CropCabbage : Crop
 		{
 			watered = true;
 			waterWaitingSeconds = 0.0f;
-			FarmSoundManager.PlaySfx("SFX_water_oneshot");
+			SoundManager.PlaySfx("SFX_water_oneshot");
 		}
 	}
 
@@ -92,7 +92,7 @@ public class CropCabbage : Crop
 				if (_shakeCount >= ShakeCountCriterion)
 				{
 					_harvested = true;
-					FarmSoundManager.PlaySfx("SFX_harvest");
+					SoundManager.PlaySfx("SFX_harvest");
 				}
 			}
 		}

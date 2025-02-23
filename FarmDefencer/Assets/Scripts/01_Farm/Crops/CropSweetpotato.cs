@@ -70,7 +70,7 @@ public class CropSweetpotato : Crop
 			if (_tapCount >= 5)
 			{
 				_harvested = true;
-				FarmSoundManager.PlaySfx("SFX_harvest");
+				SoundManager.PlaySfx("SFX_harvest");
 			}
 		}
 		else if (_harvested)
@@ -97,7 +97,7 @@ public class CropSweetpotato : Crop
 			if (Mathf.Abs(deltaX) > PlantRubbingCriterion)
 			{
 				_isSeed = false;
-				FarmSoundManager.PlaySfx("SFX_plant_seed");
+				SoundManager.PlaySfx("SFX_plant_seed");
 			}
 		}
 		else if (!_wrapped
@@ -119,7 +119,7 @@ public class CropSweetpotato : Crop
 		{
 			watered = true;
 			waterWaitingSeconds = 0.0f;
-			FarmSoundManager.PlaySfx("SFX_water_oneshot");
+			SoundManager.PlaySfx("SFX_water_oneshot");
 		}
 	}
 

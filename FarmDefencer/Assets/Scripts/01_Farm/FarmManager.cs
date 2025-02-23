@@ -12,7 +12,7 @@ public class FarmManager : MonoBehaviour
     public Farm Farm;
 	public FarmTestPlayer FarmTestPlayer;
 	public ProductDatabase ProductDatabase;
-	public FarmSoundManager FarmSoundManager;
+	public SoundManager SoundManager;
 
 	public void SetAvailability(string productUniqueId, bool value)
 	{

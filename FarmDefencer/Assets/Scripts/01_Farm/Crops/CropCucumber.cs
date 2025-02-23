@@ -33,7 +33,7 @@ public class CropCucumber : Crop
 		{
 			waterWaitingSeconds = 0.0f;
 			watered = true;
-			FarmSoundManager.PlaySfx("SFX_water_oneshot");
+			SoundManager.PlaySfx("SFX_water_oneshot");
 		}
 	}
 
@@ -42,7 +42,7 @@ public class CropCucumber : Crop
 		if (_isSeed)
 		{
 			_isSeed = false;
-			FarmSoundManager.PlaySfx("SFX_plant_seed");
+			SoundManager.PlaySfx("SFX_plant_seed");
 		}
 		else if (!_shortTrellisPlaced && !_longTrellisPlaced
 				&& growthSeconds >= Stage1GrowthSeconds)
@@ -58,7 +58,7 @@ public class CropCucumber : Crop
 			&&_shortTrellisPlaced && _longTrellisPlaced
 			&& growthSeconds >= Stage1GrowthSeconds + Stage2GrowthSeconds)
 		{
-			FarmSoundManager.PlaySfx("SFX_harvest");
+			SoundManager.PlaySfx("SFX_harvest");
 			_harvested = true;
 		}
 		else if (_harvested)

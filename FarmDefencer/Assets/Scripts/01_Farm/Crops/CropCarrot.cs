@@ -20,12 +20,12 @@ public class CropCarrot : Crop
 	{
 		if (_isSeed)
 		{
-			FarmSoundManager.PlaySfx("SFX_plant_seed");
+			SoundManager.PlaySfx("SFX_plant_seed");
 			_isSeed = false;
 		}
 		else if (growthSeconds >= MatureSeconds && !_harvested)
 		{
-			FarmSoundManager.PlaySfx("SFX_harvest");
+			SoundManager.PlaySfx("SFX_harvest");
 			_harvested = true;
 		}
 		else if (_harvested)
@@ -43,7 +43,7 @@ public class CropCarrot : Crop
 		{
 			waterWaitingSeconds = 0.0f;
 			watered = true;
-			FarmSoundManager.PlaySfx("SFX_water_oneshot");
+			SoundManager.PlaySfx("SFX_water_oneshot");
 		}
 	}
 
