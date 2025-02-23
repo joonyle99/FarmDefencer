@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CropCarrot : Crop
 {
+	private const float MatureSeconds = 15.0f;
+
 	public Sprite SeedSprite;
 	public Sprite MatureSprite;
 	public Sprite BeforeWaterSprite;
@@ -9,7 +11,6 @@ public class CropCarrot : Crop
 	public Sprite GrowingSprite;
 	public Sprite HarvestedSprite;
 
-	public float MatureSeconds = 15.0f;
 
 	private SpriteRenderer _spriteRenderer;
 	private bool _isSeed;

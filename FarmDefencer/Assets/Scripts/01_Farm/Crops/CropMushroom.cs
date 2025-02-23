@@ -2,21 +2,26 @@ using UnityEngine;
 
 public class CropMushroom : Crop
 {
-	public float PlantRubbingCriterion = 10.0f;
+	private const float PlantRubbingCriterion = 5.0f; // 밭 문지르기 동작 판정 기준 (가로 방향 위치 델타)
+	private const float Stage1GrowthSeconds = 15.0f;
+	private const float Stage2GrowthSeconds = 15.0f;
+	private const float Stage3GrowthSeconds = 10.0f;
+	private const float PoisonousProbability = 0.65f;
+	private const float BoomSeconds = 5.0f; // 독버섯 수확 후 터져 없어질때까지 걸리는 시간
+	private const float InoculationHoldingTime = 2.0f;
+	private const float MultipleTouchSecondsCriterion = 0.3f; // 연속 탭 동작 판정 시간. 이 시간 이내로 다시 탭 해야 연속 탭으로 간주됨
+
 	[Space]
 	public Sprite Stage1BeforeWaterSprite;
 	public Sprite Stage1DeadSprite;
 	public Sprite Stage1AfterWaterSprite;
-	public float Stage1GrowthSeconds = 20.0f;
 	[Space]
 	public Sprite Stage2BeforeWaterSprite;
 	public Sprite Stage2DeadSprite;
 	public Sprite Stage2AfterWaterSprite;
-	public float Stage2GrowthSeconds = 20.0f;
 	[Space]
 	public Sprite Stage3BeforeInoculationSprite;
 	public Sprite Stage3AfterInoculationSprite;
-	public float Stage3GrowthSeconds = 10.0f;
 	private bool _inoculated;
 	[Space]
 	public Sprite Stage4NormalSprite;
@@ -47,7 +52,7 @@ public class CropMushroom : Crop
 		else if (_harvested)
 		{
 			var currentTime = Time.time;
-			if (_lastTapTime + 0.3f > currentTime)
+			if (_lastTapTime + MultipleTouchSecondsCriterion > currentTime)
 			{
 				_tapCount++;
 			}
@@ -94,7 +99,7 @@ public class CropMushroom : Crop
 			&&growthSeconds >= Stage1GrowthSeconds + Stage2GrowthSeconds)
 		{
 			_holdingTime += deltaHoldTime;
-			if (_holdingTime >= 2.0f)
+			if (_holdingTime >= InoculationHoldingTime)
 			{
 				_inoculated = true;
 				_holdingTime = 0.0f;
@@ -142,7 +147,7 @@ public class CropMushroom : Crop
 				if (_boom)
 				{
 					_boomElapsedTime += deltaTime;
-					if (_boomElapsedTime >= 5.0f)
+					if (_boomElapsedTime >= BoomSeconds)
 					{
 						_isSeed = true;
 					}
@@ -169,7 +174,7 @@ public class CropMushroom : Crop
 			if (!_poisonousDetermined)
 			{
 				_poisonousDetermined = true;
-				_poisonous = Random.Range(0.0f, 1.0f) <= 0.65f;
+				_poisonous = Random.Range(0.0f, 1.0f) <= PoisonousProbability;
 				_spriteRenderer.sprite = _poisonous ? Stage4PoisonousSprite : Stage4NormalSprite;
 			}
 		}

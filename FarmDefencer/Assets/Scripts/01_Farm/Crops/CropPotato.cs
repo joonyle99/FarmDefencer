@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class CropPotato : Crop
 {
+	private const float MatureSeconds = 15.0f;
+	private const float HarvestHoldTime = 2.0f;
+
 	public Sprite SeedSprite;
 	public Sprite MatureSprite;
 	public Sprite BeforeWaterSprite;
 	public Sprite DeadSprite;
 	public Sprite GrowingSprite;
 	public Sprite HarvestedSprite;
-
-	public float MatureSeconds = 20.0f;
-	public float HarvestHoldTime = 2.0f;
 
 	private SpriteRenderer _spriteRenderer;
 	private bool _isSeed;

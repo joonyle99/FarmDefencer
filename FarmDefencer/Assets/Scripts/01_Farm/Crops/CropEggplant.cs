@@ -2,19 +2,21 @@ using UnityEngine;
 
 public class CropEggplant : Crop
 {
-	public float DoubleTapCriterion = 0.5f;
+	private const float DoubleTapCriterion = 0.3f; // 연속 탭 동작 판정 시간. 이 시간 이내로 다시 탭 해야 연속 탭으로 간주됨
+	private const float Stage1GrowthSeconds = 10.0f;
+	private const float Stage2GrowthSeconds = 10.0f;
+	private const int InitialLeavesCount = 2; // 마지막 수확 단계에서의 최초 잎 개수
+
 	public Sprite SeedSprite;
 	[Space]
 	public Sprite Stage1BeforeWaterSprite;
 	public Sprite Stage1DeadSprite;
 	public Sprite Stage1AfterWaterSprite;
-	public float Stage1GrowthSeconds = 20.0f;
 	[Space]
 	public Sprite BeforeTrellisSprite;
 	public Sprite Stage2BeforeWaterSprite;
 	public Sprite Stage2DeadSprite;
 	public Sprite Stage2AfterWaterSprite;
-	public float Stage2GrowthSeconds = 20.0f;
 	[Space]
 	public Sprite MatureFullLeavesSprite;
 	public Sprite MatureHalfLeafSprite;
@@ -87,7 +89,7 @@ public class CropEggplant : Crop
 			_harvested = false;
 			_trellisPlaced = false;
 			_spriteRenderer.sprite = SeedSprite;
-			_leavesRemaining = 2;
+			_leavesRemaining = InitialLeavesCount;
 
 			if (_spriteRenderer.sprite != SeedSprite)
 			{

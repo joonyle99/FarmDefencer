@@ -6,20 +6,20 @@ using UnityEngine;
 /// </summary>
 public class CropCabbage : Crop
 {
-	public float DeltaShakeCriterion = 5.0f;
-	public int ShakeCountCriterion = 4;
+	private const float DeltaShakeCriterion = 5.0f; // 배추 수확단계 흔들기 기준 (가로 방향 위치 델타)
+	private const int ShakeCountCriterion = 4; // 배추 수확 흔들기 횟수 기준
+	private const float Stage1GrowthSeconds = 10.0f;
+	private const float Stage2GrowthSeconds = 10.0f;
 
 	public Sprite SeedSprite;
 	[Space]
 	public Sprite Stage1BeforeWateringSprite;
 	public Sprite Stage1DeadSprite;
 	public Sprite Stage1AfterWateringSprite;
-	public float Stage1GrowthSeconds = 10.0f;
 	[Space]
 	public Sprite Stage2BeforeWateringSprite;
 	public Sprite Stage2DeadSprite;
 	public Sprite Stage2AfterWateringSprite;
-	public float Stage2GrowthSeconds = 10.0f;
 	[Space]
 	public Sprite HarvestedSprite;
 	[Space]

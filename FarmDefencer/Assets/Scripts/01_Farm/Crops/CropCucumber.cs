@@ -2,18 +2,19 @@ using UnityEngine;
 
 public class CropCucumber : Crop
 {
+	private const float Stage1GrowthSeconds = 15.0f;
+	private const float Stage2GrowthSeconds = 15.0f;
+
 	public Sprite SeedSprite;
 	[Space]
 	public Sprite Stage1BeforeWateringSprite;
 	public Sprite Stage1DeadSprite;
 	public Sprite Stage1AfterWateringSprite;
-	public float Stage1GrowthSeconds = 15.0f;
 	[Space]
 	public Sprite BeforeShortTrellisSprite;
 	public Sprite Stage2BeforeWateringSprite;
 	public Sprite Stage2DeadSprite;
 	public Sprite Stage2AfterWateringSprite;
-	public float Stage2GrowthSeconds = 15.0f;
 	[Space]
 	public Sprite BeforeLongTrellisSprite;
 	public Sprite MatureSprite;

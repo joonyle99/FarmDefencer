@@ -1,27 +1,26 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class CropSweetpotato : Crop
 {
-	public float PlantRubbingCriterion = 10.0f;
+	private const float PlantRubbingCriterion = 5.0f; // 밭 문지르기 동작 판정 기준 (가로 방향 위치 델타)
+	private const float Stage1GrowthSeconds = 15.0f;
+	private const float Stage2GrowthSeconds = 15.0f;
+	private const float Stage3GrowthSeconds = 10.0f;
+	private const float Stage4GrowthSeconds = 5.0f;
 
 	public Sprite Stage1BeforeWaterSprite;
 	public Sprite Stage1DeadSprite;
 	public Sprite Stage1AfterWaterSprite;
-	public float Stage1GrowthSeconds = 20.0f;
 	[Space]
 	public Sprite Stage2BeforeWaterSprite;
 	public Sprite Stage2DeadSprite;
 	public Sprite Stage2AfterWaterSprite;
-	public float Stage2GrowthSeconds = 20.0f;
 	[Space]
 	public Sprite Stage3BeforeWrapSprite;
 	public Sprite Stage3AfterWrapSprite;
-	public float Stage3GrowthSeconds = 10.0f;
 	private bool _wrapped = false;
 	[Space]
 	public Sprite Stage4Sprite;
-	public float Stage4GrowthSeconds = 5.0f;
 	[Space]
 	public Sprite Stage5_X_Sprite;
 	public Sprite Stage5_O_Sprite;
