@@ -117,36 +117,13 @@ public class GridCell : MonoBehaviour
                 return;
             }
 
+            // 실시간 경로 검사
             if (GameStateManager.Instance.CurrentState is GameState.Wave)
             {
-                var gridMap = DefenceContext.Current.GridMap;
-                var fieldMonsters = DefenceContext.Current.WaveSystem.FieldMonsters;
-
-                // 현재 클릭된 GridCell에 몬스터가 있는지 확인
-                foreach (var fieldMonster in fieldMonsters)
+                if (CheckBuild() == false)
                 {
-                    bool isInCell = gridMap.IsTargetInCell(fieldMonster.transform.position, this);
-                    if (isInCell == true)
-                    {
-                        Debug.Log("a monster is in this grid cell");
-                        return;
-                    }
-                }
-
-                // 현재 GridCell의 isUsable = false하는 이유는
-                // 타워를 설치하려고 하는 곳을 경로 타일로 사용하지 않도록 하기 위함
-                isUsable = false;
-
-                bool result = gridMap.FindPath();
-                if (result == false)
-                {
-                    isUsable = true;
-
-                    Debug.Log("failed to find path (origin path or each path)");
                     return;
                 }
-
-                isUsable = true;
             }
 
             // 2. 설치할 타워의 인스턴스 생성 가능 여부 확인
@@ -168,6 +145,39 @@ public class GridCell : MonoBehaviour
             // e.g) start / end point
             Debug.Log($"here is start / end point");
         }
+    }
+
+    // check
+    private bool CheckBuild()
+    {
+        var gridMap = DefenceContext.Current.GridMap;
+        var fieldMonsters = DefenceContext.Current.WaveSystem.FieldMonsters;
+
+        // 현재 클릭된 GridCell에 몬스터가 있는지 확인
+        foreach (var fieldMonster in fieldMonsters)
+        {
+            bool isInCell = gridMap.IsTargetInCell(fieldMonster.transform.position, this);
+            if (isInCell == true)
+            {
+                Debug.Log("a monster is in this grid cell");
+                return false;
+            }
+        }
+
+        isUsable = false; // 타워를 설치하려고 하는 곳을 경로 타일로 사용하지 않도록 하기 위함
+
+        bool result = gridMap.FindPathAll();
+        if (result == false)
+        {
+            isUsable = true;
+
+            Debug.Log("failed to find path (origin path or each path)");
+            return false;
+        }
+
+        isUsable = true;
+
+        return true;
     }
 
     // sprite
@@ -202,6 +212,7 @@ public class GridCell : MonoBehaviour
         _spriteRenderer.color = color;
     }
 
+    //
     public void Usable()
     {
         isUsable = true;
@@ -215,6 +226,7 @@ public class GridCell : MonoBehaviour
         // gameObject.SetActive(false);
     }
 
+    //
     public void Occupy(Tower tower)
     {
         _occupiedTower = tower;

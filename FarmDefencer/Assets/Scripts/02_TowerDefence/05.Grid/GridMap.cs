@@ -159,7 +159,7 @@ public class GridMap : MonoBehaviour
 
         yield return DrawPathRoutine(_originGridPath);
     }
-    public bool FindPath()
+    public bool FindPathAll()
     {
         var newOriginGridPath = CalculateOriginPath();
         if (newOriginGridPath == null || newOriginGridPath.Count < 2)
