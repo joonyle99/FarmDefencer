@@ -2,10 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
+/// 게임에 필요한 사운드를 관리하는 매니저입니다.
+/// </summary>
+/// <remarks>
 /// SFX파일은 Resources/Sfx에 둘 것.
 /// 하나의 이름으로 여러 SFX 버전이 존재하는 경우(ex. sfx_harvest_0, sfx_harvest_1) 반드시 0번부터 연속적으로 이름_번호 규격을 맞출 것(ex. 이름: sfx_harvest, 번호: _0, _1, _2...).
-/// </summary>
-public class SoundManager : JoonyleGameDevKit.PersistentSingleton<SoundManager>
+/// </remarks>
+public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
 {
 	private Dictionary<string, List<AudioClip>> _sfxLists;
 
@@ -63,8 +66,10 @@ public class SoundManager : JoonyleGameDevKit.PersistentSingleton<SoundManager>
 	protected override void Awake()
 	{
 		base.Awake();
+
 		_audioListener = GetComponent<AudioListener>();
 		_sfxAudioSource = GetComponent<AudioSource>();
+
 		_sfxLists = new Dictionary<string, List<AudioClip>>();
 	}
 }
