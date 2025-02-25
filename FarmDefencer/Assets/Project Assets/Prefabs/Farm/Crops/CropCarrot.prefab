@@ -135,12 +135,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WaterWaitingDeadSeconds: 300
   WaterWaitingResetSeconds: 300
-  SeedSprite: {fileID: -8306299516934490982, guid: c3ccb1d274efe034da6d17be35db96d7, type: 3}
-  MatureSprite: {fileID: 3244099961016166343, guid: 25c7b0a9b33edaa4aa8e5d141b40f68a, type: 3}
-  BeforeWaterSprite: {fileID: 8283948540272183631, guid: 11632c471d1fca84c8c126f09c5ef9b7, type: 3}
-  DeadSprite: {fileID: -7666930650782403411, guid: 97bd691e5e83cf8468de7a61e766b685, type: 3}
-  GrowingSprite: {fileID: -619267247784436514, guid: 1a34d90d6f24288418f0af7e1075b2ef, type: 3}
-  HarvestedSprite: {fileID: -4431930551636028851, guid: 3341125b2246c7d48a7d07f456e600a7, type: 3}
+  _seedSprite: {fileID: -8306299516934490982, guid: c3ccb1d274efe034da6d17be35db96d7, type: 3}
+  _matureSprite: {fileID: 3244099961016166343, guid: 25c7b0a9b33edaa4aa8e5d141b40f68a, type: 3}
+  _beforeWaterSprite: {fileID: 8283948540272183631, guid: 11632c471d1fca84c8c126f09c5ef9b7, type: 3}
+  _deadSprite: {fileID: -7666930650782403411, guid: 97bd691e5e83cf8468de7a61e766b685, type: 3}
+  _growingSprite: {fileID: -619267247784436514, guid: 1a34d90d6f24288418f0af7e1075b2ef, type: 3}
+  _harvestedSprite: {fileID: -4431930551636028851, guid: 3341125b2246c7d48a7d07f456e600a7, type: 3}
 --- !u!212 &6026670487540730573
 SpriteRenderer:
   m_ObjectHideFlags: 0

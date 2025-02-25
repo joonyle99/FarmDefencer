@@ -1,139 +1,143 @@
+using JetBrains.Annotations;
+using System;
+using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using UnityEngine;
 
 public class CropCarrot : Crop
 {
+	private struct CarrotState : ICommonCropState
+	{
+		public bool Planted { get; set; }
+		public float WaterWaitingSeconds { get; set; }
+		public float GrowthSeconds { get; set; }
+		public bool Watered { get; set; }
+		public bool Harvested { get; set; }
+		public float HoldingTime { get; set; }
+		public int RemainingQuota { get; set; }
+	}
+
+	private enum CarrotStage
+	{
+		Seed,
+		BeforeWater,
+		Dead,
+		Growing,
+		Mature,
+		Harvested
+	}
+
 	private const float MatureSeconds = 15.0f;
 
-	public Sprite SeedSprite;
-	public Sprite MatureSprite;
-	public Sprite BeforeWaterSprite;
-	public Sprite DeadSprite;
-	public Sprite GrowingSprite;
-	public Sprite HarvestedSprite;
-
+	[SerializeField] private Sprite _seedSprite;
+	[SerializeField] private Sprite _matureSprite;
+	[SerializeField] private Sprite _beforeWaterSprite;
+	[SerializeField] private Sprite _deadSprite;
+	[SerializeField] private Sprite _growingSprite;
+	[SerializeField] private Sprite _harvestedSprite;
 
 	private SpriteRenderer _spriteRenderer;
-	private bool _isSeed;
-	private bool _harvested;
+	private CarrotState _currentState;
 
-	public override void OnSingleTap(Vector2 worldPosition)
+	public override void OnSingleTap(Vector2 inputWorldPosition)
 	{
-		if (_isSeed)
-		{
-			EffectPlayer.PlayTabEffect(worldPosition);
-			SoundManager.PlaySfx("SFX_plant_seed");
-			_isSeed = false;
-		}
-		else if (growthSeconds >= MatureSeconds && !_harvested)
-		{
-			EffectPlayer.PlayTabEffect(worldPosition);
-			SoundManager.PlaySfx("SFX_harvest");
-			_harvested = true;
-		}
-		else if (_harvested)
-		{
-			if (HarvestHandler(1) > 0)
-			{
-				EffectPlayer.PlayTabEffect(worldPosition);
-				_isSeed = true;
-			}
-		}
+		_currentState = HandleActionFillQuotaAndPlayEffectAt(
+
+			Effects,
+			GetQuota,
+			NotifyQuotaFilled,
+			OnSingleTapFunctions[GetCurrentStage(_currentState)], _currentState)
+
+			(inputWorldPosition, transform.position);
 	}
 
 	public override void OnWatering()
 	{
-		if (!_isSeed && !watered)
-		{
-			waterWaitingSeconds = 0.0f;
-			watered = true;
-			SoundManager.PlaySfx("SFX_water_oneshot");
-		}
+		_currentState = HandleActionFillQuotaAndPlayEffectAt(
+
+			Effects,
+			GetQuota,
+			NotifyQuotaFilled,
+			Water,
+			_currentState)
+
+			(transform.position, transform.position);
 	}
 
 	public override void OnFarmUpdate(float deltaTime)
 	{
-		if (_isSeed)
-		{
-			watered = false;
-			_harvested = false;
-			waterWaitingSeconds = 0.0f;
-			growthSeconds = 0.0f;
+		var currentStage = GetCurrentStage(_currentState);
+		ApplySpriteTo(currentStage)(_spriteRenderer);
 
-			if (_spriteRenderer.sprite != SeedSprite)
+		_currentState = HandleActionFillQuotaAndPlayEffectAt(
+
+			Effects,
+			GetQuota,
+			NotifyQuotaFilled,
+			(beforeState)
+			=>
 			{
-				_spriteRenderer.sprite = SeedSprite;
-			}
-
-			return;
-		}
-
-		if (_harvested)
-		{
-			if (_spriteRenderer.sprite != HarvestedSprite)
-			{
-				_spriteRenderer.sprite = HarvestedSprite;
-			}
-
-			return;
-		}
+				return OnFarmUpdateFunctions[currentStage](beforeState, deltaTime);
+			},
+			_currentState)
 	
-		if (growthSeconds >= MatureSeconds)
-		{
-			if (_spriteRenderer.sprite != MatureSprite)
-			{
-				_spriteRenderer.sprite = MatureSprite;
-			}
-
-			return;
-		}
-
-		if (!watered)
-		{
-			waterWaitingSeconds += deltaTime;
-
-			if (waterWaitingSeconds >= WaterWaitingDeadSeconds + WaterWaitingResetSeconds)
-			{
-				_isSeed = true;
-			}
-			else if (waterWaitingSeconds >= WaterWaitingDeadSeconds)
-			{
-				if (_spriteRenderer.sprite != DeadSprite)
-				{
-					_spriteRenderer.sprite = DeadSprite;
-				}
-			}
-			else
-			{
-				if (_spriteRenderer.sprite != BeforeWaterSprite)
-				{
-					_spriteRenderer.sprite = BeforeWaterSprite;
-				}
-			}
-
-			return;
-		}
-
-		growthSeconds += deltaTime;
-		if (growthSeconds >= MatureSeconds)
-		{
-			if (_spriteRenderer.sprite != MatureSprite)
-			{
-				_spriteRenderer.sprite = MatureSprite;
-			}
-			return;
-		}
-
-		if (_spriteRenderer.sprite != GrowingSprite)
-		{
-			_spriteRenderer.sprite = GrowingSprite;
-		}
+			(transform.position, transform.position);
 	}
 
 	private void Awake()
 	{
 		_spriteRenderer = GetComponent<SpriteRenderer>();
-		_isSeed = true;
-		watered = false;
-		_harvested = false;
 	}
+
+	// 이하 함수 빌딩 블록
+
+	private static CarrotStage GetCurrentStage(CarrotState state) => state switch
+	{
+		{ Planted: false } => CarrotStage.Seed,
+		{ Harvested: true } => CarrotStage.Harvested,
+		{ GrowthSeconds: >= MatureSeconds } => CarrotStage.Mature,
+		{ Watered: true } => CarrotStage.Growing,
+		{ Watered: false, WaterWaitingSeconds: >= WaterWaitingDeadSeconds + WaterWaitingResetSeconds } => CarrotStage.Seed,
+		{ Watered: false, WaterWaitingSeconds: >= WaterWaitingDeadSeconds } => CarrotStage.Dead,
+		{ Watered: false } => CarrotStage.BeforeWater,
+	};
+
+	private static readonly Dictionary<CarrotStage, Func<CarrotState, float, CarrotState>> OnFarmUpdateFunctions = new Dictionary<CarrotStage, Func<CarrotState, float, CarrotState>>
+	{
+		{CarrotStage.Seed, (currentState, deltaTime) => Reset(currentState) },
+		{CarrotStage.BeforeWater, WaitWater },
+		{CarrotStage.Dead, WaitWater },
+		{CarrotStage.Growing, Grow },
+		{CarrotStage.Mature, (currentState, deltaTime) => DoNothing(currentState) },
+		{CarrotStage.Harvested, (currentState, deltaTime) => DoNothing(currentState) },
+	};
+
+	private static readonly Dictionary<CarrotStage, Func<CarrotState, CarrotState>> OnSingleTapFunctions = new Dictionary<CarrotStage, Func<CarrotState, CarrotState>>
+	{
+		{CarrotStage.Seed, Plant },
+		{CarrotStage.BeforeWater, DoNothing },
+		{CarrotStage.Dead, DoNothing },
+		{CarrotStage.Growing, DoNothing },
+		{CarrotStage.Mature, Harvest },
+		{CarrotStage.Harvested, (beforeState) => FillQuotaUpto(beforeState, 1) },
+	};
+
+	[Pure]
+	private Action<SpriteRenderer> ApplySpriteTo(CarrotStage stage) => stage switch
+	{
+		CarrotStage.Seed when _spriteRenderer.sprite != _seedSprite => (spriteRenderer) => spriteRenderer.sprite = _seedSprite,
+		CarrotStage.BeforeWater when _spriteRenderer.sprite != _beforeWaterSprite => (spriteRenderer) => spriteRenderer.sprite = _beforeWaterSprite,
+		CarrotStage.Dead when _spriteRenderer.sprite != _deadSprite => (spriteRenderer) => spriteRenderer.sprite = _deadSprite,
+		CarrotStage.Growing when _spriteRenderer.sprite != _growingSprite => (spriteRenderer) => spriteRenderer.sprite = _growingSprite,
+		CarrotStage.Mature when _spriteRenderer.sprite != _matureSprite => (spriteRenderer) => spriteRenderer.sprite = _matureSprite,
+		CarrotStage.Harvested when _spriteRenderer.sprite != _harvestedSprite => (spriteRenderer) => spriteRenderer.sprite = _harvestedSprite,
+		_ => (_) => { }
+	};
+
+	private static List<(Func<CarrotState, CarrotState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<CarrotState, CarrotState, bool>, Action<Vector2, Vector2>)>
+	{
+		(WaterEffectCondition, WaterEffect),
+		(PlantEffectCondition, PlantEffect),
+		(HarvestEffectCondition, HarvestEffect)
+	};
 }
