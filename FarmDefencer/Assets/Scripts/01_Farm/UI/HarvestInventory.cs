@@ -37,31 +37,32 @@ public class HarvestInventory : MonoBehaviour
 	/// 요청한 개수와 남은 주문량 중 낮은 값만큼 수확 처리하는 메소드.
 	/// 내부적으로 수확 애니메이션 재생 코루틴을 실행함.
 	/// </summary>
+	/// <remarks>
+	/// count가 지금 주문량보다 많으면 에러. 반드시 GetQuota()로 사전 확인할 것.
+	/// </remarks>
 	/// <param name="productEntry"></param>
-	/// <param name="cropScreenPosition"></param>
+	/// <param name="cropWorldPosition"></param>
 	/// <param name="count"></param>
-	/// <returns>실제 수확한 개수</returns>
-	public int Gather(ProductEntry productEntry, Vector2 cropPosition, int count)
+	public void Gather(ProductEntry productEntry, Vector2 cropWorldPosition, int count)
 	{
 		var harvestBox = _harvestBoxes[productEntry.UniqueId];
-		if (harvestBox.Quota == 0)
+		
+		if (count > harvestBox.Quota)
 		{
-			return 0;
+			throw new System.ArgumentOutOfRangeException($"ProductEntry {productEntry.UniqueId}의 남은 주문량 {harvestBox.Quota}보다 많은 개수인 {count}만큼 Gather() 시도했습니다.");
 		}
-
-		count = Mathf.Min(count, harvestBox.Quota);
 
 		var profit = productEntry.Price * count;
 		harvestBox.Quota -= count;
 		ResourceManager.Instance.EarnGold(profit);
 		SoundManager.PlaySfx("SFX_coin");
 
-		var cropScreenPosition = Camera.main.WorldToScreenPoint(cropPosition);
+		var cropScreenPosition = Camera.main.WorldToScreenPoint(cropWorldPosition);
 
 		StartCoroutine(HarvestAnimationCoroutine(productEntry, cropScreenPosition, count));
-
-		return count;
 	}
+
+	public int GetQuota(ProductEntry productEntry) => _harvestBoxes[productEntry.UniqueId].Quota;
 
 	/// <summary>
 	/// 해당 농작물의 개수를 감소시킵니다.

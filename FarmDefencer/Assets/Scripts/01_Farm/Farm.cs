@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -7,25 +8,8 @@ using UnityEngine;
 /// </summary>
 public class Farm : MonoBehaviour, IFarmUpdatable
 {
-	private Func<ProductEntry, Vector2, int, int> _harvestHandler;
-	public Func<ProductEntry, Vector2, int, int> HarvestHandler
-	{
-		get
-		{
-			return _harvestHandler;
-		}
-		set
-		{
-			_harvestHandler = value;
-			foreach (var field in _fields)
-			{
-				field.HarvestHandler = value;
-			}
-		}
-	}
-
 	private bool _isFarmPaused;
-	private List<Field> _fields;
+	private Field[] _fields;
 
 	/// <summary>
 	/// 해당 월드 좌표의 Crop을 검색합니다.
@@ -50,110 +34,104 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 	}
 
 	public void TapAction(Vector2 position)
-    {
+	{
 		if (_isFarmPaused)
 		{
 			return;
 		}
 
 		foreach (var field in _fields)
-        {
+		{
 			if (!field.IsAvailable)
 			{
 				continue;
 			}
 			if (field.TryFindCropAt(position, out var crop))
 			{
-                crop.OnSingleTap(position);
+				crop.OnSingleTap(position);
 			}
 		}
-    }
+	}
 
-    public void SingleHoldingAction(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
-    {
+	public void SingleHoldingAction(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
+	{
 		if (_isFarmPaused)
 		{
 			return;
 		}
-		foreach (var field in _fields)
+		Array.ForEach(_fields, field =>
 		{
-			if (!field.IsAvailable)
-			{
-				continue;
-			}
-			if (field.TryFindCropAt(initialPosition, out var crop))
+			if (field.IsAvailable && field.TryFindCropAt(initialPosition, out var crop))
 			{
 				crop.OnSingleHolding(initialPosition, deltaPosition, isEnd, deltaHoldTime);
 			}
-		}
+		});
 	}
 
 	public void WateringAction(Vector2 position)
 	{
-		foreach (var field in _fields)
+		if (_isFarmPaused)
 		{
-			if (!field.IsAvailable)
-			{
-				continue;
-			}
-			if (field.TryFindCropAt(position, out var crop))
+			return;
+		}
+		Array.ForEach(_fields, field =>
+		{
+			if (field.IsAvailable && field.TryFindCropAt(position, out var crop))
 			{
 				crop.OnWatering();
 			}
-		}
+		});
 	}
 
 	public void OnFarmUpdate(float deltaTime)
-    {
+	{
 		_isFarmPaused = deltaTime == 0.0f;
-        foreach (var field in _fields)
-        {
-			if (!field.IsAvailable)
+		Array.ForEach(_fields, field =>
+		{
+			if (field.IsAvailable)
 			{
-				continue;
+				field.OnFarmUpdate(deltaTime);
 			}
-			field.OnFarmUpdate(deltaTime);
-        }
+		});
     }
 
 	public bool GetFieldAvailability(string productUniqueId)
 	{
-		foreach (var field in _fields)
+		var field = _fields.FirstOrDefault(field => field.ProductEntry.UniqueId == productUniqueId);
+		if (field == null)
 		{
-			if (field.ProductEntry.UniqueId == productUniqueId)
-			{
-				return field.IsAvailable;
-			}
+			Debug.LogError($"Farm이 {productUniqueId}에 해당하는 Field를 가지고 있지 않습니다.");
+			return false;
 		}
-
-		Debug.LogError($"Farm이 {productUniqueId}에 해당하는 Field를 가지고 있지 않습니다.");
-		return false;
+		return field.IsAvailable;
 	}
 
 	public void SetFieldAvailability(string productUniqueId, bool value)
 	{
-		foreach (var field in _fields)
+		var field = _fields.FirstOrDefault(field => field.ProductEntry.UniqueId == productUniqueId);
+		if (field == null)
 		{
-			if (field.ProductEntry.UniqueId == productUniqueId)
-			{
-				field.IsAvailable = value;
-				return;
-			}
+			Debug.LogError($"Farm이 {productUniqueId}에 해당하는 Field를 가지고 있지 않습니다.");
+			return;
 		}
+		field.IsAvailable = value;
+	}
 
-		Debug.LogError($"Farm이 {productUniqueId}에 해당하는 Field를 가지고 있지 않습니다.");
+	public void Init(Func<ProductEntry, int> getQuotaFunction, Action<ProductEntry, Vector2, int> fillQuotaFunction)
+	{
+		Array.ForEach(_fields, field => field.Init(getQuotaFunction, fillQuotaFunction));
 	}
 
 	private void Awake()
     {
-		_fields = new List<Field>();
+		_fields = new Field[transform.childCount];
 
 		for (int childIndex = 0; childIndex < transform.childCount; ++childIndex)
 		{
 			var childObject = transform.GetChild(childIndex);
 			var fieldComponent = childObject.GetComponent<Field>();
 
-			_fields.Add(fieldComponent);
+			_fields[childIndex] = fieldComponent;
 		}
     }
 }

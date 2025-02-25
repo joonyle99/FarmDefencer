@@ -28,12 +28,12 @@ public class FarmManager : MonoBehaviour
 
 		FarmUI.Init(FarmClock);
 		FarmUI.WateringCan.OnWatering.AddListener(Farm.WateringAction);
+
+		Farm.Init(FarmUI.HarvestInventory.GetQuota, FarmUI.HarvestInventory.Gather);
 	}
 
 	private void Start()
 	{
-		Farm.HarvestHandler = FarmUI.HarvestInventory.Gather;
-
 		SetAvailability("product_carrot", true);
 		SetAvailability("product_potato", true);
 		SetAvailability("product_corn", true);

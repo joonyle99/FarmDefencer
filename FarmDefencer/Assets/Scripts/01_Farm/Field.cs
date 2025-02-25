@@ -8,22 +8,6 @@ using System.Collections.Generic;
 /// </summary>
 public class Field : MonoBehaviour, IFarmUpdatable
 {
-	private Func<ProductEntry, Vector2, int, int> _harvestHandler;
-	public Func<ProductEntry, Vector2, int, int> HarvestHandler
-	{
-		get
-		{
-			return _harvestHandler;
-		}
-		set
-		{
-			_harvestHandler = value;
-			foreach (var crop in _crops)
-			{
-                crop.HarvestHandler = (count) => { return _harvestHandler(ProductEntry, crop.transform.position, count); };
-			}
-		}
-	}
 	public GameObject CropPrefab;
 
     public ProductEntry ProductEntry;
@@ -42,9 +26,23 @@ public class Field : MonoBehaviour, IFarmUpdatable
         }
     }
     private bool _isAvailable;
-    private List<Crop> _crops;
+    private Crop[] _crops;
     private SpriteRenderer _backgroundRenderer; // 0번 자식 오브젝트에 할당
     private SpriteRenderer _fieldLockedRenderer; // 1번 자식 오브젝트에 할당
+
+    public void Init(Func<ProductEntry, int> getQuotaFunction, Action<ProductEntry, Vector2, int> fillQuotaFunction)
+    {
+        Array.ForEach(
+            _crops,
+            crop => crop.Init(() => getQuotaFunction(ProductEntry),
+            (count) =>
+            {
+                if (count > 0)
+                {
+                    fillQuotaFunction(ProductEntry, crop.transform.position, count);
+                }
+            }));
+	}
 
 	/// <summary>
 	/// 입력된 좌표에 해당되는 Crop을 검색해서 반환합니다.
@@ -85,7 +83,7 @@ public class Field : MonoBehaviour, IFarmUpdatable
 
 	private void Awake()
     {
-        _crops = new List<Crop>();
+        _crops = new Crop[FieldSize.x * FieldSize.y];
         _backgroundRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         _fieldLockedRenderer = transform.GetChild(1).GetComponent<SpriteRenderer>();
 
@@ -98,7 +96,7 @@ public class Field : MonoBehaviour, IFarmUpdatable
                 var cropComponent = cropObject.GetComponent<Crop>();
                 cropObject.transform.localPosition = new Vector3(xOffset, yOffset, 0.0f);
 
-                _crops.Add(cropComponent);
+                _crops[yOffset * FieldSize.x + xOffset] = cropComponent;
             }
         }
 	}
