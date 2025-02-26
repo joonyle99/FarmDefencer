@@ -1,237 +1,236 @@
+using JetBrains.Annotations;
+using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class CropEggplant : Crop
 {
-	private const float DoubleTapCriterion = 0.3f; // 연속 탭 동작 판정 시간. 이 시간 이내로 다시 탭 해야 연속 탭으로 간주됨
-	private const float Stage1GrowthSeconds = 10.0f;
-	private const float Stage2GrowthSeconds = 10.0f;
+	private struct EggplantState : ICommonCropState
+	{
+		public bool Planted { get; set; }
+		public float WaterWaitingSeconds { get; set; }
+		public float GrowthSeconds { get; set; }
+		public bool Watered { get; set; }
+		public bool Harvested { get; set; }
+		public int RemainingQuota { get; set; }
+		public int LeavesDropped { get; set; }
+		public float LastSingleTapTime { get; set; }
+		public bool TrellisPlaced { get; set; }
+	}
+
+	private enum EggplantStage
+	{
+		Seed,
+		Mature,
+		Harvested,
+
+		Stage1_BeforeWater,
+		Stage1_Dead,
+		Stage1_Growing,
+
+		Stage2_BeforeTrellis,
+		Stage2_BeforeWater,
+		Stage2_Dead,
+		Stage2_Growing,
+
+		Stage3_FullLeaves,
+		Stage3_HalfLeaves,
+	}
+
+	private const float Stage1_GrowthSeconds = 10.0f;
+	private const float Stage2_GrowthSeconds = 10.0f;
 	private const int InitialLeavesCount = 2; // 마지막 수확 단계에서의 최초 잎 개수
 
-	public Sprite SeedSprite;
+	[SerializeField] private Sprite _seedSprite;
 	[Space]
-	public Sprite Stage1BeforeWaterSprite;
-	public Sprite Stage1DeadSprite;
-	public Sprite Stage1AfterWaterSprite;
+	[SerializeField] private Sprite _stage1_beforeWaterSprite;
+	[SerializeField] private Sprite _stage1_deadSprite;
+	[SerializeField] private Sprite _stage1_growingSprite;
 	[Space]
-	public Sprite BeforeTrellisSprite;
-	public Sprite Stage2BeforeWaterSprite;
-	public Sprite Stage2DeadSprite;
-	public Sprite Stage2AfterWaterSprite;
+	[SerializeField] private Sprite _stage2_beforeTrellisSprite;
+	[SerializeField] private Sprite _stage2_beforeWaterSprite;
+	[SerializeField] private Sprite _stage2_deadSprite;
+	[SerializeField] private Sprite _stage2_growingSprite;
 	[Space]
-	public Sprite MatureFullLeavesSprite;
-	public Sprite MatureHalfLeafSprite;
-	public Sprite MatureSprite;
-	public Sprite HarvestedSprite;
+	[SerializeField] private Sprite _stage3_fullLeavesSprite;
+	[SerializeField] private Sprite _stage3_halfLeavesSprite;
+	[Space]
+	[SerializeField] private Sprite _matureSprite;
+	[SerializeField] private Sprite _harvestedSprite;
 
 	private SpriteRenderer _spriteRenderer;
-	private bool _trellisPlaced;
-	private int _leavesRemaining;
-	private float _lastSingleTapTime;
-	private bool _isSeed;
-	private bool _harvested;
+	private EggplantState _currentState;
 
 	public override void OnWatering()
 	{
-		if (!watered && !_isSeed
-			&& (growthSeconds == 0.0f || growthSeconds >= Stage1GrowthSeconds && _trellisPlaced))
-		{
-			watered = true;
-			waterWaitingSeconds = 0.0f;
-			SoundManager.PlaySfx("SFX_water_oneshot");
-		}
+		_currentState = HandleActionFillQuotaAndPlayEffectAt(
+
+			Effects,
+			GetQuota,
+			NotifyQuotaFilled,
+			Water,
+			_currentState)
+
+			(transform.position, transform.position);
 	}
 
 	public override void OnSingleTap(Vector2 worldPosition)
 	{
-		var currentTime = Time.time;
-		if (_lastSingleTapTime + DoubleTapCriterion > currentTime)
-		{
-			if (growthSeconds >= Stage1GrowthSeconds + Stage2GrowthSeconds && _leavesRemaining > 0)
-			{
-				EffectPlayer.PlayTabEffect(worldPosition);
-				_leavesRemaining -= 1;
-				_lastSingleTapTime = currentTime - DoubleTapCriterion; // 연속 입력 판정 방지
-				EffectPlayer.PlayVfx("SoilDust", transform.position);
-				return; // 액션 소모
-			}
-		}
-		_lastSingleTapTime = currentTime;
+		_currentState = HandleActionFillQuotaAndPlayEffectAt(
 
-		if (_isSeed)
-		{
-			_isSeed = false;
-			SoundManager.PlaySfx("SFX_plant_seed");
-			EffectPlayer.PlayTabEffect(worldPosition);
-		}
-		else if (growthSeconds >= Stage1GrowthSeconds
-			&& !_trellisPlaced)
-		{
-			_trellisPlaced = true;
-		}
-		else if (!_harvested && growthSeconds >= Stage1GrowthSeconds + Stage2GrowthSeconds && _leavesRemaining == 0)
-		{
-			_harvested = true;
-			SoundManager.PlaySfx("SFX_harvest");
-			EffectPlayer.PlayTabEffect(worldPosition);
-		}
-		else if (_harvested)
-		{
-			if (HarvestHandler(1) > 0)
-			{
-				_isSeed = true;
-				EffectPlayer.PlayTabEffect(worldPosition);
-			}
-		}
+			Effects,
+			GetQuota,
+			NotifyQuotaFilled,
+			OnSingleTapFunctions[GetCurrentStage(_currentState)], 
+			_currentState)
+
+			(transform.position, transform.position);
 	}
 
 	public override void OnFarmUpdate(float deltaTime)
 	{
-		if (_isSeed)
-		{
-			watered = false;
-			waterWaitingSeconds = 0.0f;
-			growthSeconds = 0.0f;
-			_harvested = false;
-			_trellisPlaced = false;
-			_spriteRenderer.sprite = SeedSprite;
-			_leavesRemaining = InitialLeavesCount;
+		var currentStage = GetCurrentStage(_currentState);
+		GetSpriteAndApplyTo(currentStage)(_spriteRenderer);
+		_currentState = HandleActionFillQuotaAndPlayEffectAt(
 
-			if (_spriteRenderer.sprite != SeedSprite)
+			Effects,
+			GetQuota,
+			NotifyQuotaFilled,
+			(beforeState)
+			=>
 			{
-				_spriteRenderer.sprite = SeedSprite;
-			}
+				return OnFarmUpdateFunctions[currentStage](_currentState, deltaTime);
+			},
+			_currentState)
 
-			return;
-		}
-
-		if (_harvested)
-		{
-			if (_spriteRenderer.sprite != HarvestedSprite)
-			{
-				_spriteRenderer.sprite = HarvestedSprite;
-			}
-
-			return;
-		}
-
-
-		if (growthSeconds >= Stage1GrowthSeconds + Stage2GrowthSeconds) // 모두 성장한 단계
-		{
-			if (_leavesRemaining == 2)
-			{
-				if (_spriteRenderer.sprite != MatureFullLeavesSprite)
-				{
-					_spriteRenderer.sprite = MatureFullLeavesSprite;
-				}
-			}
-			else if (_leavesRemaining == 1)
-			{
-				if (_spriteRenderer.sprite != MatureHalfLeafSprite)
-				{
-					_spriteRenderer.sprite = MatureHalfLeafSprite;
-				}
-			}
-			else if (_leavesRemaining == 0)
-			{
-				if (_spriteRenderer.sprite != MatureSprite)
-				{
-					_spriteRenderer.sprite = MatureSprite;
-				}
-			}
-			else // 에러!
-			{
-				Debug.LogWarning($"잘못된 잎 개수: {_leavesRemaining}");
-				_leavesRemaining = 2;
-			}
-		}
-		else if (growthSeconds >= Stage1GrowthSeconds) // 성장 2단계
-		{
-			if (!_trellisPlaced) // 짧은 지지대 설치 이전 상태
-			{
-				if (_spriteRenderer.sprite != BeforeTrellisSprite)
-				{
-					_spriteRenderer.sprite = BeforeTrellisSprite;
-				}
-			}
-			else if (!watered) // 물 안준 상태
-			{
-				waterWaitingSeconds += deltaTime;
-
-				if (waterWaitingSeconds >= WaterWaitingDeadSeconds + WaterWaitingResetSeconds)
-				{
-					_isSeed = true;
-				}
-				else if (waterWaitingSeconds >= WaterWaitingDeadSeconds)
-				{
-					if (_spriteRenderer.sprite != Stage2DeadSprite)
-					{
-						_spriteRenderer.sprite = Stage2DeadSprite;
-					}
-				}
-				else
-				{
-					if (_spriteRenderer.sprite != Stage2BeforeWaterSprite)
-					{
-						_spriteRenderer.sprite = Stage2BeforeWaterSprite;
-					}
-				}
-			}
-			else // 물 준 상태
-			{
-				growthSeconds += deltaTime;
-
-				if (_spriteRenderer.sprite != Stage2AfterWaterSprite)
-				{
-					_spriteRenderer.sprite = Stage2AfterWaterSprite;
-				}
-			}
-		}
-		else // 성장 1단계
-		{
-			if (!watered) // 물 안준 상태
-			{
-				waterWaitingSeconds += deltaTime;
-
-				if (waterWaitingSeconds >= WaterWaitingDeadSeconds + WaterWaitingResetSeconds)
-				{
-					_isSeed = true;
-				}
-				else if (waterWaitingSeconds >= WaterWaitingDeadSeconds)
-				{
-					if (_spriteRenderer.sprite != Stage1DeadSprite)
-					{
-						_spriteRenderer.sprite = Stage1DeadSprite;
-					}
-				}
-				else
-				{
-					if (_spriteRenderer.sprite != Stage1BeforeWaterSprite)
-					{
-						_spriteRenderer.sprite = Stage1BeforeWaterSprite;
-					}
-				}
-			}
-			else // 물 준 상태
-			{
-				growthSeconds += deltaTime;
-
-				if (growthSeconds >= Stage1GrowthSeconds)
-				{
-					watered = false;
-				}
-
-				if (_spriteRenderer.sprite != Stage1AfterWaterSprite)
-				{
-					_spriteRenderer.sprite = Stage1AfterWaterSprite;
-				}
-			}
-		}
+			(transform.position, transform.position);
 	}
 
 	private void Awake()
 	{
-		_isSeed = true;
 		_spriteRenderer = GetComponent<SpriteRenderer>();
+	}
+
+	// 이하 함수 빌딩 블록
+
+	private static EggplantStage GetCurrentStage(EggplantState state) => state switch
+	{
+		{ Planted: false } => EggplantStage.Seed,
+		{ Harvested: true } => EggplantStage.Harvested,
+		{ LeavesDropped: >= 2 } => EggplantStage.Mature,
+
+		{ LeavesDropped: >= 1 } => EggplantStage.Stage3_HalfLeaves,
+		{ GrowthSeconds: >= Stage1_GrowthSeconds + Stage2_GrowthSeconds } => EggplantStage.Stage3_FullLeaves,
+
+		{ GrowthSeconds: >= Stage1_GrowthSeconds, TrellisPlaced: false} => EggplantStage.Stage2_BeforeTrellis,
+		{ GrowthSeconds: >= Stage1_GrowthSeconds, WaterWaitingSeconds: >= WaterWaitingDeadSeconds + WaterWaitingResetSeconds } => EggplantStage.Seed,
+		{ GrowthSeconds: >= Stage1_GrowthSeconds, WaterWaitingSeconds: >= WaterWaitingDeadSeconds } => EggplantStage.Stage2_Dead,
+		{ GrowthSeconds: >= Stage1_GrowthSeconds, Watered: true } => EggplantStage.Stage2_Growing,
+		{ GrowthSeconds: >= Stage1_GrowthSeconds } => EggplantStage.Stage2_BeforeWater,
+
+		{ WaterWaitingSeconds: >= WaterWaitingDeadSeconds + WaterWaitingResetSeconds } => EggplantStage.Seed,
+		{ WaterWaitingSeconds: >= WaterWaitingDeadSeconds } => EggplantStage.Stage1_Dead,
+		{ Watered: true } => EggplantStage.Stage1_Growing,
+		{ } => EggplantStage.Stage1_BeforeWater,
+	};
+
+	private static readonly Dictionary<EggplantStage, Func<EggplantState, float, EggplantState>> OnFarmUpdateFunctions = new Dictionary<EggplantStage, Func<EggplantState, float, EggplantState>>
+	{
+		{EggplantStage.Seed, (beforeState, deltaTime) => Reset(beforeState) },
+
+		{EggplantStage.Stage1_Dead, WaitWater },
+		{EggplantStage.Stage1_BeforeWater, WaitWater },
+		{
+			EggplantStage.Stage1_Growing,
+			(beforeState, deltaTime) =>
+			{
+				var nextState = Grow(beforeState, deltaTime);
+				if (nextState.GrowthSeconds >= Stage1_GrowthSeconds)
+				{
+					nextState.Watered = false;
+				}
+				return nextState;
+			}
+		},
+
+		{EggplantStage.Stage2_BeforeTrellis, DoNothing_OnFarmUpdate },
+		{EggplantStage.Stage2_Dead, WaitWater },
+		{EggplantStage.Stage2_BeforeWater, WaitWater },
+		{EggplantStage.Stage2_Growing, Grow },
+
+		{EggplantStage.Stage3_FullLeaves, DoNothing_OnFarmUpdate },
+		{EggplantStage.Stage3_HalfLeaves, DoNothing_OnFarmUpdate },
+
+		{EggplantStage.Mature, DoNothing_OnFarmUpdate },
+		{EggplantStage.Harvested, DoNothing_OnFarmUpdate },
+
+	};
+
+	private static readonly Dictionary<EggplantStage, Func<EggplantState, EggplantState>> OnSingleTapFunctions = new Dictionary<EggplantStage, Func<EggplantState, EggplantState>>
+	{
+		{EggplantStage.Seed, Plant },
+
+		{EggplantStage.Stage1_Dead, DoNothing },
+		{EggplantStage.Stage1_BeforeWater, DoNothing },
+		{EggplantStage.Stage1_Growing, DoNothing },
+
+		{EggplantStage.Stage2_BeforeTrellis, (beforeState) => { beforeState.TrellisPlaced = true; return beforeState; } },
+		{EggplantStage.Stage2_BeforeWater, DoNothing },
+		{EggplantStage.Stage2_Dead, DoNothing },
+		{EggplantStage.Stage2_Growing, DoNothing },
+
+		{EggplantStage.Stage3_FullLeaves, DropLeafIfDoubleTap },
+		{EggplantStage.Stage3_HalfLeaves, DropLeafIfDoubleTap },
+	
+		{EggplantStage.Mature, DoNothing },
+		{EggplantStage.Harvested, (beforeState) => FillQuotaUpto(beforeState, 1) },
+	};
+
+	[Pure]
+	private Action<SpriteRenderer> GetSpriteAndApplyTo(EggplantStage stage) => stage switch
+	{
+		EggplantStage.Seed => (spriteRenderer) => ApplySprite(_seedSprite, spriteRenderer),
+
+		EggplantStage.Stage1_Dead => (spriteRenderer) => ApplySprite(_stage1_deadSprite, spriteRenderer),
+		EggplantStage.Stage1_BeforeWater => (spriteRenderer) => ApplySprite(_stage1_beforeWaterSprite, spriteRenderer),
+		EggplantStage.Stage1_Growing => (spriteRenderer) => ApplySprite(_stage1_growingSprite, spriteRenderer),
+
+		EggplantStage.Stage2_BeforeTrellis => (spriteRenderer) => ApplySprite(_stage2_beforeTrellisSprite, spriteRenderer),
+		EggplantStage.Stage2_Dead => (spriteRenderer) => ApplySprite(_stage2_deadSprite, spriteRenderer),
+		EggplantStage.Stage2_BeforeWater => (spriteRenderer) => ApplySprite(_stage2_beforeWaterSprite, spriteRenderer),
+		EggplantStage.Stage2_Growing => (spriteRenderer) => ApplySprite(_stage2_growingSprite, spriteRenderer),
+
+		EggplantStage.Stage3_FullLeaves => (spriteRenderer) => ApplySprite(_stage3_fullLeavesSprite, spriteRenderer),
+		EggplantStage.Stage3_HalfLeaves => (spriteRenderer) => ApplySprite(_stage3_halfLeavesSprite, spriteRenderer),
+
+		EggplantStage.Mature => (spriteRenderer) => ApplySprite(_matureSprite, spriteRenderer),
+		EggplantStage.Harvested => (spriteRenderer) => ApplySprite(_harvestedSprite, spriteRenderer),
+
+		_ => (_) => { }
+	};
+
+	private static List<(Func<EggplantState, EggplantState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<EggplantState, EggplantState, bool>, Action<Vector2, Vector2>)>
+	{
+		(WaterEffectCondition, WaterEffect),
+		(PlantEffectCondition, PlantEffect),
+		(HarvestEffectCondition, HarvestEffect)
+	};
+
+	private static EggplantState DropLeafIfDoubleTap(EggplantState beforeState)
+	{
+		var nextState = beforeState;
+		var currentTime = Time.time;
+		var lastTapTime = beforeState.LastSingleTapTime;
+
+		nextState.LastSingleTapTime = currentTime;
+		if (currentTime < lastTapTime + MultipleTouchSecondsCriterion)
+		{
+			// 연속 탭 판정 방지
+			nextState.LastSingleTapTime -= 2 * MultipleTouchSecondsCriterion;
+			nextState.LeavesDropped = beforeState.LeavesDropped + 1;
+		}
+
+		return nextState;
 	}
 }
 
