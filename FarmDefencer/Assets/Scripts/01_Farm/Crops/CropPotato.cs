@@ -183,5 +183,6 @@ public class CropPotato : Crop
 		(PlantEffectCondition, PlantEffect),
 		(HarvestEffectCondition, HarvestEffect),
 		(HoldEffectCondition, HoldEffect),
+		(QuotaFilledEffectCondition, QuotaFilledEffect),
 	};
 }

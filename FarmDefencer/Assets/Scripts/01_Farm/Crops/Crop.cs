@@ -24,7 +24,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	protected const float WaterWaitingDeadSeconds = 300.0f;
 	protected const float WaterWaitingResetSeconds = 300.0f;
 	protected const float MultipleTouchSecondsCriterion = 0.3f; // 연속 탭 동작 판정 시간. 이 시간 이내로 다시 탭 해야 연속 탭으로 간주됨
-	protected const float PlantRubbingCriterion = 0.25f; // 밭 문지르기 동작 판정 기준 (가로 방향 위치 델타)
+	protected const float PlowDeltaPositionCrierion = 0.25f; // 밭 문지르기 동작 판정 기준 (가로 방향 위치 델타)
 
 	private Func<int> _getQuota;
 	protected Func<int> GetQuota => _getQuota;
@@ -151,6 +151,9 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 		EffectPlayer.PlayTabEffect(inputWorldPosition);
 		SoundManager.PlaySfx("SFX_harvest");
 	}
+
+	protected static bool QuotaFilledEffectCondition<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => afterState.RemainingQuota < beforeState.RemainingQuota;
+	protected static void QuotaFilledEffect(Vector2 inputWorldPosition, Vector2 cropPosition) => EffectPlayer.PlayTabEffect(inputWorldPosition);
 
 	/// <summary>
 	/// 이전 상태의 RemainingQuota와 count 둘 중 작은 값만큼 다음 상태의 RemainingQuota를 감소시키며,

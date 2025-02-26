@@ -69,7 +69,7 @@ public class CropCabbage : Crop
 			NotifyQuotaFilled,
 			OnSingleTapFunctions[GetCurrentStage(_currentState)], _currentState)
 
-			(transform.position, transform.position);
+			(worldPosition, transform.position);
 	}
 
 	public override void OnWatering()
@@ -99,7 +99,7 @@ public class CropCabbage : Crop
 			},
 			_currentState)
 
-			(transform.position, transform.position);
+			(initialPosition+deltaPosition, transform.position);
 	}
 
 	public override void OnFarmUpdate(float deltaTime)
@@ -165,7 +165,8 @@ public class CropCabbage : Crop
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(HarvestEffectCondition, HarvestEffect)
+		(HarvestEffectCondition, HarvestEffect),
+		(QuotaFilledEffectCondition, QuotaFilledEffect),
 	};
 
 	private static readonly Func<CabbageState, Vector2, Vector2, bool, float, CabbageState> ShakeAndHarvest =

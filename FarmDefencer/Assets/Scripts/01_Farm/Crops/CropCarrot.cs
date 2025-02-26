@@ -1,7 +1,6 @@
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using UnityEngine;
 
 public class CropCarrot : Crop
@@ -108,8 +107,8 @@ public class CropCarrot : Crop
 		{CarrotStage.BeforeWater, WaitWater },
 		{CarrotStage.Dead, WaitWater },
 		{CarrotStage.Growing, Grow },
-		{CarrotStage.Mature, (currentState, deltaTime) => DoNothing(currentState) },
-		{CarrotStage.Harvested, (currentState, deltaTime) => DoNothing(currentState) },
+		{CarrotStage.Mature, DoNothing_OnFarmUpdate },
+		{CarrotStage.Harvested, DoNothing_OnFarmUpdate },
 	};
 
 	private static readonly Dictionary<CarrotStage, Func<CarrotState, CarrotState>> OnSingleTapFunctions = new Dictionary<CarrotStage, Func<CarrotState, CarrotState>>
@@ -119,7 +118,7 @@ public class CropCarrot : Crop
 		{CarrotStage.Dead, DoNothing },
 		{CarrotStage.Growing, DoNothing },
 		{CarrotStage.Mature, Harvest },
-		{CarrotStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
+		{CarrotStage.Harvested, FillQuotaOneAndResetIfSucceeded },
 	};
 
 	[Pure]
@@ -138,6 +137,7 @@ public class CropCarrot : Crop
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(HarvestEffectCondition, HarvestEffect)
+		(HarvestEffectCondition, HarvestEffect),
+		(QuotaFilledEffectCondition, QuotaFilledEffect),
 	};
 }

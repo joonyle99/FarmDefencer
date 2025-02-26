@@ -91,7 +91,7 @@ public class CropSweetpotato : Crop
 			OnSingleTapFunctions[GetCurrentStage(_currentState)],
 			_currentState)
 
-			(transform.position, transform.position);
+			(worldPosition, transform.position);
 	}
 
 	public override void OnSingleHolding(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
@@ -108,7 +108,7 @@ public class CropSweetpotato : Crop
 			},
 			_currentState)
 
-			(transform.position, transform.position);
+			(initialPosition+deltaPosition, transform.position);
 	}
 
 	public override void OnWatering()
@@ -203,7 +203,8 @@ public class CropSweetpotato : Crop
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(HarvestEffectCondition, HarvestEffect)
+		(HarvestEffectCondition, HarvestEffect),
+		(QuotaFilledEffectCondition, QuotaFilledEffect),
 	};
 
 	/// <summary>

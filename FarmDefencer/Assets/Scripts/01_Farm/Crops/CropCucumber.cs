@@ -81,7 +81,7 @@ public class CropCucumber : Crop
 			OnSingleTapFunctions[GetCurrentStage(_currentState)],
 			_currentState)
 
-			(transform.position, transform.position);
+			(worldPosition, transform.position);
 	}
 
 	public override void OnFarmUpdate(float deltaTime)
@@ -204,7 +204,8 @@ private static readonly Dictionary<CucumberStage, Func<CucumberState, CucumberSt
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(HarvestEffectCondition, HarvestEffect)
+		(HarvestEffectCondition, HarvestEffect),
+		(QuotaFilledEffectCondition, QuotaFilledEffect),
 	};
 }
 

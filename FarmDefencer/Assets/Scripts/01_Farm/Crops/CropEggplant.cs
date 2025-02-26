@@ -39,7 +39,6 @@ public class CropEggplant : Crop
 
 	private const float Stage1_GrowthSeconds = 10.0f;
 	private const float Stage2_GrowthSeconds = 10.0f;
-	private const int InitialLeavesCount = 2; // 마지막 수확 단계에서의 최초 잎 개수
 
 	[SerializeField] private Sprite _seedSprite;
 	[Space]
@@ -84,7 +83,7 @@ public class CropEggplant : Crop
 			OnSingleTapFunctions[GetCurrentStage(_currentState)], 
 			_currentState)
 
-			(transform.position, transform.position);
+			(worldPosition, transform.position);
 	}
 
 	public override void OnFarmUpdate(float deltaTime)
@@ -213,7 +212,8 @@ public class CropEggplant : Crop
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(HarvestEffectCondition, HarvestEffect)
+		(HarvestEffectCondition, HarvestEffect),
+		(QuotaFilledEffectCondition, QuotaFilledEffect),
 	};
 
 	private static EggplantState DropLeafIfDoubleTap(EggplantState beforeState)

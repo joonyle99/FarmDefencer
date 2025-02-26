@@ -81,7 +81,7 @@ public class CropMushroom : Crop
 			OnSingleTapFunctions[GetCurrentStage(_currentState)],
 			_currentState)
 
-			(transform.position, transform.position);
+			(worldPosition, transform.position);
 	}
 
 	public override void OnSingleHolding(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
@@ -98,7 +98,7 @@ public class CropMushroom : Crop
 			},
 			_currentState)
 
-			(transform.position, transform.position);
+			(initialPosition + deltaPosition, transform.position);
 	}
 
 	public override void OnWatering()
@@ -202,7 +202,8 @@ public class CropMushroom : Crop
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(HarvestEffectCondition, HarvestEffect)
+		(HarvestEffectCondition, HarvestEffect),
+		(QuotaFilledEffectCondition, QuotaFilledEffect),
 	};
 
 	private static readonly Func<MushroomState, MushroomState> HarvestOnFiveTap =
