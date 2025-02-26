@@ -174,91 +174,6 @@ public class CropSweetpotato : Crop
 		{ } => SweetpotatoStage.Stage1_BeforeWater,
 	};
 
-	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, float, SweetpotatoState>> OnFarmUpdateFunctions = new Dictionary<SweetpotatoStage, Func<SweetpotatoState, float, SweetpotatoState>>
-	{
-		{SweetpotatoStage.Unplowed, (beforeState, deltaTime) => Reset(beforeState) },
-
-		{SweetpotatoStage.Stage1_Dead, WaitWater },
-		{SweetpotatoStage.Stage1_BeforeWater, WaitWater },
-		{
-			SweetpotatoStage.Stage1_Growing,
-			(beforeState, deltaTime) =>
-			{
-				var nextState = Grow(beforeState, deltaTime);
-				if (nextState.GrowthSeconds >= Stage1_GrowthSeconds)
-				{
-					nextState.Watered = false;
-				}
-				return nextState;
-			}
-		},
-
-		{SweetpotatoStage.Stage2_BeforeWater, WaitWater },
-		{SweetpotatoStage.Stage2_Dead, WaitWater },
-		{SweetpotatoStage.Stage2_Growing, Grow },
-
-		{SweetpotatoStage.Stage3_BeforeWrap, DoNothing_OnFarmUpdate },
-		{SweetpotatoStage.Stage3_AfterWrap, Grow },
-
-		{
-			SweetpotatoStage.Stage4,
-			(beforeState, deltaTime) =>
-			{
-				var nextState = Grow(beforeState, deltaTime);
-				if (nextState.GrowthSeconds >= Stage1_GrowthSeconds + Stage2_GrowthSeconds + Stage3_GrowthSeconds + Stage4_GrowthSeconds)
-				{
-					nextState = DetermineSweetpotatoCount(nextState);
-				}
-				return nextState;
-			}
-		},
-
-		{SweetpotatoStage.Mature, DoNothing_OnFarmUpdate },
-		{SweetpotatoStage.Harvested, DoNothing_OnFarmUpdate },
-
-	};
-
-	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, SweetpotatoState>> OnSingleTapFunctions = new Dictionary<SweetpotatoStage, Func<SweetpotatoState, SweetpotatoState>>
-	{
-		{SweetpotatoStage.Unplowed, DoNothing },
-
-		{SweetpotatoStage.Stage1_Dead, DoNothing },
-		{SweetpotatoStage.Stage1_BeforeWater, DoNothing },
-		{SweetpotatoStage.Stage1_Growing, DoNothing },
-
-		{SweetpotatoStage.Stage2_BeforeWater, DoNothing },
-		{SweetpotatoStage.Stage2_Dead, DoNothing },
-		{SweetpotatoStage.Stage2_Growing, DoNothing },
-
-		{SweetpotatoStage.Stage3_BeforeWrap, DoNothing },
-		{SweetpotatoStage.Stage3_AfterWrap, DoNothing },
-
-		{SweetpotatoStage.Stage4, DoNothing },
-
-		{SweetpotatoStage.Mature, HarvestIfFiveTap },
-		{SweetpotatoStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, beforeState.RemainingSweetpotatoCount) },
-	};
-
-	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, Vector2, Vector2, bool, float, SweetpotatoState>> OnSingleHoldingFunctions = new Dictionary<SweetpotatoStage, Func<SweetpotatoState, Vector2, Vector2, bool, float, SweetpotatoState>>
-	{
-		{SweetpotatoStage.Unplowed, DoNothing_OnSingleHolding },
-
-		{SweetpotatoStage.Stage1_Dead, DoNothing_OnSingleHolding },
-		{SweetpotatoStage.Stage1_BeforeWater, DoNothing_OnSingleHolding },
-		{SweetpotatoStage.Stage1_Growing, DoNothing_OnSingleHolding },
-
-		{SweetpotatoStage.Stage2_BeforeWater, DoNothing_OnSingleHolding },
-		{SweetpotatoStage.Stage2_Dead, DoNothing_OnSingleHolding },
-		{SweetpotatoStage.Stage2_Growing, DoNothing_OnSingleHolding },
-
-		{SweetpotatoStage.Stage3_BeforeWrap, Wrap },
-		{SweetpotatoStage.Stage3_AfterWrap, DoNothing_OnSingleHolding },
-
-		{SweetpotatoStage.Stage4, DoNothing_OnSingleHolding },
-
-		{SweetpotatoStage.Mature, DoNothing_OnSingleHolding },
-		{SweetpotatoStage.Harvested, DoNothing_OnSingleHolding },
-	};
 	[Pure]
 	private Action<SpriteRenderer> GetSpriteAndApplyTo(SweetpotatoStage stage) => stage switch
 	{
@@ -443,7 +358,7 @@ public class CropSweetpotato : Crop
 				}
 				else
 				{
-					nextState.RemainingQuota = 1;
+					nextState.RemainingSweetpotatoCount = 1;
 				}
 			}
 			else
@@ -476,4 +391,102 @@ public class CropSweetpotato : Crop
 
 			return nextState;
 		};
+
+	private static readonly Func<SweetpotatoState, Vector2, Vector2, bool, float, SweetpotatoState> Plow =
+		(beforeState, initialWorldPosition, deltaPosition, isEnd, deltaHoldTime) =>
+		{
+			var nextState = beforeState;
+			if (deltaPosition.x >= PlowDeltaPositionCrierion)
+			{
+				nextState.Planted = true;
+			}
+
+			return nextState;
+		};
+
+	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, float, SweetpotatoState>> OnFarmUpdateFunctions = new Dictionary<SweetpotatoStage, Func<SweetpotatoState, float, SweetpotatoState>>
+	{
+		{SweetpotatoStage.Unplowed, (beforeState, deltaTime) => Reset(beforeState) },
+
+		{SweetpotatoStage.Stage1_Dead, WaitWater },
+		{SweetpotatoStage.Stage1_BeforeWater, WaitWater },
+		{
+			SweetpotatoStage.Stage1_Growing,
+			(beforeState, deltaTime) =>
+			{
+				var nextState = Grow(beforeState, deltaTime);
+				if (nextState.GrowthSeconds >= Stage1_GrowthSeconds)
+				{
+					nextState.Watered = false;
+				}
+				return nextState;
+			}
+		},
+
+		{SweetpotatoStage.Stage2_BeforeWater, WaitWater },
+		{SweetpotatoStage.Stage2_Dead, WaitWater },
+		{SweetpotatoStage.Stage2_Growing, Grow },
+
+		{SweetpotatoStage.Stage3_BeforeWrap, DoNothing_OnFarmUpdate },
+		{SweetpotatoStage.Stage3_AfterWrap, Grow },
+
+		{
+			SweetpotatoStage.Stage4,
+			(beforeState, deltaTime) =>
+			{
+				var nextState = Grow(beforeState, deltaTime);
+				if (nextState.GrowthSeconds >= Stage1_GrowthSeconds + Stage2_GrowthSeconds + Stage3_GrowthSeconds + Stage4_GrowthSeconds)
+				{
+					nextState = DetermineSweetpotatoCount(nextState);
+				}
+				return nextState;
+			}
+		},
+
+		{SweetpotatoStage.Mature, DoNothing_OnFarmUpdate },
+		{SweetpotatoStage.Harvested, DoNothing_OnFarmUpdate },
+
+	};
+
+	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, SweetpotatoState>> OnSingleTapFunctions = new Dictionary<SweetpotatoStage, Func<SweetpotatoState, SweetpotatoState>>
+	{
+		{SweetpotatoStage.Unplowed, DoNothing },
+
+		{SweetpotatoStage.Stage1_Dead, DoNothing },
+		{SweetpotatoStage.Stage1_BeforeWater, DoNothing },
+		{SweetpotatoStage.Stage1_Growing, DoNothing },
+
+		{SweetpotatoStage.Stage2_BeforeWater, DoNothing },
+		{SweetpotatoStage.Stage2_Dead, DoNothing },
+		{SweetpotatoStage.Stage2_Growing, DoNothing },
+
+		{SweetpotatoStage.Stage3_BeforeWrap, DoNothing },
+		{SweetpotatoStage.Stage3_AfterWrap, DoNothing },
+
+		{SweetpotatoStage.Stage4, DoNothing },
+
+		{SweetpotatoStage.Mature, HarvestIfFiveTap },
+		{SweetpotatoStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, beforeState.RemainingSweetpotatoCount) },
+	};
+
+	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, Vector2, Vector2, bool, float, SweetpotatoState>> OnSingleHoldingFunctions = new Dictionary<SweetpotatoStage, Func<SweetpotatoState, Vector2, Vector2, bool, float, SweetpotatoState>>
+	{
+		{SweetpotatoStage.Unplowed, Plow },
+
+		{SweetpotatoStage.Stage1_Dead, DoNothing_OnSingleHolding },
+		{SweetpotatoStage.Stage1_BeforeWater, DoNothing_OnSingleHolding },
+		{SweetpotatoStage.Stage1_Growing, DoNothing_OnSingleHolding },
+
+		{SweetpotatoStage.Stage2_BeforeWater, DoNothing_OnSingleHolding },
+		{SweetpotatoStage.Stage2_Dead, DoNothing_OnSingleHolding },
+		{SweetpotatoStage.Stage2_Growing, DoNothing_OnSingleHolding },
+
+		{SweetpotatoStage.Stage3_BeforeWrap, Wrap },
+		{SweetpotatoStage.Stage3_AfterWrap, DoNothing_OnSingleHolding },
+
+		{SweetpotatoStage.Stage4, DoNothing_OnSingleHolding },
+
+		{SweetpotatoStage.Mature, DoNothing_OnSingleHolding },
+		{SweetpotatoStage.Harvested, DoNothing_OnSingleHolding },
+	};
 }
