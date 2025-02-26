@@ -212,7 +212,7 @@ public class GridMovement : MonoBehaviour
             return false;
         }
 
-        var eachGridPath = gridMap.CalculateEachPath(_currGridCell.cellPosition, gridMap.EndCellPoint);
+        var eachGridPath = gridMap.CalculateEachPath(_nextGridCell.cellPosition, gridMap.EndCellPoint);
         if (eachGridPath == null || eachGridPath.Count < 2)
         {
             Debug.Log("each grid path is invalid");
@@ -232,35 +232,27 @@ public class GridMovement : MonoBehaviour
         //     return true;
         // }
 
-        int tempPathIndex = 0;
         GridCell tempCurrGridCell = null;
         GridCell tempNextGridCell = null;
 
-        // TODO: 이게 무조건 반대 방향으로 가도록 하면 안되지 준열아
-        // 가려던 방향이 더 가깝다면 거기로 가도록 해야지 .. 바보야
         // 방향 전환이 필요한 경우
-        var newNextGridCell = eachGridPath[1];
+        var newNextGridCell = eachGridPath[0];
         if (newNextGridCell != _nextGridCell)
         {
-            // 여기서 newNextGridCell은 사용하지 않는다
-            // _nextGridCell -> _currGridCell -> newNextGridCell
-            // 이 순서대로 가게될 것이기 때문이다
-            // eachGridPath[0]은 _currGridCell이기 때문에
-            // tempPathIndex 또한 0으로 맞춰줘야 한다
-            tempCurrGridCell = _nextGridCell;
-            tempNextGridCell = _currGridCell;
+            tempCurrGridCell = _currGridCell;
+            tempNextGridCell = newNextGridCell;
         }
         // 방향 전환이 필요하지 않은 경우
         else
         {
-            tempCurrGridCell = eachGridPath[tempPathIndex++];
+            tempCurrGridCell = _currGridCell;
             if (tempCurrGridCell == null)
             {
                 Debug.Log("curr grid cell is null");
                 return false;
             }
 
-            tempNextGridCell = eachGridPath[tempPathIndex];
+            tempNextGridCell = newNextGridCell;
             if (tempNextGridCell == null)
             {
                 Debug.Log("next grid cell is null");
@@ -268,7 +260,7 @@ public class GridMovement : MonoBehaviour
             }
         }
 
-        _pathIndex = tempPathIndex;
+        _pathIndex = 0;
         _currGridCell = tempCurrGridCell;
         _nextGridCell = tempNextGridCell;
         _eachGridPath = eachGridPath;

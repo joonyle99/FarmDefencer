@@ -1745,8 +1745,9 @@ GameObject:
   - component: {fileID: 2363259571219213461}
   - component: {fileID: 5803083254459691797}
   - component: {fileID: 8739588272964975750}
+  - component: {fileID: 157674121498074274}
   m_Layer: 6
-  m_Name: Tower01
+  m_Name: Tower02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1857,7 +1858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6bd4cbf5e8141428ad86564abcd0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  demageableBehavior: {fileID: 2363259571219213461}
+  demageableBehavior: {fileID: 0}
 --- !u!114 &2363259571219213461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2011,6 +2012,50 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &157674121498074274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016940742814412144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45a08f44da64864c86674ad76d49826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthBar: {fileID: 0}
+  _maxHp: 100
+  _stunDuration: 0.03
+  _isDead: 0
+  _isStun: 0
+  _targetPoint: {fileID: 0}
+  _detector: {fileID: 7505782182428129248}
+  _cost: 10
+  UpgradeUIPanel: {fileID: 6451064662953558476}
+  _maxLevel: 3
+  _currentLevel: 1
+  upgradeCost: 40
+  attackRate_1: 1
+  damage_1: 5
+  sellCost_1: 5
+  attackRate_2: 0.8
+  damage_2: 20
+  sellCost_2: 37
+  attackRate_3: 0.5
+  damage_3: 40
+  sellCost_3: 89
+  _spineController: {fileID: 0}
+  IdleAnimationName_1: 
+  IdleAnimationName_2: 
+  IdleAnimationName_3: 
+  AttackAnimationName_1: 
+  AttackAnimationName_2: 
+  AttackAnimationName_3: 
+  LevelUpAnimationName_1: 
+  LevelUpAnimationName_2: 
+  _head: {fileID: 0}
+  _projectileTickPrefab: {fileID: 0}
 --- !u!1 &8359961825463992884
 GameObject:
   m_ObjectHideFlags: 0
