@@ -161,12 +161,16 @@ public class CropCabbage : Crop
 		_ => (_) => { }
 	};
 
+	private static readonly Func<CabbageState, CabbageState, bool> ShakeEffectCondition = (beforeState, afterState) => afterState.ShakeCount > beforeState.ShakeCount;
+	private static readonly Action<Vector2, Vector2> ShakeEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayVfx("SoilParticle", cropPosition);
+
 	private static List<(Func<CabbageState, CabbageState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<CabbageState, CabbageState, bool>, Action<Vector2, Vector2>)>
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
 		(HarvestEffectCondition, HarvestEffect),
 		(QuotaFilledEffectCondition, QuotaFilledEffect),
+		(ShakeEffectCondition, ShakeEffect),
 	};
 
 	private static readonly Func<CabbageState, Vector2, Vector2, bool, float, CabbageState> ShakeAndHarvest =
