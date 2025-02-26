@@ -219,14 +219,23 @@ public class CropEggplant : Crop
 		_ => (_) => { }
 	};
 
-	private static readonly Func<EggplantState, EggplantState, bool> TapEffectCondition = (beforeState, afterState) => afterState.LastSingleTapTime > beforeState.LastSingleTapTime || afterState.LeavesDropped > beforeState.LeavesDropped;
+	private static readonly Func<EggplantState, EggplantState, bool> TapEffectCondition = (beforeState, afterState) => afterState.LastSingleTapTime > beforeState.LastSingleTapTime;
 	private static readonly Action<Vector2, Vector2> TapEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayTabEffect(inputWorldPosition);
 
 	private static readonly Func<EggplantState, EggplantState, bool> TrelisEffectCondition = (beforeState, afterState) => afterState.TrelisPlaced && !beforeState.TrelisPlaced;
 	private static readonly Action<Vector2, Vector2> TrelisEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayTabEffect(inputWorldPosition);
 
+	private static readonly Func<EggplantState, EggplantState, bool> LeafDropEffectCondition = (beforeState, afterState) => afterState.LeavesDropped > beforeState.LeavesDropped;
+	private static readonly Action<Vector2, Vector2> LeafDropEffect =
+		(inputWorldPosition, cropPosition) =>
+		{
+			EffectPlayer.PlayVfx("SoilDust", cropPosition);
+			EffectPlayer.PlayTabEffect(inputWorldPosition);
+		};
+
 	private static List<(Func<EggplantState, EggplantState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<EggplantState, EggplantState, bool>, Action<Vector2, Vector2>)>
 	{
+		(LeafDropEffectCondition, LeafDropEffect),
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
 		(HarvestEffectCondition, HarvestEffect),
