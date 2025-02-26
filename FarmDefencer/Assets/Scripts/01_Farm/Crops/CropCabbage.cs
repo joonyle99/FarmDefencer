@@ -95,7 +95,7 @@ public class CropCabbage : Crop
 			(beforeState)
 			=>
 			{
-				return OnSingleHoldingFunctions[GetCurrentStage(_currentState)](_currentState, initialPosition, deltaPosition, isEnd, deltaHoldTime);
+				return OnSingleHoldingFunctions[GetCurrentStage(_currentState)](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime);
 			},
 			_currentState)
 
@@ -142,6 +142,71 @@ public class CropCabbage : Crop
 	}
 
 	// 이하 함수 빌딩 블록
+
+	[Pure]
+	private Action<SpriteRenderer> ApplySpriteTo(CabbageStage stage) => stage switch
+	{
+		CabbageStage.Seed when _spriteRenderer.sprite != _seedSprite => (spriteRenderer) => spriteRenderer.sprite = _seedSprite,
+		CabbageStage.Mature when _spriteRenderer.sprite != null => (spriteRenderer) => spriteRenderer.sprite = null,
+		CabbageStage.Harvested when _spriteRenderer.sprite != _harvestedSprite => (spriteRenderer) => spriteRenderer.sprite = _harvestedSprite,
+
+		CabbageStage.Stage2_Dead when _spriteRenderer.sprite != _stage2_deadSprite => (spriteRenderer) => spriteRenderer.sprite = _stage2_deadSprite,
+		CabbageStage.Stage2_BeforeWater when _spriteRenderer.sprite != _stage2_beforeWaterSprite => (spriteRenderer) => spriteRenderer.sprite = _stage2_beforeWaterSprite,
+		CabbageStage.Stage2_Growing when _spriteRenderer.sprite != _stage2_growingSprite => (spriteRenderer) => spriteRenderer.sprite = _stage2_growingSprite,
+
+		CabbageStage.Stage1_Dead when _spriteRenderer.sprite != _stage1_deadSprite => (spriteRenderer) => spriteRenderer.sprite = _stage1_deadSprite,
+		CabbageStage.Stage1_BeforeWater when _spriteRenderer.sprite != _stage1_beforeWaterSprite => (spriteRenderer) => spriteRenderer.sprite = _stage1_beforeWaterSprite,
+		CabbageStage.Stage1_Growing when _spriteRenderer.sprite != _stage1_growingSprite => (spriteRenderer) => spriteRenderer.sprite = _stage1_growingSprite,
+
+		_ => (_) => { }
+	};
+
+	private static List<(Func<CabbageState, CabbageState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<CabbageState, CabbageState, bool>, Action<Vector2, Vector2>)>
+	{
+		(WaterEffectCondition, WaterEffect),
+		(PlantEffectCondition, PlantEffect),
+		(HarvestEffectCondition, HarvestEffect)
+	};
+
+	private static readonly Func<CabbageState, Vector2, Vector2, bool, float, CabbageState> ShakeAndHarvest =
+		(beforeState, initialWorldPosition, deltaPosition, isEnd, deltaHoldTime)
+		=>
+		{
+			var nextState = beforeState;
+			nextState.Shake = deltaPosition.x;
+
+			if (isEnd)
+			{
+				nextState.Shake = 0.0f;
+				nextState.ShakeCount = 0;
+			}
+
+			if (Math.Abs(deltaPosition.x) > DeltaShakeCriterion)
+			{
+				if (beforeState.ShakeCount == 0)
+				{
+					nextState.ShakeCount += 1;
+					nextState.WasLastShakeLeftSide = deltaPosition.x < 0.0f;
+				}
+				else
+				{
+					if (beforeState.WasLastShakeLeftSide && deltaPosition.x > 0.0f
+					|| !beforeState.WasLastShakeLeftSide && deltaPosition.x < 0.0f)
+					{
+						nextState.ShakeCount += 1;
+						nextState.WasLastShakeLeftSide = !beforeState.WasLastShakeLeftSide;
+					}
+				}
+
+				if (nextState.ShakeCount >= ShakeCountCriterion)
+				{
+					nextState.Harvested = true;
+				}
+			}
+			
+
+			return nextState;
+		};
 
 	private static CabbageStage GetCurrentStage(CabbageState state) => state switch
 	{
@@ -200,7 +265,7 @@ public class CropCabbage : Crop
 		{CabbageStage.Stage1_Growing, DoNothing },
 	};
 
-	
+
 	private static readonly Dictionary<CabbageStage, Func<CabbageState, Vector2, Vector2, bool, float, CabbageState>> OnSingleHoldingFunctions = new Dictionary<CabbageStage, Func<CabbageState, Vector2, Vector2, bool, float, CabbageState>>
 	{
 		{CabbageStage.Seed, DoNothing_OnSingleHolding },
@@ -211,61 +276,6 @@ public class CropCabbage : Crop
 		{CabbageStage.Stage1_BeforeWater, DoNothing_OnSingleHolding },
 		{CabbageStage.Stage1_Dead, DoNothing_OnSingleHolding },
 		{CabbageStage.Stage1_Growing, DoNothing_OnSingleHolding },
-		{
-			CabbageStage.Mature,
-			(beforeState, initialWorldPosition, deltaPosition, isEnd, deltaHoldTime)
-			=>
-			{
-				var nextState = beforeState;
-				if (Math.Abs(deltaPosition.x) > DeltaShakeCriterion)
-				{
-					if (beforeState.ShakeCount == 0)
-					{
-						nextState.ShakeCount += 1;
-						nextState.WasLastShakeLeftSide = deltaPosition.x < 0.0f;
-					}
-					else
-					{
-						if (beforeState.WasLastShakeLeftSide && deltaPosition.x > 0.0f
-						|| !beforeState.WasLastShakeLeftSide && deltaPosition.x < 0.0f)
-						{
-							nextState.ShakeCount += 1;
-							nextState.WasLastShakeLeftSide = !beforeState.WasLastShakeLeftSide;
-						}
-					}
-
-					if (nextState.ShakeCount >= ShakeCountCriterion)
-					{
-						nextState.Harvested = true;
-					}
-				}
-				return nextState;
-			}
-		},
-	};
-
-	[Pure]
-	private Action<SpriteRenderer> ApplySpriteTo(CabbageStage stage) => stage switch
-	{
-		CabbageStage.Seed when _spriteRenderer.sprite != _seedSprite => (spriteRenderer) => spriteRenderer.sprite = _seedSprite,
-		CabbageStage.Mature when _spriteRenderer.sprite != null => (spriteRenderer) => spriteRenderer.sprite = null,
-		CabbageStage.Harvested when _spriteRenderer.sprite != _harvestedSprite => (spriteRenderer) => spriteRenderer.sprite = _harvestedSprite,
-
-		CabbageStage.Stage2_Dead when _spriteRenderer.sprite != _stage2_deadSprite => (spriteRenderer) => spriteRenderer.sprite = _stage2_deadSprite,
-		CabbageStage.Stage2_BeforeWater when _spriteRenderer.sprite != _stage2_beforeWaterSprite => (spriteRenderer) => spriteRenderer.sprite = _stage2_beforeWaterSprite,
-		CabbageStage.Stage2_Growing when _spriteRenderer.sprite != _stage2_growingSprite => (spriteRenderer) => spriteRenderer.sprite = _stage2_growingSprite,
-
-		CabbageStage.Stage1_Dead when _spriteRenderer.sprite != _stage1_deadSprite => (spriteRenderer) => spriteRenderer.sprite = _stage1_deadSprite,
-		CabbageStage.Stage1_BeforeWater when _spriteRenderer.sprite != _stage1_beforeWaterSprite => (spriteRenderer) => spriteRenderer.sprite = _stage1_beforeWaterSprite,
-		CabbageStage.Stage1_Growing when _spriteRenderer.sprite != _stage1_growingSprite => (spriteRenderer) => spriteRenderer.sprite = _stage1_growingSprite,
-
-		_ => (_) => { }
-	};
-
-	private static List<(Func<CabbageState, CabbageState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<CabbageState, CabbageState, bool>, Action<Vector2, Vector2>)>
-	{
-		(WaterEffectCondition, WaterEffect),
-		(PlantEffectCondition, PlantEffect),
-		(HarvestEffectCondition, HarvestEffect)
+		{CabbageStage.Mature, ShakeAndHarvest },
 	};
 }
