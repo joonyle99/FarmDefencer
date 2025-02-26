@@ -85,6 +85,13 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 			};
 	}
 
+	protected static void ApplySprite(Sprite sprite, SpriteRenderer spriteRenderer)
+	{
+		if (spriteRenderer.sprite != sprite)
+		{
+			spriteRenderer.sprite = sprite;
+		}
+	}
 
 	/// <summary>
 	/// 이전 상태가 Planted && !Watered일 경우 다음 상태에 Watered = true로 설정하여 반환하는 함수.
