@@ -198,12 +198,20 @@ public class CropMushroom : Crop
 		{ IsPoisonous: true } => (spriteRenderer) => ApplySprite(_harvested_poisonousSprite, spriteRenderer),
 	};
 
+	private static readonly Func<MushroomState, MushroomState, bool> HoldEffectCondition = (beforeState, afterState) => afterState.HoldingTime > beforeState.HoldingTime;
+	private static readonly Action<Vector2, Vector2> HoldEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayHoldEffect(inputWorldPosition);
+
+	private static readonly Func<MushroomState, MushroomState, bool> TapEffectCondition = (beforeState, afterState) => afterState.LastSingleTapTime > beforeState.LastSingleTapTime;
+	private static readonly Action<Vector2, Vector2> TapEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayTabEffect(inputWorldPosition);
+
 	private static readonly List<(Func<MushroomState, MushroomState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<MushroomState, MushroomState, bool>, Action<Vector2, Vector2>)>
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
 		(HarvestEffectCondition, HarvestEffect),
 		(QuotaFilledEffectCondition, QuotaFilledEffect),
+		(HoldEffectCondition, HoldEffect),
+		(TapEffectCondition, TapEffect),
 	};
 
 	private static readonly Func<MushroomState, MushroomState> HarvestOnFiveTap =
@@ -266,9 +274,15 @@ public class CropMushroom : Crop
 	(beforeState, initialWorldPosition, deltaPosition, isEnd, deltaHoldTime) =>
 	{
 		var nextState = beforeState;
-		if (deltaPosition.x >= PlowDeltaPositionCrierion)
+		nextState.HoldingTime = beforeState.HoldingTime + deltaHoldTime;
+		if (Mathf.Abs(deltaPosition.x) >= PlowDeltaPositionCrierion)
 		{
 			nextState.Planted = true;
+		}
+
+		if (isEnd)
+		{
+			nextState.HoldingTime = 0.0f;
 		}
 
 		return nextState;
