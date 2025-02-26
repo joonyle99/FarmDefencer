@@ -182,7 +182,7 @@ public class CropEggplant : Crop
 		{EggplantStage.Stage3_FullLeaves, DropLeafIfDoubleTap },
 		{EggplantStage.Stage3_HalfLeaves, DropLeafIfDoubleTap },
 	
-		{EggplantStage.Mature, DoNothing },
+		{EggplantStage.Mature, Harvest },
 		{EggplantStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
 	};
 
