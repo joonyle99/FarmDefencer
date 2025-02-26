@@ -63,7 +63,7 @@ public class CropEggplant : Crop
 
 	public override void OnWatering()
 	{
-		_currentState = HandleActionFillQuotaAndPlayEffectAt(
+		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
 			Effects,
 			GetQuota,
@@ -76,7 +76,7 @@ public class CropEggplant : Crop
 
 	public override void OnSingleTap(Vector2 worldPosition)
 	{
-		_currentState = HandleActionFillQuotaAndPlayEffectAt(
+		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
 			Effects,
 			GetQuota,
@@ -91,7 +91,7 @@ public class CropEggplant : Crop
 	{
 		var currentStage = GetCurrentStage(_currentState);
 		GetSpriteAndApplyTo(currentStage)(_spriteRenderer);
-		_currentState = HandleActionFillQuotaAndPlayEffectAt(
+		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
 			Effects,
 			GetQuota,
@@ -183,7 +183,7 @@ public class CropEggplant : Crop
 		{EggplantStage.Stage3_HalfLeaves, DropLeafIfDoubleTap },
 	
 		{EggplantStage.Mature, DoNothing },
-		{EggplantStage.Harvested, (beforeState) => FillQuotaUpto(beforeState, 1) },
+		{EggplantStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
 	};
 
 	[Pure]

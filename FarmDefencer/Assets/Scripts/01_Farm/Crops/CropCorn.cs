@@ -52,7 +52,7 @@ public class CropCorn : Crop
 
 	public override void OnSingleTap(Vector2 inputWorldPosition)
 	{
-		_currentState = HandleActionFillQuotaAndPlayEffectAt(
+		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 			Effects, 
 			GetQuota,
 			NotifyQuotaFilled,
@@ -64,7 +64,7 @@ public class CropCorn : Crop
 
 	public override void OnWatering()
 	{
-		_currentState = HandleActionFillQuotaAndPlayEffectAt(
+		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
@@ -78,7 +78,7 @@ public class CropCorn : Crop
 	{
 		var currentStage = GetCurrentStage(_currentState);
 		ApplySpriteTo(currentStage)(_spriteRenderer);
-		_currentState = HandleActionFillQuotaAndPlayEffectAt(
+		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
@@ -145,7 +145,7 @@ public class CropCorn : Crop
 	{
 		{CornStage.Seed, Plant },
 		{CornStage.Mature, Harvest },
-		{CornStage.Harvested, (beforeState) => FillQuotaUpto(beforeState, 1) },
+		{CornStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
 
 		{CornStage.Stage2_Dead, DoNothing },
 		{CornStage.Stage2_BeforeWater, DoNothing },

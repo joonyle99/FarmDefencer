@@ -41,7 +41,7 @@ public class CropPotato : Crop
 
 	public override void OnSingleTap(Vector2 inputWorldPosition)
 	{
-		_currentState = HandleActionFillQuotaAndPlayEffectAt(
+		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
 			Effects,
 			GetQuota,
@@ -54,7 +54,7 @@ public class CropPotato : Crop
 
 	public override void OnSingleHolding(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
 	{
-		_currentState = HandleActionFillQuotaAndPlayEffectAt(
+		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
 			Effects,
 			GetQuota,
@@ -71,7 +71,7 @@ public class CropPotato : Crop
 
 	public override void OnWatering()
 	{
-		_currentState = HandleActionFillQuotaAndPlayEffectAt(
+		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
 			Effects,
 			GetQuota,
@@ -87,7 +87,7 @@ public class CropPotato : Crop
 		var currentStage = GetCurrentStage(_currentState);
 		ApplySpriteTo(currentStage)(_spriteRenderer);
 
-		_currentState = HandleActionFillQuotaAndPlayEffectAt(
+		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
 			Effects,
 			GetQuota,
@@ -137,7 +137,7 @@ public class CropPotato : Crop
 		{PotatoStage.Dead, DoNothing },
 		{PotatoStage.Growing, DoNothing },
 		{PotatoStage.Mature, DoNothing },
-		{PotatoStage.Harvested, (beforeState) => FillQuotaUpto(beforeState, 1) },
+		{PotatoStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
 	};
 
 	private static readonly Dictionary<PotatoStage, Func<PotatoState, Vector2, Vector2, bool, float, PotatoState>> OnSingleHoldingFunctions = new Dictionary<PotatoStage, Func<PotatoState, Vector2, Vector2, bool, float, PotatoState>>

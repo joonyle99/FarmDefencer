@@ -62,7 +62,7 @@ public class CropCabbage : Crop
 
 	public override void OnSingleTap(Vector2 worldPosition)
 	{
-		_currentState = HandleActionFillQuotaAndPlayEffectAt(
+		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
 			Effects,
 			GetQuota,
@@ -74,7 +74,7 @@ public class CropCabbage : Crop
 
 	public override void OnWatering()
 	{
-		_currentState = HandleActionFillQuotaAndPlayEffectAt(
+		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
 			Effects,
 			GetQuota,
@@ -87,7 +87,7 @@ public class CropCabbage : Crop
 
 	public override void OnSingleHolding(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
 	{
-		_currentState = HandleActionFillQuotaAndPlayEffectAt(
+		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
 			Effects,
 			GetQuota,
@@ -119,7 +119,7 @@ public class CropCabbage : Crop
 			_harvestCropLayerObject.SetActive(false);
 		}
 
-		_currentState = HandleActionFillQuotaAndPlayEffectAt(
+		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
 			Effects,
 			GetQuota,
@@ -189,7 +189,7 @@ public class CropCabbage : Crop
 	private static readonly Dictionary<CabbageStage, Func<CabbageState, CabbageState>> OnSingleTapFunctions = new Dictionary<CabbageStage, Func<CabbageState, CabbageState>>
 	{
 		{CabbageStage.Seed, Plant },
-		{CabbageStage.Harvested, (beforeState) => FillQuotaUpto(beforeState, 1) },
+		{CabbageStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
 
 		{CabbageStage.Mature, DoNothing },
 		{CabbageStage.Stage2_Dead, DoNothing },

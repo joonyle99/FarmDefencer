@@ -25,6 +25,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	protected const float WaterWaitingDeadSeconds = 300.0f;
 	protected const float WaterWaitingResetSeconds = 300.0f;
 	protected const float MultipleTouchSecondsCriterion = 0.3f; // 연속 탭 동작 판정 시간. 이 시간 이내로 다시 탭 해야 연속 탭으로 간주됨
+	protected const float PlantRubbingCriterion = 0.25f; // 밭 문지르기 동작 판정 기준 (가로 방향 위치 델타)
 
 	private Func<int> _getQuota;
 	protected Func<int> GetQuota => _getQuota;
@@ -66,7 +67,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	// 이하 함수 빌딩 블록
 
 
-	protected static Func<Vector2, Vector2, TState> HandleActionFillQuotaAndPlayEffectAt<TState>(
+	protected static Func<Vector2, Vector2, TState> HandleAction_NotifyFilledQuota_PlayEffectAt<TState>(
 		List<(Func<TState, TState, bool>, Action<Vector2, Vector2>)> effects,
 		Func<int> getQuotaFunction, Action<int> notifyQuotaFilledFunction,
 		Func<TState, TState> transitionFunction,
@@ -115,20 +116,13 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	protected static TState Harvest<TState>(TState beforeState) where TState : struct, ICommonCropState { beforeState.Harvested = true; return beforeState; }
 	protected static TState DoNothing<TState>(TState beforeState) where TState : struct, ICommonCropState => beforeState;
 	protected static int GetQuotaFilled<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => afterState.RemainingQuota - beforeState.RemainingQuota;
-	/// <summary>
-	/// 이전 상태의 RemainingQuota와 count 둘 중 작은 값만큼 RemainingQUota 감소된 상태를 반환.
-	/// </summary>
-	/// <typeparam name="TState"></typeparam>
-	/// <param name="beforeState"></param>
-	/// <param name="count"></param>
-	/// <returns></returns>
-	protected static TState FillQuotaUpto<TState>(TState beforeState, int count) where TState : struct, ICommonCropState { beforeState.RemainingQuota -= Math.Min(count, beforeState.RemainingQuota); return beforeState; }
 	protected static Action<Vector2, Vector2> PlayEffectAt<TState>(List<(Func<TState, TState, bool>, Action<Vector2, Vector2>)> effects, TState beforeState, TState afterState)
 	{
 		var (_, effect) = effects.FirstOrDefault(effect => effect.Item1(beforeState, afterState));
 		return effect == null ? (_, _) => { } : effect;
 	}
 	protected static TState DoNothing_OnSingleHolding<TState>(TState beforeState, Vector2 initialWorldPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime) where TState: struct, ICommonCropState => DoNothing(beforeState);
+	protected static TState DoNothing_OnFarmUpdate<TState>(TState beforeState, float deltaTime) where TState: struct, ICommonCropState => DoNothing(beforeState);
 
 	// 이펙트 조건 및 실행 함수
 
@@ -148,4 +142,25 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 		SoundManager.PlaySfx("SFX_harvest");
 	}
 
+	/// <summary>
+	/// 이전 상태의 RemainingQuota와 count 둘 중 작은 값만큼 다음 상태의 RemainingQuota를 감소시키며,
+	/// 만약 감소시킨 값이 최초 요청한 count와 같다면 Planted 또한 false로 변경.
+	/// </summary>
+	/// <typeparam name="TState"></typeparam>
+	/// <param name="beforeState"></param>
+	/// <param name="count"></param>
+	/// <returns></returns>
+	protected static TState FillQuotaUptoAndResetIfEqual<TState>(TState beforeState, int count) where TState : struct, ICommonCropState
+	{
+		var nextState = beforeState;
+		var quotaToFill = Math.Min(count, beforeState.RemainingQuota);
+
+		nextState.RemainingQuota -= quotaToFill;
+		if (quotaToFill == count)
+		{
+			nextState.Planted = false;
+		}
+
+		return nextState; 
+	}
 }
