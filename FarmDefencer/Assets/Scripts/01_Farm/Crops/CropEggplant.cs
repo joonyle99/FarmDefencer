@@ -15,7 +15,7 @@ public class CropEggplant : Crop
 		public int RemainingQuota { get; set; }
 		public int LeavesDropped { get; set; }
 		public float LastSingleTapTime { get; set; }
-		public bool trelisPlaced { get; set; }
+		public bool TrelisPlaced { get; set; }
 	}
 
 	private enum EggplantStage
@@ -67,7 +67,18 @@ public class CropEggplant : Crop
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
-			Water,
+			(beforeState)
+			=>
+			{
+				var nextState = beforeState;
+				if (beforeState.Planted
+				&& !beforeState.Watered 
+				&& (beforeState.GrowthSeconds < Stage1_GrowthSeconds || beforeState.TrelisPlaced))
+				{
+					nextState.Watered = true;
+				}
+				return nextState;
+			},
 			_currentState)
 
 			(transform.position, transform.position);
@@ -121,7 +132,7 @@ public class CropEggplant : Crop
 		{ LeavesDropped: >= 1 } => EggplantStage.Stage3_HalfLeaves,
 		{ GrowthSeconds: >= Stage1_GrowthSeconds + Stage2_GrowthSeconds } => EggplantStage.Stage3_FullLeaves,
 
-		{ GrowthSeconds: >= Stage1_GrowthSeconds, trelisPlaced: false} => EggplantStage.Stage2_Beforetrelis,
+		{ GrowthSeconds: >= Stage1_GrowthSeconds, TrelisPlaced: false} => EggplantStage.Stage2_Beforetrelis,
 		{ GrowthSeconds: >= Stage1_GrowthSeconds, WaterWaitingSeconds: >= WaterWaitingDeadSeconds + WaterWaitingResetSeconds } => EggplantStage.Seed,
 		{ GrowthSeconds: >= Stage1_GrowthSeconds, WaterWaitingSeconds: >= WaterWaitingDeadSeconds } => EggplantStage.Stage2_Dead,
 		{ GrowthSeconds: >= Stage1_GrowthSeconds, Watered: true } => EggplantStage.Stage2_Growing,
@@ -173,7 +184,7 @@ public class CropEggplant : Crop
 		{EggplantStage.Stage1_BeforeWater, DoNothing },
 		{EggplantStage.Stage1_Growing, DoNothing },
 
-		{EggplantStage.Stage2_Beforetrelis, (beforeState) => { beforeState.trelisPlaced = true; return beforeState; } },
+		{EggplantStage.Stage2_Beforetrelis, (beforeState) => { beforeState.TrelisPlaced = true; return beforeState; } },
 		{EggplantStage.Stage2_BeforeWater, DoNothing },
 		{EggplantStage.Stage2_Dead, DoNothing },
 		{EggplantStage.Stage2_Growing, DoNothing },
@@ -211,7 +222,7 @@ public class CropEggplant : Crop
 	private static readonly Func<EggplantState, EggplantState, bool> TapEffectCondition = (beforeState, afterState) => afterState.LastSingleTapTime > beforeState.LastSingleTapTime || afterState.LeavesDropped > beforeState.LeavesDropped;
 	private static readonly Action<Vector2, Vector2> TapEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayTabEffect(inputWorldPosition);
 
-	private static readonly Func<EggplantState, EggplantState, bool> TrelisEffectCondition = (beforeState, afterState) => afterState.trelisPlaced && !beforeState.trelisPlaced;
+	private static readonly Func<EggplantState, EggplantState, bool> TrelisEffectCondition = (beforeState, afterState) => afterState.TrelisPlaced && !beforeState.TrelisPlaced;
 	private static readonly Action<Vector2, Vector2> TrelisEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayTabEffect(inputWorldPosition);
 
 	private static List<(Func<EggplantState, EggplantState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<EggplantState, EggplantState, bool>, Action<Vector2, Vector2>)>
