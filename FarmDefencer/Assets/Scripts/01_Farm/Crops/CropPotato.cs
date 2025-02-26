@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEditor.PackageManager;
 
 public class CropPotato : Crop
 {
@@ -49,7 +50,7 @@ public class CropPotato : Crop
 			OnSingleTapFunctions[GetCurrentStage(_currentState)],
 			_currentState)
 
-			(transform.position, transform.position);
+			(inputWorldPosition, transform.position);
 	}
 
 	public override void OnSingleHolding(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
@@ -66,7 +67,7 @@ public class CropPotato : Crop
 			},
 			_currentState)
 
-			(transform.position, transform.position);
+			(initialPosition + deltaPosition, transform.position);
 	}
 
 	public override void OnWatering()
@@ -125,19 +126,19 @@ public class CropPotato : Crop
 		{PotatoStage.Seed, (currentState, deltaTime) => Reset(currentState) },
 		{PotatoStage.BeforeWater, WaitWater },
 		{PotatoStage.Dead, WaitWater },
-		{PotatoStage.Growing, (currentState, deltaTime) => { currentState.GrowthSeconds += deltaTime; return currentState; } },
-		{PotatoStage.Mature, (currentState, deltaTime) => DoNothing(currentState) },
-		{PotatoStage.Harvested, (currentState, deltaTime) => DoNothing(currentState) },
+		{PotatoStage.Growing, Grow },
+		{PotatoStage.Mature, DoNothing_OnFarmUpdate },
+		{PotatoStage.Harvested, DoNothing_OnFarmUpdate },
 	};
 
 	private static readonly Dictionary<PotatoStage, Func<PotatoState, PotatoState>> OnSingleTapFunctions = new Dictionary<PotatoStage, Func<PotatoState, PotatoState>>
 	{
-		{PotatoStage.Seed, Reset },
+		{PotatoStage.Seed, Plant },
 		{PotatoStage.BeforeWater, DoNothing },
 		{PotatoStage.Dead, DoNothing },
 		{PotatoStage.Growing, DoNothing },
 		{PotatoStage.Mature, DoNothing },
-		{PotatoStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
+		{PotatoStage.Harvested, FillQuotaOneAndResetIfSucceeded },
 	};
 
 	private static readonly Dictionary<PotatoStage, Func<PotatoState, Vector2, Vector2, bool, float, PotatoState>> OnSingleHoldingFunctions = new Dictionary<PotatoStage, Func<PotatoState, Vector2, Vector2, bool, float, PotatoState>>
@@ -161,6 +162,9 @@ public class CropPotato : Crop
 		},
 	};
 
+	private static readonly Func<PotatoState, PotatoState, bool> HoldEffectCondition = (beforeState, afterState) => afterState.HoldingTime > beforeState.HoldingTime;
+	private static readonly Action<Vector2, Vector2> HoldEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayHoldEffect(inputWorldPosition);
+
 	[Pure]
 	private Action<SpriteRenderer> ApplySpriteTo(PotatoStage stage) => stage switch
 	{
@@ -177,6 +181,7 @@ public class CropPotato : Crop
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(HarvestEffectCondition, HarvestEffect)
+		(HarvestEffectCondition, HarvestEffect),
+		(HoldEffectCondition, HoldEffect),
 	};
 }
