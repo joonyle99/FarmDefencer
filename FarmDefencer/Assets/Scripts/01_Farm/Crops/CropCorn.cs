@@ -84,7 +84,7 @@ public class CropCorn : Crop
 			NotifyQuotaFilled,
 			(beforeState) =>
 			{
-				return OnFarmUpdateFunctions[currentStage](_currentState, deltaTime);
+				return OnFarmUpdateFunctions[currentStage](beforeState, deltaTime);
 			},
 			_currentState)
 

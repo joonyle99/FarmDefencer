@@ -28,12 +28,12 @@ public class FarmManager : MonoBehaviour
 
 		FarmUI.Init(FarmClock);
 		FarmUI.WateringCan.OnWatering.AddListener(Farm.WateringAction);
-
-		Farm.Init(FarmUI.HarvestInventory.GetQuota, FarmUI.HarvestInventory.Gather);
 	}
 
 	private void Start()
 	{
+		Farm.Init(FarmUI.HarvestInventory.GetQuota, FarmUI.HarvestInventory.Gather);
+
 		SetAvailability("product_carrot", true);
 		SetAvailability("product_potato", true);
 		SetAvailability("product_corn", true);
@@ -52,7 +52,7 @@ public class FarmManager : MonoBehaviour
 				("product_cabbage", 99), 
 				("product_cucumber", 99), 
 				("product_eggplant", 99), 
-				("product_sweetpotato", 3), 
+				("product_sweetpotato", 99), 
 				("product_mushroom", 99),
 			});
 	}

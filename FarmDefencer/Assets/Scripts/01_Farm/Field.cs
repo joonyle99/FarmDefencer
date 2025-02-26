@@ -99,5 +99,7 @@ public class Field : MonoBehaviour, IFarmUpdatable
                 _crops[yOffset * FieldSize.x + xOffset] = cropComponent;
             }
         }
+
+        OnAvailabilityChanged();
 	}
 }

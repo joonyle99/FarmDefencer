@@ -104,7 +104,7 @@ public class CropSweetpotato : Crop
 			NotifyQuotaFilled,
 			(beforeState) =>
 			{
-				return OnSingleHoldingFunctions[currentStage](_currentState, initialPosition, deltaPosition, isEnd, deltaHoldTime);
+				return OnSingleHoldingFunctions[currentStage](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime);
 			},
 			_currentState)
 
@@ -137,7 +137,7 @@ public class CropSweetpotato : Crop
 			NotifyQuotaFilled,
 			(beforeState) =>
 			{
-				return OnFarmUpdateFunctions[currentStage](_currentState, deltaTime);
+				return OnFarmUpdateFunctions[currentStage](beforeState, deltaTime);
 			},
 			_currentState)
 

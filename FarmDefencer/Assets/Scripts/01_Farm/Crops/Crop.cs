@@ -1,13 +1,12 @@
 using UnityEngine;
 using System;
-using UnityEngine.Rendering;
 using System.Collections.Generic;
 using System.Linq;
 
 public abstract class Crop : MonoBehaviour, IFarmUpdatable
 {
 	/// <summary>
-	/// CropState는 반드시 초기값이 초기 상태가 되어야 한다.<br/>
+	/// CropState의 RemainingQuota를 제외한 필드는 반드시 초기값이 초기 상태를 의미하도록 되어야 한다.<br/>
 	/// 예: { IsSeed = true }가 초기 상태 - X<br/>
 	/// { IsPlanted = false } 가 초기 상태 - O<br/>
 	/// 즉 컴파일러가 생성하는 초기값이 초기 상태여야 함.
@@ -109,7 +108,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 		}
 		return nextState;
 	}
-	protected static TState Plant<TState>(TState beforeState) where TState : struct, ICommonCropState { var nextState = new TState { Planted = true }; return nextState; }
+	protected static TState Plant<TState>(TState beforeState) where TState : struct, ICommonCropState{ beforeState.Planted = true; return beforeState; }
 	protected static TState WaitWater<TState>(TState beforeState, float deltaTime) where TState : struct, ICommonCropState { beforeState.WaterWaitingSeconds += deltaTime; return beforeState; }
 	protected static TState Grow<TState>(TState beforeState, float deltaTime) where TState : struct, ICommonCropState { beforeState.GrowthSeconds += deltaTime; return beforeState; }
 	
@@ -126,7 +125,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	}
 	protected static TState Harvest<TState>(TState beforeState) where TState : struct, ICommonCropState { beforeState.Harvested = true; return beforeState; }
 	protected static TState DoNothing<TState>(TState beforeState) where TState : struct, ICommonCropState => beforeState;
-	protected static int GetQuotaFilled<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => afterState.RemainingQuota - beforeState.RemainingQuota;
+	protected static int GetQuotaFilled<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => beforeState.RemainingQuota - afterState.RemainingQuota;
 	protected static Action<Vector2, Vector2> PlayEffectAt<TState>(List<(Func<TState, TState, bool>, Action<Vector2, Vector2>)> effects, TState beforeState, TState afterState)
 	{
 		var (_, effect) = effects.FirstOrDefault(effect => effect.Item1(beforeState, afterState));
@@ -182,16 +181,5 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	/// <param name="beforeState"></param>
 	/// <param name="count"></param>
 	/// <returns></returns>
-	protected static TState FillQuotaOneAndResetIfSucceeded<TState>(TState beforeState) where TState : struct, ICommonCropState
-	{
-		var nextState = beforeState;
-
-		if (beforeState.RemainingQuota >= 1)
-		{
-			nextState.RemainingQuota -= 1;
-			nextState = Reset(nextState);
-		}
-
-		return nextState;
-	}
+	protected static TState FillQuotaOneAndResetIfSucceeded<TState>(TState beforeState) where TState : struct, ICommonCropState => FillQuotaUptoAndResetIfEqual(beforeState, 1);
 }

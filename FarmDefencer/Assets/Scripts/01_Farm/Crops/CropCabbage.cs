@@ -127,7 +127,7 @@ public class CropCabbage : Crop
 			(beforeState)
 			=>
 			{
-				return OnFarmUpdateFunctions[currentStage](_currentState, deltaTime);
+				return OnFarmUpdateFunctions[currentStage](beforeState, deltaTime);
 			},
 			_currentState)
 
