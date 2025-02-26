@@ -388,7 +388,7 @@ public class CropSweetpotato : Crop
 				nextState.Harvested = true;
 			}
 
-			return beforeState;
+			return nextState;
 		};
 
 	private static readonly Func<SweetpotatoState, Vector2, Vector2, bool, float, SweetpotatoState> Wrap =
