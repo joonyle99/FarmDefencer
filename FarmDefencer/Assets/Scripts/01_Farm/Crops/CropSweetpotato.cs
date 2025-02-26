@@ -199,12 +199,24 @@ public class CropSweetpotato : Crop
 		_ => (_) => { }
 	};
 
+	private static readonly Func<SweetpotatoState, SweetpotatoState, bool> HoldEffectCondition = (beforeState, afterState) => afterState.HoldingTime > beforeState.HoldingTime;
+	private static readonly Action<Vector2, Vector2> HoldEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayHoldEffect(inputWorldPosition);
+
+	private static readonly Func<SweetpotatoState, SweetpotatoState, bool> TapEffectCondition = (beforeState, afterState) => afterState.LastSingleTapTime > beforeState.LastSingleTapTime;
+	private static readonly Action<Vector2, Vector2> TapEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayTabEffect(inputWorldPosition);
+
+	private static readonly Func<SweetpotatoState, SweetpotatoState, bool> WrapEffectCondition = (beforeState, afterState) => afterState.Wrapped && !beforeState.Wrapped;
+	private static readonly Action<Vector2, Vector2> WrapEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayVfx("SoilDust", cropPosition);
+
 	private static readonly List<(Func<SweetpotatoState, SweetpotatoState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<SweetpotatoState, SweetpotatoState, bool>, Action<Vector2, Vector2>)>
 	{
+		(WrapEffectCondition, WrapEffect),
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
 		(HarvestEffectCondition, HarvestEffect),
 		(QuotaFilledEffectCondition, QuotaFilledEffect),
+		(HoldEffectCondition, HoldEffect),
+		(TapEffectCondition, TapEffect),
 	};
 
 	/// <summary>
@@ -397,9 +409,15 @@ public class CropSweetpotato : Crop
 		(beforeState, initialWorldPosition, deltaPosition, isEnd, deltaHoldTime) =>
 		{
 			var nextState = beforeState;
-			if (deltaPosition.x >= PlowDeltaPositionCrierion)
+			nextState.HoldingTime = beforeState.HoldingTime + deltaHoldTime;
+			if (Mathf.Abs(deltaPosition.x) >= PlowDeltaPositionCrierion)
 			{
 				nextState.Planted = true;
+			}
+
+			if (isEnd)
+			{
+				nextState.HoldingTime = 0.0f;
 			}
 
 			return nextState;
