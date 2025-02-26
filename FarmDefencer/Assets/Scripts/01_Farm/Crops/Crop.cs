@@ -112,7 +112,18 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	protected static TState Plant<TState>(TState beforeState) where TState : struct, ICommonCropState { var nextState = new TState { Planted = true }; return nextState; }
 	protected static TState WaitWater<TState>(TState beforeState, float deltaTime) where TState : struct, ICommonCropState { beforeState.WaterWaitingSeconds += deltaTime; return beforeState; }
 	protected static TState Grow<TState>(TState beforeState, float deltaTime) where TState : struct, ICommonCropState { beforeState.GrowthSeconds += deltaTime; return beforeState; }
-	protected static TState Reset<TState>(TState beforeState) where TState : struct => new TState();
+	
+	/// <summary>
+	/// RemainingQuota를 제외한 모든 값을 초기값으로 설정한 상태를 반환,
+	/// </summary>
+	/// <typeparam name="TState"></typeparam>
+	/// <param name="beforeState"></param>
+	/// <returns></returns>
+	protected static TState Reset<TState>(TState beforeState) where TState : struct, ICommonCropState
+	{
+		var nextState = new TState() { RemainingQuota = beforeState.RemainingQuota };
+		return nextState;
+	}
 	protected static TState Harvest<TState>(TState beforeState) where TState : struct, ICommonCropState { beforeState.Harvested = true; return beforeState; }
 	protected static TState DoNothing<TState>(TState beforeState) where TState : struct, ICommonCropState => beforeState;
 	protected static int GetQuotaFilled<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => afterState.RemainingQuota - beforeState.RemainingQuota;
@@ -144,7 +155,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 
 	/// <summary>
 	/// 이전 상태의 RemainingQuota와 count 둘 중 작은 값만큼 다음 상태의 RemainingQuota를 감소시키며,
-	/// 만약 감소시킨 값이 최초 요청한 count와 같다면 Planted 또한 false로 변경.
+	/// 만약 감소시킨 값이 최초 요청한 count와 같다면 Reset().
 	/// </summary>
 	/// <typeparam name="TState"></typeparam>
 	/// <param name="beforeState"></param>
@@ -158,9 +169,29 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 		nextState.RemainingQuota -= quotaToFill;
 		if (quotaToFill == count)
 		{
-			nextState.Planted = false;
+			nextState = Reset(nextState);
 		}
 
 		return nextState; 
+	}
+
+	/// <summary>
+	/// 이전 상태의 RemainingQuota >= 1이라면 다음 상태에 1 감소시키며 Reset()함.
+	/// </summary>
+	/// <typeparam name="TState"></typeparam>
+	/// <param name="beforeState"></param>
+	/// <param name="count"></param>
+	/// <returns></returns>
+	protected static TState FillQuotaOneAndResetIfSucceeded<TState>(TState beforeState) where TState : struct, ICommonCropState
+	{
+		var nextState = beforeState;
+
+		if (beforeState.RemainingQuota >= 1)
+		{
+			nextState.RemainingQuota -= 1;
+			nextState = Reset(nextState);
+		}
+
+		return nextState;
 	}
 }
