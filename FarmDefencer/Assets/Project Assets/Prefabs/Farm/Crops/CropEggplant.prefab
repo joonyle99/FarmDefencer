@@ -105,7 +105,7 @@ MonoBehaviour:
   _stage1_beforeWaterSprite: {fileID: -38436379460211280, guid: 9b47d2a1df8bf1840811499242fdae73, type: 3}
   _stage1_deadSprite: {fileID: 3641188092932242446, guid: be80812cd60c2ad46bb78081a8d9121b, type: 3}
   _stage1_growingSprite: {fileID: -4296200620010335966, guid: 155f7bfd29d60bf4396588d0ea59eafa, type: 3}
-  _stage2_beforeTrellisSprite: {fileID: -6717930171321577887, guid: c4ae92e52f434b146ae66df5dab51c5c, type: 3}
+  _stage2_beforetrelisSprite: {fileID: -6717930171321577887, guid: c4ae92e52f434b146ae66df5dab51c5c, type: 3}
   _stage2_beforeWaterSprite: {fileID: -7898577524073931799, guid: c1b25f99d5645814db9cf93f216ddc19, type: 3}
   _stage2_deadSprite: {fileID: -3656584184956693866, guid: bdecbf60c73c03040aedcf5626956828, type: 3}
   _stage2_growingSprite: {fileID: -5371069837622984630, guid: 470ddf4a34d76344fbb59328d53222e9, type: 3}
