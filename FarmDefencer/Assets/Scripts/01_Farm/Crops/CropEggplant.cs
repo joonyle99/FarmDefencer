@@ -28,7 +28,7 @@ public class CropEggplant : Crop
 		Stage1_Dead,
 		Stage1_Growing,
 
-		Stage2_Beforetrelis,
+		Stage2_BeforeTrelis,
 		Stage2_BeforeWater,
 		Stage2_Dead,
 		Stage2_Growing,
@@ -132,7 +132,7 @@ public class CropEggplant : Crop
 		{ LeavesDropped: >= 1 } => EggplantStage.Stage3_HalfLeaves,
 		{ GrowthSeconds: >= Stage1_GrowthSeconds + Stage2_GrowthSeconds } => EggplantStage.Stage3_FullLeaves,
 
-		{ GrowthSeconds: >= Stage1_GrowthSeconds, TrelisPlaced: false} => EggplantStage.Stage2_Beforetrelis,
+		{ GrowthSeconds: >= Stage1_GrowthSeconds, TrelisPlaced: false} => EggplantStage.Stage2_BeforeTrelis,
 		{ GrowthSeconds: >= Stage1_GrowthSeconds, WaterWaitingSeconds: >= WaterWaitingDeadSeconds + WaterWaitingResetSeconds } => EggplantStage.Seed,
 		{ GrowthSeconds: >= Stage1_GrowthSeconds, WaterWaitingSeconds: >= WaterWaitingDeadSeconds } => EggplantStage.Stage2_Dead,
 		{ GrowthSeconds: >= Stage1_GrowthSeconds, Watered: true } => EggplantStage.Stage2_Growing,
@@ -163,7 +163,7 @@ public class CropEggplant : Crop
 			}
 		},
 
-		{EggplantStage.Stage2_Beforetrelis, DoNothing_OnFarmUpdate },
+		{EggplantStage.Stage2_BeforeTrelis, DoNothing_OnFarmUpdate },
 		{EggplantStage.Stage2_Dead, WaitWater },
 		{EggplantStage.Stage2_BeforeWater, WaitWater },
 		{EggplantStage.Stage2_Growing, Grow },
@@ -184,7 +184,7 @@ public class CropEggplant : Crop
 		{EggplantStage.Stage1_BeforeWater, DoNothing },
 		{EggplantStage.Stage1_Growing, DoNothing },
 
-		{EggplantStage.Stage2_Beforetrelis, (beforeState) => { beforeState.TrelisPlaced = true; return beforeState; } },
+		{EggplantStage.Stage2_BeforeTrelis, (beforeState) => { beforeState.TrelisPlaced = true; return beforeState; } },
 		{EggplantStage.Stage2_BeforeWater, DoNothing },
 		{EggplantStage.Stage2_Dead, DoNothing },
 		{EggplantStage.Stage2_Growing, DoNothing },
@@ -205,7 +205,7 @@ public class CropEggplant : Crop
 		EggplantStage.Stage1_BeforeWater => (spriteRenderer) => ApplySprite(_stage1_beforeWaterSprite, spriteRenderer),
 		EggplantStage.Stage1_Growing => (spriteRenderer) => ApplySprite(_stage1_growingSprite, spriteRenderer),
 
-		EggplantStage.Stage2_Beforetrelis => (spriteRenderer) => ApplySprite(_stage2_beforetrelisSprite, spriteRenderer),
+		EggplantStage.Stage2_BeforeTrelis => (spriteRenderer) => ApplySprite(_stage2_beforetrelisSprite, spriteRenderer),
 		EggplantStage.Stage2_Dead => (spriteRenderer) => ApplySprite(_stage2_deadSprite, spriteRenderer),
 		EggplantStage.Stage2_BeforeWater => (spriteRenderer) => ApplySprite(_stage2_beforeWaterSprite, spriteRenderer),
 		EggplantStage.Stage2_Growing => (spriteRenderer) => ApplySprite(_stage2_growingSprite, spriteRenderer),

@@ -192,7 +192,7 @@ MonoBehaviour:
   _stage1_beforeWaterSprite: {fileID: 5169970296904740854, guid: 5e0bc8dcf004adf4e91d2f143cd1cc2a, type: 3}
   _stage1_deadSprite: {fileID: -5765044233073359201, guid: c5456887a0fb6f149a99069d9e0dda34, type: 3}
   _stage1_growingSprite: {fileID: 2504396362891868477, guid: 1bb3676a4aa8fd64f8689fb5397b5116, type: 3}
-  _stage2_beforeShortTrellisSprite: {fileID: -1508817800329217220, guid: 0cbecd0e76baa3c42bae143cde2ad909, type: 3}
+  _stage2_beforeShorttrelisSprite: {fileID: -1508817800329217220, guid: 0cbecd0e76baa3c42bae143cde2ad909, type: 3}
   _stage2_beforeWaterSprite: {fileID: 968733346534869322, guid: 31ced9c90e3c55647a427102dbcde65a, type: 3}
   _stage2_deadSprite: {fileID: -2444987322731586363, guid: 229c5e2d53c40914f8da197bd42c8b2b, type: 3}
   _stage2_growingSprite: {fileID: -4925550858667894425, guid: 73eade3f7c0c876409d2a6f1038d324b, type: 3}

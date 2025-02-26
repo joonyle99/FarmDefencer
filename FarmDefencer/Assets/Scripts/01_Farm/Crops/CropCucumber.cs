@@ -14,8 +14,8 @@ public class CropCucumber : Crop
 		public bool Harvested { get; set; }
 		public float HoldingTime { get; set; }
 		public int RemainingQuota { get; set; }
-		public bool ShortTrellisPlaced { get; set; }
-		public bool LongTrellisPlaced { get; set; }
+		public bool ShortTrelisPlaced { get; set; }
+		public bool LongtrelisPlaced { get; set; }
 	}
 
 	private enum CucumberStage
@@ -28,7 +28,7 @@ public class CropCucumber : Crop
 		Stage1_Dead,
 		Stage1_Growing,
 
-		Stage2_BeforeShortTrellis,
+		Stage2_BeforeShortTrelis,
 		Stage2_BeforeWater,
 		Stage2_Dead,
 		Stage2_Growing,
@@ -45,7 +45,7 @@ public class CropCucumber : Crop
 	[SerializeField] private Sprite _stage1_deadSprite;
 	[SerializeField] private Sprite _stage1_growingSprite;
 	[Space]
-	[SerializeField] private Sprite _stage2_beforeShortTrellisSprite;
+	[SerializeField] private Sprite _stage2_beforeShorttrelisSprite;
 	[SerializeField] private Sprite _stage2_beforeWaterSprite;
 	[SerializeField] private Sprite _stage2_deadSprite;
 	[SerializeField] private Sprite _stage2_growingSprite;
@@ -65,7 +65,18 @@ public class CropCucumber : Crop
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
-			Water,
+			(beforeState)
+			=>
+			{
+				var nextState = beforeState;
+				if (beforeState.Planted
+				&& !beforeState.Watered
+				&& (beforeState.GrowthSeconds < Stage1_GrowthSeconds || beforeState.ShortTrelisPlaced))
+				{
+					nextState.Watered = true;
+				}
+				return nextState;
+			},
 			_currentState)
 
 			(transform.position, transform.position);
@@ -114,11 +125,11 @@ public class CropCucumber : Crop
 	{
 		{ Planted: false } => CucumberStage.Seed,
 		{ Harvested: true } => CucumberStage.Harvested,
-		{ LongTrellisPlaced: true } => CucumberStage.Mature,
+		{ LongtrelisPlaced: true } => CucumberStage.Mature,
 
 		{ GrowthSeconds: >= Stage1_GrowthSeconds + Stage2_GrowthSeconds } => CucumberStage.Stage3,
 
-		{ GrowthSeconds: >= Stage1_GrowthSeconds, ShortTrellisPlaced: false } => CucumberStage.Stage2_BeforeShortTrellis,
+		{ GrowthSeconds: >= Stage1_GrowthSeconds, ShortTrelisPlaced: false } => CucumberStage.Stage2_BeforeShortTrelis,
 		{ GrowthSeconds: >= Stage1_GrowthSeconds, WaterWaitingSeconds: >= WaterWaitingDeadSeconds + WaterWaitingResetSeconds } => CucumberStage.Seed,
 		{ GrowthSeconds: >= Stage1_GrowthSeconds, WaterWaitingSeconds: >= WaterWaitingDeadSeconds } => CucumberStage.Stage2_Dead,
 		{ GrowthSeconds: >= Stage1_GrowthSeconds, Watered: true } => CucumberStage.Stage2_Growing,
@@ -149,7 +160,7 @@ public class CropCucumber : Crop
 			}
 		},
 
-		{CucumberStage.Stage2_BeforeShortTrellis, (beforeState, deltaTime) => DoNothing(beforeState) },
+		{CucumberStage.Stage2_BeforeShortTrelis, (beforeState, deltaTime) => DoNothing(beforeState) },
 		{CucumberStage.Stage2_Dead, WaitWater },
 		{CucumberStage.Stage2_BeforeWater, WaitWater },
 		{CucumberStage.Stage2_Growing, Grow },
@@ -168,12 +179,12 @@ private static readonly Dictionary<CucumberStage, Func<CucumberState, CucumberSt
 		{CucumberStage.Stage1_BeforeWater, DoNothing },
 		{CucumberStage.Stage1_Growing, DoNothing },
 
-		{CucumberStage.Stage2_BeforeShortTrellis, (beforeState) => { beforeState.ShortTrellisPlaced = true; return beforeState; } },
+		{CucumberStage.Stage2_BeforeShortTrelis, (beforeState) => { beforeState.ShortTrelisPlaced = true; return beforeState; } },
 		{CucumberStage.Stage2_Dead, DoNothing },
 		{CucumberStage.Stage2_BeforeWater, DoNothing },
 		{CucumberStage.Stage2_Growing, DoNothing },
 
-		{CucumberStage.Stage3, (beforeState) => { beforeState.LongTrellisPlaced = true; return beforeState; } },
+		{CucumberStage.Stage3, (beforeState) => { beforeState.LongtrelisPlaced = true; return beforeState; } },
 
 		{CucumberStage.Mature, Harvest },
 		{CucumberStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
@@ -188,7 +199,7 @@ private static readonly Dictionary<CucumberStage, Func<CucumberState, CucumberSt
 		CucumberStage.Stage1_BeforeWater => (spriteRenderer) => ApplySprite(_stage1_beforeWaterSprite, spriteRenderer),
 		CucumberStage.Stage1_Growing => (spriteRenderer) => ApplySprite(_stage1_growingSprite, spriteRenderer),
 
-		CucumberStage.Stage2_BeforeShortTrellis => (spriteRenderer) => ApplySprite(_stage2_beforeShortTrellisSprite, spriteRenderer),
+		CucumberStage.Stage2_BeforeShortTrelis => (spriteRenderer) => ApplySprite(_stage2_beforeShorttrelisSprite, spriteRenderer),
 		CucumberStage.Stage2_Dead => (spriteRenderer) => ApplySprite(_stage2_deadSprite, spriteRenderer),
 		CucumberStage.Stage2_BeforeWater => (spriteRenderer) => ApplySprite(_stage2_beforeWaterSprite, spriteRenderer),
 		CucumberStage.Stage2_Growing => (spriteRenderer) => ApplySprite(_stage2_growingSprite, spriteRenderer),
@@ -200,12 +211,16 @@ private static readonly Dictionary<CucumberStage, Func<CucumberState, CucumberSt
 		_ => (_) => { }
 	};
 
+	private static readonly Func<CucumberState, CucumberState, bool> TrelisEffectCondition = (beforeState, afterState) => afterState.LongtrelisPlaced && !beforeState.LongtrelisPlaced || afterState.ShortTrelisPlaced && !beforeState.ShortTrelisPlaced;
+	private static readonly Action<Vector2, Vector2> TrelisEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayTabEffect(inputWorldPosition);
+
 	private static List<(Func<CucumberState, CucumberState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<CucumberState, CucumberState, bool>, Action<Vector2, Vector2>)>
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
 		(HarvestEffectCondition, HarvestEffect),
 		(QuotaFilledEffectCondition, QuotaFilledEffect),
+		(TrelisEffectCondition, TrelisEffect),
 	};
 }
 
