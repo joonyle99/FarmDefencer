@@ -188,31 +188,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d8bafe1b868c047bfaf940bca61686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaterWaitingDeadSeconds: 300
-  WaterWaitingResetSeconds: 300
-  Stage1BeforeWaterSprite: {fileID: -2926072093043426144, guid: adff25b7ded79e44e9e6521105146f8e, type: 3}
-  Stage1DeadSprite: {fileID: 8667131316060353084, guid: aa9d49020695b5a4489c182701c777e9, type: 3}
-  Stage1AfterWaterSprite: {fileID: -2935609776451076171, guid: 7b18db4b3dd471b43ab8dfd96b821ea2, type: 3}
-  Stage2BeforeWaterSprite: {fileID: 7360896723288083390, guid: c77df4ef5d6a5eb4783987f9d2469772, type: 3}
-  Stage2DeadSprite: {fileID: -1837152525124395075, guid: 3b3bad560977d52468550390a38d771d, type: 3}
-  Stage2AfterWaterSprite: {fileID: -680451588128437482, guid: ebb05c008ccc93742adabf41cad90847, type: 3}
-  Stage3BeforeWrapSprite: {fileID: -8072476731542956246, guid: 56ca345ce86a8504abb3d0e5f4bfec2c, type: 3}
-  Stage3AfterWrapSprite: {fileID: -7668523388517660598, guid: 8bc14c9180d0e76428b690e134c12eff, type: 3}
-  Stage4Sprite: {fileID: -393943011667699732, guid: a26918cffb64425428c75149b79b107e, type: 3}
-  Stage5_X_Sprite: {fileID: -1501239353019026789, guid: 1ccb20eee17787f41a9e0f397e67d87a, type: 3}
-  Stage5_O_Sprite: {fileID: 8851719432068433820, guid: 68b4429c1aee3664c89bd0db314c960d, type: 3}
-  Stage5_OO_Sprite: {fileID: -8974424302408145557, guid: e03e0272824bee24698d7b78b69e39bf, type: 3}
-  Stage5_OX_Sprite: {fileID: -6549051271431963970, guid: 3e713878f60aea34c9054be02731eec8, type: 3}
-  Stage5_XO_Sprite: {fileID: -6549051271431963970, guid: 3e713878f60aea34c9054be02731eec8, type: 3}
-  Stage5_XX_Sprite: {fileID: -2871083057967756941, guid: eee22def713719941ad31443c6a5bf77, type: 3}
-  Stage5_XXX_Sprite: {fileID: -8298802704867711590, guid: be12bd176e84d244d9c2408c5d1a0b70, type: 3}
-  Stage5_XXO_Sprite: {fileID: -5468782791774853274, guid: 898363a2890d4fd4781a5651b3ef8893, type: 3}
-  Stage5_XOX_Sprite: {fileID: -5468782791774853274, guid: 898363a2890d4fd4781a5651b3ef8893, type: 3}
-  Stage5_OXX_Sprite: {fileID: -5468782791774853274, guid: 898363a2890d4fd4781a5651b3ef8893, type: 3}
-  Stage5_XOO_Sprite: {fileID: 8346025296148574424, guid: c11d91e4ee01baf4d853605406d3e315, type: 3}
-  Stage5_OXO_Sprite: {fileID: 8346025296148574424, guid: c11d91e4ee01baf4d853605406d3e315, type: 3}
-  Stage5_OOX_Sprite: {fileID: 8346025296148574424, guid: c11d91e4ee01baf4d853605406d3e315, type: 3}
-  Stage5_OOO_Sprite: {fileID: 3900174459098693200, guid: 903fd32b17f7af5469a3ee2d6296de09, type: 3}
-  Harvested1Sprite: {fileID: 6151279427029150262, guid: 9ea773bb6af578f4fa82bc2c0bcd135e, type: 3}
-  Harvested2Sprite: {fileID: 6275712384507771880, guid: ccf408fc4685eab4fbf15b5b84da2e9c, type: 3}
-  Harvested3Sprite: {fileID: 8536362653482191216, guid: 50210f2e99b9b2e4886b9f67a95eae21, type: 3}
+  _stage1_beforeWaterSprite: {fileID: -2926072093043426144, guid: adff25b7ded79e44e9e6521105146f8e, type: 3}
+  _stage1_deadSprite: {fileID: 8667131316060353084, guid: aa9d49020695b5a4489c182701c777e9, type: 3}
+  _stage1_growingSprite: {fileID: -2935609776451076171, guid: 7b18db4b3dd471b43ab8dfd96b821ea2, type: 3}
+  _stage2_beforeWaterSprite: {fileID: 7360896723288083390, guid: c77df4ef5d6a5eb4783987f9d2469772, type: 3}
+  _stage2_deadSprite: {fileID: -1837152525124395075, guid: 3b3bad560977d52468550390a38d771d, type: 3}
+  _stage2_growingSprite: {fileID: -680451588128437482, guid: ebb05c008ccc93742adabf41cad90847, type: 3}
+  _stage3_beforeWrapSprite: {fileID: -8072476731542956246, guid: 56ca345ce86a8504abb3d0e5f4bfec2c, type: 3}
+  _stage3_afterWrapSprite: {fileID: -7668523388517660598, guid: 8bc14c9180d0e76428b690e134c12eff, type: 3}
+  _stage4Sprite: {fileID: -393943011667699732, guid: a26918cffb64425428c75149b79b107e, type: 3}
+  _mature_X_sprite: {fileID: -1501239353019026789, guid: 1ccb20eee17787f41a9e0f397e67d87a, type: 3}
+  _mature_O_sprite: {fileID: 8851719432068433820, guid: 68b4429c1aee3664c89bd0db314c960d, type: 3}
+  _mature_OO_sprite: {fileID: -8974424302408145557, guid: e03e0272824bee24698d7b78b69e39bf, type: 3}
+  _mature_XO_sprite: {fileID: -6549051271431963970, guid: 3e713878f60aea34c9054be02731eec8, type: 3}
+  _mature_XX_sprite: {fileID: -2871083057967756941, guid: eee22def713719941ad31443c6a5bf77, type: 3}
+  _mature_XXX_sprite: {fileID: -8298802704867711590, guid: be12bd176e84d244d9c2408c5d1a0b70, type: 3}
+  _mature_XXO_sprite: {fileID: -5468782791774853274, guid: 898363a2890d4fd4781a5651b3ef8893, type: 3}
+  _mature_XOO_sprite: {fileID: 8346025296148574424, guid: c11d91e4ee01baf4d853605406d3e315, type: 3}
+  _mature_OOO_sprite: {fileID: 3900174459098693200, guid: 903fd32b17f7af5469a3ee2d6296de09, type: 3}
+  _harvested_1_sprite: {fileID: 6151279427029150262, guid: 9ea773bb6af578f4fa82bc2c0bcd135e, type: 3}
+  _harvested_2_sprite: {fileID: 6275712384507771880, guid: ccf408fc4685eab4fbf15b5b84da2e9c, type: 3}
+  _harvested_3_sprite: {fileID: 8536362653482191216, guid: 50210f2e99b9b2e4886b9f67a95eae21, type: 3}

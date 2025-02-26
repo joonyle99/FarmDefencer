@@ -364,13 +364,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a7a4915a887ee24c88a8dfeca05f867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaterWaitingDeadSeconds: 300
-  WaterWaitingResetSeconds: 300
-  SeedSprite: {fileID: 9108210110304135379, guid: cd476129295bf35488970a7ab9874eea, type: 3}
-  Stage1BeforeWateringSprite: {fileID: 7163337446934043649, guid: 6f02de391efcdae4880706b5a2033e89, type: 3}
-  Stage1DeadSprite: {fileID: -3669741882301279548, guid: 86ade9aa1594ba9458982bed2b6530bf, type: 3}
-  Stage1AfterWateringSprite: {fileID: -7431639975308168539, guid: d277a1c6601dc624a9b745c06f63ef08, type: 3}
-  Stage2BeforeWateringSprite: {fileID: -1378995463599233203, guid: 42aef13b974d23a4c8fa4fd1c02c1efc, type: 3}
-  Stage2DeadSprite: {fileID: 3681791427279955028, guid: ddbd4317a23ccf240b3343744e802223, type: 3}
-  Stage2AfterWateringSprite: {fileID: -5321431602895988416, guid: 9f3d671f3c2fa4440a438beae60cf7c8, type: 3}
-  HarvestedSprite: {fileID: -8333321270782159142, guid: 85c660a3bae86a84aac821d876a6b14b, type: 3}
+  _seedSprite: {fileID: 9108210110304135379, guid: cd476129295bf35488970a7ab9874eea, type: 3}
+  _harvestedSprite: {fileID: -8333321270782159142, guid: 85c660a3bae86a84aac821d876a6b14b, type: 3}
+  _stage1_beforeWaterSprite: {fileID: 7163337446934043649, guid: 6f02de391efcdae4880706b5a2033e89, type: 3}
+  _stage1_deadSprite: {fileID: -3669741882301279548, guid: 86ade9aa1594ba9458982bed2b6530bf, type: 3}
+  _stage1_growingSprite: {fileID: -7431639975308168539, guid: d277a1c6601dc624a9b745c06f63ef08, type: 3}
+  _stage2_beforeWaterSprite: {fileID: -1378995463599233203, guid: 42aef13b974d23a4c8fa4fd1c02c1efc, type: 3}
+  _stage2_deadSprite: {fileID: 3681791427279955028, guid: ddbd4317a23ccf240b3343744e802223, type: 3}
+  _stage2_growingSprite: {fileID: -5321431602895988416, guid: 9f3d671f3c2fa4440a438beae60cf7c8, type: 3}
