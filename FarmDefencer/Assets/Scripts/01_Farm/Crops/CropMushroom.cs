@@ -164,6 +164,115 @@ public class CropMushroom : Crop
 		{ } => MushroomStage.Stage1_BeforeWater,
 	};
 
+	[Pure]
+	private Action<SpriteRenderer> GetSpriteAndApplyTo(MushroomStage stage) => stage switch
+	{
+		MushroomStage.Unplowed => (spriteRenderer) => ApplySprite(null, spriteRenderer),
+
+		MushroomStage.Stage1_Dead => (spriteRenderer) => ApplySprite(_stage1_deadSprite, spriteRenderer),
+		MushroomStage.Stage1_BeforeWater => (spriteRenderer) => ApplySprite(_stage1_beforeWaterSprite, spriteRenderer),
+		MushroomStage.Stage1_Growing => (spriteRenderer) => ApplySprite(_stage1_growingSprite, spriteRenderer),
+
+		MushroomStage.Stage2_Dead => (spriteRenderer) => ApplySprite(_stage2_deadSprite, spriteRenderer),
+		MushroomStage.Stage2_BeforeWater => (spriteRenderer) => ApplySprite(_stage2_beforeWaterSprite, spriteRenderer),
+		MushroomStage.Stage2_Growing => (spriteRenderer) => ApplySprite(_stage2_growingSprite, spriteRenderer),
+
+		MushroomStage.Stage3_BeforeInoculation => (spriteRenderer) => ApplySprite(_stage3_beforeInoculationSprite, spriteRenderer),
+		MushroomStage.Stage3_AfterInoculation => (spriteRenderer) => ApplySprite(_stage3_afterInoculationSprite, spriteRenderer),
+
+		MushroomStage.Mature => (spriteRenderer) => ApplySprite(null, spriteRenderer),
+
+		MushroomStage.Harvested => (spriteRenderer) => ApplySprite(null, spriteRenderer),
+
+		_ => (_) => { }
+	};
+
+	private Action<SpriteRenderer> GetSpriteAndApplyTo_PoisonousVarying(MushroomState state) => state switch
+	{
+		{ GrowthSeconds: < Stage1_GrowthSeconds + Stage2_GrowthSeconds + Stage3_GrowthSeconds } => (_) => { }
+		,
+
+		{ Harvested: false, IsPoisonous: false } => (spriteRenderer) => ApplySprite(_mature_normalSprite, spriteRenderer),
+		{ Harvested: false, IsPoisonous: true } => (spriteRenderer) => ApplySprite(_mature_poisonousSprite, spriteRenderer),
+		{ IsPoisonous: false } => (spriteRenderer) => ApplySprite(_harvested_normalSprite, spriteRenderer),
+		{ IsPoisonous: true } => (spriteRenderer) => ApplySprite(_harvested_poisonousSprite, spriteRenderer),
+	};
+
+	private static readonly List<(Func<MushroomState, MushroomState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<MushroomState, MushroomState, bool>, Action<Vector2, Vector2>)>
+	{
+		(WaterEffectCondition, WaterEffect),
+		(PlantEffectCondition, PlantEffect),
+		(HarvestEffectCondition, HarvestEffect)
+	};
+
+	private static readonly Func<MushroomState, MushroomState> HarvestOnFiveTap =
+		(beforeState) =>
+		{
+			var nextState = beforeState;
+			var currentTime = Time.time;
+			var lastSingleTapTime = beforeState.LastSingleTapTime;
+			if (currentTime < lastSingleTapTime + MultipleTouchSecondsCriterion)
+			{
+				nextState.TapCount = beforeState.TapCount + 1;
+			}
+			else
+			{
+				nextState.TapCount = 1;
+			}
+			nextState.LastSingleTapTime = currentTime;
+			if (nextState.TapCount >= 5)
+			{
+				nextState = Harvest(nextState);
+			}
+
+			return nextState;
+		};
+
+	private static readonly Func<MushroomState, float, MushroomState> Boom =
+	(beforeState, deltaTime) =>
+	{
+		var nextState = beforeState;
+		nextState.BoomTimeElapsed += deltaTime;
+
+		if (nextState.BoomTimeElapsed >= BoomTime)
+		{
+			nextState = Reset(beforeState);
+		}
+
+		return nextState;
+	};
+
+	private static readonly Func<MushroomState, Vector2, Vector2, bool, float, MushroomState> Inoculate =
+	(beforeState, initialWorldPosition, deltaPosition, isEnd, deltaHoldTime) =>
+	{
+		var nextState = beforeState;
+		nextState.HoldingTime += deltaHoldTime;
+
+		if (isEnd)
+		{
+			nextState.HoldingTime = 0.0f;
+		}
+
+		if (nextState.HoldingTime >= InoculationHoldingTime)
+		{
+			nextState.Inoculated = true;
+		}
+
+		return nextState;
+	};
+
+	private static readonly Func<MushroomState, Vector2, Vector2, bool, float, MushroomState> Plow =
+	(beforeState, initialWorldPosition, deltaPosition, isEnd, deltaHoldTime) =>
+	{
+		var nextState = beforeState;
+		if (deltaPosition.x >= PlowDeltaPositionCrierion)
+		{
+			nextState.Planted = true;
+		}
+
+		return nextState;
+	};
+
 	private static readonly Dictionary<MushroomStage, Func<MushroomState, float, MushroomState>> OnFarmUpdateFunctions = new Dictionary<MushroomStage, Func<MushroomState, float, MushroomState>>
 	{
 		{MushroomStage.Unplowed, (beforeState, deltaTime) => Reset(beforeState) },
@@ -231,7 +340,7 @@ public class CropMushroom : Crop
 
 	private static readonly Dictionary<MushroomStage, Func<MushroomState, Vector2, Vector2, bool, float, MushroomState>> OnSingleHoldingFunctions = new Dictionary<MushroomStage, Func<MushroomState, Vector2, Vector2, bool, float, MushroomState>>
 	{
-		{MushroomStage.Unplowed, DoNothing_OnSingleHolding },
+		{MushroomStage.Unplowed, Plow },
 
 		{MushroomStage.Stage1_Dead, DoNothing_OnSingleHolding },
 		{MushroomStage.Stage1_BeforeWater, DoNothing_OnSingleHolding },
@@ -247,101 +356,5 @@ public class CropMushroom : Crop
 		{MushroomStage.Mature, DoNothing_OnSingleHolding },
 		{MushroomStage.Booming, DoNothing_OnSingleHolding },
 		{MushroomStage.Harvested, DoNothing_OnSingleHolding },
-	};
-	[Pure]
-	private Action<SpriteRenderer> GetSpriteAndApplyTo(MushroomStage stage) => stage switch
-	{
-		MushroomStage.Unplowed => (spriteRenderer) => ApplySprite(null, spriteRenderer),
-
-		MushroomStage.Stage1_Dead => (spriteRenderer) => ApplySprite(_stage1_deadSprite, spriteRenderer),
-		MushroomStage.Stage1_BeforeWater => (spriteRenderer) => ApplySprite(_stage1_beforeWaterSprite, spriteRenderer),
-		MushroomStage.Stage1_Growing => (spriteRenderer) => ApplySprite(_stage1_growingSprite, spriteRenderer),
-
-		MushroomStage.Stage2_Dead => (spriteRenderer) => ApplySprite(_stage2_deadSprite, spriteRenderer),
-		MushroomStage.Stage2_BeforeWater => (spriteRenderer) => ApplySprite(_stage2_beforeWaterSprite, spriteRenderer),
-		MushroomStage.Stage2_Growing => (spriteRenderer) => ApplySprite(_stage2_growingSprite, spriteRenderer),
-
-		MushroomStage.Stage3_BeforeInoculation => (spriteRenderer) => ApplySprite(_stage3_beforeInoculationSprite, spriteRenderer),
-		MushroomStage.Stage3_AfterInoculation => (spriteRenderer) => ApplySprite(_stage3_afterInoculationSprite, spriteRenderer),
-
-		MushroomStage.Mature => (spriteRenderer) => ApplySprite(null, spriteRenderer),
-
-		MushroomStage.Harvested => (spriteRenderer) => ApplySprite(null, spriteRenderer),
-
-		_ => (_) => { }
-	};
-
-	private Action<SpriteRenderer> GetSpriteAndApplyTo_PoisonousVarying(MushroomState state) => state switch
-	{
-		{ GrowthSeconds: < Stage1_GrowthSeconds + Stage2_GrowthSeconds + Stage3_GrowthSeconds } => (_) => { }
-		,
-
-		{ Harvested: false, IsPoisonous: false } => (spriteRenderer) => ApplySprite(_mature_normalSprite, spriteRenderer),
-		{ Harvested: false, IsPoisonous: true } => (spriteRenderer) => ApplySprite(_mature_poisonousSprite, spriteRenderer),
-		{ IsPoisonous: false } => (spriteRenderer) => ApplySprite(_harvested_poisonousSprite, spriteRenderer),
-		{ IsPoisonous: true } => (spriteRenderer) => ApplySprite(_harvested_normalSprite, spriteRenderer),
-	};
-
-	private static readonly List<(Func<MushroomState, MushroomState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<MushroomState, MushroomState, bool>, Action<Vector2, Vector2>)>
-	{
-		(WaterEffectCondition, WaterEffect),
-		(PlantEffectCondition, PlantEffect),
-		(HarvestEffectCondition, HarvestEffect)
-	};
-
-	private static readonly Func<MushroomState, MushroomState> HarvestOnFiveTap =
-		(beforeState) =>
-		{
-			var nextState = beforeState;
-			var currentTime = Time.time;
-			var lastSingleTapTime = beforeState.LastSingleTapTime;
-			if (currentTime < lastSingleTapTime + MultipleTouchSecondsCriterion)
-			{
-				nextState.TapCount = beforeState.TapCount + 1;
-			}
-			else
-			{
-				nextState.TapCount = 1;
-			}
-			nextState.LastSingleTapTime = currentTime;
-			if (nextState.TapCount >= 5)
-			{
-				nextState = Harvest(nextState);
-			}
-
-			return nextState;
-		};
-
-	private static readonly Func<MushroomState, float, MushroomState> Boom =
-	(beforeState, deltaTime) =>
-	{
-		var nextState = beforeState;
-		nextState.BoomTimeElapsed += deltaTime;
-
-		if (nextState.BoomTimeElapsed >= BoomTime)
-		{
-			nextState = Reset(beforeState);
-		}
-
-		return nextState;
-	};
-
-	private static readonly Func<MushroomState, Vector2, Vector2, bool, float, MushroomState> Inoculate =
-	(beforeState, initialWorldPosition, deltaPosition, isEnd, deltaHoldTime) =>
-	{
-		var nextState = beforeState;
-		nextState.HoldingTime += deltaHoldTime;
-
-		if (isEnd)
-		{
-			nextState.HoldingTime = 0.0f;
-		}
-
-		if (nextState.HoldingTime >= InoculationHoldingTime)
-		{
-			nextState.Inoculated = true;
-		}
-
-		return nextState;
 	};
 }
