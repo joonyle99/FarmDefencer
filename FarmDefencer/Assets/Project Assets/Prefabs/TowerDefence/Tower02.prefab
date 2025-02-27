@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef6080c1bf747a498520d7c748d262d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tower: {fileID: 2363259571219213461}
+  tower: {fileID: 0}
   levelText: {fileID: 5452563909937772322}
   attackRateText: {fileID: 6595185119455024861}
   damageText: {fileID: 7346579493683085739}
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2363259571219213461}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Tower, Assembly-CSharp
         m_MethodName: Upgrade
         m_Mode: 1
@@ -1428,7 +1428,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2363259571219213461}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Tower, Assembly-CSharp
         m_MethodName: Sell
         m_Mode: 1
@@ -1742,10 +1742,9 @@ GameObject:
   - component: {fileID: 6566107183723906193}
   - component: {fileID: 5983989570294867973}
   - component: {fileID: 3661977379965913437}
-  - component: {fileID: 2363259571219213461}
+  - component: {fileID: 157674121498074274}
   - component: {fileID: 5803083254459691797}
   - component: {fileID: 8739588272964975750}
-  - component: {fileID: 157674121498074274}
   m_Layer: 6
   m_Name: Tower02
   m_TagString: Untagged
@@ -1859,7 +1858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   demageableBehavior: {fileID: 0}
---- !u!114 &2363259571219213461
+--- !u!114 &157674121498074274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1868,7 +1867,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8016940742814412144}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9851108c98df8e2488ff066e35e695ee, type: 3}
+  m_Script: {fileID: 11500000, guid: d45a08f44da64864c86674ad76d49826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 0}
@@ -1878,6 +1877,7 @@ MonoBehaviour:
   _isStun: 0
   _targetPoint: {fileID: 0}
   _detector: {fileID: 7505782182428129248}
+  _towerName: turret_1
   _cost: 10
   UpgradeUIPanel: {fileID: 6451064662953558476}
   _maxLevel: 3
@@ -1892,7 +1892,7 @@ MonoBehaviour:
   attackRate_3: 0.5
   damage_3: 40
   sellCost_3: 89
-  _spineController: {fileID: 1928018848388447381}
+  _spineController: {fileID: 0}
   IdleAnimationName_1: idle_Lv1
   IdleAnimationName_2: idle_Lv2
   IdleAnimationName_3: idle_Lv3
@@ -1901,8 +1901,8 @@ MonoBehaviour:
   AttackAnimationName_3: attack_Lv3
   LevelUpAnimationName_1: level_up_1_to_2
   LevelUpAnimationName_2: level_up_2_to_3
-  _head: {fileID: 4637789690329802503}
-  _projectileTickPrefab: {fileID: 5264179474769179215, guid: 5949fc53ae8e0ad4080564acac3a6c09, type: 3}
+  _head: {fileID: 0}
+  _projectileTickPrefab: {fileID: 0}
 --- !u!210 &5803083254459691797
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -1925,7 +1925,7 @@ AudioSource:
   m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b9f8646df2af13d45b7fb57ae1a12310, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: b9f8646df2af13d45b7fb57ae1a12310, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -2012,50 +2012,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &157674121498074274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8016940742814412144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d45a08f44da64864c86674ad76d49826, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _healthBar: {fileID: 0}
-  _maxHp: 100
-  _stunDuration: 0.03
-  _isDead: 0
-  _isStun: 0
-  _targetPoint: {fileID: 0}
-  _detector: {fileID: 7505782182428129248}
-  _cost: 10
-  UpgradeUIPanel: {fileID: 6451064662953558476}
-  _maxLevel: 3
-  _currentLevel: 1
-  upgradeCost: 40
-  attackRate_1: 1
-  damage_1: 5
-  sellCost_1: 5
-  attackRate_2: 0.8
-  damage_2: 20
-  sellCost_2: 37
-  attackRate_3: 0.5
-  damage_3: 40
-  sellCost_3: 89
-  _spineController: {fileID: 0}
-  IdleAnimationName_1: 
-  IdleAnimationName_2: 
-  IdleAnimationName_3: 
-  AttackAnimationName_1: 
-  AttackAnimationName_2: 
-  AttackAnimationName_3: 
-  LevelUpAnimationName_1: 
-  LevelUpAnimationName_2: 
-  _head: {fileID: 0}
-  _projectileTickPrefab: {fileID: 0}
 --- !u!1 &8359961825463992884
 GameObject:
   m_ObjectHideFlags: 0

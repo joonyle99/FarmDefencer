@@ -1877,6 +1877,7 @@ MonoBehaviour:
   _isStun: 0
   _targetPoint: {fileID: 0}
   _detector: {fileID: 7505782182428129248}
+  _towerName: turret_1
   _cost: 10
   UpgradeUIPanel: {fileID: 6451064662953558476}
   _maxLevel: 3
@@ -1924,7 +1925,7 @@ AudioSource:
   m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b9f8646df2af13d45b7fb57ae1a12310, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: b9f8646df2af13d45b7fb57ae1a12310, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1

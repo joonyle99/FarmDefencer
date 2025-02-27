@@ -13,6 +13,11 @@ public abstract class Tower : TargetableBehavior
 
     [Space]
 
+    [SerializeField] private string _towerName;
+    public string TowerName => _towerName;
+
+    [Space]
+
     [Header("Build")]
     [SerializeField] private int _cost = 10;
     public int Cost => _cost;
@@ -315,6 +320,8 @@ public abstract class Tower : TargetableBehavior
         projectileTick.SetTarget(_currentTarget);
         projectileTick.SetDamage(_currentDamage);
         projectileTick.Shoot();
+
+        SoundManager.Instance.PlaySfx($"SFX_D_turretShot_1-{CurrentLevel}");
     }
 
     // panel
@@ -347,19 +354,27 @@ public abstract class Tower : TargetableBehavior
         // animation
         _spineController.SetAnimation(LevelUpAnimation, false);
 
+        // level
         CurrentLevel++;
         OnLevelChanged?.Invoke(CurrentLevel);
 
         // animation
         _spineController.AddAnimation(IdleAnimation, true);
 
+        // cost
         _cost += upgradeCost;
         OnCostChanged?.Invoke(_cost);
 
+        Reinforce();
+
+        HidePanel();
+    }
+    private void Reinforce()
+    {
         ReinforceRate();
         ReinforceDamage();
 
-        HidePanel();
+        SoundManager.Instance.PlaySfx("SFX_D_turret_levelup");
     }
     private void ReinforceRate()
     {
@@ -419,7 +434,10 @@ public abstract class Tower : TargetableBehavior
         {
             sellCost = sellCost_3;
         }
+
         ResourceManager.Instance.EarnGold(sellCost);
+
+        SoundManager.Instance.PlaySfx("SFX_D_turret_remove");
 
         // detector
         _detector.DebugEraseRange();

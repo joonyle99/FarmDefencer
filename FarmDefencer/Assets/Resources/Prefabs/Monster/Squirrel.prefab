@@ -292,7 +292,7 @@ MonoBehaviour:
   _isStun: 0
   _targetPoint: {fileID: 3677401387006666995}
   _originFactory: {fileID: 0}
-  _monsterName: Squirrel
+  _monsterName: squirrel
   _spineController: {fileID: 7923479951364342952}
   IdleAnimationName: idle
   WalkAnimationName: walk

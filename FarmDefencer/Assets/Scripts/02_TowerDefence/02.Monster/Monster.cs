@@ -121,6 +121,8 @@ public abstract class Monster : TargetableBehavior, IProduct
         // TEMP: 이동 중지
         GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
 
+        SoundManager.Instance.PlaySfx($"SFX_D_{_monsterName}_dead");
+
         StartCoroutine(KillRoutine(DissappearAnimationName));
 
         /*

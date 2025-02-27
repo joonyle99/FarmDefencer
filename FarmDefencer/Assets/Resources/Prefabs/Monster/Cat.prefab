@@ -292,7 +292,7 @@ MonoBehaviour:
   _isStun: 0
   _targetPoint: {fileID: 8056559261859085462}
   _originFactory: {fileID: 0}
-  _monsterName: Cat
+  _monsterName: cat
   _spineController: {fileID: 7923479951364342952}
   IdleAnimationName: idle
   WalkAnimationName: walk

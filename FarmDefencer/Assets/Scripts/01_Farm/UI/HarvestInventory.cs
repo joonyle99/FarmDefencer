@@ -55,7 +55,7 @@ public class HarvestInventory : MonoBehaviour
 		var profit = productEntry.Price * count;
 		harvestBox.Quota -= count;
 		ResourceManager.Instance.EarnGold(profit);
-		SoundManager.PlaySfx("SFX_coin");
+		SoundManager.Instance.PlaySfx("SFX_coin");
 
 		var cropScreenPosition = Camera.main.WorldToScreenPoint(cropWorldPosition);
 

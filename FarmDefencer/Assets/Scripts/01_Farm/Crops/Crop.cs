@@ -137,19 +137,19 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	// 이펙트 조건 및 실행 함수
 
 	protected static bool WaterEffectCondition<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => !beforeState.Watered && afterState.Watered;
-	protected static void WaterEffect(Vector2 inputWorldPosition, Vector2 cropPosition) => SoundManager.PlaySfx("SFX_water_oneshot");
+	protected static void WaterEffect(Vector2 inputWorldPosition, Vector2 cropPosition) => SoundManager.Instance.PlaySfx("SFX_water_oneshot");
 
 	protected static bool PlantEffectCondition<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => !beforeState.Planted && afterState.Planted;
 	protected static void PlantEffect(Vector2 inputWorldPosition, Vector2 cropPosition)
 	{
-		SoundManager.PlaySfx("SFX_plant_seed");
+		SoundManager.Instance.PlaySfx("SFX_plant_seed");
 		EffectPlayer.PlayTabEffect(inputWorldPosition);
 	}
 	protected static bool HarvestEffectCondition<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => !beforeState.Harvested && afterState.Harvested;
 	protected static void HarvestEffect(Vector2 inputWorldPosition, Vector2 cropPosition)
 	{
 		EffectPlayer.PlayTabEffect(inputWorldPosition);
-		SoundManager.PlaySfx("SFX_harvest");
+		SoundManager.Instance.PlaySfx("SFX_harvest");
 	}
 
 	protected static bool QuotaFilledEffectCondition<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => afterState.RemainingQuota < beforeState.RemainingQuota;

@@ -261,7 +261,7 @@ MonoBehaviour:
   _isStun: 0
   _targetPoint: {fileID: 6219046591756985945}
   _originFactory: {fileID: 0}
-  _monsterName: Capybara
+  _monsterName: capybara
   _spineController: {fileID: 7923479951364342952}
   IdleAnimationName: idle
   WalkAnimationName: walk

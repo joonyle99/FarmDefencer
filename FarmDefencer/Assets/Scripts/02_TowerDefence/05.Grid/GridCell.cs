@@ -117,7 +117,7 @@ public class GridCell : MonoBehaviour
                 return;
             }
 
-            // 실시간 경로 검사
+            // 2. 실시간 경로 검사
             if (GameStateManager.Instance.CurrentState is GameState.Wave)
             {
                 if (CheckBuild() == false)
@@ -126,7 +126,7 @@ public class GridCell : MonoBehaviour
                 }
             }
 
-            // 2. 설치할 타워의 인스턴스 생성 가능 여부 확인
+            // 3. 설치할 타워의 인스턴스 생성 가능 여부 확인
             Tower towerToInstance = towerBuildSystem.InstantiateTower(towerToBuild, this.worldPosition, Quaternion.identity);
             if (towerToInstance == null)
             {
@@ -231,6 +231,8 @@ public class GridCell : MonoBehaviour
     {
         _occupiedTower = tower;
         _occupiedTower.OccupyingGridCell(this);
+
+        SoundManager.Instance.PlaySfx($"SFX_D_{_occupiedTower.TowerName}_build");
     }
     public void DeleteOccupiedTower()
     {
