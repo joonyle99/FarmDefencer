@@ -9,8 +9,7 @@ public class TowerBuildSystem : MonoBehaviour
     [Space]
 
     [SerializeField] private Tower[] _towerPrefabs;
-
-    private int _selectedTowerIndex = 0;
+    [SerializeField] private int _selectedTowerIndex = 0;
 
     public Tower CheckTower()
     {

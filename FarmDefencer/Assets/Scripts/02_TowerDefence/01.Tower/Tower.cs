@@ -26,6 +26,8 @@ public abstract class Tower : TargetableBehavior
 
     [Space]
 
+    // TODO: Tower Stats -> ScriptableObject로 변경하기
+
     [Header("Upgrade")]
     public UpgradePanel UpgradeUIPanel;
 
@@ -54,7 +56,8 @@ public abstract class Tower : TargetableBehavior
 
     [Space]
 
-    public int upgradeCost = 40;
+    public int upgradeCost_1_2 = 30;
+    public int upgradeCost_2_3 = 40;
 
     [Space]
 
@@ -171,15 +174,17 @@ public abstract class Tower : TargetableBehavior
     [Space]
 
     [Header("Fire")]
-    [SerializeField] private TowerHead _head;
-    [SerializeField] private ProjectileTick _projectileTickPrefab;
+    [SerializeField] private TowerHead _head; // TODO: TowerHead의 하위 클래스 생성하기
+    public TowerHead Head => _head;
+    [SerializeField] private ProjectileTick _projectileTickPrefab; // TODO: ProjectileTick의 하위 클래스 생성하기
+    public ProjectileTick ProjectileTickPrefab => _projectileTickPrefab;
 
     private float _currentAttackRate;
     public float CurrentAttackRate => _currentAttackRate;
     private int _currentDamage;
     public int CurrentDamage => _currentDamage;
 
-    private TargetableBehavior _currentTarget;
+    protected TargetableBehavior currentTarget;
     private float _attackWaitTimer = 0f;
 
     private bool _isAttacking = false;
@@ -251,9 +256,9 @@ public abstract class Tower : TargetableBehavior
         if (_isAttacking == false)
         {
             UpdateTarget();
-            if (_currentTarget != null && _currentTarget.gameObject.activeSelf == true)
+            if (currentTarget != null && currentTarget.gameObject.activeSelf == true)
             {
-                _head.LookAt(_currentTarget.transform.position);
+                _head.LookAt(currentTarget.transform.position);
             }
         }
 
@@ -263,9 +268,9 @@ public abstract class Tower : TargetableBehavior
         {
             _attackWaitTimer = 0f;
 
-            if (_currentTarget != null
-                && _currentTarget.gameObject.activeSelf == true
-                && _currentTarget.IsDead == false)
+            if (currentTarget != null
+                && currentTarget.gameObject.activeSelf == true
+                && currentTarget.IsDead == false)
             {
                 Attack();
             }
@@ -295,7 +300,7 @@ public abstract class Tower : TargetableBehavior
     // fire
     private void UpdateTarget()
     {
-        _currentTarget = _detector.GetFrontTarget();
+        currentTarget = _detector.GetFrontTarget();
     }
     private void Attack()
     {
@@ -305,6 +310,10 @@ public abstract class Tower : TargetableBehavior
         _spineController.SetAnimation(AttackAnimation, false);
         _spineController.AddAnimation(IdleAnimation, true);
 
+        ShootingProcess();
+    }
+    protected virtual void ShootingProcess()
+    {
         // 공격 애니메이션은 바로 실행된다
         // 그러므로 공격 애니메이션의 시간을 알아내어
         // 그 시간 동안 대기 시간을 둔다
@@ -317,7 +326,7 @@ public abstract class Tower : TargetableBehavior
             return;
         }
 
-        projectileTick.SetTarget(_currentTarget);
+        projectileTick.SetTarget(currentTarget);
         projectileTick.SetDamage(_currentDamage);
         projectileTick.Shoot();
 
@@ -343,12 +352,15 @@ public abstract class Tower : TargetableBehavior
             return;
         }
 
+        // cost 1
+        var upgradeCost = int.MaxValue;
+        if (CurrentLevel == 1) upgradeCost = upgradeCost_1_2;
+        else if (CurrentLevel == 2) upgradeCost = upgradeCost_2_3;
         if (ResourceManager.Instance.GetGold() < upgradeCost)
         {
             Debug.Log("돈이 부족하여 Upgrade할 수 없습니다");
             return;
         }
-
         ResourceManager.Instance.SpendGold(upgradeCost);
 
         // animation
@@ -361,7 +373,7 @@ public abstract class Tower : TargetableBehavior
         // animation
         _spineController.AddAnimation(IdleAnimation, true);
 
-        // cost
+        // cost 2
         _cost += upgradeCost;
         OnCostChanged?.Invoke(_cost);
 
@@ -420,6 +432,7 @@ public abstract class Tower : TargetableBehavior
         _occupyingGridCell.Usable();
         _occupyingGridCell.DeleteOccupiedTower();
 
+        // TODO: sellCost 변수 하나로 줄이기
         // return gold
         var sellCost = 0;
         if (CurrentLevel == 1)

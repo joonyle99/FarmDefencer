@@ -251,4 +251,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damager: {fileID: 2493848825862227538}
-  _speed: 7
+  _speed: 10
