@@ -102,7 +102,7 @@ public class GridCell : MonoBehaviour
         // 타워가 설치되어 있다면 패널을 보여준다
         if (_occupiedTower != null)
         {
-            _occupiedTower.ShowPanel();
+            _occupiedTower.ShowUpgradePanel();
         }
         // 타워가 설치되어 있지 않다면 설치를 시도한다
         else if (_occupiedTower == null && isUsable == true)

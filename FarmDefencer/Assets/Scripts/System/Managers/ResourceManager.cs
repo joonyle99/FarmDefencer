@@ -56,6 +56,16 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>
     }
 
     // gold
+    public bool TrySpendGold(int amount)
+    {
+        if (Gold < amount)
+        {
+            Debug.Log("You don't have enough gold to build this tower");
+            return false;
+        }
+        SpendGold(amount);
+        return true;
+    }
     public void EarnGold(int amount)
     {
         Gold += amount;

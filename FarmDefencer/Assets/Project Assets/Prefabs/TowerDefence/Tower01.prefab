@@ -1744,7 +1744,6 @@ GameObject:
   - component: {fileID: 3661977379965913437}
   - component: {fileID: 2363259571219213461}
   - component: {fileID: 5803083254459691797}
-  - component: {fileID: 8739588272964975750}
   m_Layer: 6
   m_Name: Tower01
   m_TagString: Untagged
@@ -1877,32 +1876,28 @@ MonoBehaviour:
   _isStun: 0
   _targetPoint: {fileID: 0}
   _detector: {fileID: 7505782182428129248}
+  _levelData:
+  - {fileID: 11400000, guid: 6b743fe8a71ad6f4fad88123fe1d65e0, type: 2}
+  - {fileID: 11400000, guid: beef47e499746d747a492eb073bc4f3b, type: 2}
+  - {fileID: 11400000, guid: 94e864e4dd0d7104fac1aa524149290d, type: 2}
   _towerName: turret_1
   _cost: 10
-  UpgradeUIPanel: {fileID: 6451064662953558476}
-  _maxLevel: 3
-  _currentLevel: 1
-  upgradeCost: 40
-  attackRate_1: 1
-  damage_1: 5
-  sellCost_1: 5
-  attackRate_2: 0.8
-  damage_2: 20
-  sellCost_2: 37
-  attackRate_3: 0.5
-  damage_3: 40
-  sellCost_3: 89
+  _level: 1
   _spineController: {fileID: 1928018848388447381}
-  IdleAnimationName_1: idle_Lv1
-  IdleAnimationName_2: idle_Lv2
-  IdleAnimationName_3: idle_Lv3
-  AttackAnimationName_1: attack_Lv1
-  AttackAnimationName_2: attack_Lv2
-  AttackAnimationName_3: attack_Lv3
-  LevelUpAnimationName_1: level_up_1_to_2
-  LevelUpAnimationName_2: level_up_2_to_3
+  IdleAnimationNames:
+  - idle_Lv1
+  - idle_Lv2
+  - idle_Lv3
+  AttackAnimationNames:
+  - attack_Lv1
+  - attack_Lv2
+  - attack_Lv3
+  LevelUpAnimationNames:
+  - level_up_1_to_2
+  - level_up_2_to_3
   _head: {fileID: 4637789690329802503}
   _projectileTickPrefab: {fileID: 5264179474769179215, guid: 5949fc53ae8e0ad4080564acac3a6c09, type: 3}
+  UpgradePanel: {fileID: 6451064662953558476}
 --- !u!210 &5803083254459691797
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -1915,103 +1910,6 @@ SortingGroup:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_SortAtRoot: 0
---- !u!82 &8739588272964975750
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8016940742814412144}
-  m_Enabled: 0
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: b9f8646df2af13d45b7fb57ae1a12310, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &8359961825463992884
 GameObject:
   m_ObjectHideFlags: 0

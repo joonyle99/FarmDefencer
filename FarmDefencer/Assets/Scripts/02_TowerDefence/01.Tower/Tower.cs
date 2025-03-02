@@ -9,191 +9,79 @@ public abstract class Tower : TargetableBehavior
     [Header("──────── Tower ────────")]
     [Space]
 
+    [Header("Module")]
     [SerializeField] private TargetableDetector _detector;
 
     [Space]
 
-    [SerializeField] private string _towerName;
-    public string TowerName => _towerName;
-
-    [Space]
-
-    [Header("Build")]
-    [SerializeField] private int _cost = 10;
-    public int Cost => _cost;
-
-    private GridCell _occupyingGridCell;
-
-    [Space]
-
-    // TODO: Tower Stats -> ScriptableObject로 변경하기
-
-    [Header("Upgrade")]
-    public UpgradePanel UpgradeUIPanel;
-
-    [Space]
-
-    [SerializeField] private int _maxLevel = 3;
-    public int MaxLevel => _maxLevel;
-    [SerializeField] private int _currentLevel = 1;
-    public int CurrentLevel
+    [Header("Level Data")]
+    [SerializeField] private TowerLevelData[] _levelData;
+    private TowerLevelData _currentLevelData;
+    public TowerLevelData CurrentLevelData
     {
-        get => _currentLevel;
-        set
+        get
         {
-            _currentLevel = value;
-            
-            if (_currentLevel < 1)
-            {
-                _currentLevel = 1;
-            }
-            else if (_currentLevel > 3)
-            {
-                _currentLevel = 3;
-            }
+            _currentLevelData = _levelData[Level - 1];
+            return _currentLevelData;
         }
     }
 
     [Space]
 
-    public int upgradeCost_1_2 = 30;
-    public int upgradeCost_2_3 = 40;
+    [Header("Default")]
+    [SerializeField] private string _towerName;
+    [SerializeField][Tooltip("input default cost")] private int _cost;
+    [SerializeField][Tooltip("tower current level")] private int _level = 1;
 
-    [Space]
-
-    // level 1
-    public float attackRate_1 = 1f;
-    public int damage_1 = 5;
-    public int sellCost_1 = 5;
-
-    [Space]
-
-    // level 2
-    public float attackRate_2 = 0.8f;
-    public int damage_2 = 20;
-    public int sellCost_2 = 37;
-
-    [Space]
-
-    // level 3
-    public float attackRate_3 = 0.5f;
-    public int damage_3 = 40;
-    public int sellCost_3 = 89;
-
-    [Space]
+    public string TowerName => _towerName;
+    public int Cost => _cost;
+    public int Level
+    {
+        get => Mathf.Clamp(_level, 1, _levelData.Length);
+        set => _level = Mathf.Clamp(value, 1, _levelData.Length);
+    }
 
     [Space]
 
     [Header("Animation")]
     [SerializeField] private SpineController _spineController;
+    [SpineAnimation] public string[] IdleAnimationNames;
+    [SpineAnimation] public string[] AttackAnimationNames;
+    [SpineAnimation] public string[] LevelUpAnimationNames;
 
-    [Space]
+    public string IdleAnimation => IdleAnimationNames[Level - 1];
+    public string AttackAnimation => AttackAnimationNames[Level - 1];
+    public string LevelUpAnimation => LevelUpAnimationNames[Level - 1];
 
-    [SpineAnimation]
-    public string IdleAnimationName_1;
-    [SpineAnimation]
-    public string IdleAnimationName_2;
-    [SpineAnimation]
-    public string IdleAnimationName_3;
-    [SpineAnimation]
-    public string IdleAnimation
-    {
-        get
-        {
-            if (CurrentLevel == 1)
-            {
-                return IdleAnimationName_1;
-            }
-            else if (CurrentLevel == 2)
-            {
-                return IdleAnimationName_2;
-            }
-            else if (CurrentLevel == 3)
-            {
-                return IdleAnimationName_3;
-            }
+    private float[] _attackDuration;
+    public float AttackDuration => _attackDuration[Level - 1];
 
-            return IdleAnimationName_1;
-        }
-    }
-
-    [Space]
-
-    [SpineAnimation]
-    public string AttackAnimationName_1;
-    [SpineAnimation]
-    public string AttackAnimationName_2;
-    [SpineAnimation]
-    public string AttackAnimationName_3;
-    [SpineAnimation]
-    public string AttackAnimation
-    {
-        get
-        {
-            if (CurrentLevel == 1)
-            {
-                return AttackAnimationName_1;
-            }
-            else if (CurrentLevel == 2)
-            {
-                return AttackAnimationName_2;
-            }
-            else if (CurrentLevel == 3)
-            {
-                return AttackAnimationName_3;
-            }
-
-            return AttackAnimationName_1;
-        }
-    }
-
-    [Space]
-
-    [SpineAnimation]
-    public string LevelUpAnimationName_1;
-    [SpineAnimation]
-    public string LevelUpAnimationName_2;
-    [SpineAnimation]
-    public string LevelUpAnimation
-    {
-        get
-        {
-            if (CurrentLevel == 1)
-            {
-                return LevelUpAnimationName_1;
-            }
-            else if (CurrentLevel == 2)
-            {
-                return LevelUpAnimationName_2;
-            }
-
-            return LevelUpAnimationName_1;
-        }
-    }
-
-    [Space]
+    private bool _isAttacking = false;
+    private float _attackCooldownTimer = 0f;
+    private float _attackDurationTimer = 0f;
 
     [Header("Fire")]
     [SerializeField] private TowerHead _head; // TODO: TowerHead의 하위 클래스 생성하기
-    public TowerHead Head => _head;
     [SerializeField] private ProjectileTick _projectileTickPrefab; // TODO: ProjectileTick의 하위 클래스 생성하기
+
+    public TowerHead Head => _head;
     public ProjectileTick ProjectileTickPrefab => _projectileTickPrefab;
 
-    private float _currentAttackRate;
-    public float CurrentAttackRate => _currentAttackRate;
-    private int _currentDamage;
-    public int CurrentDamage => _currentDamage;
+    [Space]
 
-    protected TargetableBehavior currentTarget;
-    private float _attackWaitTimer = 0f;
+    [Header("UI")]
+    public UpgradePanel UpgradePanel;
 
-    private bool _isAttacking = false;
-    private float _attackAnimDuration_1;
-    private float _attackAnimDuration_2;
-    private float _attackAnimDuration_3;
-    private float _attackElapsedTime = 0f;
+    // target
+    private TargetableBehavior _currentTarget;
+    public TargetableBehavior CurrentTarget => _currentTarget;
+    public bool IsValidTarget => _currentTarget != null && _currentTarget.gameObject.activeSelf;
+    public bool IsAttackableTarget => IsValidTarget && !_currentTarget.IsDead;
 
-    // Actions
+    // build
+    private GridCell _occupyingGridCell;
+
+    // actions
     public event System.Action<int> OnLevelChanged;
     public event System.Action<float> OnAttackRateChanged;
     public event System.Action<int> OnDamageChanged;
@@ -202,9 +90,6 @@ public abstract class Tower : TargetableBehavior
     protected override void Awake()
     {
         base.Awake();
-
-        _currentAttackRate = attackRate_1;
-        _currentDamage = damage_1;
     }
     protected override void OnEnable()
     {
@@ -213,79 +98,31 @@ public abstract class Tower : TargetableBehavior
     protected override void Start()
     {
         base.Start();
-
-        UpgradeUIPanel.SetOwner(this);
-
-        _attackAnimDuration_1 = _spineController.Skeleton.Data.FindAnimation(AttackAnimationName_1).Duration;
-        _attackAnimDuration_2 = _spineController.Skeleton.Data.FindAnimation(AttackAnimationName_2).Duration;
-        _attackAnimDuration_3 = _spineController.Skeleton.Data.FindAnimation(AttackAnimationName_3).Duration;
+        UpgradePanel.SetOwner(this);
+        InitializeAttackDurations();
     }
     private void Update()
     {
-        if (_isAttacking == true)
+        UpdateAttackState();
+    }
+
+    // initialize
+    private void InitializeAttackDurations()
+    {
+        var skeletonData = _spineController.Skeleton.Data;
+        _attackDuration = new float[AttackAnimationNames.Length];
+
+        for (int i = 0; i < _attackDuration.Length; i++)
         {
-            _attackElapsedTime += Time.deltaTime;
-
-            if (CurrentLevel == 1)
-            {
-                if (_attackElapsedTime >= _attackAnimDuration_1)
-                {
-                    _attackElapsedTime = 0f;
-                    _isAttacking = false;
-                }
-            }
-            else if (CurrentLevel == 2)
-            {
-                if (_attackElapsedTime >= _attackAnimDuration_2)
-                {
-                    _attackElapsedTime = 0f;
-                    _isAttacking = false;
-                }
-            }
-            else if (CurrentLevel == 3)
-            {
-                if (_attackElapsedTime >= _attackAnimDuration_3)
-                {
-                    _attackElapsedTime = 0f;
-                    _isAttacking = false;
-                }
-            }
+            var animation = skeletonData.FindAnimation(AttackAnimationNames[i]);
+            _attackDuration[i] = (animation != null) ? animation.Duration : 0f;
         }
-
-        // find
-        if (_isAttacking == false)
-        {
-            UpdateTarget();
-            if (currentTarget != null && currentTarget.gameObject.activeSelf == true)
-            {
-                _head.LookAt(currentTarget.transform.position);
-            }
-        }
-
-        // attack
-        _attackWaitTimer += Time.deltaTime;
-        if (_attackWaitTimer >= _currentAttackRate)
-        {
-            _attackWaitTimer = 0f;
-
-            if (currentTarget != null
-                && currentTarget.gameObject.activeSelf == true
-                && currentTarget.IsDead == false)
-            {
-                Attack();
-            }
-        }
-
-        // TODO
-        // 현재 문제점..
-        // 공격할 때 LooAt을 한다
-        // 최소한 공격 애니메이션은 끝나고 방향을 전환해야 한다
     }
 
     // build
     public bool IsValidBuild(int gold)
     {
-        if (gold >= _cost)
+        if (gold >= Cost)
         {
             return true;
         }
@@ -298,9 +135,43 @@ public abstract class Tower : TargetableBehavior
     }
 
     // fire
+    private void UpdateAttackState()
+    {
+        // wait attack duration
+        if (_isAttacking == true)
+        {
+            _attackDurationTimer += Time.deltaTime;
+            if (_attackDurationTimer >= AttackDuration)
+            {
+                _attackDurationTimer = 0f;
+                _isAttacking = false;
+            }
+        }
+
+        // find
+        if (_isAttacking == false) // 공격 애니메이션 재생 중에 다른 곳을 바라보지 않도록 하기 위함
+        {
+            UpdateTarget();
+            if (IsValidTarget)
+            {
+                _head.LookAt(CurrentTarget.transform.position);
+            }
+        }
+
+        // attack
+        _attackCooldownTimer += Time.deltaTime; // 공격 쿨타임은 공격 애니메이션 재생 중에도 증가
+        if (_attackCooldownTimer >= CurrentLevelData.AttackRate)
+        {
+            _attackCooldownTimer = 0f;
+            if (IsAttackableTarget)
+            {
+                Attack();
+            }
+        }
+    }
     private void UpdateTarget()
     {
-        currentTarget = _detector.GetFrontTarget();
+        _currentTarget = _detector.GetFrontTarget();
     }
     private void Attack()
     {
@@ -314,11 +185,7 @@ public abstract class Tower : TargetableBehavior
     }
     protected virtual void ShootingProcess()
     {
-        // 공격 애니메이션은 바로 실행된다
-        // 그러므로 공격 애니메이션의 시간을 알아내어
-        // 그 시간 동안 대기 시간을 둔다
-
-        var projectileTick = Instantiate(_projectileTickPrefab, _head.Muzzle.position, _head.Muzzle.rotation);
+        var projectileTick = Instantiate(_projectileTickPrefab, Head.Muzzle.position, Head.Muzzle.rotation);
 
         if (projectileTick == null)
         {
@@ -326,103 +193,61 @@ public abstract class Tower : TargetableBehavior
             return;
         }
 
-        projectileTick.SetTarget(currentTarget);
-        projectileTick.SetDamage(_currentDamage);
+        projectileTick.SetTarget(CurrentTarget);
+        projectileTick.SetDamage(CurrentLevelData.Damage);
         projectileTick.Shoot();
 
-        SoundManager.Instance.PlaySfx($"SFX_D_turretShot_1-{CurrentLevel}");
-    }
-
-    // panel
-    public void ShowPanel()
-    {
-        UpgradeUIPanel.gameObject.SetActive(true);
-    }
-    public void HidePanel()
-    {
-        UpgradeUIPanel.gameObject.SetActive(false);
+        SoundManager.Instance.PlaySfx($"SFX_D_turretShot_1-{Level}");
     }
 
     // upgrade
     public void Upgrade()
     {
-        if (CurrentLevel >= MaxLevel)
+        if (Level >= _levelData.Length)
         {
-            Debug.Log("최고 레벨이므로 Upgrade할 수 없습니다");
+            Debug.Log("최고 레벨이므로 타워를 업그레이드 할 수 없습니다");
             return;
         }
 
-        // cost 1
-        var upgradeCost = int.MaxValue;
-        if (CurrentLevel == 1) upgradeCost = upgradeCost_1_2;
-        else if (CurrentLevel == 2) upgradeCost = upgradeCost_2_3;
-        if (ResourceManager.Instance.GetGold() < upgradeCost)
+        var result = ResourceManager.Instance.TrySpendGold(CurrentLevelData.UpgradeCost);
+        if (result == false)
         {
-            Debug.Log("돈이 부족하여 Upgrade할 수 없습니다");
+            Debug.Log("골드가 부족하여 타워를 업그레이드 할 수 없습니다");
             return;
         }
-        ResourceManager.Instance.SpendGold(upgradeCost);
 
         // animation
         _spineController.SetAnimation(LevelUpAnimation, false);
-
-        // level
-        CurrentLevel++;
-        OnLevelChanged?.Invoke(CurrentLevel);
-
-        // animation
         _spineController.AddAnimation(IdleAnimation, true);
 
-        // cost 2
-        _cost += upgradeCost;
+        // level
+        Level = Level + 1;
+        OnLevelChanged?.Invoke(Level);
+
+        // cost
+        _cost += CurrentLevelData.UpgradeCost;
         OnCostChanged?.Invoke(_cost);
 
         Reinforce();
 
-        HidePanel();
+        HideUpgradePanel();
     }
     private void Reinforce()
     {
-        ReinforceRate();
-        ReinforceDamage();
+        OnAttackRateChanged?.Invoke(CurrentLevelData.AttackRate);
+        OnDamageChanged?.Invoke(CurrentLevelData.Damage);
 
         SoundManager.Instance.PlaySfx("SFX_D_turret_levelup");
     }
-    private void ReinforceRate()
+
+    // panel
+    public void ShowUpgradePanel()
     {
-        if (CurrentLevel == 1)
-        {
-            _currentAttackRate = attackRate_1;
-            OnAttackRateChanged?.Invoke(_currentAttackRate);
-        }
-        else if (CurrentLevel == 2)
-        {
-            _currentAttackRate = attackRate_2;
-            OnAttackRateChanged?.Invoke(_currentAttackRate);
-        }
-        else if (CurrentLevel == 3)
-        {
-            _currentAttackRate = attackRate_3;
-            OnAttackRateChanged?.Invoke(_currentAttackRate);
-        }
+        UpgradePanel.gameObject.SetActive(true);
     }
-    private void ReinforceDamage()
+    public void HideUpgradePanel()
     {
-        if (CurrentLevel == 1)
-        {
-            _currentDamage = damage_1;
-            OnDamageChanged?.Invoke(_currentDamage);
-        }
-        else if (CurrentLevel == 2)
-        {
-            _currentDamage = damage_2;
-            OnDamageChanged?.Invoke(_currentDamage);
-        }
-        else if (CurrentLevel == 3)
-        {
-            _currentDamage = damage_3;
-            OnDamageChanged?.Invoke(_currentDamage);
-        }
+        UpgradePanel.gameObject.SetActive(false);
     }
 
     // sell
@@ -432,24 +257,7 @@ public abstract class Tower : TargetableBehavior
         _occupyingGridCell.Usable();
         _occupyingGridCell.DeleteOccupiedTower();
 
-        // TODO: sellCost 변수 하나로 줄이기
-        // return gold
-        var sellCost = 0;
-        if (CurrentLevel == 1)
-        {
-            sellCost = sellCost_1;
-        }
-        else if (CurrentLevel == 2)
-        {
-            sellCost = sellCost_2;
-        }
-        else if (CurrentLevel == 3)
-        {
-            sellCost = sellCost_3;
-        }
-
-        ResourceManager.Instance.EarnGold(sellCost);
-
+        ResourceManager.Instance.EarnGold(CurrentLevelData.SellCost);
         SoundManager.Instance.PlaySfx("SFX_D_turret_remove");
 
         // detector
@@ -458,6 +266,7 @@ public abstract class Tower : TargetableBehavior
         Destroy(gameObject);
     }
 
+    // hit
     public override void TakeDamage(int damage)
     {
         HP -= damage;
@@ -467,20 +276,3 @@ public abstract class Tower : TargetableBehavior
         throw new System.NotImplementedException();
     }
 }
-
-// 타워의 체력
-// 타워의 방어력
-
-// 타워의 공격력
-// 타워의 공격속도
-// 타워의 공격 효과 (슬로우, 중독, 기절)
-
-// 타워의 사정거리 범위
-// 타워의 타게팅 가능 수
-// 타워의 공격 대상 (지상, 공중, 수중)
-// 타워의 타게팅 방식 (가장 가까운 적, 체력이 적은 적, 혹은 가장 빠른 적)
-
-// 타워 설치 비용
-// 타워 설치 쿨타임
-
-// 타워 업그레이드
