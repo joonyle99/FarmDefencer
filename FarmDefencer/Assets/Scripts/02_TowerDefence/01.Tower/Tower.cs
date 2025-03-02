@@ -11,6 +11,7 @@ public abstract class Tower : TargetableBehavior
 
     [Header("Module")]
     [SerializeField] private TargetableDetector _detector;
+    public TargetableDetector Detector => _detector;
 
     [Space]
 
@@ -174,7 +175,7 @@ public abstract class Tower : TargetableBehavior
         SoundManager.Instance.PlaySfx("SFX_D_turret_remove");
 
         // detector
-        _detector.DebugEraseRange();
+        Detector.EraseRange();
 
         Destroy(gameObject);
     }
@@ -262,7 +263,7 @@ public abstract class Tower : TargetableBehavior
     }
     private void UpdateTarget()
     {
-        _currentTarget = _detector.GetFrontTarget();
+        _currentTarget = Detector.GetFrontTarget();
     }
     private void Attack()
     {

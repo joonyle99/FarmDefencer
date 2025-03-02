@@ -97,7 +97,7 @@ public class GridCell : MonoBehaviour
         }
 
         // GridMap에 현재 클릭된 GridCell을 저장
-        DefenceContext.Current.GridMap.ClickedCell = this;
+        DefenceContext.Current.GridMap.HoveringCell = this;
 
         // 타워가 설치되어 있다면 패널을 보여준다
         if (_occupiedTower != null)
@@ -110,7 +110,7 @@ public class GridCell : MonoBehaviour
             TowerBuildSystem towerBuildSystem = DefenceContext.Current.TowerBuildSystem;
 
             // 1. 설치할 타워의 유효성 및 건설 가능 여부 확인
-            Tower towerToBuild = towerBuildSystem.CheckTower();
+            Tower towerToBuild = towerBuildSystem.CheckSelectedTower();
             if (towerToBuild == null)
             {
                 Debug.Log("towerToBuild is invalid");

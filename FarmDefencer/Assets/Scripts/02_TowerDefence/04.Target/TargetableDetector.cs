@@ -36,10 +36,6 @@ public class TargetableDetector : MonoBehaviour
         return _currentTargets[0];
     }
 
-    private void Start()
-    {
-        DebugPaintRange();
-    }
     private void Update()
     {
         DetectTargets();
@@ -154,8 +150,7 @@ public class TargetableDetector : MonoBehaviour
         }
     }
 
-    // debug
-    private void DebugPaintRange()
+    public void PaintRange()
     {
         var order = 0;
 
@@ -178,13 +173,13 @@ public class TargetableDetector : MonoBehaviour
 
                 // debug
                 order++;
-                targetCell.DebugChangeColor(Color.blue);
+                targetCell.ChangeColor(Color.blue);
                 // targetCell.distanceCostText.text = order.ToString();
                 // JoonyleGameDevKit.Painter.DebugDrawPlus(targetCell.transform.position, Color.red, DefenceContext.Current.GridMap.UnitCellSize / 2f, 5f);
             }
         }
     }
-    public void DebugEraseRange()
+    public void EraseRange()
     {
         // get targetDetector's cell
         var thisCellPos = DefenceContext.Current.GridMap.WorldToCell(transform.position);
@@ -204,7 +199,7 @@ public class TargetableDetector : MonoBehaviour
                 }
 
                 // debug
-                targetCell.DebugResetColor();
+                targetCell.ResetColor();
                 // targetCell.distanceCostText.text = order.ToString();
                 // JoonyleGameDevKit.Painter.DebugDrawPlus(targetCell.transform.position, Color.red, DefenceContext.Current.GridMap.UnitCellSize / 2f, 5f);
             }

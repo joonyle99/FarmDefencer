@@ -11,7 +11,7 @@ public class TowerBuildSystem : MonoBehaviour
     [SerializeField] private Tower[] _towerPrefabs;
     [SerializeField] private int _selectedTowerIndex = 0;
 
-    public Tower CheckTower()
+    public Tower CheckSelectedTower()
     {
         var towerToBuild = _towerPrefabs[_selectedTowerIndex];
 
