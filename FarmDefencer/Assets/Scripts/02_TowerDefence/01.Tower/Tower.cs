@@ -21,7 +21,7 @@ public abstract class Tower : TargetableBehavior
     {
         get
         {
-            _currentLevelData = _levelData[Level - 1];
+            _currentLevelData = _levelData[CurrentLevel - 1];
             return _currentLevelData;
         }
     }
@@ -30,31 +30,46 @@ public abstract class Tower : TargetableBehavior
 
     [Header("Default")]
     [SerializeField] private string _towerName;
-    [SerializeField][Tooltip("input default cost")] private int _cost;
-    [SerializeField][Tooltip("tower current level")] private int _level = 1;
+    [SerializeField][Tooltip("default cost at first, after based on upgradeCost")] private int _cost;
+    [SerializeField][Tooltip("tower current level linked levelData")] private int _level = 1;
 
     public string TowerName => _towerName;
-    public int Cost => _cost;
-    public int Level
+    public int CurrentCost
     {
-        get => Mathf.Clamp(_level, 1, _levelData.Length);
-        set => _level = Mathf.Clamp(value, 1, _levelData.Length);
+        get => _cost;
+        set
+        {
+            _cost = Mathf.Max(value, 0);
+            OnCostChanged?.Invoke(_cost); // TODO: 변화한 경우에만 호출..?
+        }
     }
+    public int CurrentLevel
+    {
+        get => _level;
+        set
+        {
+            _level = Mathf.Clamp(value, 1, MaxLevel);
+            OnLevelChanged?.Invoke(_level); // TODO: 변화한 경우에만 호출..?
+        }
+    }
+
+    public int MaxLevel => _levelData.Length;
 
     [Space]
 
     [Header("Animation")]
     [SerializeField] private SpineController _spineController;
+
     [SpineAnimation] public string[] IdleAnimationNames;
     [SpineAnimation] public string[] AttackAnimationNames;
     [SpineAnimation] public string[] LevelUpAnimationNames;
 
-    public string IdleAnimation => IdleAnimationNames[Level - 1];
-    public string AttackAnimation => AttackAnimationNames[Level - 1];
-    public string LevelUpAnimation => LevelUpAnimationNames[Level - 1];
+    public string IdleAnimation => IdleAnimationNames[CurrentLevel - 1];
+    public string AttackAnimation => AttackAnimationNames[CurrentLevel - 1];
+    public string LevelUpAnimation => LevelUpAnimationNames[CurrentLevel - 1];
 
     private float[] _attackDuration;
-    public float AttackDuration => _attackDuration[Level - 1];
+    public float AttackDuration => _attackDuration[CurrentLevel - 1];
 
     private bool _isAttacking = false;
     private float _attackCooldownTimer = 0f;
@@ -72,14 +87,14 @@ public abstract class Tower : TargetableBehavior
     [Header("UI")]
     public UpgradePanel UpgradePanel;
 
+    // build
+    private GridCell _occupyingGridCell;
+
     // target
     private TargetableBehavior _currentTarget;
     public TargetableBehavior CurrentTarget => _currentTarget;
     public bool IsValidTarget => _currentTarget != null && _currentTarget.gameObject.activeSelf;
     public bool IsAttackableTarget => IsValidTarget && !_currentTarget.IsDead;
-
-    // build
-    private GridCell _occupyingGridCell;
 
     // actions
     public event System.Action<int> OnLevelChanged;
@@ -100,6 +115,7 @@ public abstract class Tower : TargetableBehavior
         base.Start();
         UpgradePanel.SetOwner(this);
         InitializeAttackDurations();
+        InitilaizeSpineEvent();
     }
     private void Update()
     {
@@ -118,11 +134,24 @@ public abstract class Tower : TargetableBehavior
             _attackDuration[i] = (animation != null) ? animation.Duration : 0f;
         }
     }
+    private void InitilaizeSpineEvent()
+    {
+        _spineController.SkeletonAnimation.AnimationState.Event += HandleSpineEvent;
+    }
+    private void HandleSpineEvent(Spine.TrackEntry trackEntry, Spine.Event e)
+    {
+        switch (e.Data.Name)
+        {
+            case "fire":
+                Shoot();
+                break;
+        }
+    }
 
     // build
     public bool IsValidBuild(int gold)
     {
-        if (gold >= Cost)
+        if (gold >= CurrentCost)
         {
             return true;
         }
@@ -132,6 +161,68 @@ public abstract class Tower : TargetableBehavior
     public void OccupyingGridCell(GridCell gridCell)
     {
         _occupyingGridCell = gridCell;
+    }
+
+    // sell
+    public void Sell()
+    {
+        // grid cell
+        _occupyingGridCell.Usable();
+        _occupyingGridCell.DeleteOccupiedTower();
+
+        ResourceManager.Instance.EarnGold(CurrentLevelData.SellCost);
+        SoundManager.Instance.PlaySfx("SFX_D_turret_remove");
+
+        // detector
+        _detector.DebugEraseRange();
+
+        Destroy(gameObject);
+    }
+
+    // upgrade
+    public void Upgrade()
+    {
+        if (CurrentLevel >= MaxLevel)
+        {
+            Debug.Log("최고 레벨이므로 타워를 업그레이드 할 수 없습니다");
+            return;
+        }
+
+        var result = ResourceManager.Instance.TrySpendGold(CurrentLevelData.UpgradeCost);
+        if (result == false)
+        {
+            Debug.Log("골드가 부족하여 타워를 업그레이드 할 수 없습니다");
+            return;
+        }
+
+        // prev level animation
+        _spineController.SetAnimation(LevelUpAnimation, false);
+
+        // level up
+        CurrentCost += CurrentLevelData.UpgradeCost;
+        CurrentLevel += 1;
+
+        // next level animation
+        _spineController.AddAnimation(IdleAnimation, true); // 레벨이 오른 후의 애니메이션을 출력해야 한다
+
+        Reinforce();
+
+        HideUpgradePanel();
+    }
+    private void Reinforce()
+    {
+        OnAttackRateChanged?.Invoke(CurrentLevelData.AttackRate);
+        OnDamageChanged?.Invoke(CurrentLevelData.Damage);
+
+        SoundManager.Instance.PlaySfx("SFX_D_turret_levelup");
+    }
+    public void ShowUpgradePanel()
+    {
+        UpgradePanel.gameObject.SetActive(true);
+    }
+    public void HideUpgradePanel()
+    {
+        UpgradePanel.gameObject.SetActive(false);
     }
 
     // fire
@@ -180,10 +271,8 @@ public abstract class Tower : TargetableBehavior
         // animation
         _spineController.SetAnimation(AttackAnimation, false);
         _spineController.AddAnimation(IdleAnimation, true);
-
-        ShootingProcess();
     }
-    protected virtual void ShootingProcess()
+    protected virtual void Shoot()
     {
         var projectileTick = Instantiate(_projectileTickPrefab, Head.Muzzle.position, Head.Muzzle.rotation);
 
@@ -197,73 +286,7 @@ public abstract class Tower : TargetableBehavior
         projectileTick.SetDamage(CurrentLevelData.Damage);
         projectileTick.Shoot();
 
-        SoundManager.Instance.PlaySfx($"SFX_D_turretShot_1-{Level}");
-    }
-
-    // upgrade
-    public void Upgrade()
-    {
-        if (Level >= _levelData.Length)
-        {
-            Debug.Log("최고 레벨이므로 타워를 업그레이드 할 수 없습니다");
-            return;
-        }
-
-        var result = ResourceManager.Instance.TrySpendGold(CurrentLevelData.UpgradeCost);
-        if (result == false)
-        {
-            Debug.Log("골드가 부족하여 타워를 업그레이드 할 수 없습니다");
-            return;
-        }
-
-        // animation
-        _spineController.SetAnimation(LevelUpAnimation, false);
-        _spineController.AddAnimation(IdleAnimation, true);
-
-        // level
-        Level = Level + 1;
-        OnLevelChanged?.Invoke(Level);
-
-        // cost
-        _cost += CurrentLevelData.UpgradeCost;
-        OnCostChanged?.Invoke(_cost);
-
-        Reinforce();
-
-        HideUpgradePanel();
-    }
-    private void Reinforce()
-    {
-        OnAttackRateChanged?.Invoke(CurrentLevelData.AttackRate);
-        OnDamageChanged?.Invoke(CurrentLevelData.Damage);
-
-        SoundManager.Instance.PlaySfx("SFX_D_turret_levelup");
-    }
-
-    // panel
-    public void ShowUpgradePanel()
-    {
-        UpgradePanel.gameObject.SetActive(true);
-    }
-    public void HideUpgradePanel()
-    {
-        UpgradePanel.gameObject.SetActive(false);
-    }
-
-    // sell
-    public void Sell()
-    {
-        // grid cell
-        _occupyingGridCell.Usable();
-        _occupyingGridCell.DeleteOccupiedTower();
-
-        ResourceManager.Instance.EarnGold(CurrentLevelData.SellCost);
-        SoundManager.Instance.PlaySfx("SFX_D_turret_remove");
-
-        // detector
-        _detector.DebugEraseRange();
-
-        Destroy(gameObject);
+        SoundManager.Instance.PlaySfx($"SFX_D_turretShot_1-{CurrentLevel}");
     }
 
     // hit

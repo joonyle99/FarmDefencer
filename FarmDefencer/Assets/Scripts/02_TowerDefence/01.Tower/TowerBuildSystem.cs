@@ -35,7 +35,7 @@ public class TowerBuildSystem : MonoBehaviour
     }
     public Tower InstantiateTower(Tower towerToBuild, Vector3 targetPos, Quaternion targetRot)
     {
-        ResourceManager.Instance.SpendGold(towerToBuild.Cost);
+        ResourceManager.Instance.SpendGold(towerToBuild.CurrentCost);
 
         var towerToInstance = Instantiate(towerToBuild, targetPos, targetRot);
 

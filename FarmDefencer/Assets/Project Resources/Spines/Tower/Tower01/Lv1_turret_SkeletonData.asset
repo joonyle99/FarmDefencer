@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: Lv1_turret_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: 907ca3fb18251974e8eb49d6f54128bc, type: 2}
+  - {fileID: 11400000, guid: d598af9a3203c9c48826493d69938d16, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: 382033e6395cad942833dd63a52151eb, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: 27e8aa62c8a458340869e8a92937bb30, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 1
     applyAdditiveMaterial: 1
     additiveMaterials:
     - pageName: Lv1_turret.png
-      material: {fileID: 2100000, guid: ac6cc0fd47fd62149b3ed50031e618b6, type: 2}
+      material: {fileID: 2100000, guid: 35b30af138ed89b4496170270aa17db2, type: 2}
     multiplyMaterials: []
     screenMaterials: []
   skeletonDataModifiers: []
