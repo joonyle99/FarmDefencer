@@ -17,8 +17,6 @@ public class WaveSystem : MonoBehaviour
     [SerializeField] private RangeFloat _waitSpawnTimeRange;
     private float _waitSpawnTime = 0f;
 
-    [Space]
-
     [SerializeField] private float _waitWaveTime = 2f;
 
     // target spawn count
@@ -72,7 +70,7 @@ public class WaveSystem : MonoBehaviour
 
     [Space]
 
-    public StageData stageData; // TEMP: 현재 1-1 스테이지에 대한 데이터만 존재함
+    public StageData stageData;
 
     private void Update()
     {
@@ -267,6 +265,7 @@ public class WaveSystem : MonoBehaviour
                 bool result = movemnet.CalcEachGridPath();
                 if (result == false)
                 {
+                    DefenceContext.Current.GridMap.LoadPrevDistanceCost();
                     return false;
                 }
             }

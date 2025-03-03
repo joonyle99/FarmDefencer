@@ -60,6 +60,7 @@ public abstract class Tower : TargetableBehavior
 
     [Header("Animation")]
     [SerializeField] private SpineController _spineController;
+    public SpineController SpineController => _spineController;
 
     [SpineAnimation] public string[] IdleAnimationNames;
     [SpineAnimation] public string[] AttackAnimationNames;
@@ -150,9 +151,10 @@ public abstract class Tower : TargetableBehavior
     }
 
     // build
-    public bool IsValidBuild(int gold)
+    public bool HasEnoughGold()
     {
-        if (gold >= CurrentCost)
+        var currentGold = ResourceManager.Instance.GetGold();
+        if (currentGold >= CurrentCost)
         {
             return true;
         }
@@ -287,7 +289,7 @@ public abstract class Tower : TargetableBehavior
         projectileTick.SetDamage(CurrentLevelData.Damage);
         projectileTick.Shoot();
 
-        SoundManager.Instance.PlaySfx($"SFX_D_turretShot_1-{CurrentLevel}");
+        SoundManager.Instance.PlaySfx($"SFX_D_turret_shot_1-{CurrentLevel}");
     }
 
     // hit

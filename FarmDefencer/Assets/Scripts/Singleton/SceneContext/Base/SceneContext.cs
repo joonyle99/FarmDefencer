@@ -1,9 +1,8 @@
 using Com.LuisPedroFonseca.ProCamera2D;
 using System;
-using UnityEngine;
 
 /// <summary>
-/// ¾À¿¡ Á¸ÀçÇÏ´Â Áê¿ä ¿ÀºêÁ§Æ®µéÀ» °ü¸®ÇÏ´Â ÄÁÅØ½ºÆ®ÀÔ´Ï´Ù.
+/// ì”¬ì— ì¡´ì¬í•˜ëŠ” ì¥¬ìš” ì˜¤ë¸Œì íŠ¸ë“¤ì„ ê´€ë¦¬í•˜ëŠ” ì»¨í…ìŠ¤íŠ¸ì…ë‹ˆë‹¤.
 /// </summary>
 public class SceneContext : JoonyleGameDevKit.Singleton<SceneContext>
 {

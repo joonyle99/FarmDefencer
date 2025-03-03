@@ -148,7 +148,7 @@ public class GridCell : MonoBehaviour
     }
 
     // check
-    private bool CheckBuild()
+    public bool CheckBuild()
     {
         var gridMap = DefenceContext.Current.GridMap;
         var fieldMonsters = DefenceContext.Current.WaveSystem.FieldMonsters;
@@ -181,31 +181,23 @@ public class GridCell : MonoBehaviour
     }
 
     // sprite
-    private void OnHover()
+    public void OnHover()
     {
-        if (_spriteRenderer.color == _hoverColor)
-        {
-            return;
-        }
-
+        if (_spriteRenderer.color == _hoverColor) return;
         _spriteRenderer.color = _hoverColor;
     }
-    private void OffHover()
+    public void OffHover()
     {
-        if (_spriteRenderer.color == _startColor)
-        {
-            return;
-        }
-
+        if (_spriteRenderer.color == _startColor) return;
         _spriteRenderer.color = _startColor;
     }
-    private void Appear()
+    public void Appear()
     {
         var color = _spriteRenderer.color;
         color.a = _startColor.a;
         _spriteRenderer.color = color;
     }
-    private void Disappear()
+    public void Disappear()
     {
         var color = _spriteRenderer.color;
         color.a = 0f;
@@ -229,25 +221,25 @@ public class GridCell : MonoBehaviour
     //
     public void Occupy(Tower tower)
     {
-        _occupiedTower = tower;
-        _occupiedTower.OccupyingGridCell(this);
+        occupiedTower = tower;
+        occupiedTower.OccupyingGridCell(this);
 
-        SoundManager.Instance.PlaySfx($"SFX_D_{_occupiedTower.TowerName}_build");
+        SoundManager.Instance.PlaySfx($"SFX_D_{occupiedTower.TowerName}_build");
     }
     public void DeleteOccupiedTower()
     {
-        _occupiedTower = null;
+        occupiedTower = null;
     }
 
     // debug
-    public void DebugChangeColor(Color color)
+    public void ChangeColor(Color color)
     {
         _changedColorReferenceCount++;
 
         _spriteRenderer.color = color;
         _startColor = _spriteRenderer.color;
     }
-    public void DebugResetColor()
+    public void ResetColor()
     {
         _changedColorReferenceCount--;
 

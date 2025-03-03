@@ -54,7 +54,7 @@ public class GridMap : MonoBehaviour
     private int[] _dx = new int[4] { -1, 0, 1, 0 };
     private int[] _dy = new int[4] { 0, 1, 0, -1 };
 
-    public GridCell HoveringCell = null;
+    public GridCell LastHoverCell = null;
 
     private void Awake()
     {
@@ -151,7 +151,7 @@ public class GridMap : MonoBehaviour
         if (originGridPath == null || originGridPath.Count < 2)
         {
             Debug.LogError("origin grid path is invalid");
-            //LoadPrevDistanceCost();
+            LoadPrevDistanceCost();
             yield break;
         }
 
@@ -165,7 +165,7 @@ public class GridMap : MonoBehaviour
         if (newOriginGridPath == null || newOriginGridPath.Count < 2)
         {
             Debug.LogError("new origin grid path is invalid");
-            //LoadPrevDistanceCost();
+            LoadPrevDistanceCost();
             return false;
         }
 
@@ -212,7 +212,7 @@ public class GridMap : MonoBehaviour
     // path finding
     public List<GridCell> CalculateOriginPath()
     {
-        //SavePrevDistanceCost();
+        SavePrevDistanceCost();
         ResetGridMap();
 
         Queue<Vector2Int> queue = new Queue<Vector2Int>();
@@ -258,7 +258,7 @@ public class GridMap : MonoBehaviour
             return null;
         }
 
-        //SavePrevDistanceCost();
+        SavePrevDistanceCost();
         ResetGridMap();
 
         Queue<Vector2Int> queue = new Queue<Vector2Int>();
@@ -318,7 +318,7 @@ public class GridMap : MonoBehaviour
     // etc
     public void SavePrevDistanceCost()
     {
-        Debug.Log("SavePrevDistanceCost");
+        //Debug.Log("SavePrevDistanceCost");
 
         for (int h = 0; h < _height; h++)
         {
@@ -330,7 +330,7 @@ public class GridMap : MonoBehaviour
     }
     public void LoadPrevDistanceCost()
     {
-        Debug.Log("LoadPrevDistanceCost");
+        //Debug.Log("LoadPrevDistanceCost");
 
         for (int h = 0; h < _height; h++)
         {
@@ -342,7 +342,7 @@ public class GridMap : MonoBehaviour
     }
     public void ResetGridMap()
     {
-        Debug.Log("ResetGridMap");
+        //Debug.Log("ResetGridMap");
 
         // myGridMap 초기화
         for (int h = 0; h < _height; h++)
