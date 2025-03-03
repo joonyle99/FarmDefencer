@@ -1,8 +1,8 @@
+using UnityEngine;
 using JoonyleGameDevKit;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Collections.Generic;
 
 /// <summary>
 /// GridMap의 각 Cell은 이동할 수 있는 땅인지의 정보를 가지며,
@@ -31,6 +31,35 @@ public class GridMap : MonoBehaviour
     public Vector3 StartWorldPoint => CellToWorld(StartCellPoint.ToVector3Int());
     public Vector2Int EndCellPoint { get; private set; }
     public Vector3 EndWorldPoint => CellToWorld(EndCellPoint.ToVector3Int());
+    public Vector2Int DirectionToEnd => EndCellPoint - StartCellPoint;
+    public int DirectionToEndX
+    {
+        get
+        {
+            if (DirectionToEnd.x >= 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+    }
+    public int DirectionToEndY
+    {
+        get
+        {
+            if (DirectionToEnd.y > 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+    }
     private Vector2Int[] _possiblePoints;
     private Vector2Int[] _oppositePoints;
 
@@ -173,7 +202,6 @@ public class GridMap : MonoBehaviour
         if (result == false)
         {
             Debug.Log("each grid paths are invalid");
-            //LoadPrevDistanceCost();
             return false;
         }
 
