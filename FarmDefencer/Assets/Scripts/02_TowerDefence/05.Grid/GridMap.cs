@@ -226,6 +226,13 @@ public class GridMap : MonoBehaviour
         return _tilemap.WorldToCell(worldPos);
     }
 
+    // check
+    public bool IsOutOfTileMap(Vector3 worldPos)
+    {
+        Vector3Int cellPos = _tilemap.WorldToCell(worldPos);
+        return _tilemap.HasTile(cellPos) == false;
+    }
+
     // getter
     public GridCell GetCell(int w, int h)
     {
