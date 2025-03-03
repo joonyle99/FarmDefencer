@@ -1,4 +1,3 @@
-using Spine;
 using Spine.Unity;
 using UnityEngine;
 
@@ -15,13 +14,18 @@ public class SpineController : MonoBehaviour
     public Spine.AnimationState SpineAnimationState => _spineAnimationState;
     public Spine.Skeleton Skeleton => _skeleton;
 
+    private Color _originalColor;
+
     private void Awake()
     {
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
 
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.Skeleton;
+
+        _originalColor = _skeletonAnimation.Skeleton.GetColor();
     }
+
     public void SetAnimation(string animationName, bool loop)
     {
         // 현재 애니메이션이 이미 실행 중이라면 중복 실행하지 않는다
@@ -31,5 +35,18 @@ public class SpineController : MonoBehaviour
     public void AddAnimation(string animationName, bool loop, float delay = 0f)
     {
         _spineAnimationState.AddAnimation(0, animationName, loop, delay);
+    }
+
+    public Color GetColor()
+    {
+        return _skeletonAnimation.Skeleton.GetColor();
+    }
+    public void SetColor(Color color)
+    {
+        _skeletonAnimation.Skeleton.SetColor(color);
+    }
+    public void ResetColor()
+    {
+        _skeletonAnimation.Skeleton.SetColor(_originalColor);
     }
 }

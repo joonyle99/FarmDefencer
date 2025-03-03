@@ -150,7 +150,7 @@ public class TargetableDetector : MonoBehaviour
         }
     }
 
-    public void PaintRange()
+    public void PaintRange(Color? color = null)
     {
         var order = 0;
 
@@ -173,7 +173,7 @@ public class TargetableDetector : MonoBehaviour
 
                 // debug
                 order++;
-                targetCell.ChangeColor(Color.blue);
+                targetCell.ChangeColor(color ?? Color.blue);
                 // targetCell.distanceCostText.text = order.ToString();
                 // JoonyleGameDevKit.Painter.DebugDrawPlus(targetCell.transform.position, Color.red, DefenceContext.Current.GridMap.UnitCellSize / 2f, 5f);
             }

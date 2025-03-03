@@ -1,0 +1,35 @@
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class BuildUI : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
+{
+    [SerializeField] private BuildSystem _buildSystem;
+
+    private void OnEnable()
+    {
+        if (_buildSystem == null)
+        {
+            return;
+        }
+    }
+    private void OnDisable()
+    {
+        if (_buildSystem == null)
+        {
+            return;
+        }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        _buildSystem.OnPointerDown(eventData);
+    }
+    public void OnDrag(PointerEventData eventData)
+    {
+        _buildSystem.OnDrag(eventData);
+    }
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        _buildSystem.OnPointerUp(eventData);
+    }
+}

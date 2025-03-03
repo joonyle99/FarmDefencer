@@ -21,7 +21,7 @@ public class DefenceContext : SceneContext
     // defence reference
     public GridMap GridMap;
     public WaveSystem WaveSystem;
-    public TowerBuildSystem TowerBuildSystem;
+    public BuildSystem BuildSystem;
 
     protected override void Awake()
     {
@@ -29,9 +29,9 @@ public class DefenceContext : SceneContext
 
         GridMap = FindFirstObjectByType<GridMap>();
         WaveSystem = FindFirstObjectByType<WaveSystem>();
-        TowerBuildSystem = FindFirstObjectByType<TowerBuildSystem>();
+        BuildSystem = FindFirstObjectByType<BuildSystem>();
 
-        if (GridMap != null && WaveSystem != null && TowerBuildSystem != null)
+        if (GridMap != null && WaveSystem != null && BuildSystem != null)
         {
             string log = "";
 
@@ -39,7 +39,7 @@ public class DefenceContext : SceneContext
             //log += $"============================\n";
             log += $"{nameof(GridMap)} is ready.\n";
             log += $"{nameof(WaveSystem)} is ready.\n";
-            log += $"{nameof(TowerBuildSystem)} is ready.\n";
+            log += $"{nameof(BuildSystem)} is ready.\n";
 
             Debug.Log(log);
         }

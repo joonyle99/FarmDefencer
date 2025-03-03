@@ -206,7 +206,7 @@ public class GridMovement : MonoBehaviour
         var gridMap = DefenceContext.Current.GridMap;
 
         // 다음 목적지에는 타워를 설치할 수 없다
-        if (gridMap.HoveringCell == _nextGridCell)
+        if (gridMap.LastHoverCell == _nextGridCell)
         {
             Debug.Log("cannot be installed in the next grid cell.");
             return false;
@@ -216,7 +216,6 @@ public class GridMovement : MonoBehaviour
         if (eachGridPath == null || eachGridPath.Count < 2)
         {
             Debug.Log("each grid path is invalid");
-            //DefenceContext.Current.GridMap.LoadPrevDistanceCost();
             return false;
         }
 
