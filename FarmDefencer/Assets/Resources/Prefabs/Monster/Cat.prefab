@@ -308,7 +308,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 141406357
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 9999
   m_SortAtRoot: 0
 --- !u!1001 &6505670202219218649
 PrefabInstance:

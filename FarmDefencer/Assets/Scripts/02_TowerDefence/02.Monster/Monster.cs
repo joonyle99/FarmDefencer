@@ -2,6 +2,7 @@ using Spine;
 using Spine.Unity;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 /// <summary>
 /// 
@@ -37,6 +38,9 @@ public abstract class Monster : TargetableBehavior, IProduct
     [SerializeField] private SpineController _spineController;
     public SpineController SpineController => _spineController;
 
+    private SortingGroup _sortingGroup;
+    private int _defaultSortingOrder;
+
     [Space]
 
     // default animation names
@@ -57,6 +61,9 @@ public abstract class Monster : TargetableBehavior, IProduct
     protected override void Awake()
     {
         base.Awake();
+
+        _sortingGroup = GetComponent<SortingGroup>();
+        _defaultSortingOrder = _sortingGroup.sortingOrder;
 
         InstantTransparent();
     }
@@ -85,6 +92,24 @@ public abstract class Monster : TargetableBehavior, IProduct
         base.Start();
 
         // Debug.Log("Monster Start()");
+    }
+    private void Update()
+    {
+        var dirX = DefenceContext.Current.GridMap.DirectionToEndX; // 1 or -1
+
+        // cf)
+        // transform.position.x: 0 ~ 17
+        // transform.position.y: 0 ~ 10
+
+        // 1. 기본적으로 y좌표가 낮을 수록 레이어가 높아야 한다
+        // 2. 기본적으로 x좌표가 높을 수록 레이어가 높아야 한다
+
+        // 위 조건을 기준으로 측정된 계산.. dirX / dirY에 따라 계산이 달라져야 한다
+        // 어떠한 경우이냐면,, dirX가 -1인 경우에는 왼쪽에 위치한 오브젝트의 레이어가 더 높아야한다
+        var weightY = 100; var weightX = 10; // y좌표에 대한 가중치 >>> x좌표에 대한 가중치
+        var deltaY = -1 * (int)Mathf.Floor(transform.position.y * weightY); // y좌표에 따른 레이어 순서는 절대적이어야 한다
+        var deltaX = dirX * (int)Mathf.Floor(transform.position.x * weightX); // x좌표에 다른 레이어 순서는 dirX에 따라 달라져야 한다
+        _sortingGroup.sortingOrder = _defaultSortingOrder + deltaY + deltaX;
     }
 
     public override void TakeDamage(int damage)
