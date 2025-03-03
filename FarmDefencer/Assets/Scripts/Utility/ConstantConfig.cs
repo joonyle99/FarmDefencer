@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ConstantConfig : MonoBehaviour
+public class ConstantConfig
 {
-    public const bool DEBUG = false;
+    public const bool DEBUG = true;
 }
