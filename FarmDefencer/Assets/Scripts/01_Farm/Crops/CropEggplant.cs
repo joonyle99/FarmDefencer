@@ -225,23 +225,27 @@ public class CropEggplant : Crop
 	private static readonly Func<EggplantState, EggplantState, bool> TrelisEffectCondition = (beforeState, afterState) => afterState.TrelisPlaced && !beforeState.TrelisPlaced;
 	private static readonly Action<Vector2, Vector2> TrelisEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayTabEffect(inputWorldPosition);
 
-	private static readonly Func<EggplantState, EggplantState, bool> LeafDropEffectCondition = (beforeState, afterState) => afterState.LeavesDropped > beforeState.LeavesDropped;
-	private static readonly Action<Vector2, Vector2> LeafDropEffect =
+	private static readonly Func<int, Func<EggplantState, EggplantState, bool>> LeafDropSfxEffectConditionFor = (leavesDropped) => (beforeState, afterState) => afterState.LeavesDropped == leavesDropped && beforeState.LeavesDropped < leavesDropped;
+	private static readonly Func<int, Action<Vector2, Vector2>> LeafDropSfxEffectFor =
+		(leavesDropped) =>
 		(inputWorldPosition, cropPosition) =>
 		{
+			SoundManager.PlaySfxStatic($"SFX_T_eggplant_leaf_{leavesDropped}");
 			EffectPlayer.PlayVfx("SoilDust", cropPosition);
 			EffectPlayer.PlayTabEffect(inputWorldPosition);
 		};
 
+
 	private static List<(Func<EggplantState, EggplantState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<EggplantState, EggplantState, bool>, Action<Vector2, Vector2>)>
 	{
-		(LeafDropEffectCondition, LeafDropEffect),
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
 		(HarvestEffectCondition, HarvestEffect),
 		(QuotaFilledEffectCondition, QuotaFilledEffect),
 		(TapEffectCondition, TapEffect),
 		(TrelisEffectCondition, TrelisEffect),
+		(LeafDropSfxEffectConditionFor(1), LeafDropSfxEffectFor(1)),
+		(LeafDropSfxEffectConditionFor(2), LeafDropSfxEffectFor(2)),
 	};
 
 	private static EggplantState DropLeafIfDoubleTap(EggplantState beforeState)
