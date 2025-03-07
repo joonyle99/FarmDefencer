@@ -6,8 +6,8 @@ using UnityEngine;
 /// </summary>
 /// <remarks>
 /// SFX파일은 Resources/Sfx에 둘 것
-/// 하나의 이름으로 여러 SFX 버전이 존재하는 경우(ex. sfx_harvest_0, sfx_harvest_1)
-/// 반드시 0번부터 연속적으로 이름_번호 규격을 맞출 것(ex. 이름: sfx_harvest, 번호: _0, _1, _2 ...)
+/// 하나의 이름으로 여러 SFX 버전이 존재하는 경우(ex. sfx_T_harvest_0, sfx_T_harvest_1)
+/// 반드시 0번부터 연속적으로 이름_번호 규격을 맞출 것(ex. 이름: sfx_T_harvest, 번호: _0, _1, _2 ...)
 /// </remarks>
 public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
 {
