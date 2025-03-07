@@ -11,6 +11,7 @@ public class EffectPlayer : MonoBehaviour
 	
 	private Animator _interactEffectAnimator;
 	private Animator _vfxAnimator;
+	private float _lastVfxDoneTime;
 
 	private bool _isHolding;
 	private Dictionary<string, RuntimeAnimatorController> _vfxControllers;
@@ -67,11 +68,18 @@ public class EffectPlayer : MonoBehaviour
 			return;
 		}
 
-		if (overwriteEvenIfSame || controller != s_singleton._vfxAnimator.runtimeAnimatorController)
+		var currentTime = Time.time;
+
+		if (currentTime >= s_singleton._lastVfxDoneTime || overwriteEvenIfSame || controller != s_singleton._vfxAnimator.runtimeAnimatorController)
 		{
 			s_singleton._vfxAnimator.runtimeAnimatorController = null;
 			s_singleton._vfxAnimator.transform.position = worldPosition;
 			s_singleton._vfxAnimator.runtimeAnimatorController = controller;
+			s_singleton._lastVfxDoneTime = currentTime;
+			if (controller.animationClips.Length > 0)
+			{
+				s_singleton._lastVfxDoneTime += controller.animationClips[0].length;
+			}
 		}
 	}
 

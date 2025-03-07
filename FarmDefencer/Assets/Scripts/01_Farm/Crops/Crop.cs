@@ -152,9 +152,17 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 		EffectPlayer.PlayTabEffect(inputWorldPosition);
 	}
 	protected static bool HarvestEffectCondition<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => !beforeState.Harvested && afterState.Harvested;
-	protected static void HarvestEffect(Vector2 inputWorldPosition, Vector2 cropPosition)
+	protected static void HarvestEffect_SoilParticle(Vector2 inputWorldPosition, Vector2 cropPosition)
 	{
 		EffectPlayer.PlayTabEffect(inputWorldPosition);
+		EffectPlayer.PlayVfx("VFX_T_SoilParticle", cropPosition);
+		SoundManager.PlaySfxStatic("SFX_T_harvest");
+	}
+
+	protected static void HarvestEffect_SoilDust(Vector2 inputWorldPosition, Vector2 cropPosition)
+	{
+		EffectPlayer.PlayTabEffect(inputWorldPosition);
+		EffectPlayer.PlayVfx("VFX_T_SoilDust", cropPosition);
 		SoundManager.PlaySfxStatic("SFX_T_harvest");
 	}
 

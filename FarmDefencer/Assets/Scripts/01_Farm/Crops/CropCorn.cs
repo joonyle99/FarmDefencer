@@ -178,7 +178,7 @@ public class CropCorn : Crop
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(HarvestEffectCondition, HarvestEffect),
+		(HarvestEffectCondition, HarvestEffect_SoilParticle),
 		(QuotaFilledEffectCondition, QuotaFilledEffect),
 	};
 }

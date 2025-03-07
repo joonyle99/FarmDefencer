@@ -200,7 +200,20 @@ public class CropSweetpotato : Crop
 	};
 
 	private static readonly Func<SweetpotatoState, SweetpotatoState, bool> HoldEffectCondition = (beforeState, afterState) => afterState.HoldingTime > beforeState.HoldingTime;
-	private static readonly Action<Vector2, Vector2> HoldEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayHoldEffect(inputWorldPosition);
+	private static readonly Action<Vector2, Vector2> HoldEffect = (inputWorldPosition, cropPosition) =>
+	{
+		EffectPlayer.PlayHoldEffect(inputWorldPosition);
+		EffectPlayer.PlayVfx("VFX_T_SoilStone", cropPosition, false);
+	};
+
+	private static readonly Func<SweetpotatoState, SweetpotatoState, bool> HoldStopEffectCondition = (beforeState, afterState) =>
+	{
+		return afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
+	};
+	private static readonly Action<Vector2, Vector2> HoldStopEffect = (inputWorldPosition, cropPosition) =>
+	{
+		EffectPlayer.StopVfx();
+	};
 
 	private static readonly Func<SweetpotatoState, SweetpotatoState, bool> TapEffectCondition = (beforeState, afterState) => afterState.LastSingleTapTime > beforeState.LastSingleTapTime;
 	private static readonly Action<Vector2, Vector2> TapEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayTabEffect(inputWorldPosition);
@@ -212,15 +225,19 @@ public class CropSweetpotato : Crop
 		SoundManager.PlaySfxStatic("SFX_T_sweet_vinyl");
 	};
 
+	private static readonly Func<SweetpotatoState, SweetpotatoState, bool> SweetpotatoHarvestEffectCondition = (beforeState, afterState) => afterState.TapCount == 2 && beforeState.TapCount != 2;
+	private static readonly Action<Vector2, Vector2> SweetpotatoHarvestEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayVfx("VFX_T_SoilDust", cropPosition);
+
 	private static readonly List<(Func<SweetpotatoState, SweetpotatoState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<SweetpotatoState, SweetpotatoState, bool>, Action<Vector2, Vector2>)>
 	{
 		(WrapEffectCondition, WrapEffect),
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(HarvestEffectCondition, HarvestEffect),
 		(QuotaFilledEffectCondition, QuotaFilledEffect),
 		(HoldEffectCondition, HoldEffect),
+		(HoldStopEffectCondition, HoldStopEffect),
 		(TapEffectCondition, TapEffect),
+		(SweetpotatoHarvestEffectCondition, SweetpotatoHarvestEffect),
 	};
 
 	/// <summary>
@@ -335,7 +352,7 @@ public class CropSweetpotato : Crop
 			nextState.Wrapped = true;
 		}
 
-		if (isEnd)
+		if (isEnd || nextState.Wrapped)
 		{
 			nextState.HoldingTime = 0.0f;
 		}
@@ -413,13 +430,13 @@ public class CropSweetpotato : Crop
 		(beforeState, initialWorldPosition, deltaPosition, isEnd, deltaHoldTime) =>
 		{
 			var nextState = beforeState;
-			nextState.HoldingTime = beforeState.HoldingTime + deltaHoldTime;
+			nextState.HoldingTime += deltaHoldTime;
 			if (Mathf.Abs(deltaPosition.x) >= PlowDeltaPositionCrierion)
 			{
 				nextState.Planted = true;
 			}
 
-			if (isEnd)
+			if (isEnd || nextState.Planted)
 			{
 				nextState.HoldingTime = 0.0f;
 			}
@@ -429,7 +446,16 @@ public class CropSweetpotato : Crop
 
 	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, float, SweetpotatoState>> OnFarmUpdateFunctions = new Dictionary<SweetpotatoStage, Func<SweetpotatoState, float, SweetpotatoState>>
 	{
-		{SweetpotatoStage.Unplowed, (beforeState, deltaTime) => Reset(beforeState) },
+		{
+			SweetpotatoStage.Unplowed, 
+			(beforeState, deltaTime) =>
+			{
+				var holdTime = beforeState.HoldingTime;
+				var reset = Reset(beforeState);
+				reset.HoldingTime = holdTime;
+				return reset;
+			} 
+		},
 
 		{SweetpotatoStage.Stage1_Dead, WaitWater },
 		{SweetpotatoStage.Stage1_BeforeWater, WaitWater },

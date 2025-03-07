@@ -137,7 +137,7 @@ public class CropCarrot : Crop
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(HarvestEffectCondition, HarvestEffect),
+		(HarvestEffectCondition, HarvestEffect_SoilDust),
 		(QuotaFilledEffectCondition, QuotaFilledEffect),
 	};
 }

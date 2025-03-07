@@ -199,7 +199,16 @@ public class CropMushroom : Crop
 	};
 
 	private static readonly Func<MushroomState, MushroomState, bool> HoldEffectCondition = (beforeState, afterState) => afterState.HoldingTime > beforeState.HoldingTime;
-	private static readonly Action<Vector2, Vector2> HoldEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayHoldEffect(inputWorldPosition);
+	private static readonly Action<Vector2, Vector2> HoldEffect = (inputWorldPosition, cropPosition) =>
+	{
+		EffectPlayer.PlayHoldEffect(inputWorldPosition);
+	};
+
+	private static readonly Func<MushroomState, MushroomState, bool> SoilStoneEffectCondition = (beforeState, afterState) => HoldEffectCondition(beforeState, afterState) && GetCurrentStage(beforeState) != MushroomStage.Stage3_BeforeInoculation;
+	private static readonly Action<Vector2, Vector2> SoilStoneEffect = (inputWorldPosition, cropPosition) =>
+	{
+		EffectPlayer.PlayVfx("VFX_T_SoilStone", cropPosition, false);
+	};
 
 	private static readonly Func<MushroomState, MushroomState, bool> TapEffectCondition = (beforeState, afterState) => afterState.LastSingleTapTime > beforeState.LastSingleTapTime;
 	private static readonly Action<Vector2, Vector2> TapEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayTabEffect(inputWorldPosition);
@@ -211,16 +220,27 @@ public class CropMushroom : Crop
 	private static readonly Func<MushroomState, MushroomState, bool> StopShotSfxEffectCondition = (beforeState, afterState) => afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
 	private static readonly Action<Vector2, Vector2> StopShotSfxEffect = (inputWorldPosition, cropPosition) => SoundManager.StopCurrentSfxStatic();
 
+	private static readonly Func<MushroomState, MushroomState, bool> MushroomHarvestEffectCondition = (beforeState, afterState) => afterState.TapCount == 2 && beforeState.TapCount != 2;
+	private static readonly Action<Vector2, Vector2> MushroomHarvestEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayVfx("VFX_T_SoilDust", cropPosition);
+
+	private static readonly Func<MushroomState, MushroomState, bool> HoldStopEffectCondition = (beforeState, afterState) => afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
+	private static readonly Action<Vector2, Vector2> HoldStopEffect = (inputWorldPosition, cropPosition) =>
+	{
+		EffectPlayer.StopVfx();
+	};
+
 	private static readonly List<(Func<MushroomState, MushroomState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<MushroomState, MushroomState, bool>, Action<Vector2, Vector2>)>
 	{
+		(SoilStoneEffectCondition, SoilStoneEffect),
+		(HoldStopEffectCondition, HoldStopEffect),
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(HarvestEffectCondition, HarvestEffect),
 		(QuotaFilledEffectCondition, QuotaFilledEffect),
 		(HoldEffectCondition, HoldEffect),
 		(TapEffectCondition, TapEffect),
 		(PlayShotSfxEffectCondition, PlayShotSfxEffect),
 		(StopShotSfxEffectCondition, StopShotSfxEffect),
+		(MushroomHarvestEffectCondition, MushroomHarvestEffect),
 	};
 
 	private static readonly Func<MushroomState, MushroomState> HarvestOnFiveTap =
@@ -266,14 +286,15 @@ public class CropMushroom : Crop
 		var nextState = beforeState;
 		nextState.HoldingTime += deltaHoldTime;
 
-		if (isEnd)
-		{
-			nextState.HoldingTime = 0.0f;
-		}
 
 		if (nextState.HoldingTime >= InoculationHoldingTime)
 		{
 			nextState.Inoculated = true;
+		}
+
+		if (isEnd || nextState.Inoculated)
+		{
+			nextState.HoldingTime = 0.0f;
 		}
 
 		return nextState;
@@ -299,7 +320,16 @@ public class CropMushroom : Crop
 
 	private static readonly Dictionary<MushroomStage, Func<MushroomState, float, MushroomState>> OnFarmUpdateFunctions = new Dictionary<MushroomStage, Func<MushroomState, float, MushroomState>>
 	{
-		{MushroomStage.Unplowed, (beforeState, deltaTime) => Reset(beforeState) },
+		{
+			MushroomStage.Unplowed, 
+			(beforeState, deltaTime) =>
+			{
+				var holdTime = beforeState.HoldingTime;
+				var reset = Reset(beforeState);
+				reset.HoldingTime = holdTime;
+				return reset;
+			}
+		},
 
 		{MushroomStage.Stage1_Dead, WaitWater },
 		{MushroomStage.Stage1_BeforeWater, WaitWater },

@@ -168,12 +168,15 @@ public class CropPotato : Crop
 	};
 
 	private static readonly Func<PotatoState, PotatoState, bool> HoldEffectCondition = (beforeState, afterState) => afterState.HoldingTime > beforeState.HoldingTime;
-	private static readonly Action<Vector2, Vector2> HoldEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayHoldEffect(inputWorldPosition);
+	private static readonly Action<Vector2, Vector2> HoldEffect = (inputWorldPosition, cropPosition) =>
+	{
+		EffectPlayer.PlayHoldEffect(inputWorldPosition);
+		EffectPlayer.PlayVfx("VFX_T_SoilStone", cropPosition, false);
+	};
 
 	private static readonly Func<PotatoState, PotatoState, bool> PlayDustSfxEffectCondition = (beforeState, afterState) => afterState.HoldingTime > 0.0f && beforeState.HoldingTime == 0.0f;
 	private static readonly Action<Vector2, Vector2> PlayDustSfxEffect = (inputWorldPosition, cropPosition) =>
 	{
-		EffectPlayer.PlayVfx("VFX_T_SoilStone", cropPosition);
 		SoundManager.PlaySfxStatic("SFX_T_potato_dust");
 	};
 
@@ -200,7 +203,6 @@ public class CropPotato : Crop
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(HarvestEffectCondition, HarvestEffect),
 		(HoldEffectCondition, HoldEffect),
 		(QuotaFilledEffectCondition, QuotaFilledEffect),
 		(StopDustSfxEffectCondition, StopDustSfxEffect),

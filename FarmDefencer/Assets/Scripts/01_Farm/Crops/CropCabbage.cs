@@ -167,14 +167,14 @@ public class CropCabbage : Crop
 		EffectPlayer.PlayVfx("VFX_T_SoilParticle", cropPosition);
 	};
 
-	private static readonly Func<int, Func<CabbageState, CabbageState, bool>> ShakeSfxEffectConditionFor = (shakedCount) => (beforeState, afterState) => afterState.ShakeCount == shakedCount && beforeState.ShakeCount < shakedCount;
-	private static readonly Func<int, Action<Vector2, Vector2>> ShakeSfxEffectFor = (shakedCount) => (inputWorldPosition, cropPosition) => SoundManager.PlaySfxStatic($"SFX_T_cabbage_shake_{shakedCount}");
+	private static readonly Func<int, Func<CabbageState, CabbageState, bool>> ShakeSfxEffectConditionFor = shakedCount => (beforeState, afterState) => afterState.ShakeCount == shakedCount && beforeState.ShakeCount < shakedCount;
+	private static readonly Func<int, Action<Vector2, Vector2>> ShakeSfxEffectFor = shakedCount => (inputWorldPosition, cropPosition) => SoundManager.PlaySfxStatic($"SFX_T_cabbage_shake_{shakedCount}");
 
 	private static List<(Func<CabbageState, CabbageState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<CabbageState, CabbageState, bool>, Action<Vector2, Vector2>)>
 	{
+		(HarvestEffectCondition, HarvestEffect_SoilParticle),
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(HarvestEffectCondition, HarvestEffect),
 		(QuotaFilledEffectCondition, QuotaFilledEffect),
 		(ShakeEffectCondition, ShakeEffect),
 		(ShakeSfxEffectConditionFor(1), ShakeSfxEffectFor(1)),

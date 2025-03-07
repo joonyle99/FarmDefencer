@@ -1,0 +1,553 @@
+fileFormatVersion: 2
+guid: ac38f5a325c7b9a4588b1eb301e33f22
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 148913260804331270
+    second: soil_dust_L_149x181_0
+  - first:
+      213: -4678915711464827996
+    second: soil_dust_L_149x181_1
+  - first:
+      213: 7970812630888229434
+    second: soil_dust_L_149x181_2
+  - first:
+      213: 4384737024702408016
+    second: soil_dust_L_149x181_3
+  - first:
+      213: 4670090893735042685
+    second: soil_dust_L_149x181_4
+  - first:
+      213: -8435143699339804725
+    second: soil_dust_L_149x181_5
+  - first:
+      213: -34106162610758845
+    second: soil_dust_L_149x181_6
+  - first:
+      213: -6608247789075538837
+    second: soil_dust_L_149x181_7
+  - first:
+      213: 7487116847532514505
+    second: soil_dust_L_149x181_8
+  - first:
+      213: 2001554035739902511
+    second: soil_dust_L_149x181_9
+  - first:
+      213: 5785944441367759494
+    second: soil_dust_L_149x181_10
+  - first:
+      213: 106747751829104497
+    second: soil_dust_L_149x181_11
+  - first:
+      213: 4887654537917287545
+    second: soil_dust_L_149x181_12
+  - first:
+      213: -592494955758222510
+    second: soil_dust_L_149x181_13
+  - first:
+      213: 1331343629476562710
+    second: soil_dust_L_149x181_14
+  - first:
+      213: -4393890048610698640
+    second: soil_dust_L_149x181_15
+  - first:
+      213: 8494787959235516568
+    second: soil_dust_L_149x181_16
+  - first:
+      213: -6167510031172801834
+    second: soil_dust_L_149x181_17
+  - first:
+      213: -6505193090263061193
+    second: soil_dust_L_149x181_18
+  - first:
+      213: -7125391411006672435
+    second: soil_dust_L_149x181_19
+  - first:
+      213: 8265505936787548833
+    second: soil_dust_L_149x181_20
+  - first:
+      213: -5722341874032788361
+    second: soil_dust_L_149x181_21
+  - first:
+      213: -5213982894743473909
+    second: soil_dust_L_149x181_22
+  - first:
+      213: 6795100002790602014
+    second: soil_dust_L_149x181_23
+  - first:
+      213: -7873362793020365724
+    second: soil_dust_L_149x181_24
+  - first:
+      213: -1232284964807912530
+    second: soil_dust_L_149x181_25
+  - first:
+      213: -4932909548313053245
+    second: soil_dust_L_149x181_26
+  - first:
+      213: -1623440453630816753
+    second: soil_dust_L_149x181_27
+  - first:
+      213: 2796725856045344588
+    second: soil_dust_L_149x181_28
+  - first:
+      213: -8727397154302056414
+    second: soil_dust_L_149x181_29
+  - first:
+      213: 1972347528105167003
+    second: soil_dust_L_149x181_30
+  - first:
+      213: 2696654212508019532
+    second: soil_dust_L_149x181_31
+  - first:
+      213: 3351503354272946644
+    second: soil_dust_L_149x181_32
+  - first:
+      213: -3911323319565106129
+    second: soil_dust_L_149x181_33
+  - first:
+      213: 6300245036461939812
+    second: soil_dust_L_149x181_34
+  - first:
+      213: 7754250734621019138
+    second: soil_dust_L_149x181_35
+  - first:
+      213: -8471445943807207040
+    second: soil_dust_L_149x181_36
+  - first:
+      213: 1853493682252674154
+    second: soil_dust_L_149x181_37
+  - first:
+      213: 641350496554638908
+    second: soil_dust_L_149x181_38
+  - first:
+      213: -1914133352732511637
+    second: soil_dust_L_149x181_39
+  - first:
+      213: 4638488955439192082
+    second: soil_dust_L_149x181_40
+  - first:
+      213: -6777573339583624143
+    second: soil_dust_L_149x181_41
+  - first:
+      213: 1637176132073515156
+    second: soil_dust_L_149x181_42
+  - first:
+      213: 8713733185371611870
+    second: soil_dust_L_149x181_43
+  - first:
+      213: 126822443501877836
+    second: soil_dust_L_149x181_44
+  - first:
+      213: 3126602527899973676
+    second: soil_dust_L_149x181_45
+  - first:
+      213: -6638772196151530129
+    second: soil_dust_L_149x181_46
+  - first:
+      213: -7446901599802332959
+    second: soil_dust_L_149x181_47
+  - first:
+      213: 8073307657923274925
+    second: soil_dust_L_149x181_48
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: soil_dust_L_149x181_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 543
+        width: 149
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6627bd67ead0d5446a2143a19b20297a
+      internalID: -663901865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_dust_L_149x181_1
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 543
+        width: 149
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02724943869df7243b0cd30fed1b58e9
+      internalID: -1159652735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_dust_L_149x181_2
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 543
+        width: 149
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1c14d40f9391ea4bb99c89d52285934
+      internalID: -1915069863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_dust_L_149x181_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 362
+        width: 149
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35db9a9018534e842954658e9c866cb6
+      internalID: 2005430005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_dust_L_149x181_4
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 362
+        width: 149
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7645431e0391e884caba3ba3c5cba67b
+      internalID: -116569061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_dust_L_149x181_5
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 362
+        width: 149
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5cfdc337bf50e64092a68993dd4e560
+      internalID: 53830589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_dust_L_149x181_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 181
+        width: 149
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51297f12dc8a01a40b79d3901d9f800a
+      internalID: 1777862589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_dust_L_149x181_7
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 181
+        width: 149
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bf03bdbed8a71d40b2a6a678ea513a9
+      internalID: 1096167337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_dust_L_149x181_8
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 181
+        width: 149
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 307e9ec636e168a40b0c7f5e4a1cc0ec
+      internalID: 65574096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_dust_L_149x181_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 149
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d773c84887c4c94eba714519059d781
+      internalID: 1575933088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_dust_L_149x181_10
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 0
+        width: 149
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62f4163ad6a6e82409fb778e4cdfa64a
+      internalID: 1920167183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_dust_L_149x181_11
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 0
+        width: 149
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 664ceba7b35410b4387bf992b60dde30
+      internalID: -1707739263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 042b6ae4fca255f4692384577b31b2d9
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      soil_dust_L_149x181_0: -663901865
+      soil_dust_L_149x181_1: -1159652735
+      soil_dust_L_149x181_10: 1920167183
+      soil_dust_L_149x181_11: -1707739263
+      soil_dust_L_149x181_2: -1915069863
+      soil_dust_L_149x181_3: 2005430005
+      soil_dust_L_149x181_4: -116569061
+      soil_dust_L_149x181_5: 53830589
+      soil_dust_L_149x181_6: 1777862589
+      soil_dust_L_149x181_7: 1096167337
+      soil_dust_L_149x181_8: 65574096
+      soil_dust_L_149x181_9: 1575933088
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

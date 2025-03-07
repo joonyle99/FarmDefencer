@@ -223,7 +223,7 @@ public class CropEggplant : Crop
 	private static readonly Action<Vector2, Vector2> TapEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayTabEffect(inputWorldPosition);
 
 	private static readonly Func<EggplantState, EggplantState, bool> TrelisEffectCondition = (beforeState, afterState) => afterState.TrelisPlaced && !beforeState.TrelisPlaced;
-	private static readonly Action<Vector2, Vector2> TrelisEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayTabEffect(inputWorldPosition);
+	private static readonly Action<Vector2, Vector2> TrelisEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayVfx("VFX_T_SoilParticleWhite", cropPosition);
 
 	private static readonly Func<int, Func<EggplantState, EggplantState, bool>> LeafDropSfxEffectConditionFor = (leavesDropped) => (beforeState, afterState) => afterState.LeavesDropped == leavesDropped && beforeState.LeavesDropped < leavesDropped;
 	private static readonly Func<int, Action<Vector2, Vector2>> LeafDropSfxEffectFor =
@@ -231,8 +231,14 @@ public class CropEggplant : Crop
 		(inputWorldPosition, cropPosition) =>
 		{
 			SoundManager.PlaySfxStatic($"SFX_T_eggplant_leaf_{leavesDropped}");
-			EffectPlayer.PlayVfx("VFX_T_SoilDust", cropPosition);
-			EffectPlayer.PlayTabEffect(inputWorldPosition);
+			if (leavesDropped == 1)
+			{
+				EffectPlayer.PlayVfx("VFX_T_SoilDustL", cropPosition);
+			}
+			else
+			{
+				EffectPlayer.PlayVfx("VFX_T_SoilDustR", cropPosition);
+			}
 		};
 
 
@@ -240,7 +246,7 @@ public class CropEggplant : Crop
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(HarvestEffectCondition, HarvestEffect),
+		(HarvestEffectCondition, HarvestEffect_SoilParticle),
 		(QuotaFilledEffectCondition, QuotaFilledEffect),
 		(TapEffectCondition, TapEffect),
 		(TrelisEffectCondition, TrelisEffect),
