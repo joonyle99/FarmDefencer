@@ -2,7 +2,11 @@ using JetBrains.Annotations;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using Spine.Unity;
 
+/// <summary>
+/// 0번 자식에는 SkeletonGraphic 컴포넌트를 가진 자식을 배치할 것.
+/// </summary>
 public class CropMushroom : Crop
 {
 	private struct MushroomState : ICommonCropState
@@ -67,6 +71,23 @@ public class CropMushroom : Crop
 	[Space]
 	[SerializeField] private Sprite _harvested_normalSprite;
 	[SerializeField] private Sprite _harvested_poisonousSprite;
+
+	[Space]
+
+	[SerializeField]
+	[SpineAnimation]
+	private string _idleAnimationName;
+	[SerializeField]
+	[SpineAnimation]
+	private string _injectAnimationName;
+	[SerializeField]
+	[SpineAnimation]
+	private string _injectFinishedAnimationName;
+
+	private GameObject _inoculationAnimationObject; // 0번 자식
+	private SkeletonAnimation _skeletonAnimation; // 0번 자식이 소유
+	private Spine.AnimationState _spineAnimationState; // 0번 자식이 소유
+	private Spine.Skeleton _skeleton; // 0번 자식이 소유
 
 	private SpriteRenderer _spriteRenderer;
 	private MushroomState _currentState;
@@ -133,15 +154,59 @@ public class CropMushroom : Crop
 			_currentState)
 
 			(transform.position, transform.position);
+
+		RenderInoculationAnimation();
 	}
 
 	private void Awake()
 	{
 		_spriteRenderer = GetComponent<SpriteRenderer>();
+		_inoculationAnimationObject = transform.GetChild(0).gameObject;
+		_skeletonAnimation = _inoculationAnimationObject.GetComponent<SkeletonAnimation>();
+		_spineAnimationState = _skeletonAnimation.AnimationState;
+		_skeleton = _skeletonAnimation.Skeleton;
 	}
 
 
+
 	// 이하 함수 빌딩 블록
+
+	private void RenderInoculationAnimation()
+	{
+		var currentStage = GetCurrentStage(_currentState);
+		var currentAnimationName = _spineAnimationState.GetCurrent(0).Animation.Name;
+
+		if (currentStage == MushroomStage.Stage3_BeforeInoculation)
+		{
+			_inoculationAnimationObject.SetActive(true);
+			if (_currentState.HoldingTime > 0.0f)
+			{
+				if (currentAnimationName != _injectAnimationName)
+				{
+					_spineAnimationState.SetAnimation(0, _injectAnimationName, false);
+				}
+			}
+			else
+			{
+				if (currentAnimationName != _idleAnimationName)
+				{
+					_spineAnimationState.SetAnimation(0, _idleAnimationName, false);
+				}
+			}
+		}
+		else if (currentStage == MushroomStage.Stage3_AfterInoculation)
+		{
+			_inoculationAnimationObject.SetActive(true);
+			if (currentAnimationName != _injectFinishedAnimationName)
+			{
+				_spineAnimationState.SetAnimation(0, _injectFinishedAnimationName, false);
+			}
+		}
+		else
+		{
+			_inoculationAnimationObject.SetActive(false);
+		}
+	}
 
 	private static MushroomStage GetCurrentStage(MushroomState state) => state switch
 	{
@@ -217,7 +282,7 @@ public class CropMushroom : Crop
 	private static readonly Func<MushroomState, MushroomState, bool> PlayShotSfxEffectCondition = (beforeState, afterState) => GetCurrentStage(beforeState) == MushroomStage.Stage3_BeforeInoculation && afterState.HoldingTime > 0.0f && beforeState.HoldingTime == 0.0f;
 	private static readonly Action<Vector2, Vector2> PlayShotSfxEffect = (inputWorldPosition, cropPosition) => SoundManager.PlaySfxStatic("SFX_T_mushroom_shot");
 
-	private static readonly Func<MushroomState, MushroomState, bool> StopShotSfxEffectCondition = (beforeState, afterState) => afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
+	private static readonly Func<MushroomState, MushroomState, bool> StopShotSfxEffectCondition = (beforeState, afterState) => GetCurrentStage(beforeState) == MushroomStage.Stage3_BeforeInoculation && afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
 	private static readonly Action<Vector2, Vector2> StopShotSfxEffect = (inputWorldPosition, cropPosition) => SoundManager.StopCurrentSfxStatic();
 
 	private static readonly Func<MushroomState, MushroomState, bool> MushroomHarvestEffectCondition = (beforeState, afterState) => afterState.TapCount == 2 && beforeState.TapCount != 2;
