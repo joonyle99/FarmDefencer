@@ -171,10 +171,18 @@ public class CropPotato : Crop
 	private static readonly Action<Vector2, Vector2> HoldEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayHoldEffect(inputWorldPosition);
 
 	private static readonly Func<PotatoState, PotatoState, bool> PlayDustSfxEffectCondition = (beforeState, afterState) => afterState.HoldingTime > 0.0f && beforeState.HoldingTime == 0.0f;
-	private static readonly Action<Vector2, Vector2> PlayDustSfxEffect = (inputWorldPosition, cropPosition) => SoundManager.PlaySfxStatic("SFX_T_potato_dust");
+	private static readonly Action<Vector2, Vector2> PlayDustSfxEffect = (inputWorldPosition, cropPosition) =>
+	{
+		EffectPlayer.PlayVfx("VFX_T_SoilStone", cropPosition);
+		SoundManager.PlaySfxStatic("SFX_T_potato_dust");
+	};
 
 	private static readonly Func<PotatoState, PotatoState, bool> StopDustSfxEffectCondition = (beforeState, afterState) => afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
-	private static readonly Action<Vector2, Vector2> StopDustSfxEffect = (inputWorldPosition, cropPosition) => SoundManager.StopCurrentSfxStatic();
+	private static readonly Action<Vector2, Vector2> StopDustSfxEffect = (inputWorldPosition, cropPosition) =>
+	{
+		EffectPlayer.StopVfx();
+		SoundManager.StopCurrentSfxStatic();
+	};
 
 	[Pure]
 	private Action<SpriteRenderer> ApplySpriteTo(PotatoStage stage) => stage switch

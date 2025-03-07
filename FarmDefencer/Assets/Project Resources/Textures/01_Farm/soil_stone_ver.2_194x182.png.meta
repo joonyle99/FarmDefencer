@@ -1,0 +1,1366 @@
+fileFormatVersion: 2
+guid: c8490f8da561ebe4e9fb83d8c1be7d3d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 884266983816193167
+    second: soil_stone_ver.2_194x182_0
+  - first:
+      213: 607093597721731958
+    second: soil_stone_ver.2_194x182_1
+  - first:
+      213: 7653683430798728820
+    second: soil_stone_ver.2_194x182_2
+  - first:
+      213: -7221638353830228141
+    second: soil_stone_ver.2_194x182_3
+  - first:
+      213: -267392600984192507
+    second: soil_stone_ver.2_194x182_4
+  - first:
+      213: -1337888937921972451
+    second: soil_stone_ver.2_194x182_5
+  - first:
+      213: -3224993923248944469
+    second: soil_stone_ver.2_194x182_6
+  - first:
+      213: -8082788148620200807
+    second: soil_stone_ver.2_194x182_7
+  - first:
+      213: 2717635013571578532
+    second: soil_stone_ver.2_194x182_8
+  - first:
+      213: 8484600774549240681
+    second: soil_stone_ver.2_194x182_9
+  - first:
+      213: -4304246281870830204
+    second: soil_stone_ver.2_194x182_10
+  - first:
+      213: 5715114783110423151
+    second: soil_stone_ver.2_194x182_11
+  - first:
+      213: 1867242066879400062
+    second: soil_stone_ver.2_194x182_12
+  - first:
+      213: 1203430637301059026
+    second: soil_stone_ver.2_194x182_13
+  - first:
+      213: 7107662703375447515
+    second: soil_stone_ver.2_194x182_14
+  - first:
+      213: 7621199490037353436
+    second: soil_stone_ver.2_194x182_15
+  - first:
+      213: 5644951037442665031
+    second: soil_stone_ver.2_194x182_16
+  - first:
+      213: -1220374146962177695
+    second: soil_stone_ver.2_194x182_17
+  - first:
+      213: 5683287818164153142
+    second: soil_stone_ver.2_194x182_18
+  - first:
+      213: 559852655862602094
+    second: soil_stone_ver.2_194x182_19
+  - first:
+      213: -3383521071769633476
+    second: soil_stone_ver.2_194x182_20
+  - first:
+      213: 7580484417984104131
+    second: soil_stone_ver.2_194x182_21
+  - first:
+      213: 6991375238511864597
+    second: soil_stone_ver.2_194x182_22
+  - first:
+      213: 4807615002021689047
+    second: soil_stone_ver.2_194x182_23
+  - first:
+      213: -3545187148106757898
+    second: soil_stone_ver.2_194x182_24
+  - first:
+      213: -1407996019971474247
+    second: soil_stone_ver.2_194x182_25
+  - first:
+      213: 6727259600078233282
+    second: soil_stone_ver.2_194x182_26
+  - first:
+      213: -4336237949849395080
+    second: soil_stone_ver.2_194x182_27
+  - first:
+      213: 1904273726925051781
+    second: soil_stone_ver.2_194x182_28
+  - first:
+      213: 1924619530961779636
+    second: soil_stone_ver.2_194x182_29
+  - first:
+      213: 4765088083679095014
+    second: soil_stone_ver.2_194x182_30
+  - first:
+      213: -2738653624631321177
+    second: soil_stone_ver.2_194x182_31
+  - first:
+      213: -606661761737125145
+    second: soil_stone_ver.2_194x182_32
+  - first:
+      213: 59383742026325967
+    second: soil_stone_ver.2_194x182_33
+  - first:
+      213: 6343658493309507978
+    second: soil_stone_ver.2_194x182_34
+  - first:
+      213: -5579964520209409974
+    second: soil_stone_ver.2_194x182_35
+  - first:
+      213: 3859727765210943434
+    second: soil_stone_ver.2_194x182_36
+  - first:
+      213: -5708457939850074161
+    second: soil_stone_ver.2_194x182_37
+  - first:
+      213: 1918371563910601259
+    second: soil_stone_ver.2_194x182_38
+  - first:
+      213: -5235312938397716497
+    second: soil_stone_ver.2_194x182_39
+  - first:
+      213: 2123320712343552985
+    second: soil_stone_ver.2_194x182_40
+  - first:
+      213: 4024048397979434949
+    second: soil_stone_ver.2_194x182_41
+  - first:
+      213: 5925180007839908650
+    second: soil_stone_ver.2_194x182_42
+  - first:
+      213: -761085423816029624
+    second: soil_stone_ver.2_194x182_43
+  - first:
+      213: 6646704469010857205
+    second: soil_stone_ver.2_194x182_44
+  - first:
+      213: -5423877785477307102
+    second: soil_stone_ver.2_194x182_45
+  - first:
+      213: 2927607403517024133
+    second: soil_stone_ver.2_194x182_46
+  - first:
+      213: 6631638954181745275
+    second: soil_stone_ver.2_194x182_47
+  - first:
+      213: 5953546132178696811
+    second: soil_stone_ver.2_194x182_48
+  - first:
+      213: 8714889568366971695
+    second: soil_stone_ver.2_194x182_49
+  - first:
+      213: 481788829047632749
+    second: soil_stone_ver.2_194x182_50
+  - first:
+      213: -2595389188704886464
+    second: soil_stone_ver.2_194x182_51
+  - first:
+      213: 2962591701993825976
+    second: soil_stone_ver.2_194x182_52
+  - first:
+      213: -8662843033482761301
+    second: soil_stone_ver.2_194x182_53
+  - first:
+      213: -7821621230118421205
+    second: soil_stone_ver.2_194x182_54
+  - first:
+      213: -4004449259535925553
+    second: soil_stone_ver.2_194x182_55
+  - first:
+      213: -6476156000432147300
+    second: soil_stone_ver.2_194x182_56
+  - first:
+      213: 7738548258457158622
+    second: soil_stone_ver.2_194x182_57
+  - first:
+      213: -9152804921813977366
+    second: soil_stone_ver.2_194x182_58
+  - first:
+      213: 4155305089273119422
+    second: soil_stone_ver.2_194x182_59
+  - first:
+      213: -6949846643795810926
+    second: soil_stone_ver.2_194x182_60
+  - first:
+      213: -8228646523160205427
+    second: soil_stone_ver.2_194x182_61
+  - first:
+      213: -1536269973615865531
+    second: soil_stone_ver.2_194x182_62
+  - first:
+      213: -7282798892782539120
+    second: soil_stone_ver.2_194x182_63
+  - first:
+      213: 6913972376278224785
+    second: soil_stone_ver.2_194x182_64
+  - first:
+      213: -5561287877750939641
+    second: soil_stone_ver.2_194x182_65
+  - first:
+      213: -2611900049168915981
+    second: soil_stone_ver.2_194x182_66
+  - first:
+      213: 4989182573922168491
+    second: soil_stone_ver.2_194x182_67
+  - first:
+      213: -4654053592085607705
+    second: soil_stone_ver.2_194x182_68
+  - first:
+      213: 2327253022944213336
+    second: soil_stone_ver.2_194x182_69
+  - first:
+      213: 4400848517760244898
+    second: soil_stone_ver.2_194x182_70
+  - first:
+      213: -8493429973056319392
+    second: soil_stone_ver.2_194x182_71
+  - first:
+      213: 5751078619448613554
+    second: soil_stone_ver.2_194x182_72
+  - first:
+      213: -2727593635721748075
+    second: soil_stone_ver.2_194x182_73
+  - first:
+      213: -8102977391576847398
+    second: soil_stone_ver.2_194x182_74
+  - first:
+      213: 1414257507421204090
+    second: soil_stone_ver.2_194x182_75
+  - first:
+      213: -5083678248438561787
+    second: soil_stone_ver.2_194x182_76
+  - first:
+      213: -1408539433829099093
+    second: soil_stone_ver.2_194x182_77
+  - first:
+      213: 7343299641296405732
+    second: soil_stone_ver.2_194x182_78
+  - first:
+      213: -289236857956638802
+    second: soil_stone_ver.2_194x182_79
+  - first:
+      213: -2164749461181147623
+    second: soil_stone_ver.2_194x182_80
+  - first:
+      213: -2994266093019821483
+    second: soil_stone_ver.2_194x182_81
+  - first:
+      213: 377685450182806328
+    second: soil_stone_ver.2_194x182_82
+  - first:
+      213: 8003306367347873514
+    second: soil_stone_ver.2_194x182_83
+  - first:
+      213: 3390766227530127433
+    second: soil_stone_ver.2_194x182_84
+  - first:
+      213: 2835612633268131549
+    second: soil_stone_ver.2_194x182_85
+  - first:
+      213: 5432331710600079441
+    second: soil_stone_ver.2_194x182_86
+  - first:
+      213: 4872444898495990965
+    second: soil_stone_ver.2_194x182_87
+  - first:
+      213: -6552125438783659237
+    second: soil_stone_ver.2_194x182_88
+  - first:
+      213: -7409715628450924290
+    second: soil_stone_ver.2_194x182_89
+  - first:
+      213: -7272152493141618830
+    second: soil_stone_ver.2_194x182_90
+  - first:
+      213: -5675172406429587015
+    second: soil_stone_ver.2_194x182_91
+  - first:
+      213: -3795084986195134673
+    second: soil_stone_ver.2_194x182_92
+  - first:
+      213: -887957035896873106
+    second: soil_stone_ver.2_194x182_93
+  - first:
+      213: -9211179643304438172
+    second: soil_stone_ver.2_194x182_94
+  - first:
+      213: -561317760660419806
+    second: soil_stone_ver.2_194x182_95
+  - first:
+      213: -867093318580643429
+    second: soil_stone_ver.2_194x182_96
+  - first:
+      213: 8343403334997882565
+    second: soil_stone_ver.2_194x182_97
+  - first:
+      213: -6714500855102026626
+    second: soil_stone_ver.2_194x182_98
+  - first:
+      213: -870415670027500164
+    second: soil_stone_ver.2_194x182_99
+  - first:
+      213: 1154671673104863281
+    second: soil_stone_ver.2_194x182_100
+  - first:
+      213: 6239371899699601620
+    second: soil_stone_ver.2_194x182_101
+  - first:
+      213: -4214545667204252308
+    second: soil_stone_ver.2_194x182_102
+  - first:
+      213: -8880804258023119412
+    second: soil_stone_ver.2_194x182_103
+  - first:
+      213: -6323110457254974951
+    second: soil_stone_ver.2_194x182_104
+  - first:
+      213: -5367531241246798861
+    second: soil_stone_ver.2_194x182_105
+  - first:
+      213: 2025628828815373590
+    second: soil_stone_ver.2_194x182_106
+  - first:
+      213: 3971571120845241423
+    second: soil_stone_ver.2_194x182_107
+  - first:
+      213: 8315699514638561115
+    second: soil_stone_ver.2_194x182_108
+  - first:
+      213: -8392177236457668676
+    second: soil_stone_ver.2_194x182_109
+  - first:
+      213: -7405097524939867201
+    second: soil_stone_ver.2_194x182_110
+  - first:
+      213: -829385435762889361
+    second: soil_stone_ver.2_194x182_111
+  - first:
+      213: -1303113966234955500
+    second: soil_stone_ver.2_194x182_112
+  - first:
+      213: -2636241328008303702
+    second: soil_stone_ver.2_194x182_113
+  - first:
+      213: 6098810735713749293
+    second: soil_stone_ver.2_194x182_114
+  - first:
+      213: -215107500818867494
+    second: soil_stone_ver.2_194x182_115
+  - first:
+      213: -56910532889205988
+    second: soil_stone_ver.2_194x182_116
+  - first:
+      213: -4941532976668962871
+    second: soil_stone_ver.2_194x182_117
+  - first:
+      213: 8376862864301200605
+    second: soil_stone_ver.2_194x182_118
+  - first:
+      213: 7318718768162379691
+    second: soil_stone_ver.2_194x182_119
+  - first:
+      213: -739807771900236590
+    second: soil_stone_ver.2_194x182_120
+  - first:
+      213: 4562163745714571904
+    second: soil_stone_ver.2_194x182_121
+  - first:
+      213: -2559416843123418378
+    second: soil_stone_ver.2_194x182_122
+  - first:
+      213: 8164904712821409181
+    second: soil_stone_ver.2_194x182_123
+  - first:
+      213: -8591565139648192995
+    second: soil_stone_ver.2_194x182_124
+  - first:
+      213: 3817923835021426717
+    second: soil_stone_ver.2_194x182_125
+  - first:
+      213: -2745424530053535374
+    second: soil_stone_ver.2_194x182_126
+  - first:
+      213: 1910865670512300412
+    second: soil_stone_ver.2_194x182_127
+  - first:
+      213: -8469419221248846358
+    second: soil_stone_ver.2_194x182_128
+  - first:
+      213: -7270365228961685512
+    second: soil_stone_ver.2_194x182_129
+  - first:
+      213: -2352557704920728388
+    second: soil_stone_ver.2_194x182_130
+  - first:
+      213: 2772577975148530218
+    second: soil_stone_ver.2_194x182_131
+  - first:
+      213: 4874400752038170358
+    second: soil_stone_ver.2_194x182_132
+  - first:
+      213: 4982028220487792334
+    second: soil_stone_ver.2_194x182_133
+  - first:
+      213: 8441882521121611854
+    second: soil_stone_ver.2_194x182_134
+  - first:
+      213: 3193477931134563752
+    second: soil_stone_ver.2_194x182_135
+  - first:
+      213: 7679086582485011242
+    second: soil_stone_ver.2_194x182_136
+  - first:
+      213: 1848837263700542511
+    second: soil_stone_ver.2_194x182_137
+  - first:
+      213: -3581894784995102858
+    second: soil_stone_ver.2_194x182_138
+  - first:
+      213: -5390036662287851889
+    second: soil_stone_ver.2_194x182_139
+  - first:
+      213: 6865863043448764346
+    second: soil_stone_ver.2_194x182_140
+  - first:
+      213: 120332101736820086
+    second: soil_stone_ver.2_194x182_141
+  - first:
+      213: -8903385424784436980
+    second: soil_stone_ver.2_194x182_142
+  - first:
+      213: 5464280156890447082
+    second: soil_stone_ver.2_194x182_143
+  - first:
+      213: -7938165330741027260
+    second: soil_stone_ver.2_194x182_144
+  - first:
+      213: 8630486169608957924
+    second: soil_stone_ver.2_194x182_145
+  - first:
+      213: 207853995324922961
+    second: soil_stone_ver.2_194x182_146
+  - first:
+      213: -7434903637202041336
+    second: soil_stone_ver.2_194x182_147
+  - first:
+      213: 6546872489930883812
+    second: soil_stone_ver.2_194x182_148
+  - first:
+      213: -2377462262594158907
+    second: soil_stone_ver.2_194x182_149
+  - first:
+      213: -2156466986124853200
+    second: soil_stone_ver.2_194x182_150
+  - first:
+      213: -7522226063617495657
+    second: soil_stone_ver.2_194x182_151
+  - first:
+      213: 1407248486641159579
+    second: soil_stone_ver.2_194x182_152
+  - first:
+      213: 2622101645314134344
+    second: soil_stone_ver.2_194x182_153
+  - first:
+      213: -8227571663855613359
+    second: soil_stone_ver.2_194x182_154
+  - first:
+      213: -1747186244400679035
+    second: soil_stone_ver.2_194x182_155
+  - first:
+      213: -1619593829312273393
+    second: soil_stone_ver.2_194x182_156
+  - first:
+      213: -4355073745614278404
+    second: soil_stone_ver.2_194x182_157
+  - first:
+      213: 2349319767463979916
+    second: soil_stone_ver.2_194x182_158
+  - first:
+      213: -6928543134320257302
+    second: soil_stone_ver.2_194x182_159
+  - first:
+      213: 7991281169807491498
+    second: soil_stone_ver.2_194x182_160
+  - first:
+      213: 7843057195709871747
+    second: soil_stone_ver.2_194x182_161
+  - first:
+      213: 8756070256135301559
+    second: soil_stone_ver.2_194x182_162
+  - first:
+      213: 6166654220806793394
+    second: soil_stone_ver.2_194x182_163
+  - first:
+      213: 4379388049910645602
+    second: soil_stone_ver.2_194x182_164
+  - first:
+      213: -1278764331099235611
+    second: soil_stone_ver.2_194x182_165
+  - first:
+      213: -613259964507520966
+    second: soil_stone_ver.2_194x182_166
+  - first:
+      213: -5911642306847982657
+    second: soil_stone_ver.2_194x182_167
+  - first:
+      213: 6314202675452028404
+    second: soil_stone_ver.2_194x182_168
+  - first:
+      213: -1241810756049731727
+    second: soil_stone_ver.2_194x182_169
+  - first:
+      213: 4307688867435314543
+    second: soil_stone_ver.2_194x182_170
+  - first:
+      213: 6220470649713121589
+    second: soil_stone_ver.2_194x182_171
+  - first:
+      213: 2721645268025793334
+    second: soil_stone_ver.2_194x182_172
+  - first:
+      213: -1245812855972519480
+    second: soil_stone_ver.2_194x182_173
+  - first:
+      213: 6097412499641186287
+    second: soil_stone_ver.2_194x182_174
+  - first:
+      213: 1121788593950694120
+    second: soil_stone_ver.2_194x182_175
+  - first:
+      213: -2094787786030401469
+    second: soil_stone_ver.2_194x182_176
+  - first:
+      213: -566701826792520165
+    second: soil_stone_ver.2_194x182_177
+  - first:
+      213: -3612730117350300250
+    second: soil_stone_ver.2_194x182_178
+  - first:
+      213: -5826156533403765964
+    second: soil_stone_ver.2_194x182_179
+  - first:
+      213: -2965984902848721901
+    second: soil_stone_ver.2_194x182_180
+  - first:
+      213: 6723106190505195494
+    second: soil_stone_ver.2_194x182_181
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 910
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92017ee7735549940b0acdb43ed077c7
+      internalID: 65114849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_1
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 910
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89f7bfb62eae3744bb8971a217bbe974
+      internalID: -1988775452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_2
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 910
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aae6ac9db089a304c8e86a55357f4cd2
+      internalID: 1426576662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_3
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 910
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65569a97cfa2a274face7510986dfba1
+      internalID: -1173065576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_4
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 910
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f63a4234d79bebb459961b9ec22d1bd0
+      internalID: -1525145445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 728
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d70d59841a186fc44a44ae812c17d88d
+      internalID: -2100516786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_6
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 728
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf988df959801fb43945df0d3ba71da9
+      internalID: 410809934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_7
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 728
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f70f0b3ea37bf74ebaeda93fef4a4da
+      internalID: -819566151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_8
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 728
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 444f35ed1737ab245a2efe49daa07f72
+      internalID: -1510337351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_9
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 728
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e1451a859847d745ab51481adeec0cd
+      internalID: 1521721283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 546
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d5f184e7764b0c4dab93889d55e4bc0
+      internalID: -2062483195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_11
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 546
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 114b77ac5381283408a14681c7310dd5
+      internalID: 1540052052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_12
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 546
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fa042d460dc9fb4b8773e7457f120f8
+      internalID: 770007541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_13
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 546
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b39696c5c127a7c4eb7f64ca159cb9ee
+      internalID: 1871660340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_14
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 546
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd691e94f15ee1b4981402eb56431621
+      internalID: 1277374772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 364
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d03beca781d975e4e8e9235ccd15510d
+      internalID: -1193177973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_16
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 364
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4de99be5e5a56a64c85d94155af51175
+      internalID: -1062513821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_17
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 364
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8acf77f2049cbd478a3fec24f4ba72e
+      internalID: -1692201546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_18
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 364
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 936f877f0aee8324da145b1354a6ce5f
+      internalID: 698320505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_19
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 364
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2967e81217e33042a4866be7a43652b
+      internalID: -1750398376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 182
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d67efa6eb7e77f841bdcaac34ff93c93
+      internalID: 376299083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_21
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 182
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 499667d073aaef146b6bb3f36543ddf5
+      internalID: 632741499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_22
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 182
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecf047713da154a438437b0eb9d9356a
+      internalID: -1549130911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_23
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 182
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 399e40cedde943d4e93fdaf2427409c7
+      internalID: 1339394216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_24
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 182
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 886922b76e9d8eb46a83a6e2ca0c8de8
+      internalID: -1592278404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac126d3c7bb92eb438314f2423d74b94
+      internalID: -1305856264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_26
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 0
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bfbc327cff2d7742ab195b9a0ca0dca
+      internalID: 381743988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_27
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 0
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22629cd0d4228834ea1ede82e0a9d90d
+      internalID: -1060659217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_28
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 0
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b13f182baef56b246ac9e1f1bf8f8fde
+      internalID: -1783973936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soil_stone_ver.2_194x182_29
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 0
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d45f61196e415924389d420d6c6f2ca7
+      internalID: 399926662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 526c34de0f284e94fbe97df9e0edc3bc
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      soil_stone_ver.2_194x182_0: 65114849
+      soil_stone_ver.2_194x182_1: -1988775452
+      soil_stone_ver.2_194x182_10: -2062483195
+      soil_stone_ver.2_194x182_11: 1540052052
+      soil_stone_ver.2_194x182_12: 770007541
+      soil_stone_ver.2_194x182_13: 1871660340
+      soil_stone_ver.2_194x182_14: 1277374772
+      soil_stone_ver.2_194x182_15: -1193177973
+      soil_stone_ver.2_194x182_16: -1062513821
+      soil_stone_ver.2_194x182_17: -1692201546
+      soil_stone_ver.2_194x182_18: 698320505
+      soil_stone_ver.2_194x182_19: -1750398376
+      soil_stone_ver.2_194x182_2: 1426576662
+      soil_stone_ver.2_194x182_20: 376299083
+      soil_stone_ver.2_194x182_21: 632741499
+      soil_stone_ver.2_194x182_22: -1549130911
+      soil_stone_ver.2_194x182_23: 1339394216
+      soil_stone_ver.2_194x182_24: -1592278404
+      soil_stone_ver.2_194x182_25: -1305856264
+      soil_stone_ver.2_194x182_26: 381743988
+      soil_stone_ver.2_194x182_27: -1060659217
+      soil_stone_ver.2_194x182_28: -1783973936
+      soil_stone_ver.2_194x182_29: 399926662
+      soil_stone_ver.2_194x182_3: -1173065576
+      soil_stone_ver.2_194x182_4: -1525145445
+      soil_stone_ver.2_194x182_5: -2100516786
+      soil_stone_ver.2_194x182_6: 410809934
+      soil_stone_ver.2_194x182_7: -819566151
+      soil_stone_ver.2_194x182_8: -1510337351
+      soil_stone_ver.2_194x182_9: 1521721283
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
