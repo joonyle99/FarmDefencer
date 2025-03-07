@@ -51,9 +51,9 @@ public class EffectPlayer : MonoBehaviour
 	/// </summary>
 	/// <param name="name">Resources/Vfx에 위치한 Animation Controller의 이름.</param>
 	/// <param name="worldPosition"></param>
-	public static void PlayVfx(string name, Vector2 worldPosition)
+	/// <param name="overwriteEvenIfSame">true일 경우, 동일한 VFX를 요청해도 다시 처음부터 재생.</param>
+	public static void PlayVfx(string name, Vector2 worldPosition, bool overwriteEvenIfSame = true)
 	{
-		s_singleton._vfxAnimator.runtimeAnimatorController = null;
 		if (!s_singleton._vfxControllers.ContainsKey(name))
 		{
 			var loadedController = Resources.Load<RuntimeAnimatorController>($"Vfx/{name}");
@@ -67,8 +67,12 @@ public class EffectPlayer : MonoBehaviour
 			return;
 		}
 
-		s_singleton._vfxAnimator.transform.position = worldPosition;
-		s_singleton._vfxAnimator.runtimeAnimatorController = controller;
+		if (overwriteEvenIfSame || controller != s_singleton._vfxAnimator.runtimeAnimatorController)
+		{
+			s_singleton._vfxAnimator.runtimeAnimatorController = null;
+			s_singleton._vfxAnimator.transform.position = worldPosition;
+			s_singleton._vfxAnimator.runtimeAnimatorController = controller;
+		}
 	}
 
 	/// <summary>
