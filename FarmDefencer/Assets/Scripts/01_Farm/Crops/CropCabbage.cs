@@ -99,7 +99,7 @@ public class CropCabbage : Crop
 			},
 			_currentState)
 
-			(initialPosition+deltaPosition, transform.position);
+			(initialPosition + deltaPosition, transform.position);
 	}
 
 	public override void OnFarmUpdate(float deltaTime)
@@ -162,7 +162,13 @@ public class CropCabbage : Crop
 	};
 
 	private static readonly Func<CabbageState, CabbageState, bool> ShakeEffectCondition = (beforeState, afterState) => afterState.ShakeCount > beforeState.ShakeCount;
-	private static readonly Action<Vector2, Vector2> ShakeEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayVfx("SoilParticle", cropPosition);
+	private static readonly Action<Vector2, Vector2> ShakeEffect = (inputWorldPosition, cropPosition) =>
+	{
+		EffectPlayer.PlayVfx("SoilParticle", cropPosition);
+	};
+
+	private static readonly Func<int, Func<CabbageState, CabbageState, bool>> ShakeSfxEffectConditionFor = (shakedCount) => (beforeState, afterState) => afterState.ShakeCount == shakedCount && beforeState.ShakeCount < shakedCount;
+	private static readonly Func<int, Action<Vector2, Vector2>> ShakeSfxEffectFor = (shakedCount) => (inputWorldPosition, cropPosition) => SoundManager.PlaySfxStatic($"SFX_T_cabbage_shake_{shakedCount}");
 
 	private static List<(Func<CabbageState, CabbageState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<CabbageState, CabbageState, bool>, Action<Vector2, Vector2>)>
 	{
@@ -171,6 +177,10 @@ public class CropCabbage : Crop
 		(HarvestEffectCondition, HarvestEffect),
 		(QuotaFilledEffectCondition, QuotaFilledEffect),
 		(ShakeEffectCondition, ShakeEffect),
+		(ShakeSfxEffectConditionFor(1), ShakeSfxEffectFor(1)),
+		(ShakeSfxEffectConditionFor(2), ShakeSfxEffectFor(2)),
+		(ShakeSfxEffectConditionFor(3), ShakeSfxEffectFor(3)),
+		(ShakeSfxEffectConditionFor(4), ShakeSfxEffectFor(4)),
 	};
 
 	private static readonly Func<CabbageState, Vector2, Vector2, bool, float, CabbageState> ShakeAndHarvest =
@@ -208,7 +218,7 @@ public class CropCabbage : Crop
 					nextState.Harvested = true;
 				}
 			}
-			
+
 
 			return nextState;
 		};
