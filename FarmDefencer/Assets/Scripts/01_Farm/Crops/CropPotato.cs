@@ -150,20 +150,31 @@ public class CropPotato : Crop
 		{PotatoStage.Harvested, DoNothing_OnSingleHolding },
 		{
 			PotatoStage.Mature,
-			(beforeState, _, _, _, deltaHoldTime) => 
-			{ 
-				beforeState.HoldingTime += deltaHoldTime;
-				if (beforeState.HoldingTime > HarvestHoldTime)
+			(beforeState, _, _, isEnd, deltaHoldTime) =>
+			{
+				var afterState = beforeState;
+				afterState.HoldingTime += deltaHoldTime;
+				if (afterState.HoldingTime > HarvestHoldTime)
 				{
-					beforeState.Harvested = true;
+					afterState.Harvested = true;
 				}
-				return beforeState;
+				if (isEnd)
+				{
+					afterState.HoldingTime = 0.0f;
+				}
+				return afterState;
 			}
 		},
 	};
 
 	private static readonly Func<PotatoState, PotatoState, bool> HoldEffectCondition = (beforeState, afterState) => afterState.HoldingTime > beforeState.HoldingTime;
 	private static readonly Action<Vector2, Vector2> HoldEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayHoldEffect(inputWorldPosition);
+
+	private static readonly Func<PotatoState, PotatoState, bool> PlayDustSfxEffectCondition = (beforeState, afterState) => afterState.HoldingTime > 0.0f && beforeState.HoldingTime == 0.0f;
+	private static readonly Action<Vector2, Vector2> PlayDustSfxEffect = (inputWorldPosition, cropPosition) => SoundManager.PlaySfxStatic("SFX_T_potato_dust", false);
+
+	private static readonly Func<PotatoState, PotatoState, bool> StopDustSfxEffectCondition = (beforeState, afterState) => afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
+	private static readonly Action<Vector2, Vector2> StopDustSfxEffect = (inputWorldPosition, cropPosition) => SoundManager.StopCurrentSfxStatic();
 
 	[Pure]
 	private Action<SpriteRenderer> ApplySpriteTo(PotatoStage stage) => stage switch
@@ -184,5 +195,7 @@ public class CropPotato : Crop
 		(HarvestEffectCondition, HarvestEffect),
 		(HoldEffectCondition, HoldEffect),
 		(QuotaFilledEffectCondition, QuotaFilledEffect),
+		(StopDustSfxEffectCondition, StopDustSfxEffect),
+		(PlayDustSfxEffectCondition, PlayDustSfxEffect)
 	};
 }
