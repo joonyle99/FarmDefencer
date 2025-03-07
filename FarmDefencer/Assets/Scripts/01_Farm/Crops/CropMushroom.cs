@@ -204,6 +204,13 @@ public class CropMushroom : Crop
 	private static readonly Func<MushroomState, MushroomState, bool> TapEffectCondition = (beforeState, afterState) => afterState.LastSingleTapTime > beforeState.LastSingleTapTime;
 	private static readonly Action<Vector2, Vector2> TapEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayTabEffect(inputWorldPosition);
 
+	// 용어 참고: SFX에서의 shot == 코드에서의 inoculation.
+	private static readonly Func<MushroomState, MushroomState, bool> PlayShotSfxEffectCondition = (beforeState, afterState) => GetCurrentStage(beforeState) == MushroomStage.Stage3_BeforeInoculation && afterState.HoldingTime > 0.0f && beforeState.HoldingTime == 0.0f;
+	private static readonly Action<Vector2, Vector2> PlayShotSfxEffect = (inputWorldPosition, cropPosition) => SoundManager.PlaySfxStatic("SFX_T_mushroom_shot");
+
+	private static readonly Func<MushroomState, MushroomState, bool> StopShotSfxEffectCondition = (beforeState, afterState) => afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
+	private static readonly Action<Vector2, Vector2> StopShotSfxEffect = (inputWorldPosition, cropPosition) => SoundManager.StopCurrentSfxStatic();
+
 	private static readonly List<(Func<MushroomState, MushroomState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<MushroomState, MushroomState, bool>, Action<Vector2, Vector2>)>
 	{
 		(WaterEffectCondition, WaterEffect),
@@ -212,6 +219,8 @@ public class CropMushroom : Crop
 		(QuotaFilledEffectCondition, QuotaFilledEffect),
 		(HoldEffectCondition, HoldEffect),
 		(TapEffectCondition, TapEffect),
+		(PlayShotSfxEffectCondition, PlayShotSfxEffect),
+		(StopShotSfxEffectCondition, StopShotSfxEffect),
 	};
 
 	private static readonly Func<MushroomState, MushroomState> HarvestOnFiveTap =
@@ -280,7 +289,7 @@ public class CropMushroom : Crop
 			nextState.Planted = true;
 		}
 
-		if (isEnd)
+		if (isEnd || nextState.Planted)
 		{
 			nextState.HoldingTime = 0.0f;
 		}
