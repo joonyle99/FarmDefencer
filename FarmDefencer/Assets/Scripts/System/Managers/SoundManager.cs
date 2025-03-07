@@ -20,9 +20,9 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
 	/// <seealso cref="PlaySfx(string, bool)"/>
 	/// </summary>
 	/// <param name="name"></param>
-	public static void PlaySfxStatic(string name, bool overwriteCurrentPlaying = true)
+	public static void PlaySfxStatic(string name)
 	{
-		Instance.PlaySfx(name, overwriteCurrentPlaying);
+		Instance.PlaySfx(name);
 	}
 
 	/// <summary>
@@ -30,8 +30,7 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
 	/// 캐시에 존재하지 않을 경우 Resources/Sfx에서 불러와 캐시에 넣고 재생함.<br/>
 	/// </summary>
 	/// <param name="name"></param>
-	/// <param name="overwriteCurrentPlaying">이미 재생중인 SFX가 존재하는 경우에 대한 동작. true일 경우 즉시 중지하고 새 SFX 재생, false일 경우 새 SFX는 무시.</param>
-	public void PlaySfx(string name, bool overwriteCurrentPlaying = true)
+	public void PlaySfx(string name)
 	{
 		if (_sfxDictionary.ContainsKey(name) == false)
 		{
@@ -66,18 +65,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
 		{
 			Debug.LogError($"존재하지 않는 SFX: {name}");
 			return;
-		}
-
-		if (_sfxAudioSource.isPlaying)
-		{
-			if (overwriteCurrentPlaying)
-			{
-				_sfxAudioSource.Stop();
-			}
-			else
-			{
-				return;
-			}
 		}
 
 		if (sfxList.Count == 1)
