@@ -206,7 +206,11 @@ public class CropSweetpotato : Crop
 	private static readonly Action<Vector2, Vector2> TapEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayTabEffect(inputWorldPosition);
 
 	private static readonly Func<SweetpotatoState, SweetpotatoState, bool> WrapEffectCondition = (beforeState, afterState) => afterState.Wrapped && !beforeState.Wrapped;
-	private static readonly Action<Vector2, Vector2> WrapEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayVfx("SoilDust", cropPosition);
+	private static readonly Action<Vector2, Vector2> WrapEffect = (inputWorldPosition, cropPosition) =>
+	{
+		EffectPlayer.PlayVfx("SoilDust", cropPosition);
+		SoundManager.PlaySfxStatic("SFX_T_sweet_vinyl");
+	};
 
 	private static readonly List<(Func<SweetpotatoState, SweetpotatoState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<SweetpotatoState, SweetpotatoState, bool>, Action<Vector2, Vector2>)>
 	{
