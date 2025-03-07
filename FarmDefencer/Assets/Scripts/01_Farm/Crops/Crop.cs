@@ -108,10 +108,10 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 		}
 		return nextState;
 	}
-	protected static TState Plant<TState>(TState beforeState) where TState : struct, ICommonCropState{ beforeState.Planted = true; return beforeState; }
+	protected static TState Plant<TState>(TState beforeState) where TState : struct, ICommonCropState { beforeState.Planted = true; return beforeState; }
 	protected static TState WaitWater<TState>(TState beforeState, float deltaTime) where TState : struct, ICommonCropState { beforeState.WaterWaitingSeconds += deltaTime; return beforeState; }
 	protected static TState Grow<TState>(TState beforeState, float deltaTime) where TState : struct, ICommonCropState { beforeState.GrowthSeconds += deltaTime; return beforeState; }
-	
+
 	/// <summary>
 	/// RemainingQuota를 제외한 모든 값을 초기값으로 설정한 상태를 반환,
 	/// </summary>
@@ -128,28 +128,34 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	protected static int GetQuotaFilled<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => beforeState.RemainingQuota - afterState.RemainingQuota;
 	protected static Action<Vector2, Vector2> PlayEffectAt<TState>(List<(Func<TState, TState, bool>, Action<Vector2, Vector2>)> effects, TState beforeState, TState afterState)
 	{
-		var (_, effect) = effects.FirstOrDefault(effect => effect.Item1(beforeState, afterState));
-		return effect == null ? (_, _) => { } : effect;
+		var targetEffects = effects.Where(effect => effect.Item1(beforeState, afterState)).ToList();
+		return (inputWorldPosition, cropPosition) =>
+		{
+			foreach (var (_, effect) in targetEffects)
+			{
+				effect(inputWorldPosition, cropPosition);
+			}
+		};
 	}
-	protected static TState DoNothing_OnSingleHolding<TState>(TState beforeState, Vector2 initialWorldPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime) where TState: struct, ICommonCropState => DoNothing(beforeState);
-	protected static TState DoNothing_OnFarmUpdate<TState>(TState beforeState, float deltaTime) where TState: struct, ICommonCropState => DoNothing(beforeState);
+	protected static TState DoNothing_OnSingleHolding<TState>(TState beforeState, Vector2 initialWorldPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime) where TState : struct, ICommonCropState => DoNothing(beforeState);
+	protected static TState DoNothing_OnFarmUpdate<TState>(TState beforeState, float deltaTime) where TState : struct, ICommonCropState => DoNothing(beforeState);
 
 	// 이펙트 조건 및 실행 함수
 
 	protected static bool WaterEffectCondition<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => !beforeState.Watered && afterState.Watered;
-	protected static void WaterEffect(Vector2 inputWorldPosition, Vector2 cropPosition) => SoundManager.Instance.PlaySfx("SFX_T_water_oneshot");
+	protected static void WaterEffect(Vector2 inputWorldPosition, Vector2 cropPosition) => SoundManager.PlaySfxStatic("SFX_T_water_oneshot");
 
 	protected static bool PlantEffectCondition<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => !beforeState.Planted && afterState.Planted;
 	protected static void PlantEffect(Vector2 inputWorldPosition, Vector2 cropPosition)
 	{
-		SoundManager.Instance.PlaySfx("SFX_T_plant_seed");
+		SoundManager.PlaySfxStatic("SFX_T_plant_seed");
 		EffectPlayer.PlayTabEffect(inputWorldPosition);
 	}
 	protected static bool HarvestEffectCondition<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => !beforeState.Harvested && afterState.Harvested;
 	protected static void HarvestEffect(Vector2 inputWorldPosition, Vector2 cropPosition)
 	{
 		EffectPlayer.PlayTabEffect(inputWorldPosition);
-		SoundManager.Instance.PlaySfx("SFX_T_harvest");
+		SoundManager.PlaySfxStatic("SFX_T_harvest");
 	}
 
 	protected static bool QuotaFilledEffectCondition<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => afterState.RemainingQuota < beforeState.RemainingQuota;
@@ -174,7 +180,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 			nextState = Reset(nextState);
 		}
 
-		return nextState; 
+		return nextState;
 	}
 
 	/// <summary>
