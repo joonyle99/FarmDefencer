@@ -71,6 +71,14 @@ public class EffectPlayer : MonoBehaviour
 		s_singleton._vfxAnimator.runtimeAnimatorController = controller;
 	}
 
+	/// <summary>
+	/// 현재 재생중인 VFX가 있다면 중지.
+	/// </summary>
+	public static void StopVfx()
+	{
+		s_singleton._vfxAnimator.runtimeAnimatorController = null;
+	}
+
 	private void Awake()
 	{
 		if (s_singleton != null)
