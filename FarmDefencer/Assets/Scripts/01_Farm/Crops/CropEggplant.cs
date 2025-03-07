@@ -231,7 +231,7 @@ public class CropEggplant : Crop
 		(inputWorldPosition, cropPosition) =>
 		{
 			SoundManager.PlaySfxStatic($"SFX_T_eggplant_leaf_{leavesDropped}");
-			EffectPlayer.PlayVfx("SoilDust", cropPosition);
+			EffectPlayer.PlayVfx("VFX_T_SoilDust", cropPosition);
 			EffectPlayer.PlayTabEffect(inputWorldPosition);
 		};
 
