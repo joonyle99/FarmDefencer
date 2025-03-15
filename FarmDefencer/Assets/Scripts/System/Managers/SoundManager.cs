@@ -36,7 +36,7 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
 		{
 			var newSfxList = new List<AudioClip>();
 
-			var singleSfx = Resources.Load<AudioClip>($"Sfx/{name}");
+			var singleSfx = Resources.Load<AudioClip>($"_Sfx/{name}");
 			if (singleSfx != null)
 			{
 				newSfxList.Add(singleSfx);
@@ -46,7 +46,7 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
 				int number = 0;
 				while (true)
 				{
-					var sfxWithNumber = Resources.Load<AudioClip>($"Sfx/{name}_{number}");
+					var sfxWithNumber = Resources.Load<AudioClip>($"_Sfx/{name}_{number}");
 					if (sfxWithNumber == null)
 					{
 						break;
