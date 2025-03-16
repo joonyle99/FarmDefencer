@@ -2,13 +2,13 @@
 
 ### 🐙 Github 사용가이드
 
-아트 및 사운드 리소스를 프로젝트에 추가할 때는 [여기](Docs/github-guide.md)를 참고해 주세요.
+프로젝트에 파일을 추가할 때는 [여기](Docs/github-guide.md)를 참고해 주세요.
 
 ---
 
 ### 🏆 마일스톤 생성가이드
 
-프로젝트 마일스톤을 생성할 때는 [여기](Docs/milestone-guide.md)를 참고해 주세요.
+프로젝트의 마일스톤을 생성할 때는 [여기](Docs/milestone-guide.md)를 참고해 주세요.
 
 ---
 
