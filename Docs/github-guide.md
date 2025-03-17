@@ -11,8 +11,7 @@
 <br>
 
 ### 2. Unity 프로젝트에 리소스 추가 (아트 / 사운드)
-1. 유니티 프로젝트를 켜고, 원하는 경로에 리소스 파일 드래그 & 드롭
-    - e.g) `Assets/Project Resources/Spines/Monster/Something.skel`
+1. 유니티 프로젝트를 켜고, 원하는 경로에 리소스 파일 드래그 & 드롭 - e.g) `Assets/Project Resources/Spines/Monster/Something.skel`
     - [에셋 네이밍 규칙 - 에셋 컨벤션](https://github.com/joonyle99/FarmDefencer/blob/main/Docs/asset-convention.md)
 
 ![4](https://github.com/user-attachments/assets/c3c569df-4b54-425f-8b9d-74e1d37af0ce)
