@@ -145,6 +145,7 @@ public abstract class Tower : TargetableBehavior
         switch (e.Data.Name)
         {
             case "fire":
+            case "shoot":
                 Shoot();
                 break;
         }
