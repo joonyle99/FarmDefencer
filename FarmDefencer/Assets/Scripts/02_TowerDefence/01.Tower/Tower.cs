@@ -79,10 +79,9 @@ public abstract class Tower : TargetableBehavior
 
     [Header("Fire")]
     [SerializeField] private TowerHead _head; // TODO: TowerHead의 하위 클래스 생성하기
-    [SerializeField] private ProjectileTick _projectileTickPrefab; // TODO: ProjectileTick의 하위 클래스 생성하기
+    [SerializeField] private GameObject _projectilePrefab;
 
     public TowerHead Head => _head;
-    public ProjectileTick ProjectileTickPrefab => _projectileTickPrefab;
 
     [Space]
 
@@ -278,17 +277,18 @@ public abstract class Tower : TargetableBehavior
     }
     protected virtual void Shoot()
     {
-        var projectileTick = Instantiate(_projectileTickPrefab, Head.Muzzle.position, Head.Muzzle.rotation);
+        var projectileGO = Instantiate(_projectilePrefab, Head.Muzzle.position, Head.Muzzle.rotation);
+        var projectile = projectileGO.GetComponent<ProjectileBase>();
 
-        if (projectileTick == null)
+        if (projectile == null)
         {
             Debug.LogWarning($"projectile is null");
             return;
         }
 
-        projectileTick.SetTarget(CurrentTarget);
-        projectileTick.SetDamage(CurrentLevelData.Damage);
-        projectileTick.Shoot();
+        projectile.SetTarget(CurrentTarget);
+        projectile.SetDamage(CurrentLevelData.Damage);
+        projectile.Trigger();
 
         SoundManager.Instance.PlaySfx($"SFX_D_turret_shot_1-{CurrentLevel}");
     }

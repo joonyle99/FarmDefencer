@@ -2,15 +2,6 @@ using UnityEngine;
 using JoonyleGameDevKit;
 using System.Collections.Generic;
 
-public interface IProduct
-{
-    public Factory OriginFactory { get; set; }
-    public void SetOriginFactory(Factory originFactory);
-
-    public GameObject GameObject { get; }
-    public Transform Transform { get; }
-}
-
 /// <summary>
 /// 
 /// </summary>
