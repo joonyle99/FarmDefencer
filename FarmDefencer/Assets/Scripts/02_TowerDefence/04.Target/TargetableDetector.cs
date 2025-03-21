@@ -14,9 +14,7 @@ public class TargetableDetector : MonoBehaviour
     [SerializeField] private int _widthRange = 1;
     [SerializeField] private int _heightRange = 1;
 
-    [Space]
-
-    [SerializeField] private List<TargetableBehavior> _currentTargets = new List<TargetableBehavior>(BUCKET_CAPACITY);
+    private List<TargetableBehavior> _currentTargets = new List<TargetableBehavior>(BUCKET_CAPACITY);
 
     private const int BUCKET_CAPACITY = 100;
 

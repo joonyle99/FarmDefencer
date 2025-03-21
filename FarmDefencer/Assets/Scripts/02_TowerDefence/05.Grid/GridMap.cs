@@ -63,7 +63,7 @@ public class GridMap : MonoBehaviour
     private Vector2Int[] _possiblePoints;
     private Vector2Int[] _oppositePoints;
 
-    // temp for debug
+    // GetBone for debug
     public GameObject debugStartPointObject;
     public GameObject debugEndPointObject;
     public LineRenderer debugLine;

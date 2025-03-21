@@ -9,6 +9,15 @@ public class UpgradePanel : MonoBehaviour
         _owner = owner;
     }
 
+    public void Upgrade()
+    {
+        _owner.Upgrade();
+    }
+    public void Sell()
+    {
+        _owner.Sell();
+    }
+
     public void ShowPanel()
     {
         this.gameObject.SetActive(true);

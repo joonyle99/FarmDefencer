@@ -8,10 +8,8 @@ public abstract class ProjectileBase : MonoBehaviour
     [SerializeField] protected Damager damager;
     [SerializeField] protected float speed = 20f;
     [SerializeField] protected float hitThreshold = 0.05f;
-    
-    [Space]
 
-    [SerializeField] protected TargetableBehavior currentTarget;
+    protected TargetableBehavior currentTarget;
 
     private bool _isTriggered = false;
 

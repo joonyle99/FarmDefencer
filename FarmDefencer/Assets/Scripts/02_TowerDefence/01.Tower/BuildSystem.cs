@@ -37,7 +37,7 @@ public class BuildSystem : MonoBehaviour
 
         if (OutOfTileMap(worldPos) || NullGridCell(gridCell))
         {
-            Debug.Log("OutOfTileMap || NullGridCell");
+            //Debug.Log("=====> OutOfTileMap || NullGridCell");
             MoveGhostTower(worldPos);
 
             _ghostTower.SpineController.SetColor(new Color(1, 0, 0, 0.7f));
@@ -47,12 +47,12 @@ public class BuildSystem : MonoBehaviour
         {
             if (SameGridCell(gridCell))
             {
-                Debug.Log("Same GridCell");
+                //Debug.Log("=====> Same GridCell");
                 return;
             }
             else if (!EmptyGridCell(gridCell) || !UsableGridCell(gridCell))
             {
-                Debug.Log("EmptyGridCell || UsableGridCell");
+                //Debug.Log("=====> EmptyGridCell || UsableGridCell");
                 MoveGhostTower(gridCell.worldPosition);
 
                 _ghostTower.SpineController.SetColor(new Color(1, 0, 0, 0.7f));
@@ -60,7 +60,7 @@ public class BuildSystem : MonoBehaviour
             }
             else
             {
-                Debug.Log("Valid GridCell");
+                //Debug.Log("=====> Valid GridCell");
                 MoveGhostTower(gridCell.worldPosition);
 
                 _ghostTower.SpineController.SetColor(new Color(1, 1, 1, 0.7f));
