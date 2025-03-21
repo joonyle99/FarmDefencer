@@ -6,6 +6,6 @@ public class TowerLevelData : ScriptableObject
     public int Level;
     public float AttackRate;
     public int Damage;
-    public int UpgradeCost;
+    public int ValueCost;
     public int SellCost;
 }

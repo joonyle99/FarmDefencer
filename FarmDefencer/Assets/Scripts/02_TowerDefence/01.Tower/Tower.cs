@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public abstract class Tower : TargetableBehavior
+public sealed class Tower : TargetableBehavior
 {
     [Header("──────── Tower ────────")]
     [Space]
@@ -15,7 +15,7 @@ public abstract class Tower : TargetableBehavior
 
     [Space]
 
-    [Header("Level Data")]
+    [Header("Stats")]
     [SerializeField] private TowerLevelData[] _levelData;
     private TowerLevelData _currentLevelData;
     public TowerLevelData CurrentLevelData
@@ -30,31 +30,28 @@ public abstract class Tower : TargetableBehavior
     [Space]
 
     [Header("Default")]
-    [SerializeField] private string _towerName;
-    [SerializeField][Tooltip("default cost at first, after based on upgradeCost")] private int _cost;
-    [SerializeField][Tooltip("tower current level linked levelData")] private int _level = 1;
+    [SerializeField]private int _level = 1;
+    private int _cost = 0;
 
-    public string TowerName => _towerName;
-    public int CurrentCost
-    {
-        get => _cost;
-        set
-        {
-            _cost = Mathf.Max(value, 0);
-            OnCostChanged?.Invoke(_cost); // TODO: 변화한 경우에만 호출..?
-        }
-    }
     public int CurrentLevel
     {
         get => _level;
         set
         {
             _level = Mathf.Clamp(value, 1, MaxLevel);
-            OnLevelChanged?.Invoke(_level); // TODO: 변화한 경우에만 호출..?
+            OnLevelChanged?.Invoke(_level);
         }
     }
-
     public int MaxLevel => _levelData.Length;
+    public int CurrentCost
+    {
+        get => _cost;
+        set
+        {
+            _cost = Mathf.Max(value, 0);
+            OnCostChanged?.Invoke(_cost);
+        }
+    }
 
     [Space]
 
@@ -78,10 +75,9 @@ public abstract class Tower : TargetableBehavior
     private float _attackDurationTimer = 0f;
 
     [Header("Fire")]
-    [SerializeField] private TowerHead _head; // TODO: TowerHead의 하위 클래스 생성하기
+    [SerializeField] private FlipAimer _flipAimer;
+    public FlipAimer FlipAimer => _flipAimer;
     [SerializeField] private GameObject _projectilePrefab;
-
-    public TowerHead Head => _head;
 
     [Space]
 
@@ -106,6 +102,8 @@ public abstract class Tower : TargetableBehavior
     protected override void Awake()
     {
         base.Awake();
+
+        _cost = CurrentLevelData.ValueCost;
     }
     protected override void OnEnable()
     {
@@ -114,6 +112,7 @@ public abstract class Tower : TargetableBehavior
     protected override void Start()
     {
         base.Start();
+
         UpgradePanel.SetOwner(this);
         InitializeAttackDurations();
         InitilaizeSpineEvent();
@@ -145,7 +144,7 @@ public abstract class Tower : TargetableBehavior
         {
             case "fire":
             case "shoot":
-                Shoot();
+                Fire();
                 break;
         }
     }
@@ -191,7 +190,10 @@ public abstract class Tower : TargetableBehavior
             return;
         }
 
-        var result = ResourceManager.Instance.TrySpendGold(CurrentLevelData.UpgradeCost);
+        var nextValueCost = _levelData[Mathf.Min(CurrentLevel, MaxLevel - 1)].ValueCost;
+        var currValueCost = CurrentLevelData.ValueCost;
+        var upgradeCost = nextValueCost - currValueCost;
+        var result = ResourceManager.Instance.TrySpendGold(upgradeCost);
         if (result == false)
         {
             Debug.Log("골드가 부족하여 타워를 업그레이드 할 수 없습니다");
@@ -202,8 +204,8 @@ public abstract class Tower : TargetableBehavior
         _spineController.SetAnimation(LevelUpAnimation, false);
 
         // level up
-        CurrentCost += CurrentLevelData.UpgradeCost;
         CurrentLevel += 1;
+        CurrentCost = CurrentLevelData.ValueCost;
 
         // next level animation
         _spineController.AddAnimation(IdleAnimation, true); // 레벨이 오른 후의 애니메이션을 출력해야 한다
@@ -217,7 +219,7 @@ public abstract class Tower : TargetableBehavior
         OnAttackRateChanged?.Invoke(CurrentLevelData.AttackRate);
         OnDamageChanged?.Invoke(CurrentLevelData.Damage);
 
-        SoundManager.Instance.PlaySfx("SFX_D_turret_levelup");
+        SoundManager.Instance.PlaySfx("SFX_D_turret_upgrade");
     }
     public void ShowUpgradePanel()
     {
@@ -248,7 +250,7 @@ public abstract class Tower : TargetableBehavior
             UpdateTarget();
             if (IsValidTarget)
             {
-                _head.LookAt(CurrentTarget.transform.position);
+                _flipAimer.FlipAim(CurrentTarget.transform.position);
             }
         }
 
@@ -275,9 +277,12 @@ public abstract class Tower : TargetableBehavior
         _spineController.SetAnimation(AttackAnimation, false);
         _spineController.AddAnimation(IdleAnimation, true);
     }
-    protected virtual void Shoot()
+    private void Fire()
     {
-        var projectileGO = Instantiate(_projectilePrefab, Head.Muzzle.position, Head.Muzzle.rotation);
+        // TODO: Muzzle을 Spine Animator에서 가져오도록 수정한다
+        // var muzzle = SpineController.GetBone("muzzle").GetWorldPosition(SpineController.transform);
+
+        var projectileGO = Instantiate(_projectilePrefab, FlipAimer.Muzzle.position, FlipAimer.Muzzle.rotation);
         var projectile = projectileGO.GetComponent<ProjectileBase>();
 
         if (projectile == null)
