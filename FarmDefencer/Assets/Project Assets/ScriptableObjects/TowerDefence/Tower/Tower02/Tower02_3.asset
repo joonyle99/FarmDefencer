@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tower02_3
   m_EditorClassIdentifier: 
   Level: 3
-  UpgradeCost: 0
   AttackRate: 1.5
   Damage: 35
+  ValueCost: 175
   SellCost: 117

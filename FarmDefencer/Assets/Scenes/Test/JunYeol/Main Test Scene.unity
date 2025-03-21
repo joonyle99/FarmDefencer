@@ -2695,10 +2695,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5bbe8099b8565419df7c37d6a4da35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _selectedIndex: 0
+  _selectedIndex: 1
   _towerPrefabs:
   - {fileID: 7831573459716681309, guid: c33dac51bb3454542a08bdea32b29f79, type: 3}
-  - {fileID: 0}
+  - {fileID: 7831573459716681309, guid: 7bdd8eb0720db94479f348acbc1cd182, type: 3}
 --- !u!4 &1224125957
 Transform:
   m_ObjectHideFlags: 0

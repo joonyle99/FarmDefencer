@@ -1,3 +1,4 @@
+using DG.Tweening.Plugins.Core.PathCore;
 using Spine.Unity;
 using UnityEngine;
 
@@ -293,6 +294,10 @@ public sealed class Tower : TargetableBehavior
 
         projectile.SetTarget(CurrentTarget);
         projectile.SetDamage(CurrentLevelData.Damage);
+        if (projectile is ParabolicProjectile parabolicProjectile)
+        {
+            parabolicProjectile.SetControlPoint(FlipAimer.ControlPoint);
+        }
         projectile.Trigger();
 
         SoundManager.Instance.PlaySfx($"SFX_D_turret_shot_1-{CurrentLevel}");
