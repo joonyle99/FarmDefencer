@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2493848825862227538}
   - component: {fileID: 5264179474769179215}
   m_Layer: 0
-  m_Name: ProjectileTick
+  m_Name: LinearProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -250,5 +250,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2aa5ca52c40842449570046a5a8ae5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damager: {fileID: 2493848825862227538}
-  _speed: 10
+  damager: {fileID: 2493848825862227538}
+  speed: 10
+  hitThreshold: 0.05
