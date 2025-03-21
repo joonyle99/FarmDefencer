@@ -1,3 +1,4 @@
+using Spine;
 using Spine.Unity;
 using UnityEngine;
 
@@ -6,10 +7,12 @@ public class SpineController : MonoBehaviour
     [Header("──────── SpineController ────────")]
     [Space]
 
+    // attribute
     private SkeletonAnimation _skeletonAnimation;
     private Spine.AnimationState _spineAnimationState;
     private Spine.Skeleton _skeleton;
 
+    // property
     public SkeletonAnimation SkeletonAnimation => _skeletonAnimation;
     public Spine.AnimationState SpineAnimationState => _spineAnimationState;
     public Spine.Skeleton Skeleton => _skeleton;
@@ -48,5 +51,10 @@ public class SpineController : MonoBehaviour
     public void ResetColor()
     {
         _skeletonAnimation.Skeleton.SetColor(_originalColor);
+    }
+
+    public Bone GetBone(string boneName)
+    {
+        return _skeletonAnimation.Skeleton.FindBone(boneName);
     }
 }
