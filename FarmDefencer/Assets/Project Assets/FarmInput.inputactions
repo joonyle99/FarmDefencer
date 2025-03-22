@@ -1,5 +1,5 @@
 {
-    "name": "TestPlayerFInputActions",
+    "name": "FarmInput",
     "maps": [
         {
             "name": "PlayerActionMap",
@@ -29,8 +29,8 @@
                     "id": "ec52ef3c-a03e-428a-bb16-d0ec481e883c",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Tap",
-                    "initialStateCheck": false
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "SingleHold",
@@ -46,6 +46,15 @@
                     "type": "Value",
                     "id": "54c9e419-7fab-46c8-b2b9-978683f823a0",
                     "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MouseWheel",
+                    "type": "Value",
+                    "id": "b01dba77-ed71-47a7-8905-bafbc5e10e50",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -247,6 +256,17 @@
                     "processors": "Scale",
                     "groups": ";Mobile",
                     "action": "DoubleHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "426fc367-fbaf-4657-94bc-df0870ed68bb",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";PC(Debug)",
+                    "action": "MouseWheel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

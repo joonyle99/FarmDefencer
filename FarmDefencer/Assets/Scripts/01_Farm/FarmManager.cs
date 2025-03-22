@@ -1,49 +1,54 @@
-using FarmTest;
 using UnityEngine;
 
 /// <summary>
-/// 타이쿤 씬 로드 직후의 동작을 정의하고, 여러 오브젝트 간의 콜백 구성 및 의존성 주입을 담당하도록 설계된 클래스입니다.
-/// 잦은 이벤트 사용과 콜백 사용시 흐름 파악이 어렵기 때문에 최대한 이 클래스가 중간에서 관계를 구성하도록 합니다.
+/// 타이쿤의 최초 로드 동작을 정의하고, 타이쿤을 구성하는 여러 시스템들간의 중재자 역할을 하는 컴포넌트.
 /// </summary>
 public class FarmManager : MonoBehaviour
 {
-	public FarmUI FarmUI;
-    public FarmClock FarmClock;
-    public Farm Farm;
-	public FarmTestPlayer FarmTestPlayer;
-	public ProductDatabase ProductDatabase;
-	public SoundManager SoundManager;
-
-	public void SetAvailability(string productUniqueId, bool value)
-	{
-		Farm.SetFieldAvailability(productUniqueId, value);
-		FarmUI.HarvestInventory.SetHarvestBoxAvailability(productUniqueId, value);
-	}
-
-	public bool GetAvailability(string productUniqueId) => FarmUI.HarvestInventory.GetHarvestBoxAvailability(productUniqueId);
+	[SerializeField] private CropSigns _cropSigns;
+	[SerializeField] private FarmUI _farmUI;
+	[SerializeField] private FarmClock _farmClock;
+	[SerializeField] private Farm _farm;
+	[SerializeField] private FarmInput _farmInput;
+	[SerializeField] private ProductDatabase _productDatabase;
 
 	private void Awake()
 	{
-		FarmClock.RegisterFarmUpdatableObject(Farm);
+		_farmClock.RegisterFarmUpdatableObject(_farm);
 
-		FarmUI.Init(FarmClock);
-		FarmUI.WateringCan.OnWatering.AddListener(Farm.WateringAction);
+		_farmUI.Init(_farmClock);
+		_farmUI.WateringCan.Water += _farm.WateringAction;
+
+		_cropSigns.SignClicked += _farmUI.CropGuide.Toggle;
+
+		_farmInput.RegisterInputLayer(_farmUI.CropGuide);
+		_farmInput.RegisterInputLayer(_farmUI.WateringCan);
+		_farmInput.RegisterInputLayer(_cropSigns);
+		_farmInput.RegisterInputLayer(_farm);
 	}
 
 	private void Start()
 	{
-		Farm.Init(FarmUI.HarvestInventory.GetQuota, FarmUI.HarvestInventory.Gather);
+		_farm.Init(_farmUI.HarvestInventory.GetQuota, _farmUI.HarvestInventory.Gather);
 
-		SetAvailability("product_carrot", true);
-		SetAvailability("product_potato", true);
-		SetAvailability("product_corn", true);
-		SetAvailability("product_cabbage", true);
-		SetAvailability("product_cucumber", true);
-		SetAvailability("product_eggplant", true);
-		SetAvailability("product_sweetpotato", true);
-		SetAvailability("product_mushroom", true);
+		_farmUI.HarvestInventory.SetHarvestBoxAvailability("product_carrot", true);
+		_farm.SetFieldAvailability("product_carrot", true);
+		_farmUI.HarvestInventory.SetHarvestBoxAvailability("product_potato", true);
+		_farm.SetFieldAvailability("product_potato", true);
+		_farmUI.HarvestInventory.SetHarvestBoxAvailability("product_corn", true);
+		_farm.SetFieldAvailability("product_corn", true);
+		_farmUI.HarvestInventory.SetHarvestBoxAvailability("product_cabbage", true);
+		_farm.SetFieldAvailability("product_cabbage", true);
+		_farmUI.HarvestInventory.SetHarvestBoxAvailability("product_cucumber", true);
+		_farm.SetFieldAvailability("product_cucumber", true);
+		_farmUI.HarvestInventory.SetHarvestBoxAvailability("product_eggplant", true);
+		_farm.SetFieldAvailability("product_eggplant", true);
+		_farmUI.HarvestInventory.SetHarvestBoxAvailability("product_sweetpotato", true);
+		_farm.SetFieldAvailability("product_sweetpotato", true);
+		_farmUI.HarvestInventory.SetHarvestBoxAvailability("product_mushroom", true);
+		_farm.SetFieldAvailability("product_mushroom", true);
 
-		FarmUI.HarvestInventory.SetTodaysOrder(
+		_farmUI.HarvestInventory.SetTodaysOrder(
 			new System.Collections.Generic.List<(string, int)>
 			{
 				("product_carrot", 99),
@@ -59,7 +64,7 @@ public class FarmManager : MonoBehaviour
 
 	private void Update()
 	{
-		var ratio = FarmClock.LengthOfDaytime == 0.0f ? 0.0f : FarmClock.RemainingDaytime / FarmClock.LengthOfDaytime;
-		FarmUI.TimerUI.SetClockhand(ratio);
+		var ratio = _farmClock.LengthOfDaytime == 0.0f ? 0.0f : _farmClock.RemainingDaytime / _farmClock.LengthOfDaytime;
+		_farmUI.TimerUI.SetClockhand(ratio);
 	}
 }

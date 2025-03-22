@@ -57,7 +57,7 @@ public class EffectPlayer : MonoBehaviour
 	{
 		if (!s_singleton._vfxControllers.ContainsKey(name))
 		{
-			var loadedController = Resources.Load<RuntimeAnimatorController>($"Vfx/{name}");
+			var loadedController = Resources.Load<RuntimeAnimatorController>($"_Vfx/{name}");
 			s_singleton._vfxControllers.Add(name, loadedController);
 		}
 

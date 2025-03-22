@@ -1,12 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 /// <summary>
 /// 자식으로는 반드시 Field 오브젝트만 가지게 할 것.
 /// </summary>
-public class Farm : MonoBehaviour, IFarmUpdatable
+public class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
 {
 	private bool _isFarmPaused;
 	private Field[] _fields;
@@ -33,11 +32,11 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 		return false;
 	}
 
-	public void TapAction(Vector2 position)
+	public bool OnSingleTap(Vector2 worldPosition)
 	{
 		if (_isFarmPaused)
 		{
-			return;
+			return false;
 		}
 
 		foreach (var field in _fields)
@@ -46,26 +45,37 @@ public class Farm : MonoBehaviour, IFarmUpdatable
 			{
 				continue;
 			}
-			if (field.TryFindCropAt(position, out var crop))
+			if (field.TryFindCropAt(worldPosition, out var crop))
 			{
-				crop.OnSingleTap(position);
+				crop.OnSingleTap(worldPosition);
+				return true;
 			}
 		}
+
+		return false;
 	}
 
-	public void SingleHoldingAction(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
+	public bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
 	{
 		if (_isFarmPaused)
 		{
-			return;
+			return false;
 		}
-		Array.ForEach(_fields, field =>
+
+		foreach (var field in _fields)
 		{
-			if (field.IsAvailable && field.TryFindCropAt(initialPosition, out var crop))
+			if (!field.IsAvailable)
 			{
-				crop.OnSingleHolding(initialPosition, deltaPosition, isEnd, deltaHoldTime);
+				continue;
 			}
-		});
+			if (field.TryFindCropAt(initialWorldPosition, out var crop))
+			{
+				crop.OnSingleHolding(initialWorldPosition, deltaWorldPosition, isEnd, deltaHoldTime);
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public void WateringAction(Vector2 position)
