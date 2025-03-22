@@ -15,6 +15,8 @@ public class CropGuide : MonoBehaviour
 
 	private Image _image;
 
+	
+
 	public void Close()
 	{
 		_image.sprite = null;
@@ -27,7 +29,6 @@ public class CropGuide : MonoBehaviour
 
 		if (sprite == null)
 		{
-			Debug.LogError($"알 수 없는 ProductEntry.UniqueId: {productEntry.UniqueId}");
 			Close();
 		}
 		else
@@ -43,7 +44,6 @@ public class CropGuide : MonoBehaviour
 
 		if (sprite == null)
 		{
-			Debug.LogError($"알 수 없는 ProductEntry.UniqueId: {productEntry.UniqueId}");
 			Close();
 			return;
 		}
@@ -65,17 +65,24 @@ public class CropGuide : MonoBehaviour
 		Close();
 	}
 
-	private Sprite GetSpriteOf(ProductEntry productEntry) =>
-		productEntry.UniqueId switch
+	private Sprite GetSpriteOf(ProductEntry productEntry)
 	{
-		"product_carrot" => _cropGuideImage_carrot,
-		"product_potato" => _cropGuideImage_potato,
-		"product_corn" => _cropGuideImage_corn,
-		"product_cabbage" => _cropGuideImage_cabbage,
-		"product_cucumber" => _cropGuideImage_cucumber,
-		"product_eggplant" => _cropGuideImage_eggplant,
-		"product_sweetpotato" => _cropGuideImage_sweetpotato,
-		"product_mushroom" => _cropGuideImage_mushroom,
-		_ => null
-	};
+		if (productEntry == null)
+		{
+			return null;
+		}
+
+		return productEntry.UniqueId switch
+		{
+			"product_carrot" => _cropGuideImage_carrot,
+			"product_potato" => _cropGuideImage_potato,
+			"product_corn" => _cropGuideImage_corn,
+			"product_cabbage" => _cropGuideImage_cabbage,
+			"product_cucumber" => _cropGuideImage_cucumber,
+			"product_eggplant" => _cropGuideImage_eggplant,
+			"product_sweetpotato" => _cropGuideImage_sweetpotato,
+			"product_mushroom" => _cropGuideImage_mushroom,
+			_ => null
+		};
+	}
 }

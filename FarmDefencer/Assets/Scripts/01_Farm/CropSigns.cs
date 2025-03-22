@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -5,28 +6,25 @@ using UnityEngine;
 /// <summary>
 /// 자식으로 CropSign을 가진 오브젝트들을 둘 것.
 /// </summary>
-public class CropSigns : MonoBehaviour
+public class CropSigns : MonoBehaviour, IFarmInputLayer
 {
+	public Action<ProductEntry> SignClicked;
+
 	// 클릭 판정 월드 기준 크기
 	private static readonly Vector2 SignClickSize = new Vector2 { x = 1.0f, y = 1.0f };
 	private List<CropSign> _cropSigns;
 
-	public bool TryGetClickedSign(Vector2 inputWorldPosition, out ProductEntry productEntry)
+	public void OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
+	{
+		return;
+	}
+
+	public void OnSingleTap(Vector2 worldPosition)
 	{
 		var cropSign = _cropSigns
-			.Where(cropSign => (Mathf.Abs(cropSign.transform.position.x - inputWorldPosition.x) < SignClickSize.x) && (Mathf.Abs(cropSign.transform.position.y - inputWorldPosition.y) < SignClickSize.y))
+			.Where(cropSign => (Mathf.Abs(cropSign.transform.position.x - worldPosition.x) < SignClickSize.x) && (Mathf.Abs(cropSign.transform.position.y - worldPosition.y) < SignClickSize.y))
 			.FirstOrDefault();
-
-		if (cropSign == null)
-		{
-			productEntry = null;
-			return false;
-		}
-		else
-		{
-			productEntry = cropSign.ProductEntry;
-			return true;
-		}
+		SignClicked?.Invoke(cropSign?.ProductEntry);
 	}
 
 	private void Awake()

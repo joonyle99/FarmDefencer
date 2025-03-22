@@ -1,25 +1,21 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Events;
-using UnityEngine.UI;
 using Spine.Unity;
+using System;
 
 /// <summary>
-/// 물뿌리개입니다.
-/// UI의 형태로 구현되며 스크린 좌표로 유저의 입력을 받고, 월드 좌표로 Farm 등과 상호작용합니다.
-/// 한 타일에 WateringTime 이상 머물면 OnWatering 이벤트를 발생시키는 동작을 합니다.
+/// UI로 구현되는 물뿌리개.
+/// FarmInput과는 별개로 동작하며, 반드시 main camera가 설정되어 있어야 함.
 /// </summary>
-public class WateringCan : MonoBehaviour,
+public sealed class WateringCan : MonoBehaviour,
 	IDragHandler,
 	IPointerDownHandler,
 	IPointerUpHandler,
 	IPointerExitHandler
 {
-	[Header("물 주기 판정이 가해지는 watering 애니메이션에서의 시각")]
-	public float WateringAnimationTimePoint = 0.5f;
-	[Header("물 주기 판정시 액션")]
-	public UnityEvent<Vector2> OnWatering;
-	public Camera Camera;
+	// 물 주기 판정이 가해지는 watering 애니메이션에서의 시각
+	private const float WateringAnimationTimePoint = 0.5f;
+	public Action<Vector2> Water;
 	private bool _using;
 	public bool Using
 	{
@@ -49,7 +45,6 @@ public class WateringCan : MonoBehaviour,
 
 	private SkeletonGraphic _skeletonGraphic;
 	private Spine.AnimationState _spineAnimationState;
-	private Spine.Skeleton _skeleton;
 	private bool _isWateredThisTime; // 이벤트 중복 호출 방지용
 
 	public void OnPointerDown(PointerEventData eventData) => OnDrag(eventData);
@@ -73,7 +68,7 @@ public class WateringCan : MonoBehaviour,
 
 		// 물뿌리개의 월드 위치 구하기
 		var pointerScreenPosition = pointerEventData.position;
-		var pointerWorldPosition = Camera.ScreenToWorldPoint(pointerScreenPosition);
+		var pointerWorldPosition = Camera.main.ScreenToWorldPoint(pointerScreenPosition);
 
 		_currentWateringWorldPosition = pointerWorldPosition;
 	}
@@ -92,7 +87,6 @@ public class WateringCan : MonoBehaviour,
 
 		_skeletonGraphic = GetComponent<SkeletonGraphic>();
 		_spineAnimationState = _skeletonGraphic.AnimationState;
-		_skeleton = _skeletonGraphic.Skeleton;
 	}
 
 	private void Update()
@@ -114,7 +108,7 @@ public class WateringCan : MonoBehaviour,
 				if (!_isWateredThisTime)
 				{
 					_isWateredThisTime = true;
-					OnWatering.Invoke(_currentWateringWorldPosition);
+					Water?.Invoke(_currentWateringWorldPosition);
 				}
 			}
 		}
