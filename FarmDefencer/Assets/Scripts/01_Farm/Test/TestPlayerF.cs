@@ -13,10 +13,7 @@ namespace FarmTest
         public float LongTapThreshold = 1.0f;
         public float CameraMovementScale = 1.0f;
         public Vector2 LastInteractWorldPosition;
-        public GameObject FarmObject;
-        public FarmClock FarmClock;
 		public FarmManager FarmManager;
-        private Farm _farmComponent;
 
 		private float _singleHoldingTimeElapsed;
         private bool _isSingleHolding;
@@ -47,7 +44,15 @@ namespace FarmTest
 
 		public void OnSingleTap()
 		{
-			_farmComponent.TapAction(LastInteractWorldPosition);
+			FarmManager.Farm.TapAction(LastInteractWorldPosition);
+            if (FarmManager.CropSigns.TryGetClickedSign(LastInteractWorldPosition, out var productEntry))
+            {
+                FarmManager.FarmUI.CropGuide.Toggle(productEntry);
+            }
+            else
+            {
+                FarmManager.FarmUI.CropGuide.Close();
+            }
 		}
 
         public void OnSingleHold(InputValue inputValue)
@@ -76,13 +81,13 @@ namespace FarmTest
 
 		private void Update()
 		{
-            _remainingDaytimeText.text = $"Remaining Daytime: {FarmClock.RemainingDaytime:f2}s";
+            _remainingDaytimeText.text = $"Remaining Daytime: {FarmManager.FarmClock.RemainingDaytime:f2}s";
 
             if (_isSingleHolding)
             {
                 _singleHoldingTimeElapsed += Time.deltaTime;
 
-				_farmComponent.SingleHoldingAction(
+				FarmManager.Farm.SingleHoldingAction(
 					_singleHoldBeginWorldPosition,
 					LastInteractWorldPosition - _singleHoldBeginWorldPosition,
 					false,
@@ -91,7 +96,7 @@ namespace FarmTest
             }
             else if (_singleHoldingTimeElapsed > 0.0f) // Single Hold가 종료된 직후
             {
-				_farmComponent.SingleHoldingAction(
+				FarmManager.Farm.SingleHoldingAction(
 					_singleHoldBeginWorldPosition,
 	                LastInteractWorldPosition - _singleHoldBeginWorldPosition,
 	                true,
@@ -104,21 +109,20 @@ namespace FarmTest
         {
             _camera = GetComponent<Camera>();
             _camera.tag = "MainCamera";
-			_farmComponent = FarmObject.GetComponent<Farm>();
             _remainingDaytimeText = transform.Find("Canvas/DebugArea/DebugTimer/RemainingDaytimeText").GetComponent<TMP_Text>();
             transform.Find("Canvas/DebugArea/DebugTimer/DaytimeRandomSetButton")
                 .GetComponent<Button>()
-                .onClick.AddListener(() => FarmClock.SetRemainingDaytimeRandom(300.0f, 600.0f));
+                .onClick.AddListener(() => FarmManager.FarmClock.SetRemainingDaytimeRandom(300.0f, 600.0f));
             transform.Find("Canvas/DebugArea/DebugTimer/Daytime5sSetButton").GetComponent<Button>()
                 .GetComponent<Button>()
-                .onClick.AddListener(() => FarmClock.SetRemainingDaytimeBy(5.0f));          
+                .onClick.AddListener(() => FarmManager.FarmClock.SetRemainingDaytimeBy(5.0f));          
             transform.Find("Canvas/DebugArea/DebugTimer/PauseButton").GetComponent<Button>()
                 .GetComponent<Button>()
                 .onClick.AddListener(
                 () =>
                 {
-                    FarmClock.IsManuallyPaused = !FarmClock.IsManuallyPaused;
-                    transform.Find("Canvas/DebugArea/DebugTimer/PauseButton").GetComponentInChildren<TMP_Text>().text = FarmClock.IsManuallyPaused ? "Play" : "Pause";
+                    FarmManager.FarmClock.IsManuallyPaused = !FarmManager.FarmClock.IsManuallyPaused;
+                    transform.Find("Canvas/DebugArea/DebugTimer/PauseButton").GetComponentInChildren<TMP_Text>().text = FarmManager.FarmClock.IsManuallyPaused ? "Play" : "Pause";
                 });
         }
     }

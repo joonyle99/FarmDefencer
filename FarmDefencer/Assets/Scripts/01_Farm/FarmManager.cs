@@ -7,12 +7,12 @@ using UnityEngine;
 /// </summary>
 public class FarmManager : MonoBehaviour
 {
+	public CropSigns CropSigns;
 	public FarmUI FarmUI;
     public FarmClock FarmClock;
     public Farm Farm;
 	public FarmTestPlayer FarmTestPlayer;
 	public ProductDatabase ProductDatabase;
-	public SoundManager SoundManager;
 
 	public void SetAvailability(string productUniqueId, bool value)
 	{
