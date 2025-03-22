@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
-public class CropGuide : MonoBehaviour
+public class CropGuide : MonoBehaviour, IFarmInputLayer
 {
 	[SerializeField] private Sprite _cropGuideImage_carrot;
 	[SerializeField] private Sprite _cropGuideImage_potato;
@@ -15,7 +15,23 @@ public class CropGuide : MonoBehaviour
 
 	private Image _image;
 
-	
+	public bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
+	{
+		return false;
+	}
+
+	public bool OnSingleTap(Vector2 worldPosition)
+	{
+		if (_image.sprite != null)
+		{
+			Close();
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 	public void Close()
 	{
@@ -38,8 +54,19 @@ public class CropGuide : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// 이미 열려 있는 가이드가 있는 경우, Close()로 동작.
+	/// 이외의 경우에는 해당 가이드를 띄움.
+	/// </summary>
+	/// <param name="productEntry"></param>
 	public void Toggle(ProductEntry productEntry)
 	{
+		if (_image.sprite != null)
+		{
+			Close();
+			return;
+		}
+
 		var sprite = GetSpriteOf(productEntry);
 
 		if (sprite == null)
@@ -48,15 +75,8 @@ public class CropGuide : MonoBehaviour
 			return;
 		}
 
-		if (_image.sprite == sprite)
-		{
-			Close();
-		}
-		else
-		{
-			_image.sprite = sprite;
-			gameObject.SetActive(true);
-		}
+		_image.sprite = sprite;
+		gameObject.SetActive(true);
 	}
 
 	private void Awake()

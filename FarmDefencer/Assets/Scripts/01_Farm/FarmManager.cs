@@ -21,8 +21,10 @@ public class FarmManager : MonoBehaviour
 
 		_cropSigns.SignClicked += _farmUI.CropGuide.Toggle;
 
-		_farmInput.RegisterInputLayer(_farm);
+		_farmInput.RegisterInputLayer(_farmUI.CropGuide);
+		_farmInput.RegisterInputLayer(_farmUI.WateringCan);
 		_farmInput.RegisterInputLayer(_cropSigns);
+		_farmInput.RegisterInputLayer(_farm);
 	}
 
 	private void Start()

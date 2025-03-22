@@ -7,7 +7,9 @@ using System;
 /// UI로 구현되는 물뿌리개.
 /// FarmInput과는 별개로 동작하며, 반드시 main camera가 설정되어 있어야 함.
 /// </summary>
-public sealed class WateringCan : MonoBehaviour,
+public sealed class WateringCan :
+	MonoBehaviour,
+	IFarmInputLayer,
 	IDragHandler,
 	IPointerDownHandler,
 	IPointerUpHandler,
@@ -46,6 +48,21 @@ public sealed class WateringCan : MonoBehaviour,
 	private SkeletonGraphic _skeletonGraphic;
 	private Spine.AnimationState _spineAnimationState;
 	private bool _isWateredThisTime; // 이벤트 중복 호출 방지용
+
+	public bool OnSingleTap(Vector2 worldPosition)
+	{
+		return false;
+	}
+
+	public bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
+	{
+		if (isEnd)
+		{
+			return false;
+		}
+
+		return _using;
+	}
 
 	public void OnPointerDown(PointerEventData eventData) => OnDrag(eventData);
 	public void OnPointerUp(PointerEventData pointerEventData) => MoveToInitialPosition();

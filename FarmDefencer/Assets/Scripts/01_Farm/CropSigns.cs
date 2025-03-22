@@ -14,17 +14,25 @@ public class CropSigns : MonoBehaviour, IFarmInputLayer
 	private static readonly Vector2 SignClickSize = new Vector2 { x = 1.0f, y = 1.0f };
 	private List<CropSign> _cropSigns;
 
-	public void OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
+	public bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
 	{
-		return;
+		return false;
 	}
 
-	public void OnSingleTap(Vector2 worldPosition)
+	public bool OnSingleTap(Vector2 worldPosition)
 	{
 		var cropSign = _cropSigns
 			.Where(cropSign => (Mathf.Abs(cropSign.transform.position.x - worldPosition.x) < SignClickSize.x) && (Mathf.Abs(cropSign.transform.position.y - worldPosition.y) < SignClickSize.y))
 			.FirstOrDefault();
-		SignClicked?.Invoke(cropSign?.ProductEntry);
+		if (cropSign != null)
+		{
+			SignClicked?.Invoke(cropSign.ProductEntry);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	private void Awake()

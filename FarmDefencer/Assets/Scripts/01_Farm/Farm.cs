@@ -32,11 +32,11 @@ public class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
 		return false;
 	}
 
-	public void OnSingleTap(Vector2 worldPosition)
+	public bool OnSingleTap(Vector2 worldPosition)
 	{
 		if (_isFarmPaused)
 		{
-			return;
+			return false;
 		}
 
 		foreach (var field in _fields)
@@ -48,23 +48,34 @@ public class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
 			if (field.TryFindCropAt(worldPosition, out var crop))
 			{
 				crop.OnSingleTap(worldPosition);
+				return true;
 			}
 		}
+
+		return false;
 	}
 
-	public void OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
+	public bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
 	{
 		if (_isFarmPaused)
 		{
-			return;
+			return false;
 		}
-		Array.ForEach(_fields, field =>
+
+		foreach (var field in _fields)
 		{
-			if (field.IsAvailable && field.TryFindCropAt(initialWorldPosition, out var crop))
+			if (!field.IsAvailable)
+			{
+				continue;
+			}
+			if (field.TryFindCropAt(initialWorldPosition, out var crop))
 			{
 				crop.OnSingleHolding(initialWorldPosition, deltaWorldPosition, isEnd, deltaHoldTime);
+				return true;
 			}
-		});
+		}
+
+		return false;
 	}
 
 	public void WateringAction(Vector2 position)
