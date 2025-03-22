@@ -36,7 +36,10 @@ public class GridCell : MonoBehaviour
 
     public bool isUsable;
     public Tower occupiedTower;
-    public bool IsEmptyUsableCell => isUsable == true && occupiedTower == null;
+
+    public bool IsEmpty => occupiedTower == null;
+    public bool IsUsable => isUsable;
+    public bool IsEmptyUsableCell => IsEmpty && IsUsable;
 
     private int _changedColorReferenceCount = 0;
 
@@ -50,9 +53,9 @@ public class GridCell : MonoBehaviour
     }
     private void Update()
     {
-        distanceCostText.text = distanceCost.ToString($"D{2}");
-        isUsableText.text = isUsable.ToString();
-        isUsableText.color = (isUsable == true) ? Color.blue : Color.red;
+        //distanceCostText.text = distanceCost.ToString($"D{2}");
+        //isUsableText.text = isUsable.ToString();
+        //isUsableText.color = (isUsable == true) ? Color.blue : Color.red;
     }
 
     private void OnMouseDown()
@@ -94,6 +97,7 @@ public class GridCell : MonoBehaviour
             }
         }
 
+        var flag = true;
         isUsable = false; // 타워를 설치하려고 하는 곳을 경로 타일로 사용하지 않도록 하기 위함
 
         bool result = gridMap.FindPathAll();
@@ -102,12 +106,12 @@ public class GridCell : MonoBehaviour
             isUsable = true;
 
             Debug.Log("failed to find path (origin path or each path)");
-            return false;
+            flag = false;
         }
 
         isUsable = true;
 
-        return true;
+        return flag;
     }
 
     // sprite
@@ -154,7 +158,7 @@ public class GridCell : MonoBehaviour
         occupiedTower = tower;
         occupiedTower.OccupyingGridCell(this);
 
-        SoundManager.Instance.PlaySfx($"SFX_D_{occupiedTower.TowerName}_build");
+        SoundManager.Instance.PlaySfx($"SFX_D_turret_build");
     }
     public void DeleteOccupiedTower()
     {

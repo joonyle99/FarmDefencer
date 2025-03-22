@@ -49,11 +49,7 @@ public class Guideline_ManagerClass { }
 ///         -
 ///     - Defence Context
 ///         - 
-///         
-/// 3. 
-/// 
-/// 
-/// TODO:
+///
 /// 1. SceneContext를 어느 타이밍에 생성할 것인가..? (애초에 생성해두면 안되는 걸까?)
 /// 2. 스크립트 실행 순서에 따른 의존성 관계를 잘 고려해야 한다
 ///     - 각 스크립트에서도 Awake, Start, OnEnable, OnDisable

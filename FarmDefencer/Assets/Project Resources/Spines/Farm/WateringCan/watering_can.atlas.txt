@@ -1,0 +1,8 @@
+watering_can.png
+size:1024,512
+filter:Linear,Linear
+pma:true
+물방울
+bounds:2,2,50,89
+물뿌리개
+bounds:2,93,558,338

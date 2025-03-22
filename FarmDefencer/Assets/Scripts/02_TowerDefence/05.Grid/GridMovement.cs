@@ -1,7 +1,6 @@
 using JoonyleGameDevKit;
 using System.Collections.Generic;
 using UnityEngine;
-using VInspector.Libs;
 
 public class GridMovement : MonoBehaviour
 {
@@ -206,7 +205,7 @@ public class GridMovement : MonoBehaviour
         var gridMap = DefenceContext.Current.GridMap;
 
         // 다음 목적지에는 타워를 설치할 수 없다
-        if (gridMap.LastHoverCell == _nextGridCell)
+        if (gridMap.LastGridCell == _nextGridCell)
         {
             Debug.Log("cannot be installed in the next grid cell.");
             return false;

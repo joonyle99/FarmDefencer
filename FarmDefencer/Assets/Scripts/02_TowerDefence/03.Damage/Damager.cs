@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Damager : MonoBehaviour
 {
-    [Header("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ Damager ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡")]
+    [Header("â”€â”€â”€â”€â”€â”€â”€â”€ Damager â”€â”€â”€â”€â”€â”€â”€â”€")]
     [Space]
 
     [SerializeField] private int _damage = 10;

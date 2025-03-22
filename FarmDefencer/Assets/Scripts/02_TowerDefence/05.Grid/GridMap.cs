@@ -63,7 +63,7 @@ public class GridMap : MonoBehaviour
     private Vector2Int[] _possiblePoints;
     private Vector2Int[] _oppositePoints;
 
-    // temp for debug
+    // GetBone for debug
     public GameObject debugStartPointObject;
     public GameObject debugEndPointObject;
     public LineRenderer debugLine;
@@ -83,7 +83,7 @@ public class GridMap : MonoBehaviour
     private int[] _dx = new int[4] { -1, 0, 1, 0 };
     private int[] _dy = new int[4] { 0, 1, 0, -1 };
 
-    public GridCell LastHoverCell = null;
+    public GridCell LastGridCell = null;
 
     private void Awake()
     {

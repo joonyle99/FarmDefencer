@@ -12,7 +12,12 @@ public class TowerStats : MonoBehaviour
 
     private void OnEnable()
     {
-        SetStats(tower.CurrentLevel, tower.CurrentLevelData.AttackRate, tower.CurrentLevelData.Damage, tower.CurrentCost);
+        var level = tower.CurrentLevel;
+        var attackRate = tower.CurrentLevelData.AttackRate;
+        var damage = tower.CurrentLevelData.Damage;
+        var cost = tower.CurrentCost;
+
+        SetStats(level, attackRate, damage, cost);
 
         tower.OnLevelChanged -= SetLevelText;
         tower.OnLevelChanged += SetLevelText;
