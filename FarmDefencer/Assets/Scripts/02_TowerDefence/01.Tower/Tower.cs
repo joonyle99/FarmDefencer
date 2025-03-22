@@ -249,10 +249,6 @@ public sealed class Tower : TargetableBehavior
         if (_isAttacking == false) // 공격 애니메이션 재생 중에 다른 곳을 바라보지 않도록 하기 위함
         {
             UpdateTarget();
-            if (IsValidTarget)
-            {
-                _flipAimer.FlipAim(CurrentTarget.transform.position);
-            }
         }
 
         // attack
@@ -280,6 +276,13 @@ public sealed class Tower : TargetableBehavior
     }
     private void Fire()
     {
+        if (!IsValidTarget)
+        {
+            return;
+        }
+
+        _flipAimer.FlipAim(CurrentTarget.transform.position);
+
         // TODO: Muzzle을 Spine Animator에서 가져오도록 수정한다
         // var muzzle = SpineController.GetBone("muzzle").GetWorldPosition(SpineController.transform);
 
