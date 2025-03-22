@@ -25,7 +25,8 @@ public abstract class ProjectileBase : MonoBehaviour
             }
 
             // 타겟에 닿으면 데미지를 주고 파괴
-            if (Vector3.Distance(currentTarget.TargetPoint.position, transform.position) <= hitThreshold)
+            var sqrMagnitude = (currentTarget.TargetPoint.position - transform.position).sqrMagnitude;
+            if (sqrMagnitude <= hitThreshold)
             {
                 damager.HasDamaged(currentTarget);
                 Destroy(gameObject);
