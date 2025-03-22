@@ -334,7 +334,14 @@ public class CropSweetpotato : Crop
 			nextState.LastSingleTapTime = currentTime;
 			if (nextState.TapCount >= 5)
 			{
-				nextState.Harvested = true;
+				if (nextState.RemainingSweetpotatoCount == 0)
+				{
+					nextState = Reset(nextState);
+				}
+				else
+				{
+					nextState.Harvested = true;
+				}
 			}
 
 			return nextState;
@@ -494,7 +501,6 @@ public class CropSweetpotato : Crop
 
 		{SweetpotatoStage.Mature, DoNothing_OnFarmUpdate },
 		{SweetpotatoStage.Harvested, DoNothing_OnFarmUpdate },
-
 	};
 
 	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, SweetpotatoState>> OnSingleTapFunctions = new Dictionary<SweetpotatoStage, Func<SweetpotatoState, SweetpotatoState>>
