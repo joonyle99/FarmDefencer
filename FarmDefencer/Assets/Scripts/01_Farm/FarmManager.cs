@@ -20,15 +20,15 @@ public class FarmManager : MonoBehaviour
 		_farmUI.WateringCan.Water += _farm.WateringAction;
 
 		_cropSigns.SignClicked += _farmUI.CropGuide.Toggle;
-
-		_farmInput.RegisterInputLayer(_farmUI.CropGuide);
-		_farmInput.RegisterInputLayer(_farmUI.WateringCan);
-		_farmInput.RegisterInputLayer(_cropSigns);
-		_farmInput.RegisterInputLayer(_farm);
 	}
 
 	private void Start()
 	{
+		_farmInput.RegisterInputLayer(_farmUI.CropGuide);
+		_farmInput.RegisterInputLayer(_farmUI.WateringCan);
+		_farmInput.RegisterInputLayer(_cropSigns);
+		_farmInput.RegisterInputLayer(_farm);
+
 		_farm.Init(_farmUI.HarvestInventory.GetQuota, _farmUI.HarvestInventory.Gather);
 
 		_farmUI.HarvestInventory.SetHarvestBoxAvailability("product_carrot", true);
