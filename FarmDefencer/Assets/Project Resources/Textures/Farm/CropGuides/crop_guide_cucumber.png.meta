@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      crop_guide_cucumber_0: -7218159748931476319
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

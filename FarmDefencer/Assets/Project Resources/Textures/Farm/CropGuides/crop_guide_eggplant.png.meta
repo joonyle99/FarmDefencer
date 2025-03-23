@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      crop_guide_eggplant_0: 8971362675534445170
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
