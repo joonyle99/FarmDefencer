@@ -1,208 +1,208 @@
 fileFormatVersion: 2
-guid: db2bbf6c5fd7083419f5c6ff22ffbe39
+guid: 05dfc410f310a3d4f8d5127df7840a0d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6090686526108929734
-    second: Lv2_turret 1_0
+      213: 5966279503158464714
+    second: Lv2_turret_0
   - first:
-      213: -8215586012737438154
-    second: Lv2_turret 1_1
+      213: -8349357472669424334
+    second: Lv2_turret_1
   - first:
-      213: 410236753042950695
-    second: Lv2_turret 1_2
+      213: 8022982290798614617
+    second: Lv2_turret_2
   - first:
-      213: 1701233310323019180
-    second: Lv2_turret 1_3
+      213: -5399187220014052854
+    second: Lv2_turret_3
   - first:
-      213: -2437367011649967891
-    second: Lv2_turret 1_4
+      213: 6684070498675824813
+    second: Lv2_turret_4
   - first:
-      213: -4434128623004391372
-    second: Lv2_turret 1_5
+      213: 9154698350166197313
+    second: Lv2_turret_5
   - first:
-      213: -4894450620121607510
-    second: Lv2_turret 1_6
+      213: -3104737860102015754
+    second: Lv2_turret_6
   - first:
-      213: -104139502870121406
-    second: Lv2_turret 1_7
+      213: 4460163144083465993
+    second: Lv2_turret_7
   - first:
-      213: 7354154683219517934
-    second: Lv2_turret 1_8
+      213: -657704563412135376
+    second: Lv2_turret_8
   - first:
-      213: -6757867086957348404
-    second: Lv2_turret 1_9
+      213: -6139025979438326361
+    second: Lv2_turret_9
   - first:
-      213: 4108354690825000827
-    second: Lv2_turret 1_10
+      213: -8210659933271954136
+    second: Lv2_turret_10
   - first:
-      213: 9066823911164277700
-    second: Lv2_turret 1_11
+      213: 3491121617736906343
+    second: Lv2_turret_11
   - first:
-      213: 6375515024294776179
-    second: Lv2_turret 1_12
+      213: 1511274146254448465
+    second: Lv2_turret_12
   - first:
-      213: 2997528453126743920
-    second: Lv2_turret 1_13
+      213: -1133242229580874288
+    second: Lv2_turret_13
   - first:
-      213: -3153628673844454059
-    second: Lv2_turret 1_14
+      213: -5637047585033937981
+    second: Lv2_turret_14
   - first:
-      213: 556304325369287648
-    second: Lv2_turret 1_15
+      213: -2950158422763161191
+    second: Lv2_turret_15
   - first:
-      213: 1784744158746511532
-    second: Lv2_turret 1_16
+      213: 1211773556834957696
+    second: Lv2_turret_16
   - first:
-      213: 3978516950350720862
-    second: Lv2_turret 1_17
+      213: 79973131935050574
+    second: Lv2_turret_17
   - first:
-      213: -1379984737367868984
-    second: Lv2_turret 1_18
+      213: 7439279030694003785
+    second: Lv2_turret_18
   - first:
-      213: 2487825767508399997
-    second: Lv2_turret 1_19
+      213: 2246577486114500991
+    second: Lv2_turret_19
   - first:
-      213: -1882625980585327689
-    second: Lv2_turret 1_20
+      213: 8807356471164907277
+    second: Lv2_turret_20
   - first:
-      213: -5883736227239252221
-    second: Lv2_turret 1_21
+      213: 6594150480508355627
+    second: Lv2_turret_21
   - first:
-      213: 2400040426721143988
-    second: Lv2_turret 1_22
+      213: 982049133520031941
+    second: Lv2_turret_22
   - first:
-      213: 4512246548551593064
-    second: Lv2_turret 1_23
+      213: 39985308142843075
+    second: Lv2_turret_23
   - first:
-      213: 336930628667727406
-    second: Lv2_turret 1_24
+      213: 4042086319674058429
+    second: Lv2_turret_24
   - first:
-      213: -1626644524995025666
-    second: Lv2_turret 1_25
+      213: -8290428018422350991
+    second: Lv2_turret_25
   - first:
-      213: -1213983143438833297
-    second: Lv2_turret 1_26
+      213: -8638319478442021825
+    second: Lv2_turret_26
   - first:
-      213: -5801303738016314163
-    second: Lv2_turret 1_27
+      213: 4391222434075270729
+    second: Lv2_turret_27
   - first:
-      213: 8147151544489097542
-    second: Lv2_turret 1_28
+      213: 5644015733706370358
+    second: Lv2_turret_28
   - first:
-      213: -5577384187204545733
-    second: Lv2_turret 1_29
+      213: -4555537128950718389
+    second: Lv2_turret_29
   - first:
-      213: -3412758226828555815
-    second: Lv2_turret 1_30
+      213: 1815105836813621854
+    second: Lv2_turret_30
   - first:
-      213: 7409171655313393176
-    second: Lv2_turret 1_31
+      213: -6057410769781171343
+    second: Lv2_turret_31
   - first:
-      213: -6933252086863541244
-    second: Lv2_turret 1_32
+      213: 610610531873887509
+    second: Lv2_turret_32
   - first:
-      213: 2256213324893324387
-    second: Lv2_turret 1_33
+      213: 2607229363176590565
+    second: Lv2_turret_33
   - first:
-      213: 8199643997509017208
-    second: Lv2_turret 1_34
+      213: 7484276990605544520
+    second: Lv2_turret_34
   - first:
-      213: 432696312326121316
-    second: Lv2_turret 1_35
+      213: -2386896340195513985
+    second: Lv2_turret_35
   - first:
-      213: 290300748827183566
-    second: Lv2_turret 1_36
+      213: 3470896732321423776
+    second: Lv2_turret_36
   - first:
-      213: -4231480578598601995
-    second: Lv2_turret 1_37
+      213: -64831094896982896
+    second: Lv2_turret_37
   - first:
-      213: 933942742625327249
-    second: Lv2_turret 1_38
+      213: -1318355187211698430
+    second: Lv2_turret_38
   - first:
-      213: -3072362240656813
-    second: Lv2_turret 1_39
+      213: 8604181023798090703
+    second: Lv2_turret_39
   - first:
-      213: -4971633101675900169
-    second: Lv2_turret 1_40
+      213: -6629059311961326437
+    second: Lv2_turret_40
   - first:
-      213: -526314685475529987
-    second: Lv2_turret 1_41
+      213: -465875606858843365
+    second: Lv2_turret_41
   - first:
-      213: 7357202661848593356
-    second: Lv2_turret 1_42
+      213: -4484576067495758137
+    second: Lv2_turret_42
   - first:
-      213: 5146551072218198184
-    second: Lv2_turret 1_43
+      213: -8173128664023934604
+    second: Lv2_turret_43
   - first:
-      213: -8930524336918901972
-    second: Lv2_turret 1_44
+      213: 8781425992647166647
+    second: Lv2_turret_44
   - first:
-      213: -6589657152297303913
-    second: Lv2_turret 1_45
+      213: 5557858870986849675
+    second: Lv2_turret_45
   - first:
-      213: -1669557731772341679
-    second: Lv2_turret 1_46
+      213: 5022963361990514666
+    second: Lv2_turret_46
   - first:
-      213: 272376865138388215
-    second: Lv2_turret 1_47
+      213: 3304177688639882790
+    second: Lv2_turret_47
   - first:
-      213: 5314061324273885031
-    second: Lv2_turret 1_48
+      213: -5199701356719168289
+    second: Lv2_turret_48
   - first:
-      213: -8985895260505803921
-    second: Lv2_turret 1_49
+      213: 5604807663581977740
+    second: Lv2_turret_49
   - first:
-      213: -1655939642438799654
-    second: Lv2_turret 1_50
+      213: 3447564209547569351
+    second: Lv2_turret_50
   - first:
-      213: -4840439137957100682
-    second: Lv2_turret 1_51
+      213: -1131281700255215758
+    second: Lv2_turret_51
   - first:
-      213: 8239398693082023236
-    second: Lv2_turret 1_52
+      213: 7089863558894900761
+    second: Lv2_turret_52
   - first:
-      213: -791977728579798367
-    second: Lv2_turret 1_53
+      213: -1969270917394838755
+    second: Lv2_turret_53
   - first:
-      213: -6163879848418683069
-    second: Lv2_turret 1_54
+      213: 260757022714833069
+    second: Lv2_turret_54
   - first:
-      213: 3188279288798514832
-    second: Lv2_turret 1_55
+      213: 1916667623950034963
+    second: Lv2_turret_55
   - first:
-      213: -643522896061368239
-    second: Lv2_turret 1_56
+      213: -7449042637754109843
+    second: Lv2_turret_56
   - first:
-      213: -4968201336509390627
-    second: Lv2_turret 1_57
+      213: 4920042237587721885
+    second: Lv2_turret_57
   - first:
-      213: -3546584111766039003
-    second: Lv2_turret 1_58
+      213: 4083793097556303755
+    second: Lv2_turret_58
   - first:
-      213: 3594456361533971434
-    second: Lv2_turret 1_59
+      213: -3216171935729872548
+    second: Lv2_turret_59
   - first:
-      213: 576503059045939389
-    second: Lv2_turret 1_60
+      213: 3606872383648979500
+    second: Lv2_turret_60
   - first:
-      213: -3234633378907492817
-    second: Lv2_turret 1_61
+      213: 8658119420637765676
+    second: Lv2_turret_61
   - first:
-      213: -5798905451336831476
-    second: Lv2_turret 1_62
+      213: -2773607308778701756
+    second: Lv2_turret_62
   - first:
-      213: 4506298411830534164
-    second: Lv2_turret 1_63
+      213: -8686614948722281301
+    second: Lv2_turret_63
   - first:
-      213: -5027907192805158904
-    second: Lv2_turret 1_64
+      213: 397401383552561272
+    second: Lv2_turret_64
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
-    sRGBTexture: 1
+    sRGBTexture: 0
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -238,7 +238,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 0
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -247,7 +247,7 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 1
+  alphaIsTransparency: 0
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
@@ -267,7 +267,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -305,7 +305,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lv2_turret 1_0
+      name: Lv2_turret_0
       rect:
         serializedVersion: 2
         x: 1
@@ -320,14 +320,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6ce0bfa2027768450800000000000000
-      internalID: 6090686526108929734
+      spriteID: ac05470f89b7cc250800000000000000
+      internalID: 5966279503158464714
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_1
+      name: Lv2_turret_1
       rect:
         serializedVersion: 2
         x: 273
@@ -342,14 +342,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 63efd19ac006cfd80800000000000000
-      internalID: -8215586012737438154
+      spriteID: 23529ca8d9f112c80800000000000000
+      internalID: -8349357472669424334
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_2
+      name: Lv2_turret_2
       rect:
         serializedVersion: 2
         x: 899
@@ -364,14 +364,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 72a4fe2472471b500800000000000000
-      internalID: 410236753042950695
+      spriteID: 9581d4ac2eb575f60800000000000000
+      internalID: 8022982290798614617
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_3
+      name: Lv2_turret_3
       rect:
         serializedVersion: 2
         x: 1000
@@ -386,14 +386,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cad8dd5aeaefb9710800000000000000
-      internalID: 1701233310323019180
+      spriteID: a0acb3b54db3215b0800000000000000
+      internalID: -5399187220014052854
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_4
+      name: Lv2_turret_4
       rect:
         serializedVersion: 2
         x: 1656
@@ -408,14 +408,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: de8295bdd9bbc2ed0800000000000000
-      internalID: -2437367011649967891
+      spriteID: da89d3f64b692cc50800000000000000
+      internalID: 6684070498675824813
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_5
+      name: Lv2_turret_5
       rect:
         serializedVersion: 2
         x: 1951
@@ -430,14 +430,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4386e69a28fc672c0800000000000000
-      internalID: -4434128623004391372
+      spriteID: 144c28355a50c0f70800000000000000
+      internalID: 9154698350166197313
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_6
+      name: Lv2_turret_6
       rect:
         serializedVersion: 2
         x: 2411
@@ -452,14 +452,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aa216f8c71b631cb0800000000000000
-      internalID: -4894450620121607510
+      spriteID: 6f4b9e7ad51c9e4d0800000000000000
+      internalID: -3104737860102015754
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_7
+      name: Lv2_turret_7
       rect:
         serializedVersion: 2
         x: 2789
@@ -474,14 +474,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 24437548ca50e8ef0800000000000000
-      internalID: -104139502870121406
+      spriteID: 9076263afbea5ed30800000000000000
+      internalID: 4460163144083465993
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_8
+      name: Lv2_turret_8
       rect:
         serializedVersion: 2
         x: 37
@@ -496,14 +496,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ee1239c68b43f0660800000000000000
-      internalID: 7354154683219517934
+      spriteID: 0329aaa2f2d5fd6f0800000000000000
+      internalID: -657704563412135376
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_9
+      name: Lv2_turret_9
       rect:
         serializedVersion: 2
         x: 231
@@ -518,14 +518,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cc97a9a60bb3732a0800000000000000
-      internalID: -6757867086957348404
+      spriteID: 7ad1facc56ccdcaa0800000000000000
+      internalID: -6139025979438326361
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_10
+      name: Lv2_turret_10
       rect:
         serializedVersion: 2
         x: 1425
@@ -540,14 +540,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b771fe503dec30930800000000000000
-      internalID: 4108354690825000827
+      spriteID: 82deac9ea40ed0e80800000000000000
+      internalID: -8210659933271954136
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_11
+      name: Lv2_turret_11
       rect:
         serializedVersion: 2
         x: 414
@@ -562,14 +562,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4c3f6f12f44d3dd70800000000000000
-      internalID: 9066823911164277700
+      spriteID: 76635e45d94f27030800000000000000
+      internalID: 3491121617736906343
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_12
+      name: Lv2_turret_12
       rect:
         serializedVersion: 2
         x: 617
@@ -584,14 +584,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 37d814bb2216a7850800000000000000
-      internalID: 6375515024294776179
+      spriteID: 1576ab534df19f410800000000000000
+      internalID: 1511274146254448465
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_13
+      name: Lv2_turret_13
       rect:
         serializedVersion: 2
         x: 2942
@@ -606,14 +606,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 077eebc1f3c599920800000000000000
-      internalID: 2997528453126743920
+      spriteID: 0dd3c55423ae540f0800000000000000
+      internalID: -1133242229580874288
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_14
+      name: Lv2_turret_14
       rect:
         serializedVersion: 2
         x: 854
@@ -628,14 +628,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 55dd3060e6f0c34d0800000000000000
-      internalID: -3153628673844454059
+      spriteID: 3cb1418761f25c1b0800000000000000
+      internalID: -5637047585033937981
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_15
+      name: Lv2_turret_15
       rect:
         serializedVersion: 2
         x: 940
@@ -650,14 +650,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0e356a426d368b700800000000000000
-      internalID: 556304325369287648
+      spriteID: 999331c8b8eee07d0800000000000000
+      internalID: -2950158422763161191
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_16
+      name: Lv2_turret_16
       rect:
         serializedVersion: 2
         x: 1360
@@ -672,14 +672,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ca80a0d3b5fa4c810800000000000000
-      internalID: 1784744158746511532
+      spriteID: 089fb5331a511d010800000000000000
+      internalID: 1211773556834957696
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_17
+      name: Lv2_turret_17
       rect:
         serializedVersion: 2
         x: 1892
@@ -694,14 +694,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e5f66865618863730800000000000000
-      internalID: 3978516950350720862
+      spriteID: e4b6098c32f1c1100800000000000000
+      internalID: 79973131935050574
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_18
+      name: Lv2_turret_18
       rect:
         serializedVersion: 2
         x: 2144
@@ -716,14 +716,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8c93abd513f49dce0800000000000000
-      internalID: -1379984737367868984
+      spriteID: 94447890dd0ad3760800000000000000
+      internalID: 7439279030694003785
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_19
+      name: Lv2_turret_19
       rect:
         serializedVersion: 2
         x: 2410
@@ -738,14 +738,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d77d66fba58868220800000000000000
-      internalID: 2487825767508399997
+      spriteID: f71be3c12527d2f10800000000000000
+      internalID: 2246577486114500991
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_20
+      name: Lv2_turret_20
       rect:
         serializedVersion: 2
         x: 33
@@ -760,14 +760,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7b34a4e25a19fd5e0800000000000000
-      internalID: -1882625980585327689
+      spriteID: d0fa5021c040a3a70800000000000000
+      internalID: 8807356471164907277
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_21
+      name: Lv2_turret_21
       rect:
         serializedVersion: 2
         x: 224
@@ -782,14 +782,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 30fae4f1315c85ea0800000000000000
-      internalID: -5883736227239252221
+      spriteID: b240c2abce0238b50800000000000000
+      internalID: 6594150480508355627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_22
+      name: Lv2_turret_22
       rect:
         serializedVersion: 2
         x: 2951
@@ -804,14 +804,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4bc6a495d08ae4120800000000000000
-      internalID: 2400040426721143988
+      spriteID: 5c0117bdb70f0ad00800000000000000
+      internalID: 982049133520031941
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_23
+      name: Lv2_turret_23
       rect:
         serializedVersion: 2
         x: 406
@@ -826,14 +826,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 86c66693458be9e30800000000000000
-      internalID: 4512246548551593064
+      spriteID: 3c4b6180d6e0e8000800000000000000
+      internalID: 39985308142843075
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_24
+      name: Lv2_turret_24
       rect:
         serializedVersion: 2
         x: 801
@@ -848,14 +848,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e2e50b32f940da400800000000000000
-      internalID: 336930628667727406
+      spriteID: db663a38710681830800000000000000
+      internalID: 4042086319674058429
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_25
+      name: Lv2_turret_25
       rect:
         serializedVersion: 2
         x: 1199
@@ -870,14 +870,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ef466df3c6ffc69e0800000000000000
-      internalID: -1626644524995025666
+      spriteID: 17b7dfd44ab72fc80800000000000000
+      internalID: -8290428018422350991
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_26
+      name: Lv2_turret_26
       rect:
         serializedVersion: 2
         x: 1724
@@ -892,14 +892,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f69240453c0172fe0800000000000000
-      internalID: -1213983143438833297
+      spriteID: f3c202fb3368e1880800000000000000
+      internalID: -8638319478442021825
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_27
+      name: Lv2_turret_27
       rect:
         serializedVersion: 2
         x: 1739
@@ -914,14 +914,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dcc4465acf0ad7fa0800000000000000
-      internalID: -5801303738016314163
+      spriteID: 94e58c0c981c0fc30800000000000000
+      internalID: 4391222434075270729
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_28
+      name: Lv2_turret_28
       rect:
         serializedVersion: 2
         x: 2162
@@ -936,14 +936,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6493c8c0a2f701170800000000000000
-      internalID: 8147151544489097542
+      spriteID: 63da8421862935e40800000000000000
+      internalID: 5644015733706370358
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_29
+      name: Lv2_turret_29
       rect:
         serializedVersion: 2
         x: 2645
@@ -958,14 +958,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b33dac9c1a62992b0800000000000000
-      internalID: -5577384187204545733
+      spriteID: b402ac31e1b77c0c0800000000000000
+      internalID: -4555537128950718389
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_30
+      name: Lv2_turret_30
       rect:
         serializedVersion: 2
         x: 2660
@@ -980,14 +980,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9d98799697273a0d0800000000000000
-      internalID: -3412758226828555815
+      spriteID: e5a9309442d803910800000000000000
+      internalID: 1815105836813621854
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_31
+      name: Lv2_turret_31
       rect:
         serializedVersion: 2
         x: 29
@@ -1002,14 +1002,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 81609d27d5aa2d660800000000000000
-      internalID: 7409171655313393176
+      spriteID: 17b51989ff0cfeba0800000000000000
+      internalID: -6057410769781171343
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_32
+      name: Lv2_turret_32
       rect:
         serializedVersion: 2
         x: 412
@@ -1024,14 +1024,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 40c434006f328cf90800000000000000
-      internalID: -6933252086863541244
+      spriteID: 51594782b03597800800000000000000
+      internalID: 610610531873887509
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_33
+      name: Lv2_turret_33
       rect:
         serializedVersion: 2
         x: 500
@@ -1046,14 +1046,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 36405c7a01eaf4f10800000000000000
-      internalID: 2256213324893324387
+      spriteID: 5eccb18ca4dbe2420800000000000000
+      internalID: 2607229363176590565
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_34
+      name: Lv2_turret_34
       rect:
         serializedVersion: 2
         x: 1138
@@ -1068,14 +1068,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 87e503ca5ccfac170800000000000000
-      internalID: 8199643997509017208
+      spriteID: 84c4ca1054e7dd760800000000000000
+      internalID: 7484276990605544520
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_35
+      name: Lv2_turret_35
       rect:
         serializedVersion: 2
         x: 1144
@@ -1090,14 +1090,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 467e1d7e00f310600800000000000000
-      internalID: 432696312326121316
+      spriteID: f7967f6cc6a00eed0800000000000000
+      internalID: -2386896340195513985
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_36
+      name: Lv2_turret_36
       rect:
         serializedVersion: 2
         x: 1684
@@ -1112,14 +1112,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ec9cfd33efa570400800000000000000
-      internalID: 290300748827183566
+      spriteID: 0a1251e303a1b2030800000000000000
+      internalID: 3470896732321423776
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_37
+      name: Lv2_turret_37
       rect:
         serializedVersion: 2
         x: 2205
@@ -1134,14 +1134,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5fa7aa645d2c645c0800000000000000
-      internalID: -4231480578598601995
+      spriteID: 0940442767ca91ff0800000000000000
+      internalID: -64831094896982896
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_38
+      name: Lv2_turret_38
       rect:
         serializedVersion: 2
         x: 2880
@@ -1156,14 +1156,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1989cb6e9f706fc00800000000000000
-      internalID: 933942742625327249
+      spriteID: 20ff37231f244bde0800000000000000
+      internalID: -1318355187211698430
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_39
+      name: Lv2_turret_39
       rect:
         serializedVersion: 2
         x: 799
@@ -1178,14 +1178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 35a360ce3b515fff0800000000000000
-      internalID: -3072362240656813
+      spriteID: fcb54a2ed01386770800000000000000
+      internalID: 8604181023798090703
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_40
+      name: Lv2_turret_40
       rect:
         serializedVersion: 2
         x: 1153
@@ -1200,14 +1200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7f2d80de806310bb0800000000000000
-      internalID: -4971633101675900169
+      spriteID: b9cbc839da9d004a0800000000000000
+      internalID: -6629059311961326437
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_41
+      name: Lv2_turret_41
       rect:
         serializedVersion: 2
         x: 1714
@@ -1222,14 +1222,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dfad824059722b8f0800000000000000
-      internalID: -526314685475529987
+      spriteID: b1bb8a79a90e889f0800000000000000
+      internalID: -465875606858843365
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_42
+      name: Lv2_turret_42
       rect:
         serializedVersion: 2
         x: 1739
@@ -1244,14 +1244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cc33b0047d80a1660800000000000000
-      internalID: 7357202661848593356
+      spriteID: 7c672b0b3d593c1c0800000000000000
+      internalID: -4484576067495758137
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_43
+      name: Lv2_turret_43
       rect:
         serializedVersion: 2
         x: 2280
@@ -1266,14 +1266,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8a0b8fdbee83c6740800000000000000
-      internalID: 5146551072218198184
+      spriteID: 4795a4d78c6339e80800000000000000
+      internalID: -8173128664023934604
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_44
+      name: Lv2_turret_44
       rect:
         serializedVersion: 2
         x: 2937
@@ -1288,14 +1288,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c2bc7f77e67601480800000000000000
-      internalID: -8930524336918901972
+      spriteID: 7bacd111a64edd970800000000000000
+      internalID: 8781425992647166647
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_45
+      name: Lv2_turret_45
       rect:
         serializedVersion: 2
         x: 14
@@ -1310,14 +1310,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 79005b5cbb5dc84a0800000000000000
-      internalID: -6589657152297303913
+      spriteID: b8dbce4423b712d40800000000000000
+      internalID: 5557858870986849675
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_46
+      name: Lv2_turret_46
       rect:
         serializedVersion: 2
         x: 421
@@ -1332,14 +1332,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 152e3b1b61a84d8e0800000000000000
-      internalID: -1669557731772341679
+      spriteID: ae71f3f909625b540800000000000000
+      internalID: 5022963361990514666
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_47
+      name: Lv2_turret_47
       rect:
         serializedVersion: 2
         x: 2883
@@ -1354,14 +1354,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7fcab93d05da7c300800000000000000
-      internalID: 272376865138388215
+      spriteID: 626c62ef91ccadd20800000000000000
+      internalID: 3304177688639882790
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_48
+      name: Lv2_turret_48
       rect:
         serializedVersion: 2
         x: 795
@@ -1376,14 +1376,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 76f9cfb8e965fb940800000000000000
-      internalID: 5314061324273885031
+      spriteID: fd423ae4a23f6d7b0800000000000000
+      internalID: -5199701356719168289
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_49
+      name: Lv2_turret_49
       rect:
         serializedVersion: 2
         x: 2899
@@ -1398,14 +1398,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f637fa0bedfab4380800000000000000
-      internalID: -8985895260505803921
+      spriteID: c8cd03edfd648cd40800000000000000
+      internalID: 5604807663581977740
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_50
+      name: Lv2_turret_50
       rect:
         serializedVersion: 2
         x: 2903
@@ -1420,14 +1420,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: adea2f23babe409e0800000000000000
-      internalID: -1655939642438799654
+      spriteID: 7c8ee62f16538df20800000000000000
+      internalID: 3447564209547569351
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_51
+      name: Lv2_turret_51
       rect:
         serializedVersion: 2
         x: 1
@@ -1442,14 +1442,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6734b21ff3e43dcb0800000000000000
-      internalID: -4840439137957100682
+      spriteID: 27f43639941ec40f0800000000000000
+      internalID: -1131281700255215758
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_52
+      name: Lv2_turret_52
       rect:
         serializedVersion: 2
         x: 1175
@@ -1464,14 +1464,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 445c8f70579385270800000000000000
-      internalID: 8239398693082023236
+      spriteID: 916dae5d751446260800000000000000
+      internalID: 7089863558894900761
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_53
+      name: Lv2_turret_53
       rect:
         serializedVersion: 2
         x: 1741
@@ -1486,14 +1486,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1aafaf1b3745205f0800000000000000
-      internalID: -791977728579798367
+      spriteID: d1b4c26c88ebba4e0800000000000000
+      internalID: -1969270917394838755
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_54
+      name: Lv2_turret_54
       rect:
         serializedVersion: 2
         x: 2297
@@ -1508,14 +1508,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 347d0dc7fef757aa0800000000000000
-      internalID: -6163879848418683069
+      spriteID: da82b9f61256e9300800000000000000
+      internalID: 260757022714833069
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_55
+      name: Lv2_turret_55
       rect:
         serializedVersion: 2
         x: 2329
@@ -1530,14 +1530,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 09e0295fe1b0f3c20800000000000000
-      internalID: 3188279288798514832
+      spriteID: 318a80e8c0f599a10800000000000000
+      internalID: 1916667623950034963
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_56
+      name: Lv2_turret_56
       rect:
         serializedVersion: 2
         x: 362
@@ -1552,14 +1552,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1587e67e55fb117f0800000000000000
-      internalID: -643522896061368239
+      spriteID: d607deb003faf9890800000000000000
+      internalID: -7449042637754109843
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_57
+      name: Lv2_turret_57
       rect:
         serializedVersion: 2
         x: 760
@@ -1574,14 +1574,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dd0acb405376d0bb0800000000000000
-      internalID: -4968201336509390627
+      spriteID: d9e855bf850874440800000000000000
+      internalID: 4920042237587721885
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_58
+      name: Lv2_turret_58
       rect:
         serializedVersion: 2
         x: 835
@@ -1596,14 +1596,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 526142c7a8008cec0800000000000000
-      internalID: -3546584111766039003
+      spriteID: b8f19047f2c8ca830800000000000000
+      internalID: 4083793097556303755
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_59
+      name: Lv2_turret_59
       rect:
         serializedVersion: 2
         x: 2933
@@ -1618,14 +1618,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aeb10ed340312e130800000000000000
-      internalID: 3594456361533971434
+      spriteID: c519d3a1aacdd53d0800000000000000
+      internalID: -3216171935729872548
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_60
+      name: Lv2_turret_60
       rect:
         serializedVersion: 2
         x: 1178
@@ -1640,14 +1640,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: db8fb5e4a76200800800000000000000
-      internalID: 576503059045939389
+      spriteID: c2a5099a25f2e0230800000000000000
+      internalID: 3606872383648979500
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_61
+      name: Lv2_turret_61
       rect:
         serializedVersion: 2
         x: 1194
@@ -1662,14 +1662,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f2ee89764164c13d0800000000000000
-      internalID: -3234633378907492817
+      spriteID: c20660a8db1d72870800000000000000
+      internalID: 8658119420637765676
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_62
+      name: Lv2_turret_62
       rect:
         serializedVersion: 2
         x: 1773
@@ -1684,14 +1684,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c0eedf64736268fa0800000000000000
-      internalID: -5798905451336831476
+      spriteID: 44c71dd09da2289d0800000000000000
+      internalID: -2773607308778701756
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_63
+      name: Lv2_turret_63
       rect:
         serializedVersion: 2
         x: 2347
@@ -1706,14 +1706,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 410e019b786998e30800000000000000
-      internalID: 4506298411830534164
+      spriteID: ba47fc05ab1f27780800000000000000
+      internalID: -8686614948722281301
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv2_turret 1_64
+      name: Lv2_turret_64
       rect:
         serializedVersion: 2
         x: 2936
@@ -1728,8 +1728,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 80097311c09493ab0800000000000000
-      internalID: -5027907192805158904
+      spriteID: 87036ebe37ad38500800000000000000
+      internalID: 397401383552561272
       vertices: []
       indices: 
       edges: []
@@ -1748,71 +1748,71 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Lv2_turret 1_0: 6090686526108929734
-      Lv2_turret 1_1: -8215586012737438154
-      Lv2_turret 1_10: 4108354690825000827
-      Lv2_turret 1_11: 9066823911164277700
-      Lv2_turret 1_12: 6375515024294776179
-      Lv2_turret 1_13: 2997528453126743920
-      Lv2_turret 1_14: -3153628673844454059
-      Lv2_turret 1_15: 556304325369287648
-      Lv2_turret 1_16: 1784744158746511532
-      Lv2_turret 1_17: 3978516950350720862
-      Lv2_turret 1_18: -1379984737367868984
-      Lv2_turret 1_19: 2487825767508399997
-      Lv2_turret 1_2: 410236753042950695
-      Lv2_turret 1_20: -1882625980585327689
-      Lv2_turret 1_21: -5883736227239252221
-      Lv2_turret 1_22: 2400040426721143988
-      Lv2_turret 1_23: 4512246548551593064
-      Lv2_turret 1_24: 336930628667727406
-      Lv2_turret 1_25: -1626644524995025666
-      Lv2_turret 1_26: -1213983143438833297
-      Lv2_turret 1_27: -5801303738016314163
-      Lv2_turret 1_28: 8147151544489097542
-      Lv2_turret 1_29: -5577384187204545733
-      Lv2_turret 1_3: 1701233310323019180
-      Lv2_turret 1_30: -3412758226828555815
-      Lv2_turret 1_31: 7409171655313393176
-      Lv2_turret 1_32: -6933252086863541244
-      Lv2_turret 1_33: 2256213324893324387
-      Lv2_turret 1_34: 8199643997509017208
-      Lv2_turret 1_35: 432696312326121316
-      Lv2_turret 1_36: 290300748827183566
-      Lv2_turret 1_37: -4231480578598601995
-      Lv2_turret 1_38: 933942742625327249
-      Lv2_turret 1_39: -3072362240656813
-      Lv2_turret 1_4: -2437367011649967891
-      Lv2_turret 1_40: -4971633101675900169
-      Lv2_turret 1_41: -526314685475529987
-      Lv2_turret 1_42: 7357202661848593356
-      Lv2_turret 1_43: 5146551072218198184
-      Lv2_turret 1_44: -8930524336918901972
-      Lv2_turret 1_45: -6589657152297303913
-      Lv2_turret 1_46: -1669557731772341679
-      Lv2_turret 1_47: 272376865138388215
-      Lv2_turret 1_48: 5314061324273885031
-      Lv2_turret 1_49: -8985895260505803921
-      Lv2_turret 1_5: -4434128623004391372
-      Lv2_turret 1_50: -1655939642438799654
-      Lv2_turret 1_51: -4840439137957100682
-      Lv2_turret 1_52: 8239398693082023236
-      Lv2_turret 1_53: -791977728579798367
-      Lv2_turret 1_54: -6163879848418683069
-      Lv2_turret 1_55: 3188279288798514832
-      Lv2_turret 1_56: -643522896061368239
-      Lv2_turret 1_57: -4968201336509390627
-      Lv2_turret 1_58: -3546584111766039003
-      Lv2_turret 1_59: 3594456361533971434
-      Lv2_turret 1_6: -4894450620121607510
-      Lv2_turret 1_60: 576503059045939389
-      Lv2_turret 1_61: -3234633378907492817
-      Lv2_turret 1_62: -5798905451336831476
-      Lv2_turret 1_63: 4506298411830534164
-      Lv2_turret 1_64: -5027907192805158904
-      Lv2_turret 1_7: -104139502870121406
-      Lv2_turret 1_8: 7354154683219517934
-      Lv2_turret 1_9: -6757867086957348404
+      Lv2_turret_0: 5966279503158464714
+      Lv2_turret_1: -8349357472669424334
+      Lv2_turret_10: -8210659933271954136
+      Lv2_turret_11: 3491121617736906343
+      Lv2_turret_12: 1511274146254448465
+      Lv2_turret_13: -1133242229580874288
+      Lv2_turret_14: -5637047585033937981
+      Lv2_turret_15: -2950158422763161191
+      Lv2_turret_16: 1211773556834957696
+      Lv2_turret_17: 79973131935050574
+      Lv2_turret_18: 7439279030694003785
+      Lv2_turret_19: 2246577486114500991
+      Lv2_turret_2: 8022982290798614617
+      Lv2_turret_20: 8807356471164907277
+      Lv2_turret_21: 6594150480508355627
+      Lv2_turret_22: 982049133520031941
+      Lv2_turret_23: 39985308142843075
+      Lv2_turret_24: 4042086319674058429
+      Lv2_turret_25: -8290428018422350991
+      Lv2_turret_26: -8638319478442021825
+      Lv2_turret_27: 4391222434075270729
+      Lv2_turret_28: 5644015733706370358
+      Lv2_turret_29: -4555537128950718389
+      Lv2_turret_3: -5399187220014052854
+      Lv2_turret_30: 1815105836813621854
+      Lv2_turret_31: -6057410769781171343
+      Lv2_turret_32: 610610531873887509
+      Lv2_turret_33: 2607229363176590565
+      Lv2_turret_34: 7484276990605544520
+      Lv2_turret_35: -2386896340195513985
+      Lv2_turret_36: 3470896732321423776
+      Lv2_turret_37: -64831094896982896
+      Lv2_turret_38: -1318355187211698430
+      Lv2_turret_39: 8604181023798090703
+      Lv2_turret_4: 6684070498675824813
+      Lv2_turret_40: -6629059311961326437
+      Lv2_turret_41: -465875606858843365
+      Lv2_turret_42: -4484576067495758137
+      Lv2_turret_43: -8173128664023934604
+      Lv2_turret_44: 8781425992647166647
+      Lv2_turret_45: 5557858870986849675
+      Lv2_turret_46: 5022963361990514666
+      Lv2_turret_47: 3304177688639882790
+      Lv2_turret_48: -5199701356719168289
+      Lv2_turret_49: 5604807663581977740
+      Lv2_turret_5: 9154698350166197313
+      Lv2_turret_50: 3447564209547569351
+      Lv2_turret_51: -1131281700255215758
+      Lv2_turret_52: 7089863558894900761
+      Lv2_turret_53: -1969270917394838755
+      Lv2_turret_54: 260757022714833069
+      Lv2_turret_55: 1916667623950034963
+      Lv2_turret_56: -7449042637754109843
+      Lv2_turret_57: 4920042237587721885
+      Lv2_turret_58: 4083793097556303755
+      Lv2_turret_59: -3216171935729872548
+      Lv2_turret_6: -3104737860102015754
+      Lv2_turret_60: 3606872383648979500
+      Lv2_turret_61: 8658119420637765676
+      Lv2_turret_62: -2773607308778701756
+      Lv2_turret_63: -8686614948722281301
+      Lv2_turret_64: 397401383552561272
+      Lv2_turret_7: 4460163144083465993
+      Lv2_turret_8: -657704563412135376
+      Lv2_turret_9: -6139025979438326361
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
