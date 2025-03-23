@@ -11,7 +11,7 @@ public sealed class FarmInput : MonoBehaviour
 	private const float MinimumCameraMovementScale = 0.1f;
 
 	private const float MaximumProjectionSize = 10.0f; // 가장 넓게 볼 때의 크기를 의미.
-	private const float MinimumProjectionSize = 1.0f; // 가장 좁게 볼 때의 크기를 의미.
+	private const float MinimumProjectionSize = 5.0f; // 가장 좁게 볼 때의 크기를 의미.
 
 	private const float MovableWidth = 15.0f;
 	private const float MovableHeight = 10.0f;
