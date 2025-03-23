@@ -28,12 +28,13 @@ public abstract class ProjectileBase : MonoBehaviour
             var sqrMagnitude = (currentTarget.TargetPoint.position - transform.position).sqrMagnitude;
             if (sqrMagnitude <= hitThreshold)
             {
-                damager.HasDamaged(currentTarget);
+                DealDamage();
                 Destroy(gameObject);
                 return;
             }
 
             Move();
+            //Rotate();
         }
     }
 
@@ -64,6 +65,16 @@ public abstract class ProjectileBase : MonoBehaviour
     }
 
     protected abstract void Move();
+    protected virtual void Rotate()
+    {
+        var direction = currentTarget.TargetPoint.position - transform.position;
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
+    }
+    protected virtual void DealDamage()
+    {
+        damager.HasDamaged(currentTarget);
+    }
 
     public void Trigger()
     {

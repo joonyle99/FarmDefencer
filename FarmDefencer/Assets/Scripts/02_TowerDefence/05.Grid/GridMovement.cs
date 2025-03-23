@@ -17,6 +17,9 @@ public class GridMovement : MonoBehaviour
 
     private List<GridCell> _eachGridPath;
 
+    public GridCell CurrGridCell => _currGridCell;
+    public GridCell NextGridCell => _nextGridCell;
+
 #if UNITY_EDITOR
     public float eTime;
     public float distance;
