@@ -17,7 +17,7 @@ MonoBehaviour:
     SpawnCountRange:
       Start: 8
       End: 12
-  - WaveMonster: {fileID: 8488813293856363186, guid: 58e1d33d6e27d6f499f928c32673ef4a, type: 3}
+  - WaveMonster: {fileID: 221480247723861646, guid: 4dcf527e597654e4799e2e212a0a49da, type: 3}
     SpawnCountRange:
       Start: 4
       End: 6

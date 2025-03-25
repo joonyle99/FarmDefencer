@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad3b3c3cfd96ffb4c8da6ae81f5d7314, type: 3}
-  m_Name: StageData_1-2
+  m_Name: StageData_1-8
   m_EditorClassIdentifier: 
   Waves:
-  - WaveMonster: {fileID: 8488813293856363186, guid: 58e1d33d6e27d6f499f928c32673ef4a, type: 3}
+  - WaveMonster: {fileID: 1115794259428524055, guid: 97399fbf276cc6f45ba6f0813de0e46c, type: 3}
     SpawnCountRange:
-      Start: 10
-      End: 13
-  - WaveMonster: {fileID: 221480247723861646, guid: 4dcf527e597654e4799e2e212a0a49da, type: 3}
+      Start: 8
+      End: 12
+  - WaveMonster: {fileID: 505854064816607841, guid: 1265832eb0d602d409315addab1e8710, type: 3}
     SpawnCountRange:
-      Start: 3
+      Start: 4
       End: 6
