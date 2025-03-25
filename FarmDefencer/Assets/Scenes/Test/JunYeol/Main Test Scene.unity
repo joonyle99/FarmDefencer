@@ -2708,7 +2708,7 @@ Transform:
   m_GameObject: {fileID: 1224125955}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1048.1771, y: 575.125, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2749,7 +2749,8 @@ MonoBehaviour:
     Start: 1
     End: 2
   _waitWaveTime: 3
-  stageData: {fileID: 11400000, guid: a79d7d6ba973ac240b076a1bb5ca99ca, type: 2}
+  stageData:
+  - {fileID: 11400000, guid: fc3387685d0c4d649b3c33c4e4fc3d7d, type: 2}
 --- !u!114 &1231187497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2776,7 +2777,7 @@ Transform:
   m_GameObject: {fileID: 1231187495}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 575, y: 323.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

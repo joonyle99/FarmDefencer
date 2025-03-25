@@ -1,37 +1,37 @@
 fileFormatVersion: 2
-guid: b24e6c6af71320349bc1172df206711b
+guid: 56e475e46c167df41a962e42b0e5855f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7233811798392237112
-    second: Lv1_turret_0
+      213: -7216213497550054915
+    second: Lv1_turret 1_0
   - first:
-      213: -6509170032469026971
-    second: Lv1_turret_1
+      213: -1062503320978587607
+    second: Lv1_turret 1_1
   - first:
-      213: -1219529696105132281
-    second: Lv1_turret_2
+      213: 8697156303661385245
+    second: Lv1_turret 1_2
   - first:
-      213: -7829027406327703247
-    second: Lv1_turret_3
+      213: 7995036483217487988
+    second: Lv1_turret 1_3
   - first:
-      213: 1901910305290326372
-    second: Lv1_turret_4
+      213: -6196359176410008377
+    second: Lv1_turret 1_4
   - first:
-      213: 7526164851917486953
-    second: Lv1_turret_5
+      213: -3355314863934044979
+    second: Lv1_turret 1_5
   - first:
-      213: 9196746071109523820
-    second: Lv1_turret_6
+      213: 9172104914952027648
+    second: Lv1_turret 1_6
   - first:
-      213: 4664920868096677977
-    second: Lv1_turret_7
+      213: -3761471619627487899
+    second: Lv1_turret 1_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
-    sRGBTexture: 0
+    sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -67,7 +67,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -76,7 +76,7 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
@@ -96,7 +96,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -134,7 +134,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lv1_turret_0
+      name: Lv1_turret 1_0
       rect:
         serializedVersion: 2
         x: 1
@@ -149,14 +149,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 83ce2371189a36460800000000000000
-      internalID: 7233811798392237112
+      spriteID: df9562f9e0cdadb90800000000000000
+      internalID: -7216213497550054915
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv1_turret_1
+      name: Lv1_turret 1_1
       rect:
         serializedVersion: 2
         x: 484
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 567d010b758caa5a0800000000000000
-      internalID: -6509170032469026971
+      spriteID: 9200664ebda3141f0800000000000000
+      internalID: -1062503320978587607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv1_turret_2
+      name: Lv1_turret 1_2
       rect:
         serializedVersion: 2
         x: 2
@@ -193,14 +193,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 70f0d96e33c531fe0800000000000000
-      internalID: -1219529696105132281
+      spriteID: d1649c3249182b870800000000000000
+      internalID: 8697156303661385245
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv1_turret_3
+      name: Lv1_turret 1_3
       rect:
         serializedVersion: 2
         x: 941
@@ -215,14 +215,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1391a0dcd05b95390800000000000000
-      internalID: -7829027406327703247
+      spriteID: 478777c625314fe60800000000000000
+      internalID: 7995036483217487988
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv1_turret_4
+      name: Lv1_turret 1_4
       rect:
         serializedVersion: 2
         x: 1437
@@ -237,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4611c7d8851f46a10800000000000000
-      internalID: 1901910305290326372
+      spriteID: 7c47955a82c120aa0800000000000000
+      internalID: -6196359176410008377
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv1_turret_5
+      name: Lv1_turret 1_5
       rect:
         serializedVersion: 2
         x: 1438
@@ -259,14 +259,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 96b7297be0f427860800000000000000
-      internalID: 7526164851917486953
+      spriteID: dc48f9198e68f61d0800000000000000
+      internalID: -3355314863934044979
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv1_turret_6
+      name: Lv1_turret 1_6
       rect:
         serializedVersion: 2
         x: 1833
@@ -281,14 +281,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c69d3f143d761af70800000000000000
-      internalID: 9196746071109523820
+      spriteID: 00e745203dcd94f70800000000000000
+      internalID: 9172104914952027648
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv1_turret_7
+      name: Lv1_turret 1_7
       rect:
         serializedVersion: 2
         x: 1833
@@ -303,8 +303,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 958953050d02db040800000000000000
-      internalID: 4664920868096677977
+      spriteID: 56de367bd719ccbc0800000000000000
+      internalID: -3761471619627487899
       vertices: []
       indices: 
       edges: []
@@ -323,14 +323,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Lv1_turret_0: 7233811798392237112
-      Lv1_turret_1: -6509170032469026971
-      Lv1_turret_2: -1219529696105132281
-      Lv1_turret_3: -7829027406327703247
-      Lv1_turret_4: 1901910305290326372
-      Lv1_turret_5: 7526164851917486953
-      Lv1_turret_6: 9196746071109523820
-      Lv1_turret_7: 4664920868096677977
+      Lv1_turret 1_0: -7216213497550054915
+      Lv1_turret 1_1: -1062503320978587607
+      Lv1_turret 1_2: 8697156303661385245
+      Lv1_turret 1_3: 7995036483217487988
+      Lv1_turret 1_4: -6196359176410008377
+      Lv1_turret 1_5: -3355314863934044979
+      Lv1_turret 1_6: 9172104914952027648
+      Lv1_turret 1_7: -3761471619627487899
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
