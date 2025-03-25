@@ -18,6 +18,7 @@ public class SpineController : MonoBehaviour
     public Spine.Skeleton Skeleton => _skeleton;
 
     private Color _originalColor;
+    private Bone _shootingBone;
 
     private void Awake()
     {
@@ -27,6 +28,14 @@ public class SpineController : MonoBehaviour
         _skeleton = _skeletonAnimation.Skeleton;
 
         _originalColor = _skeletonAnimation.Skeleton.GetColor();
+    }
+    private void Start()
+    {
+        var shootingBone = _skeleton.FindBone("shoot");
+        if (shootingBone != null)
+        {
+            _shootingBone = shootingBone;
+        }
     }
 
     public void SetAnimation(string animationName, bool loop)
@@ -55,6 +64,15 @@ public class SpineController : MonoBehaviour
 
     public Bone GetBone(string boneName)
     {
-        return _skeletonAnimation.Skeleton.FindBone(boneName);
+        return _skeleton.FindBone(boneName);
+    }
+
+    public Bone GetShootingBone()
+    {
+        return _shootingBone;
+    }
+    public Vector3 GetShootingBonePos()
+    {
+        return _shootingBone.GetWorldPosition(transform);
     }
 }
