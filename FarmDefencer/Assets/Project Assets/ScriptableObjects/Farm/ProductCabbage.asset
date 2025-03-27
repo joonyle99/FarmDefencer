@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dd4d119d542f9e42a284dc9f0bd187e, type: 3}
   m_Name: ProductCabbage
   m_EditorClassIdentifier: 
-  name: product_cabbage
+  productProductName: product_cabbage
   productSprite: {fileID: 21300000, guid: b5926e2ab73b6a5448b5b2591e2cc97c, type: 3}
   price: 7

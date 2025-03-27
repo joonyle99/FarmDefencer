@@ -8,7 +8,7 @@ public sealed class ProductDatabase : ScriptableObject
     private Dictionary<string, ProductEntry> _lookupDictionary;
 
 	public bool TryGetProduct(string productUniqueId, out ProductEntry entry) => _lookupDictionary.TryGetValue(productUniqueId, out entry);
-	public bool TryGetProduct(ProductEntry keyEntry, out ProductEntry foundEntry) => _lookupDictionary.TryGetValue(keyEntry.Name, out foundEntry);
+	public bool TryGetProduct(ProductEntry keyEntry, out ProductEntry foundEntry) => _lookupDictionary.TryGetValue(keyEntry.ProductName, out foundEntry);
 
 	private void Awake()
 	{
@@ -20,13 +20,13 @@ public sealed class ProductDatabase : ScriptableObject
 				continue;
 			}
 
-			if (_lookupDictionary.ContainsKey(entry.Name))
+			if (_lookupDictionary.ContainsKey(entry.ProductName))
 			{
-				Debug.LogError($"ProductDatabase({name})에 중복된 UniqueId {entry.Name}(을)를 갖는 Entry가 존재합니다.");
+				Debug.LogError($"ProductDatabase({name})에 중복된 UniqueId {entry.ProductName}(을)를 갖는 Entry가 존재합니다.");
 				continue;
 			}
 
-			_lookupDictionary.Add(entry.Name, entry);
+			_lookupDictionary.Add(entry.ProductName, entry);
 		}
 	}
 }

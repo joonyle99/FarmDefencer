@@ -92,7 +92,7 @@ public sealed class CropGuide : MonoBehaviour, IFarmInputLayer
 			return null;
 		}
 
-		return productEntry.Name switch
+		return productEntry.ProductName switch
 		{
 			"product_carrot" => cropGuideImage_carrot,
 			"product_potato" => cropGuideImage_potato,

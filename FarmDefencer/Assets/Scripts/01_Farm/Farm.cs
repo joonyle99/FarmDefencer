@@ -111,7 +111,7 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
 
     public bool GetFieldAvailability(string productUniqueId)
     {
-        var field = _fields.FirstOrDefault(field => field.ProductEntry.Name == productUniqueId);
+        var field = _fields.FirstOrDefault(field => field.ProductEntry.ProductName == productUniqueId);
         if (field == null)
         {
             Debug.LogError($"Farm이 {productUniqueId}에 해당하는 Field를 가지고 있지 않습니다.");
@@ -123,7 +123,7 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
 
     public void SetFieldAvailability(string productUniqueId, bool value)
     {
-        var field = _fields.FirstOrDefault(field => field.ProductEntry.Name == productUniqueId);
+        var field = _fields.FirstOrDefault(field => field.ProductEntry.ProductName == productUniqueId);
         if (field == null)
         {
             Debug.LogError($"Farm이 {productUniqueId}에 해당하는 Field를 가지고 있지 않습니다.");
