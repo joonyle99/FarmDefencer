@@ -31,7 +31,7 @@ public sealed class ParabolicProjectile : ProjectileBase
         Vector2 direction = (nextPos - (Vector2)transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90f;
         Quaternion targetRot = Quaternion.AngleAxis(angle, Vector3.forward);
-        float rotateSpeed = 15f;
+        float rotateSpeed = 20f;
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotateSpeed);
     }
     protected override void DealDamage()
