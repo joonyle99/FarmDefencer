@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using UnityEditor.PackageManager;
 
-public class CropPotato : Crop
+public sealed class CropPotato : Crop
 {
 	private struct PotatoState : ICommonCropState
 	{
@@ -30,12 +30,12 @@ public class CropPotato : Crop
 	private const float MatureSeconds = 15.0f;
 	private const float HarvestHoldTime = 2.0f;
 
-	[SerializeField] private Sprite _seedSprite;
-	[SerializeField] private Sprite _matureSprite;
-	[SerializeField] private Sprite _beforeWaterSprite;
-	[SerializeField] private Sprite _deadSprite;
-	[SerializeField] private Sprite _growingSprite;
-	[SerializeField] private Sprite _harvestedSprite;
+	[SerializeField] private Sprite seedSprite;
+	[SerializeField] private Sprite matureSprite;
+	[SerializeField] private Sprite beforeWaterSprite;
+	[SerializeField] private Sprite deadSprite;
+	[SerializeField] private Sprite growingSprite;
+	[SerializeField] private Sprite harvestedSprite;
 
 	private SpriteRenderer _spriteRenderer;
 	private PotatoState _currentState;
@@ -121,7 +121,7 @@ public class CropPotato : Crop
 		{ Watered: false } => PotatoStage.BeforeWater,
 	};
 
-	private static readonly Dictionary<PotatoStage, Func<PotatoState, float, PotatoState>> OnFarmUpdateFunctions = new Dictionary<PotatoStage, Func<PotatoState, float, PotatoState>>
+	private static readonly Dictionary<PotatoStage, Func<PotatoState, float, PotatoState>> OnFarmUpdateFunctions = new()
 	{
 		{PotatoStage.Seed, (currentState, deltaTime) => Reset(currentState) },
 		{PotatoStage.BeforeWater, WaitWater },
@@ -131,7 +131,7 @@ public class CropPotato : Crop
 		{PotatoStage.Harvested, DoNothing_OnFarmUpdate },
 	};
 
-	private static readonly Dictionary<PotatoStage, Func<PotatoState, PotatoState>> OnSingleTapFunctions = new Dictionary<PotatoStage, Func<PotatoState, PotatoState>>
+	private static readonly Dictionary<PotatoStage, Func<PotatoState, PotatoState>> OnSingleTapFunctions = new()
 	{
 		{PotatoStage.Seed, Plant },
 		{PotatoStage.BeforeWater, DoNothing },
@@ -141,7 +141,7 @@ public class CropPotato : Crop
 		{PotatoStage.Harvested, FillQuotaOneAndResetIfSucceeded },
 	};
 
-	private static readonly Dictionary<PotatoStage, Func<PotatoState, Vector2, Vector2, bool, float, PotatoState>> OnSingleHoldingFunctions = new Dictionary<PotatoStage, Func<PotatoState, Vector2, Vector2, bool, float, PotatoState>>
+	private static readonly Dictionary<PotatoStage, Func<PotatoState, Vector2, Vector2, bool, float, PotatoState>> OnSingleHoldingFunctions = new()
 	{
 		{PotatoStage.Seed, DoNothing_OnSingleHolding },
 		{PotatoStage.BeforeWater, DoNothing_OnSingleHolding },
@@ -175,13 +175,13 @@ public class CropPotato : Crop
 	};
 
 	private static readonly Func<PotatoState, PotatoState, bool> PlayDustSfxEffectCondition = (beforeState, afterState) => afterState.HoldingTime > 0.0f && beforeState.HoldingTime == 0.0f;
-	private static readonly Action<Vector2, Vector2> PlayDustSfxEffect = (inputWorldPosition, cropPosition) =>
+	private static readonly Action<Vector2, Vector2> PlayDustSfxEffect = (_, _) =>
 	{
 		SoundManager.PlaySfxStatic("SFX_T_potato_dust");
 	};
 
 	private static readonly Func<PotatoState, PotatoState, bool> StopDustSfxEffectCondition = (beforeState, afterState) => afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
-	private static readonly Action<Vector2, Vector2> StopDustSfxEffect = (inputWorldPosition, cropPosition) =>
+	private static readonly Action<Vector2, Vector2> StopDustSfxEffect = (_, _) =>
 	{
 		EffectPlayer.StopVfx();
 		SoundManager.StopCurrentSfxStatic();
@@ -190,16 +190,16 @@ public class CropPotato : Crop
 	[Pure]
 	private Action<SpriteRenderer> ApplySpriteTo(PotatoStage stage) => stage switch
 	{
-		PotatoStage.Seed when _spriteRenderer.sprite != _seedSprite => (spriteRenderer) => spriteRenderer.sprite = _seedSprite,
-		PotatoStage.BeforeWater when _spriteRenderer.sprite != _beforeWaterSprite => (spriteRenderer) => spriteRenderer.sprite = _beforeWaterSprite,
-		PotatoStage.Dead when _spriteRenderer.sprite != _deadSprite => (spriteRenderer) => spriteRenderer.sprite = _deadSprite,
-		PotatoStage.Growing when _spriteRenderer.sprite != _growingSprite => (spriteRenderer) => spriteRenderer.sprite = _growingSprite,
-		PotatoStage.Mature when _spriteRenderer.sprite != _matureSprite => (spriteRenderer) => spriteRenderer.sprite = _matureSprite,
-		PotatoStage.Harvested when _spriteRenderer.sprite != _harvestedSprite => (spriteRenderer) => spriteRenderer.sprite = _harvestedSprite,
+		PotatoStage.Seed when _spriteRenderer.sprite != seedSprite => (spriteRenderer) => spriteRenderer.sprite = seedSprite,
+		PotatoStage.BeforeWater when _spriteRenderer.sprite != beforeWaterSprite => (spriteRenderer) => spriteRenderer.sprite = beforeWaterSprite,
+		PotatoStage.Dead when _spriteRenderer.sprite != deadSprite => (spriteRenderer) => spriteRenderer.sprite = deadSprite,
+		PotatoStage.Growing when _spriteRenderer.sprite != growingSprite => (spriteRenderer) => spriteRenderer.sprite = growingSprite,
+		PotatoStage.Mature when _spriteRenderer.sprite != matureSprite => (spriteRenderer) => spriteRenderer.sprite = matureSprite,
+		PotatoStage.Harvested when _spriteRenderer.sprite != harvestedSprite => (spriteRenderer) => spriteRenderer.sprite = harvestedSprite,
 		_ => (_) => { }
 	};
 
-	private static List<(Func<PotatoState, PotatoState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<PotatoState, PotatoState, bool>, Action<Vector2, Vector2>)>
+	private static List<(Func<PotatoState, PotatoState, bool>, Action<Vector2, Vector2>)> Effects = new()
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class CropCucumber : Crop
+public sealed class CropCucumber : Crop
 {
 	private struct CucumberState : ICommonCropState
 	{
@@ -39,21 +39,21 @@ public class CropCucumber : Crop
 	private const float Stage1_GrowthSeconds = 15.0f;
 	private const float Stage2_GrowthSeconds = 15.0f;
 
-	[SerializeField] private Sprite _seedSprite;
+	[SerializeField] private Sprite seedSprite;
 	[Space]
-	[SerializeField] private Sprite _stage1_beforeWaterSprite;
-	[SerializeField] private Sprite _stage1_deadSprite;
-	[SerializeField] private Sprite _stage1_growingSprite;
+	[SerializeField] private Sprite stage1_beforeWaterSprite;
+	[SerializeField] private Sprite stage1_deadSprite;
+	[SerializeField] private Sprite stage1_growingSprite;
 	[Space]
-	[SerializeField] private Sprite _stage2_beforeShorttrelisSprite;
-	[SerializeField] private Sprite _stage2_beforeWaterSprite;
-	[SerializeField] private Sprite _stage2_deadSprite;
-	[SerializeField] private Sprite _stage2_growingSprite;
+	[SerializeField] private Sprite stage2_beforeShorttrelisSprite;
+	[SerializeField] private Sprite stage2_beforeWaterSprite;
+	[SerializeField] private Sprite stage2_deadSprite;
+	[SerializeField] private Sprite stage2_growingSprite;
 	[Space]
-	[SerializeField] private Sprite _stage3_sprite;
+	[SerializeField] private Sprite stage3_sprite;
 	[Space]
-	[SerializeField] private Sprite _matureSprite;
-	[SerializeField] private Sprite _harvestedSprite;
+	[SerializeField] private Sprite matureSprite;
+	[SerializeField] private Sprite harvestedSprite;
 
 	private SpriteRenderer _spriteRenderer;
 	private CucumberState _currentState;
@@ -141,7 +141,7 @@ public class CropCucumber : Crop
 		{ } => CucumberStage.Stage1_BeforeWater,
 	};
 
-	private static readonly Dictionary<CucumberStage, Func<CucumberState, float, CucumberState>> OnFarmUpdateFunctions = new Dictionary<CucumberStage, Func<CucumberState, float, CucumberState>>
+	private static readonly Dictionary<CucumberStage, Func<CucumberState, float, CucumberState>> OnFarmUpdateFunctions = new()
 	{
 		{CucumberStage.Seed, (beforeState, deltaTime) => Reset(beforeState) },
 
@@ -171,8 +171,8 @@ public class CropCucumber : Crop
 		{CucumberStage.Harvested, (beforeState, deltaTime) => DoNothing(beforeState) },
 	};
 
-private static readonly Dictionary<CucumberStage, Func<CucumberState, CucumberState>> OnSingleTapFunctions = new Dictionary<CucumberStage, Func<CucumberState, CucumberState>>
-	{
+private static readonly Dictionary<CucumberStage, Func<CucumberState, CucumberState>> OnSingleTapFunctions = new()
+{
 		{CucumberStage.Seed, Plant },
 
 		{CucumberStage.Stage1_Dead, DoNothing },
@@ -193,21 +193,21 @@ private static readonly Dictionary<CucumberStage, Func<CucumberState, CucumberSt
 	[Pure]
 	private Action<SpriteRenderer> GetSpriteAndApplyTo(CucumberStage cucumberStage) => cucumberStage switch
 	{
-		CucumberStage.Seed => (spriteRenderer) => ApplySprite(_seedSprite, spriteRenderer),
+		CucumberStage.Seed => (spriteRenderer) => ApplySprite(seedSprite, spriteRenderer),
 
-		CucumberStage.Stage1_Dead => (spriteRenderer) => ApplySprite(_stage1_deadSprite, spriteRenderer),
-		CucumberStage.Stage1_BeforeWater => (spriteRenderer) => ApplySprite(_stage1_beforeWaterSprite, spriteRenderer),
-		CucumberStage.Stage1_Growing => (spriteRenderer) => ApplySprite(_stage1_growingSprite, spriteRenderer),
+		CucumberStage.Stage1_Dead => (spriteRenderer) => ApplySprite(stage1_deadSprite, spriteRenderer),
+		CucumberStage.Stage1_BeforeWater => (spriteRenderer) => ApplySprite(stage1_beforeWaterSprite, spriteRenderer),
+		CucumberStage.Stage1_Growing => (spriteRenderer) => ApplySprite(stage1_growingSprite, spriteRenderer),
 
-		CucumberStage.Stage2_BeforeShortTrelis => (spriteRenderer) => ApplySprite(_stage2_beforeShorttrelisSprite, spriteRenderer),
-		CucumberStage.Stage2_Dead => (spriteRenderer) => ApplySprite(_stage2_deadSprite, spriteRenderer),
-		CucumberStage.Stage2_BeforeWater => (spriteRenderer) => ApplySprite(_stage2_beforeWaterSprite, spriteRenderer),
-		CucumberStage.Stage2_Growing => (spriteRenderer) => ApplySprite(_stage2_growingSprite, spriteRenderer),
+		CucumberStage.Stage2_BeforeShortTrelis => (spriteRenderer) => ApplySprite(stage2_beforeShorttrelisSprite, spriteRenderer),
+		CucumberStage.Stage2_Dead => (spriteRenderer) => ApplySprite(stage2_deadSprite, spriteRenderer),
+		CucumberStage.Stage2_BeforeWater => (spriteRenderer) => ApplySprite(stage2_beforeWaterSprite, spriteRenderer),
+		CucumberStage.Stage2_Growing => (spriteRenderer) => ApplySprite(stage2_growingSprite, spriteRenderer),
 
-		CucumberStage.Stage3 => (spriteRenderer) => ApplySprite(_stage3_sprite, spriteRenderer),
+		CucumberStage.Stage3 => (spriteRenderer) => ApplySprite(stage3_sprite, spriteRenderer),
 
-		CucumberStage.Mature => (spriteRenderer) => ApplySprite(_matureSprite, spriteRenderer),
-		CucumberStage.Harvested => (spriteRenderer) => ApplySprite(_harvestedSprite, spriteRenderer),
+		CucumberStage.Mature => (spriteRenderer) => ApplySprite(matureSprite, spriteRenderer),
+		CucumberStage.Harvested => (spriteRenderer) => ApplySprite(harvestedSprite, spriteRenderer),
 		_ => (_) => { }
 	};
 
@@ -218,7 +218,7 @@ private static readonly Dictionary<CucumberStage, Func<CucumberState, CucumberSt
 		EffectPlayer.PlayVfx("VFX_T_SoilParticleWhite", cropPosition);
 	};
 
-	private static List<(Func<CucumberState, CucumberState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<CucumberState, CucumberState, bool>, Action<Vector2, Vector2>)>
+	private static List<(Func<CucumberState, CucumberState, bool>, Action<Vector2, Vector2>)> Effects = new()
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),

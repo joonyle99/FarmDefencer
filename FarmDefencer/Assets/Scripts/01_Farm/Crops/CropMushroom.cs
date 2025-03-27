@@ -7,7 +7,7 @@ using Spine.Unity;
 /// <summary>
 /// 0번 자식에는 SkeletonGraphic 컴포넌트를 가진 자식을 배치할 것.
 /// </summary>
-public class CropMushroom : Crop
+public sealed class CropMushroom : Crop
 {
 	private struct MushroomState : ICommonCropState
 	{
@@ -55,34 +55,34 @@ public class CropMushroom : Crop
 	private const float InoculationHoldingTime = 2.0f;
 
 	[Space]
-	[SerializeField] private Sprite _stage1_beforeWaterSprite;
-	[SerializeField] private Sprite _stage1_deadSprite;
-	[SerializeField] private Sprite _stage1_growingSprite;
+	[SerializeField] private Sprite stage1_beforeWaterSprite;
+	[SerializeField] private Sprite stage1_deadSprite;
+	[SerializeField] private Sprite stage1_growingSprite;
 	[Space]
-	[SerializeField] private Sprite _stage2_beforeWaterSprite;
-	[SerializeField] private Sprite _stage2_deadSprite;
-	[SerializeField] private Sprite _stage2_growingSprite;
+	[SerializeField] private Sprite stage2_beforeWaterSprite;
+	[SerializeField] private Sprite stage2_deadSprite;
+	[SerializeField] private Sprite stage2_growingSprite;
 	[Space]
-	[SerializeField] private Sprite _stage3_beforeInoculationSprite;
-	[SerializeField] private Sprite _stage3_afterInoculationSprite;
+	[SerializeField] private Sprite stage3_beforeInoculationSprite;
+	[SerializeField] private Sprite stage3_afterInoculationSprite;
 	[Space]
-	[SerializeField] private Sprite _mature_normalSprite;
-	[SerializeField] private Sprite _mature_poisonousSprite;
+	[SerializeField] private Sprite mature_normalSprite;
+	[SerializeField] private Sprite mature_poisonousSprite;
 	[Space]
-	[SerializeField] private Sprite _harvested_normalSprite;
-	[SerializeField] private Sprite _harvested_poisonousSprite;
+	[SerializeField] private Sprite harvested_normalSprite;
+	[SerializeField] private Sprite harvested_poisonousSprite;
 
 	[Space]
 
 	[SerializeField]
 	[SpineAnimation]
-	private string _idleAnimationName;
+	private string idleAnimationName;
 	[SerializeField]
 	[SpineAnimation]
-	private string _injectAnimationName;
+	private string injectAnimationName;
 	[SerializeField]
 	[SpineAnimation]
-	private string _injectFinishedAnimationName;
+	private string injectFinishedAnimationName;
 
 	private GameObject _inoculationAnimationObject; // 0번 자식
 	private SkeletonAnimation _skeletonAnimation; // 0번 자식이 소유
@@ -181,25 +181,25 @@ public class CropMushroom : Crop
 			_inoculationAnimationObject.SetActive(true);
 			if (_currentState.HoldingTime > 0.0f)
 			{
-				if (currentAnimationName != _injectAnimationName)
+				if (currentAnimationName != injectAnimationName)
 				{
-					_spineAnimationState.SetAnimation(0, _injectAnimationName, false);
+					_spineAnimationState.SetAnimation(0, injectAnimationName, false);
 				}
 			}
 			else
 			{
-				if (currentAnimationName != _idleAnimationName)
+				if (currentAnimationName != idleAnimationName)
 				{
-					_spineAnimationState.SetAnimation(0, _idleAnimationName, false);
+					_spineAnimationState.SetAnimation(0, idleAnimationName, false);
 				}
 			}
 		}
 		else if (currentStage == MushroomStage.Stage3_AfterInoculation)
 		{
 			_inoculationAnimationObject.SetActive(true);
-			if (currentAnimationName != _injectFinishedAnimationName)
+			if (currentAnimationName != injectFinishedAnimationName)
 			{
-				_spineAnimationState.SetAnimation(0, _injectFinishedAnimationName, false);
+				_spineAnimationState.SetAnimation(0, injectFinishedAnimationName, false);
 			}
 		}
 		else
@@ -234,16 +234,16 @@ public class CropMushroom : Crop
 	{
 		MushroomStage.Unplowed => (spriteRenderer) => ApplySprite(null, spriteRenderer),
 
-		MushroomStage.Stage1_Dead => (spriteRenderer) => ApplySprite(_stage1_deadSprite, spriteRenderer),
-		MushroomStage.Stage1_BeforeWater => (spriteRenderer) => ApplySprite(_stage1_beforeWaterSprite, spriteRenderer),
-		MushroomStage.Stage1_Growing => (spriteRenderer) => ApplySprite(_stage1_growingSprite, spriteRenderer),
+		MushroomStage.Stage1_Dead => (spriteRenderer) => ApplySprite(stage1_deadSprite, spriteRenderer),
+		MushroomStage.Stage1_BeforeWater => (spriteRenderer) => ApplySprite(stage1_beforeWaterSprite, spriteRenderer),
+		MushroomStage.Stage1_Growing => (spriteRenderer) => ApplySprite(stage1_growingSprite, spriteRenderer),
 
-		MushroomStage.Stage2_Dead => (spriteRenderer) => ApplySprite(_stage2_deadSprite, spriteRenderer),
-		MushroomStage.Stage2_BeforeWater => (spriteRenderer) => ApplySprite(_stage2_beforeWaterSprite, spriteRenderer),
-		MushroomStage.Stage2_Growing => (spriteRenderer) => ApplySprite(_stage2_growingSprite, spriteRenderer),
+		MushroomStage.Stage2_Dead => (spriteRenderer) => ApplySprite(stage2_deadSprite, spriteRenderer),
+		MushroomStage.Stage2_BeforeWater => (spriteRenderer) => ApplySprite(stage2_beforeWaterSprite, spriteRenderer),
+		MushroomStage.Stage2_Growing => (spriteRenderer) => ApplySprite(stage2_growingSprite, spriteRenderer),
 
-		MushroomStage.Stage3_BeforeInoculation => (spriteRenderer) => ApplySprite(_stage3_beforeInoculationSprite, spriteRenderer),
-		MushroomStage.Stage3_AfterInoculation => (spriteRenderer) => ApplySprite(_stage3_afterInoculationSprite, spriteRenderer),
+		MushroomStage.Stage3_BeforeInoculation => (spriteRenderer) => ApplySprite(stage3_beforeInoculationSprite, spriteRenderer),
+		MushroomStage.Stage3_AfterInoculation => (spriteRenderer) => ApplySprite(stage3_afterInoculationSprite, spriteRenderer),
 
 		MushroomStage.Mature => (spriteRenderer) => ApplySprite(null, spriteRenderer),
 
@@ -257,44 +257,44 @@ public class CropMushroom : Crop
 		{ GrowthSeconds: < Stage1_GrowthSeconds + Stage2_GrowthSeconds + Stage3_GrowthSeconds } => (_) => { }
 		,
 
-		{ Harvested: false, IsPoisonous: false } => (spriteRenderer) => ApplySprite(_mature_normalSprite, spriteRenderer),
-		{ Harvested: false, IsPoisonous: true } => (spriteRenderer) => ApplySprite(_mature_poisonousSprite, spriteRenderer),
-		{ IsPoisonous: false } => (spriteRenderer) => ApplySprite(_harvested_normalSprite, spriteRenderer),
-		{ IsPoisonous: true } => (spriteRenderer) => ApplySprite(_harvested_poisonousSprite, spriteRenderer),
+		{ Harvested: false, IsPoisonous: false } => (spriteRenderer) => ApplySprite(mature_normalSprite, spriteRenderer),
+		{ Harvested: false, IsPoisonous: true } => (spriteRenderer) => ApplySprite(mature_poisonousSprite, spriteRenderer),
+		{ IsPoisonous: false } => (spriteRenderer) => ApplySprite(harvested_normalSprite, spriteRenderer),
+		{ IsPoisonous: true } => (spriteRenderer) => ApplySprite(harvested_poisonousSprite, spriteRenderer),
 	};
 
 	private static readonly Func<MushroomState, MushroomState, bool> HoldEffectCondition = (beforeState, afterState) => afterState.HoldingTime > beforeState.HoldingTime;
-	private static readonly Action<Vector2, Vector2> HoldEffect = (inputWorldPosition, cropPosition) =>
+	private static readonly Action<Vector2, Vector2> HoldEffect = (inputWorldPosition, _) =>
 	{
 		EffectPlayer.PlayHoldEffect(inputWorldPosition);
 	};
 
 	private static readonly Func<MushroomState, MushroomState, bool> SoilStoneEffectCondition = (beforeState, afterState) => HoldEffectCondition(beforeState, afterState) && GetCurrentStage(beforeState) != MushroomStage.Stage3_BeforeInoculation;
-	private static readonly Action<Vector2, Vector2> SoilStoneEffect = (inputWorldPosition, cropPosition) =>
+	private static readonly Action<Vector2, Vector2> SoilStoneEffect = (_, cropPosition) =>
 	{
 		EffectPlayer.PlayVfx("VFX_T_SoilStone", cropPosition, false);
 	};
 
 	private static readonly Func<MushroomState, MushroomState, bool> TapEffectCondition = (beforeState, afterState) => afterState.LastSingleTapTime > beforeState.LastSingleTapTime;
-	private static readonly Action<Vector2, Vector2> TapEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayTabEffect(inputWorldPosition);
+	private static readonly Action<Vector2, Vector2> TapEffect = (inputWorldPosition, _) => EffectPlayer.PlayTabEffect(inputWorldPosition);
 
 	// 용어 참고: SFX에서의 shot == 코드에서의 inoculation.
 	private static readonly Func<MushroomState, MushroomState, bool> PlayShotSfxEffectCondition = (beforeState, afterState) => GetCurrentStage(beforeState) == MushroomStage.Stage3_BeforeInoculation && afterState.HoldingTime > 0.0f && beforeState.HoldingTime == 0.0f;
-	private static readonly Action<Vector2, Vector2> PlayShotSfxEffect = (inputWorldPosition, cropPosition) => SoundManager.PlaySfxStatic("SFX_T_mushroom_shot");
+	private static readonly Action<Vector2, Vector2> PlayShotSfxEffect = (_, _) => SoundManager.PlaySfxStatic("SFX_T_mushroom_shot");
 
 	private static readonly Func<MushroomState, MushroomState, bool> StopShotSfxEffectCondition = (beforeState, afterState) => GetCurrentStage(beforeState) == MushroomStage.Stage3_BeforeInoculation && afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
-	private static readonly Action<Vector2, Vector2> StopShotSfxEffect = (inputWorldPosition, cropPosition) => SoundManager.StopCurrentSfxStatic();
+	private static readonly Action<Vector2, Vector2> StopShotSfxEffect = (_, _) => SoundManager.StopCurrentSfxStatic();
 
 	private static readonly Func<MushroomState, MushroomState, bool> MushroomHarvestEffectCondition = (beforeState, afterState) => afterState.TapCount == 2 && beforeState.TapCount != 2;
-	private static readonly Action<Vector2, Vector2> MushroomHarvestEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayVfx("VFX_T_SoilDust", cropPosition);
+	private static readonly Action<Vector2, Vector2> MushroomHarvestEffect = (_, cropPosition) => EffectPlayer.PlayVfx("VFX_T_SoilDust", cropPosition);
 
 	private static readonly Func<MushroomState, MushroomState, bool> HoldStopEffectCondition = (beforeState, afterState) => afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
-	private static readonly Action<Vector2, Vector2> HoldStopEffect = (inputWorldPosition, cropPosition) =>
+	private static readonly Action<Vector2, Vector2> HoldStopEffect = (_, _) =>
 	{
 		EffectPlayer.StopVfx();
 	};
 
-	private static readonly List<(Func<MushroomState, MushroomState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<MushroomState, MushroomState, bool>, Action<Vector2, Vector2>)>
+	private static readonly List<(Func<MushroomState, MushroomState, bool>, Action<Vector2, Vector2>)> Effects = new()
 	{
 		(SoilStoneEffectCondition, SoilStoneEffect),
 		(HoldStopEffectCondition, HoldStopEffect),
@@ -383,7 +383,7 @@ public class CropMushroom : Crop
 		return nextState;
 	};
 
-	private static readonly Dictionary<MushroomStage, Func<MushroomState, float, MushroomState>> OnFarmUpdateFunctions = new Dictionary<MushroomStage, Func<MushroomState, float, MushroomState>>
+	private static readonly Dictionary<MushroomStage, Func<MushroomState, float, MushroomState>> OnFarmUpdateFunctions = new()
 	{
 		{
 			MushroomStage.Unplowed, 
@@ -437,7 +437,7 @@ public class CropMushroom : Crop
 
 	};
 
-	private static readonly Dictionary<MushroomStage, Func<MushroomState, MushroomState>> OnSingleTapFunctions = new Dictionary<MushroomStage, Func<MushroomState, MushroomState>>
+	private static readonly Dictionary<MushroomStage, Func<MushroomState, MushroomState>> OnSingleTapFunctions = new()
 	{
 		{MushroomStage.Unplowed, DoNothing },
 
@@ -457,7 +457,7 @@ public class CropMushroom : Crop
 		{MushroomStage.Harvested, FillQuotaOneAndResetIfSucceeded },
 	};
 
-	private static readonly Dictionary<MushroomStage, Func<MushroomState, Vector2, Vector2, bool, float, MushroomState>> OnSingleHoldingFunctions = new Dictionary<MushroomStage, Func<MushroomState, Vector2, Vector2, bool, float, MushroomState>>
+	private static readonly Dictionary<MushroomStage, Func<MushroomState, Vector2, Vector2, bool, float, MushroomState>> OnSingleHoldingFunctions = new()
 	{
 		{MushroomStage.Unplowed, Plow },
 

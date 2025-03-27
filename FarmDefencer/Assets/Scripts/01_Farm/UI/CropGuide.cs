@@ -2,16 +2,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
-public class CropGuide : MonoBehaviour, IFarmInputLayer
+public sealed class CropGuide : MonoBehaviour, IFarmInputLayer
 {
-	[SerializeField] private Sprite _cropGuideImage_carrot;
-	[SerializeField] private Sprite _cropGuideImage_potato;
-	[SerializeField] private Sprite _cropGuideImage_corn;
-	[SerializeField] private Sprite _cropGuideImage_cabbage;
-	[SerializeField] private Sprite _cropGuideImage_cucumber;
-	[SerializeField] private Sprite _cropGuideImage_eggplant;
-	[SerializeField] private Sprite _cropGuideImage_sweetpotato;
-	[SerializeField] private Sprite _cropGuideImage_mushroom;
+	[SerializeField] private Sprite cropGuideImage_carrot;
+	[SerializeField] private Sprite cropGuideImage_potato;
+	[SerializeField] private Sprite cropGuideImage_corn;
+	[SerializeField] private Sprite cropGuideImage_cabbage;
+	[SerializeField] private Sprite cropGuideImage_cucumber;
+	[SerializeField] private Sprite cropGuideImage_eggplant;
+	[SerializeField] private Sprite cropGuideImage_sweetpotato;
+	[SerializeField] private Sprite cropGuideImage_mushroom;
 
 	private Image _image;
 
@@ -92,16 +92,16 @@ public class CropGuide : MonoBehaviour, IFarmInputLayer
 			return null;
 		}
 
-		return productEntry.UniqueId switch
+		return productEntry.Name switch
 		{
-			"product_carrot" => _cropGuideImage_carrot,
-			"product_potato" => _cropGuideImage_potato,
-			"product_corn" => _cropGuideImage_corn,
-			"product_cabbage" => _cropGuideImage_cabbage,
-			"product_cucumber" => _cropGuideImage_cucumber,
-			"product_eggplant" => _cropGuideImage_eggplant,
-			"product_sweetpotato" => _cropGuideImage_sweetpotato,
-			"product_mushroom" => _cropGuideImage_mushroom,
+			"product_carrot" => cropGuideImage_carrot,
+			"product_potato" => cropGuideImage_potato,
+			"product_corn" => cropGuideImage_corn,
+			"product_cabbage" => cropGuideImage_cabbage,
+			"product_cucumber" => cropGuideImage_cucumber,
+			"product_eggplant" => cropGuideImage_eggplant,
+			"product_sweetpotato" => cropGuideImage_sweetpotato,
+			"product_mushroom" => cropGuideImage_mushroom,
 			_ => null
 		};
 	}

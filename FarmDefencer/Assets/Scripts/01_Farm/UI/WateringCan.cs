@@ -41,9 +41,11 @@ public sealed class WateringCan :
 	private FarmClock _farmClock;
 
 	[SpineAnimation]
-	public string IdleAnimationName;	
+	[SerializeField]
+	private string idleAnimationName;	
 	[SpineAnimation]
-	public string WateringAnimationName;
+	[SerializeField]
+	private string wateringAnimationName;
 
 	private SkeletonGraphic _skeletonGraphic;
 	private Spine.AnimationState _spineAnimationState;
@@ -70,7 +72,7 @@ public sealed class WateringCan :
 
 	public void OnDrag(PointerEventData pointerEventData)
 	{
-		if (_farmClock.IsPaused)
+		if (_farmClock.Stopped)
 		{
 			if (Using)
 			{
@@ -97,8 +99,6 @@ public sealed class WateringCan :
 
 	private void Awake()
 	{
-		var tileX = Mathf.FloorToInt(transform.position.x);
-		var tileY = Mathf.FloorToInt(transform.position.y);
 		_rectTransform = GetComponent<RectTransform>();
 		_initialScreenLocalPosition = _rectTransform.localPosition;
 
@@ -114,20 +114,19 @@ public sealed class WateringCan :
 		}
 
 		var currentTrackEntry = _spineAnimationState.GetCurrent(0);
-		if (currentTrackEntry.Animation.Name == WateringAnimationName)
+		if (currentTrackEntry.Animation.Name != wateringAnimationName)
 		{
-			if (currentTrackEntry.AnimationTime < WateringAnimationTimePoint)
-			{
-				_isWateredThisTime = false;
-			}
-			else
-			{
-				if (!_isWateredThisTime)
-				{
-					_isWateredThisTime = true;
-					Water?.Invoke(_currentWateringWorldPosition);
-				}
-			}
+			return;
+		}
+
+		if (currentTrackEntry.AnimationTime < WateringAnimationTimePoint)
+		{
+			_isWateredThisTime = false;
+		}
+		else if (!_isWateredThisTime)
+		{
+			_isWateredThisTime = true;
+			Water?.Invoke(_currentWateringWorldPosition);
 		}
 	}
 
@@ -141,11 +140,11 @@ public sealed class WateringCan :
 	{
 		if (_using)
 		{
-			_spineAnimationState.SetAnimation(0, WateringAnimationName, true);
+			_spineAnimationState.SetAnimation(0, wateringAnimationName, true);
 		}
 		else
 		{
-			_spineAnimationState.SetAnimation(0, IdleAnimationName, true).MixDuration = 0.0f;
+			_spineAnimationState.SetAnimation(0, idleAnimationName, true).MixDuration = 0.0f;
 		}
 	}
 }

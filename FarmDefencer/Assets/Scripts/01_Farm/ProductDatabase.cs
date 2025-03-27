@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ProductDatabase", menuName = "Scriptable Objects/Farm/ProductDatabase")]
-public class ProductDatabase : ScriptableObject
+public sealed class ProductDatabase : ScriptableObject
 {
     public List<ProductEntry> Products;
     private Dictionary<string, ProductEntry> _lookupDictionary;
 
 	public bool TryGetProduct(string productUniqueId, out ProductEntry entry) => _lookupDictionary.TryGetValue(productUniqueId, out entry);
-	public bool TryGetProduct(ProductEntry keyEntry, out ProductEntry foundEntry) => _lookupDictionary.TryGetValue(keyEntry.UniqueId, out foundEntry);
+	public bool TryGetProduct(ProductEntry keyEntry, out ProductEntry foundEntry) => _lookupDictionary.TryGetValue(keyEntry.Name, out foundEntry);
 
 	private void Awake()
 	{
@@ -20,13 +20,13 @@ public class ProductDatabase : ScriptableObject
 				continue;
 			}
 
-			if (_lookupDictionary.ContainsKey(entry.UniqueId))
+			if (_lookupDictionary.ContainsKey(entry.Name))
 			{
-				Debug.LogError($"ProductDatabase({name})¿¡ Áßº¹µÈ UniqueId {entry.UniqueId}(À»)¸¦ °®´Â Entry°¡ Á¸ÀçÇÕ´Ï´Ù.");
+				Debug.LogError($"ProductDatabase({name})ì— ì¤‘ë³µëœ UniqueId {entry.Name}(ì„)ë¥¼ ê°–ëŠ” Entryê°€ ì¡´ì¬í•©ë‹ˆë‹¤.");
 				continue;
 			}
 
-			_lookupDictionary.Add(entry.UniqueId, entry);
+			_lookupDictionary.Add(entry.Name, entry);
 		}
 	}
 }

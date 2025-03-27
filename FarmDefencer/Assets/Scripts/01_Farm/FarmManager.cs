@@ -3,52 +3,52 @@ using UnityEngine;
 /// <summary>
 /// 타이쿤의 최초 로드 동작을 정의하고, 타이쿤을 구성하는 여러 시스템들간의 중재자 역할을 하는 컴포넌트.
 /// </summary>
-public class FarmManager : MonoBehaviour
+public sealed class FarmManager : MonoBehaviour
 {
-	[SerializeField] private CropSigns _cropSigns;
-	[SerializeField] private FarmUI _farmUI;
-	[SerializeField] private FarmClock _farmClock;
-	[SerializeField] private Farm _farm;
-	[SerializeField] private FarmInput _farmInput;
-	[SerializeField] private ProductDatabase _productDatabase;
+	[SerializeField] private CropSigns cropSigns;
+	[SerializeField] private FarmUI farmUI;
+	[SerializeField] private FarmClock farmClock;
+	[SerializeField] private Farm farm;
+	[SerializeField] private FarmInput farmInput;
+	[SerializeField] private ProductDatabase productDatabase;
 
 	private void Awake()
 	{
-		_farmClock.RegisterFarmUpdatableObject(_farm);
+		farmClock.RegisterFarmUpdatableObject(farm);
 
-		_farmUI.Init(_farmClock);
-		_farmUI.WateringCan.Water += _farm.WateringAction;
+		farmUI.Init(farmClock);
+		farmUI.WateringCan.Water += farm.WateringAction;
 
-		_cropSigns.SignClicked += _farmUI.CropGuide.Toggle;
+		cropSigns.SignClicked += farmUI.CropGuide.Toggle;
 	}
 
 	private void Start()
 	{
-		_farmInput.RegisterInputLayer(_farmUI.CropGuide);
-		_farmInput.RegisterInputLayer(_farmUI.WateringCan);
-		_farmInput.RegisterInputLayer(_cropSigns);
-		_farmInput.RegisterInputLayer(_farm);
+		farmInput.RegisterInputLayer(farmUI.CropGuide);
+		farmInput.RegisterInputLayer(farmUI.WateringCan);
+		farmInput.RegisterInputLayer(cropSigns);
+		farmInput.RegisterInputLayer(farm);
 
-		_farm.Init(_farmUI.HarvestInventory.GetQuota, _farmUI.HarvestInventory.Gather);
+		farm.Init(farmUI.HarvestInventory.GetQuota, farmUI.HarvestInventory.Gather);
 
-		_farmUI.HarvestInventory.SetHarvestBoxAvailability("product_carrot", true);
-		_farm.SetFieldAvailability("product_carrot", true);
-		_farmUI.HarvestInventory.SetHarvestBoxAvailability("product_potato", true);
-		_farm.SetFieldAvailability("product_potato", true);
-		_farmUI.HarvestInventory.SetHarvestBoxAvailability("product_corn", true);
-		_farm.SetFieldAvailability("product_corn", true);
-		_farmUI.HarvestInventory.SetHarvestBoxAvailability("product_cabbage", true);
-		_farm.SetFieldAvailability("product_cabbage", true);
-		_farmUI.HarvestInventory.SetHarvestBoxAvailability("product_cucumber", true);
-		_farm.SetFieldAvailability("product_cucumber", true);
-		_farmUI.HarvestInventory.SetHarvestBoxAvailability("product_eggplant", true);
-		_farm.SetFieldAvailability("product_eggplant", true);
-		_farmUI.HarvestInventory.SetHarvestBoxAvailability("product_sweetpotato", true);
-		_farm.SetFieldAvailability("product_sweetpotato", true);
-		_farmUI.HarvestInventory.SetHarvestBoxAvailability("product_mushroom", true);
-		_farm.SetFieldAvailability("product_mushroom", true);
+		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_carrot", true);
+		farm.SetFieldAvailability("product_carrot", true);
+		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_potato", true);
+		farm.SetFieldAvailability("product_potato", true);
+		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_corn", true);
+		farm.SetFieldAvailability("product_corn", true);
+		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_cabbage", true);
+		farm.SetFieldAvailability("product_cabbage", true);
+		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_cucumber", true);
+		farm.SetFieldAvailability("product_cucumber", true);
+		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_eggplant", true);
+		farm.SetFieldAvailability("product_eggplant", true);
+		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_sweetpotato", true);
+		farm.SetFieldAvailability("product_sweetpotato", true);
+		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_mushroom", true);
+		farm.SetFieldAvailability("product_mushroom", true);
 
-		_farmUI.HarvestInventory.SetTodaysOrder(
+		farmUI.HarvestInventory.SetTodaysOrder(
 			new System.Collections.Generic.List<(string, int)>
 			{
 				("product_carrot", 99),
@@ -64,7 +64,7 @@ public class FarmManager : MonoBehaviour
 
 	private void Update()
 	{
-		var ratio = _farmClock.LengthOfDaytime == 0.0f ? 0.0f : _farmClock.RemainingDaytime / _farmClock.LengthOfDaytime;
-		_farmUI.TimerUI.SetClockhand(ratio);
+		var ratio = farmClock.LengthOfDaytime == 0.0f ? 0.0f : farmClock.RemainingDaytime / farmClock.LengthOfDaytime;
+		farmUI.TimerUI.SetClockhand(ratio);
 	}
 }

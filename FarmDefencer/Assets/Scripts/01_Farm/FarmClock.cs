@@ -1,21 +1,21 @@
 using UnityEngine;
 
 /// <summary>
-/// FarmClock¿¡ Á¾¼ÓÀûÀ¸·Î ¾÷µ¥ÀÌÆ®µÉ °´Ã¼¸¦ ÀÇ¹ÌÇÕ´Ï´Ù.
+/// FarmClockì— ì˜í•´ Updateë  ê°ì²´ì— ëŒ€í•œ ì¸í„°í˜ì´ìŠ¤.
 /// </summary>
 public interface IFarmUpdatable
 {
 	/// <summary>
-	/// Ç×»ó ¸Å ÇÁ·¹ÀÓ È£ÃâµÇÁö¸¸, ÀÏ½ÃÁ¤ÁöµÇ°Å³ª ³· ½Ã°£ÀÌ ´Ù µÇ¾ú´Ù¸é deltaTimeÀÌ 0.0fÀÔ´Ï´Ù.
+	/// FarmClockì´ ì¼ì‹œì •ì§€ ìƒíƒœì¼ ê²½ìš°ì—ë„ ì§€ì†ì ìœ¼ë¡œ í˜¸ì¶œë˜ë©° ì´ ê²½ìš°ëŠ” deltaTimeì´ 0.0fë¡œ ì „ë‹¬ë¨.
 	/// </summary>
 	/// <param name="deltaTime"></param>
 	void OnFarmUpdate(float deltaTime);
 }
 
 /// <summary>
-/// ³²Àº ³· ½Ã°£À» ´ã´çÇÏ¸ç IFarmUpdatable °´Ã¼ÀÇ ¾÷µ¥ÀÌÆ®¸¦ ´ã´çÇÕ´Ï´Ù.
+/// ì¼ì‹œì •ì§€ë  ìˆ˜ ìˆê³  IFarmUpdatable ê°ì²´ì— ëŒ€í•´ OnFarmUpdate()ë¥¼ í˜¸ì¶œí•˜ëŠ” í´ë˜ìŠ¤.
 /// </summary>
-public class FarmClock : MonoBehaviour
+public sealed class FarmClock : MonoBehaviour
 {
 	private float _remainingDaytime;
 	public float RemainingDaytime
@@ -30,26 +30,33 @@ public class FarmClock : MonoBehaviour
 			}
 		}
 	}
-
+	
+	/// <summary>
+	/// Pause()ë¥¼ í˜¸ì¶œí•˜ì˜€ê±°ë‚˜, RemainingDaytimeì´ 0.0fì—¬ì„œ ë©ˆì¶˜ ìƒíƒœ.
+	/// </summary>
+	public bool Stopped { get; private set; }
 
 	/// <summary>
-	/// ³· ½Ã°£ÀÌ Á¾·áµÇ¾î ½Ã°£ÀÌ ¸ØÃè°Å³ª, ¾ÆÁ÷ ³· ½Ã°£ÀÌ ³²¾Ò¾îµµ IsManuallyPaused°¡ true·Î ¼³Á¤µÇ¾î ÀÏ½ÃÁ¤Áö »óÅÂ°¡ µÇ¾úÀ½À» ÀÇ¹ÌÇÕ´Ï´Ù.
+	/// Pause()ë¥¼ í˜¸ì¶œí•œ ìƒíƒœ.
 	/// </summary>
-	public bool IsPaused { get; private set; }
-
-	/// <summary>
-	/// ÀÌ¹ø¿¡ ¼³Á¤µÈ ³·ÀÇ ÃÑ ±æÀÌÀÔ´Ï´Ù.
-	/// </summary>
+	public bool IsManuallyPaused { get; private set; }
 	public float LengthOfDaytime { get; private set; }
 
-	/// <summary>
-	/// À¯ÀúÀÇ ÀÏ½ÃÁ¤Áö ¿äÃ» ¿©ºÎ ÀÇ¹ÌÇÏ´Â º¯¼öÀÔ´Ï´Ù.
-	/// ÀÌ °ªÀÌ true¸é RemainingDaytime > 0.0f¿©µµ ¸ØÃä´Ï´Ù. 
-	/// ÀÌ¹Ì RemainingDaytimeÀÌ 0.0f¶ó¸é ¾Æ¹« È¿°úµµ ¾ø½À´Ï´Ù.
-	/// </summary>
-	public bool IsManuallyPaused;
+	// ì¼ë‹¨ì€ í•˜ë‚˜ë§Œ ê°€ì§ˆ ìˆ˜ ìˆë„ë¡ êµ¬í˜„í•˜ì˜€ìŒ
+	private IFarmUpdatable _farmUpdatable;
 
-	public IFarmUpdatable _farmUpdatable;
+	public void Pause()
+	{
+		IsManuallyPaused = true;
+	}
+
+	/// <summary>
+	/// RemainingDaytimeì´ 0.0fë¼ë©´ ì—¬ì „íˆ ë©ˆì¶° ìˆì„ ê²ƒì„.
+	/// </summary>
+	public void Resume()
+	{
+		IsManuallyPaused = false;
+	}
 
 	public void SetRemainingDaytimeBy(float daytime)
 	{
@@ -60,8 +67,8 @@ public class FarmClock : MonoBehaviour
 	public void RegisterFarmUpdatableObject(IFarmUpdatable farmUpdatable) => _farmUpdatable = farmUpdatable;
 	private void Update()
 	{
-		IsPaused = IsManuallyPaused || RemainingDaytime == 0.0f;
-		var deltaTime = IsPaused ? 0.0f : Time.deltaTime;
+		Stopped = IsManuallyPaused || RemainingDaytime == 0.0f;
+		var deltaTime = Stopped ? 0.0f : Time.deltaTime;
 		RemainingDaytime -= deltaTime;
 		_farmUpdatable?.OnFarmUpdate(deltaTime);
     }

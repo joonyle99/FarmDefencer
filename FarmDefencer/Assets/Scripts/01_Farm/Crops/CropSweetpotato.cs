@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class CropSweetpotato : Crop
+public sealed class CropSweetpotato : Crop
 {
 	private struct SweetpotatoState : ICommonCropState
 	{
@@ -49,34 +49,34 @@ public class CropSweetpotato : Crop
 	private const float Stage4_GrowthSeconds = 5.0f;
 	private const float WrapHoldingSecondsCriterion = 2.0f;
 
-	[SerializeField] private Sprite _stage1_beforeWaterSprite;
-	[SerializeField] private Sprite _stage1_deadSprite;
-	[SerializeField] private Sprite _stage1_growingSprite;
+	[SerializeField] private Sprite stage1_beforeWaterSprite;
+	[SerializeField] private Sprite stage1_deadSprite;
+	[SerializeField] private Sprite stage1_growingSprite;
 	[Space]
-	[SerializeField] private Sprite _stage2_beforeWaterSprite;
-	[SerializeField] private Sprite _stage2_deadSprite;
-	[SerializeField] private Sprite _stage2_growingSprite;
+	[SerializeField] private Sprite stage2_beforeWaterSprite;
+	[SerializeField] private Sprite stage2_deadSprite;
+	[SerializeField] private Sprite stage2_growingSprite;
 	[Space]
-	[SerializeField] private Sprite _stage3_beforeWrapSprite;
-	[SerializeField] private Sprite _stage3_afterWrapSprite;
+	[SerializeField] private Sprite stage3_beforeWrapSprite;
+	[SerializeField] private Sprite stage3_afterWrapSprite;
 	[Space]
-	[SerializeField] private Sprite _stage4Sprite;
+	[SerializeField] private Sprite stage4Sprite;
 	[Space]
-	[SerializeField] private Sprite _mature_X_sprite;
-	[SerializeField] private Sprite _mature_O_sprite;
+	[SerializeField] private Sprite mature_X_sprite;
+	[SerializeField] private Sprite mature_O_sprite;
 	[Space]
-	[SerializeField] private Sprite _mature_OO_sprite;
-	[SerializeField] private Sprite _mature_XO_sprite;
-	[SerializeField] private Sprite _mature_XX_sprite;
+	[SerializeField] private Sprite mature_OO_sprite;
+	[SerializeField] private Sprite mature_XO_sprite;
+	[SerializeField] private Sprite mature_XX_sprite;
 	[Space]
-	[SerializeField] private Sprite _mature_XXX_sprite;
-	[SerializeField] private Sprite _mature_XXO_sprite;
-	[SerializeField] private Sprite _mature_XOO_sprite;
-	[SerializeField] private Sprite _mature_OOO_sprite;
+	[SerializeField] private Sprite mature_XXX_sprite;
+	[SerializeField] private Sprite mature_XXO_sprite;
+	[SerializeField] private Sprite mature_XOO_sprite;
+	[SerializeField] private Sprite mature_OOO_sprite;
 	[Space]
-	[SerializeField] private Sprite _harvested_1_sprite;
-	[SerializeField] private Sprite _harvested_2_sprite;
-	[SerializeField] private Sprite _harvested_3_sprite;
+	[SerializeField] private Sprite harvested_1_sprite;
+	[SerializeField] private Sprite harvested_2_sprite;
+	[SerializeField] private Sprite harvested_3_sprite;
 
 	private SpriteRenderer _spriteRenderer;
 	private SweetpotatoState _currentState;
@@ -179,18 +179,18 @@ public class CropSweetpotato : Crop
 	{
 		SweetpotatoStage.Unplowed => (spriteRenderer) => ApplySprite(null, spriteRenderer),
 
-		SweetpotatoStage.Stage1_Dead => (spriteRenderer) => ApplySprite(_stage1_deadSprite, spriteRenderer),
-		SweetpotatoStage.Stage1_BeforeWater => (spriteRenderer) => ApplySprite(_stage1_beforeWaterSprite, spriteRenderer),
-		SweetpotatoStage.Stage1_Growing => (spriteRenderer) => ApplySprite(_stage1_growingSprite, spriteRenderer),
+		SweetpotatoStage.Stage1_Dead => (spriteRenderer) => ApplySprite(stage1_deadSprite, spriteRenderer),
+		SweetpotatoStage.Stage1_BeforeWater => (spriteRenderer) => ApplySprite(stage1_beforeWaterSprite, spriteRenderer),
+		SweetpotatoStage.Stage1_Growing => (spriteRenderer) => ApplySprite(stage1_growingSprite, spriteRenderer),
 
-		SweetpotatoStage.Stage2_Dead => (spriteRenderer) => ApplySprite(_stage2_deadSprite, spriteRenderer),
-		SweetpotatoStage.Stage2_BeforeWater => (spriteRenderer) => ApplySprite(_stage2_beforeWaterSprite, spriteRenderer),
-		SweetpotatoStage.Stage2_Growing => (spriteRenderer) => ApplySprite(_stage2_growingSprite, spriteRenderer),
+		SweetpotatoStage.Stage2_Dead => (spriteRenderer) => ApplySprite(stage2_deadSprite, spriteRenderer),
+		SweetpotatoStage.Stage2_BeforeWater => (spriteRenderer) => ApplySprite(stage2_beforeWaterSprite, spriteRenderer),
+		SweetpotatoStage.Stage2_Growing => (spriteRenderer) => ApplySprite(stage2_growingSprite, spriteRenderer),
 
-		SweetpotatoStage.Stage3_BeforeWrap => (spriteRenderer) => ApplySprite(_stage3_beforeWrapSprite, spriteRenderer),
-		SweetpotatoStage.Stage3_AfterWrap => (spriteRenderer) => ApplySprite(_stage3_afterWrapSprite, spriteRenderer),
+		SweetpotatoStage.Stage3_BeforeWrap => (spriteRenderer) => ApplySprite(stage3_beforeWrapSprite, spriteRenderer),
+		SweetpotatoStage.Stage3_AfterWrap => (spriteRenderer) => ApplySprite(stage3_afterWrapSprite, spriteRenderer),
 
-		SweetpotatoStage.Stage4 => (spriteRenderer) => ApplySprite(_stage4Sprite, spriteRenderer),
+		SweetpotatoStage.Stage4 => (spriteRenderer) => ApplySprite(stage4Sprite, spriteRenderer),
 
 		SweetpotatoStage.Mature => (spriteRenderer) => ApplySprite(null, spriteRenderer),
 
@@ -210,25 +210,25 @@ public class CropSweetpotato : Crop
 	{
 		return afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
 	};
-	private static readonly Action<Vector2, Vector2> HoldStopEffect = (inputWorldPosition, cropPosition) =>
+	private static readonly Action<Vector2, Vector2> HoldStopEffect = (_, _) =>
 	{
 		EffectPlayer.StopVfx();
 	};
 
 	private static readonly Func<SweetpotatoState, SweetpotatoState, bool> TapEffectCondition = (beforeState, afterState) => afterState.LastSingleTapTime > beforeState.LastSingleTapTime;
-	private static readonly Action<Vector2, Vector2> TapEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayTabEffect(inputWorldPosition);
+	private static readonly Action<Vector2, Vector2> TapEffect = (inputWorldPosition, _) => EffectPlayer.PlayTabEffect(inputWorldPosition);
 
 	private static readonly Func<SweetpotatoState, SweetpotatoState, bool> WrapEffectCondition = (beforeState, afterState) => afterState.Wrapped && !beforeState.Wrapped;
-	private static readonly Action<Vector2, Vector2> WrapEffect = (inputWorldPosition, cropPosition) =>
+	private static readonly Action<Vector2, Vector2> WrapEffect = (_, cropPosition) =>
 	{
 		EffectPlayer.PlayVfx("VFX_T_SoilDust", cropPosition);
 		SoundManager.PlaySfxStatic("SFX_T_sweet_vinyl");
 	};
 
 	private static readonly Func<SweetpotatoState, SweetpotatoState, bool> SweetpotatoHarvestEffectCondition = (beforeState, afterState) => afterState.TapCount == 2 && beforeState.TapCount != 2;
-	private static readonly Action<Vector2, Vector2> SweetpotatoHarvestEffect = (inputWorldPosition, cropPosition) => EffectPlayer.PlayVfx("VFX_T_SoilDust", cropPosition);
+	private static readonly Action<Vector2, Vector2> SweetpotatoHarvestEffect = (_, cropPosition) => EffectPlayer.PlayVfx("VFX_T_SoilDust", cropPosition);
 
-	private static readonly List<(Func<SweetpotatoState, SweetpotatoState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<SweetpotatoState, SweetpotatoState, bool>, Action<Vector2, Vector2>)>
+	private static readonly List<(Func<SweetpotatoState, SweetpotatoState, bool>, Action<Vector2, Vector2>)> Effects = new()
 	{
 		(WrapEffectCondition, WrapEffect),
 		(WaterEffectCondition, WaterEffect),
@@ -253,15 +253,15 @@ public class CropSweetpotato : Crop
 		{ 
 			if (state.RemainingSweetpotatoCount == 1)
 			{
-				ApplySprite(_harvested_1_sprite, spriteRenderer);
+				ApplySprite(harvested_1_sprite, spriteRenderer);
 			}
 			else if (state.RemainingSweetpotatoCount == 2)
 			{
-				ApplySprite(_harvested_2_sprite, spriteRenderer);
+				ApplySprite(harvested_2_sprite, spriteRenderer);
 			}
 			else
 			{
-				ApplySprite(_harvested_3_sprite, spriteRenderer);
+				ApplySprite(harvested_3_sprite, spriteRenderer);
 			}
 		},
 		{ GrowthSeconds: >= Stage1_GrowthSeconds+Stage2_GrowthSeconds+Stage3_GrowthSeconds+Stage4_GrowthSeconds} =>
@@ -272,45 +272,45 @@ public class CropSweetpotato : Crop
 			{
 				if (state.RemainingSweetpotatoCount == 1)
 				{
-					ApplySprite(_mature_O_sprite, spriteRenderer);
+					ApplySprite(mature_O_sprite, spriteRenderer);
 				}
 				else
 				{
-					ApplySprite(_mature_X_sprite, spriteRenderer);
+					ApplySprite(mature_X_sprite, spriteRenderer);
 				}
 			}
 			else if (state.InitialDeterminedSweetpotatoCount == 2)
 			{
 				if (state.RemainingSweetpotatoCount == 0)
 				{
-					ApplySprite(_mature_XX_sprite, spriteRenderer);
+					ApplySprite(mature_XX_sprite, spriteRenderer);
 				}
 				else if (state.RemainingSweetpotatoCount == 1)
 				{
-					ApplySprite(_mature_XO_sprite, spriteRenderer);
+					ApplySprite(mature_XO_sprite, spriteRenderer);
 				}
 				else
 				{
-					ApplySprite(_mature_OO_sprite, spriteRenderer);
+					ApplySprite(mature_OO_sprite, spriteRenderer);
 				}
 			}
 			else
 			{
 				if (state.RemainingSweetpotatoCount == 0)
 				{
-					ApplySprite(_mature_XXX_sprite, spriteRenderer);
+					ApplySprite(mature_XXX_sprite, spriteRenderer);
 				}
 				else if (state.RemainingSweetpotatoCount == 1)
 				{
-					ApplySprite(_mature_XXO_sprite, spriteRenderer);
+					ApplySprite(mature_XXO_sprite, spriteRenderer);
 				}
 				else if (state.RemainingSweetpotatoCount == 2)
 				{
-					ApplySprite(_mature_XOO_sprite, spriteRenderer);
+					ApplySprite(mature_XOO_sprite, spriteRenderer);
 				}
 				else
 				{
-					ApplySprite(_mature_OOO_sprite, spriteRenderer);
+					ApplySprite(mature_OOO_sprite, spriteRenderer);
 				}
 			}
 		},
@@ -348,7 +348,7 @@ public class CropSweetpotato : Crop
 		};
 
 	private static readonly Func<SweetpotatoState, Vector2, Vector2, bool, float, SweetpotatoState> Wrap =
-	(beforeState, initialWorldPosition, deltaPosition, isEnd, deltaHoldTime) =>
+	(beforeState, _, _, isEnd, deltaHoldTime) =>
 	{
 		var nextState = beforeState;
 
@@ -434,7 +434,7 @@ public class CropSweetpotato : Crop
 		};
 
 	private static readonly Func<SweetpotatoState, Vector2, Vector2, bool, float, SweetpotatoState> Plow =
-		(beforeState, initialWorldPosition, deltaPosition, isEnd, deltaHoldTime) =>
+		(beforeState, _, deltaPosition, isEnd, deltaHoldTime) =>
 		{
 			var nextState = beforeState;
 			nextState.HoldingTime += deltaHoldTime;
@@ -451,7 +451,7 @@ public class CropSweetpotato : Crop
 			return nextState;
 		};
 
-	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, float, SweetpotatoState>> OnFarmUpdateFunctions = new Dictionary<SweetpotatoStage, Func<SweetpotatoState, float, SweetpotatoState>>
+	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, float, SweetpotatoState>> OnFarmUpdateFunctions = new()
 	{
 		{
 			SweetpotatoStage.Unplowed, 
@@ -503,7 +503,7 @@ public class CropSweetpotato : Crop
 		{SweetpotatoStage.Harvested, DoNothing_OnFarmUpdate },
 	};
 
-	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, SweetpotatoState>> OnSingleTapFunctions = new Dictionary<SweetpotatoStage, Func<SweetpotatoState, SweetpotatoState>>
+	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, SweetpotatoState>> OnSingleTapFunctions = new()
 	{
 		{SweetpotatoStage.Unplowed, DoNothing },
 
@@ -524,7 +524,7 @@ public class CropSweetpotato : Crop
 		{SweetpotatoStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, beforeState.RemainingSweetpotatoCount) },
 	};
 
-	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, Vector2, Vector2, bool, float, SweetpotatoState>> OnSingleHoldingFunctions = new Dictionary<SweetpotatoStage, Func<SweetpotatoState, Vector2, Vector2, bool, float, SweetpotatoState>>
+	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, Vector2, Vector2, bool, float, SweetpotatoState>> OnSingleHoldingFunctions = new()
 	{
 		{SweetpotatoStage.Unplowed, Plow },
 
