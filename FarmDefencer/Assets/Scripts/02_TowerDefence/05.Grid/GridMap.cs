@@ -164,8 +164,8 @@ public class GridMap : MonoBehaviour
                 _myGridMap[h, w].distanceCost = -1;
                 _myGridMap[h, w].prevGridCell = null;
 
-                if (cellPos == EndCellPoint)
-                //if (cellPos == StartCellPoint || cellPos == EndCellPoint)
+                //if (cellPos == EndCellPoint)
+                if (cellPos == StartCellPoint || cellPos == EndCellPoint)
                 {
                     _myGridMap[h, w].UnUsable();
                 }
