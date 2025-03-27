@@ -116,7 +116,7 @@ Material:
     - _CamDistFadeStepMax: 100
     - _CamDistFadeStepMin: 0
     - _CamDistProximityFade: 0
-    - _ColorGradingMidPoint: 0.294
+    - _ColorGradingMidPoint: 0.499
     - _ColorMask: 15
     - _ColorRampBlend: 1
     - _ColorRampLuminosity: 0
@@ -134,7 +134,7 @@ Material:
     - _DistortionScrollXSpeed: 0
     - _DistortionScrollYSpeed: 0
     - _DstMode: 1
-    - _EditorDrawers: 11
+    - _EditorDrawers: 59
     - _FadeAmount: -0.1
     - _FadeBurnGlow: 2
     - _FadeBurnWidth: 0.025
@@ -243,9 +243,9 @@ Material:
     m_Colors:
     - _BackFaceTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorGradingDark: {r: 0.78431374, g: 0.044661615, b: 0, a: 1}
-    - _ColorGradingLight: {r: 1.4980392, g: 0.44037336, b: 0, a: 1}
-    - _ColorGradingMiddle: {r: 0.7490196, g: 0.007259172, b: 0, a: 1}
+    - _ColorGradingDark: {r: 0.2830189, g: 0.02262882, b: 0.020024918, a: 1}
+    - _ColorGradingLight: {r: 0.6509434, g: 0.0064449846, b: 0, a: 1}
+    - _ColorGradingMiddle: {r: 0.41509432, g: 0.025434513, b: 0.021537915, a: 1}
     - _DepthGlowColor: {r: 1, g: 1, b: 1, a: 1}
     - _FadeBurnColor: {r: 1, g: 1, b: 0, a: 1}
     - _FrontFaceTint: {r: 1, g: 1, b: 1, a: 1}
