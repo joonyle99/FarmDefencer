@@ -1,5 +1,6 @@
 using Spine;
 using Spine.Unity;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpineController : MonoBehaviour
@@ -18,24 +19,20 @@ public class SpineController : MonoBehaviour
     public Spine.Skeleton Skeleton => _skeleton;
 
     private Color _originalColor;
-    private Bone _shootingBone;
+    private Dictionary<int, Bone> _cachedShootingBones;
 
     private void Awake()
     {
+        //
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
-
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.Skeleton;
 
+        //
         _originalColor = _skeletonAnimation.Skeleton.GetColor();
-    }
-    private void Start()
-    {
-        var shootingBone = _skeleton.FindBone("shoot");
-        if (shootingBone != null)
-        {
-            _shootingBone = shootingBone;
-        }
+
+        //
+        InitShootingBone();
     }
 
     public void SetAnimation(string animationName, bool loop)
@@ -62,17 +59,67 @@ public class SpineController : MonoBehaviour
         _skeletonAnimation.Skeleton.SetColor(_originalColor);
     }
 
+    public void InitShootingBone()
+    {
+        _cachedShootingBones = new Dictionary<int, Bone>();
+
+        // 기본 shoot
+        Bone defaultBone = GetBone("shoot");
+        if (defaultBone != null)
+        {
+            _cachedShootingBones[0] = defaultBone;
+        }
+
+        // 레벨별 shoot
+        for (int i = 1; i <= 3; i++)
+        {
+            Bone levelBone = GetBone($"shoot_Lv{i}");
+            if (levelBone != null)
+            {
+                _cachedShootingBones[i] = levelBone;
+            }
+        }
+    }
     public Bone GetBone(string boneName)
     {
         return _skeleton.FindBone(boneName);
     }
+    public Bone GetShootingBone(int towerLevel)
+    {
+        Bone bone;
 
-    public Bone GetShootingBone()
-    {
-        return _shootingBone;
+        // 우선 기본 shoot 본 사용
+        if (_cachedShootingBones.TryGetValue(0, out bone))
+        {
+            return bone;
+        }
+
+        // towerLevel에 해당하는 shoot_Lv 본이 있으면 사용
+        if (_cachedShootingBones.TryGetValue(towerLevel, out bone))
+        {
+            return bone;
+        }
+
+        Debug.LogError($"타워 레벨 {towerLevel}에 해당하는 shoot bone이 없습니다");
+        return null; // fallback`
     }
-    public Vector3 GetShootingBonePos()
+    public Vector3 GetShootingBonePos(int towerLevel)
     {
-        return _shootingBone.GetWorldPosition(transform);
+        Bone bone;
+
+        // 우선 기본 shoot 본 사용
+        if (_cachedShootingBones.TryGetValue(0, out bone))
+        {
+            return bone.GetWorldPosition(transform);
+        }
+
+        // towerLevel에 해당하는 shoot_Lv 본이 있으면 사용
+        if (_cachedShootingBones.TryGetValue(towerLevel, out bone))
+        {
+            return bone.GetWorldPosition(transform);
+        }
+
+        Debug.LogError($"타워 레벨 {towerLevel}에 해당하는 shoot bone이 없습니다");
+        return transform.position; // fallback
     }
 }
