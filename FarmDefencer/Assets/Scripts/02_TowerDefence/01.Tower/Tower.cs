@@ -283,10 +283,7 @@ public sealed class Tower : TargetableBehavior
 
         _flipAimer.FlipAim(CurrentTarget.transform.position);
 
-        // TODO: Muzzle을 Spine Animator에서 가져오도록 수정한다
-        // var muzzle = SpineController.GetBone("muzzle").GetWorldPosition(SpineController.transform);
-
-        var projectileGO = Instantiate(_projectilePrefab, FlipAimer.Muzzle.position, FlipAimer.Muzzle.rotation);
+        var projectileGO = Instantiate(_projectilePrefab, _spineController.GetShootingBonePos(CurrentLevel), Quaternion.identity);
         var projectile = projectileGO.GetComponent<ProjectileBase>();
 
         if (projectile == null)
@@ -297,10 +294,6 @@ public sealed class Tower : TargetableBehavior
 
         projectile.SetTarget(CurrentTarget);
         projectile.SetDamage(CurrentLevelData.Damage);
-        if (projectile is ParabolicProjectile parabolicProjectile)
-        {
-            parabolicProjectile.SetControlPoint(FlipAimer.ControlPoint);
-        }
         projectile.Trigger();
 
         SoundManager.Instance.PlaySfx($"SFX_D_turret_shot_1-{CurrentLevel}");
