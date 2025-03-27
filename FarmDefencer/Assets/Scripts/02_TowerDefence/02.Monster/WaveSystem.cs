@@ -1,6 +1,7 @@
 using JoonyleGameDevKit;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 /// <summary>
@@ -68,6 +69,8 @@ public class WaveSystem : MonoBehaviour
     private bool _isTriggered = false;
     private float _elapsedTime = 0f;
 
+    private int _currentWave = 0;
+
     [Space]
 
     public StageData stageData;
@@ -78,7 +81,7 @@ public class WaveSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && _isTriggered == false)
         {
             _isTriggered = true;
-            StartCoroutine(WaveProcessRoutine());
+            StartCoroutine(WaveProcessCo());
         }
 
         // CHEAT: fast clock
@@ -122,27 +125,22 @@ public class WaveSystem : MonoBehaviour
 
         AddMonster(spawnedMonster);
     }
-    private IEnumerator SpawnRoutine()
+    private IEnumerator WaveSpawnCo()
     {
-        #region NEW
-
-        int waveCount = 1;
-
         // 모든 웨이브를 순회한다
         foreach (var wave in stageData.Waves)
         {
+            _currentWave++;
+
             var waveMonster = wave.WaveMonster;
             var spawnCount = wave.SpawnCountRange.Random();
 
             TargetSpawnCount = spawnCount;
 
-            //Debug.Log($"Wave {waveCount++} Start");
-            //Debug.Log($"Spawn Monster: {waveMonster.GetType()}, Spawn Count: {spawnCount}");
-
             _currentSpawnCount = 0;
 
             // 해당 웨이브 진입
-            // e.g) 토끼(8~12) + 토끼(4~6)
+            // e.g) 토끼(8~12) + 고양이(4~6)
             while (true)
             {
                 // complete wave
@@ -166,59 +164,19 @@ public class WaveSystem : MonoBehaviour
                 _elapsedTime += Time.deltaTime;
             }
 
-            //Debug.Log("다음 웨이브 대기 중");
-
             // 다음 웨이브 대기
             yield return new WaitForSeconds(_waitWaveTime);
         }
-
         yield return new WaitUntil(() => CompleteStage == true);
 
         CompleteStageProcess();
-
-        #endregion
-
-        #region OLD
-
-        //while (true)
-        //{
-        //    // ending
-        //    if (CompleteSpawn == true && CompleteStage == true)
-        //    {
-        //        // wait a second
-        //        yield return new WaitForSeconds(1f);
-
-        //        CompleteStageProcess();
-
-        //        yield break;
-        //    }
-
-        //    // wave process
-        //    if (CompleteSpawn == false)
-        //    {
-        //        // wait time
-        //        if (_elapsedTime >= _waitSpawnTime)
-        //        {
-        //            _elapsedTime = 0f;
-        //            _waitSpawnTime = _waitSpawnTimeRange.Random();
-
-        //            Spawn();
-        //        }
-        //    }
-
-        //    yield return null;
-
-        //    _elapsedTime += Time.deltaTime;
-        //}
-
-        #endregion
     }
-    private IEnumerator WaveProcessRoutine()
+    private IEnumerator WaveProcessCo()
     {
         GameStateManager.Instance.ChangeState(GameState.Wave);
 
-        yield return DefenceContext.Current.GridMap.FindPathOnStart();
-        yield return SpawnRoutine();
+        yield return DefenceContext.Current.GridMap.FindPathOnStartCo();
+        yield return WaveSpawnCo();
     }
 
     //

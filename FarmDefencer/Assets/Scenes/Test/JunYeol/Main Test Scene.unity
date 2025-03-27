@@ -2749,8 +2749,7 @@ MonoBehaviour:
     Start: 1
     End: 2
   _waitWaveTime: 3
-  stageData:
-  - {fileID: 11400000, guid: fc3387685d0c4d649b3c33c4e4fc3d7d, type: 2}
+  stageData: {fileID: 11400000, guid: fc3387685d0c4d649b3c33c4e4fc3d7d, type: 2}
 --- !u!114 &1231187497
 MonoBehaviour:
   m_ObjectHideFlags: 0

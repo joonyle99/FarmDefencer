@@ -363,6 +363,7 @@ MonoBehaviour:
   distanceCost: 0
   isUsable: 0
   occupiedTower: {fileID: 0}
+  monstersInCell: []
 --- !u!1 &6608955164458824269
 GameObject:
   m_ObjectHideFlags: 0

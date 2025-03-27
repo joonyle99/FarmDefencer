@@ -174,7 +174,7 @@ public class GridMap : MonoBehaviour
     }
 
     // shortest path finding by using bfs algorithm
-    public IEnumerator FindPathOnStart()
+    public IEnumerator FindPathOnStartCo()
     {
         var originGridPath = CalculateOriginPath();
         if (originGridPath == null || originGridPath.Count < 2)
@@ -186,7 +186,7 @@ public class GridMap : MonoBehaviour
 
         _originGridPath = originGridPath;
 
-        yield return DrawPathRoutine(_originGridPath);
+        yield return DrawPathCo(_originGridPath);
     }
     public bool FindPathAll()
     {
@@ -207,7 +207,7 @@ public class GridMap : MonoBehaviour
 
         _originGridPath = newOriginGridPath;
 
-        //StartCoroutine(DrawPathRoutine(_originGridPath));
+        //StartCoroutine(DrawPathCo(_originGridPath));
 
         return true;
     }
@@ -405,7 +405,7 @@ public class GridMap : MonoBehaviour
         var thisCellPos = gridCell.cellPosition;
         return targetCellPos == thisCellPos;
     }
-    public IEnumerator DrawPathRoutine(List<GridCell> gridPath, Color? endColor = null)
+    public IEnumerator DrawPathCo(List<GridCell> gridPath, Color? endColor = null)
     {
         var lineObject = Instantiate(debugLine, Vector3.zero, Quaternion.identity);
         lineObject.positionCount = 0;

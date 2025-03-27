@@ -33,11 +33,6 @@ public abstract class Monster : TargetableBehavior, IProduct
     [SerializeField] private string _monsterName;
     public string MonsterName => _monsterName;
 
-    [Space]
-
-    [SerializeField] private SpineController _spineController;
-    public SpineController SpineController => _spineController;
-
     private SortingGroup _sortingGroup;
     private int _defaultSortingOrder;
 
@@ -76,11 +71,11 @@ public abstract class Monster : TargetableBehavior, IProduct
     private void OnDisable()
     {
         // stop all coroutines
-        // 1. TransparentRoutine
-        // 2. OpaqueRoutine
-        // 3. KillRoutine
-        // 4. SurviveRoutine
-        // 5. StunRoutine
+        // 1. TransparentCo
+        // 2. OpaqueCo
+        // 3. KillCo
+        // 4. SurviveCo
+        // 5. StunCo
         StopAllCoroutines();
 
         OnDamaged = null;
@@ -124,15 +119,17 @@ public abstract class Monster : TargetableBehavior, IProduct
         if (HP > 0)
         {
             // 현재 실행 중인 애니메이션 확인
-            var currentAnimation = _spineController.SpineAnimationState.GetCurrent(0);
+            var currentAnimation = spineController.SpineAnimationState.GetCurrent(0);
             if (currentAnimation != null
                 && currentAnimation.Animation.Name != WalkDamagedAnimationName)
             {
-                _spineController.SetAnimation(WalkDamagedAnimationName, false);
-                _spineController.AddAnimation(WalkAnimationName, true);
+                spineController.SetAnimation(WalkDamagedAnimationName, false);
+                spineController.AddAnimation(WalkAnimationName, true);
             }
 
-            //StartCoroutine(StunRoutine(StunDuration));
+            //StartCoroutine(StunCo(StunDuration));
+
+            // 여기서,, 
         }
 
         OnDamaged?.Invoke(damage);
@@ -148,7 +145,7 @@ public abstract class Monster : TargetableBehavior, IProduct
 
         SoundManager.Instance.PlaySfx($"SFX_D_{_monsterName}_dead");
 
-        StartCoroutine(KillRoutine(DissappearAnimationName));
+        StartCoroutine(KillCo(DissappearAnimationName));
 
         /*
         SetAnimation(DissappearAnimationName, false);
@@ -165,7 +162,7 @@ public abstract class Monster : TargetableBehavior, IProduct
         // TEMP: 이동 중지
         GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
 
-        StartCoroutine(SurviveRoutine(DissappearAnimationName));
+        StartCoroutine(SurviveCo(DissappearAnimationName));
 
         /*
         SetAnimation(DissappearAnimationName, false);
@@ -178,13 +175,13 @@ public abstract class Monster : TargetableBehavior, IProduct
     // color alpha
     private void InstantTransparent()
     {
-        _spineController.Skeleton.A = Mathf.Clamp01(0f);
+        spineController.Skeleton.A = Mathf.Clamp01(0f);
     }
     private void InstantOpaque()
     {
-        _spineController.Skeleton.A = Mathf.Clamp01(1f);
+        spineController.Skeleton.A = Mathf.Clamp01(1f);
     }
-    private IEnumerator TransparentRoutine(float duration)
+    private IEnumerator TransparentCo(float duration)
     {
         var eTime = 0f;
 
@@ -192,7 +189,7 @@ public abstract class Monster : TargetableBehavior, IProduct
         {
             var t = eTime / duration;
 
-            _spineController.Skeleton.A = Mathf.Clamp01(1f - t);
+            spineController.Skeleton.A = Mathf.Clamp01(1f - t);
 
             yield return null;
 
@@ -201,7 +198,7 @@ public abstract class Monster : TargetableBehavior, IProduct
 
         InstantTransparent();
     }
-    private IEnumerator OpaqueRoutine(float duration)
+    private IEnumerator OpaqueCo(float duration)
     {
         var eTime = 0f;
 
@@ -209,7 +206,7 @@ public abstract class Monster : TargetableBehavior, IProduct
         {
             var t = eTime / duration;
 
-            _spineController.Skeleton.A = Mathf.Clamp01(t);
+            spineController.Skeleton.A = Mathf.Clamp01(t);
 
             yield return null;
 
@@ -219,18 +216,18 @@ public abstract class Monster : TargetableBehavior, IProduct
         InstantOpaque();
     }
 
-    private IEnumerator KillRoutine(string animationName)
+    private IEnumerator KillCo(string animationName)
     {
         //Debug.Log("kill routine");
-        _spineController.SetAnimation(animationName, false);
+        spineController.SetAnimation(animationName, false);
 
-        var animation = _spineController.Skeleton.Data.FindAnimation(animationName);
+        var animation = spineController.Skeleton.Data.FindAnimation(animationName);
         if (animation != null)
         {
             yield return new WaitForSeconds(animation.Duration);
         }
 
-        yield return TransparentRoutine(1.5f);
+        yield return TransparentCo(1.5f);
 
         OnKilled?.Invoke(this);
 
@@ -238,17 +235,17 @@ public abstract class Monster : TargetableBehavior, IProduct
         //OriginFactory.ReturnProduct(this);
         Destroy(this.gameObject);
     }
-    private IEnumerator SurviveRoutine(string animationName)
+    private IEnumerator SurviveCo(string animationName)
     {
-        _spineController.SetAnimation(animationName, false);
+        spineController.SetAnimation(animationName, false);
 
-        var animation = _spineController.Skeleton.Data.FindAnimation(animationName);
+        var animation = spineController.Skeleton.Data.FindAnimation(animationName);
         if (animation != null)
         {
             yield return new WaitForSeconds(animation.Duration);
         }
 
-        yield return TransparentRoutine(1.5f);
+        yield return TransparentCo(1.5f);
 
         OnSurvived?.Invoke(this);
 
