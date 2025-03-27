@@ -1,5 +1,16 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
+public enum Status
+{
+    NONE,
+    BURN,
+    SLOW,
+    STUN,
+    POISON,
+}
 
 /// <summary>
 /// 
@@ -42,7 +53,7 @@ public abstract class DamageableBehavior : MonoBehaviour
 
             if (_healthBar != null)
             {
-                _healthBar.UpdateHealthBar((float)_hp, (float)_startHp);
+                _healthBar.UpdateHealthBar((float)_hp, (float)startHp);
                 //Debug.Log("_healthBar.UpdateHealthBar");
             }
         }
@@ -59,19 +70,25 @@ public abstract class DamageableBehavior : MonoBehaviour
     public bool IsStun { get { return _isStun; } protected set { _isStun = value; } }
 
     // etc
-    private int _startHp;
-    public int StartHp => _startHp;
+    protected int startHp;
+    public int StartHp => startHp;
+
+    protected SpineController spineController;
+    public SpineController SpineController => spineController;
+
+    protected Dictionary<Status, Coroutine> activeEffects = new();
 
     protected virtual void Awake()
     {
         var damageZone = GetComponent<DamageableZone>();
-
         if (damageZone == null)
         {
             throw new System.NullReferenceException($"You should add DamageZone component");
         }
 
-        _startHp = MaxHp;
+        spineController = GetComponent<SpineController>();
+
+        startHp = MaxHp;
     }
     protected virtual void OnEnable()
     {
@@ -83,18 +100,52 @@ public abstract class DamageableBehavior : MonoBehaviour
     {
         if (_healthBar != null)
         {
-            _healthBar.UpdateHealthBar((float)_hp, (float)_startHp);
+            _healthBar.UpdateHealthBar((float)_hp, (float)startHp);
         }
     }
 
     public abstract void TakeDamage(int damage);
     public abstract void Kill();
 
-    // status
-    public IEnumerator StunRoutine(float duration)
+    // stun
+    public IEnumerator StunCo(float duration)
     {
         IsStun = true;
         yield return new WaitForSeconds(duration);
         IsStun = false;
+    }
+
+    // tick
+    public void TakeTickDamage(Status status, int tickCount, float interval, int tickDamage)
+    {
+        // TODO: 중복이 될지 않될지를 확인해야 한다
+        if (activeEffects.TryGetValue(status, out Coroutine co))
+        {
+            StopCoroutine(co);
+            activeEffects[status] = null;
+        }
+
+        var newCo = StartCoroutine(TickDamageCo(status, tickCount, interval, tickDamage));
+        activeEffects[status] = newCo;
+    }
+    public IEnumerator TickDamageCo(Status status, int tickCount, float interval, int tickDamage)
+    {
+        spineController.SetColor(Color.red);
+
+        for (int i = 0; i < tickCount; i++)
+        {
+            if (IsDead)
+            {
+                spineController.ResetColor();
+                activeEffects[status] = null;
+                yield break;
+            }
+
+            TakeDamage(tickDamage);
+            yield return new WaitForSeconds(interval);
+        }
+
+        spineController.ResetColor();
+        activeEffects[status] = null;
     }
 }

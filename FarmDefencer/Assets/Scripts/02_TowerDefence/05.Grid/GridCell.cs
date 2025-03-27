@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -42,6 +43,8 @@ public class GridCell : MonoBehaviour
     public bool IsEmptyUsableCell => IsEmpty && IsUsable;
 
     private int _changedColorReferenceCount = 0;
+
+    public List<Monster> monstersInCell;
 
     private void Start()
     {

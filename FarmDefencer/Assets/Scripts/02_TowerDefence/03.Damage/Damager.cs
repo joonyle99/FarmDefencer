@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Damager : MonoBehaviour
@@ -5,7 +6,7 @@ public class Damager : MonoBehaviour
     [Header("──────── Damager ────────")]
     [Space]
 
-    [SerializeField] private int _damage = 10;
+    [SerializeField] private int _damage;
 
     public int GetDamage()
     {
@@ -15,8 +16,12 @@ public class Damager : MonoBehaviour
     {
         _damage = damage;
     }
-    public void HasDamaged(DamageableBehavior damageable)
+    public void DealDamage(DamageableBehavior damageable)
     {
         damageable.TakeDamage(_damage);
+    }
+    public void DealTickDamage(DamageableBehavior damageable, Status status, int tickCount, float tickInterval, int tickDamage)
+    {
+        damageable.TakeTickDamage(status, tickCount, tickInterval, tickDamage);
     }
 }

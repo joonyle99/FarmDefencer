@@ -5,6 +5,7 @@ using UnityEngine;
 public class GridMovement : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 1f;
+    [SerializeField] private float _arrivalThreshold = 0.05f;
 
     private GridCell _currGridCell;
     private GridCell _nextGridCell;
@@ -32,6 +33,7 @@ public class GridMovement : MonoBehaviour
     }
     private void OnEnable()
     {
+        // for object pooling
         if (_isFirst == false)
         {
             Initialize();
@@ -100,9 +102,12 @@ public class GridMovement : MonoBehaviour
         }
 
         // check distance
-        if (Vector2.Distance(transform.position, _nextGridCell.worldPosition) <= 0.05f)
+        var sqrtThreshold = _arrivalThreshold * _arrivalThreshold;
+        if ((_nextGridCell.worldPosition - transform.position).sqrMagnitude <= sqrtThreshold)
         {
             _pathIndex++;
+
+            _currGridCell.monstersInCell.Remove(_monster);
 
             if (_pathIndex >= _eachGridPath.Count)
             {
@@ -119,6 +124,8 @@ public class GridMovement : MonoBehaviour
 
                 return;
             }
+
+            _nextGridCell.monstersInCell.Add(_monster);
 
             _currGridCell = _nextGridCell;
             _nextGridCell = _eachGridPath[_pathIndex];
@@ -168,7 +175,11 @@ public class GridMovement : MonoBehaviour
 
         // 위치 초기화
         transform.position = _currGridCell.transform.position;
+
+        // 몬스터 리스트에 추가
+        _currGridCell.monstersInCell.Add(_monster);
     }
+    /// <summary> 원래 경로(출발 지점에서 도착 지점의 경로)를 사용합니다. </summary>
     public bool UseOriginGridPath()
     {
         var originGridPath = DefenceContext.Current.GridMap.OriginGridPath;
@@ -203,6 +214,7 @@ public class GridMovement : MonoBehaviour
 
         return true;
     }
+    /// <summary> 몬스터의 현재 지점에서 도착 지점까지의 경로를 사용합니다. </summary>
     public bool CalcEachGridPath()
     {
         var gridMap = DefenceContext.Current.GridMap;
@@ -214,24 +226,13 @@ public class GridMovement : MonoBehaviour
             return false;
         }
 
+        // _nextGridCell을 기준으로 EndCellPoint까지의 경로를 계산합니다
         var eachGridPath = gridMap.CalculateEachPath(_nextGridCell.cellPosition, gridMap.EndCellPoint);
         if (eachGridPath == null || eachGridPath.Count < 2)
         {
             Debug.Log("each grid path is invalid");
             return false;
         }
-
-        // 굳이 경로를 바꿀 필요가 없는 경우
-        // _eachGridPath에서 남아있는 경로의 개수를 구해야지,,
-        // if (eachGridPath.Count >= _eachGridPath.Count - _pathIndex)
-        // {
-        //     //Debug.Log($"eachGridPath.Count: {eachGridPath.Count} / _eachGridPath.Count: {_eachGridPath.Count}");
-        //     //StartCoroutine(gridMap.DrawPathRoutine(eachGridPath, Color.red));
-        //     //StartCoroutine(gridMap.DrawPathRoutine(_eachGridPath, Color.blue));
-           
-        //     Debug.Log("no need to change path");
-        //     return true;
-        // }
 
         GridCell tempCurrGridCell = null;
         GridCell tempNextGridCell = null;
@@ -266,35 +267,19 @@ public class GridMovement : MonoBehaviour
         _nextGridCell = tempNextGridCell;
         _eachGridPath = eachGridPath;
 
-        //StartCoroutine(gridMap.DrawPathRoutine(_eachGridPath, Color.blue));
-
         return true;
-    }
-
-    public bool ContainCellInPath(List<GridCell> gridPath, GridCell gridCell)
-    {
-        if (gridPath == null || gridPath.Count == 0)
-        {
-            return false;
-        }
-
-        return _eachGridPath.Contains(gridCell);
     }
 
     private void OnDrawGizmos()
     {
         if (_currGridCell != null)
         {
-            //var dir = _currGridCell.worldPosition - transform.position;
-            //JoonyleGameDevKit.Painter.GizmosDrawArrow(transform.position, dir, bodyColor: Color.blue, headColor: Color.blue);
             Gizmos.color = Color.blue;
             Gizmos.DrawLine(transform.position, _currGridCell.worldPosition);
         }
 
         if (_nextGridCell != null)
         {
-            //var dir = _nextGridCell.worldPosition - transform.position;
-            //JoonyleGameDevKit.Painter.GizmosDrawArrow(transform.position, dir, bodyColor: Color.red, headColor: Color.red);
             Gizmos.color = Color.red;
             Gizmos.DrawLine(transform.position, _nextGridCell.worldPosition);
         }

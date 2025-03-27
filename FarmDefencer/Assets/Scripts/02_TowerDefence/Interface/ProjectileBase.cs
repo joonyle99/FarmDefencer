@@ -6,16 +6,25 @@ public abstract class ProjectileBase : MonoBehaviour
     [Space]
 
     [SerializeField] protected Damager damager;
-    [SerializeField] protected float speed = 20f;
-    [SerializeField] protected float hitThreshold = 0.05f;
+    [SerializeField] protected float moveDuration = 1.5f;
+    //[SerializeField] protected float hitThreshold = 0.05f;
 
     protected TargetableBehavior currentTarget;
 
-    private bool _isTriggered = false;
+    protected Vector3 startPos;
+    protected bool isTriggered = false;
+    protected float elapsedTime = 0f;
+    protected float linearT = 0f;
 
-    protected virtual void Update()
+    //public ProjectileData projectileData;
+
+    private void Start()
     {
-        if (_isTriggered)
+        startPos = transform.position;
+    }
+    private void Update()
+    {
+        if (isTriggered)
         {
             // 타겟이 없으면 파괴
             if (currentTarget == null || currentTarget.gameObject.activeSelf == false)
@@ -24,24 +33,22 @@ public abstract class ProjectileBase : MonoBehaviour
                 return;
             }
 
-            // 타겟에 닿으면 데미지를 주고 파괴
-            var sqrMagnitude = (currentTarget.TargetPoint.position - transform.position).sqrMagnitude;
-            if (sqrMagnitude <= hitThreshold)
+            if (linearT >= 1f)
             {
                 DealDamage();
                 Destroy(gameObject);
                 return;
             }
 
+            linearT = Mathf.Clamp01(elapsedTime / moveDuration);
+
             Move();
-            //Rotate();
+            Rotate();
+
+            elapsedTime += Time.deltaTime;
         }
     }
 
-    public void SetSpeed(float speed)
-    {
-        this.speed = speed;
-    }
     public void SetDamage(int damage)
     {
         damager.SetDamage(damage);
@@ -51,10 +58,6 @@ public abstract class ProjectileBase : MonoBehaviour
         currentTarget = target;
     }
 
-    public float GetSpeed()
-    {
-        return speed;
-    }
     public int GetDamage()
     {
         return damager.GetDamage();
@@ -67,17 +70,16 @@ public abstract class ProjectileBase : MonoBehaviour
     protected abstract void Move();
     protected virtual void Rotate()
     {
-        var direction = currentTarget.TargetPoint.position - transform.position;
-        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
+        // do nothing
     }
     protected virtual void DealDamage()
     {
-        damager.HasDamaged(currentTarget);
+        //Debug.Log(GetTarget().name + "에게 " + GetDamage() + "의 데미지를 입힘");
+        damager.DealDamage(currentTarget);
     }
 
     public void Trigger()
     {
-        _isTriggered = true;
+        isTriggered = true;
     }
 }
