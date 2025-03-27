@@ -30,7 +30,9 @@ public sealed class ParabolicProjectile : ProjectileBase
         Vector2 nextPos = Vector2.Lerp(startPos, currentTarget.transform.position, nextLinearT) + Vector2.up * nextHeight;
         Vector2 direction = (nextPos - (Vector2)transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90f;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        Quaternion targetRot = Quaternion.AngleAxis(angle, Vector3.forward);
+        float rotateSpeed = 15f;
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotateSpeed);
     }
     protected override void DealDamage()
     {
@@ -58,7 +60,7 @@ public sealed class ParabolicProjectile : ProjectileBase
                 if (cell == null) continue;
 
                 // 1) 지속 데미지 부여
-                cell.monstersInCell.ForEach(monster => { damager.DealTickDamage(monster, Status.BURN, 5, 1f, 5); });
+                cell.monstersInCell.ForEach(monster => { damager.DealTickDamage(monster, 5, 1f, 5); });
 
                 // 2) 셀 시각 효과
                 cell.transform?.DOScale(1.5f, 0.25f).SetEase(Ease.OutBack).OnComplete(() => { cell.transform.DOScale(1f, 0.25f).SetEase(Ease.InBack); });
