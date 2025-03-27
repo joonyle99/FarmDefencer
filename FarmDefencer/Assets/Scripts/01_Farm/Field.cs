@@ -6,12 +6,14 @@ using System.Collections.Generic;
 /// 0번 자식: 배경
 /// 1번 자식: 잠금 디스플레이
 /// </summary>
-public class Field : MonoBehaviour, IFarmUpdatable
+public sealed class Field : MonoBehaviour, IFarmUpdatable
 {
-	public GameObject CropPrefab;
+	[SerializeField] private GameObject cropPrefab;
 
-    public ProductEntry ProductEntry;
-    public Vector2Int FieldSize;
+    [SerializeField] private ProductEntry productEntry;
+    public ProductEntry ProductEntry => productEntry;
+    [SerializeField] private Vector2Int fieldSize;
+    public Vector2Int FieldSize => fieldSize;
 
     public bool IsAvailable
     {
@@ -39,7 +41,7 @@ public class Field : MonoBehaviour, IFarmUpdatable
             {
                 if (count > 0)
                 {
-                    fillQuotaFunction(ProductEntry, crop.transform.position, count);
+                    fillQuotaFunction(productEntry, crop.transform.position, count);
                 }
             }));
 	}
@@ -53,14 +55,14 @@ public class Field : MonoBehaviour, IFarmUpdatable
 	public bool TryFindCropAt(Vector2 position, out Crop crop)
 	{
         var localPosition = new Vector2Int(Mathf.RoundToInt(position.x - transform.position.x), Mathf.RoundToInt(position.y - transform.position.y));
-        if (localPosition.x < 0 || localPosition.x >= FieldSize.x
-            || localPosition.y < 0 || localPosition.y >= FieldSize.y)
+        if (localPosition.x < 0 || localPosition.x >= fieldSize.x
+            || localPosition.y < 0 || localPosition.y >= fieldSize.y)
         {
             crop = null;
             return false;
         }
 
-        crop = _crops[localPosition.y * FieldSize.x + localPosition.x];
+        crop = _crops[localPosition.y * fieldSize.x + localPosition.x];
 		return true;
 	}
 
@@ -83,20 +85,20 @@ public class Field : MonoBehaviour, IFarmUpdatable
 
 	private void Awake()
     {
-        _crops = new Crop[FieldSize.x * FieldSize.y];
+        _crops = new Crop[fieldSize.x * fieldSize.y];
         _backgroundRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         _fieldLockedRenderer = transform.GetChild(1).GetComponent<SpriteRenderer>();
 
-        for (int yOffset = 0; yOffset < FieldSize.y; ++yOffset)
+        for (int yOffset = 0; yOffset < fieldSize.y; ++yOffset)
         {
-            for (int xOffset = 0; xOffset < FieldSize.x; ++xOffset)
+            for (int xOffset = 0; xOffset < fieldSize.x; ++xOffset)
             {
-                var cropObject = Instantiate(CropPrefab, transform);
+                var cropObject = Instantiate(cropPrefab, transform);
 
                 var cropComponent = cropObject.GetComponent<Crop>();
                 cropObject.transform.localPosition = new Vector3(xOffset, yOffset, 0.0f);
 
-                _crops[yOffset * FieldSize.x + xOffset] = cropComponent;
+                _crops[yOffset * fieldSize.x + xOffset] = cropComponent;
             }
         }
 

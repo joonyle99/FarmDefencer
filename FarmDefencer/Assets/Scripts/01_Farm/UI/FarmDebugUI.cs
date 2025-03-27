@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class FarmDebugUI : MonoBehaviour
+public sealed class FarmDebugUI : MonoBehaviour
 {
 	private TMP_Text _remainingDaytimeText;
 	private TMP_Text _playPausedButtonText;
@@ -30,7 +30,14 @@ public class FarmDebugUI : MonoBehaviour
 			.onClick.AddListener(
 			() =>
 			{
-				_farmClock.IsManuallyPaused = !_farmClock.IsManuallyPaused;
+				if (_farmClock.IsManuallyPaused)
+				{
+					_farmClock.Resume();	
+				}
+				else
+				{
+					_farmClock.Pause();
+				}
 				_playPausedButtonText.text = _farmClock.IsManuallyPaused ? "Play" : "Pause";
 			});
 	}

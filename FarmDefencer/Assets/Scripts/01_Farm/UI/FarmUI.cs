@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FarmUI : MonoBehaviour
+public sealed class FarmUI : MonoBehaviour
 {
 	private CoinsUI _coinsUI;
 	public CoinsUI CoinsUI => _coinsUI;

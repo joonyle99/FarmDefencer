@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 자식으로 CropSign을 가진 오브젝트들을 둘 것.
 /// </summary>
-public class CropSigns : MonoBehaviour, IFarmInputLayer
+public sealed class CropSigns : MonoBehaviour, IFarmInputLayer
 {
 	public Action<ProductEntry> SignClicked;
 

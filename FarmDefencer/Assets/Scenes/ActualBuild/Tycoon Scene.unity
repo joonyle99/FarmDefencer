@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8614ac8f3ee821849a648cd31b6ea669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productEntry: {fileID: 0}
+  productEntry: {fileID: 11400000, guid: 7dafbc71fcd9c0846b0f38a024abc95b, type: 2}
 --- !u!1 &42818392
 GameObject:
   m_ObjectHideFlags: 0
@@ -850,6 +850,10 @@ PrefabInstance:
       propertyPath: ProductEntry
       value: 
       objectReference: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
+    - target: {fileID: 3851315698124741541, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: productEntry
+      value: 
+      objectReference: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
     - target: {fileID: 4114535044796607587, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1075,6 +1079,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3851315698124741541, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
       propertyPath: ProductEntry
+      value: 
+      objectReference: {fileID: 11400000, guid: 7dafbc71fcd9c0846b0f38a024abc95b, type: 2}
+    - target: {fileID: 3851315698124741541, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: productEntry
       value: 
       objectReference: {fileID: 11400000, guid: 7dafbc71fcd9c0846b0f38a024abc95b, type: 2}
     - target: {fileID: 4114535044796607587, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
@@ -1867,6 +1875,10 @@ PrefabInstance:
       propertyPath: ProductEntry
       value: 
       objectReference: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
+    - target: {fileID: 3851315698124741541, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: productEntry
+      value: 
+      objectReference: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
     - target: {fileID: 4114535044796607587, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2197,7 +2209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8614ac8f3ee821849a648cd31b6ea669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productEntry: {fileID: 0}
+  productEntry: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
 --- !u!1 &546169077
 GameObject:
   m_ObjectHideFlags: 0
@@ -2377,9 +2389,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3f4e49362e03f40887474469816bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CropPrefab: {fileID: 7695424892220933664, guid: ed7e1018e94fca44787f20ebd01a4104, type: 3}
-  ProductEntry: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
-  FieldSize: {x: 5, y: 5}
+  cropPrefab: {fileID: 7695424892220933664, guid: ed7e1018e94fca44787f20ebd01a4104, type: 3}
+  productEntry: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
+  fieldSize: {x: 5, y: 5}
 --- !u!1001 &554067717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2390,6 +2402,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3851315698124741541, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
       propertyPath: ProductEntry
+      value: 
+      objectReference: {fileID: 11400000, guid: cc99559fa3cd81c4f9e227728fe5fe8c, type: 2}
+    - target: {fileID: 3851315698124741541, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: productEntry
       value: 
       objectReference: {fileID: 11400000, guid: cc99559fa3cd81c4f9e227728fe5fe8c, type: 2}
     - target: {fileID: 4114535044796607587, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
@@ -2496,6 +2512,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3851315698124741541, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
       propertyPath: ProductEntry
+      value: 
+      objectReference: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
+    - target: {fileID: 3851315698124741541, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: productEntry
       value: 
       objectReference: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
     - target: {fileID: 4114535044796607587, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
@@ -2679,6 +2699,10 @@ PrefabInstance:
       propertyPath: ProductEntry
       value: 
       objectReference: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
+    - target: {fileID: 3851315698124741541, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: productEntry
+      value: 
+      objectReference: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
     - target: {fileID: 4114535044796607587, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2819,9 +2843,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3f4e49362e03f40887474469816bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CropPrefab: {fileID: 7695424892220933664, guid: 26b6c03d1efd26d45a6bad4af3831148, type: 3}
-  ProductEntry: {fileID: 11400000, guid: 7dafbc71fcd9c0846b0f38a024abc95b, type: 2}
-  FieldSize: {x: 2, y: 5}
+  cropPrefab: {fileID: 7695424892220933664, guid: 26b6c03d1efd26d45a6bad4af3831148, type: 3}
+  productEntry: {fileID: 11400000, guid: 7dafbc71fcd9c0846b0f38a024abc95b, type: 2}
+  fieldSize: {x: 2, y: 5}
 --- !u!1 &746587803
 GameObject:
   m_ObjectHideFlags: 0
@@ -2968,8 +2992,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04e2a5299c32fc641bc943598326d2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartAngle: 170
-  EndAngle: 360
+  startAngle: 170
+  endAngle: 360
 --- !u!1 &788816882
 GameObject:
   m_ObjectHideFlags: 0
@@ -3205,9 +3229,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3f4e49362e03f40887474469816bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CropPrefab: {fileID: 7695424892220933664, guid: f11c145bce3513544aa38877c53961fd, type: 3}
-  ProductEntry: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
-  FieldSize: {x: 2, y: 5}
+  cropPrefab: {fileID: 7695424892220933664, guid: f11c145bce3513544aa38877c53961fd, type: 3}
+  productEntry: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
+  fieldSize: {x: 2, y: 5}
 --- !u!1 &827212170
 GameObject:
   m_ObjectHideFlags: 0
@@ -3254,9 +3278,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3f4e49362e03f40887474469816bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CropPrefab: {fileID: 7695424892220933664, guid: b6905625307a92141911d0f45a150636, type: 3}
-  ProductEntry: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
-  FieldSize: {x: 2, y: 5}
+  cropPrefab: {fileID: 7695424892220933664, guid: b6905625307a92141911d0f45a150636, type: 3}
+  productEntry: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
+  fieldSize: {x: 2, y: 5}
 --- !u!1 &839516629
 GameObject:
   m_ObjectHideFlags: 0
@@ -3314,8 +3338,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c10c640ef7cc667428442bf47fd8b22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AnimationDuration: 0.5
-  HarvestAnimationObjectPrefab: {fileID: 1611345472189484286, guid: bf7cf61d9a08c484ea65e794dc499e98, type: 3}
+  animationDuration: 0.5
+  harvestAnimationObjectPrefab: {fileID: 1611345472189484286, guid: bf7cf61d9a08c484ea65e794dc499e98, type: 3}
 --- !u!1 &846510279
 GameObject:
   m_ObjectHideFlags: 0
@@ -3416,7 +3440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8614ac8f3ee821849a648cd31b6ea669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productEntry: {fileID: 0}
+  productEntry: {fileID: 11400000, guid: bbf41d007f26d6049ba7c478bd5f3ecd, type: 2}
 --- !u!1 &871593981
 GameObject:
   m_ObjectHideFlags: 0
@@ -3775,7 +3799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8614ac8f3ee821849a648cd31b6ea669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productEntry: {fileID: 0}
+  productEntry: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
 --- !u!1 &944554848
 GameObject:
   m_ObjectHideFlags: 0
@@ -4570,6 +4594,10 @@ PrefabInstance:
       propertyPath: ProductEntry
       value: 
       objectReference: {fileID: 11400000, guid: bbf41d007f26d6049ba7c478bd5f3ecd, type: 2}
+    - target: {fileID: 3851315698124741541, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: productEntry
+      value: 
+      objectReference: {fileID: 11400000, guid: bbf41d007f26d6049ba7c478bd5f3ecd, type: 2}
     - target: {fileID: 4114535044796607587, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4710,9 +4738,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3f4e49362e03f40887474469816bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CropPrefab: {fileID: 7695424892220933664, guid: c97502bd5df4e4945addaa75786a4937, type: 3}
-  ProductEntry: {fileID: 11400000, guid: cc99559fa3cd81c4f9e227728fe5fe8c, type: 2}
-  FieldSize: {x: 1, y: 5}
+  cropPrefab: {fileID: 7695424892220933664, guid: c97502bd5df4e4945addaa75786a4937, type: 3}
+  productEntry: {fileID: 11400000, guid: cc99559fa3cd81c4f9e227728fe5fe8c, type: 2}
+  fieldSize: {x: 1, y: 5}
 --- !u!1 &1325461635
 GameObject:
   m_ObjectHideFlags: 0
@@ -4813,7 +4841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8614ac8f3ee821849a648cd31b6ea669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productEntry: {fileID: 0}
+  productEntry: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
 --- !u!1 &1332467412
 GameObject:
   m_ObjectHideFlags: 0
@@ -5373,6 +5401,10 @@ PrefabInstance:
       propertyPath: ProductEntry
       value: 
       objectReference: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
+    - target: {fileID: 3851315698124741541, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: productEntry
+      value: 
+      objectReference: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
     - target: {fileID: 4114535044796607587, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5649,9 +5681,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3f4e49362e03f40887474469816bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CropPrefab: {fileID: 7695424892220933664, guid: 5374d7b0498d7bb4a92a049f5ce91fd2, type: 3}
-  ProductEntry: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
-  FieldSize: {x: 3, y: 5}
+  cropPrefab: {fileID: 7695424892220933664, guid: 5374d7b0498d7bb4a92a049f5ce91fd2, type: 3}
+  productEntry: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
+  fieldSize: {x: 3, y: 5}
 --- !u!1 &1503578048
 GameObject:
   m_ObjectHideFlags: 0
@@ -5874,9 +5906,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3f4e49362e03f40887474469816bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CropPrefab: {fileID: 7695424892220933664, guid: b24383526ea18db43866570050fa992c, type: 3}
-  ProductEntry: {fileID: 11400000, guid: bbf41d007f26d6049ba7c478bd5f3ecd, type: 2}
-  FieldSize: {x: 1, y: 5}
+  cropPrefab: {fileID: 7695424892220933664, guid: b24383526ea18db43866570050fa992c, type: 3}
+  productEntry: {fileID: 11400000, guid: bbf41d007f26d6049ba7c478bd5f3ecd, type: 2}
+  fieldSize: {x: 1, y: 5}
 --- !u!1 &1567906209
 GameObject:
   m_ObjectHideFlags: 0
@@ -6064,7 +6096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8614ac8f3ee821849a648cd31b6ea669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productEntry: {fileID: 0}
+  productEntry: {fileID: 11400000, guid: cc99559fa3cd81c4f9e227728fe5fe8c, type: 2}
 --- !u!1 &1589993484
 GameObject:
   m_ObjectHideFlags: 0
@@ -6551,7 +6583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8614ac8f3ee821849a648cd31b6ea669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productEntry: {fileID: 0}
+  productEntry: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
 --- !u!1 &1743981753
 GameObject:
   m_ObjectHideFlags: 0
@@ -6773,7 +6805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8614ac8f3ee821849a648cd31b6ea669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productEntry: {fileID: 0}
+  productEntry: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
 --- !u!1 &1976797179
 GameObject:
   m_ObjectHideFlags: 0
@@ -6820,9 +6852,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3f4e49362e03f40887474469816bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CropPrefab: {fileID: 7695424892220933664, guid: abba9eb9dad20aa4dad0bff8b38687d7, type: 3}
-  ProductEntry: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
-  FieldSize: {x: 3, y: 5}
+  cropPrefab: {fileID: 7695424892220933664, guid: abba9eb9dad20aa4dad0bff8b38687d7, type: 3}
+  productEntry: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
+  fieldSize: {x: 3, y: 5}
 --- !u!1 &1998135282
 GameObject:
   m_ObjectHideFlags: 0
@@ -7197,7 +7229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0cc1086435753943b161a9f7422a86c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProductDatabase: {fileID: 11400000, guid: 306ee76be7a6f2c4a962c5707f74017f, type: 2}
+  productDatabase: {fileID: 11400000, guid: 306ee76be7a6f2c4a962c5707f74017f, type: 2}
 --- !u!1 &2078747838
 GameObject:
   m_ObjectHideFlags: 0
@@ -7461,8 +7493,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f6eef7e4bfacc408f0aeb259f79ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IdleAnimationName: idle
-  WateringAnimationName: water
+  idleAnimationName: idle
+  wateringAnimationName: water
 --- !u!23 &2095539720
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7746,14 +7778,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d4571a4ae475a745915624a42f642ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cropGuideImage_carrot: {fileID: 1410483304339041755, guid: 599ac5a98b779ed45a1cde0ac890b92b, type: 3}
-  _cropGuideImage_potato: {fileID: 6567537973310776033, guid: 453d861ac9c44e34ebb8095cd98f9e90, type: 3}
-  _cropGuideImage_corn: {fileID: 7792876914236157679, guid: 8154e2b38967d4d47901f514da354cfd, type: 3}
-  _cropGuideImage_cabbage: {fileID: -2051378696425274611, guid: 46ec3b9ed556b414abf9fc921608771b, type: 3}
-  _cropGuideImage_cucumber: {fileID: -7218159748931476319, guid: e00115439c7b8444a8da176b2a65e6c5, type: 3}
-  _cropGuideImage_eggplant: {fileID: 8971362675534445170, guid: 56940cfe7e2fbc6448c04594abbd1698, type: 3}
-  _cropGuideImage_sweetpotato: {fileID: -1822085296798445489, guid: 4023b82bb1b7f1340a3450c56f211ce3, type: 3}
-  _cropGuideImage_mushroom: {fileID: 6940092911553946102, guid: 293ef3bc999b0064faee19b6982a6a88, type: 3}
+  cropGuideImage_carrot: {fileID: 1410483304339041755, guid: 599ac5a98b779ed45a1cde0ac890b92b, type: 3}
+  cropGuideImage_potato: {fileID: 6567537973310776033, guid: 453d861ac9c44e34ebb8095cd98f9e90, type: 3}
+  cropGuideImage_corn: {fileID: 7792876914236157679, guid: 8154e2b38967d4d47901f514da354cfd, type: 3}
+  cropGuideImage_cabbage: {fileID: -2051378696425274611, guid: 46ec3b9ed556b414abf9fc921608771b, type: 3}
+  cropGuideImage_cucumber: {fileID: -7218159748931476319, guid: e00115439c7b8444a8da176b2a65e6c5, type: 3}
+  cropGuideImage_eggplant: {fileID: 8971362675534445170, guid: 56940cfe7e2fbc6448c04594abbd1698, type: 3}
+  cropGuideImage_sweetpotato: {fileID: -1822085296798445489, guid: 4023b82bb1b7f1340a3450c56f211ce3, type: 3}
+  cropGuideImage_mushroom: {fileID: 6940092911553946102, guid: 293ef3bc999b0064faee19b6982a6a88, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

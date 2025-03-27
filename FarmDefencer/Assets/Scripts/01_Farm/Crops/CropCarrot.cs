@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CropCarrot : Crop
+public sealed class CropCarrot : Crop
 {
 	private struct CarrotState : ICommonCropState
 	{
@@ -28,12 +28,12 @@ public class CropCarrot : Crop
 
 	private const float MatureSeconds = 15.0f;
 
-	[SerializeField] private Sprite _seedSprite;
-	[SerializeField] private Sprite _matureSprite;
-	[SerializeField] private Sprite _beforeWaterSprite;
-	[SerializeField] private Sprite _deadSprite;
-	[SerializeField] private Sprite _growingSprite;
-	[SerializeField] private Sprite _harvestedSprite;
+	[SerializeField] private Sprite seedSprite;
+	[SerializeField] private Sprite matureSprite;
+	[SerializeField] private Sprite beforeWaterSprite;
+	[SerializeField] private Sprite deadSprite;
+	[SerializeField] private Sprite growingSprite;
+	[SerializeField] private Sprite harvestedSprite;
 
 	private SpriteRenderer _spriteRenderer;
 	private CarrotState _currentState;
@@ -101,7 +101,7 @@ public class CropCarrot : Crop
 		{ Watered: false } => CarrotStage.BeforeWater,
 	};
 
-	private static readonly Dictionary<CarrotStage, Func<CarrotState, float, CarrotState>> OnFarmUpdateFunctions = new Dictionary<CarrotStage, Func<CarrotState, float, CarrotState>>
+	private static readonly Dictionary<CarrotStage, Func<CarrotState, float, CarrotState>> OnFarmUpdateFunctions = new()
 	{
 		{CarrotStage.Seed, (currentState, deltaTime) => Reset(currentState) },
 		{CarrotStage.BeforeWater, WaitWater },
@@ -111,7 +111,7 @@ public class CropCarrot : Crop
 		{CarrotStage.Harvested, DoNothing_OnFarmUpdate },
 	};
 
-	private static readonly Dictionary<CarrotStage, Func<CarrotState, CarrotState>> OnSingleTapFunctions = new Dictionary<CarrotStage, Func<CarrotState, CarrotState>>
+	private static readonly Dictionary<CarrotStage, Func<CarrotState, CarrotState>> OnSingleTapFunctions = new()
 	{
 		{CarrotStage.Seed, Plant },
 		{CarrotStage.BeforeWater, DoNothing },
@@ -124,16 +124,16 @@ public class CropCarrot : Crop
 	[Pure]
 	private Action<SpriteRenderer> ApplySpriteTo(CarrotStage stage) => stage switch
 	{
-		CarrotStage.Seed when _spriteRenderer.sprite != _seedSprite => (spriteRenderer) => spriteRenderer.sprite = _seedSprite,
-		CarrotStage.BeforeWater when _spriteRenderer.sprite != _beforeWaterSprite => (spriteRenderer) => spriteRenderer.sprite = _beforeWaterSprite,
-		CarrotStage.Dead when _spriteRenderer.sprite != _deadSprite => (spriteRenderer) => spriteRenderer.sprite = _deadSprite,
-		CarrotStage.Growing when _spriteRenderer.sprite != _growingSprite => (spriteRenderer) => spriteRenderer.sprite = _growingSprite,
-		CarrotStage.Mature when _spriteRenderer.sprite != _matureSprite => (spriteRenderer) => spriteRenderer.sprite = _matureSprite,
-		CarrotStage.Harvested when _spriteRenderer.sprite != _harvestedSprite => (spriteRenderer) => spriteRenderer.sprite = _harvestedSprite,
+		CarrotStage.Seed when _spriteRenderer.sprite != seedSprite => (spriteRenderer) => spriteRenderer.sprite = seedSprite,
+		CarrotStage.BeforeWater when _spriteRenderer.sprite != beforeWaterSprite => (spriteRenderer) => spriteRenderer.sprite = beforeWaterSprite,
+		CarrotStage.Dead when _spriteRenderer.sprite != deadSprite => (spriteRenderer) => spriteRenderer.sprite = deadSprite,
+		CarrotStage.Growing when _spriteRenderer.sprite != growingSprite => (spriteRenderer) => spriteRenderer.sprite = growingSprite,
+		CarrotStage.Mature when _spriteRenderer.sprite != matureSprite => (spriteRenderer) => spriteRenderer.sprite = matureSprite,
+		CarrotStage.Harvested when _spriteRenderer.sprite != harvestedSprite => (spriteRenderer) => spriteRenderer.sprite = harvestedSprite,
 		_ => (_) => { }
 	};
 
-	private static List<(Func<CarrotState, CarrotState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<CarrotState, CarrotState, bool>, Action<Vector2, Vector2>)>
+	private static List<(Func<CarrotState, CarrotState, bool>, Action<Vector2, Vector2>)> Effects = new()
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),

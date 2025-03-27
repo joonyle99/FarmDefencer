@@ -7,7 +7,7 @@ using UnityEngine;
 /// 0번 자식에 수확 단계 흙을 표시하기 위한 SpriteRenderer 오브젝트를 할당하고,
 /// 1번 자식에 수확 단계 작물을 표시하기 위한 SpriteRenderer 오브젝트를 할당할 것.
 /// </summary>
-public class CropCabbage : Crop
+public sealed class CropCabbage : Crop
 {
 	private struct CabbageState : ICommonCropState
 	{
@@ -43,17 +43,16 @@ public class CropCabbage : Crop
 	private const float Stage1_GrowthSeconds = 10.0f;
 	private const float Stage2_GrowthSeconds = 10.0f;
 
-	[SerializeField] private Sprite _seedSprite;
-	[SerializeField] private Sprite _harvestedSprite;
+	[SerializeField] private Sprite seedSprite;
+	[SerializeField] private Sprite harvestedSprite;
 
-	[SerializeField] private Sprite _stage1_beforeWaterSprite;
-	[SerializeField] private Sprite _stage1_deadSprite;
-	[SerializeField] private Sprite _stage1_growingSprite;
+	[SerializeField] private Sprite stage1_beforeWaterSprite;
+	[SerializeField] private Sprite stage1_deadSprite;
+	[SerializeField] private Sprite stage1_growingSprite;
 
-	[SerializeField] private Sprite _stage2_beforeWaterSprite;
-	[SerializeField] private Sprite _stage2_deadSprite;
-	[SerializeField] private Sprite _stage2_growingSprite;
-
+	[SerializeField] private Sprite stage2_beforeWaterSprite;
+	[SerializeField] private Sprite stage2_deadSprite;
+	[SerializeField] private Sprite stage2_growingSprite;
 
 	private SpriteRenderer _spriteRenderer; // 수확 단계를 제외한 모든 단계의 스프라이트 표시
 	private CabbageState _currentState;
@@ -146,31 +145,31 @@ public class CropCabbage : Crop
 	[Pure]
 	private Action<SpriteRenderer> ApplySpriteTo(CabbageStage stage) => stage switch
 	{
-		CabbageStage.Seed when _spriteRenderer.sprite != _seedSprite => (spriteRenderer) => spriteRenderer.sprite = _seedSprite,
+		CabbageStage.Seed when _spriteRenderer.sprite != seedSprite => (spriteRenderer) => spriteRenderer.sprite = seedSprite,
 		CabbageStage.Mature when _spriteRenderer.sprite != null => (spriteRenderer) => spriteRenderer.sprite = null,
-		CabbageStage.Harvested when _spriteRenderer.sprite != _harvestedSprite => (spriteRenderer) => spriteRenderer.sprite = _harvestedSprite,
+		CabbageStage.Harvested when _spriteRenderer.sprite != harvestedSprite => (spriteRenderer) => spriteRenderer.sprite = harvestedSprite,
 
-		CabbageStage.Stage2_Dead when _spriteRenderer.sprite != _stage2_deadSprite => (spriteRenderer) => spriteRenderer.sprite = _stage2_deadSprite,
-		CabbageStage.Stage2_BeforeWater when _spriteRenderer.sprite != _stage2_beforeWaterSprite => (spriteRenderer) => spriteRenderer.sprite = _stage2_beforeWaterSprite,
-		CabbageStage.Stage2_Growing when _spriteRenderer.sprite != _stage2_growingSprite => (spriteRenderer) => spriteRenderer.sprite = _stage2_growingSprite,
+		CabbageStage.Stage2_Dead when _spriteRenderer.sprite != stage2_deadSprite => (spriteRenderer) => spriteRenderer.sprite = stage2_deadSprite,
+		CabbageStage.Stage2_BeforeWater when _spriteRenderer.sprite != stage2_beforeWaterSprite => (spriteRenderer) => spriteRenderer.sprite = stage2_beforeWaterSprite,
+		CabbageStage.Stage2_Growing when _spriteRenderer.sprite != stage2_growingSprite => (spriteRenderer) => spriteRenderer.sprite = stage2_growingSprite,
 
-		CabbageStage.Stage1_Dead when _spriteRenderer.sprite != _stage1_deadSprite => (spriteRenderer) => spriteRenderer.sprite = _stage1_deadSprite,
-		CabbageStage.Stage1_BeforeWater when _spriteRenderer.sprite != _stage1_beforeWaterSprite => (spriteRenderer) => spriteRenderer.sprite = _stage1_beforeWaterSprite,
-		CabbageStage.Stage1_Growing when _spriteRenderer.sprite != _stage1_growingSprite => (spriteRenderer) => spriteRenderer.sprite = _stage1_growingSprite,
+		CabbageStage.Stage1_Dead when _spriteRenderer.sprite != stage1_deadSprite => (spriteRenderer) => spriteRenderer.sprite = stage1_deadSprite,
+		CabbageStage.Stage1_BeforeWater when _spriteRenderer.sprite != stage1_beforeWaterSprite => (spriteRenderer) => spriteRenderer.sprite = stage1_beforeWaterSprite,
+		CabbageStage.Stage1_Growing when _spriteRenderer.sprite != stage1_growingSprite => (spriteRenderer) => spriteRenderer.sprite = stage1_growingSprite,
 
 		_ => (_) => { }
 	};
 
 	private static readonly Func<CabbageState, CabbageState, bool> ShakeEffectCondition = (beforeState, afterState) => afterState.ShakeCount > beforeState.ShakeCount;
-	private static readonly Action<Vector2, Vector2> ShakeEffect = (inputWorldPosition, cropPosition) =>
+	private static readonly Action<Vector2, Vector2> ShakeEffect = (_, cropPosition) =>
 	{
 		EffectPlayer.PlayVfx("VFX_T_SoilParticle", cropPosition);
 	};
 
 	private static readonly Func<int, Func<CabbageState, CabbageState, bool>> ShakeSfxEffectConditionFor = shakedCount => (beforeState, afterState) => afterState.ShakeCount == shakedCount && beforeState.ShakeCount < shakedCount;
-	private static readonly Func<int, Action<Vector2, Vector2>> ShakeSfxEffectFor = shakedCount => (inputWorldPosition, cropPosition) => SoundManager.PlaySfxStatic($"SFX_T_cabbage_shake_{shakedCount}");
+	private static readonly Func<int, Action<Vector2, Vector2>> ShakeSfxEffectFor = shakedCount => (_, _) => SoundManager.PlaySfxStatic($"SFX_T_cabbage_shake_{shakedCount}");
 
-	private static List<(Func<CabbageState, CabbageState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<CabbageState, CabbageState, bool>, Action<Vector2, Vector2>)>
+	private static List<(Func<CabbageState, CabbageState, bool>, Action<Vector2, Vector2>)> Effects = new()
 	{
 		(HarvestEffectCondition, HarvestEffect_SoilParticle),
 		(WaterEffectCondition, WaterEffect),
@@ -184,7 +183,7 @@ public class CropCabbage : Crop
 	};
 
 	private static readonly Func<CabbageState, Vector2, Vector2, bool, float, CabbageState> ShakeAndHarvest =
-		(beforeState, initialWorldPosition, deltaPosition, isEnd, deltaHoldTime)
+		(beforeState, _, deltaPosition, isEnd, _)
 		=>
 		{
 			var nextState = beforeState;
@@ -240,11 +239,11 @@ public class CropCabbage : Crop
 		{ } => CabbageStage.Stage1_BeforeWater,
 	};
 
-	private static readonly Dictionary<CabbageStage, Func<CabbageState, float, CabbageState>> OnFarmUpdateFunctions = new Dictionary<CabbageStage, Func<CabbageState, float, CabbageState>>
+	private static readonly Dictionary<CabbageStage, Func<CabbageState, float, CabbageState>> OnFarmUpdateFunctions = new()
 	{
-		{CabbageStage.Seed, (currentState, deltaTime) => Reset(currentState) },
-		{CabbageStage.Mature, (currentState, deltaTime) => DoNothing(currentState) },
-		{CabbageStage.Harvested, (currentState, deltaTime) => DoNothing(currentState) },
+		{CabbageStage.Seed, (currentState, _) => Reset(currentState) },
+		{CabbageStage.Mature, (currentState, _) => DoNothing(currentState) },
+		{CabbageStage.Harvested, (currentState, _) => DoNothing(currentState) },
 
 		{CabbageStage.Stage2_Dead, WaitWater },
 		{CabbageStage.Stage2_BeforeWater, WaitWater },
@@ -266,7 +265,7 @@ public class CropCabbage : Crop
 		},
 	};
 
-	private static readonly Dictionary<CabbageStage, Func<CabbageState, CabbageState>> OnSingleTapFunctions = new Dictionary<CabbageStage, Func<CabbageState, CabbageState>>
+	private static readonly Dictionary<CabbageStage, Func<CabbageState, CabbageState>> OnSingleTapFunctions = new()
 	{
 		{CabbageStage.Seed, Plant },
 		{CabbageStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },

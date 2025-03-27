@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class CropEggplant : Crop
+public sealed class CropEggplant : Crop
 {
 	private struct EggplantState : ICommonCropState
 	{
@@ -40,22 +40,22 @@ public class CropEggplant : Crop
 	private const float Stage1_GrowthSeconds = 10.0f;
 	private const float Stage2_GrowthSeconds = 10.0f;
 
-	[SerializeField] private Sprite _seedSprite;
+	[SerializeField] private Sprite seedSprite;
 	[Space]
-	[SerializeField] private Sprite _stage1_beforeWaterSprite;
-	[SerializeField] private Sprite _stage1_deadSprite;
-	[SerializeField] private Sprite _stage1_growingSprite;
+	[SerializeField] private Sprite stage1_beforeWaterSprite;
+	[SerializeField] private Sprite stage1_deadSprite;
+	[SerializeField] private Sprite stage1_growingSprite;
 	[Space]
-	[SerializeField] private Sprite _stage2_beforetrelisSprite;
-	[SerializeField] private Sprite _stage2_beforeWaterSprite;
-	[SerializeField] private Sprite _stage2_deadSprite;
-	[SerializeField] private Sprite _stage2_growingSprite;
+	[SerializeField] private Sprite stage2_beforetrelisSprite;
+	[SerializeField] private Sprite stage2_beforeWaterSprite;
+	[SerializeField] private Sprite stage2_deadSprite;
+	[SerializeField] private Sprite stage2_growingSprite;
 	[Space]
-	[SerializeField] private Sprite _stage3_fullLeavesSprite;
-	[SerializeField] private Sprite _stage3_halfLeavesSprite;
+	[SerializeField] private Sprite stage3_fullLeavesSprite;
+	[SerializeField] private Sprite stage3_halfLeavesSprite;
 	[Space]
-	[SerializeField] private Sprite _matureSprite;
-	[SerializeField] private Sprite _harvestedSprite;
+	[SerializeField] private Sprite matureSprite;
+	[SerializeField] private Sprite harvestedSprite;
 
 	private SpriteRenderer _spriteRenderer;
 	private EggplantState _currentState;
@@ -199,22 +199,22 @@ public class CropEggplant : Crop
 	[Pure]
 	private Action<SpriteRenderer> GetSpriteAndApplyTo(EggplantStage stage) => stage switch
 	{
-		EggplantStage.Seed => (spriteRenderer) => ApplySprite(_seedSprite, spriteRenderer),
+		EggplantStage.Seed => (spriteRenderer) => ApplySprite(seedSprite, spriteRenderer),
 
-		EggplantStage.Stage1_Dead => (spriteRenderer) => ApplySprite(_stage1_deadSprite, spriteRenderer),
-		EggplantStage.Stage1_BeforeWater => (spriteRenderer) => ApplySprite(_stage1_beforeWaterSprite, spriteRenderer),
-		EggplantStage.Stage1_Growing => (spriteRenderer) => ApplySprite(_stage1_growingSprite, spriteRenderer),
+		EggplantStage.Stage1_Dead => (spriteRenderer) => ApplySprite(stage1_deadSprite, spriteRenderer),
+		EggplantStage.Stage1_BeforeWater => (spriteRenderer) => ApplySprite(stage1_beforeWaterSprite, spriteRenderer),
+		EggplantStage.Stage1_Growing => (spriteRenderer) => ApplySprite(stage1_growingSprite, spriteRenderer),
 
-		EggplantStage.Stage2_BeforeTrelis => (spriteRenderer) => ApplySprite(_stage2_beforetrelisSprite, spriteRenderer),
-		EggplantStage.Stage2_Dead => (spriteRenderer) => ApplySprite(_stage2_deadSprite, spriteRenderer),
-		EggplantStage.Stage2_BeforeWater => (spriteRenderer) => ApplySprite(_stage2_beforeWaterSprite, spriteRenderer),
-		EggplantStage.Stage2_Growing => (spriteRenderer) => ApplySprite(_stage2_growingSprite, spriteRenderer),
+		EggplantStage.Stage2_BeforeTrelis => (spriteRenderer) => ApplySprite(stage2_beforetrelisSprite, spriteRenderer),
+		EggplantStage.Stage2_Dead => (spriteRenderer) => ApplySprite(stage2_deadSprite, spriteRenderer),
+		EggplantStage.Stage2_BeforeWater => (spriteRenderer) => ApplySprite(stage2_beforeWaterSprite, spriteRenderer),
+		EggplantStage.Stage2_Growing => (spriteRenderer) => ApplySprite(stage2_growingSprite, spriteRenderer),
 
-		EggplantStage.Stage3_FullLeaves => (spriteRenderer) => ApplySprite(_stage3_fullLeavesSprite, spriteRenderer),
-		EggplantStage.Stage3_HalfLeaves => (spriteRenderer) => ApplySprite(_stage3_halfLeavesSprite, spriteRenderer),
+		EggplantStage.Stage3_FullLeaves => (spriteRenderer) => ApplySprite(stage3_fullLeavesSprite, spriteRenderer),
+		EggplantStage.Stage3_HalfLeaves => (spriteRenderer) => ApplySprite(stage3_halfLeavesSprite, spriteRenderer),
 
-		EggplantStage.Mature => (spriteRenderer) => ApplySprite(_matureSprite, spriteRenderer),
-		EggplantStage.Harvested => (spriteRenderer) => ApplySprite(_harvestedSprite, spriteRenderer),
+		EggplantStage.Mature => (spriteRenderer) => ApplySprite(matureSprite, spriteRenderer),
+		EggplantStage.Harvested => (spriteRenderer) => ApplySprite(harvestedSprite, spriteRenderer),
 
 		_ => (_) => { }
 	};

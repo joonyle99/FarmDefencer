@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dd4d119d542f9e42a284dc9f0bd187e, type: 3}
   m_Name: ProductMushroom
   m_EditorClassIdentifier: 
-  UniqueId: product_mushroom
-  ProductSprite: {fileID: 21300000, guid: 636749516db050845b570d742008db86, type: 3}
-  Price: 20
+  name: product_mushroom
+  productSprite: {fileID: 21300000, guid: 636749516db050845b570d742008db86, type: 3}
+  price: 50

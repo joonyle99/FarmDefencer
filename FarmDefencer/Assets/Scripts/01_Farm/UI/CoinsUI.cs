@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class CoinsUI : MonoBehaviour
+public sealed class CoinsUI : MonoBehaviour
 {
 	private TMP_Text _coinsText;
 

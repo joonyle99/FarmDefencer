@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 월드에 EffectPlayer를 가진 오브젝트를 배치하여 Singleton 접근할 것.
 /// </summary>
-public class EffectPlayer : MonoBehaviour
+public sealed class EffectPlayer : MonoBehaviour
 {
 	private static EffectPlayer s_singleton;
 	

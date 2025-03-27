@@ -189,21 +189,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d3b6e8cee281d4ab80fb8a51b43f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stage1_beforeWaterSprite: {fileID: 6346122989919259599, guid: 5167cfcb4df179d41a4dc8066abd8ddc, type: 3}
-  _stage1_deadSprite: {fileID: -4462930686507710110, guid: c8114048f842a884f934b4739941e8a7, type: 3}
-  _stage1_growingSprite: {fileID: -6123061536992418271, guid: da9984c84026a7d4db4a991ec2fc0b81, type: 3}
-  _stage2_beforeWaterSprite: {fileID: 5687606534127861334, guid: 9b1ca08f975cd95458767cd4931d935b, type: 3}
-  _stage2_deadSprite: {fileID: 8570217976540278184, guid: 09d6a7c37fcc9904f9440e2ca9c5fcdd, type: 3}
-  _stage2_growingSprite: {fileID: -4145705509535861541, guid: 39daceab827734d48ba3fe5abdd54620, type: 3}
-  _stage3_beforeInoculationSprite: {fileID: 6931849508725752192, guid: 0028416c49da8854fabd3046464497f8, type: 3}
-  _stage3_afterInoculationSprite: {fileID: 6931849508725752192, guid: 0028416c49da8854fabd3046464497f8, type: 3}
-  _mature_normalSprite: {fileID: 3333206966548326072, guid: 8a682a83d58262e439f17e3ff9ba141e, type: 3}
-  _mature_poisonousSprite: {fileID: -1890694776270067307, guid: 2a62de63a3d30374795d925012fa93cc, type: 3}
-  _harvested_normalSprite: {fileID: 2455228861196353177, guid: 286343f7725a33f4f88aa432369801c5, type: 3}
-  _harvested_poisonousSprite: {fileID: 3949356665975310843, guid: 079847ad09641c94cad2e0ca0f9c0182, type: 3}
-  _idleAnimationName: idle
-  _injectAnimationName: inject
-  _injectFinishedAnimationName: inject_finish
+  stage1_beforeWaterSprite: {fileID: 6346122989919259599, guid: 5167cfcb4df179d41a4dc8066abd8ddc, type: 3}
+  stage1_deadSprite: {fileID: -4462930686507710110, guid: c8114048f842a884f934b4739941e8a7, type: 3}
+  stage1_growingSprite: {fileID: -6123061536992418271, guid: da9984c84026a7d4db4a991ec2fc0b81, type: 3}
+  stage2_beforeWaterSprite: {fileID: 5687606534127861334, guid: 9b1ca08f975cd95458767cd4931d935b, type: 3}
+  stage2_deadSprite: {fileID: 8570217976540278184, guid: 09d6a7c37fcc9904f9440e2ca9c5fcdd, type: 3}
+  stage2_growingSprite: {fileID: -4145705509535861541, guid: 39daceab827734d48ba3fe5abdd54620, type: 3}
+  stage3_beforeInoculationSprite: {fileID: 6931849508725752192, guid: 0028416c49da8854fabd3046464497f8, type: 3}
+  stage3_afterInoculationSprite: {fileID: 7265507598394102980, guid: 2e83676cfa82ca84c8341421000d6d24, type: 3}
+  mature_normalSprite: {fileID: 3333206966548326072, guid: 8a682a83d58262e439f17e3ff9ba141e, type: 3}
+  mature_poisonousSprite: {fileID: -1890694776270067307, guid: 2a62de63a3d30374795d925012fa93cc, type: 3}
+  harvested_normalSprite: {fileID: 2455228861196353177, guid: 286343f7725a33f4f88aa432369801c5, type: 3}
+  harvested_poisonousSprite: {fileID: 3949356665975310843, guid: 079847ad09641c94cad2e0ca0f9c0182, type: 3}
+  idleAnimationName: idle
+  injectAnimationName: inject
+  injectFinishedAnimationName: inject_finish
 --- !u!1 &8244146373069677025
 GameObject:
   m_ObjectHideFlags: 0

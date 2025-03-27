@@ -3,11 +3,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HarvestBox : MonoBehaviour
+public sealed class HarvestBox : MonoBehaviour
 {
-	[SerializeField]
-	public ProductEntry ProductEntry;
-	[SerializeField]
+	[SerializeField] private ProductEntry productEntry;
 	private int _quota; // remaining count
 	public int Quota
 	{
@@ -16,11 +14,11 @@ public class HarvestBox : MonoBehaviour
 		{
 			if (!IsAvailable)
 			{
-				throw new InvalidOperationException($"HarvestBox({ProductEntry.UniqueId})°¡ Àá±ä »óÅÂ¿¡¼­ °³¼ö¸¦ Á¶ÀıÇÏ·Á ½ÃµµÇß½À´Ï´Ù.");
+				throw new InvalidOperationException($"HarvestBox({productEntry.Name})ê°€ ì ê¸´ ìƒíƒœì—ì„œ ê°œìˆ˜ë¥¼ ì¡°ì ˆí•˜ë ¤ ì‹œë„í–ˆìŠµë‹ˆë‹¤.");
 			}
 			if (value < 0)
 			{
-				throw new ArgumentOutOfRangeException($"HarvestBox({ProductEntry.UniqueId})ÀÇ °³¼ö¸¦ 0 ¹Ì¸¸À¸·Î ÁÙÀÌ·Á ½ÃµµÇß½À´Ï´Ù.");
+				throw new ArgumentOutOfRangeException($"HarvestBox({productEntry.Name})ì˜ ê°œìˆ˜ë¥¼ 0 ë¯¸ë§Œìœ¼ë¡œ ì¤„ì´ë ¤ ì‹œë„í–ˆìŠµë‹ˆë‹¤.");
 			}
 			_quota = value;
 			_cropQuotaText.text = _quota.ToString();
@@ -71,7 +69,7 @@ public class HarvestBox : MonoBehaviour
 
 	private void Start()
 	{
-		_productImage.sprite = ProductEntry.ProductSprite;
+		_productImage.sprite = productEntry.ProductSprite;
 		_cropQuotaText.text = _quota.ToString();
 	}
 }

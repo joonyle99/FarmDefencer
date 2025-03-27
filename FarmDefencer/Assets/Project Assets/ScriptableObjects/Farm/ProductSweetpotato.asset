@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dd4d119d542f9e42a284dc9f0bd187e, type: 3}
   m_Name: ProductSweetpotato
   m_EditorClassIdentifier: 
-  UniqueId: product_sweetpotato
-  ProductSprite: {fileID: 21300000, guid: cad8f864d730e7d46bccbe812f1d1c30, type: 3}
-  Price: 15
+  name: product_sweetpotato
+  productSprite: {fileID: 21300000, guid: cad8f864d730e7d46bccbe812f1d1c30, type: 3}
+  price: 15

@@ -101,15 +101,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cefd83b35bc9e7041a661b251b805a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _seedSprite: {fileID: -769777141352692519, guid: 6bf4dd8c713e1bd4ea96225144d54b44, type: 3}
-  _stage1_beforeWaterSprite: {fileID: 224499079764585744, guid: ffbc55fea0975894fac21688d35c6a00, type: 3}
-  _stage1_deadSprite: {fileID: 8050758580740907669, guid: 25ab24494d405fe459dfc03d8471550e, type: 3}
-  _stage1_growingSprite: {fileID: 4127572791758599202, guid: 77a4f4358a9ac4c4cb65c37f5f2cc6d4, type: 3}
-  _stage2_beforeWaterSprite: {fileID: -7349923331030695169, guid: b0825ac76517893478876fd9712084a2, type: 3}
-  _stage2_deadSprite: {fileID: 7553598280831887322, guid: 9de26b9601e85e044b4bd31deb138627, type: 3}
-  _stage2_growingSprite: {fileID: 8801913211351782171, guid: 2a069e253f9dc00449f80ca32e0fed7f, type: 3}
-  _matureSprite: {fileID: 8232014692696457056, guid: 8c32f40cec3fc4c4cb0e91b611c07fc7, type: 3}
-  _harvestedSprite: {fileID: -7474539987137545531, guid: 1b23b02addf581e4493ca907abcc9206, type: 3}
+  seedSprite: {fileID: -769777141352692519, guid: 6bf4dd8c713e1bd4ea96225144d54b44, type: 3}
+  stage1_beforeWaterSprite: {fileID: 224499079764585744, guid: ffbc55fea0975894fac21688d35c6a00, type: 3}
+  stage1_deadSprite: {fileID: 8050758580740907669, guid: 25ab24494d405fe459dfc03d8471550e, type: 3}
+  stage1_growingSprite: {fileID: 4127572791758599202, guid: 77a4f4358a9ac4c4cb65c37f5f2cc6d4, type: 3}
+  stage2_beforeWaterSprite: {fileID: -7349923331030695169, guid: b0825ac76517893478876fd9712084a2, type: 3}
+  stage2_deadSprite: {fileID: 7553598280831887322, guid: 9de26b9601e85e044b4bd31deb138627, type: 3}
+  stage2_growingSprite: {fileID: 8801913211351782171, guid: 2a069e253f9dc00449f80ca32e0fed7f, type: 3}
+  matureSprite: {fileID: 8232014692696457056, guid: 8c32f40cec3fc4c4cb0e91b611c07fc7, type: 3}
+  harvestedSprite: {fileID: -7474539987137545531, guid: 1b23b02addf581e4493ca907abcc9206, type: 3}
 --- !u!1 &8225194166780297433
 GameObject:
   m_ObjectHideFlags: 0

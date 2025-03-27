@@ -3,7 +3,7 @@ using System;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class CropCorn : Crop
+public sealed class CropCorn : Crop
 {
 	private struct CornState : ICommonCropState
 	{
@@ -12,7 +12,6 @@ public class CropCorn : Crop
 		public float GrowthSeconds { get; set; }
 		public bool Watered { get; set; }
 		public bool Harvested { get; set; }
-		public float HoldingTime { get; set; }
 		public int RemainingQuota { get; set; }
 	}
 
@@ -34,18 +33,18 @@ public class CropCorn : Crop
 	private const float Stage1_GrowthSeconds = 15.0f;
 	private const float Stage2_GrowthSeconds = 15.0f;
 
-	[SerializeField] private Sprite _seedSprite;
+	[SerializeField] private Sprite seedSprite;
 	[Space]
-	[SerializeField] private Sprite _stage1_beforeWaterSprite;
-	[SerializeField] private Sprite _stage1_deadSprite;
-	[SerializeField] private Sprite _stage1_growingSprite;
+	[SerializeField] private Sprite stage1_beforeWaterSprite;
+	[SerializeField] private Sprite stage1_deadSprite;
+	[SerializeField] private Sprite stage1_growingSprite;
 	[Space]
-	[SerializeField] private Sprite _stage2_beforeWaterSprite;
-	[SerializeField] private Sprite _stage2_deadSprite;
-	[SerializeField] private Sprite _stage2_growingSprite;
+	[SerializeField] private Sprite stage2_beforeWaterSprite;
+	[SerializeField] private Sprite stage2_deadSprite;
+	[SerializeField] private Sprite stage2_growingSprite;
 	[Space]
-	[SerializeField] private Sprite _matureSprite;
-	[SerializeField] private Sprite _harvestedSprite;
+	[SerializeField] private Sprite matureSprite;
+	[SerializeField] private Sprite harvestedSprite;
 
 	private SpriteRenderer _spriteRenderer;
 	private CornState _currentState;
@@ -115,11 +114,11 @@ public class CropCorn : Crop
 		{ } => CornStage.Stage1_BeforeWater,
 	};
 
-	private static readonly Dictionary<CornStage, Func<CornState, float, CornState>> OnFarmUpdateFunctions = new Dictionary<CornStage, Func<CornState, float, CornState>>
+	private static readonly Dictionary<CornStage, Func<CornState, float, CornState>> OnFarmUpdateFunctions = new()
 	{
-		{CornStage.Seed, (currentState, deltaTime) => Reset(currentState) },
-		{CornStage.Mature, (currentState, deltaTime) => DoNothing(currentState) },
-		{CornStage.Harvested, (currentState, deltaTime) => DoNothing(currentState) },
+		{CornStage.Seed, (currentState, _) => Reset(currentState) },
+		{CornStage.Mature, (currentState, _) => DoNothing(currentState) },
+		{CornStage.Harvested, (currentState, _) => DoNothing(currentState) },
 
 		{CornStage.Stage2_Dead, WaitWater },
 		{CornStage.Stage2_BeforeWater, WaitWater },
@@ -141,7 +140,7 @@ public class CropCorn : Crop
 		},
 	};
 
-	private static readonly Dictionary<CornStage, Func<CornState, CornState>> OnSingleTapFunctions = new Dictionary<CornStage, Func<CornState, CornState>>
+	private static readonly Dictionary<CornStage, Func<CornState, CornState>> OnSingleTapFunctions = new()
 	{
 		{CornStage.Seed, Plant },
 		{CornStage.Mature, Harvest },
@@ -159,22 +158,22 @@ public class CropCorn : Crop
 	[Pure]
 	private Action<SpriteRenderer> ApplySpriteTo(CornStage stage) => stage switch
 	{
-		CornStage.Seed when _spriteRenderer.sprite != _seedSprite => (spriteRenderer) => spriteRenderer.sprite = _seedSprite,
-		CornStage.Mature when _spriteRenderer.sprite != _matureSprite => (spriteRenderer) => spriteRenderer.sprite = _matureSprite,
-		CornStage.Harvested when _spriteRenderer.sprite != _harvestedSprite => (spriteRenderer) => spriteRenderer.sprite = _harvestedSprite,
+		CornStage.Seed when _spriteRenderer.sprite != seedSprite => (spriteRenderer) => spriteRenderer.sprite = seedSprite,
+		CornStage.Mature when _spriteRenderer.sprite != matureSprite => (spriteRenderer) => spriteRenderer.sprite = matureSprite,
+		CornStage.Harvested when _spriteRenderer.sprite != harvestedSprite => (spriteRenderer) => spriteRenderer.sprite = harvestedSprite,
 
-		CornStage.Stage2_Dead when _spriteRenderer.sprite != _stage2_deadSprite => (spriteRenderer) => spriteRenderer.sprite = _stage2_deadSprite,
-		CornStage.Stage2_BeforeWater when _spriteRenderer.sprite != _stage2_beforeWaterSprite => (spriteRenderer) => spriteRenderer.sprite = _stage2_beforeWaterSprite,
-		CornStage.Stage2_Growing when _spriteRenderer.sprite != _stage2_growingSprite => (spriteRenderer) => spriteRenderer.sprite = _stage2_growingSprite,
+		CornStage.Stage2_Dead when _spriteRenderer.sprite != stage2_deadSprite => (spriteRenderer) => spriteRenderer.sprite = stage2_deadSprite,
+		CornStage.Stage2_BeforeWater when _spriteRenderer.sprite != stage2_beforeWaterSprite => (spriteRenderer) => spriteRenderer.sprite = stage2_beforeWaterSprite,
+		CornStage.Stage2_Growing when _spriteRenderer.sprite != stage2_growingSprite => (spriteRenderer) => spriteRenderer.sprite = stage2_growingSprite,
 
-		CornStage.Stage1_Dead when _spriteRenderer.sprite != _stage1_deadSprite => (spriteRenderer) => spriteRenderer.sprite = _stage1_deadSprite,
-		CornStage.Stage1_BeforeWater when _spriteRenderer.sprite != _stage1_beforeWaterSprite => (spriteRenderer) => spriteRenderer.sprite = _stage1_beforeWaterSprite,
-		CornStage.Stage1_Growing when _spriteRenderer.sprite != _stage1_growingSprite => (spriteRenderer) => spriteRenderer.sprite = _stage1_growingSprite,
+		CornStage.Stage1_Dead when _spriteRenderer.sprite != stage1_deadSprite => (spriteRenderer) => spriteRenderer.sprite = stage1_deadSprite,
+		CornStage.Stage1_BeforeWater when _spriteRenderer.sprite != stage1_beforeWaterSprite => (spriteRenderer) => spriteRenderer.sprite = stage1_beforeWaterSprite,
+		CornStage.Stage1_Growing when _spriteRenderer.sprite != stage1_growingSprite => (spriteRenderer) => spriteRenderer.sprite = stage1_growingSprite,
 
 		_ => (_) => { }
 	};
 
-	private static List<(Func<CornState, CornState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<CornState, CornState, bool>, Action<Vector2, Vector2>)>
+	private static List<(Func<CornState, CornState, bool>, Action<Vector2, Vector2>)> Effects = new()
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),

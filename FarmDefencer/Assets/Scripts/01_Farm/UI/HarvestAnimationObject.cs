@@ -2,7 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-public class HarvestAnimationObject : MonoBehaviour
+public sealed class HarvestAnimationObject : MonoBehaviour
 {
 	private RectTransform _rectTransform;
 	private Image _image;

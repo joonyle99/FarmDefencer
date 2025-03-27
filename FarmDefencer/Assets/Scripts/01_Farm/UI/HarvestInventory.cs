@@ -4,10 +4,10 @@ using UnityEngine;
 /// <summary>
 /// 자식으로 HarvestAnimationPlayer 오브젝트를 가져야 함.
 /// </summary>
-public class HarvestInventory : MonoBehaviour
+public sealed class HarvestInventory : MonoBehaviour
 {
+	[SerializeField] private ProductDatabase productDatabase;
 	private HarvestAnimationPlayer _harvestAnimationPlayer;
-	public ProductDatabase ProductDatabase;
 	private Dictionary<string, HarvestBox> _harvestBoxes;
 
 	/// <summary>
@@ -30,8 +30,6 @@ public class HarvestInventory : MonoBehaviour
 			harvestBox.Quota = count;
 		}
 	}
-
-
 	
 	/// <summary>
 	/// 요청한 개수와 남은 주문량 중 낮은 값만큼 수확 처리하는 메소드.
@@ -45,11 +43,11 @@ public class HarvestInventory : MonoBehaviour
 	/// <param name="count"></param>
 	public void Gather(ProductEntry productEntry, Vector2 cropWorldPosition, int count)
 	{
-		var harvestBox = _harvestBoxes[productEntry.UniqueId];
+		var harvestBox = _harvestBoxes[productEntry.Name];
 		
 		if (count > harvestBox.Quota)
 		{
-			throw new System.ArgumentOutOfRangeException($"ProductEntry {productEntry.UniqueId}의 남은 주문량 {harvestBox.Quota}보다 많은 개수인 {count}만큼 Gather() 시도했습니다.");
+			throw new System.ArgumentOutOfRangeException($"ProductEntry {productEntry.Name}의 남은 주문량 {harvestBox.Quota}보다 많은 개수인 {count}만큼 Gather() 시도했습니다.");
 		}
 
 		var profit = productEntry.Price * count;
@@ -62,7 +60,7 @@ public class HarvestInventory : MonoBehaviour
 		StartCoroutine(HarvestAnimationCoroutine(productEntry, cropScreenPosition, count));
 	}
 
-	public int GetQuota(ProductEntry productEntry) => _harvestBoxes[productEntry.UniqueId].Quota;
+	public int GetQuota(ProductEntry productEntry) => _harvestBoxes[productEntry.Name].Quota;
 
 	/// <summary>
 	/// 해당 농작물의 개수를 감소시킵니다.
@@ -72,7 +70,7 @@ public class HarvestInventory : MonoBehaviour
 	/// <param name="count"></param>
 	public bool TryMinusProduct(ProductEntry productEntry, int count)
 	{
-		var harvestBox = _harvestBoxes[productEntry.UniqueId];
+		var harvestBox = _harvestBoxes[productEntry.Name];
 		if (harvestBox.Quota < count)
 		{
 			return false;
@@ -107,12 +105,12 @@ public class HarvestInventory : MonoBehaviour
 	{
 		_harvestAnimationPlayer = GetComponentInChildren<HarvestAnimationPlayer>();
 		_harvestBoxes = new Dictionary<string, HarvestBox>();
-		foreach (var entry in ProductDatabase.Products)
+		foreach (var entry in productDatabase.Products)
 		{
-			var harvestBoxTransform = transform.Find($"BoxArea/HarvestBox_{entry.UniqueId}");
+			var harvestBoxTransform = transform.Find($"BoxArea/HarvestBox_{entry.Name}");
 			if (harvestBoxTransform == null)
 			{
-				Debug.LogError($"HarvestInventory/BoxArea의 자식중에 HarvestBox_{entry.UniqueId}가 필요합니다.");
+				Debug.LogError($"HarvestInventory/BoxArea의 자식중에 HarvestBox_{entry.Name}가 필요합니다.");
 				continue;
 			}
 			
@@ -121,13 +119,13 @@ public class HarvestInventory : MonoBehaviour
 				Debug.LogError($"{harvestBoxTransform.gameObject.name}(은)는 HarvestBox 컴포넌트를 갖지 않습니다.");
 				continue;
 			}
-			_harvestBoxes.Add(entry.UniqueId, harvestBox);
+			_harvestBoxes.Add(entry.Name, harvestBox);
 		}
 	}
 
 	private System.Collections.IEnumerator HarvestAnimationCoroutine(ProductEntry productEntry, Vector2 cropScreenPosition, int count)
 	{
-		var harvestBox = _harvestBoxes[productEntry.UniqueId];
+		var harvestBox = _harvestBoxes[productEntry.Name];
 		var toPosition = harvestBox.ScreenPosition;
 
 		for (var i = 0; i < count; i++)

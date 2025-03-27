@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class CropSign : MonoBehaviour
+public sealed class CropSign : MonoBehaviour
 {
-	public ProductEntry ProductEntry => _productEntry;
-	[SerializeField] private ProductEntry _productEntry;
+	public ProductEntry ProductEntry => productEntry;
+	[SerializeField] private ProductEntry productEntry;
 }
