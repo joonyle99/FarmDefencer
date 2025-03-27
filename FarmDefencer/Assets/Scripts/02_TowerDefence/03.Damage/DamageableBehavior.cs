@@ -76,7 +76,8 @@ public abstract class DamageableBehavior : MonoBehaviour
     protected SpineController spineController;
     public SpineController SpineController => spineController;
 
-    protected Dictionary<Status, Coroutine> activeEffects = new();
+    //protected Dictionary<Status, Coroutine> activeEffects = new();
+    protected Coroutine myCoroutine;
 
     protected virtual void Awake()
     {
@@ -95,6 +96,13 @@ public abstract class DamageableBehavior : MonoBehaviour
         IsDead = false;
 
         HP = MaxHp;
+    }
+    protected virtual void OnDisable()
+    {
+        if (myCoroutine != null)
+        {
+            StopCoroutine(myCoroutine);
+        }
     }
     protected virtual void Start()
     {
@@ -116,19 +124,19 @@ public abstract class DamageableBehavior : MonoBehaviour
     }
 
     // tick
-    public void TakeTickDamage(Status status, int tickCount, float interval, int tickDamage)
+    public void TakeTickDamage(int tickCount, float interval, int tickDamage)
     {
         // TODO: 중복이 될지 않될지를 확인해야 한다
-        if (activeEffects.TryGetValue(status, out Coroutine co))
+        if (myCoroutine != null)
         {
-            StopCoroutine(co);
-            activeEffects[status] = null;
+            StopCoroutine(myCoroutine);
+            myCoroutine = null;
         }
 
-        var newCo = StartCoroutine(TickDamageCo(status, tickCount, interval, tickDamage));
-        activeEffects[status] = newCo;
+        var newCo = StartCoroutine(TickDamageCo(tickCount, interval, tickDamage));
+        myCoroutine = newCo;
     }
-    public IEnumerator TickDamageCo(Status status, int tickCount, float interval, int tickDamage)
+    public IEnumerator TickDamageCo(int tickCount, float interval, int tickDamage)
     {
         spineController.SetColor(Color.red);
 
@@ -137,7 +145,7 @@ public abstract class DamageableBehavior : MonoBehaviour
             if (IsDead)
             {
                 spineController.ResetColor();
-                activeEffects[status] = null;
+                myCoroutine = null;
                 yield break;
             }
 
@@ -146,6 +154,5 @@ public abstract class DamageableBehavior : MonoBehaviour
         }
 
         spineController.ResetColor();
-        activeEffects[status] = null;
     }
 }

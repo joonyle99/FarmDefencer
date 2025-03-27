@@ -20,8 +20,8 @@ public class Damager : MonoBehaviour
     {
         damageable.TakeDamage(_damage);
     }
-    public void DealTickDamage(DamageableBehavior damageable, Status status, int tickCount, float tickInterval, int tickDamage)
+    public void DealTickDamage(DamageableBehavior damageable, int tickCount, float tickInterval, int tickDamage)
     {
-        damageable.TakeTickDamage(status, tickCount, tickInterval, tickDamage);
+        damageable.TakeTickDamage(tickCount, tickInterval, tickDamage);
     }
 }
