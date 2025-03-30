@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// 자식으로는 반드시 Field 오브젝트만 가지게 할 것.
@@ -9,27 +11,105 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
 {
     private bool _isFarmPaused;
     private Field[] _fields;
+    private HashSet<Crop> _lockedCrops;
 
-    /// <summary>
-    /// 해당 월드 좌표의 Crop을 검색합니다.
-    /// Crop과 외부 시스템이 직접 상호작용할 일은 없기 때문에, <b>디버그용으로만 사용할 것을 권장합니다. </b><br/><br/>
-    /// <seealso cref="Field.TryFindCropAt(Vector2, out Crop)"/>을 해당 위치를 포함하는 Field에 대해 호출하는 동작입니다.
-    /// </summary>
-    /// <param name="position"></param>
-    /// <param name="crop"></param>
-    /// <returns></returns>
-    public bool TryFindCropAt(Vector2 position, out Crop crop)
+    public bool TryGetLockableCropPositionFromProbability(IReadOnlyList<CropProbabilityData> cropProbabilityDatas,
+        out Vector2 cropPosition)
     {
-        foreach (var field in _fields)
+        var randomMax = 0.0f;
+        foreach (var cropProbability in cropProbabilityDatas)
         {
-            if (field.TryFindCropAt(position, out crop))
+            var field = _fields.FirstOrDefault(f =>
+                f.ProductEntry.ProductName.Equals(cropProbability.TargetCrop.ProductName));
+            if (field is null || !field.IsAvailable || field.Crops.All(c => _lockedCrops.Contains(c)))
             {
-                return true;
+                continue;
+            }
+
+            randomMax += cropProbability.Probability;
+        }
+
+        if (randomMax == 0.0f)
+        {
+            cropPosition = Vector2.zero;
+            return false;
+        }
+
+        var randomValue = Random.Range(0.0f, randomMax);
+        Field targetField = null;
+        foreach (var cropProbability in cropProbabilityDatas)
+        {
+            var field = _fields.FirstOrDefault(f =>
+                f.ProductEntry.ProductName.Equals(cropProbability.TargetCrop.ProductName));
+            if (field is null || !field.IsAvailable || field.Crops.All(c => _lockedCrops.Contains(c)))
+            {
+                continue;
+            }
+
+            randomValue -= cropProbability.Probability;
+            if (randomValue <= 0.0f)
+            {
+                targetField = field;
+                break;
             }
         }
 
-        crop = null;
+        if (targetField is null)
+        {
+            cropPosition = Vector2.zero;
+            return false;
+        }
+
+        // tryCount만큼 랜덤 배정을 시도
+        for (int tryCount = 0; tryCount < 10; ++tryCount)
+        {
+            var flattenedPosition = Random.Range(0, targetField.FieldSize.x * targetField.FieldSize.y);
+            var cropX = targetField.transform.position.x + flattenedPosition % targetField.FieldSize.x;
+            var cropY = targetField.transform.position.y + flattenedPosition / targetField.FieldSize.x;
+            
+            if (targetField.TryFindCropAt(new Vector2(cropX, cropY), out var crop) && !_lockedCrops.Contains(crop))
+            {
+                cropPosition = new Vector2(cropX, cropY);
+                return true;
+            }
+        }
+        
+        // 랜덤 배정에 실패했으면 가장 처음 유효한 Crop의 위치를 반환
+        var firstCrop = targetField.Crops.FirstOrDefault(c => !_lockedCrops.Contains(c));
+        cropPosition = firstCrop is not null
+            ? firstCrop.transform.position
+            : Vector2.zero;
+        return firstCrop is not null;
+    }
+
+    public bool TryLockCropAt(Vector2 cropPosition)
+    {
+        foreach (var field in _fields)
+        {
+            if (field.TryFindCropAt(cropPosition, out var crop))
+            {
+                if (!_lockedCrops.Contains(crop))
+                {
+                    crop.ResetToInitialState();
+                    crop.gameObject.SetActive(false);
+                }
+                return _lockedCrops.Add(crop);
+            }
+        }
+
         return false;
+    }
+
+    public void UnlockCropAt(Vector2 cropPosition)
+    {
+        foreach (var field in _fields)
+        {
+            if (field.TryFindCropAt(cropPosition, out var crop))
+            {
+                crop.gameObject.SetActive(true);
+                _lockedCrops.Remove(crop);
+            }
+        } 
     }
 
     public bool OnSingleTap(Vector2 worldPosition)
@@ -141,7 +221,8 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
     private void Awake()
     {
         _fields = new Field[transform.childCount];
-
+        _lockedCrops = new();
+        
         for (int childIndex = 0; childIndex < transform.childCount; ++childIndex)
         {
             var childObject = transform.GetChild(childIndex);
