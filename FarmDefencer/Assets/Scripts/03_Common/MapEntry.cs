@@ -11,4 +11,13 @@ public sealed class MapEntry : ScriptableObject
 
     public int MapId => mapId;
     public string MapName => mapName;
+
+    public static bool operator ==(MapEntry lhs, MapEntry rhs)
+    {
+        if (lhs is null && rhs is null) return true;
+        if (lhs is null || rhs is null) return false;
+        return lhs.mapId == rhs.mapId;
+    }
+
+    public static bool operator !=(MapEntry lhs, MapEntry rhs) => !(lhs == rhs);
 }
