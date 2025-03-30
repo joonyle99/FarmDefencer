@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -11,14 +12,12 @@ public sealed class FarmManager : MonoBehaviour
 	[SerializeField] private Farm farm;
 	[SerializeField] private FarmInput farmInput;
 	[SerializeField] private ProductDatabase productDatabase;
+	[SerializeField] private PenaltyGiver penaltyGiver;
 
 	private void Awake()
 	{
 		farmClock.RegisterFarmUpdatableObject(farm);
-
-		farmUI.Init(farmClock);
 		farmUI.WateringCan.Water += farm.WateringAction;
-
 		cropSigns.SignClicked += farmUI.CropGuide.Toggle;
 	}
 
@@ -31,6 +30,7 @@ public sealed class FarmManager : MonoBehaviour
 
 		farm.Init(farmUI.HarvestInventory.GetQuota, farmUI.HarvestInventory.Gather);
 
+		farmUI.Init(farmClock);
 		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_carrot", true);
 		farm.SetFieldAvailability("product_carrot", true);
 		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_potato", true);
@@ -60,6 +60,42 @@ public sealed class FarmManager : MonoBehaviour
 				("product_sweetpotato", 99), 
 				("product_mushroom", 99),
 			});
+
+		farmInput.FullZoomOut();
+		penaltyGiver.Init(farm);
+		farmClock.AddPauseCondition(() => penaltyGiver.IsAnimationPlaying);
+		var currentMap = MapManager.Instance.CurrentMap;
+		var monsters = new List<string>();
+		monsters.Add("Rabbit");
+		monsters.Add("Rabbit");
+		monsters.Add("Rabbit");
+		monsters.Add("Rabbit");
+		monsters.Add("Rabbit");
+		monsters.Add("Rabbit");
+		monsters.Add("Squirrel");
+		monsters.Add("Squirrel");
+		monsters.Add("Squirrel");
+		monsters.Add("Squirrel");
+		monsters.Add("Squirrel");
+		monsters.Add("Cat");
+		monsters.Add("Cat");
+		monsters.Add("Cat");
+		monsters.Add("Cat");
+		monsters.Add("Cat");
+		monsters.Add("Cat");
+		monsters.Add("Capybara");
+		monsters.Add("Capybara");
+		monsters.Add("Capybara");
+		monsters.Add("Capybara");
+		monsters.Add("Capybara");
+		monsters.Add("Capybara");
+		monsters.Add("Elephant");
+		monsters.Add("Elephant");
+		monsters.Add("Elephant");
+		monsters.Add("Elephant");
+		monsters.Add("Elephant");
+		monsters.Add("Elephant");
+		penaltyGiver.SpawnMonsters(currentMap, monsters);
 	}
 
 	private void Update()
