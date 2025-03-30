@@ -133,6 +133,8 @@ public sealed class CropCabbage : Crop
 			(transform.position, transform.position);
 	}
 
+	public override void ResetToInitialState() => _currentState = Reset(_currentState);
+
 	private void Awake()
 	{
 		_spriteRenderer = GetComponent<SpriteRenderer>();

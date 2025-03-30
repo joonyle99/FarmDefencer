@@ -62,6 +62,8 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 
 	public abstract void OnFarmUpdate(float deltaTime);
 
+	public abstract void ResetToInitialState();
+
 
 	// 이하 함수 빌딩 블록
 
