@@ -9,11 +9,11 @@ using System.Collections.Generic;
 public sealed class Field : MonoBehaviour, IFarmUpdatable
 {
 	[SerializeField] private GameObject cropPrefab;
-
     [SerializeField] private ProductEntry productEntry;
     public ProductEntry ProductEntry => productEntry;
     [SerializeField] private Vector2Int fieldSize;
     public Vector2Int FieldSize => fieldSize;
+    [SerializeField] private GameObject cropBackgroundPrefab;
 
     public bool IsAvailable
     {
@@ -28,6 +28,8 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable
         }
     }
     private bool _isAvailable;
+
+    public Crop[] Crops => _crops;
     private Crop[] _crops;
     private SpriteRenderer _backgroundRenderer; // 0번 자식 오브젝트에 할당
     private SpriteRenderer _fieldLockedRenderer; // 1번 자식 오브젝트에 할당
@@ -89,6 +91,11 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable
         _backgroundRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         _fieldLockedRenderer = transform.GetChild(1).GetComponent<SpriteRenderer>();
 
+        var cropBackgroundParentObject = new GameObject();
+        cropBackgroundParentObject.transform.parent = transform;
+        cropBackgroundParentObject.name = "CropBackgrounds";
+        cropBackgroundParentObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+        
         for (int yOffset = 0; yOffset < fieldSize.y; ++yOffset)
         {
             for (int xOffset = 0; xOffset < fieldSize.x; ++xOffset)
@@ -99,6 +106,9 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable
                 cropObject.transform.localPosition = new Vector3(xOffset, yOffset, 0.0f);
 
                 _crops[yOffset * fieldSize.x + xOffset] = cropComponent;
+
+                var cropBackgroundObject = Instantiate(cropBackgroundPrefab, cropBackgroundParentObject.transform);
+                cropBackgroundObject.transform.localPosition = new Vector3(xOffset, yOffset, 0.0f);
             }
         }
 
