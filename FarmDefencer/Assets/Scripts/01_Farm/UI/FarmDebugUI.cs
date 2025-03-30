@@ -7,10 +7,12 @@ public sealed class FarmDebugUI : MonoBehaviour
 	private TMP_Text _remainingDaytimeText;
 	private TMP_Text _playPausedButtonText;
 	private FarmClock _farmClock;
+	private bool _isPaused;
 
 	public void Init(FarmClock farmClock)
 	{
 		_farmClock = farmClock;
+//		_farmClock.AddPauseCondition(() => _isPaused);
 	}
 
 	private void Awake()
@@ -30,15 +32,8 @@ public sealed class FarmDebugUI : MonoBehaviour
 			.onClick.AddListener(
 			() =>
 			{
-				if (_farmClock.IsManuallyPaused)
-				{
-					_farmClock.Resume();	
-				}
-				else
-				{
-					_farmClock.Pause();
-				}
-				_playPausedButtonText.text = _farmClock.IsManuallyPaused ? "Play" : "Pause";
+				_isPaused = !_isPaused;
+				_playPausedButtonText.text = _isPaused ? "Play" : "Pause";
 			});
 	}
 
