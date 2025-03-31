@@ -47,6 +47,11 @@ public sealed class FarmInput : MonoBehaviour
 
 	private float _zoomMomentum;
 
+	public void FullZoomOut()
+	{
+		_camera.orthographicSize = MaximumProjectionSize;
+	}
+
 	public void RegisterInputLayer(IFarmInputLayer inputLayer)
 	{
 		_inputLayers.Add(inputLayer);

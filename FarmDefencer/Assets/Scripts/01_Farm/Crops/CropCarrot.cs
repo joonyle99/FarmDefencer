@@ -62,6 +62,8 @@ public sealed class CropCarrot : Crop
 
 			(transform.position, transform.position);
 	}
+	
+	public override void ResetToInitialState() => _currentState = Reset(_currentState);
 
 	public override void OnFarmUpdate(float deltaTime)
 	{

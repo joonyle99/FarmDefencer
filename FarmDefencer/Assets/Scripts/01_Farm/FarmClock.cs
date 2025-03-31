@@ -1,4 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// FarmClock에 의해 Update될 객체에 대한 인터페이스.
@@ -31,31 +35,18 @@ public sealed class FarmClock : MonoBehaviour
 		}
 	}
 	
-	/// <summary>
-	/// Pause()를 호출하였거나, RemainingDaytime이 0.0f여서 멈춘 상태.
-	/// </summary>
 	public bool Stopped { get; private set; }
-
-	/// <summary>
-	/// Pause()를 호출한 상태.
-	/// </summary>
-	public bool IsManuallyPaused { get; private set; }
+	
 	public float LengthOfDaytime { get; private set; }
+
+	private List<Func<bool>> _pauseConditions;
 
 	// 일단은 하나만 가질 수 있도록 구현하였음
 	private IFarmUpdatable _farmUpdatable;
-
-	public void Pause()
+	
+	public void AddPauseCondition(Func<bool> condition)
 	{
-		IsManuallyPaused = true;
-	}
-
-	/// <summary>
-	/// RemainingDaytime이 0.0f라면 여전히 멈춰 있을 것임.
-	/// </summary>
-	public void Resume()
-	{
-		IsManuallyPaused = false;
+		_pauseConditions.Add(condition);
 	}
 
 	public void SetRemainingDaytimeBy(float daytime)
@@ -65,9 +56,15 @@ public sealed class FarmClock : MonoBehaviour
 	}
 	public void SetRemainingDaytimeRandom(float min, float max) => SetRemainingDaytimeBy(Random.Range(min, max));
 	public void RegisterFarmUpdatableObject(IFarmUpdatable farmUpdatable) => _farmUpdatable = farmUpdatable;
+
+	private void Awake()
+	{
+		_pauseConditions = new();
+	}
+	
 	private void Update()
 	{
-		Stopped = IsManuallyPaused || RemainingDaytime == 0.0f;
+		Stopped = _pauseConditions.Any(cond => cond()) || RemainingDaytime == 0.0f;
 		var deltaTime = Stopped ? 0.0f : Time.deltaTime;
 		RemainingDaytime -= deltaTime;
 		_farmUpdatable?.OnFarmUpdate(deltaTime);

@@ -157,6 +157,8 @@ public sealed class CropMushroom : Crop
 
 		RenderInoculationAnimation();
 	}
+	
+	public override void ResetToInitialState() => _currentState = Reset(_currentState);
 
 	private void Awake()
 	{
@@ -166,8 +168,6 @@ public sealed class CropMushroom : Crop
 		_spineAnimationState = _skeletonAnimation.AnimationState;
 		_skeleton = _skeletonAnimation.Skeleton;
 	}
-
-
 
 	// 이하 함수 빌딩 블록
 

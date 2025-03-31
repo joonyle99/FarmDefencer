@@ -115,6 +115,8 @@ public sealed class CropEggplant : Crop
 
 			(transform.position, transform.position);
 	}
+	
+	public override void ResetToInitialState() => _currentState = Reset(_currentState);
 
 	private void Awake()
 	{

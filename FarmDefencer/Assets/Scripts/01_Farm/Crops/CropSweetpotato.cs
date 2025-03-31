@@ -144,11 +144,12 @@ public sealed class CropSweetpotato : Crop
 			(transform.position, transform.position);
 	}
 
+	public override void ResetToInitialState() => _currentState = Reset(_currentState);
+	
 	private void Awake()
 	{
 		_spriteRenderer = GetComponent<SpriteRenderer>();
 	}
-
 
 	// 이하 함수 빌딩 블록
 
