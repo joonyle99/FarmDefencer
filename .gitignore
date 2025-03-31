@@ -32,6 +32,10 @@
 /FarmDefencer/.vs/
 /FarmDefencer/.vsconfig
 
+# VSCode settings (personal environment)
+/.vscode/
+/FarmDefencer/.vscode/
+
 # Gradle cache directory
 /FarmDefencer/.gradle/
 
