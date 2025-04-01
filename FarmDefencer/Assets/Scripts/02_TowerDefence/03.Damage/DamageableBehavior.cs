@@ -87,7 +87,7 @@ public abstract class DamageableBehavior : MonoBehaviour
             throw new System.NullReferenceException($"You should add DamageZone component");
         }
 
-        spineController = GetComponent<SpineController>();
+        spineController = GetComponentInChildren<SpineController>();
 
         startHp = MaxHp;
     }

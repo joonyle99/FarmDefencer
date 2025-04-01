@@ -57,9 +57,6 @@ public sealed class Tower : TargetableBehavior
     [Space]
 
     [Header("Animation")]
-    [SerializeField] private SpineController _spineController;
-    public SpineController SpineController => _spineController;
-
     [SpineAnimation] public string[] IdleAnimationNames;
     [SpineAnimation] public string[] AttackAnimationNames;
     [SpineAnimation] public string[] LevelUpAnimationNames;
@@ -126,7 +123,7 @@ public sealed class Tower : TargetableBehavior
     // initialize
     private void InitializeAttackDurations()
     {
-        var skeletonData = _spineController.Skeleton.Data;
+        var skeletonData = spineController.Skeleton.Data;
         _attackDuration = new float[AttackAnimationNames.Length];
 
         for (int i = 0; i < _attackDuration.Length; i++)
@@ -137,7 +134,7 @@ public sealed class Tower : TargetableBehavior
     }
     private void InitilaizeSpineEvent()
     {
-        _spineController.SkeletonAnimation.AnimationState.Event += HandleSpineEvent;
+        spineController.SkeletonAnimation.AnimationState.Event += HandleSpineEvent;
     }
     private void HandleSpineEvent(Spine.TrackEntry trackEntry, Spine.Event e)
     {
@@ -202,14 +199,14 @@ public sealed class Tower : TargetableBehavior
         }
 
         // prev level animation
-        _spineController.SetAnimation(LevelUpAnimation, false);
+        spineController.SetAnimation(LevelUpAnimation, false);
 
         // level up
         CurrentLevel += 1;
         CurrentCost = CurrentLevelData.ValueCost;
 
         // next level animation
-        _spineController.AddAnimation(IdleAnimation, true); // 레벨이 오른 후의 애니메이션을 출력해야 한다
+        spineController.AddAnimation(IdleAnimation, true); // 레벨이 오른 후의 애니메이션을 출력해야 한다
 
         Reinforce();
 
@@ -271,8 +268,8 @@ public sealed class Tower : TargetableBehavior
         _isAttacking = true;
 
         // animation
-        _spineController.SetAnimation(AttackAnimation, false);
-        _spineController.AddAnimation(IdleAnimation, true);
+        spineController.SetAnimation(AttackAnimation, false);
+        spineController.AddAnimation(IdleAnimation, true);
     }
     private void Fire()
     {
@@ -283,7 +280,7 @@ public sealed class Tower : TargetableBehavior
 
         _flipAimer.FlipAim(CurrentTarget.transform.position);
 
-        var projectileGO = Instantiate(_projectilePrefab, _spineController.GetShootingBonePos(CurrentLevel), Quaternion.identity);
+        var projectileGO = Instantiate(_projectilePrefab, spineController.GetShootingBonePos(CurrentLevel), Quaternion.identity);
         var projectile = projectileGO.GetComponent<ProjectileBase>();
 
         if (projectile == null)

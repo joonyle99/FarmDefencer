@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 /// <summary>
-/// 
+///
 /// </summary>
 public abstract class Monster : TargetableBehavior, IProduct
 {
@@ -68,14 +68,17 @@ public abstract class Monster : TargetableBehavior, IProduct
 
         InstantOpaque();
     }
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
+
         // stop all coroutines
         // 1. TransparentCo
         // 2. OpaqueCo
         // 3. KillCo
         // 4. SurviveCo
         // 5. StunCo
+
         StopAllCoroutines();
 
         OnDamaged = null;
@@ -129,7 +132,7 @@ public abstract class Monster : TargetableBehavior, IProduct
 
             //StartCoroutine(StunCo(StunDuration));
 
-            // 여기서,, 
+            // 여기서,,
         }
 
         OnDamaged?.Invoke(damage);
