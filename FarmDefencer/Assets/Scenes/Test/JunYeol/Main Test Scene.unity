@@ -4141,7 +4141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1951808835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4156,7 +4156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   introSource: {fileID: 1951808837}
   loopSource: {fileID: 1951808838}
-  fadeDuration: 2
+  fadeDuration: 2.5
 --- !u!4 &1951808836
 Transform:
   m_ObjectHideFlags: 0
