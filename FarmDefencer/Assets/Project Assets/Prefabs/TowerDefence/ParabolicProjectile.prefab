@@ -145,6 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damager: {fileID: 2493848825862227538}
   moveDuration: 1
+  damageType: 1
   _peekHeight: 2
   _curve:
     serializedVersion: 2
@@ -179,6 +180,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _tickCount: 0
+  _tickInterval: 0
+  _tickDamage: 0
 --- !u!1001 &4758238735245043532
 PrefabInstance:
   m_ObjectHideFlags: 0

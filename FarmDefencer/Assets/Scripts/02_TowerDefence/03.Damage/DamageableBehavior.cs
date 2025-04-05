@@ -13,7 +13,7 @@ public enum Status
 }
 
 /// <summary>
-/// 
+///
 /// </summary>
 public abstract class DamageableBehavior : MonoBehaviour
 {
@@ -21,6 +21,7 @@ public abstract class DamageableBehavior : MonoBehaviour
     [Space]
 
     [SerializeField] private FloatingHealthBar _healthBar;
+    public FloatingHealthBar HealthBar => _healthBar;
 
     [Space]
 
@@ -77,7 +78,9 @@ public abstract class DamageableBehavior : MonoBehaviour
     public SpineController SpineController => spineController;
 
     //protected Dictionary<Status, Coroutine> activeEffects = new();
-    protected Coroutine myCoroutine;
+    protected Coroutine tickDamageCo;
+
+    private static readonly Color RED_COLOR = new Color(1f, 0f, 0f, 0.8f);
 
     protected virtual void Awake()
     {
@@ -99,9 +102,10 @@ public abstract class DamageableBehavior : MonoBehaviour
     }
     protected virtual void OnDisable()
     {
-        if (myCoroutine != null)
+        if (tickDamageCo != null)
         {
-            StopCoroutine(myCoroutine);
+            StopCoroutine(tickDamageCo);
+            tickDamageCo = null;
         }
     }
     protected virtual void Start()
@@ -112,7 +116,7 @@ public abstract class DamageableBehavior : MonoBehaviour
         }
     }
 
-    public abstract void TakeDamage(int damage);
+    public abstract void TakeDamage(int damage, DamageType type);
     public abstract void Kill();
 
     // stun
@@ -124,32 +128,32 @@ public abstract class DamageableBehavior : MonoBehaviour
     }
 
     // tick
-    public void TakeTickDamage(int tickCount, float interval, int tickDamage)
+    public void TakeTickDamage(int count, float interval, int damage, DamageType type)
     {
-        // TODO: 중복이 될지 않될지를 확인해야 한다
-        if (myCoroutine != null)
+        // TODO: 중복이 될지 안될지를 확인해야 한다
+        if (tickDamageCo != null)
         {
-            StopCoroutine(myCoroutine);
-            myCoroutine = null;
+            StopCoroutine(tickDamageCo);
+            tickDamageCo = null;
         }
 
-        var newCo = StartCoroutine(TickDamageCo(tickCount, interval, tickDamage));
-        myCoroutine = newCo;
+        var newCo = StartCoroutine(TickDamageCo(count, interval, damage, type));
+        tickDamageCo = newCo;
     }
-    public IEnumerator TickDamageCo(int tickCount, float interval, int tickDamage)
+    public IEnumerator TickDamageCo(int count, float interval, int damage, DamageType type)
     {
-        spineController.SetColor(Color.red);
+        spineController.SetColor(RED_COLOR);
 
-        for (int i = 0; i < tickCount; i++)
+        for (int i = 0; i < count; i++)
         {
             if (IsDead)
             {
                 spineController.ResetColor();
-                myCoroutine = null;
+                tickDamageCo = null;
                 yield break;
             }
 
-            TakeDamage(tickDamage);
+            TakeDamage(damage, type);
             yield return new WaitForSeconds(interval);
         }
 

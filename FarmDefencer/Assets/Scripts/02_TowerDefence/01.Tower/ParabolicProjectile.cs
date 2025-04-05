@@ -12,6 +12,21 @@ public sealed class ParabolicProjectile : ProjectileBase
     [SerializeField] private float _peekHeight = 1.5f;
     [SerializeField] private AnimationCurve _curve;
 
+    [Space]
+
+    [SerializeField] private int _tickCount;
+    [SerializeField] private float _tickInterval;
+    [SerializeField] private int _tickDamage;
+
+    private static readonly (int x, int y)[] DIRECTION = new (int x, int y)[]
+    {
+        (0, 0),    // origin
+        (-1, 0),   // left
+        (1, 0),    // right
+        (0, -1),   // down
+        (0, 1)     // up
+    };
+
     protected override void Move()
     {
         // move
@@ -39,31 +54,22 @@ public sealed class ParabolicProjectile : ProjectileBase
         // 직접 데미지
         base.DealDamage();
 
-        // 지속 데미지
+        // 지속(Tick) 데미지
         var gridMovement = currentTarget.GetComponent<GridMovement>();
         if (gridMovement != null)
         {
             var originCell = gridMovement.CurrGridCell;
 
-            var directions = new (int x, int y)[]
-            {
-                (0, 0),    // origin
-                (-1, 0),   // left
-                (1, 0),    // right
-                (0, -1),   // down
-                (0, 1)     // up
-            };
-
-            foreach (var dir in directions)
+            foreach (var dir in DIRECTION)
             {
                 var cell = DefenceContext.Current.GridMap.GetCell(originCell.cellPosition.x + dir.x, originCell.cellPosition.y + dir.y);
                 if (cell == null) continue;
 
                 // 1) 지속 데미지 부여
-                cell.monstersInCell.ForEach(monster => { damager.DealTickDamage(monster, 5, 1f, 5); });
+                cell.monstersInCell.ForEach(monster => { damager.DealTickDamage(monster, _tickCount, _tickInterval, _tickDamage, damageType); });
 
                 // 2) 셀 시각 효과
-                cell.transform?.DOScale(1.5f, 0.25f).SetEase(Ease.OutBack).OnComplete(() => { cell.transform.DOScale(1f, 0.25f).SetEase(Ease.InBack); });
+                // cell.transform?.DOScale(1.5f, 0.25f).SetEase(Ease.OutBack).OnComplete(() => { cell.transform.DOScale(1f, 0.25f).SetEase(Ease.InBack); });
             }
         }
     }
