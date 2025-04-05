@@ -66,7 +66,7 @@ public class BuildSystem : MonoBehaviour
             {
                 MoveGhostTower(gridCell.worldPosition);
 
-                _ghostTower.SpineController.SetColor(NORMAL_GHOST_COLOR);
+                _ghostTower.SpineController.ResetColor();
                 _ghostTower.Detector.PaintRange(BLUE_RANGE_COLOR);
                 _hoveringGridCell = gridCell;
             }
@@ -74,7 +74,7 @@ public class BuildSystem : MonoBehaviour
     }
     public void Place(PointerEventData eventData)
     {
-        _ghostTower.SpineController.SetColor(NORMAL_GHOST_COLOR);
+        _ghostTower.SpineController.ResetColor();
         _ghostTower.Detector.EraseRange();
 
         if (_ghostTower == null)
@@ -134,7 +134,6 @@ public class BuildSystem : MonoBehaviour
     private void CreateGhostTower(Vector3 worldPos)
     {
         _ghostTower = Instantiate(SelectedTower, worldPos, Quaternion.identity);
-        _ghostTower.SpineController.SetColor(NORMAL_GHOST_COLOR);
     }
     private void MoveGhostTower(Vector3 worldPos)
     {
