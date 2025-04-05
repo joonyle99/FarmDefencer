@@ -72,6 +72,7 @@ Transform:
   m_Children:
   - {fileID: 559721783228163092}
   - {fileID: 8056559261859085462}
+  - {fileID: 8451863443428016242}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3788177686576222563
@@ -271,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 1
+  _arrivalThreshold: 0.05
   eTime: 0
   distance: 0
 --- !u!114 &221480247723861646
@@ -293,7 +295,7 @@ MonoBehaviour:
   _targetPoint: {fileID: 8056559261859085462}
   _originFactory: {fileID: 0}
   _monsterName: cat
-  _spineController: {fileID: 7923479951364342952}
+  _headPoint: {fileID: 8451863443428016242}
   IdleAnimationName: idle
   WalkAnimationName: walk
   WalkDamagedAnimationName: walk_damaged
@@ -310,6 +312,37 @@ SortingGroup:
   m_SortingLayer: 2
   m_SortingOrder: 9999
   m_SortAtRoot: 0
+--- !u!1 &4591080349136814541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8451863443428016242}
+  m_Layer: 7
+  m_Name: Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8451863443428016242
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4591080349136814541}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 7.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 693835973689949412}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6505670202219218649
 PrefabInstance:
   m_ObjectHideFlags: 0

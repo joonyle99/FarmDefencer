@@ -33,8 +33,21 @@ public abstract class Monster : TargetableBehavior, IProduct
     [SerializeField] private string _monsterName;
     public string MonsterName => _monsterName;
 
-    private SortingGroup _sortingGroup;
-    private int _defaultSortingOrder;
+    [Space]
+
+    [SerializeField] private Transform _headPoint;
+    public Transform HeadPoint
+    {
+        get
+        {
+            if (_headPoint == null)
+            {
+                _headPoint = this.transform;
+            }
+
+            return _headPoint;
+        }
+    }
 
     [Space]
 
@@ -52,6 +65,9 @@ public abstract class Monster : TargetableBehavior, IProduct
     public event System.Action<int> OnDamaged;
     public event System.Action<Monster> OnKilled;
     public event System.Action<Monster> OnSurvived;
+
+    private SortingGroup _sortingGroup;
+    private int _defaultSortingOrder;
 
     protected override void Awake()
     {
