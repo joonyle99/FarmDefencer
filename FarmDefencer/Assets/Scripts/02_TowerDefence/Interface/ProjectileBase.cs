@@ -9,8 +9,6 @@ public abstract class ProjectileBase : MonoBehaviour
     [SerializeField] protected float moveDuration = 1.5f;
     //[SerializeField] protected float hitThreshold = 0.05f;
 
-    [SerializeField] protected DamageType damageType = DamageType.Normal;
-
     protected TargetableBehavior currentTarget;
 
     protected Vector3 startPos;
@@ -77,7 +75,7 @@ public abstract class ProjectileBase : MonoBehaviour
     protected virtual void DealDamage()
     {
         //Debug.Log(GetTarget().name + "에게 " + GetDamage() + "의 데미지를 입힘");
-        damager.DealDamage(currentTarget, damageType);
+        damager.DealDamage(currentTarget, DamageType.Normal);
     }
 
     public void Trigger()
