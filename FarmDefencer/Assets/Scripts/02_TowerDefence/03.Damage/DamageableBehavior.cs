@@ -80,8 +80,6 @@ public abstract class DamageableBehavior : MonoBehaviour
     //protected Dictionary<Status, Coroutine> activeEffects = new();
     protected Coroutine tickDamageCo;
 
-    private static readonly Color RED_COLOR = new Color(1f, 0f, 0f, 0.8f);
-
     protected virtual void Awake()
     {
         var damageZone = GetComponent<DamageableZone>();
@@ -142,7 +140,7 @@ public abstract class DamageableBehavior : MonoBehaviour
     }
     public IEnumerator TickDamageCo(int count, float interval, int damage, DamageType type)
     {
-        spineController.SetColor(RED_COLOR);
+        spineController.SetColor(new Color(0.7f, 0f, 0f, 1f));
 
         for (int i = 0; i < count; i++)
         {

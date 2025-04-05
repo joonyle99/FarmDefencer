@@ -46,6 +46,7 @@ public class BuildSystem : MonoBehaviour
             MoveGhostTower(worldPos);
 
             _ghostTower.SpineController.SetColor(RED_GHOST_COLOR);
+            _ghostTower.Detector.EraseRange();
             _hoveringGridCell = null;
         }
         else

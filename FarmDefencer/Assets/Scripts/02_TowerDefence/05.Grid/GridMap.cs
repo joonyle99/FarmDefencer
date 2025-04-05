@@ -179,7 +179,7 @@ public class GridMap : MonoBehaviour
         var originGridPath = CalculateOriginPath();
         if (originGridPath == null || originGridPath.Count < 2)
         {
-            Debug.LogError("origin grid path is invalid");
+            Debug.Log("origin grid path is invalid");
             LoadPrevDistanceCost();
             yield break;
         }
@@ -193,7 +193,7 @@ public class GridMap : MonoBehaviour
         var newOriginGridPath = CalculateOriginPath();
         if (newOriginGridPath == null || newOriginGridPath.Count < 2)
         {
-            Debug.LogError("new origin grid path is invalid");
+            Debug.Log("new origin grid path is invalid");
             LoadPrevDistanceCost();
             return false;
         }

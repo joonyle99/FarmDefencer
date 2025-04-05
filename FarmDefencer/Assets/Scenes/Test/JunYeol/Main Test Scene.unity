@@ -500,7 +500,6 @@ MonoBehaviour:
   GridMap: {fileID: 0}
   WaveSystem: {fileID: 0}
   BuildSystem: {fileID: 0}
-  damageText: {fileID: 1540332421408597589, guid: 5c81b4bf9b84c054f94b96de97e81038, type: 3}
 --- !u!4 &755706060
 Transform:
   m_ObjectHideFlags: 0
