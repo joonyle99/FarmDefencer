@@ -243,7 +243,7 @@ public class GridMap : MonoBehaviour
 
         return _myGridMap[h, w];
     }
-    
+
     // path finding
     public List<GridCell> CalculateOriginPath()
     {

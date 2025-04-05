@@ -3,7 +3,7 @@ using Spine.Unity;
 using UnityEngine;
 
 /// <summary>
-/// 
+///
 /// </summary>
 public sealed class Tower : TargetableBehavior
 {
@@ -221,10 +221,12 @@ public sealed class Tower : TargetableBehavior
     }
     public void ShowUpgradePanel()
     {
+        // Detector.PaintRange(BuildSystem.RED_RANGE_COLOR);
         UpgradePanel.gameObject.SetActive(true);
     }
     public void HideUpgradePanel()
     {
+        // Detector.EraseRange();
         UpgradePanel.gameObject.SetActive(false);
     }
 
