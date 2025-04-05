@@ -66,10 +66,19 @@ public sealed class ParabolicProjectile : ProjectileBase
                 if (cell == null) continue;
 
                 // 1) 지속 데미지 부여
-                cell.monstersInCell.ForEach(monster => { damager.DealTickDamage(monster, _tickCount, _tickInterval, _tickDamage, damageType); });
+                // currentTarget 뿐만 아니라 monstersInCell에 있는 모든 몬스터에 대해 유효성 검사를 진행해야 한다
+                cell.monstersInCell.ForEach(monster =>
+                {
+                    // monster == null: 일반적인 Unity-style null 검사 → Destroy된 객체 포함
+                    // monster.Equals(null): 혹시 모를 내부 에러 방지 및 명시적 비교 (C# 오브젝트)
+                    if (monster == null || monster.Equals(null)) return;
+                    if (!monster.gameObject.activeInHierarchy) return;
+
+                    damager.DealTickDamage(monster, _tickCount, _tickInterval, _tickDamage, DamageType.Fire);
+                });
 
                 // 2) 셀 시각 효과
-                // cell.transform?.DOScale(1.5f, 0.25f).SetEase(Ease.OutBack).OnComplete(() => { cell.transform.DOScale(1f, 0.25f).SetEase(Ease.InBack); });
+                cell.transform?.DOScale(1.5f, 0.25f).SetEase(Ease.OutBack).OnComplete(() => { cell.transform.DOScale(1f, 0.25f).SetEase(Ease.InBack); });
             }
         }
     }
