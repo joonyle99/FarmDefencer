@@ -299,7 +299,7 @@ public sealed class Tower : TargetableBehavior
     }
 
     // hit
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, DamageType type)
     {
         HP -= damage;
     }
