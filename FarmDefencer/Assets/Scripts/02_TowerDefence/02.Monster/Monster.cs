@@ -137,7 +137,7 @@ public abstract class Monster : TargetableBehavior, IProduct
 
         var damageTextGo = Resources.Load<DamageText>("Prefabs/DamageText");
         var damageText = Instantiate(damageTextGo, Vector3.zero, Quaternion.identity);
-        damageText.Init(damage.ToString(), type, HeadPoint.position);
+        damageText.Init(damage.ToString(), type, HeadPoint);
 
         if (HP > 0)
         {
