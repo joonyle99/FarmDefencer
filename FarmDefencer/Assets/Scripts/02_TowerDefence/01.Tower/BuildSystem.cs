@@ -17,6 +17,12 @@ public class BuildSystem : MonoBehaviour
     private Tower _ghostTower;
     private GridCell _hoveringGridCell;
 
+    // Color 같은 구조체엔 const 대신 항상 static을 써야 함
+    public static readonly Color RED_GHOST_COLOR = new Color(1f, 0f, 0f, 0.7f);
+    public static readonly Color NORMAL_GHOST_COLOR = new Color(1f, 1f, 1f, 0.7f);
+    public static readonly Color RED_RANGE_COLOR = new Color(1f, 0f, 0f, 0.8f);
+    public static readonly Color BLUE_RANGE_COLOR = new Color(0f, 0f, 1f, 0.8f);
+
     public void Pick(PointerEventData eventData)
     {
         if (BuildState() && EnoughGold(SelectedTower))
@@ -37,39 +43,40 @@ public class BuildSystem : MonoBehaviour
 
         if (OutOfTileMap(worldPos) || NullGridCell(gridCell))
         {
-            //Debug.Log("=====> OutOfTileMap || NullGridCell");
             MoveGhostTower(worldPos);
 
-            _ghostTower.SpineController.SetColor(new Color(1, 0, 0, 0.7f));
+            _ghostTower.SpineController.SetColor(RED_GHOST_COLOR);
             _hoveringGridCell = null;
         }
         else
         {
             if (SameGridCell(gridCell))
             {
-                //Debug.Log("=====> Same GridCell");
                 return;
             }
             else if (!EmptyGridCell(gridCell) || !UsableGridCell(gridCell))
             {
-                //Debug.Log("=====> EmptyGridCell || UsableGridCell");
                 MoveGhostTower(gridCell.worldPosition);
 
-                _ghostTower.SpineController.SetColor(new Color(1, 0, 0, 0.7f));
+                _ghostTower.SpineController.SetColor(RED_GHOST_COLOR);
+                _ghostTower.Detector.PaintRange(RED_RANGE_COLOR);
                 _hoveringGridCell = gridCell;
             }
             else
             {
-                //Debug.Log("=====> Valid GridCell");
                 MoveGhostTower(gridCell.worldPosition);
 
-                _ghostTower.SpineController.SetColor(new Color(1, 1, 1, 0.7f));
+                _ghostTower.SpineController.SetColor(NORMAL_GHOST_COLOR);
+                _ghostTower.Detector.PaintRange(BLUE_RANGE_COLOR);
                 _hoveringGridCell = gridCell;
             }
         }
     }
     public void Place(PointerEventData eventData)
     {
+        _ghostTower.SpineController.SetColor(NORMAL_GHOST_COLOR);
+        _ghostTower.Detector.EraseRange();
+
         if (_ghostTower == null)
         {
             return;
@@ -95,7 +102,7 @@ public class BuildSystem : MonoBehaviour
 
         DefenceContext.Current.GridMap.LastGridCell = _hoveringGridCell;
 
-        if (CheckBuild() == false)
+        if (CheckBuild(_hoveringGridCell) == false)
         {
             CancelBuild();
             return;
@@ -127,7 +134,7 @@ public class BuildSystem : MonoBehaviour
     private void CreateGhostTower(Vector3 worldPos)
     {
         _ghostTower = Instantiate(SelectedTower, worldPos, Quaternion.identity);
-        _ghostTower.SpineController.SetColor(new Color(1, 1, 1, 0.7f));
+        _ghostTower.SpineController.SetColor(NORMAL_GHOST_COLOR);
     }
     private void MoveGhostTower(Vector3 worldPos)
     {
@@ -150,8 +157,6 @@ public class BuildSystem : MonoBehaviour
 
         if (_ghostTower != null)
         {
-            Debug.Log("1");
-
             Destroy(_ghostTower.gameObject);
             _ghostTower = null;
         }
@@ -165,9 +170,10 @@ public class BuildSystem : MonoBehaviour
         return GameStateManager.Instance.CurrentState is GameState.Build
             || GameStateManager.Instance.CurrentState is GameState.Wave;
     }
-    private bool CheckBuild()
+    private bool CheckBuild(GridCell gridCell)
     {
-        return _hoveringGridCell.CheckBuild();
+        // gridCell을 기준으로 경로를 탐색하여 타워를 설치할 수 있는지 확인한다
+        return gridCell.CheckBuild();
     }
     private bool EnoughGold(Tower tower)
     {

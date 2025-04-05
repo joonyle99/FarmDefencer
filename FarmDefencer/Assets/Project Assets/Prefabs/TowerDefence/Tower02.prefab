@@ -1383,8 +1383,8 @@ MonoBehaviour:
   _targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  _widthRange: 1
-  _heightRange: 1
+  _widthRange: 2
+  _heightRange: 2
 --- !u!1 &7567883333410665114
 GameObject:
   m_ObjectHideFlags: 0
@@ -1673,7 +1673,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2a10a66e36815244d9644cca730c9b94, type: 2}
   - {fileID: 11400000, guid: db66b221964ed214a8df350f1b8b175d, type: 2}
   _level: 1
-  _spineController: {fileID: 1928018848388447381}
   IdleAnimationNames:
   - idle_Lv1
   - idle_Lv2
