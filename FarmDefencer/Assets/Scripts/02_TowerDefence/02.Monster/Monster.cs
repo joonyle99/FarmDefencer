@@ -126,7 +126,7 @@ public abstract class Monster : TargetableBehavior, IProduct
         _sortingGroup.sortingOrder = _defaultSortingOrder + deltaY + deltaX;
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, DamageType type)
     {
         if (IsDead == true)
         {
@@ -134,6 +134,10 @@ public abstract class Monster : TargetableBehavior, IProduct
         }
 
         HP -= damage;
+
+        var damageTextGo = Resources.Load<DamageText>("Prefabs/DamageText");
+        var damageText = Instantiate(damageTextGo, Vector3.zero, Quaternion.identity);
+        damageText.Init(damage.ToString(), type, HeadPoint.position);
 
         if (HP > 0)
         {
