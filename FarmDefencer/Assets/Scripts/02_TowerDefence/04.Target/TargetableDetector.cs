@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 
+///
 /// </summary>
 public class TargetableDetector : MonoBehaviour
 {
@@ -11,10 +11,10 @@ public class TargetableDetector : MonoBehaviour
 
     [Space]
 
-    [SerializeField] private int _widthRange = 1;
-    [SerializeField] private int _heightRange = 1;
+    [SerializeField] private int _widthRange;
+    [SerializeField] private int _heightRange;
 
-    private List<TargetableBehavior> _currentTargets = new List<TargetableBehavior>(BUCKET_CAPACITY);
+    private List<TargetableBehavior> _currentTargets = new(BUCKET_CAPACITY);
 
     private const int BUCKET_CAPACITY = 100;
 
@@ -23,6 +23,8 @@ public class TargetableDetector : MonoBehaviour
     public event Action<TargetableBehavior> OnEnterTarget;
     public event Action<TargetableBehavior> OnExitTarget;
     // public event Action<TargetableBehavior> OnAccquireTarget;       // when you get current target
+
+    private HashSet<GridCell> _paintedCells = new();
 
     public TargetableBehavior GetFrontTarget()
     {
@@ -67,13 +69,14 @@ public class TargetableDetector : MonoBehaviour
         }
     }
 
-    // 
+    //
     private void DetectTargets()
     {
         // get origin cell
         var thisCellPos = DefenceContext.Current.GridMap.WorldToCell(transform.position);
 
         // new targets
+        // 중복 타겟 방지를 위해 HashSet을 사용한다.
         var newDetectedTargets = new HashSet<TargetableBehavior>(BUCKET_CAPACITY);
 
         // calc range
@@ -84,6 +87,7 @@ public class TargetableDetector : MonoBehaviour
                 var offset = new Vector3Int(widthOffset, heightOffset, 0);
                 if (offset == Vector3Int.zero)
                 {
+                    // 현재 위치는 탐지 범위에 포함되지 않는다.
                     continue;
                 }
 
@@ -92,22 +96,26 @@ public class TargetableDetector : MonoBehaviour
                 var targetCell = DefenceContext.Current.GridMap.GetCell(targetCellPos.x, targetCellPos.y);
                 if (targetCell == null)
                 {
+                    // 유효하지 않는 셀이라면 탐지 범위에 포함되지 않는다. (e.g 맵 밖)
                     continue;
                 }
 
                 // overlap circle
-                var targetColliders = Physics2D.OverlapCircleAll(targetCell.transform.position, DefenceContext.Current.GridMap.UnitCellSize / 2f, _targetLayerMask);
+                var radius = DefenceContext.Current.GridMap.UnitCellSize / 2f;
+                var targetColliders = Physics2D.OverlapCircleAll(targetCell.worldPosition, radius, _targetLayerMask);
 
                 // detected targets
                 foreach (var targetCollider in targetColliders)
                 {
                     if (targetCollider.TryGetComponent<TargetableBehavior>(out var target))
                     {
+                        // 죽은 타겟은 탐지 범위에 포함되지 않는다.
                         if (target.IsDead == true)
                         {
                             continue;
                         }
 
+                        // 이미 탐지된 타겟이라면 탐지 범위에 포함되지 않는다.
                         if (newDetectedTargets.Contains(target) == true)
                         {
                             continue;
@@ -131,6 +139,7 @@ public class TargetableDetector : MonoBehaviour
         var deletableTargets = new List<TargetableBehavior>();
 
         // for out of range
+        // 현재 탐지된 타겟들 중에서 탐지 범위에 포함되지 않는 타겟들을 삭제한다.
         foreach (var oldTarget in _currentTargets)
         {
             // 삭제 조건
@@ -148,9 +157,15 @@ public class TargetableDetector : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 탐지 범위를 시각화하는 함수
+    /// </summary>
+    /// <param name="color">시각화 색상</param>
     public void PaintRange(Color? color = null)
     {
-        var order = 0;
+        EraseRange();
+
+        // var order = 0;
 
         // get targetDetector's cell
         var thisCellPos = DefenceContext.Current.GridMap.WorldToCell(transform.position);
@@ -161,47 +176,68 @@ public class TargetableDetector : MonoBehaviour
             for (int heightOffset = -_heightRange; heightOffset <= _heightRange; heightOffset++)
             {
                 var offset = new Vector3Int(widthOffset, heightOffset, 0);
-                var targetCellPos = thisCellPos + offset;
 
-                var targetCell = DefenceContext.Current.GridMap.GetCell(targetCellPos.x, targetCellPos.y);
-                if (targetCell == null)
+                if (offset == Vector3Int.zero)
                 {
+                    // 현재 위치는 탐지 범위에 포함되지 않는다.
                     continue;
                 }
 
-                // debug
-                order++;
+                var targetCellPos = thisCellPos + offset;
+                var targetCell = DefenceContext.Current.GridMap.GetCell(targetCellPos.x, targetCellPos.y);
+                if (targetCell == null)
+                {
+                    // 유효하지 않는 셀이라면 탐지 범위에 포함되지 않는다. (e.g 맵 밖)
+                    continue;
+                }
+
+                _paintedCells.Add(targetCell);
                 targetCell.ChangeColor(color ?? Color.blue);
+
+                // debug
+                // order++;
                 // targetCell.distanceCostText.text = order.ToString();
                 // JoonyleGameDevKit.Painter.DebugDrawPlus(targetCell.transform.position, Color.red, DefenceContext.Current.GridMap.UnitCellSize / 2f, 5f);
             }
         }
     }
+
+    /// <summary>
+    /// 탐지 범위를 지우는 함수
+    /// </summary>
     public void EraseRange()
     {
-        // get targetDetector's cell
-        var thisCellPos = DefenceContext.Current.GridMap.WorldToCell(transform.position);
-
-        // calc rectangle range
-        for (int widthOffset = -_widthRange; widthOffset <= _widthRange; widthOffset++)
+        foreach (var paintedCell in _paintedCells)
         {
-            for (int heightOffset = -_heightRange; heightOffset <= _heightRange; heightOffset++)
-            {
-                var offset = new Vector3Int(widthOffset, heightOffset, 0);
-                var targetCellPos = thisCellPos + offset;
-
-                var targetCell = DefenceContext.Current.GridMap.GetCell(targetCellPos.x, targetCellPos.y);
-                if (targetCell == null)
-                {
-                    continue;
-                }
-
-                // debug
-                targetCell.ResetColor();
-                // targetCell.distanceCostText.text = order.ToString();
-                // JoonyleGameDevKit.Painter.DebugDrawPlus(targetCell.transform.position, Color.red, DefenceContext.Current.GridMap.UnitCellSize / 2f, 5f);
-            }
+            paintedCell.ResetColor();
         }
+
+        _paintedCells.Clear();
+
+        // // get targetDetector's cell
+        // var thisCellPos = DefenceContext.Current.GridMap.WorldToCell(transform.position);
+
+        // // calc rectangle range
+        // for (int widthOffset = -_widthRange; widthOffset <= _widthRange; widthOffset++)
+        // {
+        //     for (int heightOffset = -_heightRange; heightOffset <= _heightRange; heightOffset++)
+        //     {
+        //         var offset = new Vector3Int(widthOffset, heightOffset, 0);
+        //         var targetCellPos = thisCellPos + offset;
+
+        //         var targetCell = DefenceContext.Current.GridMap.GetCell(targetCellPos.x, targetCellPos.y);
+        //         if (targetCell == null)
+        //         {
+        //             // 유효하지 않는 셀이라면 탐지 범위에 포함되지 않는다. (e.g 맵 밖)
+        //             continue;
+        //         }
+
+        //         // debug
+        //         targetCell.ResetColor();
+        //         // targetCell.distanceCostText.text = order.ToString();
+        //         // JoonyleGameDevKit.Painter.DebugDrawPlus(targetCell.transform.position, Color.red, DefenceContext.Current.GridMap.UnitCellSize / 2f, 5f);
+        //     }
+        // }
     }
 }
 
