@@ -9,7 +9,10 @@ public class DamageText : MonoBehaviour
     private TextMeshPro _text;
 
     private float _timer;
+    private float _offset;
     private Color _originalColor;
+
+    private Transform _origin;
 
     private bool _isTrigger = false;
 
@@ -28,8 +31,12 @@ public class DamageText : MonoBehaviour
         float delta = Time.deltaTime;
         _timer -= delta;
 
-        // 위로 떠오르기
-        transform.position += Vector3.up * floatSpeed * delta;
+        // 누적 오프셋 증가
+        _offset += floatSpeed * delta;
+
+        // origin을 따라가면서, 위로 떠오름
+        // transform.position = _origin.position + Vector3.up * _offset;
+        transform.position = new Vector3(transform.position.x, _origin.position.y, transform.position.z) + Vector3.up * _offset;
 
         // 투명도 조정
         float alpha = Mathf.Clamp01(_timer / fadeDuration);
@@ -44,7 +51,7 @@ public class DamageText : MonoBehaviour
         }
     }
 
-    public void Init(string message, DamageType type, Vector3 worldPos)
+    public void Init(string message, DamageType type, Transform origin)
     {
         _text.text = message;
         _text.color = GetColorByType(type);
@@ -52,7 +59,9 @@ public class DamageText : MonoBehaviour
 
         _timer = fadeDuration;
 
-        transform.position = worldPos;
+        _origin = origin;
+        _offset = 0f;
+        transform.position = _origin.position;
 
         _isTrigger = true;
     }
@@ -61,7 +70,7 @@ public class DamageText : MonoBehaviour
         switch (type)
         {
             case DamageType.Fire:
-                return Color.red;
+                return new Color(0.8f, 0f, 0f, 0.8f);
             case DamageType.Poison:
                 return Color.green;
             case DamageType.Electric:
