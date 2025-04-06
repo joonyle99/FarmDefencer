@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public sealed class PenaltyGiver : MonoBehaviour
+public sealed class PenaltyGiver : MonoBehaviour, IFarmUpdatable
 {
     private const float AnimationFadeOutBeginTime = 3.0f;
     private const float AnimationEndTime = 5.0f;
-    private const float CropLockTime = 60.0f;
+    private const float CropLockTime = 5.0f;
     
     [Serializable]
     public class MapPenalty
@@ -103,6 +103,30 @@ public sealed class PenaltyGiver : MonoBehaviour
             _animationDatas.Add(penaltyPlayingData);
         }
     }
+    
+    public void OnFarmUpdate(float deltaTime)
+    {
+        // 잠금 시간 동작은 FarmClock의 영향을 받음
+        
+        for (var i = _lockDatas.Count-1; i >= 0; --i)
+        {
+            var lockData = _lockDatas[i];
+
+            lockData.TimesRemaining -= deltaTime;
+            lockData.CropLock.UpdateTime(lockData.TimesRemaining);
+            if (lockData.TimesRemaining < 0.0f)
+            {
+                // 오브젝트 삭제
+                var position = lockData.CropLock.transform.position;
+                Destroy(lockData.CropLock.gameObject);
+                
+                // 잠금 해제
+                _farm.UnlockCropAt(position);
+                
+                _lockDatas.RemoveAt(i);
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -113,7 +137,10 @@ public sealed class PenaltyGiver : MonoBehaviour
 
     private void Update()
     {
+        // 애니메이션 재생은 FarmClock 정지 상태와 무관하므로 Update()에서 처리
+        
         var deltaTime = Time.deltaTime;
+        
         for (var i = _animationDatas.Count-1; i >= 0; --i)
         {
             var animationData = _animationDatas[i];
@@ -141,25 +168,6 @@ public sealed class PenaltyGiver : MonoBehaviour
             {
                 var alpha = Mathf.Clamp((AnimationEndTime - animationData.ElapsedTime) / (AnimationEndTime - AnimationFadeOutBeginTime), 0.0f, 1.0f);
                 animationData.Monster.SpineController.Skeleton.A = alpha;
-            }
-        }
-        
-        for (var i = _lockDatas.Count-1; i >= 0; --i)
-        {
-            var lockData = _lockDatas[i];
-
-            lockData.TimesRemaining -= deltaTime;
-            lockData.CropLock.UpdateTime(lockData.TimesRemaining);
-            if (deltaTime < 0.0f)
-            {
-                // 오브젝트 삭제
-                var position = lockData.CropLock.transform.position;
-                Destroy(lockData.CropLock.gameObject);
-                
-                // 잠금 해제
-                _farm.UnlockCropAt(position);
-                
-                _lockDatas.RemoveAt(i);
             }
         }
     }
