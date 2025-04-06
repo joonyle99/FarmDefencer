@@ -101,12 +101,18 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
         return false;
     }
 
-    public void UnlockCropAt(Vector2 cropPosition) => DoCropActionTo(
-        crop =>
+    public void UnlockCropAt(Vector2 cropPosition)
+    {
+        // Unlock동작은 잠금상태에 무관하게 동작
+        foreach (var field in _fields)
         {
-            crop.gameObject.SetActive(true);
-            _lockedCrops.Remove(crop);
-        }, cropPosition);
+            if (field.TryFindCropAt(cropPosition, out var crop))
+            {
+                crop.gameObject.SetActive(true);
+                _lockedCrops.Remove(crop);  
+            }
+        }
+    }
 
     public bool OnSingleTap(Vector2 worldPosition) =>
         DoCropActionTo(crop => crop.OnSingleTap(worldPosition), worldPosition);

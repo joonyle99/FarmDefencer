@@ -7,7 +7,7 @@ public sealed class PenaltyGiver : MonoBehaviour, IFarmUpdatable
 {
     private const float AnimationFadeOutBeginTime = 3.0f;
     private const float AnimationEndTime = 5.0f;
-    private const float CropLockTime = 5.0f;
+    private const float CropLockTime = 60.0f;
     
     [Serializable]
     public class MapPenalty
