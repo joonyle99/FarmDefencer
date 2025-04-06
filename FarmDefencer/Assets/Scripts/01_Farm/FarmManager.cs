@@ -14,23 +14,22 @@ public sealed class FarmManager : MonoBehaviour
 	[SerializeField] private ProductDatabase productDatabase;
 	[SerializeField] private PenaltyGiver penaltyGiver;
 
-	private void Awake()
-	{
-		farmClock.RegisterFarmUpdatableObject(farm);
-		farmUI.WateringCan.Water += farm.WateringAction;
-		cropSigns.SignClicked += farmUI.CropGuide.Toggle;
-	}
-
 	private void Start()
 	{
+		cropSigns.SignClicked += farmUI.CropGuide.Toggle;
+		
 		farmInput.RegisterInputLayer(farmUI.CropGuide);
 		farmInput.RegisterInputLayer(farmUI.WateringCan);
 		farmInput.RegisterInputLayer(cropSigns);
 		farmInput.RegisterInputLayer(farm);
 
+		farmClock.RegisterFarmUpdatableObject(farm);
+		farmClock.RegisterFarmUpdatableObject(penaltyGiver);
+		
 		farm.Init(farmUI.HarvestInventory.GetQuota, farmUI.HarvestInventory.Gather);
 
 		farmUI.Init(farmClock);
+		farmUI.WateringCan.Water += farm.WateringAction;
 		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_carrot", true);
 		farm.SetFieldAvailability("product_carrot", true);
 		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_potato", true);
