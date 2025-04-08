@@ -83,3 +83,6 @@
 
 # 빌드 임시 파일
 /FarmDefencer/.utmp
+
+# Cursor AI
+/FarmDefencer/.cursorignore
