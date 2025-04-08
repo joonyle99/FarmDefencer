@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8a8d0f332bae4604a8ec433e3cda12c3
+guid: 478e859f73847dc4baa22778ba2263ba
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8238448599196441421
-    second: Potab_01_0
+      213: -5545910286536324390
+    second: turret_2_Lv2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Potab_01_0
+      name: turret_2_Lv2_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 7
-        width: 394
-        height: 275
+        x: 79
+        y: 47
+        width: 338
+        height: 264
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3b4e490f5a62bad80800000000000000
-      internalID: -8238448599196441421
+      spriteID: ada41d65af7f803b0800000000000000
+      internalID: -5545910286536324390
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Potab_01_0: -8238448599196441421
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
