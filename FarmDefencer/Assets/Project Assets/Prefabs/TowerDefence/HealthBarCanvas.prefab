@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7701551712186937758}
-  - component: {fileID: 7532832395141674899}
+  - component: {fileID: 7201488375193622297}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -37,7 +37,7 @@ RectTransform:
   m_AnchoredPosition: {x: -20, y: 670}
   m_SizeDelta: {x: 350, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7532832395141674899
+--- !u!114 &7201488375193622297
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,12 +46,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1961199087277307715}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc4e86d897d39d74aaf5bfb6d40c5197, type: 3}
+  m_Script: {fileID: 11500000, guid: 147fb69bdcb6a004ba3f217407b487c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _bar: {fileID: 720290982818461378}
-  _greenBar: {fileID: -403631209242680886, guid: e6d944f3438b0f34f9d09b210f0c4e1a, type: 3}
-  _redBar: {fileID: 2375728111882580812, guid: 9a2a89da93a6b4f4883acbd4d148a795, type: 3}
+  _normalBar: {fileID: -403631209242680886, guid: e6d944f3438b0f34f9d09b210f0c4e1a, type: 3}
+  _dangerBar: {fileID: 2375728111882580812, guid: 9a2a89da93a6b4f4883acbd4d148a795, type: 3}
 --- !u!1 &6207012289164954028
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

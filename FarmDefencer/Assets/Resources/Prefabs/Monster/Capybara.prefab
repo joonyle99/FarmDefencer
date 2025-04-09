@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2acef0a5c914d4ea96d810f1f1c010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthBar: {fileID: 3657265616720998730}
+  _healthBar: {fileID: 0}
   _maxHp: 185
   _stunDuration: 0.03
   _isDead: 0
@@ -445,14 +445,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6740850065851687629, guid: ac73a8c8d91c83842bec0255423aebde, type: 3}
   m_PrefabInstance: {fileID: 6505670202219218649}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3657265616720998730 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7532832395141674899, guid: ac73a8c8d91c83842bec0255423aebde, type: 3}
-  m_PrefabInstance: {fileID: 6505670202219218649}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc4e86d897d39d74aaf5bfb6d40c5197, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

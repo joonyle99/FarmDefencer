@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 6890290875928273361}
   - component: {fileID: 7649817272396287769}
   m_Layer: 5
-  m_Name: FailureImage
+  m_Name: Failure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 9119603000908606553}
   - component: {fileID: 7712078431811612082}
   m_Layer: 5
-  m_Name: TowerImage
+  m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -621,7 +621,7 @@ GameObject:
   - component: {fileID: 6155771412906431576}
   - component: {fileID: 356449294145445330}
   m_Layer: 5
-  m_Name: StageImage
+  m_Name: StageBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -807,7 +807,7 @@ GameObject:
   - component: {fileID: 1052640846129272964}
   - component: {fileID: 9121620244141751727}
   m_Layer: 5
-  m_Name: BackgroundImage
+  m_Name: TimerBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -884,7 +884,7 @@ GameObject:
   - component: {fileID: 6981831339085195385}
   - component: {fileID: 8871380871193803961}
   m_Layer: 5
-  m_Name: StageText
+  m_Name: Stage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1022,7 +1022,7 @@ GameObject:
   - component: {fileID: 4696225330861600119}
   - component: {fileID: 6066524002896842263}
   m_Layer: 5
-  m_Name: TargetSpawnText
+  m_Name: TargetSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1159,7 +1159,7 @@ GameObject:
   - component: {fileID: 1926805022910066954}
   - component: {fileID: 1680003672533400064}
   m_Layer: 5
-  m_Name: BackgroundImage
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1256,7 +1256,7 @@ GameObject:
   - component: {fileID: 8332397703619250766}
   - component: {fileID: 7915487184836383097}
   m_Layer: 5
-  m_Name: CoinImage
+  m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1620,7 +1620,7 @@ GameObject:
   - component: {fileID: 6866093360433905788}
   - component: {fileID: 7236638859610888373}
   m_Layer: 5
-  m_Name: GoldText
+  m_Name: Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1757,7 +1757,7 @@ GameObject:
   - component: {fileID: 4596095851486616099}
   - component: {fileID: 4748485598978808536}
   m_Layer: 5
-  m_Name: RabbitImage
+  m_Name: Rabbit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1854,7 +1854,7 @@ GameObject:
   - component: {fileID: 8013310823436732294}
   - component: {fileID: 3855612694382504881}
   m_Layer: 5
-  m_Name: SuccessImage
+  m_Name: Success
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2049,7 +2049,7 @@ GameObject:
   - component: {fileID: 3296129588490154574}
   - component: {fileID: 6187414684840195681}
   m_Layer: 5
-  m_Name: TimerImage
+  m_Name: TimerBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2443,7 +2443,7 @@ GameObject:
   - component: {fileID: 8606298750291716296}
   - component: {fileID: 4898119438227605990}
   m_Layer: 5
-  m_Name: CostText01
+  m_Name: Cost01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2579,7 +2579,7 @@ GameObject:
   - component: {fileID: 3082800567047162270}
   - component: {fileID: 8848017859251473191}
   m_Layer: 5
-  m_Name: CostText02
+  m_Name: Cost02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2717,7 +2717,7 @@ GameObject:
   - component: {fileID: 2559571372686298762}
   - component: {fileID: 7116791460956778543}
   m_Layer: 5
-  m_Name: SurvivedText
+  m_Name: Survived
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2853,7 +2853,7 @@ GameObject:
   - component: {fileID: 7850005513943798794}
   - component: {fileID: 7072799221265776118}
   m_Layer: 5
-  m_Name: TotalSpawnText
+  m_Name: TotalSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2986,7 +2986,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5229518273892293093}
-  - component: {fileID: 7467606925245894318}
+  - component: {fileID: 8896566181342304892}
   m_Layer: 5
   m_Name: TimerUI
   m_TagString: Untagged
@@ -3015,7 +3015,7 @@ RectTransform:
   m_AnchoredPosition: {x: -160, y: -80}
   m_SizeDelta: {x: 900, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7467606925245894318
+--- !u!114 &8896566181342304892
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3024,9 +3024,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8914067095554070789}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc4e86d897d39d74aaf5bfb6d40c5197, type: 3}
+  m_Script: {fileID: 11500000, guid: 147fb69bdcb6a004ba3f217407b487c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _bar: {fileID: 6187414684840195681}
-  _greenBar: {fileID: 3762621757841045302, guid: 6ebb6388e588f584d97ace924600c2cd, type: 3}
-  _redBar: {fileID: 4226326097774776641, guid: 99c9c119185588547afbffb1b7a9a24c, type: 3}
+  _normalBar: {fileID: 3762621757841045302, guid: 6ebb6388e588f584d97ace924600c2cd, type: 3}
+  _dangerBar: {fileID: 4226326097774776641, guid: 99c9c119185588547afbffb1b7a9a24c, type: 3}

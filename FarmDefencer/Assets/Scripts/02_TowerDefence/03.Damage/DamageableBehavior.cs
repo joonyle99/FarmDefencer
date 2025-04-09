@@ -20,8 +20,8 @@ public abstract class DamageableBehavior : MonoBehaviour
     [Header("──────── DamageableBehavior ────────")]
     [Space]
 
-    [SerializeField] private FloatingHealthBar _healthBar;
-    public FloatingHealthBar HealthBar => _healthBar;
+    [SerializeField] private ProgressBar _healthBar;
+    public ProgressBar HealthBar => _healthBar;
 
     [Space]
 
@@ -49,13 +49,13 @@ public abstract class DamageableBehavior : MonoBehaviour
 
             if (_hp <= _maxHp / 2)
             {
-                _healthBar.ChangeToRedBar();
+                _healthBar.ChangeToDangerBar();
             }
 
             if (_healthBar != null)
             {
-                _healthBar.UpdateHealthBar((float)_hp, (float)startHp);
-                //Debug.Log("_healthBar.UpdateHealthBar");
+                _healthBar.UpdateProgressBar((float)_hp, (float)startHp);
+                //Debug.Log("_healthBar.UpdateProgressBar");
             }
         }
     }
@@ -110,7 +110,7 @@ public abstract class DamageableBehavior : MonoBehaviour
     {
         if (_healthBar != null)
         {
-            _healthBar.UpdateHealthBar((float)_hp, (float)startHp);
+            _healthBar.UpdateProgressBar((float)_hp, (float)startHp);
         }
     }
 
