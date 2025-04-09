@@ -145,7 +145,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damager: {fileID: 2493848825862227538}
   moveDuration: 1
-  damageType: 1
   _peekHeight: 2
   _curve:
     serializedVersion: 2

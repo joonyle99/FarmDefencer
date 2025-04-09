@@ -1,0 +1,655 @@
+fileFormatVersion: 2
+guid: 5b422d24283905d4e80e7ef03b1b8762
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5348897134178678075
+    second: deffence_timer_rabbit_sheet_121x104_0
+  - first:
+      213: -5900306985858273540
+    second: deffence_timer_rabbit_sheet_121x104_1
+  - first:
+      213: -1152985842415822673
+    second: deffence_timer_rabbit_sheet_121x104_2
+  - first:
+      213: -7138085182227471652
+    second: deffence_timer_rabbit_sheet_121x104_3
+  - first:
+      213: -5894326369187329618
+    second: deffence_timer_rabbit_sheet_121x104_4
+  - first:
+      213: 549954878303403375
+    second: deffence_timer_rabbit_sheet_121x104_5
+  - first:
+      213: -6280212668733280123
+    second: deffence_timer_rabbit_sheet_121x104_6
+  - first:
+      213: 8575517714331126967
+    second: deffence_timer_rabbit_sheet_121x104_7
+  - first:
+      213: 8812376578657198576
+    second: deffence_timer_rabbit_sheet_121x104_8
+  - first:
+      213: 8406262070816176810
+    second: deffence_timer_rabbit_sheet_121x104_9
+  - first:
+      213: 8865964025140441681
+    second: deffence_timer_rabbit_sheet_121x104_10
+  - first:
+      213: -5392405980477296665
+    second: deffence_timer_rabbit_sheet_121x104_11
+  - first:
+      213: -7261248574794689919
+    second: deffence_timer_rabbit_sheet_121x104_12
+  - first:
+      213: -524381201864383170
+    second: deffence_timer_rabbit_sheet_121x104_13
+  - first:
+      213: -2374087601393593997
+    second: deffence_timer_rabbit_sheet_121x104_14
+  - first:
+      213: 5074023200794400400
+    second: deffence_timer_rabbit_sheet_121x104_15
+  - first:
+      213: -7264388590993179902
+    second: deffence_timer_rabbit_sheet_121x104_16
+  - first:
+      213: -8915462044676504780
+    second: deffence_timer_rabbit_sheet_121x104_17
+  - first:
+      213: -5760381364167166396
+    second: deffence_timer_rabbit_sheet_121x104_18
+  - first:
+      213: 293746046960039695
+    second: deffence_timer_rabbit_sheet_121x104_19
+  - first:
+      213: 3986236822033094984
+    second: deffence_timer_rabbit_sheet_121x104_20
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 629
+        width: 114
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cacc296566e4c5b0800000000000000
+      internalID: -5348897134178678075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_1
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 629
+        width: 112
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfe692abe06ed1ea0800000000000000
+      internalID: -5900306985858273540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_2
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 629
+        width: 113
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa810cf2c75cfffe0800000000000000
+      internalID: -1152985842415822673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_3
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 525
+        width: 113
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd22ad0985d60fc90800000000000000
+      internalID: -7138085182227471652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_4
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 527
+        width: 114
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea90f5e8565233ea0800000000000000
+      internalID: -5894326369187329618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_5
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 531
+        width: 114
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6d74cb4c05d1a700800000000000000
+      internalID: 549954878303403375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_6
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 432
+        width: 115
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 580be3e0ad338d8a0800000000000000
+      internalID: -6280212668733280123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_7
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 433
+        width: 115
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bcc6c71deb520770800000000000000
+      internalID: 8575517714331126967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_8
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 432
+        width: 115
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f1a5ddeec9db4a70800000000000000
+      internalID: 8812376578657198576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_9
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 326
+        width: 114
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aaa76dba0da09a470800000000000000
+      internalID: 8406262070816176810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_10
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 326
+        width: 113
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15273e59e4b3a0b70800000000000000
+      internalID: 8865964025140441681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_11
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 325
+        width: 112
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ef65f8b4535a25b0800000000000000
+      internalID: -5392405980477296665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_12
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 220
+        width: 111
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1821d8994ecda3b90800000000000000
+      internalID: -7261248574794689919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_13
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 218
+        width: 112
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e352bff331609b8f0800000000000000
+      internalID: -524381201864383170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_14
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 219
+        width: 112
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 371964da7eb8d0fd0800000000000000
+      internalID: -2374087601393593997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_15
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 117
+        width: 112
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 096d071c73d8a6640800000000000000
+      internalID: 5074023200794400400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_16
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 119
+        width: 113
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20b737b9015bf2b90800000000000000
+      internalID: -7264388590993179902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_17
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 121
+        width: 115
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 433449aa18ae54480800000000000000
+      internalID: -8915462044676504780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_18
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 14
+        width: 115
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 446390a4ba30f00b0800000000000000
+      internalID: -5760381364167166396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_19
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 9
+        width: 115
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f077a3f2978931400800000000000000
+      internalID: 293746046960039695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_rabbit_sheet_121x104_20
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 5
+        width: 114
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8495dd70545f15730800000000000000
+      internalID: 3986236822033094984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

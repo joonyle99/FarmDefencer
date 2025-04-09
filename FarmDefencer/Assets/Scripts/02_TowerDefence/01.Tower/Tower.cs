@@ -18,6 +18,7 @@ public sealed class Tower : TargetableBehavior
 
     [Header("Stats")]
     [SerializeField] private TowerLevelData[] _levelData;
+    public TowerLevelData[] LevelData => _levelData;
     private TowerLevelData _currentLevelData;
     public TowerLevelData CurrentLevelData
     {

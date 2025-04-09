@@ -10,8 +10,9 @@ public class BuildSystem : MonoBehaviour
     [Space]
 
     public int selectedIndex = 0;
-    [SerializeField] private Tower[] _towerPrefabs;
-    public Tower SelectedTower => _towerPrefabs[selectedIndex];
+    [SerializeField] private Tower[] _availableTowers;
+    public Tower[] AvailableTowers => _availableTowers;
+    public Tower SelectedTower => _availableTowers[selectedIndex];
 
     // dynamic variable
     private Tower _ghostTower;
