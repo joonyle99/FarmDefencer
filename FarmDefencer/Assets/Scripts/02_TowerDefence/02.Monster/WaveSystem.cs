@@ -20,6 +20,13 @@ public class WaveSystem : MonoBehaviour
 
     [SerializeField] private float _waitWaveTime = 2f;
 
+    [Space]
+
+    // progress bar
+    [SerializeField] private ProgressBar _progressBar;
+    [SerializeField] private float _defenceDuration = 20f;
+    private float _defenceTimer = 0f;
+
     // target spawn count
     private int _targetSpawnCount = 0;
     public int TargetSpawnCount
@@ -47,8 +54,6 @@ public class WaveSystem : MonoBehaviour
     // current spawn count
     private int _currentSpawnCount = 0;
     public int CurrentSpawnCount => _currentSpawnCount;
-
-    [Space]
 
     private List<Monster> _fieldMonsters = new List<Monster>();
     public List<Monster> FieldMonsters => _fieldMonsters;
@@ -102,6 +107,17 @@ public class WaveSystem : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.LeftBracket))
         {
             Time.timeScale = 1f;
+        }
+
+        // 게임의 진행도에 따라 움직이도록 해야한다.
+        // 시간 기반이 아니라,,
+        if (GameStateManager.Instance.CurrentState == GameState.Wave)
+        {
+            _defenceTimer += Time.deltaTime;
+            if (_defenceTimer < _defenceDuration)
+            {
+                _progressBar.UpdateProgressBar(_defenceDuration - _defenceTimer, _defenceDuration);
+            }
         }
     }
 

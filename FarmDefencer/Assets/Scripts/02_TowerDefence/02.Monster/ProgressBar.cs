@@ -31,4 +31,14 @@ public class ProgressBar : MonoBehaviour
         if (_bar.sprite == _dangerBar) return;
         _bar.sprite = _dangerBar;
     }
+
+    public float GetBarWidth()
+    {
+        return _bar.GetComponent<RectTransform>().rect.width;
+    }
+    public float GetProgress()
+    {
+        // 프로그레스 진행도를 반환
+        return _bar.fillAmount;
+    }
 }
