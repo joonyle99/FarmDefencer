@@ -24,7 +24,7 @@ public class BuildUI : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointe
     {
         var targetTowers = _buildSystem.AvailableTowers;
         var defaultLevel = targetTowers[selectedIndex].LevelData[0].ValueCost;
-        _cost.text = string.Format("- {0}", defaultLevel);
+        _cost.text = defaultLevel.ToString();
     }
 
     public void OnPointerDown(PointerEventData eventData)
