@@ -111,6 +111,8 @@ public class WaveSystem : MonoBehaviour
 
         // 게임의 진행도에 따라 움직이도록 해야한다.
         // 시간 기반이 아니라,,
+        // 게임의 진행도란 웨이브 몬스터 수로 판단한다
+        // 처음에 얼마나 나올지를 알아야 한다..?
         if (GameStateManager.Instance.CurrentState == GameState.Wave)
         {
             _defenceTimer += Time.deltaTime;
