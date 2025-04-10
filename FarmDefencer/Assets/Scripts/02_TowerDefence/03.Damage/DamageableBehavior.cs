@@ -49,7 +49,7 @@ public abstract class DamageableBehavior : MonoBehaviour
 
             if (_hp <= _maxHp / 2)
             {
-                _healthBar.ChangeToDangerBar();
+                _healthBar.ChangeToDanger();
             }
 
             if (_healthBar != null)

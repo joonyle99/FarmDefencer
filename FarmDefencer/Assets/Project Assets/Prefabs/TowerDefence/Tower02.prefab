@@ -1672,6 +1672,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9b6b7da944649584483b0b6a905bd158, type: 2}
   - {fileID: 11400000, guid: 2a10a66e36815244d9644cca730c9b94, type: 2}
   - {fileID: 11400000, guid: db66b221964ed214a8df350f1b8b175d, type: 2}
+  _id: 2
   _level: 1
   IdleAnimationNames:
   - idle_Lv1
