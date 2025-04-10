@@ -161,7 +161,7 @@ public class GridCell : MonoBehaviour
         occupiedTower = tower;
         occupiedTower.OccupyingGridCell(this);
 
-        SoundManager.Instance.PlaySfx($"SFX_D_turret_build");
+        SoundManager.Instance.PlaySfx($"SFX_D_tower_build");
     }
     public void DeleteOccupiedTower()
     {

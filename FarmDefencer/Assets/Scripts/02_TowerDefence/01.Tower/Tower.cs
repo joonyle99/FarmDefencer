@@ -32,9 +32,11 @@ public sealed class Tower : TargetableBehavior
     [Space]
 
     [Header("Default")]
-    [SerializeField]private int _level = 1;
+    [SerializeField] private int _id = 1;
+    [SerializeField] private int _level = 1;
     private int _cost = 0;
-
+    
+    public int ID => _id;
     public int CurrentLevel
     {
         get => _level;
@@ -172,7 +174,7 @@ public sealed class Tower : TargetableBehavior
         _occupyingGridCell.DeleteOccupiedTower();
 
         ResourceManager.Instance.EarnGold(CurrentLevelData.SellCost);
-        SoundManager.Instance.PlaySfx("SFX_D_turret_remove");
+        SoundManager.Instance.PlaySfx("SFX_D_tower_remove");
 
         // detector
         Detector.EraseRange();
@@ -218,7 +220,7 @@ public sealed class Tower : TargetableBehavior
         OnAttackRateChanged?.Invoke(CurrentLevelData.AttackRate);
         OnDamageChanged?.Invoke(CurrentLevelData.Damage);
 
-        SoundManager.Instance.PlaySfx("SFX_D_turret_upgrade");
+        SoundManager.Instance.PlaySfx("SFX_D_tower_upgrade");
     }
     public void ShowUpgradePanel()
     {
@@ -296,7 +298,7 @@ public sealed class Tower : TargetableBehavior
         projectile.SetDamage(CurrentLevelData.Damage);
         projectile.Trigger();
 
-        SoundManager.Instance.PlaySfx($"SFX_D_turret_shot_1-{CurrentLevel}");
+        SoundManager.Instance.PlaySfx($"SFX_D_tower_shot_{ID}-{CurrentLevel}");
     }
 
     // hit
