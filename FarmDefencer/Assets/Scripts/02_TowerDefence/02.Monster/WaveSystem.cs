@@ -1,7 +1,6 @@
 using JoonyleGameDevKit;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 /// <summary>
@@ -24,8 +23,9 @@ public class WaveSystem : MonoBehaviour
 
     // progress bar
     [SerializeField] private ProgressBar _progressBar;
-    [SerializeField] private float _defenceDuration = 20f;
-    private float _defenceTimer = 0f;
+    [SerializeField] private Animator _rabbitAnimator;
+    [SerializeField] private float _buildDuration = 20f;
+    private float _buildTimer = 0f;
 
     // target spawn count
     private int _targetSpawnCount = 0;
@@ -80,6 +80,12 @@ public class WaveSystem : MonoBehaviour
 
     public StageData stageData;
 
+    private void Start()
+    {
+        _rabbitAnimator.Play("Play");
+        _progressBar.SetDangerousAmount(0.5f);
+        _progressBar.OnFinished += () => _rabbitAnimator.Play("Stop");
+    }
     private void Update()
     {
         // CHEAT: trigger wave
@@ -109,16 +115,13 @@ public class WaveSystem : MonoBehaviour
             Time.timeScale = 1f;
         }
 
-        // 게임의 진행도에 따라 움직이도록 해야한다.
-        // 시간 기반이 아니라,,
-        // 게임의 진행도란 웨이브 몬스터 수로 판단한다
-        // 처음에 얼마나 나올지를 알아야 한다..?
-        if (GameStateManager.Instance.CurrentState == GameState.Wave)
+        if (GameStateManager.Instance.CurrentState == GameState.Build)
         {
-            _defenceTimer += Time.deltaTime;
-            if (_defenceTimer < _defenceDuration)
+            _buildTimer += Time.deltaTime;
+            if (_buildTimer < _buildDuration)
             {
-                _progressBar.UpdateProgressBar(_defenceDuration - _defenceTimer, _defenceDuration);
+                var remainBuildTime = _buildDuration - _buildTimer;
+                _progressBar.UpdateProgressBar(remainBuildTime, _buildDuration);
             }
         }
     }

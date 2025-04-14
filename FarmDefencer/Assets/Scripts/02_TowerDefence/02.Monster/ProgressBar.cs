@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class ProgressBar : MonoBehaviour
@@ -11,16 +11,43 @@ public class ProgressBar : MonoBehaviour
     [SerializeField] private Sprite _normalSprite;
     [SerializeField] private Sprite _dangerSprite;
 
+    private float _dangerousAmount;
+    private bool _isDangerous;
+    private bool _isFinished;
+
+    const float EPSILON = 0.01f;
+
+    public Action OnDangerous;
+    public Action OnFinished;
+
     private void OnEnable()
     {
+        _isDangerous = false;
+        _isFinished = false;
         ChangeToNormal();
     }
 
     public void UpdateProgressBar(float currentValue, float maxValue)
     {
         // fillAmount가 0인 경우 -> 진행도 100%
+        // fillAmount가 0.6인 경우 -> 진행도 40%
         // fillAmount가 1인 경우 -> 진행도 0%
-        _bar.fillAmount = currentValue / maxValue;
+        var fillAmount = currentValue / maxValue;
+        _bar.fillAmount = fillAmount;
+
+        if (!_isDangerous && fillAmount <= _dangerousAmount + EPSILON)
+        {
+            _isDangerous = true;
+            OnDangerous?.Invoke();
+
+            ChangeToDanger();
+        }
+
+        if (!_isFinished && fillAmount <= 0.0f + EPSILON)
+        {
+            _isFinished = true;
+            OnFinished?.Invoke();
+        }
     }
 
     public void ChangeToNormal()
@@ -32,6 +59,11 @@ public class ProgressBar : MonoBehaviour
     {
         if (_bar.sprite == _dangerSprite) return;
         _bar.sprite = _dangerSprite;
+    }
+
+    public void SetDangerousAmount(float amount)
+    {
+        _dangerousAmount = amount;
     }
 
     public float GetBarWidth()

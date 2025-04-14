@@ -647,7 +647,28 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      deffence_timer_rabbit_sheet_121x104_0: -5348897134178678075
+      deffence_timer_rabbit_sheet_121x104_1: -5900306985858273540
+      deffence_timer_rabbit_sheet_121x104_10: 8865964025140441681
+      deffence_timer_rabbit_sheet_121x104_11: -5392405980477296665
+      deffence_timer_rabbit_sheet_121x104_12: -7261248574794689919
+      deffence_timer_rabbit_sheet_121x104_13: -524381201864383170
+      deffence_timer_rabbit_sheet_121x104_14: -2374087601393593997
+      deffence_timer_rabbit_sheet_121x104_15: 5074023200794400400
+      deffence_timer_rabbit_sheet_121x104_16: -7264388590993179902
+      deffence_timer_rabbit_sheet_121x104_17: -8915462044676504780
+      deffence_timer_rabbit_sheet_121x104_18: -5760381364167166396
+      deffence_timer_rabbit_sheet_121x104_19: 293746046960039695
+      deffence_timer_rabbit_sheet_121x104_2: -1152985842415822673
+      deffence_timer_rabbit_sheet_121x104_20: 3986236822033094984
+      deffence_timer_rabbit_sheet_121x104_3: -7138085182227471652
+      deffence_timer_rabbit_sheet_121x104_4: -5894326369187329618
+      deffence_timer_rabbit_sheet_121x104_5: 549954878303403375
+      deffence_timer_rabbit_sheet_121x104_6: -6280212668733280123
+      deffence_timer_rabbit_sheet_121x104_7: 8575517714331126967
+      deffence_timer_rabbit_sheet_121x104_8: 8812376578657198576
+      deffence_timer_rabbit_sheet_121x104_9: 8406262070816176810
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
