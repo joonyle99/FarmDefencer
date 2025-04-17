@@ -41,6 +41,7 @@ public class EndingUI : MonoBehaviour
     public void ShowSuccess()
     {
         _successImage.gameObject.SetActive(true);
+        SoundManager.Instance.PlaySfx("SFX_D_stage_success");
     }
     public void HideSuccess()
     {
@@ -49,6 +50,7 @@ public class EndingUI : MonoBehaviour
     public void ShowFailure()
     {
         _failureImage.gameObject.SetActive(true);
+        SoundManager.Instance.PlaySfx("SFX_D_stage_fail");
     }
     public void HideFailure()
     {
