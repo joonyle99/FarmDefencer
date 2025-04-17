@@ -6,7 +6,7 @@ public class EndingUI : MonoBehaviour
     [SerializeField] private Image _successImage;
     [SerializeField] private Image _failureImage;
 
-    private void OnEnable()
+    private void Start()
     {
         DefenceContext.Current.WaveSystem.OnSuccess -= ShowSuccess;
         DefenceContext.Current.WaveSystem.OnSuccess += ShowSuccess;
@@ -14,7 +14,7 @@ public class EndingUI : MonoBehaviour
         DefenceContext.Current.WaveSystem.OnFailure -= ShowFailure;
         DefenceContext.Current.WaveSystem.OnFailure += ShowFailure;
     }
-    private void OnDisable()
+    private void OnDestroy()
     {
         if (DefenceContext.Current == null) return;
 
