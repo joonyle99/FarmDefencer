@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3080062859372743101
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1672,6 +1672,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6b743fe8a71ad6f4fad88123fe1d65e0, type: 2}
   - {fileID: 11400000, guid: beef47e499746d747a492eb073bc4f3b, type: 2}
   - {fileID: 11400000, guid: 94e864e4dd0d7104fac1aa524149290d, type: 2}
+  _id: 1
   _level: 1
   IdleAnimationNames:
   - idle_Lv1
