@@ -2264,7 +2264,7 @@ MonoBehaviour:
   _waitWaveTime: 3
   _progressBar: {fileID: 730172970}
   _rabbitAnimator: {fileID: 1391989575}
-  _buildDuration: 20
+  _buildDuration: 100
   stageData: {fileID: 11400000, guid: fc3387685d0c4d649b3c33c4e4fc3d7d, type: 2}
 --- !u!114 &1231187497
 MonoBehaviour:
@@ -7397,6 +7397,10 @@ PrefabInstance:
     - target: {fileID: 771498834663216545, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1312234496511721216, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1537033700693878111, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
       propertyPath: m_AnchorMax.y
