@@ -36,6 +36,16 @@ public class PanelToggler : MonoBehaviour
     {
         _isExpanded = !_isExpanded;
 
+        // 상태에 따라 사운드 재생
+        if (_isExpanded)
+        {
+            SoundManager.Instance.PlaySfx("SFX_D_expand");
+        }
+        else
+        {
+            SoundManager.Instance.PlaySfx("SFX_D_collapse");
+        }
+
         var targetY = _isExpanded ? _expandedY : _collapsedY;
         //var ease = _isExpanded ? Ease.OutBack : Ease.InCubic;
         _panel.DOAnchorPosY(targetY, _duration).SetEase(Ease.OutBack);
