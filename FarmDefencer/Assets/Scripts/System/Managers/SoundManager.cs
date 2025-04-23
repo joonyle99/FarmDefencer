@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -11,47 +12,102 @@ using UnityEngine;
 /// </remarks>
 public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
 {
-	private Dictionary<string, List<AudioClip>> _sfxDictionary;
+    private Dictionary<string, AudioClip> _bgmDictionary;
+    private Dictionary<string, List<AudioClip>> _sfxDictionary;
 
-    private AudioListener _audioListener;
-	private AudioSource _sfxAudioSource;
+	[SerializeField] private AudioSource _bgmAudioSource1;
+    [SerializeField] private AudioSource _bgmAudioSource2;
+    [SerializeField] private AudioSource _sfxAudioSource;
 
-	/// <summary>
-	/// <seealso cref="PlaySfx(string, bool)"/>
-	/// </summary>
-	/// <param name="name"></param>
-	public static void PlaySfxStatic(string name)
+    /// <summary>
+    /// <seealso cref="PlaySfx(string, bool)"/>
+    /// </summary>
+    /// <param name="name"></param>
+    public static void PlaySfxStatic(string name)
 	{
 		Instance.PlaySfx(name);
 	}
 
-	/// <summary>
-	/// 내부 캐시에서 SFX를 불러와 재생하는 메소드.
-	/// 캐시에 존재하지 않을 경우 Resources/Sfx에서 불러와 캐시에 넣고 재생함.<br/>
-	/// </summary>
-	/// <param name="name"></param>
-	public void PlaySfx(string name)
+    /// <summary>
+    /// <seealso cref="StopCurrentSfx"/>
+    /// </summary>
+    public static void StopCurrentSfxStatic()
+    {
+        Instance.StopCurrentSfx();
+    }
+
+    /// <summary>
+    /// 현재 재생중인 Sfx가 존재하면 중지.
+    /// </summary>
+    public void StopCurrentSfx()
+    {
+        if (_sfxAudioSource.isPlaying)
+        {
+            _sfxAudioSource.Stop();
+        }
+    }
+
+    /// <summary>
+    /// 내부 캐시에서 SFX를 불러와 재생하는 메소드.
+    /// 캐시에 존재하지 않을 경우 Resources/_Bgm에서 불러와 캐시에 넣고 재생함.
+    /// </summary>
+    public void PlayBgm(string name, float volume = 1.0f)
+    {
+        Debug.Log(name);
+
+        if (_bgmDictionary.ContainsKey(name) == false)
+        {
+            var newBgm = Resources.Load<AudioClip>($"_Bgm/{name}");
+
+            if (newBgm == null)
+            {
+                Debug.LogError($"존재하지 않는 BGM: {name}");
+                return;
+            }
+            _bgmDictionary.Add(name, newBgm);
+        }
+
+        var bgm = _bgmDictionary[name];
+
+        _bgmAudioSource1.Stop();
+        _bgmAudioSource1.clip = bgm;
+        _bgmAudioSource1.volume = volume;
+        _bgmAudioSource1.Play();
+    }
+
+    /// <summary>
+    /// 내부 캐시에서 SFX를 불러와 재생하는 메소드.
+    /// 캐시에 존재하지 않을 경우 Resources/_Sfx에서 불러와 캐시에 넣고 재생함.
+    /// 
+    /// PlayOneShot()에만 의존하는 함수,, AudioSource.volume × volumeScale로 오디오 볼륨을 조절
+    /// AudioSource.volume에 영향을 받는다는 치명적인 단점이 존재
+    /// 
+    /// 1. AudioSource.volume: 0.2f volumeScale: 0.5f = 0.1f
+    /// 2. PlayOneShot()
+    /// 3. AudioSource.volume: 0.8f volumeScale: 0.5f = 0.4f
+    /// </summary>
+    public void PlaySfx(string name, float volume = 1.0f, float pitch = 1.0f)
 	{
 		if (_sfxDictionary.ContainsKey(name) == false)
 		{
 			var newSfxList = new List<AudioClip>();
 
 			var singleSfx = Resources.Load<AudioClip>($"_Sfx/{name}");
-			if (singleSfx != null)
-			{
-				newSfxList.Add(singleSfx);
+			if (singleSfx != null) // 1. 하나의 SFX가 단일 버전으로 존재하는 경우
+            {
+                newSfxList.Add(singleSfx);
 			}
-			else
+			else // 2. 하나의 SFX가 여러 버전으로 존재하는 경우 (TODO: Pitch를 조절하는 방법으로 해결 가능하지 않을까..?)
 			{
 				int number = 0;
 				while (true)
 				{
-					var sfxWithNumber = Resources.Load<AudioClip>($"_Sfx/{name}_{number}");
-					if (sfxWithNumber == null)
+					var multipleSfx = Resources.Load<AudioClip>($"_Sfx/{name}_{number}");
+					if (multipleSfx == null)
 					{
 						break;
 					}
-					newSfxList.Add(sfxWithNumber);
+					newSfxList.Add(multipleSfx);
 					number += 1;
 				}
 			}
@@ -61,52 +117,50 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
 
 		var sfxList = _sfxDictionary[name];
 
+		// 유효하지 않은 경우
 		if (sfxList.Count == 0)
 		{
 			Debug.LogError($"존재하지 않는 SFX: {name}");
 			return;
 		}
 
+		// Single SFX
 		if (sfxList.Count == 1)
         {
-			_sfxAudioSource.PlayOneShot(sfxList[0]);
+            var sfx = sfxList[0];
+            _sfxAudioSource.PlayOneShot(sfx, volume);
             return;
         }
-		else
+		// Multiple SFX
+		else if (sfxList.Count > 1)
         {
-            var index = Random.Range(0, sfxList.Count);
-            var sfx = sfxList[index];
-            _sfxAudioSource.PlayOneShot(sfx);
+            var randomoIndex = Random.Range(0, sfxList.Count);
+            var sfx = sfxList[randomoIndex];
+            _sfxAudioSource.PlayOneShot(sfx, volume);
 			return;
         }
 	}
-
-	/// <summary>
-	/// <seealso cref="StopCurrentSfx"/>
-	/// </summary>
-	public static void StopCurrentSfxStatic()
-	{
-		Instance.StopCurrentSfx();
-	}
-
-	/// <summary>
-	/// 현재 재생중인 Sfx가 존재하면 중지.
-	/// </summary>
-	public void StopCurrentSfx()
-	{
-		if (_sfxAudioSource.isPlaying)
-		{
-			_sfxAudioSource.Stop();
-		}
-	}
+	public void PrintSfxDictionary()
+    {
+        string log = "";
+        foreach (var sfx in _sfxDictionary)
+        {
+            log += "=====================\n";
+            log += $"SFX: {sfx.Key}\n";
+            foreach (var clip in sfx.Value)
+			{
+                log += $"===> Clip: {clip.name}\n";
+			}
+            log += "=====================\n";
+        }
+        Debug.Log(log);
+    }
 
 	protected override void Awake()
 	{
 		base.Awake();
 
-		_audioListener = GetComponent<AudioListener>();
-		_sfxAudioSource = GetComponent<AudioSource>();
-
 		_sfxDictionary = new Dictionary<string, List<AudioClip>>();
-	}
+        _bgmDictionary = new Dictionary<string, AudioClip>();
+    }
 }
