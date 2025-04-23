@@ -21,6 +21,7 @@ public class PanelToggler : MonoBehaviour
     [Space]
 
     [SerializeField] private bool _isExpanded;
+    public bool IsExpanded => _isExpanded;
 
     private void Start()
     {
