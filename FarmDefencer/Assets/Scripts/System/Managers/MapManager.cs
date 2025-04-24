@@ -1,12 +1,8 @@
 using UnityEngine;
 
-/// <summary>
-/// </summary>
 public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>
 {
-    public const int Map_Grassland = 1;
-    public const int Map_Beach = 2;
-    public const int Map_Cave = 3;
+    [SerializeField] private MapEntry[] mapEntries;
     
-    public int CurrentMap => Map_Grassland;
+    public MapEntry CurrentMap => mapEntries[0]; // 추후 실제 현재 맵 저장 및 반환 로직 구현 필요
 }
