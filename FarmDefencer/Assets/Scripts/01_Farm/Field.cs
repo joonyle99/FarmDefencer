@@ -15,6 +15,8 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable
     public Vector2Int FieldSize => fieldSize;
     [SerializeField] private GameObject cropBackgroundPrefab;
 
+    private List<SpriteRenderer> _cropBackgrounds;
+
     public bool IsAvailable
     {
         get
@@ -78,8 +80,11 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable
 
 	private void OnAvailabilityChanged()
     {
-        var backgroundColor = _isAvailable ? Color.white : new Color(0.0f, 0.0f, 0.0f, 0.0f);
+        var backgroundColor = _isAvailable ? Color.white : new Color(0.5f, 0.5f, 0.5f, 1.0f);
         var fieldLockedColor = _isAvailable ? new Color(0.0f, 0.0f, 0.0f, 0.0f) : Color.white;
+        
+        Array.ForEach(_crops, c => c.gameObject.SetActive(_isAvailable));
+        _cropBackgrounds.ForEach(c => c.color = backgroundColor);
 
         _backgroundRenderer.color = backgroundColor;
         _fieldLockedRenderer.color = fieldLockedColor;
@@ -88,6 +93,8 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable
 	private void Awake()
     {
         _crops = new Crop[fieldSize.x * fieldSize.y];
+        _cropBackgrounds = new();
+        
         _backgroundRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         _fieldLockedRenderer = transform.GetChild(1).GetComponent<SpriteRenderer>();
 
@@ -109,6 +116,7 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable
 
                 var cropBackgroundObject = Instantiate(cropBackgroundPrefab, cropBackgroundParentObject.transform);
                 cropBackgroundObject.transform.localPosition = new Vector3(xOffset, yOffset, 0.0f);
+                _cropBackgrounds.Add(cropBackgroundObject.GetComponent<SpriteRenderer>());
             }
         }
 
