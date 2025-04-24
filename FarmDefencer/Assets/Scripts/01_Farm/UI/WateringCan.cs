@@ -19,7 +19,7 @@ public sealed class WateringCan :
 
 	// 물 주기 판정이 가해지는 watering 애니메이션에서의 시각
 	private const float WateringAnimationTimePoint = 0.5f;
-	public Action<Vector2> Water;
+	private Action<Vector2> _onWatering;
 	private bool _using;
 	public bool Using
 	{
@@ -94,9 +94,10 @@ public sealed class WateringCan :
 		_currentWateringWorldPosition = pointerWorldPosition;
 	}
 
-	public void Init(FarmClock farmClock)
+	public void Init(FarmClock farmClock, Action<Vector2> onWatering)
 	{
 		_farmClock = farmClock;
+		_onWatering = onWatering;
 	}
 
 	private void Awake()
@@ -128,7 +129,7 @@ public sealed class WateringCan :
 		else if (!_isWateredThisTime)
 		{
 			_isWateredThisTime = true;
-			Water?.Invoke(_currentWateringWorldPosition);
+			_onWatering?.Invoke(_currentWateringWorldPosition);
 		}
 	}
 
