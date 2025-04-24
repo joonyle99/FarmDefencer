@@ -3,9 +3,7 @@ using UnityEngine;
 public sealed class FarmUI : MonoBehaviour
 {
 	private CoinsUI _coinsUI;
-	public CoinsUI CoinsUI => _coinsUI;
 	private HarvestAnimationPlayer _harvestAnimationPlayer;
-	public HarvestAnimationPlayer HarvestAnimationPlayer  => _harvestAnimationPlayer;
 	private WateringCan _wateringCan;
 	public WateringCan WateringCan => _wateringCan;
 	private HarvestInventory _harvestInventory;
@@ -20,9 +18,11 @@ public sealed class FarmUI : MonoBehaviour
 	public FarmDebugUI FarmDebugUI => _farmDebugUI;
 	private FarmDebugUI _farmDebugUI;
 
-	public void Init(FarmClock farmClock)
+	public void Init(FarmClock farmClock, FarmInput farmInput)
 	{
 		_wateringCan.Init(farmClock);
+		farmInput.RegisterInputLayer(_wateringCan);
+		
 		_farmDebugUI.Init(farmClock);
 	}
 

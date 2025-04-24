@@ -8,6 +8,8 @@ using UnityEngine;
 /// </summary>
 public sealed class CropSigns : MonoBehaviour, IFarmInputLayer
 {
+	public int InputPriority => 200;
+	
 	public Action<ProductEntry> SignClicked;
 
 	// 클릭 판정 월드 기준 크기
@@ -22,8 +24,7 @@ public sealed class CropSigns : MonoBehaviour, IFarmInputLayer
 	public bool OnSingleTap(Vector2 worldPosition)
 	{
 		var cropSign = _cropSigns
-			.Where(cropSign => (Mathf.Abs(cropSign.transform.position.x - worldPosition.x) < SignClickSize.x) && (Mathf.Abs(cropSign.transform.position.y - worldPosition.y) < SignClickSize.y))
-			.FirstOrDefault();
+			.FirstOrDefault(cropSign => (Mathf.Abs(cropSign.transform.position.x - worldPosition.x) < SignClickSize.x) && (Mathf.Abs(cropSign.transform.position.y - worldPosition.y) < SignClickSize.y));
 		if (cropSign != null)
 		{
 			SignClicked?.Invoke(cropSign.ProductEntry);

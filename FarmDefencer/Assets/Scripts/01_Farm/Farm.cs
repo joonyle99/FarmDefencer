@@ -13,6 +13,8 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
     private Field[] _fields;
     private HashSet<Crop> _lockedCrops;
 
+    public int InputPriority => 100;
+
     public bool TryGetLockableCropPositionFromProbability(IReadOnlyList<CropProbabilityData> cropProbabilityDatas,
         out Vector2 cropPosition)
     {

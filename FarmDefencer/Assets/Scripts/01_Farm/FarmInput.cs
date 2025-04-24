@@ -43,7 +43,7 @@ public sealed class FarmInput : MonoBehaviour
 	private float _singleHoldingTimeElapsed;
 	private Vector2 _lastInteractedWorldPosition;
 	private Vector2 _initialSingleHoldingWorldPosition;
-	private List<(IFarmInputLayer, int)> _inputLayers;
+	private List<IFarmInputLayer> _inputLayers;
 
 	private float _zoomMomentum;
 
@@ -52,15 +52,10 @@ public sealed class FarmInput : MonoBehaviour
 		_camera.orthographicSize = MaximumProjectionSize;
 	}
 
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <param name="inputLayer"></param>
-	/// <param name="priority">높을 수록 우선.</param>
-	public void RegisterInputLayer(IFarmInputLayer inputLayer, int priority)
+	public void RegisterInputLayer(IFarmInputLayer inputLayer)
 	{
-		_inputLayers.Add((inputLayer, priority));
-		_inputLayers.Sort((left, right) => right.Item2.CompareTo(left.Item2));
+		_inputLayers.Add(inputLayer);
+		_inputLayers.Sort((left, right) => right.InputPriority.CompareTo(left.InputPriority));
 	}
 
 	// 현재 터치된 월드 위치 또는 커서의 월드 위치를 설정함.
@@ -71,7 +66,7 @@ public sealed class FarmInput : MonoBehaviour
 
 	private void OnSingleTap()
 	{
-		foreach (var (inputLayer, _) in _inputLayers)
+		foreach (var inputLayer in _inputLayers)
 		{
 			if (inputLayer.OnSingleTap(_lastInteractedWorldPosition))
 			{
@@ -112,7 +107,7 @@ public sealed class FarmInput : MonoBehaviour
 			var deltaPosition = _lastInteractedWorldPosition - _initialSingleHoldingWorldPosition;
 
 			bool isHandled = false;
-			foreach (var (inputLayer, _) in _inputLayers)
+			foreach (var inputLayer in _inputLayers)
 			{
 				if (inputLayer.OnSingleHolding(
 					_initialSingleHoldingWorldPosition,
@@ -136,7 +131,7 @@ public sealed class FarmInput : MonoBehaviour
 		{
 			_singleHoldingTimeElapsed = 0.0f;
 
-			_inputLayers.ForEach(inputLayer => inputLayer.Item1.OnSingleHolding(
+			_inputLayers.ForEach(inputLayer => inputLayer.OnSingleHolding(
 					_initialSingleHoldingWorldPosition,
 					_lastInteractedWorldPosition - _initialSingleHoldingWorldPosition,
 					true,
@@ -156,7 +151,7 @@ public sealed class FarmInput : MonoBehaviour
 
 	private void Awake()
 	{
-		_inputLayers = new();
+		_inputLayers = new List<IFarmInputLayer>();
 		_camera = GetComponent<Camera>();
 		_camera.tag = "MainCamera";
 	}
