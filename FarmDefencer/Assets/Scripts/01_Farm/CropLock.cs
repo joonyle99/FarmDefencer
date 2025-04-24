@@ -7,17 +7,16 @@ using UnityEngine;
 /// </summary>
 public sealed class CropLock : MonoBehaviour
 {
-    private SpriteRenderer _lockSpriteRenderer;
-    private TMP_Text _remainingTimeText;
+    private SpriteRenderer _remainingGauge;
 
-    public void UpdateTime(float time)
+    public void UpdateGauge(float ratio)
     {
-        _remainingTimeText.SetText(((int)time).ToString());
+        var clamped = Mathf.Clamp01(ratio);
+        _remainingGauge.transform.localScale = new Vector3(clamped, 1.0f, 1.0f);
     }
     
     private void Awake()
     {
-        _lockSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        _remainingTimeText = transform.GetChild(1).GetComponent<TMP_Text>();
+        _remainingGauge = transform.Find("Gauge/Remaining").GetComponent<SpriteRenderer>();
     }
 }
