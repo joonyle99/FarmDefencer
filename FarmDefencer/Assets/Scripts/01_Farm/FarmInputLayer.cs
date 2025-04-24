@@ -6,6 +6,8 @@ using UnityEngine;
 /// </summary>
 public interface IFarmInputLayer
 {
+	int InputPriority { get; }
+	
 	bool OnSingleTap(Vector2 worldPosition);
 
 	/// <summary>

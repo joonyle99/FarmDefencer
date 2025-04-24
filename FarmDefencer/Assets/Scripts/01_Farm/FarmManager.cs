@@ -13,56 +13,35 @@ public sealed class FarmManager : MonoBehaviour
 	[SerializeField] private FarmInput farmInput;
 	[SerializeField] private ProductDatabase productDatabase;
 	[SerializeField] private PenaltyGiver penaltyGiver;
+	[SerializeField] private QuotaContext quotaContext;
 
 	private void Start()
 	{
-		cropSigns.SignClicked += farmUI.CropGuide.Toggle;
+		cropSigns.SignClicked += farmUI.ToggleCropGuide;
 		
-		farmInput.RegisterInputLayer(farmUI.CropGuide);
-		farmInput.RegisterInputLayer(farmUI.WateringCan);
 		farmInput.RegisterInputLayer(cropSigns);
 		farmInput.RegisterInputLayer(farm);
+		farmInput.FullZoomOut();
 
 		farmClock.RegisterFarmUpdatableObject(farm);
 		farmClock.RegisterFarmUpdatableObject(penaltyGiver);
-		
-		farm.Init(farmUI.HarvestInventory.GetQuota, farmUI.HarvestInventory.Gather);
-
-		farmUI.Init(farmClock);
-		farmUI.WateringCan.Water += farm.WateringAction;
-		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_carrot", true);
-		farm.SetFieldAvailability("product_carrot", true);
-		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_potato", true);
-		farm.SetFieldAvailability("product_potato", true);
-		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_corn", true);
-		farm.SetFieldAvailability("product_corn", true);
-		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_cabbage", true);
-		farm.SetFieldAvailability("product_cabbage", true);
-		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_cucumber", true);
-		farm.SetFieldAvailability("product_cucumber", true);
-		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_eggplant", true);
-		farm.SetFieldAvailability("product_eggplant", true);
-		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_sweetpotato", true);
-		farm.SetFieldAvailability("product_sweetpotato", true);
-		farmUI.HarvestInventory.SetHarvestBoxAvailability("product_mushroom", true);
-		farm.SetFieldAvailability("product_mushroom", true);
-
-		farmUI.HarvestInventory.SetTodaysOrder(
-			new System.Collections.Generic.List<(string, int)>
-			{
-				("product_carrot", 99),
-				("product_potato", 99), 
-				("product_corn", 99), 
-				("product_cabbage", 99), 
-				("product_cucumber", 99), 
-				("product_eggplant", 99), 
-				("product_sweetpotato", 99), 
-				("product_mushroom", 99),
-			});
-
-		farmInput.FullZoomOut();
-		penaltyGiver.Init(farm);
 		farmClock.AddPauseCondition(() => penaltyGiver.IsAnimationPlaying);
+		
+		farm.Init(
+			entry => quotaContext.TryGetQuota(entry.ProductName, out var quota) ? quota : 0,
+			(entry, cropWorldPosition, quota) =>
+			{
+				quotaContext.FillQuota(entry.ProductName, quota);
+				farmUI.PlayProductFillAnimation(entry, cropWorldPosition, quota, quotaContext);
+				SoundManager.PlaySfxStatic("SFX_T_coin");
+				ResourceManager.Instance.Gold += entry.Price * quota;
+			});
+		farmUI.Init(farmClock, farmInput, farm.WateringAction, productDatabase);
+		penaltyGiver.Init(farm);
+
+		quotaContext.QuotaContextUpdated += QuotaContextChangedHandler;
+		quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
+
 		var currentMap = MapManager.Instance.CurrentMap;
 		var monsters = new List<string>();
 		monsters.Add("Rabbit");
@@ -94,12 +73,24 @@ public sealed class FarmManager : MonoBehaviour
 		monsters.Add("Elephant");
 		monsters.Add("Elephant");
 		monsters.Add("Elephant");
-		penaltyGiver.SpawnMonsters(currentMap, monsters);
+		penaltyGiver.SpawnMonsters(currentMap.MapId, monsters);
+		
 	}
 
 	private void Update()
 	{
 		var ratio = farmClock.LengthOfDaytime == 0.0f ? 0.0f : farmClock.RemainingDaytime / farmClock.LengthOfDaytime;
-		farmUI.TimerUI.SetClockhand(ratio);
+		farmUI.SetTimerClockHand(ratio);
+	}
+
+	private void QuotaContextChangedHandler()
+	{
+		farmUI.UpdateHarvestInventory(quotaContext);
+		farm.UpdateAvailability(quotaContext);
+
+		if (quotaContext.IsAllQuotaFilled)
+		{
+			quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
+		}
 	}
 }

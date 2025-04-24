@@ -55,6 +55,7 @@ public sealed class FarmInput : MonoBehaviour
 	public void RegisterInputLayer(IFarmInputLayer inputLayer)
 	{
 		_inputLayers.Add(inputLayer);
+		_inputLayers.Sort((left, right) => right.InputPriority.CompareTo(left.InputPriority));
 	}
 
 	// 현재 터치된 월드 위치 또는 커서의 월드 위치를 설정함.

@@ -13,6 +13,16 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
     private Field[] _fields;
     private HashSet<Crop> _lockedCrops;
 
+    public int InputPriority => 100;
+
+    public void UpdateAvailability(QuotaContext context)
+    {
+        foreach (var field in _fields)
+        {
+            field.IsAvailable = context.IsProductAvailable(field.ProductEntry);
+        }
+    }
+
     public bool TryGetLockableCropPositionFromProbability(IReadOnlyList<CropProbabilityData> cropProbabilityDatas,
         out Vector2 cropPosition)
     {

@@ -12,14 +12,6 @@ public sealed class HarvestBox : MonoBehaviour
 		get => _quota;
 		set
 		{
-			if (!IsAvailable)
-			{
-				throw new InvalidOperationException($"HarvestBox({productEntry.ProductName})가 잠긴 상태에서 개수를 조절하려 시도했습니다.");
-			}
-			if (value < 0)
-			{
-				throw new ArgumentOutOfRangeException($"HarvestBox({productEntry.ProductName})의 개수를 0 미만으로 줄이려 시도했습니다.");
-			}
 			_quota = value;
 			_cropQuotaText.text = _quota.ToString();
 		}
