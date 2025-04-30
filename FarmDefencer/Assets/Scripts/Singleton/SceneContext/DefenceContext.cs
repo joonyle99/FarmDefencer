@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class DefenceContext : SceneContext
@@ -20,26 +19,26 @@ public class DefenceContext : SceneContext
 
     // defence reference
     public GridMap GridMap;
-    public WaveSystem WaveSystem;
     public BuildSystem BuildSystem;
+    public WaveSystem WaveSystem;
 
     protected override void Awake()
     {
         base.Awake();
 
         GridMap = FindFirstObjectByType<GridMap>();
-        WaveSystem = FindFirstObjectByType<WaveSystem>();
         BuildSystem = FindFirstObjectByType<BuildSystem>();
+        WaveSystem = FindFirstObjectByType<WaveSystem>();
 
-        if (GridMap != null && WaveSystem != null && BuildSystem != null)
+        if (GridMap != null && BuildSystem != null && WaveSystem != null)
         {
             string log = "";
 
             log += "DefenceContext is ready.\n";
             //log += $"============================\n";
             log += $"{nameof(GridMap)} is ready.\n";
-            log += $"{nameof(WaveSystem)} is ready.\n";
             log += $"{nameof(BuildSystem)} is ready.\n";
+            log += $"{nameof(WaveSystem)} is ready.\n";
 
             Debug.Log(log);
         }

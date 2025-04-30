@@ -14,18 +14,20 @@ public class WaveSystem : MonoBehaviour
     [SerializeField] private Factory _factory;              // wave system use factory for spawn spawnedMonster
     public Factory Factory => _factory;
 
+    [Space]
+
     [SerializeField] private RangeFloat _waitSpawnTimeRange;
     private float _waitSpawnTime = 0f;
-
     [SerializeField] private float _waitWaveTime = 2f;
+    private float _elapsedTime = 0f;
 
     [Space]
 
     // progress bar
     [SerializeField] private ProgressBar _progressBar;
-    [SerializeField] private Animator _rabbitAnimator;
-    [SerializeField] private float _buildDuration = 20f;
-    private float _buildTimer = 0f;
+    [SerializeField] private StageData stageData;
+    private int _maxWaveCount;
+    private int _currentWave;
 
     // target spawn count
     private int _targetSpawnCount = 0;
@@ -71,57 +73,28 @@ public class WaveSystem : MonoBehaviour
     public event System.Action OnSuccess;
     public event System.Action OnFailure;
 
-    private bool _isTriggered = false;
-    private float _elapsedTime = 0f;
-
-    private int _currentWave = 0;
-
-    [Space]
-
-    public StageData stageData;
-
     private void Start()
     {
-        _rabbitAnimator.Play("Play");
-        _progressBar.SetDangerousAmount(0.5f);
-        _progressBar.OnFinished += () => _rabbitAnimator.Play("Stop");
+        _maxWaveCount = stageData.Waves.Count;
+        _currentWave = 0;
     }
     private void Update()
     {
-        // CHEAT: trigger wave
-        if (Input.GetKeyDown(KeyCode.Space) && _isTriggered == false)
+        if (GameStateManager.Instance.CurrentState == GameState.Wave)
         {
-            _isTriggered = true;
-            StartCoroutine(WaveProcessCo());
-        }
-
-        // CHEAT: fast clock
-        if (Input.GetKey(KeyCode.RightBracket))
-        {
-            Time.timeScale = 3f;
-        }
-        else if (Input.GetKeyUp(KeyCode.RightBracket))
-        {
-            Time.timeScale = 1f;
-        }
-
-        // CHEAT: slow clock
-        if (Input.GetKey(KeyCode.LeftBracket))
-        {
-            Time.timeScale = 0.3f;
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftBracket))
-        {
-            Time.timeScale = 1f;
-        }
-
-        if (GameStateManager.Instance.CurrentState == GameState.Build)
-        {
-            _buildTimer += Time.deltaTime;
-            if (_buildTimer < _buildDuration)
+            // 남은 웨이브에 따라서...?
+            // 근데 웨이브 단위가 아닌 몬스터 단위로 해야 자연스러울 거 같은데
+            // 그러려면 나올 몬스터를 미리 다 정해놔야 하지 않을까..?
+            var remainWaveCount = _maxWaveCount - _currentWave;
+            if (remainWaveCount > 0)
             {
-                var remainBuildTime = _buildDuration - _buildTimer;
-                _progressBar.UpdateProgressBar(remainBuildTime, _buildDuration);
+                _progressBar.UpdateProgressBar((float)remainWaveCount, (float)_maxWaveCount);
+            }
+            else
+            {
+                _progressBar.UpdateProgressBar(0f, (float)_maxWaveCount);
+
+                GameStateManager.Instance.ChangeState(GameState.WaveAfter);
             }
         }
     }
@@ -192,6 +165,13 @@ public class WaveSystem : MonoBehaviour
 
         CompleteStageProcess();
     }
+    public void StartWaveProcess()
+    {
+        _progressBar.Initialize();
+        _progressBar.SetDangerousThreshold(0.5f);
+
+        StartCoroutine(WaveProcessCo());
+    }
     private IEnumerator WaveProcessCo()
     {
         GameStateManager.Instance.ChangeState(GameState.Wave);
@@ -207,7 +187,7 @@ public class WaveSystem : MonoBehaviour
     }
     private void CompleteStageProcess()
     {
-        GameStateManager.Instance.ChangeState(GameState.End);
+        GameStateManager.Instance.ChangeState(GameState.DefenceEnd);
 
         if (SurvivedCount > 0)
         {

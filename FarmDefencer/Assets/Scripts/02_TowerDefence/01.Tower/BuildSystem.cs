@@ -9,10 +9,18 @@ public class BuildSystem : MonoBehaviour
     [Header("━━━━━━━━ Build System ━━━━━━━━")]
     [Space]
 
+    // build tower
     public int selectedIndex = 0;
     [SerializeField] private Tower[] _availableTowers;
     public Tower[] AvailableTowers => _availableTowers;
     public Tower SelectedTower => _availableTowers[selectedIndex];
+
+    [Space]
+
+    // progress bar
+    [SerializeField] private ProgressBar _progressBar;
+    [SerializeField] private float _buildDuration = 20f;
+    private float _buildTimer = 0f;
 
     // dynamic variable
     private Tower _ghostTower;
@@ -23,6 +31,31 @@ public class BuildSystem : MonoBehaviour
     public static readonly Color NORMAL_GHOST_COLOR = new Color(1f, 1f, 1f, 0.7f);
     public static readonly Color RED_RANGE_COLOR = new Color(1f, 0f, 0f, 0.8f);
     public static readonly Color BLUE_RANGE_COLOR = new Color(0f, 0f, 1f, 0.8f);
+
+    private void Start()
+    {
+        _progressBar.Initialize();
+        _progressBar.SetDangerousThreshold(0.5f);
+    }
+    private void Update()
+    {
+        if (GameStateManager.Instance.CurrentState == GameState.Build)
+        {
+            _buildTimer += Time.deltaTime;
+            if (_buildTimer < _buildDuration)
+            {
+                var remainBuildTime = _buildDuration - _buildTimer;
+                _progressBar.UpdateProgressBar(remainBuildTime, _buildDuration);
+            }
+            else
+            {
+                _buildTimer = 0f;
+                _progressBar.UpdateProgressBar(0f, _buildDuration);
+
+                GameStateManager.Instance.ChangeState(GameState.WaveBefore);
+            }
+        }
+    }
 
     public void Pick(PointerEventData eventData)
     {

@@ -11,7 +11,9 @@ public class ProgressBar : MonoBehaviour
     [SerializeField] private Sprite _normalSprite;
     [SerializeField] private Sprite _dangerSprite;
 
-    private float _dangerousAmount;
+    [SerializeField] private Animator _rabbitAnimator; // TODO: Follower로 만들기 Animator가 아니라
+
+    private float _dangerousThreshold;
     private bool _isDangerous;
     private bool _isFinished;
 
@@ -22,31 +24,21 @@ public class ProgressBar : MonoBehaviour
 
     private void OnEnable()
     {
-        _isDangerous = false;
-        _isFinished = false;
-        ChangeToNormal();
+        Initialize();
     }
 
-    public void UpdateProgressBar(float currentValue, float maxValue)
+    public void Initialize()
     {
-        // fillAmount가 0인 경우 -> 진행도 100%
-        // fillAmount가 0.6인 경우 -> 진행도 40%
-        // fillAmount가 1인 경우 -> 진행도 0%
-        var fillAmount = currentValue / maxValue;
-        _bar.fillAmount = fillAmount;
+        _isDangerous = false;
+        _isFinished = false;
 
-        if (!_isDangerous && fillAmount <= _dangerousAmount + EPSILON)
+        ChangeToNormal();
+
+        if (_rabbitAnimator != null)
         {
-            _isDangerous = true;
-            OnDangerous?.Invoke();
-
-            ChangeToDanger();
-        }
-
-        if (!_isFinished && fillAmount <= 0.0f + EPSILON)
-        {
-            _isFinished = true;
-            OnFinished?.Invoke();
+            _rabbitAnimator.Play("Play");
+            OnFinished = null;
+            OnFinished += () => _rabbitAnimator.Play("Stop");
         }
     }
 
@@ -61,9 +53,38 @@ public class ProgressBar : MonoBehaviour
         _bar.sprite = _dangerSprite;
     }
 
-    public void SetDangerousAmount(float amount)
+    /// <summary>
+    /// 위험한 상태의 임계값을 설정
+    /// </summary>
+    public void SetDangerousThreshold(float threshold)
     {
-        _dangerousAmount = amount;
+        _dangerousThreshold = threshold;
+    }
+
+    /// <summary>
+    /// currentValue == maxValue -> 진행도 0%
+    /// </summary>
+    public void UpdateProgressBar(float currentValue, float maxValue)
+    {
+        // fillAmount가 0인 경우 -> 진행도 100%
+        // fillAmount가 0.6인 경우 -> 진행도 40%
+        // fillAmount가 1인 경우 -> 진행도 0%
+        var fillAmount = currentValue / maxValue;
+        _bar.fillAmount = fillAmount;
+
+        if (!_isDangerous && fillAmount <= _dangerousThreshold + EPSILON)
+        {
+            _isDangerous = true;
+            OnDangerous?.Invoke();
+
+            ChangeToDanger();
+        }
+
+        if (!_isFinished && fillAmount <= 0.0f + EPSILON)
+        {
+            _isFinished = true;
+            OnFinished?.Invoke();
+        }
     }
 
     public float GetBarWidth()
