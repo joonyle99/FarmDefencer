@@ -1,0 +1,15 @@
+turret_4.png
+size:745,745
+filter:Linear,Linear
+pma:true
+tower_1
+bounds:2,321,317,422
+offsets:1,1,319,424
+tower_2
+bounds:2,2,317,422
+offsets:1,1,319,424
+rotate:90
+tower_3
+bounds:321,426,317,422
+offsets:1,1,319,424
+rotate:90
