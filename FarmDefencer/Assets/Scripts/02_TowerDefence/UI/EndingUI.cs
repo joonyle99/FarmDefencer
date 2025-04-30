@@ -1,8 +1,11 @@
+using Spine;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EndingUI : MonoBehaviour
 {
+    [SerializeField] private Image _lineLeft;
+    [SerializeField] private Image _lineRight;
     [SerializeField] private Image _successImage;
     [SerializeField] private Image _failureImage;
 
@@ -40,6 +43,7 @@ public class EndingUI : MonoBehaviour
 
     public void ShowSuccess()
     {
+        ShowLine();
         _successImage.gameObject.SetActive(true);
         SoundManager.Instance.PlaySfx("SFX_D_stage_success");
     }
@@ -49,11 +53,22 @@ public class EndingUI : MonoBehaviour
     }
     public void ShowFailure()
     {
+        ShowLine();
         _failureImage.gameObject.SetActive(true);
         SoundManager.Instance.PlaySfx("SFX_D_stage_fail");
     }
     public void HideFailure()
     {
         _failureImage.gameObject.SetActive(false);
+    }
+    public void ShowLine()
+    {
+        _lineLeft.gameObject.SetActive(true);
+        _lineRight.gameObject.SetActive(true);
+    }
+    public void HideLine()
+    {
+        _lineLeft.gameObject.SetActive(false);
+        _lineRight.gameObject.SetActive(false);
     }
 }
