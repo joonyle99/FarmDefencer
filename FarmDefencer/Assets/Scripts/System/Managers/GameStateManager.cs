@@ -8,14 +8,17 @@ public enum GameState
     // Common
     Normal,
     Pause,
-    End,
 
     // Tycoon
     Water,
+    TycoonEnd,
 
     // Defence
     Build,
+    WaveBefore,
     Wave,
+    WaveAfter,
+    DefenceEnd,
 }
 
 public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
@@ -56,19 +59,25 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
             case GameState.Pause:
                 HandlePauseState();
                 break;
-            case GameState.End:
-                HandleEndState();
-                break;
             case GameState.Build:
                 HandleBuildState();
+                break;
+            case GameState.WaveBefore:
+                HandleWaveBeforeState();
                 break;
             case GameState.Wave:
                 HandleWaveState();
                 break;
+            case GameState.WaveAfter:
+                HandleWaveAfterState();
+                break;
+            case GameState.DefenceEnd:
+                HandleDefenceEndState();
+                break;
         }
-
     }
 
+    // Common
     private void HandleNormalState()
     {
 
@@ -77,15 +86,27 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     {
 
     }
-    private void HandleEndState()
-    {
 
-    }
+    // Tycoon
+
+    // Defence
     private void HandleBuildState()
     {
 
     }
+    private void HandleWaveBeforeState()
+    {
+
+    }
     private void HandleWaveState()
+    {
+
+    }
+    private void HandleWaveAfterState()
+    {
+
+    }
+    private void HandleDefenceEndState()
     {
 
     }

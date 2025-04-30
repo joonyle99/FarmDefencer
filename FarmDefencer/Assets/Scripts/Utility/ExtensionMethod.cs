@@ -112,7 +112,7 @@ namespace JoonyleGameDevKit
 
             int layerNumber = 0;
 
-            while (layerMaskValue > 1)      // 1ÀÌ µÇ¸é Á¾·á
+            while (layerMaskValue > 1)      // 1ì´ ë˜ë©´ ì¢…ë£Œ
             {
                 layerMaskValue = layerMaskValue >> 1;
                 layerNumber++;
@@ -130,44 +130,44 @@ namespace JoonyleGameDevKit
 
         // String
         /// <summary>
-        /// ¹®ÀÚ¿­¿¡¼­ ¼ıÀÚ¸¦ Ã£¾Æ ÃßÃâÇÑ´Ù
+        /// ë¬¸ìì—´ì—ì„œ ìˆ«ìë¥¼ ì°¾ì•„ ì¶”ì¶œí•œë‹¤
         /// </summary>
         public static int ExtractNumber(this string str, int defaultValue = 0)
         {
-            // ¹®ÀÚ¿­ µÚ¿¡¼­ºÎÅÍ Å½»öÀ» ½ÃÀÛÇÑ´Ù
+            // ë¬¸ìì—´ ë’¤ì—ì„œë¶€í„° íƒìƒ‰ì„ ì‹œì‘í•œë‹¤
             int stringEndIndex = str.Length - 1;
             int numberStartIndex = -1;
 
             for (int i = stringEndIndex; i >= 0; i--)
             {
-                // ¼ıÀÚ¸¦ Ã£Àº °æ¿ì
+                // ìˆ«ìë¥¼ ì°¾ì€ ê²½ìš°
                 if (char.IsDigit(str[i]))
                 {
-                    // Ã³À½ÀÎ °æ¿ì ÀÎµ¦½º¸¦ ±â·ÏÇÑ´Ù
+                    // ì²˜ìŒì¸ ê²½ìš° ì¸ë±ìŠ¤ë¥¼ ê¸°ë¡í•œë‹¤
                     if (numberStartIndex == -1)
                     {
                         numberStartIndex = i;
                     }
                 }
-                // ¹®ÀÚ¸¦ Ã£Àº °æ¿ì
+                // ë¬¸ìë¥¼ ì°¾ì€ ê²½ìš°
                 else
                 {
-                    // ÀÌ¹Ì ¼ıÀÚ¸¦ ±â·ÏÇÑÀûÀÌ ÀÖ´Ù¸é
+                    // ì´ë¯¸ ìˆ«ìë¥¼ ê¸°ë¡í•œì ì´ ìˆë‹¤ë©´
                     if (numberStartIndex != -1)
                     {
-                        // ¼ıÀÚ ±¸°£À» ¹İÈ¯ÇÑ´Ù
+                        // ìˆ«ì êµ¬ê°„ì„ ë°˜í™˜í•œë‹¤
                         return int.Parse(str.Substring(i + 1, numberStartIndex - i));
                     }
                 }
             }
 
-            // ¿¹¿Ü: ¹®ÀÚ¿­ ÀüÃ¼°¡ ¼ıÀÚÀÌ°Å³ª °¡Àå ¾Õ¿¡ ¼ıÀÚÀÇ ½ÃÀÛÁ¡ÀÌ ÀÖ´Â °æ¿ì
+            // ì˜ˆì™¸: ë¬¸ìì—´ ì „ì²´ê°€ ìˆ«ìì´ê±°ë‚˜ ê°€ì¥ ì•ì— ìˆ«ìì˜ ì‹œì‘ì ì´ ìˆëŠ” ê²½ìš°
             if (numberStartIndex != -1)
             {
                 return int.Parse(str.Substring(0, numberStartIndex + 1));
             }
 
-            // ¼ıÀÚ¸¦ Ã£Áö ¸øÇß°Å³ª º¯È¯¿¡ ½ÇÆĞÇÑ °æ¿ì ¿¹¿Ü¸¦ ´øÁø´Ù
+            // ìˆ«ìë¥¼ ì°¾ì§€ ëª»í–ˆê±°ë‚˜ ë³€í™˜ì— ì‹¤íŒ¨í•œ ê²½ìš° ì˜ˆì™¸ë¥¼ ë˜ì§„ë‹¤
             // throw new ArgumentException("No valid number found in the input string.");
             Debug.LogWarning("No valid number found in the input string.\nThen return defaultValue");
             return defaultValue;
@@ -180,7 +180,7 @@ namespace JoonyleGameDevKit
             {
                 GameState.Normal => "Normal",
                 GameState.Pause => "Pause",
-                GameState.End => "End",
+                GameState.DefenceEnd => "DefenceEnd",
                 GameState.Water => "Water",
                 GameState.Build => "Build",
                 GameState.Wave => "Wave",
