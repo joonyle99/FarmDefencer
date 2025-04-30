@@ -17,6 +17,8 @@ public class ProcessUI : MonoBehaviour
 
     private WaveSystem _waveSystem;
 
+    private float _savedTimeScale;
+
     private void Awake()
     {
         _waveSystem = FindFirstObjectByType<WaveSystem>();
@@ -34,27 +36,30 @@ public class ProcessUI : MonoBehaviour
     }
     public void ResetButton02()
     {
-        _playX1Button.gameObject.SetActive(true);
-        _playX2Button.gameObject.SetActive(false);
+        _playX2Button.gameObject.SetActive(true);
+        _playX1Button.gameObject.SetActive(false);
     }
     public void Initialize()
     {
         ResetButton01();
-        ResetButton02();
+        //ResetButton02();
     }
 
     // 1
     public void Fight()
     {
-        Debug.Log("Fight");
         _waveSystem.StartWaveProcess();
 
         _fightButton.gameObject.SetActive(false);
         _pauseButton.gameObject.SetActive(true);
+
+        _playX2Button.gameObject.SetActive(true);
+        _playX1Button.gameObject.SetActive(false);
     }
     public void Pause()
     {
-        Debug.Log("Pause");
+        // pause 시점의 timeScale을 저장
+        _savedTimeScale = Time.timeScale;
         Time.timeScale = 0f;
 
         _pauseButton.gameObject.SetActive(false);
@@ -62,8 +67,8 @@ public class ProcessUI : MonoBehaviour
     }
     public void Resume()
     {
-        Debug.Log("Resume");
-        Time.timeScale = 1f;
+        // pause 시점의 timeScale을 복원
+        Time.timeScale = _savedTimeScale;
 
         _pauseButton.gameObject.SetActive(true);
         _resumeButton.gameObject.SetActive(false);
@@ -72,18 +77,18 @@ public class ProcessUI : MonoBehaviour
     // 2
     public void PlayX1()
     {
-        Debug.Log("PlayX1");
-        Time.timeScale = 3f;
+        Time.timeScale = 1f;
+        _savedTimeScale = Time.timeScale;
 
-        _playX1Button.gameObject.SetActive(false);
         _playX2Button.gameObject.SetActive(true);
+        _playX1Button.gameObject.SetActive(false);
     }
     public void PlayX2()
     {
-        Debug.Log("PlayX2");
-        Time.timeScale = 1f;
+        Time.timeScale = 3f;
+        _savedTimeScale = Time.timeScale;
 
-        _playX1Button.gameObject.SetActive(true);
         _playX2Button.gameObject.SetActive(false);
+        _playX1Button.gameObject.SetActive(true);
     }
 }
