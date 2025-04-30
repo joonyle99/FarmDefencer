@@ -192,8 +192,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProCamera2D: {fileID: 0}
   GridMap: {fileID: 0}
-  WaveSystem: {fileID: 0}
   BuildSystem: {fileID: 0}
+  WaveSystem: {fileID: 0}
 --- !u!4 &755706060
 Transform:
   m_ObjectHideFlags: 0
@@ -2212,6 +2212,8 @@ MonoBehaviour:
   _availableTowers:
   - {fileID: 7831573459716681309, guid: c33dac51bb3454542a08bdea32b29f79, type: 3}
   - {fileID: 7831573459716681309, guid: 7bdd8eb0720db94479f348acbc1cd182, type: 3}
+  _progressBar: {fileID: 730172970}
+  _buildDuration: 10
 --- !u!4 &1224125957
 Transform:
   m_ObjectHideFlags: 0
@@ -2263,8 +2265,6 @@ MonoBehaviour:
     End: 2
   _waitWaveTime: 3
   _progressBar: {fileID: 730172970}
-  _rabbitAnimator: {fileID: 1391989575}
-  _buildDuration: 100
   stageData: {fileID: 11400000, guid: fc3387685d0c4d649b3c33c4e4fc3d7d, type: 2}
 --- !u!114 &1231187497
 MonoBehaviour:
@@ -2761,7 +2761,7 @@ TilemapRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2017358601}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -7220,6 +7220,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 539914167890523222, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
+      propertyPath: _rabbitAnimator
+      value: 
+      objectReference: {fileID: 1391989575}
     - target: {fileID: 771498834663216545, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -7300,10 +7304,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1312234496511721216, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1537033700693878111, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7368,30 +7368,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6253125212068841416, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6253125212068841416, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6253125212068841416, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6253125212068841416, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6253125212068841416, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6253125212068841416, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -80
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7403,8 +7379,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 1913727463}
   - {fileID: 755706060}
-  - {fileID: 1231187498}
   - {fileID: 1224125957}
+  - {fileID: 1231187498}
   - {fileID: 1151536070}
   - {fileID: 868308894}
   - {fileID: 1207400527}
