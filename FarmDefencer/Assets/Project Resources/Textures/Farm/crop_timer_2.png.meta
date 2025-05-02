@@ -116,8 +116,8 @@ TextureImporter:
       name: crop_timer_2_0
       rect:
         serializedVersion: 2
-        x: 13
-        y: 14
+        x: 0
+        y: 0
         width: 114
         height: 28
       alignment: 4
@@ -126,10 +126,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 2a10087a1e28ae34d8379d4b19fb7fd1
-      internalID: -1845938565
+      spriteID: 431be6bb62a01c6c0800000000000000
+      internalID: -4125004622225034956
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 4ef05a3afca9c4345aafe4af488bcb63
+    spriteID: a6628a2decd468b4b84cba0fa193868f
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      crop_timer_2_0: -1845938565
+      crop_timer_2_0: -4125004622225034956
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
