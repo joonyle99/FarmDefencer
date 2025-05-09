@@ -43,6 +43,10 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 		_notifyQuotaFilled = notifyQuotaFilledFunction;
 	}
 
+	public bool AABB(Vector2 worldPosition) =>
+		Mathf.Abs(worldPosition.x - transform.position.x) < 0.5f &&
+		Mathf.Abs(worldPosition.y - transform.position.y) < 0.5f;
+
 	/// <summary>
 	/// 한 손가락으로 탭할 때의 동작을 정의.
 	/// </summary>
