@@ -41,7 +41,7 @@ public sealed class WateringCan :
 	private Vector2 _currentWateringWorldPosition;
 	private Vector2 _initialScreenLocalPosition; // 이 물뿌리개를 사용하지 않을 때 위치할 화면 위치. 에디터 상에서 놓은 위치를 기억해서 사용함.
 	private RectTransform _rectTransform;
-	private FarmClock _farmClock;
+	private Func<bool> _isWaterable;
 
 	[SpineAnimation]
 	[SerializeField]
@@ -75,7 +75,7 @@ public sealed class WateringCan :
 
 	public void OnDrag(PointerEventData pointerEventData)
 	{
-		if (_farmClock.Stopped)
+		if (!_isWaterable())
 		{
 			if (Using)
 			{
@@ -95,9 +95,9 @@ public sealed class WateringCan :
 		_currentWateringWorldPosition = pointerWorldPosition;
 	}
 
-	public void Init(FarmClock farmClock, Action<Vector2> onWatering)
+	public void Init(Func<bool> isWaterable, Action<Vector2> onWatering)
 	{
-		_farmClock = farmClock;
+		_isWaterable = isWaterable;
 		_onWatering = onWatering;
 	}
 

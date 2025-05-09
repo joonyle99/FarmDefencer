@@ -12,7 +12,7 @@ public sealed class FarmUI : MonoBehaviour
 
 	public void Init(FarmClock farmClock, FarmInput farmInput, Action<Vector2> onWatering, ProductDatabase productDatabase)
 	{
-		_wateringCan.Init(farmClock, onWatering);
+		_wateringCan.Init(() => !farmClock.Stopped, onWatering);
 		farmInput.RegisterInputLayer(_wateringCan);
 		
 		_farmDebugUI.Init(farmClock);
