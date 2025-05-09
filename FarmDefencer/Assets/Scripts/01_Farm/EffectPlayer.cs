@@ -15,11 +15,13 @@ public sealed class EffectPlayer : MonoBehaviour
 
 	private bool _isHolding;
 	private Dictionary<string, RuntimeAnimatorController> _vfxControllers;
+	private static readonly int Looping = Animator.StringToHash("Looping");
+	private static readonly int Play = Animator.StringToHash("Play");
 
 	public static void PlayTabEffect(Vector2 worldPosition)
 	{
 		s_singleton._interactEffectAnimator.transform.position = worldPosition;
-		s_singleton._interactEffectAnimator.SetTrigger("Play");
+		s_singleton._interactEffectAnimator.SetTrigger(Play);
 	}
 
 	/// <summary>
@@ -30,8 +32,8 @@ public sealed class EffectPlayer : MonoBehaviour
 	public static void PlayHoldEffect(Vector2 worldPosition)
 	{
 		s_singleton._interactEffectAnimator.transform.position = worldPosition;
-		s_singleton._interactEffectAnimator.SetTrigger("Play");
-		s_singleton._interactEffectAnimator.SetBool("Looping", true);
+		s_singleton._interactEffectAnimator.SetTrigger(Play);
+		s_singleton._interactEffectAnimator.SetBool(Looping, true);
 		s_singleton._isHolding = true;
 	}
 
@@ -41,10 +43,10 @@ public sealed class EffectPlayer : MonoBehaviour
 	/// </summary>
 	public static void StopHoldEffect()
 	{
-		if (s_singleton._interactEffectAnimator.GetBool("Looping"))
+		if (s_singleton._interactEffectAnimator.GetBool(Looping))
 		{
-			s_singleton._interactEffectAnimator.ResetTrigger("Play");
-			s_singleton._interactEffectAnimator.SetBool("Looping", false);
+			s_singleton._interactEffectAnimator.ResetTrigger(Play);
+			s_singleton._interactEffectAnimator.SetBool(Looping, false);
 		}
 	}
 
