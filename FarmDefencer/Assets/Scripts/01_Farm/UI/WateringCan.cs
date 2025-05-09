@@ -15,7 +15,8 @@ public sealed class WateringCan :
 	IPointerUpHandler,
 	IPointerExitHandler
 {
-	public int InputPriority => 400;
+	
+	public int InputPriority => IFarmInputLayer.Priority_WateringCan;
 
 	// 물 주기 판정이 가해지는 watering 애니메이션에서의 시각
 	private const float WateringAnimationTimePoint = 0.5f;

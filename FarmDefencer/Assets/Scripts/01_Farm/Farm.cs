@@ -11,9 +11,8 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
 {
     private bool _isFarmPaused;
     private Field[] _fields;
-    private HashSet<Crop> _lockedCrops;
 
-    public int InputPriority => 100;
+    public int InputPriority => IFarmInputLayer.Priority_Farm;
 
     public void UpdateAvailability(QuotaContext context)
     {
@@ -31,7 +30,7 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
         {
             var field = _fields.FirstOrDefault(f =>
                 f.ProductEntry.ProductName.Equals(cropProbability.TargetCrop.ProductName));
-            if (field is null || !field.IsAvailable || field.Crops.All(c => _lockedCrops.Contains(c)))
+            if (field is null || !field.IsAvailable || field.AllLocked)
             {
                 continue;
             }
@@ -51,7 +50,7 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
         {
             var field = _fields.FirstOrDefault(f =>
                 f.ProductEntry.ProductName.Equals(cropProbability.TargetCrop.ProductName));
-            if (field is null || !field.IsAvailable || field.Crops.All(c => _lockedCrops.Contains(c)))
+            if (field is null || !field.IsAvailable || field.AllLocked)
             {
                 continue;
             }
@@ -77,7 +76,7 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
             var cropX = targetField.transform.position.x + flattenedPosition % targetField.FieldSize.x;
             var cropY = targetField.transform.position.y + flattenedPosition / targetField.FieldSize.x;
 
-            if (targetField.TryFindCropAt(new Vector2(cropX, cropY), out var crop) && !_lockedCrops.Contains(crop))
+            if (targetField.IsCropLockable(new Vector2(cropX, cropY)))
             {
                 cropPosition = new Vector2(cropX, cropY);
                 return true;
@@ -85,54 +84,23 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
         }
 
         // 랜덤 배정에 실패했으면 가장 처음 유효한 Crop의 위치를 반환
-        var firstCrop = targetField.Crops.FirstOrDefault(c => !_lockedCrops.Contains(c));
-        cropPosition = firstCrop is not null
-            ? firstCrop.transform.position
-            : Vector2.zero;
-        return firstCrop is not null;
+        var found = targetField.TryGetFirstLockableCropPosition(out cropPosition);
+        return found;
     }
 
-    public bool TryLockCropAt(Vector2 cropPosition)
-    {
-        foreach (var field in _fields)
-        {
-            if (field.TryFindCropAt(cropPosition, out var crop))
-            {
-                if (!_lockedCrops.Contains(crop))
-                {
-                    crop.ResetToInitialState();
-                    crop.gameObject.SetActive(false);
-                }
+    public bool TryLockCropAt(Vector2 cropPosition) =>_fields.Any(field => field.TryLockCropAt(cropPosition));
 
-                return _lockedCrops.Add(crop);
-            }
-        }
-
-        return false;
-    }
-
-    public void UnlockCropAt(Vector2 cropPosition)
-    {
-        // Unlock동작은 잠금상태에 무관하게 동작
-        foreach (var field in _fields)
-        {
-            if (field.TryFindCropAt(cropPosition, out var crop))
-            {
-                crop.gameObject.SetActive(true);
-                _lockedCrops.Remove(crop);  
-            }
-        }
-    }
+    public void UnlockCropAt(Vector2 cropPosition) => Array.ForEach(_fields, f => f.UnlockCropAt(cropPosition));
 
     public bool OnSingleTap(Vector2 worldPosition) =>
-        DoCropActionTo(crop => crop.OnSingleTap(worldPosition), worldPosition);
+        DoActionTo(field => field.OnSingleTap(worldPosition), worldPosition);
 
     public bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd,
         float deltaHoldTime)
-        => DoCropActionTo(crop => crop.OnSingleHolding(initialWorldPosition, deltaWorldPosition, isEnd, deltaHoldTime),
+        => DoActionTo(field => field.OnSingleHolding(initialWorldPosition, deltaWorldPosition, isEnd, deltaHoldTime),
             initialWorldPosition);
 
-    public void WateringAction(Vector2 position) => DoCropActionTo(crop => crop.OnWatering(), position);
+    public void WateringAction(Vector2 position) => DoActionTo(field => field.OnWatering(position), position);
 
     public void OnFarmUpdate(float deltaTime)
     {
@@ -170,15 +138,16 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
         field.IsAvailable = value;
     }
 
-    public void Init(Func<ProductEntry, int> getQuotaFunction, Action<ProductEntry, Vector2, int> fillQuotaFunction)
+    public void Init(Func<ProductEntry, int> getQuotaFunction, 
+        Action<ProductEntry, Vector2, int> fillQuotaFunction,
+        Action<ProductEntry> signClickedHandler)
     {
-        Array.ForEach(_fields, field => field.Init(getQuotaFunction, fillQuotaFunction));
+        Array.ForEach(_fields, field => field.Init(getQuotaFunction, fillQuotaFunction, signClickedHandler));
     }
 
     private void Awake()
     {
         _fields = new Field[transform.childCount];
-        _lockedCrops = new();
 
         for (int childIndex = 0; childIndex < transform.childCount; ++childIndex)
         {
@@ -189,7 +158,7 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
         }
     }
 
-    private bool DoCropActionTo(Action<Crop> action, Vector2 cropWorldPosition)
+    private bool DoActionTo(Action<Field> action, Vector2 worldPosition)
     {
         if (_isFarmPaused)
         {
@@ -199,10 +168,9 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
         foreach (var field in _fields)
         {
             if (field.IsAvailable
-                && field.TryFindCropAt(cropWorldPosition, out var crop)
-                && !_lockedCrops.Contains(crop))
+                && field.AABB(worldPosition))
             {
-                action(crop);
+                action(field);
                 return true;
             }
         }

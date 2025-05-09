@@ -6,26 +6,24 @@ using UnityEngine;
 /// </summary>
 public sealed class FarmManager : MonoBehaviour
 {
-	[SerializeField] private CropSigns cropSigns;
 	[SerializeField] private FarmUI farmUI;
 	[SerializeField] private FarmClock farmClock;
 	[SerializeField] private Farm farm;
 	[SerializeField] private FarmInput farmInput;
 	[SerializeField] private ProductDatabase productDatabase;
 	[SerializeField] private PenaltyGiver penaltyGiver;
+	[SerializeField] private HarvestTutorialGiver harvestTutorialGiver;
 	[SerializeField] private QuotaContext quotaContext;
 
 	private void Start()
 	{
-		cropSigns.SignClicked += farmUI.ToggleCropGuide;
-		
-		farmInput.RegisterInputLayer(cropSigns);
 		farmInput.RegisterInputLayer(farm);
-		farmInput.FullZoomOut();
+		farmInput.RegisterInputLayer(harvestTutorialGiver);
 
 		farmClock.RegisterFarmUpdatableObject(farm);
 		farmClock.RegisterFarmUpdatableObject(penaltyGiver);
 		farmClock.AddPauseCondition(() => penaltyGiver.IsAnimationPlaying);
+		farmClock.AddPauseCondition(() => harvestTutorialGiver.IsPlayingTutorial);
 		
 		farm.Init(
 			entry => quotaContext.TryGetQuota(entry.ProductName, out var quota) ? quota : 0,
@@ -35,10 +33,12 @@ public sealed class FarmManager : MonoBehaviour
 				farmUI.PlayProductFillAnimation(entry, cropWorldPosition, quota, quotaContext);
 				SoundManager.PlaySfxStatic("SFX_T_coin");
 				ResourceManager.Instance.Gold += entry.Price * quota;
-			});
+			},
+			farmUI.ToggleCropGuide);
+		
 		farmUI.Init(farmClock, farmInput, farm.WateringAction, productDatabase);
 		penaltyGiver.Init(farm);
-
+		
 		quotaContext.QuotaContextUpdated += QuotaContextChangedHandler;
 		quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
 
@@ -73,14 +73,26 @@ public sealed class FarmManager : MonoBehaviour
 		monsters.Add("Elephant");
 		monsters.Add("Elephant");
 		monsters.Add("Elephant");
+		
 		penaltyGiver.SpawnMonsters(currentMap.MapId, monsters);
 		
-	}
+		harvestTutorialGiver.AddTutorial("product_carrot");
+}
 
 	private void Update()
 	{
 		var ratio = farmClock.LengthOfDaytime == 0.0f ? 0.0f : farmClock.RemainingDaytime / farmClock.LengthOfDaytime;
 		farmUI.SetTimerClockHand(ratio);
+
+		if (harvestTutorialGiver.IsPlayingTutorial)
+		{
+			harvestTutorialGiver.gameObject.SetActive(!penaltyGiver.IsAnimationPlaying);
+			farmInput.InputPriorityCut = harvestTutorialGiver.InputPriority;
+		}
+		else
+		{
+			farmInput.InputPriorityCut = 0;
+		}
 	}
 
 	private void QuotaContextChangedHandler()
