@@ -21,6 +21,8 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
 
     private HarvestTutorial _currentTutorial;
     private SpriteRenderer _background;
+    
+    private WateringCan _tutorialWateringCan;
 
     public void AddTutorial(string product)
     {
@@ -36,8 +38,14 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
         {
             return false;
         }
-        
-        return _currentTutorial.Field.OnSingleTap(worldPosition);
+
+        if (_currentTutorial.TargetCrop.AABB(worldPosition))
+        {
+            _currentTutorial.TargetCrop.OnSingleTap(worldPosition);
+            return true;
+        }
+
+        return _tutorialWateringCan.Using;
     }
 
     public bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 offset, bool isEnd, float deltaHoldTime)
@@ -47,14 +55,22 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
         {
             return false;
         }
-
-        return _currentTutorial.Field.OnSingleHolding(initialWorldPosition, offset, isEnd, deltaHoldTime);
+        
+        if (_currentTutorial.TargetCrop.AABB(initialWorldPosition))
+        {
+            _currentTutorial.Field.OnSingleHolding(initialWorldPosition, offset, isEnd, deltaHoldTime);
+            return true;
+        }
+        
+        return _tutorialWateringCan.Using;
     }
 
     private void Awake()
     {
         _tutorials = new();
         _background = transform.Find("Background").GetComponent<SpriteRenderer>();
+        _tutorialWateringCan = transform.GetComponentInChildren<WateringCan>();
+        _tutorialWateringCan.Init(() => true, wateringPosition => { if (_currentTutorial is not null && _currentTutorial.TargetCrop.AABB(wateringPosition)) _currentTutorial.TargetCrop.OnWatering(); });
     }
     
     private void Update()

@@ -10,6 +10,12 @@ public sealed class FarmUI : MonoBehaviour
 	private CropGuide _cropGuide;
 	private FarmDebugUI _farmDebugUI;
 
+	public bool WateringCanAvailable
+	{
+		get => _wateringCan.gameObject.activeSelf;
+		set => _wateringCan.gameObject.SetActive(value);
+	}
+
 	public void Init(FarmClock farmClock, FarmInput farmInput, Action<Vector2> onWatering, ProductDatabase productDatabase)
 	{
 		_wateringCan.Init(() => !farmClock.Stopped, onWatering);

@@ -93,6 +93,8 @@ public sealed class FarmManager : MonoBehaviour
 		{
 			farmInput.InputPriorityCut = 0;
 		}
+
+		farmUI.WateringCanAvailable = !harvestTutorialGiver.gameObject.activeSelf;
 	}
 
 	private void QuotaContextChangedHandler()

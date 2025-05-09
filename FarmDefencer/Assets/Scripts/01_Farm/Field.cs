@@ -43,6 +43,8 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
     }
     private bool _isAvailable;
 
+    public Crop TopLeftCrop => _crops[FieldSize.x * (FieldSize.y - 1)];
+
     public bool AllLocked => Array.TrueForAll(_crops, c => _lockedCrops.Contains(c));
     
     public bool TryLockCropAt(Vector2 cropPosition)
