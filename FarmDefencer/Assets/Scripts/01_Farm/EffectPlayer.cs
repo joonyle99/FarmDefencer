@@ -17,11 +17,12 @@ public sealed class EffectPlayer : MonoBehaviour
 	private Dictionary<string, RuntimeAnimatorController> _vfxControllers;
 	private static readonly int Looping = Animator.StringToHash("Looping");
 	private static readonly int Play = Animator.StringToHash("Play");
+	private static readonly int Enter = Animator.StringToHash("Enter");
 
 	public static void PlayTabEffect(Vector2 worldPosition)
 	{
 		s_singleton._interactEffectAnimator.transform.position = worldPosition;
-		s_singleton._interactEffectAnimator.SetTrigger(Play);
+		s_singleton._interactEffectAnimator.Play(Enter, 0, 0.0f);
 	}
 
 	/// <summary>
@@ -32,7 +33,7 @@ public sealed class EffectPlayer : MonoBehaviour
 	public static void PlayHoldEffect(Vector2 worldPosition)
 	{
 		s_singleton._interactEffectAnimator.transform.position = worldPosition;
-		s_singleton._interactEffectAnimator.SetTrigger(Play);
+		s_singleton._interactEffectAnimator.Play(Enter, 0, 0.0f);
 		s_singleton._interactEffectAnimator.SetBool(Looping, true);
 		s_singleton._isHolding = true;
 	}
