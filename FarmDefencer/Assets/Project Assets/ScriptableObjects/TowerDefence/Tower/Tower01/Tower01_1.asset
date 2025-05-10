@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d23d5d10bfc7ab40a374edf33b6caf0, type: 3}
   m_Name: Tower01_1
   m_EditorClassIdentifier: 
+  Description: "\uAE30\uBCF8\uD0C4\uC774 \uBAAC\uC2A4\uD130\uB97C \uD0C0\uACA9\uD569\uB2C8\uB2E4"
   Level: 1
   AttackRate: 1
   Damage: 5
