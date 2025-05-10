@@ -58,6 +58,9 @@ public sealed class CropCabbage : Crop
 	private CabbageState _currentState;
 	private GameObject _harvestSoilLayerObject; // 0번 자식
 	private GameObject _harvestCropLayerObject; // 1번 자식
+	
+	public override RequiredCropAction RequiredCropAction =>
+		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
 
 	public override void OnSingleTap(Vector2 worldPosition)
 	{
@@ -271,11 +274,12 @@ public sealed class CropCabbage : Crop
 	{
 		{CabbageStage.Seed, Plant },
 		{CabbageStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
-
 		{CabbageStage.Mature, DoNothing },
+		
 		{CabbageStage.Stage2_Dead, DoNothing },
 		{CabbageStage.Stage2_BeforeWater, DoNothing },
 		{CabbageStage.Stage2_Growing, DoNothing },
+		
 		{CabbageStage.Stage1_Dead, DoNothing },
 		{CabbageStage.Stage1_BeforeWater, DoNothing },
 		{CabbageStage.Stage1_Growing, DoNothing },
@@ -286,12 +290,29 @@ public sealed class CropCabbage : Crop
 	{
 		{CabbageStage.Seed, DoNothing_OnSingleHolding },
 		{CabbageStage.Harvested, DoNothing_OnSingleHolding },
+		{CabbageStage.Mature, ShakeAndHarvest },
+		
 		{CabbageStage.Stage2_BeforeWater, DoNothing_OnSingleHolding },
 		{CabbageStage.Stage2_Dead, DoNothing_OnSingleHolding },
 		{CabbageStage.Stage2_Growing, DoNothing_OnSingleHolding },
+		
 		{CabbageStage.Stage1_BeforeWater, DoNothing_OnSingleHolding },
 		{CabbageStage.Stage1_Dead, DoNothing_OnSingleHolding },
 		{CabbageStage.Stage1_Growing, DoNothing_OnSingleHolding },
-		{CabbageStage.Mature, ShakeAndHarvest },
+	};
+	
+	private static readonly Dictionary<CabbageStage, Func<CabbageState, RequiredCropAction>> GetRequiredCropActionFunctions = new()
+	{
+		{CabbageStage.Seed, _ => RequiredCropAction.SingleTap },
+		{CabbageStage.Harvested, _ => RequiredCropAction.SingleTap },
+		{CabbageStage.Mature, _ => RequiredCropAction.Drag },
+		
+		{CabbageStage.Stage2_BeforeWater, _ => RequiredCropAction.Water },
+		{CabbageStage.Stage2_Dead, _ => RequiredCropAction.Water },
+		{CabbageStage.Stage2_Growing, _ => RequiredCropAction.None },
+		
+		{CabbageStage.Stage1_BeforeWater, _ => RequiredCropAction.Water },
+		{CabbageStage.Stage1_Dead, _ => RequiredCropAction.Water },
+		{CabbageStage.Stage1_Growing, _ => RequiredCropAction.None },
 	};
 }

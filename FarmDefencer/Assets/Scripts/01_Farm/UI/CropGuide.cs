@@ -13,7 +13,7 @@ public sealed class CropGuide : MonoBehaviour, IFarmInputLayer
 	[SerializeField] private Sprite cropGuideImage_sweetpotato;
 	[SerializeField] private Sprite cropGuideImage_mushroom;
 
-	public int InputPriority => 800;
+	public int InputPriority => IFarmInputLayer.Priority_CropGuide;
 	
 	private Image _image;
 

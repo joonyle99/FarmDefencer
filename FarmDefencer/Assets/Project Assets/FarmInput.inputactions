@@ -174,21 +174,10 @@
                 {
                     "name": "",
                     "id": "149916c4-b9a5-4f81-b6d8-8ba1e2c1c9c6",
-                    "path": "<Mouse>/position",
+                    "path": "<Pointer>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";PC(Debug)",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b6dfae57-8b9d-45e8-8e13-04fde66da01e",
-                    "path": "<Touchscreen>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Mobile",
+                    "groups": ";PC(Debug);Mobile",
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false

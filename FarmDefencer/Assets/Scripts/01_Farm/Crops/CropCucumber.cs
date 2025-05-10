@@ -57,6 +57,9 @@ public sealed class CropCucumber : Crop
 
 	private SpriteRenderer _spriteRenderer;
 	private CucumberState _currentState;
+	
+	public override RequiredCropAction RequiredCropAction =>
+		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
 
 	public override void OnWatering()
 	{
@@ -173,8 +176,8 @@ public sealed class CropCucumber : Crop
 		{CucumberStage.Harvested, (beforeState, deltaTime) => DoNothing(beforeState) },
 	};
 
-private static readonly Dictionary<CucumberStage, Func<CucumberState, CucumberState>> OnSingleTapFunctions = new()
-{
+	private static readonly Dictionary<CucumberStage, Func<CucumberState, CucumberState>> OnSingleTapFunctions = new()
+	{
 		{CucumberStage.Seed, Plant },
 
 		{CucumberStage.Stage1_Dead, DoNothing },
@@ -190,6 +193,25 @@ private static readonly Dictionary<CucumberStage, Func<CucumberState, CucumberSt
 
 		{CucumberStage.Mature, Harvest },
 		{CucumberStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
+	};	
+	
+	private static readonly Dictionary<CucumberStage, Func<CucumberState, RequiredCropAction>> GetRequiredCropActionFunctions = new()
+	{
+		{CucumberStage.Seed, _ => RequiredCropAction.SingleTap },
+
+		{CucumberStage.Stage1_Dead, _ => RequiredCropAction.Water },
+		{CucumberStage.Stage1_BeforeWater, _ => RequiredCropAction.Water },
+		{CucumberStage.Stage1_Growing, _ => RequiredCropAction.None },
+
+		{CucumberStage.Stage2_BeforeShortTrelis, _ => RequiredCropAction.SingleTap },
+		{CucumberStage.Stage2_Dead, _ => RequiredCropAction.Water },
+		{CucumberStage.Stage2_BeforeWater, _ => RequiredCropAction.Water },
+		{CucumberStage.Stage2_Growing, _ => RequiredCropAction.None },
+
+		{CucumberStage.Stage3, _ => RequiredCropAction.SingleTap },
+
+		{CucumberStage.Mature, _ => RequiredCropAction.SingleTap },
+		{CucumberStage.Harvested, _ => RequiredCropAction.SingleTap },
 	};
 
 	[Pure]

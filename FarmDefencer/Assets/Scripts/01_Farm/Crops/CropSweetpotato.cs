@@ -81,6 +81,11 @@ public sealed class CropSweetpotato : Crop
 	private SpriteRenderer _spriteRenderer;
 	private SweetpotatoState _currentState;
 
+	public bool ForceHarvestOne { get; set; } = false;
+	
+	public override RequiredCropAction RequiredCropAction =>
+		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+	
 	public override void OnSingleTap(Vector2 worldPosition)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
@@ -142,6 +147,11 @@ public sealed class CropSweetpotato : Crop
 			_currentState)
 
 			(transform.position, transform.position);
+		if (ForceHarvestOne && _currentState.DeterminedCount)
+		{
+			_currentState.InitialDeterminedSweetpotatoCount = 1;
+			_currentState.RemainingSweetpotatoCount = 1;
+		}
 	}
 
 	public override void ResetToInitialState() => _currentState = Reset(_currentState);
@@ -373,7 +383,7 @@ public sealed class CropSweetpotato : Crop
 		{
 			var nextState = beforeState;
 			nextState.DeterminedCount = true;
-
+			
 			var countDecision = UnityEngine.Random.Range(0.0f, 1.0f);
 
 			if (countDecision >= 0.0f && countDecision < 0.6f)
@@ -544,5 +554,26 @@ public sealed class CropSweetpotato : Crop
 
 		{SweetpotatoStage.Mature, DoNothing_OnSingleHolding },
 		{SweetpotatoStage.Harvested, DoNothing_OnSingleHolding },
+	};	
+	
+	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, RequiredCropAction>> GetRequiredCropActionFunctions = new()
+	{
+		{SweetpotatoStage.Unplowed, _ => RequiredCropAction.Drag },
+
+		{SweetpotatoStage.Stage1_Dead, _ => RequiredCropAction.Water },
+		{SweetpotatoStage.Stage1_BeforeWater, _ => RequiredCropAction.Water },
+		{SweetpotatoStage.Stage1_Growing, _ => RequiredCropAction.None },
+
+		{SweetpotatoStage.Stage2_BeforeWater, _ => RequiredCropAction.Water },
+		{SweetpotatoStage.Stage2_Dead, _ => RequiredCropAction.Water },
+		{SweetpotatoStage.Stage2_Growing, _ => RequiredCropAction.None },
+
+		{SweetpotatoStage.Stage3_BeforeWrap, _ => RequiredCropAction.Hold },
+		{SweetpotatoStage.Stage3_AfterWrap, _ => RequiredCropAction.None },
+
+		{SweetpotatoStage.Stage4, _ => RequiredCropAction.None },
+
+		{SweetpotatoStage.Mature, _ => RequiredCropAction.FiveTap },
+		{SweetpotatoStage.Harvested, _ => RequiredCropAction.SingleTap },
 	};
 }

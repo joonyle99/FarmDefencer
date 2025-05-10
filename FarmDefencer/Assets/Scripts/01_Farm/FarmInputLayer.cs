@@ -6,16 +6,21 @@ using UnityEngine;
 /// </summary>
 public interface IFarmInputLayer
 {
-	int InputPriority { get; }
-	
-	bool OnSingleTap(Vector2 worldPosition);
+    public const int Priority_CropGuide = 800;
+    public const int Priority_WateringCan = 400;
+    public const int Priority_HarvestTutorialGiver = 399;
+    public const int Priority_Farm = 100;
+    
+    int InputPriority { get; }
 
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <param name="initialWorldPosition">최초 홀드가 시작된 월드 위치.</param>
-	/// <param name="deltaWorldPosition">최초 홀드 위치로부터의 현재 홀드 위치의 상대값.</param>
-	/// <param name="isEnd">마지막 홀드, 즉 손가락이나 마우스 클릭을 해제한 순간인지.</param>
-	/// <param name="deltaHoldTime"></param>
-	bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime);
+    bool OnSingleTap(Vector2 worldPosition);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="initialWorldPosition">최초 홀드가 시작된 월드 위치.</param>
+    /// <param name="deltaWorldPosition">최초 홀드 위치로부터의 현재 홀드 위치의 상대값.</param>
+    /// <param name="isEnd">마지막 홀드, 즉 손가락이나 마우스 클릭을 해제한 순간인지.</param>
+    /// <param name="deltaHoldTime"></param>
+    bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime);
 }
