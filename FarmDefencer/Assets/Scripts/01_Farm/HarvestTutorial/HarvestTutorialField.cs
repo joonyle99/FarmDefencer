@@ -1,22 +1,24 @@
 using UnityEngine;
 
-public abstract class HarvestTutorial : MonoBehaviour
+public sealed class HarvestTutorialField : MonoBehaviour
 {
+    private const float TimeMultiplierWhenWaiting = 7.0f;
+    
     public ProductEntry ProductEntry => _field.ProductEntry;
 
-    public bool Done => false;
+    public bool Done { get; private set; }
 
     public Field Field => _field;
     private Field _field;
     
     public Crop TargetCrop => _field.TopLeftCrop;
 
-    protected virtual void Awake()
+    private void Awake()
     {
         _field = GetComponent<Field>();
     }
 
-    protected virtual void Start()
+    private void Start()
     {
         _field.Reset();
         _field.IsAvailable = true;
@@ -26,7 +28,7 @@ public abstract class HarvestTutorial : MonoBehaviour
         }
         _field.transform.Find("FieldLockedDisplay").gameObject.SetActive(false);
         
-        _field.Init(_ => 1, (_, _, _) => { }, _ => { });
+        _field.Init(_ => 9999, (_, _, _) => { Done = true; SoundManager.PlaySfxStatic("SFX_T_coin"); }, _ => { });
 
         foreach (var spriteRendererComponent in _field.GetComponentsInChildren(typeof(SpriteRenderer)))
         {
@@ -35,12 +37,21 @@ public abstract class HarvestTutorial : MonoBehaviour
             spriteRenderer.sortingOrder = 10000 +  SortingLayer.GetLayerValueFromID(spriteRenderer.sortingLayerID) * 1000 + sortingOrder;
             spriteRenderer.sortingLayerName = "Mask";
         }
+
+        if (TargetCrop is CropSweetpotato cropSweetpotato)
+        {
+            cropSweetpotato.ForceHarvestOne = true;
+        }
+        else if (TargetCrop is CropMushroom cropMushroom)
+        {
+            cropMushroom.ForceHarvestOne = true;
+        }
     }
     
-    protected virtual void Update()
+    private void Update()
     {
-        _field.OnFarmUpdate(Time.deltaTime);
-        
+        var multiplier = TargetCrop.RequiredCropAction == RequiredCropAction.None ? TimeMultiplierWhenWaiting : 1.0f; 
+        _field.OnFarmUpdate(Time.deltaTime * multiplier);
         
     }
 }

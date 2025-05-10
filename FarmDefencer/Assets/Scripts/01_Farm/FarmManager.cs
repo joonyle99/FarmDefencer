@@ -41,42 +41,15 @@ public sealed class FarmManager : MonoBehaviour
 		
 		quotaContext.QuotaContextUpdated += QuotaContextChangedHandler;
 		quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
-
-		var currentMap = MapManager.Instance.CurrentMap;
-		var monsters = new List<string>();
-		monsters.Add("Rabbit");
-		monsters.Add("Rabbit");
-		monsters.Add("Rabbit");
-		monsters.Add("Rabbit");
-		monsters.Add("Rabbit");
-		monsters.Add("Rabbit");
-		monsters.Add("Squirrel");
-		monsters.Add("Squirrel");
-		monsters.Add("Squirrel");
-		monsters.Add("Squirrel");
-		monsters.Add("Squirrel");
-		monsters.Add("Cat");
-		monsters.Add("Cat");
-		monsters.Add("Cat");
-		monsters.Add("Cat");
-		monsters.Add("Cat");
-		monsters.Add("Cat");
-		monsters.Add("Capybara");
-		monsters.Add("Capybara");
-		monsters.Add("Capybara");
-		monsters.Add("Capybara");
-		monsters.Add("Capybara");
-		monsters.Add("Capybara");
-		monsters.Add("Elephant");
-		monsters.Add("Elephant");
-		monsters.Add("Elephant");
-		monsters.Add("Elephant");
-		monsters.Add("Elephant");
-		monsters.Add("Elephant");
 		
-		penaltyGiver.SpawnMonsters(currentMap.MapId, monsters);
-		
-		//harvestTutorialGiver.AddTutorial("product_carrot");
+		// harvestTutorialGiver.AddTutorial("product_carrot");
+		//harvestTutorialGiver.AddTutorial("product_potato");
+		//harvestTutorialGiver.AddTutorial("product_corn");
+		//harvestTutorialGiver.AddTutorial("product_cabbage");
+		//harvestTutorialGiver.AddTutorial("product_cucumber");
+		//harvestTutorialGiver.AddTutorial("product_eggplant");
+		harvestTutorialGiver.AddTutorial("product_sweetpotato");
+		harvestTutorialGiver.AddTutorial("product_mushroom");
 }
 
 	private void Update()

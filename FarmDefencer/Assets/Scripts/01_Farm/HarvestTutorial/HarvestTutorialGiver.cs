@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
 {
+    private const float TimeToShowHandFromLastInput = 1.0f;
+    
     [SerializeField] private GameObject Prefab_Field_Carrot;
     [SerializeField] private GameObject Prefab_Field_Potato;
     [SerializeField] private GameObject Prefab_Field_Corn;
@@ -17,12 +18,15 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
     
     private List<string> _tutorials; // Product Name 저장
 
-    public bool IsPlayingTutorial => _currentTutorial is not null;
+    public bool IsPlayingTutorial => _currentTutorialField is not null;
 
-    private HarvestTutorial _currentTutorial;
+    private HarvestTutorialField _currentTutorialField;
     private SpriteRenderer _background;
     
     private WateringCan _tutorialWateringCan;
+    private TutorialHand _tutorialHand;
+
+    private float _lastInputTime;
 
     public void AddTutorial(string product)
     {
@@ -34,57 +38,71 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
     public bool OnSingleTap(Vector2 worldPosition)
     {
         if (!gameObject.activeSelf
-            ||_currentTutorial is null)
+            ||_currentTutorialField is null)
         {
             return false;
         }
 
-        if (_currentTutorial.TargetCrop.AABB(worldPosition))
+        if (_currentTutorialField.TargetCrop.AABB(worldPosition) || _tutorialWateringCan.Using)
         {
-            _currentTutorial.TargetCrop.OnSingleTap(worldPosition);
+            if (_currentTutorialField.TargetCrop.AABB(worldPosition))
+            {
+                _currentTutorialField.TargetCrop.OnSingleTap(worldPosition);
+            }
+            
+            _lastInputTime = Time.time;
+            _tutorialHand.gameObject.SetActive(false);
             return true;
         }
-
-        return _tutorialWateringCan.Using;
+        
+        return false;
     }
 
     public bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 offset, bool isEnd, float deltaHoldTime)
     {
         if (!gameObject.activeSelf
-            || _currentTutorial is null)
+            || _currentTutorialField is null)
         {
             return false;
         }
         
-        if (_currentTutorial.TargetCrop.AABB(initialWorldPosition))
+        if (_currentTutorialField.TargetCrop.AABB(initialWorldPosition) || _tutorialWateringCan.Using)
         {
-            _currentTutorial.Field.OnSingleHolding(initialWorldPosition, offset, isEnd, deltaHoldTime);
+            if (_currentTutorialField.TargetCrop.AABB(initialWorldPosition))
+            {
+                _currentTutorialField.Field.OnSingleHolding(initialWorldPosition, offset, isEnd, deltaHoldTime);
+            }
+            
+            _lastInputTime = Time.time;
+            _tutorialHand.gameObject.SetActive(false);
             return true;
         }
         
-        return _tutorialWateringCan.Using;
+        return false;
     }
 
     private void Awake()
     {
         _tutorials = new();
         _background = transform.Find("Background").GetComponent<SpriteRenderer>();
+        
         _tutorialWateringCan = transform.GetComponentInChildren<WateringCan>();
-        _tutorialWateringCan.Init(() => true, wateringPosition => { if (_currentTutorial is not null && _currentTutorial.TargetCrop.AABB(wateringPosition)) _currentTutorial.TargetCrop.OnWatering(); });
+        _tutorialWateringCan.Init(() => true, wateringPosition => { if (_currentTutorialField is not null && _currentTutorialField.TargetCrop.AABB(wateringPosition)) _currentTutorialField.TargetCrop.OnWatering(); });
+        
+        _tutorialHand = transform.GetComponentInChildren<TutorialHand>();
     }
     
     private void Update()
     {
         if (!_tutorials.Any())
         {
-            _background.gameObject.SetActive(false);
-            enabled = false;
+            gameObject.SetActive(false);
             return;
         }
 
         var currentTutorialProductName = _tutorials[0];
-        if (_currentTutorial is null ||
-            !_currentTutorial.ProductEntry.ProductName.Equals(currentTutorialProductName))
+        if (_currentTutorialField is null ||
+            !_currentTutorialField.ProductEntry.ProductName.Equals(currentTutorialProductName))
         {
             var newTutorial = InstantiateTutorial(currentTutorialProductName);
             if (newTutorial is null)
@@ -97,25 +115,30 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
             AssignTutorial(newTutorial);
         }
 
-        if (_currentTutorial.Done)
+        var currentTime = Time.time;
+        _tutorialHand.gameObject.SetActive(currentTime > _lastInputTime + TimeToShowHandFromLastInput);
+        _tutorialHand.transform.position = _currentTutorialField.TargetCrop.transform.position;
+        _tutorialHand.CurrentAction = _currentTutorialField.TargetCrop.RequiredCropAction;
+
+        if (_currentTutorialField.Done)
         {
             AssignTutorial(null);
             _tutorials.RemoveAt(0);
         }
     }
 
-    private void AssignTutorial(HarvestTutorial tutorial)
+    private void AssignTutorial(HarvestTutorialField tutorialField)
     {
-        if (_currentTutorial is not null)
+        if (_currentTutorialField is not null)
         {
-            Destroy(_currentTutorial.gameObject);
-            _currentTutorial = null;
+            Destroy(_currentTutorialField.gameObject);
+            _currentTutorialField = null;
         }
 
-        _currentTutorial = tutorial;
+        _currentTutorialField = tutorialField;
     }
     
-    private HarvestTutorial InstantiateTutorial(string productName)
+    private HarvestTutorialField InstantiateTutorial(string productName)
     {
         var prefab = productName switch
         {
@@ -130,27 +153,14 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
             _ => null
         };
         
-        var tutorialType = productName switch
-        {
-            "product_carrot" => typeof(CarrotTutorial),
-            "product_potato" => typeof(PotatoTutorial),
-            "product_corn" => typeof(CornTutorial),
-            "product_cabbage" => typeof(CabbageTutorial),
-            "product_cucumber" => typeof(CucumberTutorial),
-            "product_eggplant" => typeof(EggplantTutorial),
-            "product_sweetpotato" => typeof(SweetpotatoTutorial),
-            "product_mushroom" => typeof(MushroomTutorial),
-            _ => null
-        };
-        
-        if (prefab is null || tutorialType is null)
+        if (prefab is null)
         {
             Debug.LogError($"{productName}에 해당하는 HarvestTutorial 컴포넌트를 생성할 수 없습니다.");
             return null;
         }
 
         var instantiated = Instantiate(prefab);
-        var harvestTutorial = instantiated.AddComponent(tutorialType) as HarvestTutorial;
+        var harvestTutorial = instantiated.AddComponent<HarvestTutorialField>();
 
         return harvestTutorial;
     }
