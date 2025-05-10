@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bcbf72e20b84ef45a4bd08ea668c37c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapEntries:
+  _mapEntries:
   - {fileID: 11400000, guid: 469c6bef7dd249949a7b8eeb0f2cb2fd, type: 2}
   - {fileID: 11400000, guid: d3f7f1726e9b95244b71fd8ff050326f, type: 2}
   - {fileID: 11400000, guid: 2b13a58732621a141a17b0b5078b3f12, type: 2}
@@ -632,7 +632,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 724582f711e340f45939343a329b176a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bgmAudioSource: {fileID: 7790916876619879453}
+  _bgmAudioSource1: {fileID: 0}
+  _bgmAudioSource2: {fileID: 0}
   _sfxAudioSource: {fileID: 846582086370651982}
 --- !u!81 &8396262421793352476
 AudioListener:
