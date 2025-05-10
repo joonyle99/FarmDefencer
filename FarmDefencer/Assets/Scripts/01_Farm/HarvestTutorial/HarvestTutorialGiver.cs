@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 
 public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
 {
@@ -25,6 +26,7 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
     
     private WateringCan _tutorialWateringCan;
     private TutorialHand _tutorialHand;
+    private RectTransform _signRectTransform;
 
     private float _lastInputTime;
 
@@ -90,6 +92,8 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
         _tutorialWateringCan.Init(() => true, wateringPosition => { if (_currentTutorialField is not null && _currentTutorialField.TargetCrop.AABB(wateringPosition)) _currentTutorialField.TargetCrop.OnWatering(); });
         
         _tutorialHand = transform.GetComponentInChildren<TutorialHand>();
+
+        _signRectTransform = transform.Find("SignCanvas/Sign").GetComponent<RectTransform>();
     }
     
     private void Update()
@@ -113,6 +117,14 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
 
             newTutorial.transform.parent = transform;
             AssignTutorial(newTutorial);
+            _signRectTransform.anchoredPosition = new Vector2(0, 800.0f);
+            _signRectTransform.gameObject.SetActive(true);
+
+            Sequence sequence = DOTween.Sequence();
+
+            sequence.Append(_signRectTransform.DOAnchorPosY(0.0f, 1.0f).SetEase(Ease.OutBounce))
+                .AppendInterval(2.0f)
+                .AppendCallback(() => _signRectTransform.gameObject.SetActive(false));
         }
 
         var currentTime = Time.time;
