@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d23d5d10bfc7ab40a374edf33b6caf0, type: 3}
   m_Name: Tower01_3
   m_EditorClassIdentifier: 
+  Icon: {fileID: 2647453394646532799, guid: 46bae07589f01ab41b2af9626e74f3c7, type: 3}
+  Name: "\uD0C0\uC6CC 1"
   Description: "\uAE30\uBCF8\uD0C4\uC774 \uBAAC\uC2A4\uD130\uB97C \uD0C0\uACA9\uD569\uB2C8\uB2E4"
   Level: 3
   AttackRate: 0.5

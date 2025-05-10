@@ -53,6 +53,17 @@ public sealed class Tower : TargetableBehavior
         {
             _cost = Mathf.Max(value, 0);
             OnCostChanged?.Invoke(_cost);
+            OnSellCostChanged?.Invoke(CurrentLevelData.SellCost);
+            OnUpgradeCostChanged?.Invoke(CurrentUpgradeCost);
+        }
+    }
+    public int CurrentUpgradeCost
+    {
+        get
+        {
+            var nextValueCost = _levelData[Mathf.Min(CurrentLevel, MaxLevel - 1)].ValueCost;
+            var currValueCost = CurrentLevelData.ValueCost;
+            return nextValueCost - currValueCost;
         }
     }
 
@@ -79,13 +90,9 @@ public sealed class Tower : TargetableBehavior
     public FlipAimer FlipAimer => _flipAimer;
     [SerializeField] private GameObject _projectilePrefab;
 
-    [Space]
-
-    [Header("UI")]
-    public UpgradePanel UpgradePanel;
-
     // build
     private GridCell _occupyingGridCell;
+    public GridCell OccupyingGridCell => _occupyingGridCell;
 
     // target
     private TargetableBehavior _currentTarget;
@@ -98,6 +105,8 @@ public sealed class Tower : TargetableBehavior
     public event System.Action<float> OnAttackRateChanged;
     public event System.Action<int> OnDamageChanged;
     public event System.Action<int> OnCostChanged;
+    public event System.Action<int> OnSellCostChanged;
+    public event System.Action<int> OnUpgradeCostChanged;
 
     protected override void Awake()
     {
@@ -113,7 +122,6 @@ public sealed class Tower : TargetableBehavior
     {
         base.Start();
 
-        UpgradePanel.SetOwner(this);
         InitializeAttackDurations();
         InitilaizeSpineEvent();
     }
@@ -160,7 +168,7 @@ public sealed class Tower : TargetableBehavior
 
         return false;
     }
-    public void OccupyingGridCell(GridCell gridCell)
+    public void OccupyGridCell(GridCell gridCell)
     {
         _occupyingGridCell = gridCell;
     }
@@ -178,7 +186,9 @@ public sealed class Tower : TargetableBehavior
         // detector
         Detector.EraseRange();
 
-        HideUpgradePanel();
+        var upgradeUI = DefenceContext.Current.UpgradeUI;
+        upgradeUI.HidePanel();
+        upgradeUI.ClearTower();
 
         Destroy(gameObject);
     }
@@ -192,10 +202,7 @@ public sealed class Tower : TargetableBehavior
             return;
         }
 
-        var nextValueCost = _levelData[Mathf.Min(CurrentLevel, MaxLevel - 1)].ValueCost;
-        var currValueCost = CurrentLevelData.ValueCost;
-        var upgradeCost = nextValueCost - currValueCost;
-        var result = ResourceManager.Instance.TrySpendGold(upgradeCost);
+        var result = ResourceManager.Instance.TrySpendGold(CurrentUpgradeCost);
         if (result == false)
         {
             Debug.Log("골드가 부족하여 타워를 업그레이드 할 수 없습니다");
@@ -212,7 +219,9 @@ public sealed class Tower : TargetableBehavior
         // next level animation
         spineController.AddAnimation(IdleAnimation, true); // 레벨이 오른 후의 애니메이션을 출력해야 한다
 
-        HideUpgradePanel();
+        // var upgradeUI = DefenceContext.Current.UpgradeUI;
+        // upgradeUI.HidePanel();
+        // upgradeUI.ClearTower();
 
         Reinforce();
     }
@@ -222,18 +231,6 @@ public sealed class Tower : TargetableBehavior
         OnDamageChanged?.Invoke(CurrentLevelData.Damage);
 
         SoundManager.Instance.PlaySfx("SFX_D_tower_upgrade");
-    }
-    public void ShowUpgradePanel()
-    {
-        // Detector.PaintRange(BuildSystem.RED_RANGE_COLOR);
-        UpgradePanel.gameObject.SetActive(true);
-        _occupyingGridCell.ApplyGlow();
-    }
-    public void HideUpgradePanel()
-    {
-        // Detector.EraseRange();
-        UpgradePanel.gameObject.SetActive(false);
-        _occupyingGridCell.ResetGlow();
     }
 
     // fire

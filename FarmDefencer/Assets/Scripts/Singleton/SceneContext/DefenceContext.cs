@@ -24,6 +24,8 @@ public class DefenceContext : SceneContext
     public GridMap GridMap;
     public BuildSystem BuildSystem;
     public WaveSystem WaveSystem;
+    public BuildUI BuildUI;
+    public UpgradeUI UpgradeUI;
 
     protected override void Awake()
     {
@@ -34,6 +36,8 @@ public class DefenceContext : SceneContext
         GridMap = FindFirstObjectByType<GridMap>();
         BuildSystem = FindFirstObjectByType<BuildSystem>();
         WaveSystem = FindFirstObjectByType<WaveSystem>();
+        BuildUI = FindFirstObjectByType<BuildUI>(FindObjectsInactive.Include);
+        UpgradeUI = FindFirstObjectByType<UpgradeUI>(FindObjectsInactive.Include);
 
         if (GridMap != null && BuildSystem != null && WaveSystem != null)
         {
@@ -44,6 +48,8 @@ public class DefenceContext : SceneContext
             log += $"{nameof(GridMap)} is ready.\n";
             log += $"{nameof(BuildSystem)} is ready.\n";
             log += $"{nameof(WaveSystem)} is ready.\n";
+            log += $"{nameof(BuildUI)} is ready.\n";
+            log += $"{nameof(UpgradeUI)} is ready.\n";
 
             Debug.Log(log);
         }
