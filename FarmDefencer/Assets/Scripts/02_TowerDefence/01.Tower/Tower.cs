@@ -1,4 +1,3 @@
-using DG.Tweening.Plugins.Core.PathCore;
 using Spine.Unity;
 using UnityEngine;
 
@@ -179,6 +178,8 @@ public sealed class Tower : TargetableBehavior
         // detector
         Detector.EraseRange();
 
+        HideUpgradePanel();
+
         Destroy(gameObject);
     }
 
@@ -211,9 +212,9 @@ public sealed class Tower : TargetableBehavior
         // next level animation
         spineController.AddAnimation(IdleAnimation, true); // 레벨이 오른 후의 애니메이션을 출력해야 한다
 
-        Reinforce();
-
         HideUpgradePanel();
+
+        Reinforce();
     }
     private void Reinforce()
     {
@@ -226,11 +227,13 @@ public sealed class Tower : TargetableBehavior
     {
         // Detector.PaintRange(BuildSystem.RED_RANGE_COLOR);
         UpgradePanel.gameObject.SetActive(true);
+        _occupyingGridCell.ApplyGlow();
     }
     public void HideUpgradePanel()
     {
         // Detector.EraseRange();
         UpgradePanel.gameObject.SetActive(false);
+        _occupyingGridCell.ResetGlow();
     }
 
     // fire

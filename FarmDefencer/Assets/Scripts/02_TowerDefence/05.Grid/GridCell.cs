@@ -16,6 +16,9 @@ public class GridCell : MonoBehaviour
     [Space]
 
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    public Material InstantMaterial => _spriteRenderer.material;
+    [SerializeField] private int _defaultIntensity = 1;
+    [SerializeField] private int _targetIntensity = 15;
     [SerializeField] private Color _hoverColor;
     private Color _initColor;
     private Color _startColor;
@@ -61,6 +64,9 @@ public class GridCell : MonoBehaviour
         //isUsableText.color = (isUsable == true) ? Color.blue : Color.red;
     }
 
+    /// <summary>
+    /// UpgradePanel을 보여주기 위한 마우스 클릭 이벤트
+    /// </summary>
     private void OnMouseDown()
     {
         // 현재 타워 건설 상태가 아니라면 이벤트를 처리하지 않는다
@@ -151,7 +157,7 @@ public class GridCell : MonoBehaviour
     public void UnUsable()
     {
         isUsable = false;
-        Disappear();
+        // Disappear();
         // gameObject.SetActive(false);
     }
 
@@ -185,5 +191,15 @@ public class GridCell : MonoBehaviour
             _spriteRenderer.color = _initColor;
             _startColor = _spriteRenderer.color;
         }
+    }
+
+    // 
+    public void ApplyGlow()
+    {
+        InstantMaterial.SetFloat("_GlowGlobal", _targetIntensity);
+    }
+    public void ResetGlow()
+    {
+        InstantMaterial.SetFloat("_GlowGlobal", _defaultIntensity);
     }
 }

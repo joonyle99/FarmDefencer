@@ -236,7 +236,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: f1dd4696e9db13a4695ab5ba3537465c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -257,7 +257,7 @@ SpriteRenderer:
   m_SortingLayerID: 214604371
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8889778369028240651, guid: 40c7fd32aee540d4cad4e50e49d5d3a5, type: 3}
+  m_Sprite: {fileID: -6956808262346693593, guid: 8eda5c6c85d07664a94aad9f81d8f908, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_FlipX: 0
   m_FlipY: 0
@@ -354,6 +354,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 5493607047888746186}
+  _defaultIntensity: 1
+  _targetIntensity: 45
   _hoverColor: {r: 1, g: 1, b: 1, a: 0.8235294}
   distanceCostText: {fileID: 2978388220711460693}
   isUsableText: {fileID: 1401338680115716690}
