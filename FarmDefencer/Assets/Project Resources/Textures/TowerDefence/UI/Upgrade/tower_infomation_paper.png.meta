@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e0ad6866f6228014baa9f4f69d72fd8f
+guid: 991054133ad510c40a825b27a2c16474
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1631135763550265914
-    second: tower_infomation_paper_0
+      213: -440411826732739903
+    second: tower_infomation_paper 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tower_infomation_paper_0
+      name: tower_infomation_paper 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 712
+        width: 911
         height: 165
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a3269d6b555f2a610800000000000000
-      internalID: 1631135763550265914
+      spriteID: 1c2d6b8e6c753e9f0800000000000000
+      internalID: -440411826732739903
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 836f2dd6fcb8bf94da37838ec884617e
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      tower_infomation_paper_0: 1631135763550265914
+      tower_infomation_paper 1_0: -440411826732739903
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
