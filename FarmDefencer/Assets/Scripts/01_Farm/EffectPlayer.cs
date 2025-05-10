@@ -33,7 +33,7 @@ public sealed class EffectPlayer : MonoBehaviour
 	public static void PlayHoldEffect(Vector2 worldPosition)
 	{
 		s_singleton._interactEffectAnimator.transform.position = worldPosition;
-		s_singleton._interactEffectAnimator.Play(Enter, 0, 0.0f);
+		s_singleton._interactEffectAnimator.SetTrigger(Play);
 		s_singleton._interactEffectAnimator.SetBool(Looping, true);
 		s_singleton._isHolding = true;
 	}
