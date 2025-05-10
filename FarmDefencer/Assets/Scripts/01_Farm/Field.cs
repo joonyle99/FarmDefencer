@@ -73,10 +73,10 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
         return firstCrop is not null;
     }
 
-    public bool AABB(Vector2 worldPosition) => worldPosition.x >= transform.position.x &&
-                                               worldPosition.x <= transform.position.x + FieldSize.x &&
-                                               worldPosition.y >= transform.position.y &&
-                                               worldPosition.y <= transform.position.y + FieldSize.y;
+    public bool AABB(Vector2 worldPosition) => worldPosition.x >= transform.position.x - 0.5f &&
+                                               worldPosition.x <= transform.position.x + FieldSize.x - 0.5f&&
+                                               worldPosition.y >= transform.position.y - 0.5f &&
+                                               worldPosition.y <= transform.position.y + FieldSize.y - 0.5f;
     
     public void UnlockCropAt(Vector2 cropPosition)
     {
