@@ -305,7 +305,7 @@ public sealed class CropCabbage : Crop
 	{
 		{CabbageStage.Seed, _ => RequiredCropAction.SingleTap },
 		{CabbageStage.Harvested, _ => RequiredCropAction.SingleTap },
-		{CabbageStage.Mature, _ => RequiredCropAction.Swipe },
+		{CabbageStage.Mature, _ => RequiredCropAction.Drag },
 		
 		{CabbageStage.Stage2_BeforeWater, _ => RequiredCropAction.Water },
 		{CabbageStage.Stage2_Dead, _ => RequiredCropAction.Water },

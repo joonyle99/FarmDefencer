@@ -482,7 +482,7 @@ public sealed class CropMushroom : Crop
 	
 	private static readonly Dictionary<MushroomStage, Func<MushroomState, RequiredCropAction>> GetRequiredCropActionFunctions = new()
 	{
-		{MushroomStage.Unplowed, _ => RequiredCropAction.Swipe },
+		{MushroomStage.Unplowed, _ => RequiredCropAction.Drag },
 
 		{MushroomStage.Stage1_Dead, _ => RequiredCropAction.Water },
 		{MushroomStage.Stage1_BeforeWater, _ => RequiredCropAction.Water },

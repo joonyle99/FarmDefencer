@@ -12,7 +12,6 @@ public enum RequiredCropAction
 	FiveTap,
 	Drag,
 	Water,
-	Swipe,
 }
 
 public abstract class Crop : MonoBehaviour, IFarmUpdatable

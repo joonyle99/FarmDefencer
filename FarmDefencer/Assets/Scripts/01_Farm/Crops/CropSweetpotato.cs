@@ -551,7 +551,7 @@ public sealed class CropSweetpotato : Crop
 	
 	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, RequiredCropAction>> GetRequiredCropActionFunctions = new()
 	{
-		{SweetpotatoStage.Unplowed, _ => RequiredCropAction.Swipe },
+		{SweetpotatoStage.Unplowed, _ => RequiredCropAction.Drag },
 
 		{SweetpotatoStage.Stage1_Dead, _ => RequiredCropAction.Water },
 		{SweetpotatoStage.Stage1_BeforeWater, _ => RequiredCropAction.Water },
