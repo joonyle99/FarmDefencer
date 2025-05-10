@@ -16,8 +16,11 @@ public sealed class FarmInput : MonoBehaviour
 	private const float MovableWidth = 15.0f;
 	private const float MovableHeight = 10.0f;
 
+	[SerializeField] private InputActionReference interactAction;
+	
+	public float InputPriorityCut { get; set; } // 이 수치보다 작은 Priority를 가진 레이어는 입력 처리 대상이 아니도로 하는 프로퍼티.
+	
 	private float _cameraMovementScale = 0.1f;
-
 	public float CameraMovementScale
 	{
 		get
@@ -58,16 +61,15 @@ public sealed class FarmInput : MonoBehaviour
 		_inputLayers.Sort((left, right) => right.InputPriority.CompareTo(left.InputPriority));
 	}
 
-	// 현재 터치된 월드 위치 또는 커서의 월드 위치를 설정함.
-	private void OnInteract(InputValue inputValue)
-	{
-		_lastInteractedWorldPosition = _camera.ScreenToWorldPoint(inputValue.Get<Vector2>());
-	}
-
 	private void OnSingleTap()
 	{
 		foreach (var inputLayer in _inputLayers)
 		{
+			if (inputLayer.InputPriority < InputPriorityCut)
+			{
+				continue;
+			}
+			
 			if (inputLayer.OnSingleTap(_lastInteractedWorldPosition))
 			{
 				break;
@@ -101,17 +103,26 @@ public sealed class FarmInput : MonoBehaviour
 
 	private void Update()
 	{
+		var interactScreenPosition = interactAction.action.ReadValue<Vector2>();
+		var interactWorldPosition = _camera.ScreenToWorldPoint(new Vector3(interactScreenPosition.x, interactScreenPosition.y, 10.0f));
+		var deltaWorldPosition = new Vector2(interactWorldPosition.x, interactWorldPosition.y) - _lastInteractedWorldPosition;
+		_lastInteractedWorldPosition = interactWorldPosition;
+		
 		if (_isSingleHolding)
 		{
 			_singleHoldingTimeElapsed += Time.deltaTime;
-			var deltaPosition = _lastInteractedWorldPosition - _initialSingleHoldingWorldPosition;
 
 			bool isHandled = false;
 			foreach (var inputLayer in _inputLayers)
 			{
+				if (inputLayer.InputPriority < InputPriorityCut)
+				{
+					continue;
+				}
+				
 				if (inputLayer.OnSingleHolding(
 					_initialSingleHoldingWorldPosition,
-					deltaPosition,
+					new Vector2(interactWorldPosition.x, interactWorldPosition.y) - _initialSingleHoldingWorldPosition,
 					false,
 					Time.deltaTime
 				))
@@ -123,17 +134,18 @@ public sealed class FarmInput : MonoBehaviour
 
 			if (!isHandled)
 			{
-				var cameraDelta = new Vector2(deltaPosition.x * -1.0f, deltaPosition.y * -1.0f);
+				var cameraDelta = new Vector2(deltaWorldPosition.x * -1.0f, deltaWorldPosition.y * -1.0f);
 				MoveCamera(new Vector2(transform.position.x, transform.position.y) + cameraDelta * (CameraMovementScale * _camera.orthographicSize));
 			}
 		}
 		else if (_singleHoldingTimeElapsed > 0.0f) // Single Hold가 종료된 이후의 첫 프레임임을 의미.
 		{
+			Debug.Log("Hold End!");
 			_singleHoldingTimeElapsed = 0.0f;
 
 			_inputLayers.ForEach(inputLayer => inputLayer.OnSingleHolding(
 					_initialSingleHoldingWorldPosition,
-					_lastInteractedWorldPosition - _initialSingleHoldingWorldPosition,
+					Vector2.zero,
 					true,
 					Time.deltaTime
 				));

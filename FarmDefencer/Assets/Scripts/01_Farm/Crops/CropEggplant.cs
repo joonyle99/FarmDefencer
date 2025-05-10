@@ -59,7 +59,10 @@ public sealed class CropEggplant : Crop
 
 	private SpriteRenderer _spriteRenderer;
 	private EggplantState _currentState;
-
+	
+	public override RequiredCropAction RequiredCropAction =>
+		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+	
 	public override void OnWatering()
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
@@ -146,7 +149,7 @@ public sealed class CropEggplant : Crop
 		{ } => EggplantStage.Stage1_BeforeWater,
 	};
 
-	private static readonly Dictionary<EggplantStage, Func<EggplantState, float, EggplantState>> OnFarmUpdateFunctions = new Dictionary<EggplantStage, Func<EggplantState, float, EggplantState>>
+	private static readonly Dictionary<EggplantStage, Func<EggplantState, float, EggplantState>> OnFarmUpdateFunctions = new()
 	{
 		{EggplantStage.Seed, (beforeState, deltaTime) => Reset(beforeState) },
 
@@ -178,7 +181,7 @@ public sealed class CropEggplant : Crop
 
 	};
 
-	private static readonly Dictionary<EggplantStage, Func<EggplantState, EggplantState>> OnSingleTapFunctions = new Dictionary<EggplantStage, Func<EggplantState, EggplantState>>
+	private static readonly Dictionary<EggplantStage, Func<EggplantState, EggplantState>> OnSingleTapFunctions = new()
 	{
 		{EggplantStage.Seed, Plant },
 
@@ -196,6 +199,26 @@ public sealed class CropEggplant : Crop
 	
 		{EggplantStage.Mature, Harvest },
 		{EggplantStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
+	};	
+	
+	private static readonly Dictionary<EggplantStage, Func<EggplantState, RequiredCropAction>> GetRequiredCropActionFunctions = new()
+	{
+		{EggplantStage.Seed, _ => RequiredCropAction.SingleTap },
+
+		{EggplantStage.Stage1_Dead, _ => RequiredCropAction.Water },
+		{EggplantStage.Stage1_BeforeWater, _ => RequiredCropAction.Water },
+		{EggplantStage.Stage1_Growing, _ => RequiredCropAction.None },
+
+		{EggplantStage.Stage2_BeforeTrelis, _ => RequiredCropAction.SingleTap },
+		{EggplantStage.Stage2_BeforeWater, _ => RequiredCropAction.Water },
+		{EggplantStage.Stage2_Dead, _ => RequiredCropAction.Water },
+		{EggplantStage.Stage2_Growing, _ => RequiredCropAction.None },
+
+		{EggplantStage.Stage3_FullLeaves, _ => RequiredCropAction.DoubleTap },
+		{EggplantStage.Stage3_HalfLeaves, _ => RequiredCropAction.DoubleTap },
+	
+		{EggplantStage.Mature, _ => RequiredCropAction.SingleTap },
+		{EggplantStage.Harvested, _ => RequiredCropAction.SingleTap },
 	};
 
 	[Pure]

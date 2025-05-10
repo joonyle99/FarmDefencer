@@ -3,6 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+public enum RequiredCropAction
+{
+	None,
+	SingleTap,
+	Hold,
+	DoubleTap,
+	FiveTap,
+	Drag,
+	Water,
+}
+
 public abstract class Crop : MonoBehaviour, IFarmUpdatable
 {
 	/// <summary>
@@ -26,6 +37,8 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	protected const float MultipleTouchSecondsCriterion = 0.5f; // 연속 탭 동작 판정 시간. 이 시간 이내로 다시 탭 해야 연속 탭으로 간주됨
 	protected const float PlowDeltaPositionCrierion = 0.25f; // 밭 문지르기 동작 판정 기준 (가로 방향 위치 델타)
 
+	public abstract RequiredCropAction RequiredCropAction { get; }
+
 	private Func<int> _getQuota;
 	protected Func<int> GetQuota => _getQuota;
 
@@ -42,6 +55,10 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 		_getQuota = getQuotaFunction;
 		_notifyQuotaFilled = notifyQuotaFilledFunction;
 	}
+
+	public bool AABB(Vector2 worldPosition) =>
+		Mathf.Abs(worldPosition.x - transform.position.x) < 0.5f &&
+		Mathf.Abs(worldPosition.y - transform.position.y) < 0.5f;
 
 	/// <summary>
 	/// 한 손가락으로 탭할 때의 동작을 정의.

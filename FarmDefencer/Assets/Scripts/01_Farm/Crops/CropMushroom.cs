@@ -92,6 +92,11 @@ public sealed class CropMushroom : Crop
 	private SpriteRenderer _spriteRenderer;
 	private MushroomState _currentState;
 
+	public bool ForceHarvestOne { get; set; } = false;
+	
+	public override RequiredCropAction RequiredCropAction =>
+		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+	
 	public override void OnSingleTap(Vector2 worldPosition)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
@@ -154,6 +159,11 @@ public sealed class CropMushroom : Crop
 			_currentState)
 
 			(transform.position, transform.position);
+
+		if (ForceHarvestOne && _currentState.IsPoisonous)
+		{
+			_currentState.IsPoisonous = false;
+		}
 
 		RenderInoculationAnimation();
 	}
@@ -475,5 +485,25 @@ public sealed class CropMushroom : Crop
 		{MushroomStage.Mature, DoNothing_OnSingleHolding },
 		{MushroomStage.Booming, DoNothing_OnSingleHolding },
 		{MushroomStage.Harvested, DoNothing_OnSingleHolding },
+	};
+	
+	private static readonly Dictionary<MushroomStage, Func<MushroomState, RequiredCropAction>> GetRequiredCropActionFunctions = new()
+	{
+		{MushroomStage.Unplowed, _ => RequiredCropAction.Drag },
+
+		{MushroomStage.Stage1_Dead, _ => RequiredCropAction.Water },
+		{MushroomStage.Stage1_BeforeWater, _ => RequiredCropAction.Water },
+		{MushroomStage.Stage1_Growing, _ => RequiredCropAction.None },
+
+		{MushroomStage.Stage2_BeforeWater, _ => RequiredCropAction.Water },
+		{MushroomStage.Stage2_Dead, _ => RequiredCropAction.Water },
+		{MushroomStage.Stage2_Growing, _ => RequiredCropAction.None },
+
+		{MushroomStage.Stage3_BeforeInoculation, _ => RequiredCropAction.Hold },
+		{MushroomStage.Stage3_AfterInoculation, _ => RequiredCropAction.None },
+
+		{MushroomStage.Mature, _ => RequiredCropAction.FiveTap },
+		{MushroomStage.Booming, _ => RequiredCropAction.None },
+		{MushroomStage.Harvested, _ => RequiredCropAction.SingleTap },
 	};
 }
