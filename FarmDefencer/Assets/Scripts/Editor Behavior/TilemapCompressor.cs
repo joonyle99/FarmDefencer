@@ -7,6 +7,8 @@ public class TilemapCompressor : MonoBehaviour
 
     public void CompressTilemap()
     {
+        Debug.Log("Compressing tilemap...");
+
         _tilemap = GetComponent<Tilemap>();
         _tilemap.CompressBounds();
     }
