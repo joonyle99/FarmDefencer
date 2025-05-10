@@ -122,7 +122,7 @@ public sealed class FarmInput : MonoBehaviour
 				
 				if (inputLayer.OnSingleHolding(
 					_initialSingleHoldingWorldPosition,
-					deltaWorldPosition,
+					new Vector2(interactWorldPosition.x, interactWorldPosition.y) - _initialSingleHoldingWorldPosition,
 					false,
 					Time.deltaTime
 				))
@@ -140,6 +140,7 @@ public sealed class FarmInput : MonoBehaviour
 		}
 		else if (_singleHoldingTimeElapsed > 0.0f) // Single Hold가 종료된 이후의 첫 프레임임을 의미.
 		{
+			Debug.Log("Hold End!");
 			_singleHoldingTimeElapsed = 0.0f;
 
 			_inputLayers.ForEach(inputLayer => inputLayer.OnSingleHolding(
