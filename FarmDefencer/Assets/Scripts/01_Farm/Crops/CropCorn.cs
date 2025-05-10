@@ -32,7 +32,9 @@ public sealed class CropCorn : Crop
 
 	private const float Stage1_GrowthSeconds = 15.0f;
 	private const float Stage2_GrowthSeconds = 15.0f;
-
+	public override RequiredCropAction RequiredCropAction =>
+		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+	
 	[SerializeField] private Sprite seedSprite;
 	[Space]
 	[SerializeField] private Sprite stage1_beforeWaterSprite;
@@ -155,6 +157,22 @@ public sealed class CropCorn : Crop
 		{CornStage.Stage1_Dead, DoNothing },
 		{CornStage.Stage1_BeforeWater, DoNothing },
 		{CornStage.Stage1_Growing, DoNothing },
+	};
+	
+	private static readonly Dictionary<CornStage, Func<CornState, RequiredCropAction>> GetRequiredCropActionFunctions = new()
+	{
+		{CornStage.Seed, _ => RequiredCropAction.SingleTap },
+		{CornStage.Mature, _ => RequiredCropAction.SingleTap },
+		{CornStage.Harvested, _ => RequiredCropAction.SingleTap },
+
+		{CornStage.Stage2_Dead, _ => RequiredCropAction.Water},
+		{CornStage.Stage2_BeforeWater, _ => RequiredCropAction.Water },
+		{CornStage.Stage2_Growing, _ => RequiredCropAction.None },
+
+		{CornStage.Stage1_Dead, _ => RequiredCropAction.Water },
+		{CornStage.Stage1_BeforeWater, _ => RequiredCropAction.Water },
+		{CornStage.Stage1_Growing, _ => RequiredCropAction.None },
+		
 	};
 
 	[Pure]

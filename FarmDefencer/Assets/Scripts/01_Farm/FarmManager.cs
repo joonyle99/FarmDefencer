@@ -76,7 +76,7 @@ public sealed class FarmManager : MonoBehaviour
 		
 		penaltyGiver.SpawnMonsters(currentMap.MapId, monsters);
 		
-		harvestTutorialGiver.AddTutorial("product_carrot");
+		//harvestTutorialGiver.AddTutorial("product_carrot");
 }
 
 	private void Update()

@@ -38,6 +38,8 @@ public sealed class CropCarrot : Crop
 	private SpriteRenderer _spriteRenderer;
 	private CarrotState _currentState;
 
+	public override RequiredCropAction RequiredCropAction => GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+
 	public override void OnSingleTap(Vector2 inputWorldPosition)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
@@ -121,6 +123,16 @@ public sealed class CropCarrot : Crop
 		{CarrotStage.Growing, DoNothing },
 		{CarrotStage.Mature, Harvest },
 		{CarrotStage.Harvested, FillQuotaOneAndResetIfSucceeded },
+	};
+	
+	private static readonly Dictionary<CarrotStage, Func<CarrotState, RequiredCropAction>> GetRequiredCropActionFunctions = new()
+	{
+		{CarrotStage.Seed, _ => RequiredCropAction.SingleTap },
+		{CarrotStage.BeforeWater, _ => RequiredCropAction.Water },
+		{CarrotStage.Dead, _ => RequiredCropAction.Water },
+		{CarrotStage.Growing, _ => RequiredCropAction.None },
+		{CarrotStage.Mature, _ => RequiredCropAction.SingleTap },
+		{CarrotStage.Harvested, _ => RequiredCropAction.SingleTap },
 	};
 
 	[Pure]

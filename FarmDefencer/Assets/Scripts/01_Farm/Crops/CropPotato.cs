@@ -40,6 +40,9 @@ public sealed class CropPotato : Crop
 	private SpriteRenderer _spriteRenderer;
 	private PotatoState _currentState;
 
+	public override RequiredCropAction RequiredCropAction =>
+		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+	
 	public override void OnSingleTap(Vector2 inputWorldPosition)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
@@ -167,6 +170,16 @@ public sealed class CropPotato : Crop
 				return afterState;
 			}
 		},
+	};
+	
+	private static readonly Dictionary<PotatoStage, Func<PotatoState, RequiredCropAction>> GetRequiredCropActionFunctions = new()
+	{
+		{PotatoStage.Seed, _ => RequiredCropAction.SingleTap },
+		{PotatoStage.BeforeWater, _ => RequiredCropAction.Water },
+		{PotatoStage.Dead, _ => RequiredCropAction.Water },
+		{PotatoStage.Growing, _ => RequiredCropAction.None },
+		{PotatoStage.Mature, _ => RequiredCropAction.Hold },
+		{PotatoStage.Harvested, _ => RequiredCropAction.SingleTap },
 	};
 
 	private static readonly Func<PotatoState, PotatoState, bool> HoldEffectCondition = (beforeState, afterState) => afterState.HoldingTime > beforeState.HoldingTime;
