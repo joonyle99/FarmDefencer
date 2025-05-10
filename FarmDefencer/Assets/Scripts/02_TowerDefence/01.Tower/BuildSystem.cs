@@ -218,7 +218,8 @@ public class BuildSystem : MonoBehaviour
     private bool BuildState()
     {
         return GameStateManager.Instance.CurrentState is GameState.Build
-            || GameStateManager.Instance.CurrentState is GameState.Wave;
+            || GameStateManager.Instance.CurrentState is GameState.Wave
+            || GameStateManager.Instance.CurrentState is GameState.WaveAfter;
     }
     private bool CheckBuild(GridCell gridCell)
     {
