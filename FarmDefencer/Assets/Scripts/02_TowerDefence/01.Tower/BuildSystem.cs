@@ -32,6 +32,9 @@ public class BuildSystem : MonoBehaviour
     public static readonly Color RED_RANGE_COLOR = new Color(1f, 0f, 0f, 0.8f);
     public static readonly Color BLUE_RANGE_COLOR = new Color(0f, 0f, 1f, 0.8f);
 
+    // TODO: 구조 변경하기..
+    public PanelToggler PanelToggler;
+
     private void Start()
     {
         _progressBar.Initialize();
@@ -73,6 +76,12 @@ public class BuildSystem : MonoBehaviour
             return;
         }
 
+        // build panel toggle
+        if (PanelToggler.IsExpanded)
+        {
+            PanelToggler.TogglePanel();
+        }
+
         Vector3 worldPos = ConvertToWorldPos(eventData.position);
         GridCell gridCell = FindGridCell(worldPos);
 
@@ -110,12 +119,18 @@ public class BuildSystem : MonoBehaviour
     }
     public void Place(PointerEventData eventData)
     {
-        _ghostTower.SpineController.ResetColor();
-        _ghostTower.Detector.EraseRange();
-
         if (_ghostTower == null)
         {
             return;
+        }
+
+        _ghostTower.SpineController.ResetColor();
+        _ghostTower.Detector.EraseRange();
+
+        // build panel toggle
+        if (!PanelToggler.IsExpanded)
+        {
+            PanelToggler.TogglePanel();
         }
 
         if (_hoveringGridCell == null)

@@ -187,6 +187,7 @@ public class WaveSystem : MonoBehaviour
     }
     private void CompleteStageProcess()
     {
+        // TODO: Fight 버튼, 타워 설치, 등 불가능하게 막기
         GameStateManager.Instance.ChangeState(GameState.DefenceEnd);
 
         if (SurvivedCount > 0)

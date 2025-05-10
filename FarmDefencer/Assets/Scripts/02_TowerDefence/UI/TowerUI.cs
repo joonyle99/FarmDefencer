@@ -20,9 +20,6 @@ public class TowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointe
     [SerializeField] private int selectedIndex = 0;
     [SerializeField] private BuildSystem _buildSystem;
 
-    // TODO: 구조 변경하기..
-    public PanelToggler PanelToggler;
-
     private void Start()
     {
         var targetTowers = _buildSystem.AvailableTowers;
@@ -42,11 +39,6 @@ public class TowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointe
     public void OnDrag(PointerEventData eventData)
     {
         _buildSystem.Move(eventData);
-
-        if (PanelToggler.IsExpanded)
-        {
-            PanelToggler.TogglePanel();
-        }
     }
     public void OnPointerUp(PointerEventData eventData)
     {
