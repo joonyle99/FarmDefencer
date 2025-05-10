@@ -2275,7 +2275,7 @@ MonoBehaviour:
   - {fileID: 7831573459716681309, guid: c33dac51bb3454542a08bdea32b29f79, type: 3}
   - {fileID: 7831573459716681309, guid: 7bdd8eb0720db94479f348acbc1cd182, type: 3}
   _progressBar: {fileID: 730172970}
-  _buildDuration: 20
+  _buildDuration: 5
 --- !u!4 &1224125957
 Transform:
   m_ObjectHideFlags: 0

@@ -52,7 +52,8 @@ public class BuildSystem : MonoBehaviour
                 _buildTimer = 0f;
                 _progressBar.UpdateProgressBar(0f, _buildDuration);
 
-                GameStateManager.Instance.ChangeState(GameState.WaveBefore);
+                GameStateManager.Instance.ChangeState(GameState.Wave);
+                DefenceContext.Current.WaveSystem.StartWaveProcess();
             }
         }
     }

@@ -15,7 +15,6 @@ public enum GameState
 
     // Defence
     Build,
-    WaveBefore,
     Wave,
     WaveAfter,
     DefenceEnd,
@@ -49,7 +48,7 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
         }
 
         CurrentState = nextState;
-        //Debug.Log($"Current State: {CurrentState.ToString()}");
+        Debug.Log($"Current State: {CurrentState.ToString()}");
 
         switch (CurrentState)
         {
@@ -61,9 +60,6 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
                 break;
             case GameState.Build:
                 HandleBuildState();
-                break;
-            case GameState.WaveBefore:
-                HandleWaveBeforeState();
                 break;
             case GameState.Wave:
                 HandleWaveState();
@@ -91,10 +87,6 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
 
     // Defence
     private void HandleBuildState()
-    {
-
-    }
-    private void HandleWaveBeforeState()
     {
 
     }
