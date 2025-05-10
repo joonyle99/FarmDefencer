@@ -73,10 +73,20 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
         return firstCrop is not null;
     }
 
-    public bool AABB(Vector2 worldPosition) => worldPosition.x >= transform.position.x - 0.5f &&
-                                               worldPosition.x <= transform.position.x + FieldSize.x - 0.5f&&
-                                               worldPosition.y >= transform.position.y - 0.5f &&
-                                               worldPosition.y <= transform.position.y + FieldSize.y - 0.5f;
+    public bool AABB(Vector2 worldPosition)
+    {
+        // 우선 표지판 AABB
+        if (SignAABB(worldPosition))
+        {
+            return true;
+        }
+        
+        // 밭 AABB
+        return worldPosition.x >= transform.position.x - 0.5f &&
+            worldPosition.x <= transform.position.x + FieldSize.x - 0.5f&&
+            worldPosition.y >= transform.position.y - 0.5f &&
+            worldPosition.y <= transform.position.y + FieldSize.y - 0.5f;
+    }
     
     public void UnlockCropAt(Vector2 cropPosition)
     {
@@ -98,7 +108,7 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
             return true;
         }
         
-        if (Mathf.Abs(_cropSign.transform.position.x - worldPosition.x) < CropSign.SignClickSize.x && Mathf.Abs(_cropSign.transform.position.y - worldPosition.y) < CropSign.SignClickSize.y)
+        if (SignAABB(worldPosition))
         {
             _onCropSignClicked?.Invoke();
             return true;
@@ -222,4 +232,8 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
         crop = _crops[localPosition.y * fieldSize.x + localPosition.x];
         return true;
     }
+
+    private bool SignAABB(Vector2 worldPosition) =>
+        Mathf.Abs(_cropSign.transform.position.x - worldPosition.x) < CropSign.SignClickSize.x &&
+        Mathf.Abs(_cropSign.transform.position.y - worldPosition.y) < CropSign.SignClickSize.y;
 }
