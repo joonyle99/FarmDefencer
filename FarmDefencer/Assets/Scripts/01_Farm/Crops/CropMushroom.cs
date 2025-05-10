@@ -91,6 +91,8 @@ public sealed class CropMushroom : Crop
 
 	private SpriteRenderer _spriteRenderer;
 	private MushroomState _currentState;
+
+	public bool ForceHarvestOne { get; set; } = false;
 	
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
@@ -157,6 +159,11 @@ public sealed class CropMushroom : Crop
 			_currentState)
 
 			(transform.position, transform.position);
+
+		if (ForceHarvestOne && _currentState.IsPoisonous)
+		{
+			_currentState.IsPoisonous = false;
+		}
 
 		RenderInoculationAnimation();
 	}

@@ -203,12 +203,12 @@ public sealed class CropCucumber : Crop
 		{CucumberStage.Stage1_BeforeWater, _ => RequiredCropAction.Water },
 		{CucumberStage.Stage1_Growing, _ => RequiredCropAction.None },
 
-		{CucumberStage.Stage2_BeforeShortTrelis, _ => RequiredCropAction.DoubleTap },
+		{CucumberStage.Stage2_BeforeShortTrelis, _ => RequiredCropAction.SingleTap },
 		{CucumberStage.Stage2_Dead, _ => RequiredCropAction.Water },
 		{CucumberStage.Stage2_BeforeWater, _ => RequiredCropAction.Water },
 		{CucumberStage.Stage2_Growing, _ => RequiredCropAction.None },
 
-		{CucumberStage.Stage3, _ => RequiredCropAction.DoubleTap },
+		{CucumberStage.Stage3, _ => RequiredCropAction.SingleTap },
 
 		{CucumberStage.Mature, _ => RequiredCropAction.SingleTap },
 		{CucumberStage.Harvested, _ => RequiredCropAction.SingleTap },

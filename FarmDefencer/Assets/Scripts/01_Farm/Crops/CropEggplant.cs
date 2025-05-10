@@ -203,16 +203,16 @@ public sealed class CropEggplant : Crop
 	
 	private static readonly Dictionary<EggplantStage, Func<EggplantState, RequiredCropAction>> GetRequiredCropActionFunctions = new()
 	{
-		{EggplantStage.Seed, _ => RequiredCropAction.Water },
+		{EggplantStage.Seed, _ => RequiredCropAction.SingleTap },
 
 		{EggplantStage.Stage1_Dead, _ => RequiredCropAction.Water },
 		{EggplantStage.Stage1_BeforeWater, _ => RequiredCropAction.Water },
 		{EggplantStage.Stage1_Growing, _ => RequiredCropAction.None },
 
-		{EggplantStage.Stage2_BeforeTrelis, _ => RequiredCropAction.DoubleTap },
+		{EggplantStage.Stage2_BeforeTrelis, _ => RequiredCropAction.SingleTap },
 		{EggplantStage.Stage2_BeforeWater, _ => RequiredCropAction.Water },
 		{EggplantStage.Stage2_Dead, _ => RequiredCropAction.Water },
-		{EggplantStage.Stage2_Growing, _ => RequiredCropAction.Water },
+		{EggplantStage.Stage2_Growing, _ => RequiredCropAction.None },
 
 		{EggplantStage.Stage3_FullLeaves, _ => RequiredCropAction.DoubleTap },
 		{EggplantStage.Stage3_HalfLeaves, _ => RequiredCropAction.DoubleTap },

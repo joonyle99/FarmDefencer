@@ -81,6 +81,8 @@ public sealed class CropSweetpotato : Crop
 	private SpriteRenderer _spriteRenderer;
 	private SweetpotatoState _currentState;
 
+	public bool ForceHarvestOne { get; set; } = false;
+	
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
 	
@@ -145,6 +147,11 @@ public sealed class CropSweetpotato : Crop
 			_currentState)
 
 			(transform.position, transform.position);
+		if (ForceHarvestOne && _currentState.DeterminedCount)
+		{
+			_currentState.InitialDeterminedSweetpotatoCount = 1;
+			_currentState.RemainingSweetpotatoCount = 1;
+		}
 	}
 
 	public override void ResetToInitialState() => _currentState = Reset(_currentState);
@@ -376,7 +383,7 @@ public sealed class CropSweetpotato : Crop
 		{
 			var nextState = beforeState;
 			nextState.DeterminedCount = true;
-
+			
 			var countDecision = UnityEngine.Random.Range(0.0f, 1.0f);
 
 			if (countDecision >= 0.0f && countDecision < 0.6f)
