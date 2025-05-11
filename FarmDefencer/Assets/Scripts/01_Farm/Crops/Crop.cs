@@ -14,6 +14,7 @@ public enum RequiredCropAction
 	Water,
 }
 
+[Serializable]
 public abstract class Crop : MonoBehaviour, IFarmUpdatable
 {
 	/// <summary>
