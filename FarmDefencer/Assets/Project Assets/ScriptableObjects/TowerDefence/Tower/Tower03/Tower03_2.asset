@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d23d5d10bfc7ab40a374edf33b6caf0, type: 3}
+  m_Name: Tower03_2
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 599701160624374802, guid: 6ffb6b17d937d88478f135fd24750868, type: 3}
+  Name: "\uD0C0\uC6CC 3"
+  Description: "\uC2AC\uB85C\uC6B0\uD0C4\uC774 \uBAAC\uC2A4\uD130\uB97C \uB290\uB9AC\uAC8C\uD569\uB2C8\uB2E4"
+  Level: 2
+  AttackRate: 1.8
+  Damage: 0
+  ValueCost: 80
+  SellCost: 55
