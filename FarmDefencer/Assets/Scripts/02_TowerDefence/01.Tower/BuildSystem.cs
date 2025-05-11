@@ -56,6 +56,15 @@ public class BuildSystem : MonoBehaviour
                 _progressBar.UpdateProgressBar(0f, _buildDuration);
 
                 GameStateManager.Instance.ChangeState(GameState.Wave);
+                var id = MapManager.Instance.CurrentMap.MapId;
+                if (id == 0)
+                {
+                    SoundManager.Instance.PlayBgm("BGM_D_forest_song");
+                }
+                else if (id == 1)
+                {
+                    SoundManager.Instance.PlayBgm("BGM_D_beach_song");
+                }
                 DefenceContext.Current.WaveSystem.StartWaveProcess();
             }
         }

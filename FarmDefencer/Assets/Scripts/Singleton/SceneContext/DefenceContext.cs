@@ -69,6 +69,15 @@ public class DefenceContext : SceneContext
 
         // 게임 상태를 갱신
         GameStateManager.Instance.ChangeState(GameState.Build);
+        var id = MapManager.Instance.CurrentMap.MapId;
+        if (id == 0)
+        {
+            SoundManager.Instance.PlayBgm("BGM_D_forest_amb");
+        }
+        else if (id == 1)
+        {
+            SoundManager.Instance.PlayBgm("BGM_D_beach_amb");
+        }
     }
 
     public void BackgroundVideoHandler(MapEntry map)
