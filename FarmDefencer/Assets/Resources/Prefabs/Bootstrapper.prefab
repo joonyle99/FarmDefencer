@@ -632,8 +632,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 724582f711e340f45939343a329b176a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bgmAudioSource1: {fileID: 0}
-  _bgmAudioSource2: {fileID: 0}
+  _bgmAudioSource1: {fileID: 7790916876619879453}
+  _bgmAudioSource2: {fileID: 1390226041370120174}
   _sfxAudioSource: {fileID: 846582086370651982}
 --- !u!81 &8396262421793352476
 AudioListener:

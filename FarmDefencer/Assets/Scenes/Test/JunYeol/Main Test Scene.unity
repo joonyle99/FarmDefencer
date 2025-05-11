@@ -2712,7 +2712,7 @@ MonoBehaviour:
   - {fileID: 7831573459716681309, guid: 858db06070924c341a766e4c9ff129f5, type: 3}
   - {fileID: 7831573459716681309, guid: 8462282d9e2a70442b2b268f08168088, type: 3}
   _progressBar: {fileID: 730172970}
-  _buildDuration: 5
+  _buildDuration: 30
   PanelToggler: {fileID: 1399254021}
 --- !u!4 &1224125957
 Transform:
@@ -3766,7 +3766,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8a084af806a90dc49b2d9ad32854ca4f, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 8a084af806a90dc49b2d9ad32854ca4f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

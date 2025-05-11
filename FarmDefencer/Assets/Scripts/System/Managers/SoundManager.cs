@@ -48,7 +48,7 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
     }
 
     /// <summary>
-    /// 내부 캐시에서 SFX를 불러와 재생하는 메소드.
+    /// 내부 캐시에서 Bgm을 불러와 재생하는 메소드.
     /// 캐시에 존재하지 않을 경우 Resources/_Bgm에서 불러와 캐시에 넣고 재생함.
     /// </summary>
     public void PlayBgm(string name, float volume = 1.0f)
@@ -73,6 +73,13 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
         _bgmAudioSource1.clip = bgm;
         _bgmAudioSource1.volume = volume;
         _bgmAudioSource1.Play();
+    }
+    public void StopBgm()
+    {
+        if (_bgmAudioSource1.isPlaying)
+        {
+            _bgmAudioSource1.Stop();
+        }
     }
 
     /// <summary>
