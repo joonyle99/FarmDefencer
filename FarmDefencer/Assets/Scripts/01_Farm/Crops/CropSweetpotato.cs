@@ -233,7 +233,7 @@ public sealed class CropSweetpotato : Crop
 	private static readonly Action<Vector2, Vector2> WrapEffect = (_, cropPosition) =>
 	{
 		EffectPlayer.PlayVfx("VFX_T_SoilDust", cropPosition);
-		SoundManager.PlaySfxStatic("SFX_T_sweet_vinyl");
+		SoundManager.Instance.PlaySfx("SFX_T_sweet_vinyl");
 	};
 
 	private static readonly Func<SweetpotatoState, SweetpotatoState, bool> SweetpotatoHarvestEffectCondition = (beforeState, afterState) => afterState.TapCount == 2 && beforeState.TapCount != 2;

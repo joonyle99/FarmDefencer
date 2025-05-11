@@ -172,7 +172,7 @@ public sealed class CropCabbage : Crop
 	};
 
 	private static readonly Func<int, Func<CabbageState, CabbageState, bool>> ShakeSfxEffectConditionFor = shakedCount => (beforeState, afterState) => afterState.ShakeCount == shakedCount && beforeState.ShakeCount < shakedCount;
-	private static readonly Func<int, Action<Vector2, Vector2>> ShakeSfxEffectFor = shakedCount => (_, _) => SoundManager.PlaySfxStatic($"SFX_T_cabbage_shake_{shakedCount}");
+	private static readonly Func<int, Action<Vector2, Vector2>> ShakeSfxEffectFor = shakedCount => (_, _) => SoundManager.Instance.PlaySfx($"SFX_T_cabbage_shake_{shakedCount}");
 
 	private static List<(Func<CabbageState, CabbageState, bool>, Action<Vector2, Vector2>)> Effects = new()
 	{

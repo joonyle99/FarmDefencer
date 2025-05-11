@@ -255,7 +255,7 @@ public sealed class CropEggplant : Crop
 		(leavesDropped) =>
 		(inputWorldPosition, cropPosition) =>
 		{
-			SoundManager.PlaySfxStatic($"SFX_T_eggplant_leaf_{leavesDropped}");
+			SoundManager.Instance.PlaySfx($"SFX_T_eggplant_leaf_{leavesDropped}");
 			if (leavesDropped == 1)
 			{
 				EffectPlayer.PlayVfx("VFX_T_SoilDustL", cropPosition);

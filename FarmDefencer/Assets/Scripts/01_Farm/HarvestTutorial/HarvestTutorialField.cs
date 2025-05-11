@@ -28,7 +28,7 @@ public sealed class HarvestTutorialField : MonoBehaviour
         }
         _field.transform.Find("FieldLockedDisplay").gameObject.SetActive(false);
         
-        _field.Init(_ => 9999, (_, _, _) => { Done = true; SoundManager.PlaySfxStatic("SFX_T_coin"); }, _ => { });
+        _field.Init(_ => 9999, (_, _, _) => { Done = true; SoundManager.Instance.PlaySfx("SFX_T_coin"); }, _ => { });
 
         foreach (var spriteRendererComponent in _field.GetComponentsInChildren(typeof(SpriteRenderer)))
         {

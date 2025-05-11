@@ -192,14 +192,14 @@ public sealed class CropPotato : Crop
 	private static readonly Func<PotatoState, PotatoState, bool> PlayDustSfxEffectCondition = (beforeState, afterState) => afterState.HoldingTime > 0.0f && beforeState.HoldingTime == 0.0f;
 	private static readonly Action<Vector2, Vector2> PlayDustSfxEffect = (_, _) =>
 	{
-		SoundManager.PlaySfxStatic("SFX_T_potato_dust");
+		SoundManager.Instance.PlaySfx("SFX_T_potato_dust");
 	};
 
 	private static readonly Func<PotatoState, PotatoState, bool> StopDustSfxEffectCondition = (beforeState, afterState) => afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
 	private static readonly Action<Vector2, Vector2> StopDustSfxEffect = (_, _) =>
 	{
 		EffectPlayer.StopVfx();
-		SoundManager.StopCurrentSfxStatic();
+		SoundManager.Instance.StopSfx();
 	};
 
 	[Pure]

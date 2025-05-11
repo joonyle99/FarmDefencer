@@ -31,7 +31,7 @@ public sealed class FarmManager : MonoBehaviour
 			{
 				quotaContext.FillQuota(entry.ProductName, quota);
 				farmUI.PlayProductFillAnimation(entry, cropWorldPosition, quota, quotaContext);
-				SoundManager.PlaySfxStatic("SFX_T_coin");
+				SoundManager.Instance.PlaySfx("SFX_T_coin");
 				ResourceManager.Instance.Gold += entry.Price * quota;
 			},
 			farmUI.ToggleCropGuide);

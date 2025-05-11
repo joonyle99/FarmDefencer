@@ -20,34 +20,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
     [SerializeField] private AudioSource _sfxAudioSource;
 
     /// <summary>
-    /// <seealso cref="PlaySfx(string, bool)"/>
-    /// </summary>
-    /// <param name="name"></param>
-    public static void PlaySfxStatic(string name)
-	{
-		Instance.PlaySfx(name);
-	}
-
-    /// <summary>
-    /// <seealso cref="StopCurrentSfx"/>
-    /// </summary>
-    public static void StopCurrentSfxStatic()
-    {
-        Instance.StopCurrentSfx();
-    }
-
-    /// <summary>
-    /// 현재 재생중인 Sfx가 존재하면 중지.
-    /// </summary>
-    public void StopCurrentSfx()
-    {
-        if (_sfxAudioSource.isPlaying)
-        {
-            _sfxAudioSource.Stop();
-        }
-    }
-
-    /// <summary>
     /// 내부 캐시에서 Bgm을 불러와 재생하는 메소드.
     /// 캐시에 존재하지 않을 경우 Resources/_Bgm에서 불러와 캐시에 넣고 재생함.
     /// </summary>
@@ -147,7 +119,14 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
 			return;
         }
 	}
-	public void PrintSfxDictionary()
+    public void StopSfx()
+    {
+        if (_sfxAudioSource.isPlaying)
+        {
+            _sfxAudioSource.Stop();
+        }
+    }
+    public void PrintSfxDictionary()
     {
         string log = "";
         foreach (var sfx in _sfxDictionary)
