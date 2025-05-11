@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12043925b16c32547a6d93c51fee3eea, type: 3}
-  m_Name: QuotaFillingRule_Grassland
+  m_Name: QuotaFillingRule_Forest
   m_EditorClassIdentifier: 
   entries:
   - crop: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
