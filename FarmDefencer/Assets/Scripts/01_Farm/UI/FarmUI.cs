@@ -3,6 +3,8 @@ using UnityEngine;
 
 public sealed class FarmUI : MonoBehaviour
 {
+	public bool IsPaused => _farmDebugUI.IsPaused;
+	
 	private CoinsUI _coinsUI;
 	private WateringCan _wateringCan;
 	private HarvestInventory _harvestInventory;
@@ -16,16 +18,15 @@ public sealed class FarmUI : MonoBehaviour
 		set => _wateringCan.gameObject.SetActive(value);
 	}
 
-	public void Init(FarmClock farmClock, FarmInput farmInput, Action<Vector2> onWatering, ProductDatabase productDatabase)
+	public void Init(FarmInput farmInput, ProductDatabase productDatabase, Action<Vector2> onWatering, Action<float> setDaytime, Action onGoDefenceButtonClickedHandler, Func<float> getDaytime, Func<bool> isFarmPaused)
 	{
-		_wateringCan.Init(() => !farmClock.Stopped, onWatering);
+		_wateringCan.Init(() => !isFarmPaused(), onWatering);
 		farmInput.RegisterInputLayer(_wateringCan);
-		
-		_farmDebugUI.Init(farmClock);
-		
 		farmInput.RegisterInputLayer(_cropGuide);
 		
 		_harvestInventory.Init(productDatabase);
+		
+		_farmDebugUI.Init(setDaytime, getDaytime, onGoDefenceButtonClickedHandler);
 	}
 
 	public void SetTimerClockHand(float ratio) => _timerUI.SetClockhand(ratio);

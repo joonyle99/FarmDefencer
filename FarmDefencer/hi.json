@@ -1,0 +1,26 @@
+{
+    "farmUI": {
+        "instanceID": 134426
+    },
+    "farmClock": {
+        "instanceID": 134564
+    },
+    "farm": {
+        "instanceID": 134596
+    },
+    "farmInput": {
+        "instanceID": 134812
+    },
+    "productDatabase": {
+        "instanceID": 64070
+    },
+    "penaltyGiver": {
+        "instanceID": 134644
+    },
+    "harvestTutorialGiver": {
+        "instanceID": 134770
+    },
+    "quotaContext": {
+        "instanceID": 134438
+    }
+}

@@ -1,10 +1,14 @@
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 /// <summary>
 /// 게임에서 사용되는 자원(Gold, ...) 관리합니다.
 /// </summary>
-public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>
+public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFarmSerializable
 {
+    public List<string> SurvivedMonsters { get; private set; }
+    
     private int _gold;
     public int Gold
     {
@@ -24,8 +28,13 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>
 
     public event System.Action<int> OnGoldChanged;
 
+    public JObject Serialize() => new(new JProperty("Gold", _gold));
+
+    public void Deserialize(JObject json) => _gold = json.Property("Gold")?.Value.Value<int>() ?? 0;
+    
     private void Start()
     {
+        SurvivedMonsters = new List<string>();
         Initialize();
     }
     private void Update()

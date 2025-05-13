@@ -1,20 +1,21 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 /// <summary>
 /// 0번 자식: 배경
 /// 1번 자식: 잠금 디스플레이
 /// </summary>
-public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
+public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFarmSerializable
 {
     public int InputPriority => 0; // 직접적으로 FarmInput에 등록되지 않고, Farm에 의존하므로 무시해도 됨
-    
+
     [SerializeField] private GameObject cropPrefab;
     [SerializeField] private ProductEntry productEntry;
-    
+
     private Action _onCropSignClicked;
-    
+
     public ProductEntry ProductEntry => productEntry;
     [SerializeField] private Vector2Int fieldSize;
     public Vector2Int FieldSize => fieldSize;
@@ -24,29 +25,63 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
     private CropSign _cropSign;
     private HashSet<Crop> _lockedCrops;
 
-    private Crop[] Crops => _crops;
     private Crop[] _crops;
     private SpriteRenderer _backgroundRenderer; // 0번 자식 오브젝트에 할당
     private SpriteRenderer _fieldLockedRenderer; // 1번 자식 오브젝트에 할당
-    
+
     public bool IsAvailable
     {
-        get
-        {
-            return _isAvailable;
-        }
+        get { return _isAvailable; }
         set
         {
             _isAvailable = value;
             OnAvailabilityChanged();
         }
     }
+
     private bool _isAvailable;
 
     public Crop TopLeftCrop => _crops[FieldSize.x * (FieldSize.y - 1)];
 
     public bool AllLocked => Array.TrueForAll(_crops, c => _lockedCrops.Contains(c));
-    
+
+    public JObject Serialize()
+    {
+        var jsonCrops = new JObject();
+        for (int i = 0; i < _crops.Length; ++i)
+        {
+            jsonCrops.Add(i.ToString(), _crops[i].Serialize());
+        }
+
+        return new JObject(new JProperty("Crops", jsonCrops));
+    }
+
+    public void Deserialize(JObject json)
+    {
+        if (json["Crops"] is not JObject)
+        {
+            return;
+        }
+
+        foreach (var property in ((JObject)json["Crops"]).Properties())
+        {
+            if (!int.TryParse(property.Name, out var cropIndex) || cropIndex < 0 || cropIndex >= _crops.Length)
+            {
+                Debug.LogError($"Field {ProductEntry.ProductName} 에 잘못된 Crop 인덱스 존재: {property.Name}");
+                continue;
+            }
+
+            if (property.Value.Type != JTokenType.Object)
+            {
+                Debug.LogError($"Field {ProductEntry.ProductName} 의 {cropIndex} 가 Object를 값으로 갖지 않습니다.");
+                continue;
+            }
+
+            var crop = _crops[cropIndex];
+            crop.Deserialize((JObject)property.Value);
+        }
+    }
+
     public bool TryLockCropAt(Vector2 cropPosition)
     {
         if (TryFindCropAt(cropPosition, out var crop))
@@ -80,21 +115,21 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
         {
             return true;
         }
-        
+
         // 밭 AABB
         return worldPosition.x >= transform.position.x - 0.5f &&
-            worldPosition.x <= transform.position.x + FieldSize.x - 0.5f&&
-            worldPosition.y >= transform.position.y - 0.5f &&
-            worldPosition.y <= transform.position.y + FieldSize.y - 0.5f;
+               worldPosition.x <= transform.position.x + FieldSize.x - 0.5f &&
+               worldPosition.y >= transform.position.y - 0.5f &&
+               worldPosition.y <= transform.position.y + FieldSize.y - 0.5f;
     }
-    
+
     public void UnlockCropAt(Vector2 cropPosition)
     {
         // Unlock동작은 잠금상태에 무관하게 동작
         if (TryFindCropAt(cropPosition, out var crop))
         {
             crop.gameObject.SetActive(true);
-            _lockedCrops.Remove(crop);  
+            _lockedCrops.Remove(crop);
         }
     }
 
@@ -107,7 +142,7 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
             crop.OnSingleTap(worldPosition);
             return true;
         }
-        
+
         if (SignAABB(worldPosition))
         {
             _onCropSignClicked?.Invoke();
@@ -127,7 +162,8 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
         }
     }
 
-    public bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
+    public bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd,
+        float deltaHoldTime)
     {
         if (IsAvailable
             && TryFindCropAt(initialWorldPosition, out var crop)
@@ -139,19 +175,20 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
 
         return false;
     }
-    
-    public void Init(Func<ProductEntry, int> getQuotaFunction, Action<ProductEntry, Vector2, int> fillQuotaFunction, Action<ProductEntry> signClickedHandler)
+
+    public void Init(Func<ProductEntry, int> getQuotaFunction, Action<ProductEntry, Vector2, int> fillQuotaFunction,
+        Action<ProductEntry> signClickedHandler)
     {
         Array.ForEach(
             _crops,
             crop => crop.Init(() => getQuotaFunction(ProductEntry),
-            (count) =>
-            {
-                if (count > 0)
+                (count) =>
                 {
-                    fillQuotaFunction(productEntry, crop.transform.position, count);
-                }
-            }));
+                    if (count > 0)
+                    {
+                        fillQuotaFunction(productEntry, crop.transform.position, count);
+                    }
+                }));
         _onCropSignClicked = () => signClickedHandler(ProductEntry);
     }
 
@@ -165,24 +202,24 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
         }
     }
 
-	private void OnAvailabilityChanged()
+    private void OnAvailabilityChanged()
     {
         var backgroundColor = _isAvailable ? Color.white : new Color(0.5f, 0.5f, 0.5f, 1.0f);
         var fieldLockedColor = _isAvailable ? new Color(0.0f, 0.0f, 0.0f, 0.0f) : Color.white;
-        
+
         Array.ForEach(_crops, c => c.gameObject.SetActive(_isAvailable));
         _cropBackgrounds.ForEach(c => c.color = backgroundColor);
 
         _backgroundRenderer.color = backgroundColor;
         _fieldLockedRenderer.color = fieldLockedColor;
-	}
+    }
 
-	private void Awake()
-    {        
+    private void Awake()
+    {
         _lockedCrops = new();
         _crops = new Crop[fieldSize.x * fieldSize.y];
         _cropBackgrounds = new();
-        
+
         _backgroundRenderer = transform.Find("Background").GetComponent<SpriteRenderer>();
         _fieldLockedRenderer = transform.Find("FieldLockedDisplay").GetComponent<SpriteRenderer>();
 
@@ -190,7 +227,7 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
         cropBackgroundParentObject.transform.parent = transform;
         cropBackgroundParentObject.name = "CropBackgrounds";
         cropBackgroundParentObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
-        
+
         for (int yOffset = 0; yOffset < fieldSize.y; ++yOffset)
         {
             for (int xOffset = 0; xOffset < fieldSize.x; ++xOffset)
@@ -211,8 +248,8 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
         _cropSign = GetComponentInChildren<CropSign>();
 
         OnAvailabilityChanged();
-	}
-    
+    }
+
     /// <summary>
     /// 입력된 좌표에 해당되는 Crop을 검색해서 반환합니다.
     /// </summary>
@@ -221,7 +258,8 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
     /// <returns>position에 해당하는 Crop이 존재할 경우 crop에 값이 할당되며 true 반환, 이외의 경우 crop에 null이 할당되며 false 반환</returns>
     private bool TryFindCropAt(Vector2 position, out Crop crop)
     {
-        var localPosition = new Vector2Int(Mathf.RoundToInt(position.x - transform.position.x), Mathf.RoundToInt(position.y - transform.position.y));
+        var localPosition = new Vector2Int(Mathf.RoundToInt(position.x - transform.position.x),
+            Mathf.RoundToInt(position.y - transform.position.y));
         if (localPosition.x < 0 || localPosition.x >= fieldSize.x
                                 || localPosition.y < 0 || localPosition.y >= fieldSize.y)
         {

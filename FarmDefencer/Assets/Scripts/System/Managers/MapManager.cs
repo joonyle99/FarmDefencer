@@ -1,7 +1,8 @@
 using System;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>
+public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmSerializable
 {
     // map entry
     [SerializeField] private MapEntry[] _mapEntries;
@@ -12,7 +13,15 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>
     public MapEntry CurrentMap => _mapEntries[Mathf.Clamp(_currentMapIndex, 0, MapCount - 1)];
 
     // event
-    public Action<MapEntry> OnMapChanged;
+    public event Action<MapEntry> OnMapChanged;
+
+    public JObject Serialize() => new (new JProperty("CurrentMapIndex", _currentMapIndex));
+
+    public void Deserialize(JObject json)
+    {
+        _currentMapIndex = json.Property("CurrentMapIndex")?.Value.Value<int>() ?? 0;
+        LoadCurrentMap();
+    }
 
     public void MoveToNextMap()
     {
