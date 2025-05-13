@@ -4,6 +4,7 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 타이쿤의 최초 로드 동작을 정의하고, 타이쿤을 구성하는 여러 시스템들간의 중재자 역할을 하는 컴포넌트.
@@ -19,7 +20,7 @@ public sealed class FarmManager : MonoBehaviour
     [SerializeField] private PenaltyGiver penaltyGiver;
     [SerializeField] private HarvestTutorialGiver harvestTutorialGiver;
     [SerializeField] private QuotaContext quotaContext;
-
+    
     private void Start()
     {
         InitializeDependencies();
@@ -83,6 +84,7 @@ public sealed class FarmManager : MonoBehaviour
             productDatabase,
             farm.WateringAction,
             farmClock.SetRemainingDaytimeBy,
+            OpenDefenceScene,
             () => farmClock.RemainingDaytime,
             () => farmClock.Stopped);
         
@@ -108,19 +110,21 @@ public sealed class FarmManager : MonoBehaviour
         }
         GameStateManager.Instance.IsTycoonInitialLoad = false;
     }
-    
+
     private void SerializeToSaveFile()
     {
         var saveJson = new JObject();
-        
+
         saveJson.Add("QuotaContext", quotaContext.Serialize());
         saveJson.Add("MapManager", MapManager.Instance.Serialize());
         saveJson.Add("ResourceManager", ResourceManager.Instance.Serialize());
-        
+
         FarmSerializer.WriteSave(saveJson);
     }
 
-    private void OnDestroy() => SerializeToSaveFile();
-
-    private void OnApplicationQuit() => SerializeToSaveFile();
+    private void OpenDefenceScene()
+    {
+        SerializeToSaveFile();
+        SceneManager.LoadScene(2);
+    }
 }

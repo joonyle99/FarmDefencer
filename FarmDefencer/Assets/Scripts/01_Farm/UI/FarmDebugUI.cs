@@ -16,13 +16,15 @@ public sealed class FarmDebugUI : MonoBehaviour
 	
 	public bool IsPaused { get; private set; }
 
-	public void Init(Action<float> setRemainingDaytime, Func<float> getRemainingDaytime)
+	public void Init(Action<float> setRemainingDaytime, Func<float> getRemainingDaytime, Action onGoDefenceButtonClickedHandler)
 	{
 		_setRemainingDaytime = setRemainingDaytime;
 		_getRemainingDaytime = getRemainingDaytime;
 		
 		_setDaytimeButton.onClick.AddListener(() => setRemainingDaytime(300.0f));
 		_setDaytime5sButton.onClick.AddListener(() => setRemainingDaytime(5.0f));
+		
+		_goDefenceButton.onClick.AddListener(() => onGoDefenceButtonClickedHandler());
 	}
 	
 	private void Awake()
@@ -45,17 +47,11 @@ public sealed class FarmDebugUI : MonoBehaviour
 			});
 
 		_goDefenceButton = transform.Find("Box/GoDefenceButton").GetComponent<Button>();
-		_goDefenceButton.onClick.AddListener(OnGoDefenceButtonClickedHandler);
 	}
 
 	private void Update()
 	{
 		var deltaTime = Time.deltaTime;
 		_remainingDaytimeText.text = _getRemainingDaytime().ToString();
-	}
-
-	private void OnGoDefenceButtonClickedHandler()
-	{
-		SceneManager.LoadScene(2);
 	}
 }

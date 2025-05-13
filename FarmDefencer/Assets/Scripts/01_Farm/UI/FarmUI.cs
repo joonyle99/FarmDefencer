@@ -18,7 +18,7 @@ public sealed class FarmUI : MonoBehaviour
 		set => _wateringCan.gameObject.SetActive(value);
 	}
 
-	public void Init(FarmInput farmInput, ProductDatabase productDatabase, Action<Vector2> onWatering, Action<float> setDaytime, Func<float> getDaytime, Func<bool> isFarmPaused)
+	public void Init(FarmInput farmInput, ProductDatabase productDatabase, Action<Vector2> onWatering, Action<float> setDaytime, Action onGoDefenceButtonClickedHandler, Func<float> getDaytime, Func<bool> isFarmPaused)
 	{
 		_wateringCan.Init(() => !isFarmPaused(), onWatering);
 		farmInput.RegisterInputLayer(_wateringCan);
@@ -26,7 +26,7 @@ public sealed class FarmUI : MonoBehaviour
 		
 		_harvestInventory.Init(productDatabase);
 		
-		_farmDebugUI.Init(setDaytime, getDaytime);
+		_farmDebugUI.Init(setDaytime, getDaytime, onGoDefenceButtonClickedHandler);
 	}
 
 	public void SetTimerClockHand(float ratio) => _timerUI.SetClockhand(ratio);
