@@ -108,7 +108,7 @@ MonoBehaviour:
   stage2_deadSprite: {fileID: 8570217976540278184, guid: 09d6a7c37fcc9904f9440e2ca9c5fcdd, type: 3}
   stage2_growingSprite: {fileID: -4145705509535861541, guid: 39daceab827734d48ba3fe5abdd54620, type: 3}
   stage3_beforeInoculationSprite: {fileID: 6931849508725752192, guid: 0028416c49da8854fabd3046464497f8, type: 3}
-  stage3_afterInoculationSprite: {fileID: 7265507598394102980, guid: 2e83676cfa82ca84c8341421000d6d24, type: 3}
+  stage3_afterInoculationSprite: {fileID: 6931849508725752192, guid: 0028416c49da8854fabd3046464497f8, type: 3}
   mature_normalSprite: {fileID: 3333206966548326072, guid: 8a682a83d58262e439f17e3ff9ba141e, type: 3}
   mature_poisonousSprite: {fileID: -1890694776270067307, guid: 2a62de63a3d30374795d925012fa93cc, type: 3}
   harvested_normalSprite: {fileID: 2455228861196353177, guid: 286343f7725a33f4f88aa432369801c5, type: 3}
