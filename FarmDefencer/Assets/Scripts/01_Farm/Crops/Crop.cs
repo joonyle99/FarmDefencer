@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 
 public enum RequiredCropAction
 {
@@ -15,7 +16,7 @@ public enum RequiredCropAction
 }
 
 [Serializable]
-public abstract class Crop : MonoBehaviour, IFarmUpdatable
+public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 {
 	/// <summary>
 	/// CropState의 RemainingQuota를 제외한 필드는 반드시 초기값이 초기 상태를 의미하도록 되어야 한다.<br/>
@@ -50,6 +51,10 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable
 	/// </summary>
 	/// <remarks>반드시 GetQuota()로 여유 주문량을 검증한 후 호출할 것.</remarks>
 	protected Action<int> NotifyQuotaFilled => _notifyQuotaFilled;
+
+	public abstract JObject Serialize();
+
+	public abstract void Deserialize(JObject json);
 
 	public void Init(Func<int> getQuotaFunction, Action<int> notifyQuotaFilledFunction)
 	{

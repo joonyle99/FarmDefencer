@@ -103,6 +103,7 @@ public sealed class FarmManager : MonoBehaviour
         
         quotaContext.Deserialize(saveJson["QuotaContext"] as JObject ?? new JObject());
         penaltyGiver.Deserialize(saveJson["PenaltyGiver"] as JObject ?? new JObject());
+        farm.Deserialize(saveJson["Farm"] as JObject ?? new JObject());
 
         if (GameStateManager.Instance.IsTycoonInitialLoad)
         {
@@ -118,6 +119,7 @@ public sealed class FarmManager : MonoBehaviour
 
         saveJson.Add("QuotaContext", quotaContext.Serialize());
         saveJson.Add("PenaltyGiver", penaltyGiver.Serialize());
+        saveJson.Add("Farm", farm.Serialize());
         saveJson.Add("MapManager", MapManager.Instance.Serialize());
         saveJson.Add("ResourceManager", ResourceManager.Instance.Serialize());
 

@@ -1,18 +1,57 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 /// <summary>
 /// 자식으로는 반드시 Field 오브젝트만 가지게 할 것.
 /// </summary>
-public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
+public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFarmSerializable
 {
     private bool _isFarmPaused;
     private Field[] _fields;
 
     public int InputPriority => IFarmInputLayer.Priority_Farm;
+
+    public JObject Serialize()
+    {
+        var jsonFields = new JObject();
+
+        foreach (var field in _fields)
+        {
+            jsonFields.Add(field.ProductEntry.ProductName, field.Serialize());
+        }
+        
+        return new JObject(new JProperty("Fields", jsonFields));
+    }
+
+    public void Deserialize(JObject json)
+    {
+        if (json["Fields"] is not JObject jsonFields)
+        {
+            return;
+        }
+
+        foreach (var property in jsonFields.Properties())
+        {
+            if (property.Value.Type != JTokenType.Object)
+            {
+                Debug.LogError($"Farm/Fields에 Object가 아닌 값을 가지는 키 Product Name(Field Name) 존재: {property.Name}");
+                continue;
+            }
+            
+            var field = _fields.FirstOrDefault(f => f.ProductEntry.ProductName.Equals(property.Name));
+            if (field is null)
+            {
+                Debug.LogError($"Farm/Fields에 알 수 없는 Product Name(Field Name) 존재: {property.Name}");
+                continue;
+            }
+            
+            field.Deserialize((JObject)property.Value);
+        }
+    }
 
     public void UpdateAvailability(Func<ProductEntry, bool> isFieldAvailable)
     {

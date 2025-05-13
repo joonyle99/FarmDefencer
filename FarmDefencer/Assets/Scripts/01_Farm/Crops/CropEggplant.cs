@@ -2,9 +2,12 @@ using JetBrains.Annotations;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public sealed class CropEggplant : Crop
 {
+	[Serializable]
 	private struct EggplantState : ICommonCropState
 	{
 		public bool Planted { get; set; }
@@ -62,6 +65,17 @@ public sealed class CropEggplant : Crop
 	
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+	
+	public override JObject Serialize() => JObject.FromObject(_currentState);
+
+	public override void Deserialize(JObject json)
+	{
+		var state = JsonConvert.DeserializeObject<EggplantState?>(json.ToString());
+		if (state != null)
+		{
+			_currentState = state.Value;
+		}
+	}
 	
 	public override void OnWatering()
 	{
