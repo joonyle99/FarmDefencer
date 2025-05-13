@@ -2,12 +2,13 @@ using System;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using System.IO;
+using JetBrains.Annotations;
 
 public interface IFarmSerializable
 {
-    JObject Serialize();
-
-    void Deserialize(JObject json);
+    [NotNull] JObject Serialize();
+    
+    void Deserialize([NotNull] JObject json);
 }
 
 public static class FarmSerializer
@@ -19,6 +20,7 @@ public static class FarmSerializer
     /// 파일이 없거나 오류가 발생하였다면 빈 오브젝트 반환.
     /// </summary>
     /// <returns></returns>
+    [NotNull]
     public static JObject ReadSave()
     {
         if (!File.Exists(SavePath))
@@ -29,7 +31,7 @@ public static class FarmSerializer
         try
         {
             var file = File.ReadAllText(SavePath);
-            return JObject.Parse(file);
+            return JObject.Parse(file)["FarmDefencerSave"] as JObject ?? new JObject();
         }
         catch (Exception e)
         {
@@ -37,12 +39,11 @@ public static class FarmSerializer
             {
                 Debug.LogError($"세이브 파일 불러오기에 실패하였습니다: {e.Message}");
             }
+            return new JObject();
         }
-
-        return new JObject();
     }
 
-    public static void WriteSave(JObject json)
+    public static void WriteSave([NotNull] JObject json)
     {
         if (File.Exists(SavePath))
         {

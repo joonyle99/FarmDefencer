@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using VInspector.Libs;
 
 /// <summary>
 /// 타이쿤의 최초 로드 동작을 정의하고, 타이쿤을 구성하는 여러 시스템들간의 중재자 역할을 하는 컴포넌트.
@@ -27,6 +30,8 @@ public sealed class FarmManager : MonoBehaviour
         farmClock.AddPauseCondition(() => penaltyGiver.IsAnimationPlaying);
         farmClock.AddPauseCondition(() => harvestTutorialGiver.IsPlayingTutorial);
         farmClock.AddPauseCondition(() => farmUI.IsPaused);
+        
+        quotaContext.Init(productName => productDatabase.Products.FirstOrDefault(p => p.ProductName == productName));
 
         farm.Init(
             entry => quotaContext.TryGetQuota(entry.ProductName, out var quota) ? quota : 0,
@@ -45,22 +50,19 @@ public sealed class FarmManager : MonoBehaviour
             farmClock.SetRemainingDaytimeBy,
             () => farmClock.RemainingDaytime,
             () => farmClock.Stopped);
+        
+        quotaContext.QuotaContextUpdated += QuotaContextChangedHandler;
+        //quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
+
+        var saveJson = FarmSerializer.ReadSave();
+        //FarmSerializer.WriteSave(quotaContext.Serialize());
+        quotaContext.Deserialize(saveJson["QuotaContext"] as JObject ?? new JObject());
+        
         penaltyGiver.Init(farm);
 
-        quotaContext.QuotaContextUpdated += QuotaContextChangedHandler;
-        quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
-
-        // harvestTutorialGiver.AddTutorial("product_carrot");
-        // harvestTutorialGiver.AddTutorial("product_potato");
-        // harvestTutorialGiver.AddTutorial("product_corn");
-        // harvestTutorialGiver.AddTutorial("product_cabbage");
-        //harvestTutorialGiver.AddTutorial("product_cucumber");
-        //harvestTutorialGiver.AddTutorial("product_eggplant");
-        // harvestTutorialGiver.AddTutorial("product_sweetpotato");
-        // harvestTutorialGiver.AddTutorial("product_mushroom");
-
-        var js = FarmSerializer.ReadSave();
-        FarmSerializer.WriteSave(new JObject(new JProperty("Farm", "안녕")));
+        var a = new List<string> { "Rabbit" };
+        penaltyGiver.SpawnMonsters(0, a);
+        
     }
 
     private void Update()
@@ -84,7 +86,7 @@ public sealed class FarmManager : MonoBehaviour
     private void QuotaContextChangedHandler()
     {
         farmUI.UpdateHarvestInventory(quotaContext);
-        farm.UpdateAvailability(quotaContext);
+        farm.UpdateAvailability(productEntry => quotaContext.IsProductAvailable(productEntry));
 
         if (quotaContext.IsAllQuotaFilled)
         {

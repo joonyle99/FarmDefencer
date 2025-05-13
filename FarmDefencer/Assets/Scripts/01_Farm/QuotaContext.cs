@@ -32,29 +32,30 @@ public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
 
     public JObject Serialize() => JObject.FromObject(_remainingQuotas.ToDictionary(kv => kv.Key.ProductName, kv => kv.Value));
 
-        public void Deserialize(JObject json)
-        {
-            _remainingQuotas.Clear();
+    public void Deserialize(JObject json)
+    {
+        _remainingQuotas.Clear();
 
-            var dictionary = json
-                .Properties()
-                .Where(p => p.Value.Type == JTokenType.Integer)
-                .ToDictionary(p => p.Name, p => p.Value.Value<int>());
-            
-            foreach (var (productName, quota) in dictionary)
+        var dictionary = json
+            .Properties()
+            .Where(p => p.Value.Type == JTokenType.Integer)
+            .ToDictionary(p => p.Name, p => p.Value.Value<int>());
+
+        Debug.Log($"{json}");
+        foreach (var (productName, quota) in dictionary)
+        {
+            var entry = _getProductEntry(productName);
+            if (entry is null)
             {
-                var entry = _getProductEntry(productName);
-                if (entry is null)
-                {
-                    Debug.LogError($"{productName}에 해당하는 ProductEntry를 찾지 못했습니다.");
-                    continue;
-                }
-                _remainingQuotas.Add(entry, quota);
-                Debug.Log($"{entry.ProductName}, {quota}");
+                Debug.LogError($"{productName}에 해당하는 ProductEntry를 찾지 못했습니다.");
+                continue;
             }
-            
-            QuotaContextUpdated?.Invoke();
+            _remainingQuotas.Add(entry, quota);
+            Debug.Log($"{entry.ProductName}, {quota}");
         }
+        
+        QuotaContextUpdated?.Invoke();
+    }
 
     public bool IsProductAvailable(ProductEntry product) => _remainingQuotas.ContainsKey(product);
 
