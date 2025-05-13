@@ -14,6 +14,7 @@ public sealed class MainSceneUI : MonoBehaviour
 
     private void OnTycoonButtonClickedHandler()
     {
+        GameStateManager.Instance.IsTycoonInitialLoad = true;
         SceneManager.LoadScene(1);
     }
 }
