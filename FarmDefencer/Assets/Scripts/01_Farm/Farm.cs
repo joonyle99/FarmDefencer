@@ -14,11 +14,11 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
 
     public int InputPriority => IFarmInputLayer.Priority_Farm;
 
-    public void UpdateAvailability(QuotaContext context)
+    public void UpdateAvailability(Func<ProductEntry, bool> isFieldAvailable)
     {
         foreach (var field in _fields)
         {
-            field.IsAvailable = context.IsProductAvailable(field.ProductEntry);
+            field.IsAvailable = isFieldAvailable(field.ProductEntry);
         }
     }
 
@@ -112,30 +112,6 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
                 field.OnFarmUpdate(deltaTime);
             }
         });
-    }
-
-    public bool GetFieldAvailability(string productUniqueId)
-    {
-        var field = _fields.FirstOrDefault(field => field.ProductEntry.ProductName == productUniqueId);
-        if (field == null)
-        {
-            Debug.LogError($"Farm이 {productUniqueId}에 해당하는 Field를 가지고 있지 않습니다.");
-            return false;
-        }
-
-        return field.IsAvailable;
-    }
-
-    public void SetFieldAvailability(string productUniqueId, bool value)
-    {
-        var field = _fields.FirstOrDefault(field => field.ProductEntry.ProductName == productUniqueId);
-        if (field == null)
-        {
-            Debug.LogError($"Farm이 {productUniqueId}에 해당하는 Field를 가지고 있지 않습니다.");
-            return;
-        }
-
-        field.IsAvailable = value;
     }
 
     public void Init(Func<ProductEntry, int> getQuotaFunction, 
