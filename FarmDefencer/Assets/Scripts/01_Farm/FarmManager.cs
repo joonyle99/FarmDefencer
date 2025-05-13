@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -58,13 +59,8 @@ public sealed class FarmManager : MonoBehaviour
         // harvestTutorialGiver.AddTutorial("product_sweetpotato");
         // harvestTutorialGiver.AddTutorial("product_mushroom");
 
-        using (var fs = System.IO.File.Create("hi.json", 65536))
-        {
-            var json = JsonUtility.ToJson(this, true);
-            var a = System.Text.Encoding.UTF8.GetBytes(json);
-            fs.Write(a);
-            fs.Close();
-        }
+        var js = FarmSerializer.ReadSave();
+        FarmSerializer.WriteSave(new JObject(new JProperty("Farm", "안녕")));
     }
 
     private void Update()

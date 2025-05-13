@@ -10,6 +10,9 @@
 /FarmDefencer/[Ll]ogs/
 /FarmDefencer/[Uu]ser[Ss]ettings/
 
+# 세이브 파일.
+/FarmDefencer/[Aa]ssets/FarmDefencerSave*
+
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /FarmDefencer/[Mm]emoryCaptures/
