@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFarmSerializable
 {
+    public List<string> SurvivedMonsters { get; private set; }
+    
     private int _gold;
     public int Gold
     {
@@ -28,9 +31,10 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFa
     public JObject Serialize() => new(new JProperty("Gold", _gold));
 
     public void Deserialize(JObject json) => _gold = json.Property("Gold")?.Value.Value<int>() ?? 0;
-
+    
     private void Start()
     {
+        SurvivedMonsters = new List<string>();
         Initialize();
     }
     private void Update()

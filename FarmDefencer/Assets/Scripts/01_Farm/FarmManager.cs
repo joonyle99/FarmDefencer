@@ -29,6 +29,9 @@ public sealed class FarmManager : MonoBehaviour
     {
         InitializeDependencies();
         DeserializeFromSaveFile();
+        
+        penaltyGiver.SpawnMonsters(MapManager.Instance.CurrentMap.MapId, ResourceManager.Instance.SurvivedMonsters);
+        ResourceManager.Instance.SurvivedMonsters.Clear();
     }
 
     private void Update()
