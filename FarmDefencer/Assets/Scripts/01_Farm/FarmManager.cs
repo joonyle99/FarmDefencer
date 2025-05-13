@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -103,8 +104,8 @@ public sealed class FarmManager : MonoBehaviour
         if (GameStateManager.Instance.IsTycoonInitialLoad)
         {
             MapManager.Instance.Deserialize(saveJson["MapManager"] as JObject ?? new JObject());
+            ResourceManager.Instance.Deserialize(saveJson["ResourceManager"] as JObject ?? new JObject());
         }
-
         GameStateManager.Instance.IsTycoonInitialLoad = false;
     }
     
@@ -114,6 +115,7 @@ public sealed class FarmManager : MonoBehaviour
         
         saveJson.Add("QuotaContext", quotaContext.Serialize());
         saveJson.Add("MapManager", MapManager.Instance.Serialize());
+        saveJson.Add("ResourceManager", ResourceManager.Instance.Serialize());
         
         FarmSerializer.WriteSave(saveJson);
     }

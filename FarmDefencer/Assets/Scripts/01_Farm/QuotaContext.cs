@@ -41,7 +41,6 @@ public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
             .Where(p => p.Value.Type == JTokenType.Integer)
             .ToDictionary(p => p.Name, p => p.Value.Value<int>());
 
-        Debug.Log($"{json}");
         foreach (var (productName, quota) in dictionary)
         {
             var entry = _getProductEntry(productName);
@@ -51,7 +50,6 @@ public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
                 continue;
             }
             _remainingQuotas.Add(entry, quota);
-            Debug.Log($"{entry.ProductName}, {quota}");
         }
         
         QuotaContextUpdated?.Invoke();

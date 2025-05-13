@@ -21,7 +21,6 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
     {
         _currentMapIndex = json.Property("CurrentMapIndex")?.Value.Value<int>() ?? 0;
         LoadCurrentMap();
-        Debug.Log($"CurrentMap: {_currentMapIndex}");
     }
 
     public void MoveToNextMap()
