@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable
+public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 {
     private const float AnimationFadeOutBeginTime = 3.0f;
     private const float AnimationEndTime = 5.0f;
@@ -32,6 +33,72 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable
     private List<EatingMonster> _survivedMonsters;
     private List<CropLocker> _cropLockers;
 
+    public JObject Serialize()
+    {
+        var array = new JArray();
+        foreach (var cropLocker in _cropLockers)
+        {
+            var pos = cropLocker.LockPosition;
+
+            var json = new JObject
+            {
+                ["X"] = pos.x,
+                ["Y"] = pos.y,
+                ["RemainingTime"] = cropLocker.RemainingTime
+            };
+
+            array.Add(json);
+        }
+        foreach (var monster in _survivedMonsters)
+        {
+            var pos = monster.EatingPosition;
+
+            var json = new JObject
+            {
+                ["X"] = pos.x,
+                ["Y"] = pos.y,
+                ["RemainingTime"] = CropLockTime
+            };
+            array.Add(json);
+        }
+
+        return new JObject(new JProperty("CropLockers", array));
+    }
+
+    public void Deserialize(JObject json)
+    {
+        _survivedMonsters.ForEach(DestroyMonster);
+        _survivedMonsters.Clear();
+
+        _cropLockers.ForEach(DestroyLocker);
+        _cropLockers.Clear();
+
+        if (json["CropLockers"] is JArray array)
+        {
+            foreach (var jsonCropLocker in array)
+            {
+                if (jsonCropLocker.Type != JTokenType.Object)
+                {
+                    continue;
+                }
+
+                var jsonCropLockerObject = (JObject)jsonCropLocker;
+
+                var x = jsonCropLockerObject["X"].Value<float?>() ?? 0.0f;
+                var y = jsonCropLockerObject["Y"].Value<float?>() ?? 0.0f;
+
+                if (!_farm.TryLockCropAt(new Vector2(x, y)))
+                {
+                    Debug.LogError($"PenaltiGiver.Deserialize()에서 {x}, {y} 에 해당하는 작물을 잠그지 못했습니다.");
+                    continue;
+                }
+                
+                var lockTime = jsonCropLockerObject["RemainingTime"].Value<float?>() ?? CropLockTime;
+                SpawnCropLockerAt(new Vector2(x, y), lockTime);
+            }
+        }
+    }
+
     public void Init(Farm farm)
     {
         _farm = farm;
@@ -48,18 +115,6 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable
 
         foreach (var monster in monsters)
         {
-            if (!_monsterPrefabCache.TryGetValue(monster, out var monsterPrefab))
-            {
-                monsterPrefab = Resources.Load($"Prefabs/Monster/{monster}") as GameObject;
-                _monsterPrefabCache.Add(monster, monsterPrefab);
-            }
-
-            if (monsterPrefab is null)
-            {
-                Debug.LogError($"PenaltyGiver.SpawnMonsters()에서 Monster {monster} 에 대한 프리팹을 가져오지 못하였습니다.");
-                continue;
-            }
-
             var penalty = penaltyContext.MonsterPenaltyDatas.FirstOrDefault(m => m.Monster.Equals(monster));
             if (penalty is null)
             {
@@ -75,20 +130,7 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable
                 continue;
             }
 
-            if (!_farm.TryLockCropAt(cropPosition))
-            {
-                Debug.LogError(
-                    $"PenaltyGiver.SpawnMonsters()에서 MapId {mapId} Monster {monster} (이)가 작물을 잠그는 데에 실패하였습니다.");
-                continue;
-            }
-
-            var monsterObject = Instantiate(monsterPrefab, transform);
-            var monsterComponent = monsterObject.GetComponent<Monster>();
-            monsterObject.transform.position = new Vector3(cropPosition.x, cropPosition.y, 0.0f);
-            monsterComponent.SpineController.SetAnimation("eating", true);
-
-            var penaltyPlayingData = new EatingMonster(monsterComponent);
-            _survivedMonsters.Add(penaltyPlayingData);
+            SpawnMonsterAt(monster, cropPosition);
         }
     }
 
@@ -99,8 +141,7 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable
         _cropLockers.ForEach(c => c.UpdateLock(deltaTime));
         foreach (var expiredLocker in _cropLockers.Where(c => c.IsDone))
         {
-            _farm.UnlockCropAt(expiredLocker.LockPosition);
-            expiredLocker.DestroyLock();
+            DestroyLocker(expiredLocker);
         }
 
         _cropLockers.RemoveAll(c => c.IsDone);
@@ -123,18 +164,62 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable
         foreach (var expiredMonster in _survivedMonsters
                      .Where(m => m.IsDone))
         {
-            // CropLock 오브젝트 스폰
-            var cropLockObject = Instantiate(cropLockPrefab, transform);
-            var cropLockComponent = cropLockObject.GetComponent<CropLock>();
-            cropLockObject.transform.position = expiredMonster.EatingPosition;
-            
-            var cropLocker = new CropLocker(cropLockComponent);
-            _cropLockers.Add(cropLocker);
+            // 잠금 스폰
+            SpawnCropLockerAt(expiredMonster.EatingPosition, CropLockTime);
             
             // 몬스터 삭제
-            expiredMonster.DestroyMonster();
+            DestroyMonster(expiredMonster);
         }
 
         _survivedMonsters.RemoveAll(m => m.IsDone);
+    }
+
+    private void DestroyLocker(CropLocker locker)
+    {
+        _farm.UnlockCropAt(locker.LockPosition);
+        locker.DestroyLock();
+    }
+
+    private void DestroyMonster(EatingMonster monster) => monster.DestroyMonster();
+
+    private void SpawnMonsterAt(string monsterName, Vector2 cropWorldPosition)
+    {
+        if (!_monsterPrefabCache.TryGetValue(monsterName, out var monsterPrefab))
+        {
+            monsterPrefab = Resources.Load($"Prefabs/Monster/{monsterName}") as GameObject;
+            _monsterPrefabCache.Add(monsterName, monsterPrefab);
+        }
+
+        if (monsterPrefab is null)
+        {
+            Debug.LogError($"PenaltyGiver.SpawnMonsters()에서 Monster {monsterName} 에 대한 프리팹을 가져오지 못하였습니다.");
+            return;
+        }
+        
+        if (!_farm.TryLockCropAt(cropWorldPosition))
+        {
+            Debug.LogError(
+                $"PenaltyGiver.SpawnMonsterAt()에서 Monster {monsterName} (이)가 작물을 잠그는 데에 실패하였습니다.");
+            return;
+        }
+
+        var monsterObject = Instantiate(monsterPrefab, transform);
+        var monsterComponent = monsterObject.GetComponent<Monster>();
+        monsterObject.transform.position = new Vector3(cropWorldPosition.x, cropWorldPosition.y, 0.0f);
+        monsterComponent.SpineController.SetAnimation("eating", true);
+
+        var penaltyPlayingData = new EatingMonster(monsterComponent);
+        _survivedMonsters.Add(penaltyPlayingData);
+    }
+
+    private void SpawnCropLockerAt(Vector2 cropWorldPosition, float lockTime)
+    {
+        // CropLock 오브젝트 스폰
+        var cropLockObject = Instantiate(cropLockPrefab, transform);
+        var cropLockComponent = cropLockObject.GetComponent<CropLock>();
+        cropLockObject.transform.position = cropWorldPosition;
+            
+        var cropLocker = new CropLocker(cropLockComponent, lockTime);
+        _cropLockers.Add(cropLocker);
     }
 }

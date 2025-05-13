@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,14 +11,19 @@ using UnityEngine.SceneManagement;
 [Serializable]
 public sealed class FarmManager : MonoBehaviour
 {
+    [Header("저장 대상 오브젝트들")]
+    [SerializeField] private Farm farm;
+    [SerializeField] private PenaltyGiver penaltyGiver;
+    [SerializeField] private QuotaContext quotaContext;
+    // ResourceManager
+    // MapManager
+    
+    [Header("저장되지 않는 오브젝트들")]
     [SerializeField] private FarmUI farmUI;
     [SerializeField] private FarmClock farmClock;
-    [SerializeField] private Farm farm;
     [SerializeField] private FarmInput farmInput;
     [SerializeField] private ProductDatabase productDatabase;
-    [SerializeField] private PenaltyGiver penaltyGiver;
     [SerializeField] private HarvestTutorialGiver harvestTutorialGiver;
-    [SerializeField] private QuotaContext quotaContext;
     
     private void Start()
     {
@@ -88,20 +92,17 @@ public sealed class FarmManager : MonoBehaviour
             () => farmClock.RemainingDaytime,
             () => farmClock.Stopped);
         
+        penaltyGiver.Init(farm);
+        
         quotaContext.QuotaContextUpdated += QuotaContextChangedHandler;
     }
     
     private void DeserializeFromSaveFile()
     {
         var saveJson = FarmSerializer.ReadSave();
+        
         quotaContext.Deserialize(saveJson["QuotaContext"] as JObject ?? new JObject());
-        
-        quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
-        
-        penaltyGiver.Init(farm);
-
-        var a = new List<string> { "Rabbit" };
-        penaltyGiver.SpawnMonsters(0, a);
+        penaltyGiver.Deserialize(saveJson["PenaltyGiver"] as JObject ?? new JObject());
 
         if (GameStateManager.Instance.IsTycoonInitialLoad)
         {
@@ -116,6 +117,7 @@ public sealed class FarmManager : MonoBehaviour
         var saveJson = new JObject();
 
         saveJson.Add("QuotaContext", quotaContext.Serialize());
+        saveJson.Add("PenaltyGiver", penaltyGiver.Serialize());
         saveJson.Add("MapManager", MapManager.Instance.Serialize());
         saveJson.Add("ResourceManager", ResourceManager.Instance.Serialize());
 
