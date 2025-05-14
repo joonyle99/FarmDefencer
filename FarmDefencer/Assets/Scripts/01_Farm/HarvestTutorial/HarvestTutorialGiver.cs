@@ -117,14 +117,20 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
 
             newTutorial.transform.parent = transform;
             AssignTutorial(newTutorial);
-            _signRectTransform.anchoredPosition = new Vector2(0, 800.0f);
-            _signRectTransform.gameObject.SetActive(true);
 
-            Sequence sequence = DOTween.Sequence();
+            if (newTutorial.TargetCrop is not CropCarrot
+                && newTutorial.TargetCrop is not CropPotato
+                && newTutorial.TargetCrop is not CropCorn)
+            {
+                _signRectTransform.anchoredPosition = new Vector2(0, 800.0f);
+                _signRectTransform.gameObject.SetActive(true);
 
-            sequence.Append(_signRectTransform.DOAnchorPosY(0.0f, 1.0f).SetEase(Ease.OutBounce))
-                .AppendInterval(2.0f)
-                .AppendCallback(() => _signRectTransform.gameObject.SetActive(false));
+                Sequence sequence = DOTween.Sequence();
+
+                sequence.Append(_signRectTransform.DOAnchorPosY(0.0f, 1.0f).SetEase(Ease.OutBounce))
+                    .AppendInterval(2.0f)
+                    .AppendCallback(() => _signRectTransform.gameObject.SetActive(false));
+            }
         }
 
         var currentTime = Time.time;

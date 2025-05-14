@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using Spine.Unity;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 /// <summary>
 /// 0번 자식에는 SkeletonGraphic 컴포넌트를 가진 자식을 배치할 것.
 /// </summary>
 public sealed class CropMushroom : Crop
 {
+	[Serializable]
 	private struct MushroomState : ICommonCropState
 	{
 		public bool Planted { get; set; }
@@ -96,6 +99,17 @@ public sealed class CropMushroom : Crop
 	
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+	
+	public override JObject Serialize() => JObject.FromObject(_currentState);
+
+	public override void Deserialize(JObject json)
+	{
+		var state = JsonConvert.DeserializeObject<MushroomState?>(json.ToString());
+		if (state != null)
+		{
+			_currentState = state.Value;
+		}
+	}
 	
 	public override void OnSingleTap(Vector2 worldPosition)
 	{

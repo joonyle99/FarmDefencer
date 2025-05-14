@@ -109,6 +109,11 @@ public abstract class Monster : TargetableBehavior, IProduct
     }
     private void Update()
     {
+        if (DefenceContext.Current is null)
+        {
+            return;
+        }
+        
         var dirX = DefenceContext.Current.GridMap.DirectionToEndX; // 1 or -1
 
         // cf)

@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public sealed class QuotaContext : MonoBehaviour
+public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
 {
-    public event Action QuotaContextUpdated;
-    
     [Serializable]
     public class QuotaFillingRuleForMap
     {
@@ -18,11 +18,42 @@ public sealed class QuotaContext : MonoBehaviour
         public QuotaFillingRule Rule => rule;
     }
     
+    public event Action QuotaContextUpdated;
+    
     [SerializeField] private QuotaFillingRuleForMap[] quotaFillingRules;
     
-    private Dictionary<ProductEntry, int> _remainingQuotas;
+    private Dictionary<ProductEntry, int> _remainingQuotas; // 키가 없으면 잠긴 작물
+    
+    private Func<string, ProductEntry> _getProductEntry;
 
     public bool IsAllQuotaFilled => _remainingQuotas.Values.All(v => v <= 0);
+
+    public void Init(Func<string, ProductEntry> getProductEntry) => _getProductEntry = getProductEntry;
+
+    public JObject Serialize() => JObject.FromObject(_remainingQuotas.ToDictionary(kv => kv.Key.ProductName, kv => kv.Value));
+
+    public void Deserialize(JObject json)
+    {
+        _remainingQuotas.Clear();
+
+        var dictionary = json
+            .Properties()
+            .Where(p => p.Value.Type == JTokenType.Integer)
+            .ToDictionary(p => p.Name, p => p.Value.Value<int>());
+
+        foreach (var (productName, quota) in dictionary)
+        {
+            var entry = _getProductEntry(productName);
+            if (entry is null)
+            {
+                Debug.LogError($"{productName}에 해당하는 ProductEntry를 찾지 못했습니다.");
+                continue;
+            }
+            _remainingQuotas.Add(entry, quota);
+        }
+        
+        QuotaContextUpdated?.Invoke();
+    }
 
     public bool IsProductAvailable(ProductEntry product) => _remainingQuotas.ContainsKey(product);
 
@@ -75,11 +106,8 @@ public sealed class QuotaContext : MonoBehaviour
             var quota = Random.Range(minimum, maximum + 1);
             _remainingQuotas[ruleEntry.Crop] = quota;
         }
-
-        if (!IsAllQuotaFilled) // IsAllQuotaFilled 상태에서 이벤트가 무한 호출되는것을 방지
-        {
-            QuotaContextUpdated?.Invoke();
-        }
+        
+        QuotaContextUpdated?.Invoke();
     }
     
     private void Awake()

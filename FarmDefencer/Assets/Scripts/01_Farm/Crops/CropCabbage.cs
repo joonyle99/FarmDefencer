@@ -1,4 +1,6 @@
 using JetBrains.Annotations;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -9,6 +11,7 @@ using UnityEngine;
 /// </summary>
 public sealed class CropCabbage : Crop
 {
+	[Serializable]
 	private struct CabbageState : ICommonCropState
 	{
 		public bool Planted { get; set; }
@@ -62,6 +65,17 @@ public sealed class CropCabbage : Crop
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
 
+	public override JObject Serialize() => JObject.FromObject(_currentState);
+
+	public override void Deserialize(JObject json)
+	{
+		var state = JsonConvert.DeserializeObject<CabbageState?>(json.ToString());
+		if (state != null)
+		{
+			_currentState = state.Value;
+		}
+	}
+	
 	public override void OnSingleTap(Vector2 worldPosition)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(

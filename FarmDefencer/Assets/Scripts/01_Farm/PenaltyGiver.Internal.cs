@@ -6,7 +6,7 @@ public partial class PenaltyGiver
     {
         private Monster _monster;
         private float _eatenTime;
-    
+
         public bool IsDone => _eatenTime >= AnimationEndTime;
 
         public Vector2 EatingPosition => _monster.transform.position;
@@ -45,11 +45,12 @@ public partial class PenaltyGiver
         public bool IsDone => _remainingTime <= 0.0f;
 
         public Vector2 LockPosition => _cropLock.transform.position;
+        public float RemainingTime => _remainingTime;
 
-        public CropLocker(CropLock cropLock)
+        public CropLocker(CropLock cropLock, float lockTime)
         {
             _cropLock = cropLock;
-            _remainingTime = CropLockTime;
+            _remainingTime = lockTime;
         }
 
         public void UpdateLock(float deltaTime)
