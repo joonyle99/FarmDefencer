@@ -1,4 +1,5 @@
 using Spine;
+using Spine.Unity;
 using System.Collections;
 using UnityEngine;
 
@@ -65,7 +66,15 @@ public abstract class DamageableBehavior : MonoBehaviour
 
     // state
     [SerializeField] private bool _isDead;
-    public bool IsDead { get { return _isDead; } protected set { _isDead = value; } }
+    public bool IsDead
+    {
+        get => _isDead;
+        set
+        {
+            _isDead = value;
+            spineController?.ResetColor();
+        }
+    }
     [SerializeField] private bool _isStun;
     public bool IsStun { get { return _isStun; } protected set { _isStun = value; } }
 
@@ -150,7 +159,6 @@ public abstract class DamageableBehavior : MonoBehaviour
         {
             if (IsDead)
             {
-                spineController.ResetColor();
                 tickDamageCo = null;
                 yield break;
             }
@@ -163,7 +171,8 @@ public abstract class DamageableBehavior : MonoBehaviour
     }
 
     // effect
-    public void TakeEffect(ProjectileType type)
+    // TODO: 일단 슬로우 전용 함수로 생성
+    public void TakeEffect(float slowRate, float duration, ProjectileType type)
     {
         // do nothing
     }

@@ -2712,7 +2712,7 @@ MonoBehaviour:
   - {fileID: 7831573459716681309, guid: 858db06070924c341a766e4c9ff129f5, type: 3}
   - {fileID: 7831573459716681309, guid: 8462282d9e2a70442b2b268f08168088, type: 3}
   _progressBar: {fileID: 730172970}
-  _buildDuration: 30
+  _buildDuration: 15
   PanelToggler: {fileID: 1399254021}
 --- !u!4 &1224125957
 Transform:

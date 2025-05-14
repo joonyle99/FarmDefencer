@@ -5,6 +5,26 @@ using UnityEngine;
 public class GridMovement : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 1f;
+    /// <summary>
+    /// 몬스터가 이동하는 속도입니다.
+    /// 기본 값은 1입니다. (1초에 1칸 이동)
+    /// 값이 2인 경우 -> 1초에 2칸 이동합니다.
+    /// 값이 0.5인 경우 -> 1초에 0.5칸 이동합니다.
+    /// </summary>
+    public float MoveSpeed
+    {
+        get => _moveSpeed;
+        set
+        {
+            _moveSpeed = value;
+
+            // 몬스터의 움직임 애니메이션 속도 조절
+            if (_monster != null)
+            {
+               _monster.SpineController.SpineAnimationState.TimeScale = _moveSpeed;
+            }
+        }
+    }
     [SerializeField] private float _arrivalThreshold = 0.05f;
 
     private GridCell _currGridCell;

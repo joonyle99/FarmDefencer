@@ -8,8 +8,9 @@ public sealed class PoisonProjectile : LinearProjectile
     [Header("──────── Poison Projectile ────────")]
     [Space]
 
-    [SerializeField] private float _slowDuration;
-    [SerializeField] private float _slowPower;
+    [Tooltip("값이 2인 경우 -> 속도를 0.5배로 줄임")]
+    [SerializeField] private float _slowRate;
+    [SerializeField] private float _duration;
 
     protected override void DealDamage()
     {
@@ -17,6 +18,15 @@ public sealed class PoisonProjectile : LinearProjectile
     }
     protected override void DealEffect()
     {
-        damager.DealEffect(currentTarget, ProjectileType.Poison);
+        //damager.DealEffect(currentTarget, _slowRate, _duration, ProjectileType.Poison);
+        var slowEffector = currentTarget.GetComponent<SlowEffector>();
+        if (slowEffector != null)
+        {
+            slowEffector.ReActivate();
+        }
+        else
+        {
+            currentTarget.gameObject.AddComponent<SlowEffector>().Activate(currentTarget, _slowRate, _duration);
+        }
     }
 }

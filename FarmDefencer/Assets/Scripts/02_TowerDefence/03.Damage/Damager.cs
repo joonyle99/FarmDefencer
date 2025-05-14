@@ -31,8 +31,8 @@ public class Damager : MonoBehaviour
     {
         damageable.TakeTickDamage(count, interval, damage, type);
     }
-    public void DealEffect(DamageableBehavior damageable, ProjectileType type)
+    public void DealEffect(DamageableBehavior damageable, float slowRate, float duration, ProjectileType type)
     {
-        damageable.TakeEffect(type);
+        damageable.TakeEffect(slowRate, duration, type);
     }
 }
