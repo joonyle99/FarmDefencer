@@ -94,8 +94,7 @@ public class GridCell : MonoBehaviour
                 upgradeUI.ClearTower();
             }
 
-            upgradeUI.SetTower(occupiedTower);
-            upgradeUI.ShowPanel();
+            upgradeUI.ShowPanel(occupiedTower);
         }
     }
 

@@ -167,8 +167,10 @@ public class UpgradeUI : MonoBehaviour
     }
 
     // panel
-    public void ShowPanel()
+    public void ShowPanel(Tower tower)
     {
+        SetTower(tower);
+
         if (_tower == null)
         {
             return;
@@ -189,6 +191,8 @@ public class UpgradeUI : MonoBehaviour
 
         _tower.OccupyingGridCell.ResetGlow();
         this.gameObject.SetActive(false);
+
+        ClearTower();
 
         // Upgrade UI를 숨길 때 BuildUI를 보여줌
         DefenceContext.Current.BuildUI.ShowPanel();
