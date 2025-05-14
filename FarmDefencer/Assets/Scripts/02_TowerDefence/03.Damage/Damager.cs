@@ -1,7 +1,6 @@
-using System.Collections;
 using UnityEngine;
 
-public enum DamageType
+public enum ProjectileType
 {
     Normal,
     Fire,
@@ -24,12 +23,16 @@ public class Damager : MonoBehaviour
     {
         _damage = damage;
     }
-    public void DealDamage(DamageableBehavior damageable, DamageType type)
+    public void DealDamage(DamageableBehavior damageable, ProjectileType type)
     {
         damageable.TakeDamage(_damage, type);
     }
-    public void DealTickDamage(DamageableBehavior damageable, int count, float interval, int damage, DamageType type)
+    public void DealTickDamage(DamageableBehavior damageable, int count, float interval, int damage, ProjectileType type)
     {
         damageable.TakeTickDamage(count, interval, damage, type);
+    }
+    public void DealEffect(DamageableBehavior damageable, ProjectileType type)
+    {
+        damageable.TakeEffect(type);
     }
 }

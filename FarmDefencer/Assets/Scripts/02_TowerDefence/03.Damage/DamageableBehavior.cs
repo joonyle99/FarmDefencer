@@ -115,7 +115,7 @@ public abstract class DamageableBehavior : MonoBehaviour
         }
     }
 
-    public abstract void TakeDamage(int damage, DamageType type);
+    public abstract void TakeDamage(int damage, ProjectileType type);
     public abstract void Kill();
 
     // stun
@@ -127,7 +127,7 @@ public abstract class DamageableBehavior : MonoBehaviour
     }
 
     // tick
-    public void TakeTickDamage(int count, float interval, int damage, DamageType type)
+    public void TakeTickDamage(int count, float interval, int damage, ProjectileType type)
     {
         // TODO: 중복이 될지 안될지를 확인해야 한다
         if (tickDamageCo != null)
@@ -139,7 +139,7 @@ public abstract class DamageableBehavior : MonoBehaviour
         var newCo = StartCoroutine(TickDamageCo(count, interval, damage, type));
         tickDamageCo = newCo;
     }
-    public IEnumerator TickDamageCo(int count, float interval, int damage, DamageType type)
+    public IEnumerator TickDamageCo(int count, float interval, int damage, ProjectileType type)
     {
         spineController.SetColor(new Color(0.7f, 0f, 0f, 1f));
 
@@ -157,5 +157,11 @@ public abstract class DamageableBehavior : MonoBehaviour
         }
 
         spineController.ResetColor();
+    }
+
+    // effect
+    public void TakeEffect(ProjectileType type)
+    {
+        // do nothing
     }
 }

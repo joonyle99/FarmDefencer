@@ -3,8 +3,9 @@ using DG.Tweening;
 
 /// <summary>
 /// 포물선 투사체 탄환
+/// TODO: 이후에 FireProjectile을 만들어서 해당 로직을 이동시킬 것
 /// </summary>
-public sealed class ParabolicProjectile : ProjectileBase
+public class ParabolicProjectile : ProjectileBase
 {
     [Header("──────── Parabolic Projectile ────────")]
     [Space]
@@ -52,7 +53,7 @@ public sealed class ParabolicProjectile : ProjectileBase
     protected override void DealDamage()
     {
         // 직접 데미지
-        base.DealDamage();
+        damager.DealDamage(currentTarget, ProjectileType.Fire);
 
         // 지속(Tick) 데미지
         var gridMovement = currentTarget.GetComponent<GridMovement>();
@@ -74,7 +75,7 @@ public sealed class ParabolicProjectile : ProjectileBase
                     if (monster == null || monster.Equals(null)) return;
                     if (!monster.gameObject.activeInHierarchy) return;
 
-                    damager.DealTickDamage(monster, _tickCount, _tickInterval, _tickDamage, DamageType.Fire);
+                    damager.DealTickDamage(monster, _tickCount, _tickInterval, _tickDamage, ProjectileType.Fire);
                 });
 
                 // 2) 셀 시각 효과
@@ -89,5 +90,9 @@ public sealed class ParabolicProjectile : ProjectileBase
                 }
             }
         }
+    }
+    protected override void DealEffect()
+    {
+        // do nothing
     }
 }

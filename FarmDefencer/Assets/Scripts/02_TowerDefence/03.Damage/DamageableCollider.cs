@@ -23,7 +23,7 @@ public sealed class DamageableCollider : DamageableZone
 
         // Debug.Log($"onCollisionEnter - {this.gameObject.name}");
 
-        damager.DealDamage(demageableBehavior, DamageType.Normal);
+        damager.DealDamage(demageableBehavior, ProjectileType.Normal);
         Destroy(damager.gameObject);
     }
 }

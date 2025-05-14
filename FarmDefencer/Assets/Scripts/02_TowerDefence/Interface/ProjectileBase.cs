@@ -36,6 +36,7 @@ public abstract class ProjectileBase : MonoBehaviour
             if (linearT >= 1f)
             {
                 DealDamage();
+                DealEffect();
                 Destroy(gameObject);
                 return;
             }
@@ -68,15 +69,9 @@ public abstract class ProjectileBase : MonoBehaviour
     }
 
     protected abstract void Move();
-    protected virtual void Rotate()
-    {
-        // do nothing
-    }
-    protected virtual void DealDamage()
-    {
-        //Debug.Log(GetTarget().name + "에게 " + GetDamage() + "의 데미지를 입힘");
-        damager.DealDamage(currentTarget, DamageType.Normal);
-    }
+    protected abstract void Rotate();
+    protected abstract void DealDamage();
+    protected abstract void DealEffect();
 
     public void Trigger()
     {

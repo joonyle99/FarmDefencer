@@ -23,7 +23,7 @@ public sealed class DamageableTrigger : DamageableZone
 
         // Debug.Log($"onTriggerEnter - {this.gameObject.name}");
 
-        damager.DealDamage(demageableBehavior, DamageType.Normal);
+        damager.DealDamage(demageableBehavior, ProjectileType.Normal);
         Destroy(damager.gameObject);
     }
 }

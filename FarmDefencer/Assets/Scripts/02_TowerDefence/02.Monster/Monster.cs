@@ -131,7 +131,7 @@ public abstract class Monster : TargetableBehavior, IProduct
         _sortingGroup.sortingOrder = _defaultSortingOrder + deltaY + deltaX;
     }
 
-    public override void TakeDamage(int damage, DamageType type)
+    public override void TakeDamage(int damage, ProjectileType type)
     {
         if (IsDead == true)
         {
