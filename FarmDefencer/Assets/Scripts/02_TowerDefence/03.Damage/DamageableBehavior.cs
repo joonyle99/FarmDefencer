@@ -1,7 +1,6 @@
+using Spine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public enum Status
 {
@@ -77,6 +76,9 @@ public abstract class DamageableBehavior : MonoBehaviour
     protected SpineController spineController;
     public SpineController SpineController => spineController;
 
+    protected GridMovement gridMovement;
+    public GridMovement GridMovement => gridMovement;
+
     //protected Dictionary<Status, Coroutine> activeEffects = new();
     protected Coroutine tickDamageCo;
 
@@ -89,6 +91,7 @@ public abstract class DamageableBehavior : MonoBehaviour
         }
 
         spineController = GetComponentInChildren<SpineController>();
+        gridMovement = GetComponent<GridMovement>();
 
         startHp = MaxHp;
     }

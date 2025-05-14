@@ -107,9 +107,8 @@ public class WaveSystem : MonoBehaviour
         //TODO: 오브젝트 풀링을 여러 종류의 몬스터를 생성할 수 있도록 수정
         //var spawnedMonster = _factory.GetProduct<Monster>();
         var spawnedMonster = Instantiate(monster, Vector3.zero, Quaternion.identity);
-        var movement = spawnedMonster.GetComponent<GridMovement>();
 
-        movement.Initialize();
+        spawnedMonster.GridMovement.Initialize();
 
         spawnedMonster.OnKilled -= RemoveMonster;
         spawnedMonster.OnKilled += RemoveMonster;
@@ -229,15 +228,12 @@ public class WaveSystem : MonoBehaviour
             {
                 continue;
             }
-            var movemnet = fieldMonster.GetComponent<GridMovement>();
-            if (movemnet != null)
+
+            bool result = fieldMonster.GridMovement.CalcEachGridPath();
+            if (result == false)
             {
-                bool result = movemnet.CalcEachGridPath();
-                if (result == false)
-                {
-                    DefenceContext.Current.GridMap.LoadPrevDistanceCost();
-                    return false;
-                }
+                DefenceContext.Current.GridMap.LoadPrevDistanceCost();
+                return false;
             }
         }
 
