@@ -56,7 +56,10 @@ public class SpineController : MonoBehaviour
     }
     public void ResetColor()
     {
-        _skeletonAnimation.Skeleton.SetColor(_originalColor);
+        if (_skeletonAnimation)
+        {
+            _skeletonAnimation.Skeleton.SetColor(_originalColor);
+        }
     }
 
     public void InitShootingBone()
