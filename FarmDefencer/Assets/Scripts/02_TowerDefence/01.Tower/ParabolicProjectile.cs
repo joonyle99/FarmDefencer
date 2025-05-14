@@ -78,7 +78,15 @@ public sealed class ParabolicProjectile : ProjectileBase
                 });
 
                 // 2) 셀 시각 효과
-                cell.transform?.DOScale(1.5f, 0.25f).SetEase(Ease.OutBack).OnComplete(() => { cell.transform.DOScale(1f, 0.25f).SetEase(Ease.InBack); });
+                if (DOTween.IsTweening(cell.transform))
+                {
+                    //DOTween.Kill(cell.transform);
+                    continue;
+                }
+                else
+                {
+                    cell.transform?.DOScale(1.5f, 0.25f).SetEase(Ease.OutBack).OnComplete(() => { cell.transform.DOScale(1f, 0.25f).SetEase(Ease.InBack); });
+                }
             }
         }
     }
