@@ -71,6 +71,9 @@ public class UpgradeUI : MonoBehaviour
             return;
         }
 
+        // paint range
+        tower.Detector.PaintRange();
+
         SetIcon(tower.CurrentLevelData.Icon);
         SetNameText(tower.CurrentLevelData.Name);
 
@@ -91,6 +94,9 @@ public class UpgradeUI : MonoBehaviour
         {
             return;
         }
+
+        // erase range
+        _tower.Detector.EraseRange();
 
         SetIcon(null);
         SetNameText(string.Empty);
