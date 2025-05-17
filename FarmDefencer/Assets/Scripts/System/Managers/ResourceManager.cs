@@ -30,8 +30,8 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFa
 
     public JObject Serialize() => new(new JProperty("Gold", _gold));
 
-    public void Deserialize(JObject json) => _gold = json.Property("Gold")?.Value.Value<int>() ?? 0;
-    
+    public void Deserialize(JObject json) => Gold = json.Property("Gold")?.Value.Value<int>() ?? 0;
+
     private void Start()
     {
         SurvivedMonsters = new List<string>();
@@ -61,7 +61,7 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFa
 
     public void Initialize()
     {
-        SetGold(200);
+        //SetGold(200);
     }
 
     // gold
