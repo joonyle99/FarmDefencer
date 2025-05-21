@@ -177,11 +177,11 @@ public class WaveSystem : MonoBehaviour
         var id = MapManager.Instance.CurrentMap.MapId;
         if (id == 0)
         {
-            SoundManager.Instance.PlayBgm("BGM_D_forest_song");
+            SoundManager.Instance.PlayBgm("BGM_D_forest_song", 0.7f);
         }
         else if (id == 1)
         {
-            SoundManager.Instance.PlayBgm("BGM_D_beach_song");
+            SoundManager.Instance.PlayBgm("BGM_D_beach_song", 0.7f);
         }
 
         yield return DefenceContext.Current.GridMap.FindPathOnStartCo();
