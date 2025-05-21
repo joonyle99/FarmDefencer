@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d23d5d10bfc7ab40a374edf33b6caf0, type: 3}
   m_Name: Tower03_3
   m_EditorClassIdentifier: 
-  Icon: {fileID: 599701160624374802, guid: 6ffb6b17d937d88478f135fd24750868, type: 3}
+  Icon: {fileID: -45897730112380504, guid: 7e7e08deac251054b914baacf773e9fc, type: 3}
   Name: "\uD0C0\uC6CC 3"
   Description: "\uC2AC\uB85C\uC6B0\uD0C4\uC774 \uBAAC\uC2A4\uD130\uB97C \uB290\uB9AC\uAC8C\uD569\uB2C8\uB2E4"
   Level: 3
   AttackRate: 1.5
+  SlowRate: 0.5
+  SlowDuration: 3
   Damage: 0
   ValueCost: 165
   SellCost: 109
