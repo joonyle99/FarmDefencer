@@ -5,12 +5,8 @@ using UnityEngine;
 /// </summary>
 public sealed class PoisonProjectile : LinearProjectile
 {
-    [Header("──────── Poison Projectile ────────")]
-    [Space]
-
-    [Tooltip("값이 2인 경우 -> 속도를 0.5배로 줄임")]
-    [SerializeField] private float _slowRate;
-    [SerializeField] private float _duration;
+    //[Header("──────── Poison Projectile ────────")]
+    //[Space]
 
     protected override void DealDamage()
     {
@@ -18,7 +14,9 @@ public sealed class PoisonProjectile : LinearProjectile
     }
     protected override void DealEffect()
     {
+        // 참고
         //damager.DealEffect(currentTarget, _slowRate, _duration, ProjectileType.Poison);
+
         var slowEffector = currentTarget.GetComponent<SlowEffector>();
         if (slowEffector != null)
         {
@@ -26,7 +24,7 @@ public sealed class PoisonProjectile : LinearProjectile
         }
         else
         {
-            currentTarget.gameObject.AddComponent<SlowEffector>().Activate(currentTarget, _slowRate, _duration);
+            currentTarget.gameObject.AddComponent<SlowEffector>().Activate(currentTarget, slowRate, slowDuration);
         }
     }
 }

@@ -9,6 +9,9 @@ public abstract class ProjectileBase : MonoBehaviour
     [SerializeField] protected float moveDuration = 1.5f;
     //[SerializeField] protected float hitThreshold = 0.05f;
 
+    protected float slowRate;
+    protected float slowDuration;
+
     protected TargetableBehavior currentTarget;
 
     protected Vector3 startPos;
@@ -53,6 +56,11 @@ public abstract class ProjectileBase : MonoBehaviour
     public void SetDamage(int damage)
     {
         damager.SetDamage(damage);
+    }
+    public void SetSlow(float slowRate, float slowDuration)
+    {
+        this.slowRate = slowRate;
+        this.slowDuration = slowDuration;
     }
     public void SetTarget(TargetableBehavior target)
     {

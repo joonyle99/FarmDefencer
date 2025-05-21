@@ -103,6 +103,7 @@ public sealed class Tower : TargetableBehavior
     // actions
     public event System.Action<int> OnLevelChanged;
     public event System.Action<float> OnAttackRateChanged;
+    public event System.Action<float> OnSlowRateChanged;
     public event System.Action<int> OnDamageChanged;
     public event System.Action<int> OnCostChanged;
     public event System.Action<int> OnSellCostChanged;
@@ -228,6 +229,7 @@ public sealed class Tower : TargetableBehavior
     private void Reinforce()
     {
         OnAttackRateChanged?.Invoke(CurrentLevelData.AttackRate);
+        OnSlowRateChanged?.Invoke(CurrentLevelData.SlowRate);
         OnDamageChanged?.Invoke(CurrentLevelData.Damage);
 
         SoundManager.Instance.PlaySfx("SFX_D_tower_upgrade");
@@ -296,6 +298,7 @@ public sealed class Tower : TargetableBehavior
 
         projectile.SetTarget(CurrentTarget);
         projectile.SetDamage(CurrentLevelData.Damage);
+        projectile.SetSlow(CurrentLevelData.SlowRate, CurrentLevelData.SlowDuration);
         projectile.Trigger();
 
         SoundManager.Instance.PlaySfx($"SFX_D_tower_shot_{ID}-{CurrentLevel}");

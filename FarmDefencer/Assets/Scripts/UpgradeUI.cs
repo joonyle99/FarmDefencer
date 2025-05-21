@@ -40,6 +40,9 @@ public class UpgradeUI : MonoBehaviour
         _tower.OnAttackRateChanged -= SetSpeed;
         _tower.OnAttackRateChanged += SetSpeed;
 
+        _tower.OnSlowRateChanged -= SetSlow;
+        _tower.OnSlowRateChanged += SetSlow;
+
         _tower.OnDamageChanged -= SetPower;
         _tower.OnDamageChanged += SetPower;
 
@@ -81,7 +84,7 @@ public class UpgradeUI : MonoBehaviour
         SetLevelText(tower.CurrentLevel);
         SetPower(tower.CurrentLevelData.Damage);
         SetSpeed(tower.CurrentLevelData.AttackRate);
-        SetSlow(0f); // TODO: 타워 3부터..
+        SetSlow(tower.CurrentLevelData.SlowRate);
 
         SetSellCost(tower.CurrentLevelData.SellCost);
         SetUpgradeCost(tower.CurrentUpgradeCost);

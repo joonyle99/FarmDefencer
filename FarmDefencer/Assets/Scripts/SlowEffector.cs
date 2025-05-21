@@ -9,6 +9,8 @@ public class SlowEffector : MonoBehaviour
 
     private DamageableBehavior _damagableBehavior;
 
+    public static readonly Color SLOW_COLOR = new Color(0f, 0.7f, 0f, 1f);
+
     public void Activate(DamageableBehavior damagableBehavior, float slowRate, float duration)
     {
         this._damagableBehavior = damagableBehavior;
@@ -18,7 +20,7 @@ public class SlowEffector : MonoBehaviour
 
         if (!_isActive)
         {
-            damagableBehavior.SpineController.SetColor(new Color(0f, 0.7f, 0f, 1f));
+            damagableBehavior.SpineController.SetColor(SLOW_COLOR);
             damagableBehavior.GridMovement.MoveSpeed *= slowRate;
             _isActive = true;
         }
@@ -45,4 +47,3 @@ public class SlowEffector : MonoBehaviour
         }
     }
 }
-

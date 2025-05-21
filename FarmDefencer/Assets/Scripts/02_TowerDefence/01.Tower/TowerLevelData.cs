@@ -8,6 +8,8 @@ public class TowerLevelData : ScriptableObject
     public string Description;
     public int Level;
     public float AttackRate;
+    public float SlowRate;
+    public float SlowDuration;
     public int Damage;
     public int ValueCost;
     public int SellCost;
