@@ -66,7 +66,6 @@ public sealed class FarmManager : MonoBehaviour
     private void Update()
     {
         var ratio = farmClock.LengthOfDaytime == 0.0f ? 0.0f : farmClock.RemainingDaytime / farmClock.LengthOfDaytime;
-        farmUI.SetTimerClockHand(ratio);
 
         if (harvestTutorialGiver.IsPlayingTutorial)
         {
@@ -124,11 +123,14 @@ public sealed class FarmManager : MonoBehaviour
 
         farmUI.Init(farmInput,
             productDatabase,
+            MapManager.Instance.CurrentMap.MapId,
+            MapManager.Instance.CurrentStage,
             farm.WateringAction,
             farmClock.SetRemainingDaytimeBy,
             OpenDefenceScene,
             () => farmClock.RemainingDaytime,
-            () => farmClock.Stopped);
+            () => farmClock.Stopped,
+            () => farmClock.LengthOfDaytime == 0.0f ? 0.0f :farmClock.RemainingDaytime / farmClock.LengthOfDaytime);
 
         penaltyGiver.Init(farm);
 

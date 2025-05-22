@@ -18,7 +18,16 @@ public sealed class FarmUI : MonoBehaviour
 		set => _wateringCan.gameObject.SetActive(value);
 	}
 
-	public void Init(FarmInput farmInput, ProductDatabase productDatabase, Action<Vector2> onWatering, Action<float> setDaytime, Action onGoDefenceButtonClickedHandler, Func<float> getDaytime, Func<bool> isFarmPaused)
+	public void Init(FarmInput farmInput,
+		ProductDatabase productDatabase,
+		int currentMap,
+		int currentStage,
+		Action<Vector2> onWatering,
+		Action<float> setDaytime,
+		Action onGoDefenceButtonClickedHandler,
+		Func<float> getDaytime, 
+		Func<bool> isFarmPaused,
+		Func<float> getRemainingDaytimeAlpha)
 	{
 		_wateringCan.Init(() => !isFarmPaused(), onWatering);
 		farmInput.RegisterInputLayer(_wateringCan);
@@ -27,9 +36,9 @@ public sealed class FarmUI : MonoBehaviour
 		_harvestInventory.Init(productDatabase);
 		
 		_farmDebugUI.Init(setDaytime, getDaytime, onGoDefenceButtonClickedHandler);
+		
+		_timerUI.Init(currentMap, currentStage, getRemainingDaytimeAlpha);
 	}
-
-	public void SetTimerClockHand(float ratio) => _timerUI.SetClockhand(ratio);
 
 	public void PlayProductFillAnimation(ProductEntry entry, Vector2 cropWorldPosition, int count, Func<ProductEntry, bool> isProductAvailable, Func<ProductEntry, int> getProductQuota)
 		=> _harvestInventory.PlayProductFillAnimation(entry, cropWorldPosition, count, isProductAvailable, getProductQuota);
@@ -54,6 +63,5 @@ public sealed class FarmUI : MonoBehaviour
 	private void Start()
 	{
 		_coinsUI.UpdateCoinText(ResourceManager.Instance.Gold);
-		_timerUI.SetClockhand(0.5f);
 	}
 }

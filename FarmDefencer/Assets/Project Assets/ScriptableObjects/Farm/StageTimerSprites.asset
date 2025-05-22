@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1936ce8a1683d4b9338dbff27eb33e, type: 3}
+  m_Name: StageTimerSprites
+  m_EditorClassIdentifier: 
+  stageOnOffs:
+  - on: {fileID: -4941724345055492165, guid: bdb84a8144320bb4ab36261ef889b5df, type: 3}
+    off: {fileID: 5470479550760751539, guid: 0b868224e858dbb4f9a8f9a90f085360, type: 3}
+  - on: {fileID: 869930495201849120, guid: 60526b63a10625a4baaeb0b6115db894, type: 3}
+    off: {fileID: -7730036111394504205, guid: 57d6f5e1f8d9f9e489e18af3ed6938e9, type: 3}
+  - on: {fileID: -8187305685679159016, guid: 1014911726af400418703dc1aa60b2e3, type: 3}
+    off: {fileID: 495983521437037360, guid: bfce2bb3f1ef3d049a2456c10d3c649d, type: 3}
+  - on: {fileID: 5169290464242389604, guid: 00f11de6dfb91404594197f1591698ce, type: 3}
+    off: {fileID: 3034031107613320352, guid: 1593d0ea304bed447975b84f4b666c25, type: 3}
+  - on: {fileID: 5739327710779161112, guid: fa95945936141c7409672794c7f5b7b3, type: 3}
+    off: {fileID: -258205100860228785, guid: f68292ed642c388488120e673c484284, type: 3}
+  - on: {fileID: 4461521736505070505, guid: decf618c5072f704e8aacbf17013c58f, type: 3}
+    off: {fileID: 7721447981550718800, guid: 53b017775bdb2b24eb65cf8137d976bc, type: 3}
+  - on: {fileID: 7969428194884636623, guid: 3d11320116d2c8742a8a829d582ce21d, type: 3}
+    off: {fileID: -2245239903905014699, guid: bf02d9f357f8d3b4db00308274f527b4, type: 3}
+  - on: {fileID: -517654603391506946, guid: d1d2f347abffeb24f84a5210323c4eb3, type: 3}
+    off: {fileID: -916958499488636160, guid: 1c484e857f724744daf625bc51bee2c1, type: 3}
+  - on: {fileID: -8642734881849145122, guid: 23edf1e86bd186e4f90a9c7696663a63, type: 3}
+    off: {fileID: -2000616913040032436, guid: 49ae8db2dd2188c49961caeb814360c8, type: 3}
+  - on: {fileID: -7428674495129321908, guid: f95ec4f81fc8add4ab3ec5ad6521661a, type: 3}
+    off: {fileID: -6663931450418006356, guid: 4afbc69bf8a878a4fb81b89efcb7c90b, type: 3}
+  mapOnOffs:
+  - on: {fileID: -5199821190711209179, guid: 8d7485a47b3a9594db31b40a173a8f66, type: 3}
+    off: {fileID: -2431354805409703957, guid: 1899bf4c04e1017449712d4fd5c92b63, type: 3}
+  - on: {fileID: 4771429428176326633, guid: 62070602eb16eae4b80134756deaf38a, type: 3}
+    off: {fileID: 8877263374764951568, guid: 9393eae5ae82af6499e43193266f91ca, type: 3}
+  - on: {fileID: 2207309361873681436, guid: e8733e2d7e2db214ea35c3e048bab0a6, type: 3}
+    off: {fileID: -5768674732546885593, guid: c07ffb21176691e4d9490397e8d4fe79, type: 3}
