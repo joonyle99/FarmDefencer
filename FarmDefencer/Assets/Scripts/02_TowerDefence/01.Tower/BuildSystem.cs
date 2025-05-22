@@ -57,11 +57,11 @@ public class BuildSystem : MonoBehaviour
 
                 GameStateManager.Instance.ChangeState(GameState.Wave);
                 var id = MapManager.Instance.CurrentMap.MapId;
-                if (id == 0)
+                if (id == 1)
                 {
                     SoundManager.Instance.PlayBgm("BGM_D_forest_song", 0.7f);
                 }
-                else if (id == 1)
+                else if (id == 2)
                 {
                     SoundManager.Instance.PlayBgm("BGM_D_beach_song", 0.7f);
                 }
