@@ -9,8 +9,10 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
     public int MapCount => _mapEntries.Length;
 
     // current map
-    private int _currentMapIndex = 0;
-    public MapEntry CurrentMap => _mapEntries[Mathf.Clamp(_currentMapIndex, 0, MapCount - 1)];
+    private int _currentMapIndex = 1;
+    public MapEntry CurrentMap => _mapEntries[Mathf.Clamp(_currentMapIndex-1, 0, MapCount - 1)];   
+    
+    public int CurrentStage => 2;
 
     // event
     public event Action<MapEntry> OnMapChanged;
@@ -36,7 +38,7 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
     }
     public void MoteToPreviousMap()
     {
-        if (_currentMapIndex - 1 < 0)
+        if (_currentMapIndex - 1 < 1)
         {
             Debug.Log("첫 번째 맵입니다. 더 이상 이동할 수 없습니다.");
             return;

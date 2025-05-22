@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8697a5b2d6d3c40943ade1280a3abf, type: 3}
   m_Name: MapEntry_Beach
   m_EditorClassIdentifier: 
-  mapId: 1
+  mapId: 2
   mapName: "\uD574\uBCC0"
