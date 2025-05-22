@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,9 +35,12 @@ public sealed class HarvestBox : MonoBehaviour
 	private Image _boxImage;
 	private Image _productImage;
 	private Image _lockImage;
+	private Image _blinkImage;
 	private TMP_Text _cropQuotaText;
 	private RectTransform _rectTransform;
 	public RectTransform RectTransform => _rectTransform;
+
+	public void Blink(float duration) => StartCoroutine(DoBlink(duration));
 	
 	private void OnAvailabilityChanged()
 	{
@@ -52,16 +56,37 @@ public sealed class HarvestBox : MonoBehaviour
 		_boxImage = transform.Find("BoxImage").GetComponent<Image>();
 		_lockImage = transform.Find("LockImage").GetComponent<Image>();
 		_productImage = transform.Find("ProductImage").GetComponent<Image>();
+		_blinkImage = transform.Find("BlinkImage").GetComponent<Image>();
 		_cropQuotaText = transform.Find("CropQuotaText").GetComponent<TMP_Text>();
 		_rectTransform = GetComponent<RectTransform>();
 
 		_lockImage.enabled = false;
 		IsAvailable = false;
+		_blinkImage.enabled = false;
 	}
 
 	private void Start()
 	{
 		_productImage.sprite = productEntry.ProductSprite;
 		_cropQuotaText.text = _quota.ToString();
+	}
+
+	private IEnumerator DoBlink(float duration)
+	{
+		_blinkImage.enabled = true;
+		var elapsed = 0.0f;
+		while (elapsed < duration)
+		{
+			var x = elapsed / duration;
+			var colorAlpha = -(2.0f * x - 1.0f) * (2.0f * x - 1.0f) + 1.0f; // 0->1->0 곡선
+
+			elapsed += Time.deltaTime;
+			var color = Color.white;
+			color.a = colorAlpha;
+			_blinkImage.color = color;
+			
+			yield return null;
+		}
+		_blinkImage.enabled = false;
 	}
 }

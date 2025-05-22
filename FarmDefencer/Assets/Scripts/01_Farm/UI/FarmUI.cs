@@ -31,15 +31,14 @@ public sealed class FarmUI : MonoBehaviour
 
 	public void SetTimerClockHand(float ratio) => _timerUI.SetClockhand(ratio);
 
-	public void PlayProductFillAnimation(ProductEntry entry, Vector2 cropWorldPosition, int count, QuotaContext context)
-	{
-		_harvestInventory.PlayProductFillAnimation(entry, cropWorldPosition, count);
-		_harvestInventory.UpdateInventory(context);
-	}
+	public void PlayProductFillAnimation(ProductEntry entry, Vector2 cropWorldPosition, int count, Func<ProductEntry, bool> isProductAvailable, Func<ProductEntry, int> getProductQuota)
+		=> _harvestInventory.PlayProductFillAnimation(entry, cropWorldPosition, count, isProductAvailable, getProductQuota);
+
+	public void PlayQuotaAssignAnimation(Func<ProductEntry, bool> isProductAvailable, Func<ProductEntry, int> getProductQuota) => _harvestInventory.PlayQuotaAssignAnimation(isProductAvailable, getProductQuota);
 
 	public void ToggleCropGuide(ProductEntry entry) => _cropGuide.Toggle(entry);
 
-	public void UpdateHarvestInventory(QuotaContext context) => _harvestInventory.UpdateInventory(context);
+	public void UpdateHarvestInventory(Func<ProductEntry, bool> isProductAvailable, Func<ProductEntry, int> getProductQuota) => _harvestInventory.UpdateInventory(isProductAvailable, getProductQuota);
 	
 	private void Awake()
 	{

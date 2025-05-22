@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
@@ -8,30 +6,44 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// 타이쿤의 최초 로드 동작을 정의하고, 타이쿤을 구성하는 여러 시스템들간의 중재자 역할을 하는 컴포넌트.
 /// </summary>
-[Serializable]
 public sealed class FarmManager : MonoBehaviour
 {
-    [Header("저장 대상 오브젝트들")]
-    [SerializeField] private Farm farm;
+    [Header("디버그용 세이브 무시")] [SerializeField]
+    private bool ignoreSaveFile;
+    [Header("저장 대상 오브젝트들")] [SerializeField]
+    private Farm farm;
+    
     [SerializeField] private PenaltyGiver penaltyGiver;
+
     [SerializeField] private QuotaContext quotaContext;
     // ResourceManager
     // MapManager
-    
-    [Header("저장되지 않는 오브젝트들")]
-    [SerializeField] private FarmUI farmUI;
+
+    [Header("저장되지 않는 오브젝트들")] [SerializeField]
+    private FarmUI farmUI;
+
     [SerializeField] private FarmClock farmClock;
     [SerializeField] private FarmInput farmInput;
     [SerializeField] private ProductDatabase productDatabase;
     [SerializeField] private HarvestTutorialGiver harvestTutorialGiver;
-    
+
     private void Start()
     {
         InitializeDependencies();
-        DeserializeFromSaveFile();
-        
+        if (ignoreSaveFile)
+        {
+            // 디버그용 할당 코드 등 여기에...
+            quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
+        }
+        else
+        {
+            DeserializeFromSaveFile();
+        }
+
         penaltyGiver.SpawnMonsters(MapManager.Instance.CurrentMap.MapId, ResourceManager.Instance.SurvivedMonsters);
         ResourceManager.Instance.SurvivedMonsters.Clear();
+        farmUI.PlayQuotaAssignAnimation(productEntry => quotaContext.IsProductAvailable(productEntry),
+            productEntry => quotaContext.TryGetQuota(productEntry.ProductName, out var quota) ? quota : 0);
     }
 
     private void Update()
@@ -54,12 +66,15 @@ public sealed class FarmManager : MonoBehaviour
 
     private void QuotaContextChangedHandler()
     {
-        farmUI.UpdateHarvestInventory(quotaContext);
+        farmUI.UpdateHarvestInventory(productEntry => quotaContext.IsProductAvailable(productEntry),
+            productEntry => quotaContext.TryGetQuota(productEntry.ProductName, out var quota) ? quota : 0);
         farm.UpdateAvailability(productEntry => quotaContext.IsProductAvailable(productEntry));
 
         if (quotaContext.IsAllQuotaFilled)
         {
             quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
+            farmUI.PlayQuotaAssignAnimation(productEntry => quotaContext.IsProductAvailable(productEntry),
+                productEntry => quotaContext.TryGetQuota(productEntry.ProductName, out var quota) ? quota : 0);
         }
     }
 
@@ -73,7 +88,7 @@ public sealed class FarmManager : MonoBehaviour
         farmClock.AddPauseCondition(() => penaltyGiver.IsAnimationPlaying);
         farmClock.AddPauseCondition(() => harvestTutorialGiver.IsPlayingTutorial);
         farmClock.AddPauseCondition(() => farmUI.IsPaused);
-        
+
         quotaContext.Init(productName => productDatabase.Products.FirstOrDefault(p => p.ProductName == productName));
 
         farm.Init(
@@ -81,7 +96,10 @@ public sealed class FarmManager : MonoBehaviour
             (entry, cropWorldPosition, quota) =>
             {
                 quotaContext.FillQuota(entry.ProductName, quota);
-                farmUI.PlayProductFillAnimation(entry, cropWorldPosition, quota, quotaContext);
+                farmUI.PlayProductFillAnimation(entry, cropWorldPosition, quota,
+                    productEntry => quotaContext.IsProductAvailable(productEntry),
+                    productEntry =>
+                        quotaContext.TryGetQuota(productEntry.ProductName, out var outQuota) ? outQuota : 0);
                 SoundManager.Instance.PlaySfx("SFX_T_coin");
                 ResourceManager.Instance.Gold += entry.Price * quota;
             },
@@ -94,16 +112,16 @@ public sealed class FarmManager : MonoBehaviour
             OpenDefenceScene,
             () => farmClock.RemainingDaytime,
             () => farmClock.Stopped);
-        
+
         penaltyGiver.Init(farm);
-        
+
         quotaContext.QuotaContextUpdated += QuotaContextChangedHandler;
     }
-    
+
     private void DeserializeFromSaveFile()
     {
         var saveJson = FarmSerializer.ReadSave();
-        
+
         quotaContext.Deserialize(saveJson["QuotaContext"] as JObject ?? new JObject());
         penaltyGiver.Deserialize(saveJson["PenaltyGiver"] as JObject ?? new JObject());
         farm.Deserialize(saveJson["Farm"] as JObject ?? new JObject());
@@ -113,6 +131,7 @@ public sealed class FarmManager : MonoBehaviour
             MapManager.Instance.Deserialize(saveJson["MapManager"] as JObject ?? new JObject());
             ResourceManager.Instance.Deserialize(saveJson["ResourceManager"] as JObject ?? new JObject());
         }
+
         GameStateManager.Instance.IsTycoonInitialLoad = false;
     }
 

@@ -1,0 +1,1294 @@
+fileFormatVersion: 2
+guid: c5a8f3493ba4ad145a5be75f7da95e83
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 675909506975732838
+    second: crop_drawer_line_sheet_1116x219_0
+  - first:
+      213: -2796236860950481018
+    second: crop_drawer_line_sheet_1116x219_1
+  - first:
+      213: -5551228702013095202
+    second: crop_drawer_line_sheet_1116x219_2
+  - first:
+      213: -4977904870398249998
+    second: crop_drawer_line_sheet_1116x219_3
+  - first:
+      213: -2908278264871892705
+    second: crop_drawer_line_sheet_1116x219_4
+  - first:
+      213: -551055459615001274
+    second: crop_drawer_line_sheet_1116x219_5
+  - first:
+      213: 2258788700811667363
+    second: crop_drawer_line_sheet_1116x219_6
+  - first:
+      213: 1806503872410276246
+    second: crop_drawer_line_sheet_1116x219_7
+  - first:
+      213: -1447072573684712275
+    second: crop_drawer_line_sheet_1116x219_8
+  - first:
+      213: -4285458303063522857
+    second: crop_drawer_line_sheet_1116x219_9
+  - first:
+      213: -1246146419940008230
+    second: crop_drawer_line_sheet_1116x219_10
+  - first:
+      213: 5346608360815931917
+    second: crop_drawer_line_sheet_1116x219_11
+  - first:
+      213: -3446167880165505330
+    second: crop_drawer_line_sheet_1116x219_12
+  - first:
+      213: -2163093833298612078
+    second: crop_drawer_line_sheet_1116x219_13
+  - first:
+      213: -5866160780096797769
+    second: crop_drawer_line_sheet_1116x219_14
+  - first:
+      213: 598775174119928802
+    second: crop_drawer_line_sheet_1116x219_15
+  - first:
+      213: -8089403129047253553
+    second: crop_drawer_line_sheet_1116x219_16
+  - first:
+      213: -6248995008330806849
+    second: crop_drawer_line_sheet_1116x219_17
+  - first:
+      213: 6056047035606311177
+    second: crop_drawer_line_sheet_1116x219_18
+  - first:
+      213: -6674388630513765504
+    second: crop_drawer_line_sheet_1116x219_19
+  - first:
+      213: -1858195053779533102
+    second: crop_drawer_line_sheet_1116x219_20
+  - first:
+      213: 1651595917113196541
+    second: crop_drawer_line_sheet_1116x219_21
+  - first:
+      213: -477584545661266728
+    second: crop_drawer_line_sheet_1116x219_22
+  - first:
+      213: 5224263709724836018
+    second: crop_drawer_line_sheet_1116x219_23
+  - first:
+      213: -1814744977153052190
+    second: crop_drawer_line_sheet_1116x219_24
+  - first:
+      213: -4795581280700997189
+    second: crop_drawer_line_sheet_1116x219_25
+  - first:
+      213: -2049461430733621425
+    second: crop_drawer_line_sheet_1116x219_26
+  - first:
+      213: 5525520701676680259
+    second: crop_drawer_line_sheet_1116x219_27
+  - first:
+      213: 3156357410344176257
+    second: crop_drawer_line_sheet_1116x219_28
+  - first:
+      213: 5960251095900390462
+    second: crop_drawer_line_sheet_1116x219_29
+  - first:
+      213: -7684066023103554811
+    second: crop_drawer_line_sheet_1116x219_30
+  - first:
+      213: -2788461712193793731
+    second: crop_drawer_line_sheet_1116x219_31
+  - first:
+      213: -3419652088345888107
+    second: crop_drawer_line_sheet_1116x219_32
+  - first:
+      213: -6835945484215272335
+    second: crop_drawer_line_sheet_1116x219_33
+  - first:
+      213: 2774887090373499313
+    second: crop_drawer_line_sheet_1116x219_34
+  - first:
+      213: 508711066982595516
+    second: crop_drawer_line_sheet_1116x219_35
+  - first:
+      213: -5669542290544293817
+    second: crop_drawer_line_sheet_1116x219_36
+  - first:
+      213: -674630053884380634
+    second: crop_drawer_line_sheet_1116x219_37
+  - first:
+      213: -170036520907528318
+    second: crop_drawer_line_sheet_1116x219_38
+  - first:
+      213: 2775203043636160324
+    second: crop_drawer_line_sheet_1116x219_39
+  - first:
+      213: 3292147515443089885
+    second: crop_drawer_line_sheet_1116x219_40
+  - first:
+      213: -8320551428744120993
+    second: crop_drawer_line_sheet_1116x219_41
+  - first:
+      213: -5709383128508077040
+    second: crop_drawer_line_sheet_1116x219_42
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_0
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 2409
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 664199f8d10516900800000000000000
+      internalID: 675909506975732838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_1
+      rect:
+        serializedVersion: 2
+        x: 2232
+        y: 2409
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 687713bd365c139d0800000000000000
+      internalID: -2796236860950481018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_2
+      rect:
+        serializedVersion: 2
+        x: 3348
+        y: 2409
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed28e8d38e216f2b0800000000000000
+      internalID: -5551228702013095202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2190
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f3b93af4edeaeab0800000000000000
+      internalID: -4977904870398249998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_4
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 2190
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f19425aa358b3a7d0800000000000000
+      internalID: -2908278264871892705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_5
+      rect:
+        serializedVersion: 2
+        x: 2232
+        y: 2190
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 645bb16aaf14a58f0800000000000000
+      internalID: -551055459615001274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_6
+      rect:
+        serializedVersion: 2
+        x: 3348
+        y: 2190
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a7ab861b54d85f10800000000000000
+      internalID: 2258788700811667363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1971
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 691d16063bdf11910800000000000000
+      internalID: 1806503872410276246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_8
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 1971
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dacff414927faebe0800000000000000
+      internalID: -1447072573684712275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_9
+      rect:
+        serializedVersion: 2
+        x: 2232
+        y: 1971
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d18622f06ef684c0800000000000000
+      internalID: -4285458303063522857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_10
+      rect:
+        serializedVersion: 2
+        x: 3348
+        y: 1971
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aded955fe6cc4bee0800000000000000
+      internalID: -1246146419940008230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1752
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0231930af7f23a40800000000000000
+      internalID: 5346608360815931917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_12
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 1752
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec6cf525290cc20d0800000000000000
+      internalID: -3446167880165505330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_13
+      rect:
+        serializedVersion: 2
+        x: 2232
+        y: 1752
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 290f5628e952bf1e0800000000000000
+      internalID: -2163093833298612078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_14
+      rect:
+        serializedVersion: 2
+        x: 3348
+        y: 1752
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b3800bc9d5379ea0800000000000000
+      internalID: -5866160780096797769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1533
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e3bdb139d64f4800800000000000000
+      internalID: 598775174119928802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_16
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 1533
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcd7430b6baacbf80800000000000000
+      internalID: -8089403129047253553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_17
+      rect:
+        serializedVersion: 2
+        x: 2232
+        y: 1533
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb9c045062c1749a0800000000000000
+      internalID: -6248995008330806849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_18
+      rect:
+        serializedVersion: 2
+        x: 3348
+        y: 1533
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9012f5c41b66b0450800000000000000
+      internalID: 6056047035606311177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1314
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 083325927eecf53a0800000000000000
+      internalID: -6674388630513765504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_20
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 1314
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d24518917d5636e0800000000000000
+      internalID: -1858195053779533102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_21
+      rect:
+        serializedVersion: 2
+        x: 2232
+        y: 1314
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dff74007cb5abe610800000000000000
+      internalID: 1651595917113196541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_22
+      rect:
+        serializedVersion: 2
+        x: 3348
+        y: 1314
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d4d4a5d2674f59f0800000000000000
+      internalID: -477584545661266728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_23
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1095
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b00d172a20508840800000000000000
+      internalID: 5224263709724836018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_24
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 1095
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e13ed6ee0bb0d6e0800000000000000
+      internalID: -1814744977153052190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_25
+      rect:
+        serializedVersion: 2
+        x: 2232
+        y: 1095
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb1ed48bb3ca27db0800000000000000
+      internalID: -4795581280700997189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_26
+      rect:
+        serializedVersion: 2
+        x: 3348
+        y: 1095
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f473240ffa9de83e0800000000000000
+      internalID: -2049461430733621425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 876
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 344718e7dc79eac40800000000000000
+      internalID: 5525520701676680259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_28
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 876
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18a8cb37752adcb20800000000000000
+      internalID: 3156357410344176257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_29
+      rect:
+        serializedVersion: 2
+        x: 2232
+        y: 876
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e34864ffac017b250800000000000000
+      internalID: 5960251095900390462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_30
+      rect:
+        serializedVersion: 2
+        x: 3348
+        y: 876
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50b9346f9a6bc5590800000000000000
+      internalID: -7684066023103554811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_31
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 657
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3159eeb8d46d49d0800000000000000
+      internalID: -2788461712193793731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_32
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 657
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59a78b23b84fa80d0800000000000000
+      internalID: -3419652088345888107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_33
+      rect:
+        serializedVersion: 2
+        x: 2232
+        y: 657
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17cb96decc7d121a0800000000000000
+      internalID: -6835945484215272335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_34
+      rect:
+        serializedVersion: 2
+        x: 3348
+        y: 657
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b997815b11628620800000000000000
+      internalID: 2774887090373499313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 438
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbbbec8250e4f0700800000000000000
+      internalID: 508711066982595516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_36
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 438
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7488d05435db151b0800000000000000
+      internalID: -5669542290544293817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_37
+      rect:
+        serializedVersion: 2
+        x: 2232
+        y: 438
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62a3b635a8b33a6f0800000000000000
+      internalID: -674630053884380634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_38
+      rect:
+        serializedVersion: 2
+        x: 3348
+        y: 438
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 287a6746fa8e3adf0800000000000000
+      internalID: -170036520907528318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_39
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 219
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 447248be670838620800000000000000
+      internalID: 2775203043636160324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_40
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 219
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd19b2609be00bd20800000000000000
+      internalID: 3292147515443089885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_41
+      rect:
+        serializedVersion: 2
+        x: 2232
+        y: 219
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f55765a4f86778c80800000000000000
+      internalID: -8320551428744120993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_42
+      rect:
+        serializedVersion: 2
+        x: 3348
+        y: 219
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01ceaa25b4234c0b0800000000000000
+      internalID: -5709383128508077040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_43
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06dc1550dd27828439a3e7789465bdf0
+      internalID: -1684326197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crop_drawer_line_sheet_1116x219_44
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 0
+        width: 1116
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa996883933241f40abd36c07f1dcbb3
+      internalID: 709158781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      crop_drawer_line_sheet_1116x219_0: 675909506975732838
+      crop_drawer_line_sheet_1116x219_1: -2796236860950481018
+      crop_drawer_line_sheet_1116x219_10: -1246146419940008230
+      crop_drawer_line_sheet_1116x219_11: 5346608360815931917
+      crop_drawer_line_sheet_1116x219_12: -3446167880165505330
+      crop_drawer_line_sheet_1116x219_13: -2163093833298612078
+      crop_drawer_line_sheet_1116x219_14: -5866160780096797769
+      crop_drawer_line_sheet_1116x219_15: 598775174119928802
+      crop_drawer_line_sheet_1116x219_16: -8089403129047253553
+      crop_drawer_line_sheet_1116x219_17: -6248995008330806849
+      crop_drawer_line_sheet_1116x219_18: 6056047035606311177
+      crop_drawer_line_sheet_1116x219_19: -6674388630513765504
+      crop_drawer_line_sheet_1116x219_2: -5551228702013095202
+      crop_drawer_line_sheet_1116x219_20: -1858195053779533102
+      crop_drawer_line_sheet_1116x219_21: 1651595917113196541
+      crop_drawer_line_sheet_1116x219_22: -477584545661266728
+      crop_drawer_line_sheet_1116x219_23: 5224263709724836018
+      crop_drawer_line_sheet_1116x219_24: -1814744977153052190
+      crop_drawer_line_sheet_1116x219_25: -4795581280700997189
+      crop_drawer_line_sheet_1116x219_26: -2049461430733621425
+      crop_drawer_line_sheet_1116x219_27: 5525520701676680259
+      crop_drawer_line_sheet_1116x219_28: 3156357410344176257
+      crop_drawer_line_sheet_1116x219_29: 5960251095900390462
+      crop_drawer_line_sheet_1116x219_3: -4977904870398249998
+      crop_drawer_line_sheet_1116x219_30: -7684066023103554811
+      crop_drawer_line_sheet_1116x219_31: -2788461712193793731
+      crop_drawer_line_sheet_1116x219_32: -3419652088345888107
+      crop_drawer_line_sheet_1116x219_33: -6835945484215272335
+      crop_drawer_line_sheet_1116x219_34: 2774887090373499313
+      crop_drawer_line_sheet_1116x219_35: 508711066982595516
+      crop_drawer_line_sheet_1116x219_36: -5669542290544293817
+      crop_drawer_line_sheet_1116x219_37: -674630053884380634
+      crop_drawer_line_sheet_1116x219_38: -170036520907528318
+      crop_drawer_line_sheet_1116x219_39: 2775203043636160324
+      crop_drawer_line_sheet_1116x219_4: -2908278264871892705
+      crop_drawer_line_sheet_1116x219_40: 3292147515443089885
+      crop_drawer_line_sheet_1116x219_41: -8320551428744120993
+      crop_drawer_line_sheet_1116x219_42: -5709383128508077040
+      crop_drawer_line_sheet_1116x219_43: -1684326197
+      crop_drawer_line_sheet_1116x219_44: 709158781
+      crop_drawer_line_sheet_1116x219_5: -551055459615001274
+      crop_drawer_line_sheet_1116x219_6: 2258788700811667363
+      crop_drawer_line_sheet_1116x219_7: 1806503872410276246
+      crop_drawer_line_sheet_1116x219_8: -1447072573684712275
+      crop_drawer_line_sheet_1116x219_9: -4285458303063522857
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

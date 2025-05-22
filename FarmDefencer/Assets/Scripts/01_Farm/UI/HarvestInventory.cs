@@ -1,91 +1,131 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// 자식으로 HarvestAnimationPlayer 오브젝트를 가져야 함.
 /// </summary>
 public sealed class HarvestInventory : MonoBehaviour
 {
-	private ProductDatabase _productDatabase;
-	private HarvestAnimationPlayer _harvestAnimationPlayer;
-	private Dictionary<ProductEntry, HarvestBox> _harvestBoxes;
+    private ProductDatabase _productDatabase;
+    private HarvestAnimationPlayer _harvestAnimationPlayer;
+    private Image _drawer;
+    private Dictionary<ProductEntry, HarvestBox> _harvestBoxes;
+    private Animator _quotaAssignAnimator;
 
-	public void UpdateInventory(QuotaContext context)
-	{
-		foreach (var productEntry in _productDatabase.Products)
-		{
-			var isAvailable = context.IsProductAvailable(productEntry);
-			_harvestBoxes[productEntry].IsAvailable = isAvailable;
-			if (!isAvailable)
-			{
-				_harvestBoxes[productEntry].Quota = 0;
-				continue;
-			}
+    public void UpdateInventory(Func<ProductEntry, bool> isProductAvailable, Func<ProductEntry, int> getQuota)
+    {
+        foreach (var productEntry in _productDatabase.Products)
+        {
+            var isAvailable = isProductAvailable(productEntry);
+            _harvestBoxes[productEntry].IsAvailable = isAvailable;
+            if (!isAvailable)
+            {
+                _harvestBoxes[productEntry].Quota = 0;
+                continue;
+            }
 
-			if (!context.TryGetQuota(productEntry.ProductName, out var quota))
-			{
-				Debug.LogError($"QuotaContext에서 {productEntry.ProductName}에 해당하는 주문량 정보를 가져오지 못했습니다.");
-				_harvestBoxes[productEntry].Quota = 0;
-				continue;
-			}
+            _harvestBoxes[productEntry].Quota = getQuota(productEntry);
+        }
+    }
 
-			_harvestBoxes[productEntry].Quota = quota;
-		}
-	}
+    public void PlayQuotaAssignAnimation(Func<ProductEntry, bool> isAvailable, Func<ProductEntry, int> getQuota) => StartCoroutine(DoQuotaAssignAnimation(isAvailable, getQuota));
+    
+    public void PlayProductFillAnimation(ProductEntry productEntry, Vector2 cropWorldPosition, int count,
+        Func<ProductEntry, bool> isAvailable, Func<ProductEntry, int> getQuota)
+    {
+        var cropScreenPosition = Camera.main.WorldToScreenPoint(cropWorldPosition);
+        StartCoroutine(HarvestAnimationCoroutine(productEntry, cropScreenPosition, count, isAvailable, getQuota));
+    }
 
-	/// <summary>
-	/// 요청한 개수와 남은 주문량 중 낮은 값만큼 수확 처리하는 메소드.
-	/// 내부적으로 수확 애니메이션 재생 코루틴을 실행함.
-	/// </summary>
-	/// <remarks>
-	/// count가 지금 주문량보다 많으면 에러. 반드시 GetQuota()로 사전 확인할 것.
-	/// </remarks>
-	/// <param name="productEntry"></param>
-	/// <param name="cropWorldPosition"></param>
-	/// <param name="count"></param>
-	public void PlayProductFillAnimation(ProductEntry productEntry, Vector2 cropWorldPosition, int count)
-	{
-		var cropScreenPosition = Camera.main.WorldToScreenPoint(cropWorldPosition);
-		StartCoroutine(HarvestAnimationCoroutine(productEntry, cropScreenPosition, count));
-	}
+    public void Init(ProductDatabase database)
+    {
+        _productDatabase = database;
+        foreach (var entry in _productDatabase.Products)
+        {
+            var harvestBoxTransform = transform.Find($"BoxArea/HarvestBox_{entry.ProductName}");
+            if (harvestBoxTransform is null)
+            {
+                Debug.LogError($"HarvestInventory/BoxArea의 자식중에 HarvestBox_{entry.ProductName}가 필요합니다.");
+                continue;
+            }
 
-	public void Init(ProductDatabase database)
-	{
-		_productDatabase = database;
-		foreach (var entry in _productDatabase.Products)
-		{
-			var harvestBoxTransform = transform.Find($"BoxArea/HarvestBox_{entry.ProductName}");
-			if (harvestBoxTransform is null)
-			{
-				Debug.LogError($"HarvestInventory/BoxArea의 자식중에 HarvestBox_{entry.ProductName}가 필요합니다.");
-				continue;
-			}
-			
-			if (!harvestBoxTransform.TryGetComponent<HarvestBox>(out var harvestBox))
-			{
-				Debug.LogError($"{harvestBoxTransform.gameObject.name}(은)는 HarvestBox 컴포넌트를 갖지 않습니다.");
-				continue;
-			}
-			_harvestBoxes.Add(entry, harvestBox);
-		}
-	}
-	
-	private void Awake()
-	{
-		_harvestAnimationPlayer = GetComponentInChildren<HarvestAnimationPlayer>();
-		_harvestBoxes = new();
-	}
+            if (!harvestBoxTransform.TryGetComponent<HarvestBox>(out var harvestBox))
+            {
+                Debug.LogError($"{harvestBoxTransform.gameObject.name}(은)는 HarvestBox 컴포넌트를 갖지 않습니다.");
+                continue;
+            }
 
-	private System.Collections.IEnumerator HarvestAnimationCoroutine(ProductEntry productEntry, Vector2 cropScreenPosition, int count)
-	{
-		var harvestBox = _harvestBoxes[productEntry];
-		var toPosition = harvestBox.ScreenPosition;
+            _harvestBoxes.Add(entry, harvestBox);
+        }
+    }
 
-		for (var i = 0; i < count; i++)
-		{
-			_harvestAnimationPlayer.PlayAnimation(productEntry, cropScreenPosition, toPosition, () => { });
-			yield return new WaitForSeconds(0.1f);
-		}
-		yield return null;
-	}
+    private void Awake()
+    {
+        _harvestAnimationPlayer = GetComponentInChildren<HarvestAnimationPlayer>();
+        _harvestBoxes = new();
+        _quotaAssignAnimator = GetComponentInChildren<Animator>();
+        _quotaAssignAnimator.gameObject.SetActive(false);
+        _drawer = transform.Find("Drawer").GetComponent<Image>();
+    }
+
+    private IEnumerator HarvestAnimationCoroutine(ProductEntry productEntry, Vector2 cropScreenPosition, int count,
+        Func<ProductEntry, bool> isAvailable, Func<ProductEntry, int> getQuota)
+    {
+        var harvestBox = _harvestBoxes[productEntry];
+        var toPosition = harvestBox.ScreenPosition;
+
+        for (var i = 0; i < count; i++)
+        {
+            _harvestAnimationPlayer.PlayAnimation(productEntry, cropScreenPosition, toPosition, () => { });
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        UpdateInventory(isAvailable, getQuota);
+        yield return null;
+    }
+
+    private IEnumerator DoQuotaAssignAnimation(Func<ProductEntry, bool> isAvailable, Func<ProductEntry, int> getQuota)
+    {
+        _quotaAssignAnimator.gameObject.SetActive(true);
+        _quotaAssignAnimator.Play("HarvestInventoryGlow", 0, 0.0f);
+
+        var glowAnimationLength = _quotaAssignAnimator.runtimeAnimatorController.animationClips[0].length;
+        
+        var elapsed = 0.0f;
+        foreach (var (productEntry, harvestBox) in _harvestBoxes)
+        {
+            if (isAvailable(productEntry))
+            {
+                harvestBox.Blink(glowAnimationLength);
+            }
+        }
+
+        while (elapsed < glowAnimationLength)
+        {
+            elapsed += Time.deltaTime;
+
+            var x = elapsed / glowAnimationLength;
+            var countAlpha = -(x - 1.0f) * (x - 1.0f) + 1.0f; // 0->1 체감 곡선
+
+            foreach (var (productEntry, harvestBox) in _harvestBoxes)
+            {
+                if (!isAvailable(productEntry))
+                {
+                    continue;
+                }
+                
+                harvestBox.Quota = Mathf.RoundToInt(getQuota(productEntry) * countAlpha);
+            }
+
+            var color = Color.white;
+            _drawer.color = color;
+            yield return null;
+        }
+
+        UpdateInventory(isAvailable, getQuota);
+        _quotaAssignAnimator.gameObject.SetActive(false);
+    }
 }
