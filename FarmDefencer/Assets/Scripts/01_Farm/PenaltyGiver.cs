@@ -123,14 +123,14 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmS
                 continue;
             }
 
-            if (!_farm.TryGetLockableCropPositionFromProbability(penalty.CropProbabilityDatas, out var cropPosition))
+            if (!_farm.TryGetLockableCropPositionFromProbability(penalty.CropProbabilityDatas, out var cropPosition, out var productEntry))
             {
                 Debug.LogError(
                     $"PenaltyGiver.SpawnMonsters()에서 MapId {mapId} Monster {monster} (이)가 파괴할 작물을 찾지 못하였습니다.");
                 continue;
             }
 
-            SpawnMonsterAt(monster, cropPosition);
+            SpawnMonsterAt(monster, cropPosition, productEntry.ProductName);
         }
     }
 
@@ -182,7 +182,7 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmS
 
     private void DestroyMonster(EatingMonster monster) => monster.DestroyMonster();
 
-    private void SpawnMonsterAt(string monsterName, Vector2 cropWorldPosition)
+    private void SpawnMonsterAt(string monsterName, Vector2 cropWorldPosition, string productName)
     {
         if (!_monsterPrefabCache.TryGetValue(monsterName, out var monsterPrefab))
         {
@@ -207,6 +207,15 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmS
         var monsterComponent = monsterObject.GetComponent<Monster>();
         monsterObject.transform.position = new Vector3(cropWorldPosition.x, cropWorldPosition.y, 0.0f);
         monsterComponent.SpineController.SetAnimation("eating", true);
+
+        try
+        {
+            monsterComponent.SpineController.Skeleton.SetSkin(productName.Split("_")[1]);
+        }
+        catch (Exception _)
+        {
+            Debug.LogError($"Monster의 skin 이름을 설정할 수 없습니다: {productName}");
+        }
 
         var penaltyPlayingData = new EatingMonster(monsterComponent);
         _survivedMonsters.Add(penaltyPlayingData);

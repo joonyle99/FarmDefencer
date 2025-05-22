@@ -62,7 +62,7 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFarm
     }
 
     public bool TryGetLockableCropPositionFromProbability(IReadOnlyList<CropProbabilityData> cropProbabilityDatas,
-        out Vector2 cropPosition)
+        out Vector2 cropPosition, out ProductEntry productEntry)
     {
         var randomMax = 0.0f;
         foreach (var cropProbability in cropProbabilityDatas)
@@ -80,6 +80,7 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFarm
         if (randomMax == 0.0f)
         {
             cropPosition = Vector2.zero;
+            productEntry = null;
             return false;
         }
 
@@ -105,6 +106,7 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFarm
         if (targetField is null)
         {
             cropPosition = Vector2.zero;
+            productEntry = null;
             return false;
         }
 
@@ -118,12 +120,14 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFarm
             if (targetField.IsCropLockable(new Vector2(cropX, cropY)))
             {
                 cropPosition = new Vector2(cropX, cropY);
+                productEntry = targetField.ProductEntry;
                 return true;
             }
         }
 
         // 랜덤 배정에 실패했으면 가장 처음 유효한 Crop의 위치를 반환
         var found = targetField.TryGetFirstLockableCropPosition(out cropPosition);
+        productEntry = found ? targetField.ProductEntry : null;
         return found;
     }
 
