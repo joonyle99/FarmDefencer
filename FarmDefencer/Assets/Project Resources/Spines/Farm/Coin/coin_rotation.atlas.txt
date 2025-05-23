@@ -1,0 +1,10 @@
+coin_rotation.png
+size:512,512
+filter:Linear,Linear
+pma:true
+Coin_Side
+bounds:2,2,92,402
+rotate:90
+Coin_front
+bounds:2,96,400,400
+offsets:1,1,402,402

@@ -116,6 +116,7 @@ public sealed class FarmManager : MonoBehaviour
                     productEntry => quotaContext.IsProductAvailable(productEntry),
                     productEntry =>
                         quotaContext.TryGetQuota(productEntry.ProductName, out var outQuota) ? outQuota : 0);
+                farmUI.PlayCoinAnimation();
                 SoundManager.Instance.PlaySfx("SFX_T_coin");
                 ResourceManager.Instance.Gold += entry.Price * quota;
             },

@@ -48,6 +48,8 @@ public sealed class FarmUI : MonoBehaviour
 	public void ToggleCropGuide(ProductEntry entry) => _cropGuide.Toggle(entry);
 
 	public void UpdateHarvestInventory(Func<ProductEntry, bool> isProductAvailable, Func<ProductEntry, int> getProductQuota) => _harvestInventory.UpdateInventory(isProductAvailable, getProductQuota);
+
+	public void PlayCoinAnimation() => _coinsUI.PlayAnimation();
 	
 	private void Awake()
 	{
@@ -57,11 +59,11 @@ public sealed class FarmUI : MonoBehaviour
 		_timerUI = GetComponentInChildren<TimerUI>();
 		_cropGuide = GetComponentInChildren<CropGuide>();
 		_farmDebugUI = GetComponentInChildren<FarmDebugUI>();
-		ResourceManager.Instance.OnGoldChanged += _coinsUI.UpdateCoinText;
+		ResourceManager.Instance.OnGoldChanged += _coinsUI.SetCoin;
 	}
 
 	private void Start()
 	{
-		_coinsUI.UpdateCoinText(ResourceManager.Instance.Gold);
+		_coinsUI.SetCoin(ResourceManager.Instance.Gold);
 	}
 }
