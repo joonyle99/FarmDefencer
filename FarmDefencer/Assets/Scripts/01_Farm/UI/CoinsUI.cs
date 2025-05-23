@@ -14,6 +14,8 @@ public sealed class CoinsUI : MonoBehaviour
 
 	public void PlayAnimation()
 	{
+		_animation.enabled = true;
+		_animation.AnimationState.ClearTracks();
 		_animation.AnimationState.AddAnimation(0, "coin_rotation", false, 0.0f);
 	}
 
@@ -21,5 +23,6 @@ public sealed class CoinsUI : MonoBehaviour
 	{
 		_text = GetComponentInChildren<TMP_Text>();
 		_animation = GetComponentInChildren<SkeletonGraphic>();
+		_animation.enabled = false;
 	}
 }
