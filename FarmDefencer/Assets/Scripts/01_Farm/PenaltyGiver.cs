@@ -6,7 +6,7 @@ using UnityEngine;
 
 public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 {
-    private const float AnimationFadeOutBeginTime = 3.0f;
+    private const float AnimationFadeOutBeginTime = 4.0f;
     private const float AnimationEndTime = 5.0f;
     private const float CropLockTime = 60.0f;
 
@@ -195,7 +195,7 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmS
             Debug.LogError($"PenaltyGiver.SpawnMonsters()에서 Monster {monsterName} 에 대한 프리팹을 가져오지 못하였습니다.");
             return;
         }
-        
+
         if (!_farm.TryLockCropAt(cropWorldPosition))
         {
             Debug.LogError(
@@ -206,7 +206,12 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmS
         var monsterObject = Instantiate(monsterPrefab, transform);
         var monsterComponent = monsterObject.GetComponent<Monster>();
         monsterObject.transform.position = new Vector3(cropWorldPosition.x, cropWorldPosition.y, 0.0f);
-        monsterComponent.SpineController.SetAnimation("eating", true);
+        monsterComponent.SpineController.SetAnimation("eating", false);
+        monsterComponent.SpineController.AddAnimation("eating", false);
+        var eatingAnimationLength =
+            monsterComponent.SpineController.Skeleton.Data.FindAnimation("eating").Duration;
+        monsterComponent.SpineController.SkeletonAnimation.timeScale =
+            2 * eatingAnimationLength / AnimationFadeOutBeginTime;
 
         try
         {
