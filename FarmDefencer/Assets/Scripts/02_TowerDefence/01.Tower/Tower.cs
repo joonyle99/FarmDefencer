@@ -13,28 +13,10 @@ public sealed class Tower : TargetableBehavior
     [SerializeField] private TargetableDetector _detector;
     public TargetableDetector Detector => _detector;
 
-    [Space]
-
-    [Header("Stats")]
-    [SerializeField] private TowerLevelData[] _levelData;
-    public TowerLevelData[] LevelData => _levelData;
-    private TowerLevelData _currentLevelData;
-    public TowerLevelData CurrentLevelData
-    {
-        get
-        {
-            _currentLevelData = _levelData[CurrentLevel - 1];
-            return _currentLevelData;
-        }
-    }
-
-    [Space]
-
     [Header("Default")]
     [SerializeField] private int _id = 1;
-    [SerializeField] private int _level = 1;
+    private int _level = 1;
     private int _cost = 0;
-    
     public int ID => _id;
     public int CurrentLevel
     {
@@ -67,20 +49,21 @@ public sealed class Tower : TargetableBehavior
         }
     }
 
-    [Space]
+    [Header("Stats")]
+    [SerializeField] private TowerLevelData[] _levelData;
+    public TowerLevelData[] LevelData => _levelData;
+    public TowerLevelData DefaultLevelData => _levelData[0];
+    public TowerLevelData CurrentLevelData => _levelData[CurrentLevel - 1];
 
     [Header("Animation")]
     [SpineAnimation] public string[] IdleAnimationNames;
     [SpineAnimation] public string[] AttackAnimationNames;
     [SpineAnimation] public string[] LevelUpAnimationNames;
-
     public string IdleAnimation => IdleAnimationNames[CurrentLevel - 1];
     public string AttackAnimation => AttackAnimationNames[CurrentLevel - 1];
     public string LevelUpAnimation => LevelUpAnimationNames[CurrentLevel - 1];
-
     private float[] _attackDuration;
     public float AttackDuration => _attackDuration[CurrentLevel - 1];
-
     private bool _isAttacking = false;
     private float _attackCooldownTimer = 0f;
     private float _attackDurationTimer = 0f;

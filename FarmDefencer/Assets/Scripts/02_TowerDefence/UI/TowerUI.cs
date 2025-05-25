@@ -10,20 +10,15 @@ public class TowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointe
 
     [SerializeField] private Image _background;
     [SerializeField] private Image _icon;
-    [SerializeField] private TextMeshProUGUI _cost;
-
     [SerializeField] private Color _hoverColor;
     private Color _normalColor = new Color(1f, 1f, 1f, 1f);
-
-    [Space]
-
+    [SerializeField] private TextMeshProUGUI _cost;
     [SerializeField] private int selectedIndex = 0;
-    [SerializeField] private BuildSystem _buildSystem;
 
     private void Start()
     {
-        var targetTowers = _buildSystem.AvailableTowers;
-        var defaultLevel = targetTowers[selectedIndex].LevelData[0].ValueCost;
+        var availableTowers = DefenceContext.Current.BuildSystem.AvailableTowers;
+        var defaultLevel = availableTowers[selectedIndex].DefaultLevelData.ValueCost;
         _cost.text = defaultLevel.ToString();
     }
 
@@ -33,12 +28,12 @@ public class TowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointe
         _background.color = _hoverColor;
         _icon.color = _hoverColor;
 
-        _buildSystem.selectedIndex = selectedIndex;
-        _buildSystem.Pick(eventData);
+        DefenceContext.Current.BuildSystem.selectedIndex = selectedIndex;
+        DefenceContext.Current.BuildSystem.Pick(eventData);
     }
     public void OnDrag(PointerEventData eventData)
     {
-        _buildSystem.Move(eventData);
+        DefenceContext.Current.BuildSystem.Move(eventData);
     }
     public void OnPointerUp(PointerEventData eventData)
     {
@@ -46,6 +41,6 @@ public class TowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointe
         _background.color = _normalColor;
         _icon.color = _normalColor;
 
-        _buildSystem.Place(eventData);
+        DefenceContext.Current.BuildSystem.Place(eventData);
     }
 }
