@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      stage_timer_rabbit_off_0: -2431354805409703957
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

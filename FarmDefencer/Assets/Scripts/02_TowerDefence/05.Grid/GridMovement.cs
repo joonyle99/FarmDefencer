@@ -1,4 +1,3 @@
-using JoonyleGameDevKit;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +20,7 @@ public class GridMovement : MonoBehaviour
             // 몬스터의 움직임 애니메이션 속도 조절
             if (_monster != null)
             {
-               _monster.SpineController.SpineAnimationState.TimeScale = _moveSpeed;
+                _monster.SpineController.SpineAnimationState.TimeScale = _moveSpeed;
             }
         }
     }
@@ -61,7 +60,8 @@ public class GridMovement : MonoBehaviour
     }
     private void Update()
     {
-        if (_monster.IsStun == true || _monster.IsDead == true)
+        //if (_monster.IsStun == true || _monster.IsDead == true)
+        if (_monster.IsDead == true)
         {
             return;
         }
@@ -153,7 +153,8 @@ public class GridMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (_monster.IsStun == true || _monster.IsDead == true)
+        //if (_monster.IsStun == true || _monster.IsDead == true)
+        if (_monster.IsDead == true)
         {
             _rigidbody.linearVelocity = Vector2.zero;
             return;

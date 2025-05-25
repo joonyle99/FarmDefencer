@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      stage_timer_crab_on_0: 4771429428176326633
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

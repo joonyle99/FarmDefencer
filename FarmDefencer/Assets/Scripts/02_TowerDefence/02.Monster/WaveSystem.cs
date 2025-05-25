@@ -11,6 +11,8 @@ public class WaveSystem : MonoBehaviour
     [Header("━━━━━━━━ Wave System ━━━━━━━━")]
     [Space]
 
+    #region Attribute
+
     [SerializeField] private Factory _factory;              // wave system use factory for spawn spawnedMonster
     public Factory Factory => _factory;
 
@@ -63,8 +65,7 @@ public class WaveSystem : MonoBehaviour
 
     public int FieldCount => _fieldMonsters.Count;
     public int SurvivedCount => _survivedMonsters.Count;
-
-    public bool CompleteStage => _fieldMonsters.Count <= 0;                  // all monsters are killed or survived
+    public bool CompleteStage => _fieldMonsters.Count <= 0; // all monsters are killed or survived
 
     public event System.Action<int> OnTargetSpawnCountChanged;
     public event System.Action<int> OnTotalSpawnCountChanged;
@@ -72,6 +73,10 @@ public class WaveSystem : MonoBehaviour
 
     public event System.Action OnSuccess;
     public event System.Action OnFailure;
+
+    #endregion
+
+    #region Functions
 
     private void Start()
     {
@@ -251,4 +256,6 @@ public class WaveSystem : MonoBehaviour
         _survivedMonsters.Remove(monsterName);
         OnSurvivedCountChanged?.Invoke(_survivedMonsters.Count);
     }
+
+    #endregion
 }

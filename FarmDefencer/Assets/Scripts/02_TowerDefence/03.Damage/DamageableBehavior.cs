@@ -1,5 +1,3 @@
-using Spine;
-using Spine.Unity;
 using System.Collections;
 using UnityEngine;
 
@@ -59,13 +57,13 @@ public abstract class DamageableBehavior : MonoBehaviour
             }
         }
     }
-    [SerializeField] private float _stunDuration = 0.03f;
-    public float StunDuration => _stunDuration;
+    //[SerializeField] private float _stunDuration = 0.03f;
+    //public float StunDuration => _stunDuration;
 
     [Space]
 
     // state
-    [SerializeField] private bool _isDead;
+    private bool _isDead;
     public bool IsDead
     {
         get => _isDead;
@@ -75,8 +73,8 @@ public abstract class DamageableBehavior : MonoBehaviour
             spineController?.ResetColor();
         }
     }
-    [SerializeField] private bool _isStun;
-    public bool IsStun { get { return _isStun; } protected set { _isStun = value; } }
+    //private bool _isStun;
+    //public bool IsStun { get { return _isStun; } protected set { _isStun = value; } }
 
     // etc
     protected int startHp;
@@ -131,12 +129,12 @@ public abstract class DamageableBehavior : MonoBehaviour
     public abstract void Kill();
 
     // stun
-    public IEnumerator StunCo(float duration)
-    {
-        IsStun = true;
-        yield return new WaitForSeconds(duration);
-        IsStun = false;
-    }
+    //public IEnumerator StunCo(float duration)
+    //{
+    //    IsStun = true;
+    //    yield return new WaitForSeconds(duration);
+    //    IsStun = false;
+    //}
 
     // tick
     public void TakeTickDamage(int count, float interval, int damage, ProjectileType type)

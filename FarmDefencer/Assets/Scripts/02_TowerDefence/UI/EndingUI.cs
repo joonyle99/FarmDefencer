@@ -1,4 +1,3 @@
-using Spine;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,50 +24,18 @@ public class EndingUI : MonoBehaviour
         DefenceContext.Current.WaveSystem.OnFailure -= ShowFailure;
     }
 
-#if UNITY_EDITOR
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && Input.GetKey(KeyCode.LeftShift))
-        {
-            HideFailure();
-            ShowSuccess();
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && Input.GetKey(KeyCode.LeftShift))
-        {
-            HideSuccess();
-            ShowFailure();
-        }
-    }
-#endif
-
     public void ShowSuccess()
-    {
-        ShowLine();
-        _successImage.gameObject.SetActive(true);
-        SoundManager.Instance.PlaySfx("SFX_D_stage_success", 0.7f);
-    }
-    public void HideSuccess()
-    {
-        _successImage.gameObject.SetActive(false);
-    }
-    public void ShowFailure()
-    {
-        ShowLine();
-        _failureImage.gameObject.SetActive(true);
-        SoundManager.Instance.PlaySfx("SFX_D_stage_fail", 0.7f);
-    }
-    public void HideFailure()
-    {
-        _failureImage.gameObject.SetActive(false);
-    }
-    public void ShowLine()
     {
         _lineLeft.gameObject.SetActive(true);
         _lineRight.gameObject.SetActive(true);
+        _successImage.gameObject.SetActive(true);
+        SoundManager.Instance.PlaySfx("SFX_D_stage_success", 0.7f);
     }
-    public void HideLine()
+    public void ShowFailure()
     {
         _lineLeft.gameObject.SetActive(false);
         _lineRight.gameObject.SetActive(false);
+        _failureImage.gameObject.SetActive(false);
+        SoundManager.Instance.PlaySfx("SFX_D_stage_fail", 0.7f);
     }
 }

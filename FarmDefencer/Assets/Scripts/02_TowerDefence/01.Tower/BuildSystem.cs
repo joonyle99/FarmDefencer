@@ -22,6 +22,9 @@ public class BuildSystem : MonoBehaviour
     [SerializeField] private float _buildDuration = 20f;
     private float _buildTimer = 0f;
 
+    // build panel
+    public PanelToggler PanelToggler; // // TODO: 구조 변경하기..
+
     // dynamic variable
     private Tower _ghostTower;
     private GridCell _hoveringGridCell;
@@ -31,9 +34,6 @@ public class BuildSystem : MonoBehaviour
     public static readonly Color NORMAL_GHOST_COLOR = new Color(1f, 1f, 1f, 0.7f);
     public static readonly Color RED_RANGE_COLOR = new Color(1f, 0f, 0f, 0.8f);
     public static readonly Color BLUE_RANGE_COLOR = new Color(0f, 0f, 1f, 0.8f);
-
-    // TODO: 구조 변경하기..
-    public PanelToggler PanelToggler;
 
     private void Start()
     {
@@ -212,7 +212,7 @@ public class BuildSystem : MonoBehaviour
 
     private void CancelBuild()
     {
-        Debug.Log("CancelBuild");
+        //Debug.Log("CancelBuild");
 
         if (_ghostTower != null)
         {
