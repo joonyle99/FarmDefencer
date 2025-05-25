@@ -1,0 +1,14 @@
+stone.png
+size:823,823
+filter:Linear,Linear
+pma:true
+stone_1
+bounds:465,2,472,344
+offsets:77,64,629,512
+rotate:90
+stone_2
+bounds:2,476,547,345
+offsets:51,66,668,512
+stone_3
+bounds:2,77,461,397
+offsets:86,67,659,512

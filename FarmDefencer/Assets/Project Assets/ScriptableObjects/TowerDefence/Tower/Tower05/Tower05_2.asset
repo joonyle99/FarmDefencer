@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d23d5d10bfc7ab40a374edf33b6caf0, type: 3}
   m_Name: Tower05_2
   m_EditorClassIdentifier: 
-  Icon: {fileID: -7670485267309540912, guid: a6a74b60419474443a08c63043aa4f6d, type: 3}
+  Icon: {fileID: -7070938947114936966, guid: f26620361b8a8aa43a5087209a94cfcf, type: 3}
   Name: "\uD0C0\uC6CC 5"
   Description: "\uC2A4\uD0DC\uD2F1 \uD6A8\uACFC\uC785\uB2C8\uB2E4"
   Level: 2

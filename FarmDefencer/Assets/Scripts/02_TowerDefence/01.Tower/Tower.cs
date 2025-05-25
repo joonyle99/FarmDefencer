@@ -1,4 +1,5 @@
 using Spine.Unity;
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -111,7 +112,10 @@ public sealed class Tower : TargetableBehavior
     }
     private void Update()
     {
-        UpdateAttackState();
+        if (AttackAnimationNames.Length > 0 && string.IsNullOrEmpty(AttackAnimation) == false)
+        {
+            UpdateAttackState();
+        }
     }
 
     // initialize

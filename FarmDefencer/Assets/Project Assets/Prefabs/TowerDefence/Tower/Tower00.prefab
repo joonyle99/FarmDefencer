@@ -47,8 +47,8 @@ MonoBehaviour:
   _targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  _widthRange: 1
-  _heightRange: 1
+  _widthRange: 0
+  _heightRange: 0
 --- !u!1 &8016940742814412144
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,13 +192,13 @@ MonoBehaviour:
   _id: 0
   _levelData:
   - {fileID: 11400000, guid: e025fe8f2fb949843955b8fcd4274891, type: 2}
-  - {fileID: 11400000, guid: d62e30b5e01d0064ab8241414046354f, type: 2}
-  - {fileID: 11400000, guid: 76a2cc8fb7dabd44887cb22ec591d439, type: 2}
+  - {fileID: 11400000, guid: e2736cad79792ca49a9801f864ff544c, type: 2}
+  - {fileID: 11400000, guid: 3bfe7f346ea56ae42ad0b8f45e49f467, type: 2}
   IdleAnimationNames: []
   AttackAnimationNames: []
   LevelUpAnimationNames: []
-  _flipAimer: {fileID: 4414608076142748444}
-  _projectilePrefab: {fileID: 5744434242594404492, guid: 5949fc53ae8e0ad4080564acac3a6c09, type: 3}
+  _flipAimer: {fileID: 0}
+  _projectilePrefab: {fileID: 0}
 --- !u!210 &5803083254459691797
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -277,8 +277,7 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 4c2bd195ca7566645b08314c0983da5f, type: 2}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -312,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 0f22faf1e3d169d4482e3c0c09d4c43c, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 24b16edc32b4cfa48a65572c7d9ef6c2, type: 2}
   initialSkinName: 
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
@@ -340,7 +339,7 @@ MonoBehaviour:
   physicsMovementRelativeTo: {fileID: 0}
   updateTiming: 1
   unscaledTime: 0
-  _animationName: idle_Lv1
+  _animationName: animation
   loop: 1
   timeScale: 1
 --- !u!114 &1928018848388447381
