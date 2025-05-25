@@ -252,5 +252,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damager: {fileID: 2493848825862227538}
   moveDuration: 0.25
-  _slowRate: 0.5
-  _duration: 3
