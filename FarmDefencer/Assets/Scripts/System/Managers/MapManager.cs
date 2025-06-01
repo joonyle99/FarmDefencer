@@ -14,6 +14,8 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
     
     public int CurrentStage => 2;
 
+    public int Turn { get; private set; } // 디펜스 성공 유무와 관계없이 디펜스에서 타이쿤으로 복귀할 때마다 IncrementTurn() 하여 1씩 증가하는 수.
+
     // event
     public event Action<MapEntry> OnMapChanged;
 
@@ -54,4 +56,6 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
         //currentMap.Initialize();
         OnMapChanged?.Invoke(currentMap);
     }
+
+    public void IncrementTurn() => Turn += 1;
 }

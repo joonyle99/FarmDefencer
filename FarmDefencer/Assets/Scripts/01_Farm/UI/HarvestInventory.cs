@@ -15,7 +15,7 @@ public sealed class HarvestInventory : MonoBehaviour
     private Dictionary<ProductEntry, HarvestBox> _harvestBoxes;
     private Animator _quotaAssignAnimator;
 
-    public void UpdateInventory(Func<ProductEntry, bool> isProductAvailable, Func<ProductEntry, int> getQuota)
+    public void UpdateInventory(Func<ProductEntry, bool> isProductAvailable, Func<ProductEntry, int> getQuota, Func<ProductEntry> getHotProduct, Func<ProductEntry> getSpecialProduct)
     {
         foreach (var productEntry in _productDatabase.Products)
         {
@@ -29,15 +29,29 @@ public sealed class HarvestInventory : MonoBehaviour
 
             _harvestBoxes[productEntry].Quota = getQuota(productEntry);
         }
+
+        foreach (var (_, box) in _harvestBoxes)
+        {
+            box.ClearSpecialOrHot();
+        }
+
+        if (getHotProduct() is not null && _harvestBoxes.TryGetValue(getHotProduct(), out var hotBox))
+        {
+            hotBox.MarkHot();
+        }
+        
+        if (getSpecialProduct() is not null && _harvestBoxes.TryGetValue(getSpecialProduct(), out var specialBox))
+        {
+            specialBox.MarkSpecial();
+        }
     }
 
     public void PlayQuotaAssignAnimation(Func<ProductEntry, bool> isAvailable, Func<ProductEntry, int> getQuota) => StartCoroutine(DoQuotaAssignAnimation(isAvailable, getQuota));
     
-    public void PlayProductFillAnimation(ProductEntry productEntry, Vector2 cropWorldPosition, int count,
-        Func<ProductEntry, bool> isAvailable, Func<ProductEntry, int> getQuota)
+    public void PlayProductFillAnimation(ProductEntry productEntry, Vector2 cropWorldPosition, int count)
     {
         var cropScreenPosition = Camera.main.WorldToScreenPoint(cropWorldPosition);
-        StartCoroutine(HarvestAnimationCoroutine(productEntry, cropScreenPosition, count, isAvailable, getQuota));
+        StartCoroutine(HarvestAnimationCoroutine(productEntry, cropScreenPosition, count));
     }
 
     public void Init(ProductDatabase database)
@@ -71,8 +85,7 @@ public sealed class HarvestInventory : MonoBehaviour
         _drawer = transform.Find("Drawer").GetComponent<Image>();
     }
 
-    private IEnumerator HarvestAnimationCoroutine(ProductEntry productEntry, Vector2 cropScreenPosition, int count,
-        Func<ProductEntry, bool> isAvailable, Func<ProductEntry, int> getQuota)
+    private IEnumerator HarvestAnimationCoroutine(ProductEntry productEntry, Vector2 cropScreenPosition, int count)
     {
         var harvestBox = _harvestBoxes[productEntry];
         var toPosition = harvestBox.ScreenPosition;
@@ -82,8 +95,7 @@ public sealed class HarvestInventory : MonoBehaviour
             _harvestAnimationPlayer.PlayAnimation(productEntry, cropScreenPosition, toPosition, () => { });
             yield return new WaitForSeconds(0.1f);
         }
-
-        UpdateInventory(isAvailable, getQuota);
+        
         yield return null;
     }
 
@@ -125,7 +137,6 @@ public sealed class HarvestInventory : MonoBehaviour
             yield return null;
         }
 
-        UpdateInventory(isAvailable, getQuota);
         _quotaAssignAnimator.gameObject.SetActive(false);
     }
 }

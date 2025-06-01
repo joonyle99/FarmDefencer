@@ -40,14 +40,15 @@ public sealed class FarmUI : MonoBehaviour
 		_timerUI.Init(currentMap, currentStage, getRemainingDaytimeAlpha);
 	}
 
-	public void PlayProductFillAnimation(ProductEntry entry, Vector2 cropWorldPosition, int count, Func<ProductEntry, bool> isProductAvailable, Func<ProductEntry, int> getProductQuota)
-		=> _harvestInventory.PlayProductFillAnimation(entry, cropWorldPosition, count, isProductAvailable, getProductQuota);
+	public void PlayProductFillAnimation(ProductEntry entry, Vector2 cropWorldPosition, int count)
+		=> _harvestInventory.PlayProductFillAnimation(entry, cropWorldPosition, count);
 
 	public void PlayQuotaAssignAnimation(Func<ProductEntry, bool> isProductAvailable, Func<ProductEntry, int> getProductQuota) => _harvestInventory.PlayQuotaAssignAnimation(isProductAvailable, getProductQuota);
 
 	public void ToggleCropGuide(ProductEntry entry) => _cropGuide.Toggle(entry);
 
-	public void UpdateHarvestInventory(Func<ProductEntry, bool> isProductAvailable, Func<ProductEntry, int> getProductQuota) => _harvestInventory.UpdateInventory(isProductAvailable, getProductQuota);
+	public void UpdateHarvestInventory(Func<ProductEntry, bool> isProductAvailable, Func<ProductEntry, int> getProductQuota, Func<ProductEntry> getHotProduct, Func<ProductEntry> getSpecialProduct)
+		=> _harvestInventory.UpdateInventory(isProductAvailable, getProductQuota, getHotProduct, getSpecialProduct);
 
 	public void PlayCoinAnimation() => _coinsUI.PlayAnimation();
 	

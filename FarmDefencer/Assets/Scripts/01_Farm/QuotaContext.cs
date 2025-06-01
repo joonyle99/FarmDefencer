@@ -4,28 +4,35 @@ using System.Linq;
 using JetBrains.Annotations;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
 {
     [Serializable]
-    public class QuotaFillingRuleForMap
+    public class QuotaRules
     {
         [SerializeField] private MapEntry map;
         public MapEntry Map => map;
         
-        [SerializeField] private QuotaFillingRule rule;
-        public QuotaFillingRule Rule => rule;
+        [SerializeField] private QuotaFillingRule quotaFillingRule;
+        public QuotaFillingRule QuotaFillingRule => quotaFillingRule;
+
+        [SerializeField] private SpecialProductBonusRule specialProductBonusRule;
+        public SpecialProductBonusRule SpecialProductBonusRule => specialProductBonusRule;
     }
     
     public event Action QuotaContextUpdated;
     
-    [SerializeField] private QuotaFillingRuleForMap[] quotaFillingRules;
+    [CanBeNull] public ProductEntry SpecialProduct { get; private set; }
+    [CanBeNull] public ProductEntry HotProduct { get; private set; }
+    
+    [SerializeField] private QuotaRules[] quotaRules;
     
     private Dictionary<ProductEntry, int> _remainingQuotas; // 키가 없으면 잠긴 작물
     
     private Func<string, ProductEntry> _getProductEntry;
-
+    
     public bool IsAllQuotaFilled => _remainingQuotas.Values.All(v => v <= 0);
 
     public void Init(Func<string, ProductEntry> getProductEntry) => _getProductEntry = getProductEntry;
@@ -64,13 +71,19 @@ public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
         return found.Key is not null;
     }
 
-    public void FillQuota(string productName, int quota)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="productName"></param>
+    /// <param name="quota"></param>
+    /// <returns>Hot, Special 작물을 고려한 가격.</returns>
+    public int FillQuota(string productName, int quota, int currentMapId)
     {
         var (productEntry, remainingQuota) = _remainingQuotas.FirstOrDefault(q => q.Key.ProductName.Equals(productName));
         if (productEntry is null)
         {
             Debug.LogError($"{productName} 에 해당하는 주문량 정보를 찾지 못하였습니다.");
-            return;
+            return 0;
         }
         
         if (quota > remainingQuota)
@@ -78,23 +91,44 @@ public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
             Debug.LogWarning($"{productName} 의 남은 주문량 {remainingQuota} 보다 많은 {quota} 만큼의 주문량을 채우려고 시도했습니다.");
             quota = remainingQuota;
         }
-
+        
+        var totalPrice = productEntry.Price * quota;
+        if (productEntry == HotProduct)
+        {
+            totalPrice *= 2;
+        }
+        else if (productEntry == SpecialProduct && _remainingQuotas[productEntry] == quota)
+        {
+            var ruleForMap = quotaRules.FirstOrDefault(r => r.Map.MapId == currentMapId);
+            if (ruleForMap is not null && ruleForMap.SpecialProductBonusRule.TryGetBonusOf(productName, out var bonusPrice))
+            {
+                totalPrice += bonusPrice;
+            }
+            else
+            {
+                Debug.LogError($"{currentMapId} 에 해당하는 Special Product Bonus Rule을 찾을 수 없습니다.");
+            }
+        }
+        
         _remainingQuotas[productEntry] -= quota;
         QuotaContextUpdated?.Invoke();
+
+        return totalPrice;
     }
 
-    public void AssignQuotas(int currentMapId)
+    public void AssignQuotas(int currentMapId, bool isSpecial)
     {
         _remainingQuotas.Clear();
 
-        var ruleForMap = quotaFillingRules.FirstOrDefault(r => r.Map.MapId == currentMapId);
+        var ruleForMap = quotaRules.FirstOrDefault(r => r.Map.MapId == currentMapId);
         if (ruleForMap is null)
         {
             Debug.LogError($"{currentMapId} 에 해당하는 QuotaFillingRuleForMap을 찾을 수 없습니다.");
             return;
         }
-        
-        foreach (var ruleEntry in ruleForMap.Rule.Entries)
+
+        var quotaSum = 0;
+        foreach (var ruleEntry in ruleForMap.QuotaFillingRule.Entries)
         {
             var (minimum, maximum) = ruleEntry.Range;
             if (maximum < minimum)
@@ -105,6 +139,19 @@ public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
 
             var quota = Random.Range(minimum, maximum + 1);
             _remainingQuotas[ruleEntry.Crop] = quota;
+            quotaSum += quota;
+        }
+        
+        var random = Random.Range(0, quotaSum);
+        foreach (var (productEntry, quota) in _remainingQuotas)
+        {
+            random -= quota;
+            if (random < 0)
+            {
+                SpecialProduct = isSpecial ? productEntry : null;
+                HotProduct = !isSpecial ? productEntry : null;
+                break;
+            }
         }
         
         QuotaContextUpdated?.Invoke();

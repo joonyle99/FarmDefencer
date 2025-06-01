@@ -1268,9 +1268,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feca2100169b3ab4f9d27a731d346e74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quotaFillingRules:
+  quotaRules:
   - map: {fileID: 11400000, guid: 469c6bef7dd249949a7b8eeb0f2cb2fd, type: 2}
-    rule: {fileID: 11400000, guid: 09d4708b0d0daa646bab5f5be0ea9b87, type: 2}
+    quotaFillingRule: {fileID: 11400000, guid: 09d4708b0d0daa646bab5f5be0ea9b87, type: 2}
+    specialProductBonusRule: {fileID: 11400000, guid: 074d1c613d4868f4cbe4f9afc46e167a, type: 2}
+  - map: {fileID: 11400000, guid: d3f7f1726e9b95244b71fd8ff050326f, type: 2}
+    quotaFillingRule: {fileID: 11400000, guid: 2cfffec73e4aabc4ba65c4a28ac7228d, type: 2}
+    specialProductBonusRule: {fileID: 11400000, guid: 4d66b6897631f2b4e9ed33be4a3b7d1a, type: 2}
+  - map: {fileID: 11400000, guid: 2b13a58732621a141a17b0b5078b3f12, type: 2}
+    quotaFillingRule: {fileID: 11400000, guid: 2cfffec73e4aabc4ba65c4a28ac7228d, type: 2}
+    specialProductBonusRule: {fileID: 11400000, guid: 3f5bb973b8acc214caf8a19a6865a367, type: 2}
 --- !u!4 &287826022
 Transform:
   m_ObjectHideFlags: 0

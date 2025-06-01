@@ -32,6 +32,8 @@ public sealed class HarvestBox : MonoBehaviour
 		}
 	}
 	private bool _isAvailable;
+	private Image _hotImage;
+	private Image _specialImage;
 	private Image _boxImage;
 	private Image _productImage;
 	private Image _lockImage;
@@ -41,6 +43,15 @@ public sealed class HarvestBox : MonoBehaviour
 	public RectTransform RectTransform => _rectTransform;
 
 	public void Blink(float duration) => StartCoroutine(DoBlink(duration));
+
+	public void ClearSpecialOrHot()
+	{
+		_hotImage.enabled = false;
+		_specialImage.enabled = false;
+	}
+
+	public void MarkSpecial() => _specialImage.enabled = true;
+	public void MarkHot() => _hotImage.enabled = true;
 	
 	private void OnAvailabilityChanged()
 	{
@@ -48,7 +59,11 @@ public sealed class HarvestBox : MonoBehaviour
 		_boxImage.color = color;
 		_productImage.color = color;
 		_cropQuotaText.enabled = IsAvailable;
+		
 		_lockImage.enabled = !IsAvailable;
+		
+		_hotImage.enabled = false;
+		_specialImage.enabled = false;
 	}
 
 	private void Awake()
@@ -58,11 +73,15 @@ public sealed class HarvestBox : MonoBehaviour
 		_productImage = transform.Find("ProductImage").GetComponent<Image>();
 		_blinkImage = transform.Find("BlinkImage").GetComponent<Image>();
 		_cropQuotaText = transform.Find("CropQuotaText").GetComponent<TMP_Text>();
+		_hotImage = transform.Find("HotImage").GetComponent<Image>();
+		_specialImage = transform.Find("SpecialImage").GetComponent<Image>();
 		_rectTransform = GetComponent<RectTransform>();
 
 		_lockImage.enabled = false;
 		IsAvailable = false;
 		_blinkImage.enabled = false;
+		_specialImage.enabled = false;
+		_hotImage.enabled = false;
 	}
 
 	private void Start()

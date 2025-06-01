@@ -11,9 +11,10 @@ public sealed class FarmManager : MonoBehaviour
 {
     [Header("디버그용 세이브 무시")] [SerializeField]
     private bool ignoreSaveFile;
+
     [Header("저장 대상 오브젝트들")] [SerializeField]
     private Farm farm;
-    
+
     [SerializeField] private PenaltyGiver penaltyGiver;
 
     [SerializeField] private QuotaContext quotaContext;
@@ -34,7 +35,8 @@ public sealed class FarmManager : MonoBehaviour
         if (ignoreSaveFile)
         {
             // 디버그용 할당 코드 등 여기에...
-            quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
+            var isSpecialProductTurn = MapManager.Instance.Turn % 4 == 3;
+            quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId, isSpecialProductTurn);
             var monsters = new List<string>();
             monsters.Add("Rabbit");
             monsters.Add("Rabbit");
@@ -82,13 +84,13 @@ public sealed class FarmManager : MonoBehaviour
 
     private void QuotaContextChangedHandler()
     {
-        farmUI.UpdateHarvestInventory(productEntry => quotaContext.IsProductAvailable(productEntry),
-            productEntry => quotaContext.TryGetQuota(productEntry.ProductName, out var quota) ? quota : 0);
+        UpdateHarvestInventory();
         farm.UpdateAvailability(productEntry => quotaContext.IsProductAvailable(productEntry));
 
         if (quotaContext.IsAllQuotaFilled)
         {
-            quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
+            var isSpecialProductTurn = MapManager.Instance.Turn % 4 == 3;
+            quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId, isSpecialProductTurn);
             farmUI.PlayQuotaAssignAnimation(productEntry => quotaContext.IsProductAvailable(productEntry),
                 productEntry => quotaContext.TryGetQuota(productEntry.ProductName, out var quota) ? quota : 0);
         }
@@ -109,17 +111,7 @@ public sealed class FarmManager : MonoBehaviour
 
         farm.Init(
             entry => quotaContext.TryGetQuota(entry.ProductName, out var quota) ? quota : 0,
-            (entry, cropWorldPosition, quota) =>
-            {
-                quotaContext.FillQuota(entry.ProductName, quota);
-                farmUI.PlayProductFillAnimation(entry, cropWorldPosition, quota,
-                    productEntry => quotaContext.IsProductAvailable(productEntry),
-                    productEntry =>
-                        quotaContext.TryGetQuota(productEntry.ProductName, out var outQuota) ? outQuota : 0);
-                farmUI.PlayCoinAnimation();
-                SoundManager.Instance.PlaySfx("SFX_T_coin");
-                ResourceManager.Instance.Gold += entry.Price * quota;
-            },
+            OnFarmQuotaFilledHandler,
             farmUI.ToggleCropGuide);
 
         farmUI.Init(farmInput,
@@ -131,7 +123,7 @@ public sealed class FarmManager : MonoBehaviour
             OpenDefenceScene,
             () => farmClock.RemainingDaytime,
             () => farmClock.Stopped,
-            () => farmClock.LengthOfDaytime == 0.0f ? 0.0f :farmClock.RemainingDaytime / farmClock.LengthOfDaytime);
+            () => farmClock.LengthOfDaytime == 0.0f ? 0.0f : farmClock.RemainingDaytime / farmClock.LengthOfDaytime);
 
         penaltyGiver.Init(farm);
 
@@ -172,5 +164,24 @@ public sealed class FarmManager : MonoBehaviour
     {
         SerializeToSaveFile();
         SceneManager.LoadScene(2);
+    }
+
+    private void OnFarmQuotaFilledHandler(ProductEntry entry, Vector2 cropWorldPosition, int quota)
+    {
+        var currentMapId = MapManager.Instance.CurrentMap.MapId;
+        ResourceManager.Instance.Gold += quotaContext.FillQuota(entry.ProductName, quota, currentMapId);
+        farmUI.PlayProductFillAnimation(entry, cropWorldPosition, quota);
+        farmUI.PlayCoinAnimation();
+        UpdateHarvestInventory();
+        SoundManager.Instance.PlaySfx("SFX_T_coin");
+    }
+
+    private void UpdateHarvestInventory()
+    {
+        farmUI.UpdateHarvestInventory(
+            productEntry => quotaContext.IsProductAvailable(productEntry),
+            productEntry => quotaContext.TryGetQuota(productEntry.ProductName, out var outQuota) ? outQuota : 0,
+            () => quotaContext.HotProduct,
+            () => quotaContext.SpecialProduct);
     }
 }
