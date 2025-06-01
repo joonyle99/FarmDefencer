@@ -187,17 +187,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 0}
   _maxHp: 100
-  _stunDuration: 0.03
-  _isDead: 0
-  _isStun: 0
   _targetPoint: {fileID: 0}
   _detector: {fileID: 7505782182428129248}
+  _id: 1
   _levelData:
   - {fileID: 11400000, guid: 6b743fe8a71ad6f4fad88123fe1d65e0, type: 2}
   - {fileID: 11400000, guid: beef47e499746d747a492eb073bc4f3b, type: 2}
   - {fileID: 11400000, guid: 94e864e4dd0d7104fac1aa524149290d, type: 2}
-  _id: 1
-  _level: 1
   IdleAnimationNames:
   - idle_Lv1
   - idle_Lv2
@@ -253,7 +249,7 @@ Transform:
   m_GameObject: {fileID: 8947700806788341869}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.311, z: 0}
+  m_LocalPosition: {x: 0, y: -0.3, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children: []

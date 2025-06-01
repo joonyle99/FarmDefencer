@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 3234320799271232784, guid: bcc03fa0febfb6a49a4d6da9c481d1e9, type: 3}
   Name: "\uB3CC"
-  Description: "\uBAAC\uC2A4\uD130\uC758 \uACBD\uB85C\uB97C \uB9C9\uC2B5\uB2C8\uB2E4"
+  Description: "\uB3CC\uC774 \uBAAC\uC2A4\uD130\uC758 \uACBD\uB85C\uB97C \uBC29\uD574\uD569\uB2C8\uB2E4"
   Level: 1
   AttackRate: 0
   SlowRate: 0

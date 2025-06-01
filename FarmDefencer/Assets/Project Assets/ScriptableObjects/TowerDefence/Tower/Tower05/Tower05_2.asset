@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Tower05_2
   m_EditorClassIdentifier: 
   Icon: {fileID: -7070938947114936966, guid: f26620361b8a8aa43a5087209a94cfcf, type: 3}
-  Name: "\uD0C0\uC6CC 5"
-  Description: "\uC2A4\uD0DC\uD2F1 \uD6A8\uACFC\uC785\uB2C8\uB2E4"
+  Name: "\uD0C0\uC6CC5: \uC804\uAE30\uD0D1"
+  Description: "\uC804\uAE30\uAC00 \uBAAC\uC2A4\uD130\uC640 \uC787\uB530\uB978 \uC801\uC5D0\uAC8C
+    \uC5F0\uC1C4\uC801 \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4"
   Level: 2
-  AttackRate: 0
+  AttackRate: 2.5
   SlowRate: 0
   SlowDuration: 0
   Damage: 0
-  ValueCost: 0
-  SellCost: 0
+  ValueCost: 195
+  SellCost: 128
