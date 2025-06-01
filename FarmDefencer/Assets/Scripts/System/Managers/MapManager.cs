@@ -14,16 +14,26 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
     
     public int CurrentStage => 2;
 
-    public int Turn { get; private set; } // 디펜스 성공 유무와 관계없이 디펜스에서 타이쿤으로 복귀할 때마다 IncrementTurn() 하여 1씩 증가하는 수.
+    public int CurrentTurn { get; private set; } // 디펜스 성공 유무와 관계없이 디펜스에서 타이쿤으로 복귀할 때마다 IncrementTurn() 하여 1씩 증가하는 수.
 
     // event
     public event Action<MapEntry> OnMapChanged;
 
-    public JObject Serialize() => new (new JProperty("CurrentMapIndex", _currentMapIndex));
+    public JObject Serialize()
+    {
+        var jObject = new JObject
+        {
+            { "CurrentMapIndex", _currentMapIndex },
+            { "CurrentTurn", CurrentTurn }
+        };
+
+        return jObject;
+    }
 
     public void Deserialize(JObject json)
     {
         _currentMapIndex = json.Property("CurrentMapIndex")?.Value.Value<int>() ?? 0;
+        CurrentTurn = json.Property("CurrentTurn")?.Value.Value<int>() ?? 0;
         LoadCurrentMap();
     }
 
@@ -57,5 +67,5 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
         OnMapChanged?.Invoke(currentMap);
     }
 
-    public void IncrementTurn() => Turn += 1;
+    public void IncrementTurn() => CurrentTurn += 1;
 }
