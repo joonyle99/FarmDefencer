@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public sealed class Tower : TargetableBehavior
 {
+    #region Attributes
+
     [Header("──────── Tower ────────")]
     [Space]
 
@@ -93,6 +95,10 @@ public sealed class Tower : TargetableBehavior
     public event System.Action<int> OnSellCostChanged;
     public event System.Action<int> OnUpgradeCostChanged;
 
+    #endregion
+
+    #region Fnctions
+
     protected override void Awake()
     {
         base.Awake();
@@ -146,7 +152,7 @@ public sealed class Tower : TargetableBehavior
     }
 
     // build
-    public bool HasEnoughGold()
+    public bool EnoughGold()
     {
         var currentGold = ResourceManager.Instance.GetGold();
         if (currentGold >= CurrentCost)
@@ -300,4 +306,6 @@ public sealed class Tower : TargetableBehavior
     {
         throw new System.NotImplementedException();
     }
+
+    #endregion
 }

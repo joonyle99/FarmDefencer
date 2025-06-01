@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// DamageableCollider은 Collider 기반으로 Damager와 DamageableBehavior를 연결해주는 역할을 한다.
+/// </summary>
 public sealed class DamageableCollider : DamageableZone
 {
     protected override void Awake()

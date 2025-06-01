@@ -70,9 +70,11 @@ public class BuildSystem : MonoBehaviour
         }
     }
 
+    // 타워를 집고, 옮기고, 놓는 기능을 처리하는 메소드들
     public void Pick(PointerEventData eventData)
     {
-        if (BuildState() && EnoughGold(SelectedTower))
+        // 빌드가 가능한 게임 상태인지, 돈이 충분한지 확인
+        if (BuildableState() && EnoughGold(SelectedTower))
         {
             Vector3 worldPos = ConvertToWorldPos(eventData.position);
             CreateGhostTower(worldPos);
@@ -85,7 +87,7 @@ public class BuildSystem : MonoBehaviour
             return;
         }
 
-        // build panel toggle
+        // 열려 있는 타워 설치 패널을 닫기
         if (PanelToggler.IsExpanded)
         {
             PanelToggler.TogglePanel();
@@ -94,6 +96,7 @@ public class BuildSystem : MonoBehaviour
         Vector3 worldPos = ConvertToWorldPos(eventData.position);
         GridCell gridCell = FindGridCell(worldPos);
 
+        // 타일맵 밖이거나 해당 셀이 유효하지 않은 경우
         if (OutOfTileMap(worldPos) || NullGridCell(gridCell))
         {
             MoveGhostTower(worldPos);
@@ -104,11 +107,13 @@ public class BuildSystem : MonoBehaviour
         }
         else
         {
+            // 같은 셀인 경우
             if (SameGridCell(gridCell))
             {
                 return;
             }
-            else if (!EmptyGridCell(gridCell) || !UsableGridCell(gridCell))
+            // 비어있지 않거나 사용 불가능(시작점 혹은 도착점 등)인 경우
+            else if (!EmptyGridCell(gridCell) || !UsableGridCell(gridCell) || !CheckPath(gridCell))
             {
                 MoveGhostTower(gridCell.worldPosition);
 
@@ -116,6 +121,7 @@ public class BuildSystem : MonoBehaviour
                 _ghostTower.Detector.PaintRange(RED_RANGE_COLOR);
                 _hoveringGridCell = gridCell;
             }
+            // 그 이외의 모든 경우는 빈 셀이고 사용 가능한 셀인 경우
             else
             {
                 MoveGhostTower(gridCell.worldPosition);
@@ -136,25 +142,28 @@ public class BuildSystem : MonoBehaviour
         _ghostTower.SpineController.ResetColor();
         _ghostTower.Detector.EraseRange();
 
-        // build panel toggle
+        // 닫혀있는 타워 설치 패널을 열기
         if (!PanelToggler.IsExpanded)
         {
             PanelToggler.TogglePanel();
         }
 
+        // 호버링 중인 셀이 없는 경우
         if (_hoveringGridCell == null)
         {
             CancelBuild();
             return;
         }
 
-        if (EnoughGold(_ghostTower) == false)
+        // 돈이 충분하지 않은 경우
+        if (!EnoughGold(_ghostTower))
         {
             CancelBuild();
             return;
         }
 
-        if (EmptyGridCell(_hoveringGridCell) == false || UsableGridCell(_hoveringGridCell) == false)
+        // 셀이 비어있지 않거나 사용 불가능한 경우
+        if (!EmptyGridCell(_hoveringGridCell) || !UsableGridCell(_hoveringGridCell))
         {
             CancelBuild();
             return;
@@ -162,7 +171,8 @@ public class BuildSystem : MonoBehaviour
 
         DefenceContext.Current.GridMap.LastGridCell = _hoveringGridCell;
 
-        if (CheckBuild(_hoveringGridCell) == false)
+        // 
+        if (!CheckPath(_hoveringGridCell))
         {
             CancelBuild();
             return;
@@ -224,20 +234,20 @@ public class BuildSystem : MonoBehaviour
     }
 
     //
-    private bool BuildState()
+    private bool BuildableState()
     {
         return GameStateManager.Instance.CurrentState is GameState.Build
             || GameStateManager.Instance.CurrentState is GameState.Wave
             || GameStateManager.Instance.CurrentState is GameState.WaveAfter;
     }
-    private bool CheckBuild(GridCell gridCell)
+    private bool CheckPath(GridCell gridCell)
     {
         // gridCell을 기준으로 경로를 탐색하여 타워를 설치할 수 있는지 확인한다
-        return gridCell.CheckBuild();
+        return gridCell.CheckPath();
     }
     private bool EnoughGold(Tower tower)
     {
-        return tower.HasEnoughGold();
+        return tower.EnoughGold();
     }
 
     //
