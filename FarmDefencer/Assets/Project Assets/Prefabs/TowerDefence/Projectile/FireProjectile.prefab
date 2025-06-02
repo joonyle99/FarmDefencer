@@ -5064,9 +5064,9 @@ GameObject:
   - component: {fileID: 3148617212130695460}
   - component: {fileID: 7444625088565266660}
   - component: {fileID: 2493848825862227538}
-  - component: {fileID: -116372097504836927}
+  - component: {fileID: 7560321657643498658}
   m_Layer: 0
-  m_Name: ParabolicProjectile
+  m_Name: FireProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5128,7 +5128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 20
---- !u!114 &-116372097504836927
+--- !u!114 &7560321657643498658
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5137,10 +5137,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5744434242594404492}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e752afc2b44e63043873e1cf36c85e12, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ce0ecca6646906489677b4c88e8aac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damager: {fileID: 2493848825862227538}
+  damager: {fileID: 0}
   moveDuration: 1
   _peekHeight: 2
   _curve:
@@ -5149,29 +5149,29 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 3.594226
-      outSlope: 3.594226
+      inSlope: 5.1731176
+      outSlope: 5.1731176
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.06866197
+      outWeight: 0.061619718
     - serializedVersion: 3
       time: 0.5
       value: 1
-      inSlope: -0.048080396
-      outSlope: -0.048080396
-      tangentMode: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.08450699
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -4.300233
-      outSlope: -4.300233
+      inSlope: -5.110539
+      outSlope: -5.110539
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.16021132
+      inWeight: 0.049295783
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

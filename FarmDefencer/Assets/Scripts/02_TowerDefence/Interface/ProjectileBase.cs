@@ -19,8 +19,6 @@ public abstract class ProjectileBase : MonoBehaviour
     protected float elapsedTime = 0f;
     protected float linearT = 0f;
 
-    //public ProjectileData projectileData;
-
     private void Start()
     {
         startPos = transform.position;

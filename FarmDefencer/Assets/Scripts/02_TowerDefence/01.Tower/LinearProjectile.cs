@@ -1,26 +1,19 @@
 using UnityEngine;
 
 /// <summary>
-/// 기본 투사체 탄환
+/// 직선 투사체를 구현
 /// </summary>
-public class LinearProjectile : ProjectileBase
+public abstract class LinearProjectile : ProjectileBase
 {
     //[Header("──────── Linear Projectile ────────")]
     //[Space]
 
     protected override void Move()
     {
+        // 투사체는 몬스터를 따라가는데, 속도가 느린 경우 부자연스러울 수 있음
         transform.position = Vector2.Lerp(startPos, currentTarget.transform.position, linearT);
     }
     protected override void Rotate()
-    {
-        // do nothing
-    }
-    protected override void DealDamage()
-    {
-        damager.DealDamage(currentTarget, ProjectileType.Normal);
-    }
-    protected override void DealEffect()
     {
         // do nothing
     }

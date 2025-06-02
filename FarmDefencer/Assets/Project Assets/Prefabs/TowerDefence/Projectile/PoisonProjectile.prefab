@@ -251,4 +251,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damager: {fileID: 2493848825862227538}
-  moveDuration: 0.25
+  moveDuration: 0.1
