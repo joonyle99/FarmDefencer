@@ -1,27 +1,23 @@
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 [CreateAssetMenu(fileName = "TowerLevelData", menuName = "Scriptable Objects/TowerDefence/TowerLevelData")]
 public class TowerLevelData : ScriptableObject
 {
-    [Header("1. 외형")]
-    public Sprite Icon;
+    [BoxGroup("외형")] public Sprite Icon;
 
-    [Header("1. 외형")]
-    public string Name;
-    public string Description;
-    public int Level;
+    [BoxGroup("기본 정보")] public string Name;
+    [BoxGroup("기본 정보")] public string Description;
+    [BoxGroup("기본 정보")] public int Level;
 
-    [Header("3. 능력치")]
-    public float AttackRate;
-    public float SlowRate;
-    public float SlowDuration;
-    public int Damage;
+    [FoldoutGroup("능력치 - 기본")] public int AttackDamage;
+    [FoldoutGroup("능력치 - 기본")] public float AttackRate;
+    [FoldoutGroup("능력치 - 슬로우")] public float SlowRate;
+    [FoldoutGroup("능력치 - 슬로우")] public float SlowDuration;
 
-    [Header("4. 비용")]
-    public int ValueCost;
-    public int SellCost;
+    [BoxGroup("비용")] public int ValueCost;
+    [BoxGroup("비용")] public int SellCost;
 
-    [Header("5. 사운드")]
-    public AudioClip FireReady;
-    public AudioClip FireShot;
+    [BoxGroup("사운드")] public AudioClip FireReady;
+    [BoxGroup("사운드")] public AudioClip FireShot;
 }
