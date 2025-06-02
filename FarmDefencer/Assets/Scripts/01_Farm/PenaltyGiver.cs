@@ -206,6 +206,7 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmS
         var monsterObject = Instantiate(monsterPrefab, transform);
         var monsterComponent = monsterObject.GetComponent<Monster>();
         monsterObject.transform.position = new Vector3(cropWorldPosition.x, cropWorldPosition.y, 0.0f);
+        monsterComponent.HealthBar.gameObject.SetActive(false);
         monsterComponent.SpineController.SetAnimation("eating", false);
         monsterComponent.SpineController.AddAnimation("eating", false);
         var eatingAnimationLength =

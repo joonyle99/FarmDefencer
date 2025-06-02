@@ -18,6 +18,7 @@ public sealed class TimerUI : MonoBehaviour
         {
             var imageObject = new GameObject { name = $"Map{mapToDraw}", transform = { parent = transform.Find(mapToDraw == map ? "ActiveMapImage" : "InactiveMapImages") }};
             var imageComponent = imageObject.AddComponent<Image>();
+            imageObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             var rectTransform = (RectTransform)imageObject.transform;
             
             var sprite = stageTimerSprites.GetMapSprite(mapToDraw, mapToDraw == map);
@@ -42,6 +43,7 @@ public sealed class TimerUI : MonoBehaviour
         {
             var imageObject = new GameObject { name = $"Stage{stageToDraw}", transform = { parent = transform.Find("StageImages") }};
             var imageComponent = imageObject.AddComponent<Image>();
+            imageObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             var rectTransform = (RectTransform)imageObject.transform;
             
             var sprite = stageTimerSprites.GetStageSprite(stageToDraw, stageToDraw <= stage);
