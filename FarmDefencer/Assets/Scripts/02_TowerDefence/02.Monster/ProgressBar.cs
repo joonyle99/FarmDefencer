@@ -36,9 +36,14 @@ public class ProgressBar : MonoBehaviour
 
         if (_rabbitAnimator != null)
         {
+            _rabbitAnimator.gameObject.SetActive(true);
             _rabbitAnimator.Play("Play");
             OnFinished = null;
-            OnFinished += () => _rabbitAnimator.Play("Stop");
+            OnFinished += () =>
+            {
+                _rabbitAnimator.Play("Stop");
+                _rabbitAnimator.gameObject.SetActive(false);
+            };
         }
     }
 
