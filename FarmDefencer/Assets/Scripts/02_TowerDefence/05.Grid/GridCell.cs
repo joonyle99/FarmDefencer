@@ -99,7 +99,7 @@ public class GridCell : MonoBehaviour
     }
 
     // check
-    public bool CheckBuild()
+    public bool CheckPath()
     {
         var gridMap = DefenceContext.Current.GridMap;
         var fieldMonsters = DefenceContext.Current.WaveSystem.FieldMonsters;
