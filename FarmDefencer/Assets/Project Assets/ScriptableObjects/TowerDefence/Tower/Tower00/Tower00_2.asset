@@ -15,10 +15,12 @@ MonoBehaviour:
   Icon: {fileID: 3234320799271232784, guid: bcc03fa0febfb6a49a4d6da9c481d1e9, type: 3}
   Name: "\uB3CC"
   Description: "\uB3CC\uC774 \uBAAC\uC2A4\uD130\uC758 \uACBD\uB85C\uB97C \uBC29\uD574\uD569\uB2C8\uB2E4"
-  Level: 1
+  Level: 2
+  AttackDamage: 0
   AttackRate: 0
   SlowRate: 0
   SlowDuration: 0
-  Damage: 0
-  ValueCost: 5
-  SellCost: 2
+  ValueCost: 6
+  SellCost: 3
+  FireReady: {fileID: 0}
+  FireShot: {fileID: 0}
