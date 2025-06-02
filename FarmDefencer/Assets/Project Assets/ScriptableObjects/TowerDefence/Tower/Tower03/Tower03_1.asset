@@ -23,3 +23,5 @@ MonoBehaviour:
   Damage: 0
   ValueCost: 30
   SellCost: 15
+  FireReady: {fileID: 8300000, guid: f842d624dec6c6f469303dac4ebe16ab, type: 3}
+  FireShot: {fileID: 8300000, guid: 5d3a5e9212c65f6469dba9187632e86a, type: 3}

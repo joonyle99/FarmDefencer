@@ -270,6 +270,12 @@ public sealed class Tower : TargetableBehavior
         // animation
         spineController.SetAnimation(AttackAnimation, false);
         spineController.AddAnimation(IdleAnimation, true);
+
+        // sound
+        if (CurrentLevelData.FireReady != null)
+        {
+            SoundManager.Instance.PlaySfx(CurrentLevelData.FireReady);
+        }
     }
     private void Fire()
     {
@@ -294,7 +300,11 @@ public sealed class Tower : TargetableBehavior
         projectile.SetSlow(CurrentLevelData.SlowRate, CurrentLevelData.SlowDuration);
         projectile.Trigger();
 
-        SoundManager.Instance.PlaySfx($"SFX_D_tower_shot_{ID}-{CurrentLevel}");
+        // sound
+        if (CurrentLevelData.FireShot != null)
+        {
+            SoundManager.Instance.PlaySfx(CurrentLevelData.FireShot);
+        }
     }
 
     // hit

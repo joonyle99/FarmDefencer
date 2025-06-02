@@ -65,6 +65,21 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
     /// 2. PlayOneShot()
     /// 3. AudioSource.volume: 0.8f volumeScale: 0.5f = 0.4f
     /// </summary>
+    public void PlaySfx(AudioClip audioClip, float volume = 1.0f, float pitch = 1.0f)
+    {
+        _sfxAudioSource.PlayOneShot(audioClip, volume);
+    }
+    public void PlaySfx(SoundData soundData, float volume = 1.0f, float pitch = 1.0f)
+    {
+        if (soundData.audioClip != null)
+        {
+            _sfxAudioSource.PlayOneShot(soundData.audioClip, volume);
+        }
+        else
+        {
+            Debug.LogError($"사운드 데이터에 오디오 클립이 비어있습니다.: {soundData.audioName}");
+        }
+    }
     public void PlaySfx(string name, float volume = 1.0f, float pitch = 1.0f)
 	{
 		if (_sfxDictionary.ContainsKey(name) == false)

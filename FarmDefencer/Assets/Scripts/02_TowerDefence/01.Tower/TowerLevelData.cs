@@ -13,4 +13,6 @@ public class TowerLevelData : ScriptableObject
     public int Damage;
     public int ValueCost;
     public int SellCost;
+    public AudioClip FireReady;
+    public AudioClip FireShot;
 }
