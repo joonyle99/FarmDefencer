@@ -362,6 +362,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4421504448336962453, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421504448336962453, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -9006823458091169354, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
     - target: {fileID: 8404325233409519954, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
       propertyPath: m_Name
       value: HarvestBox_product_cucumber
@@ -921,6 +929,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4421504448336962453, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421504448336962453, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -9006823458091169354, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
     - target: {fileID: 8404325233409519954, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
       propertyPath: m_Name
       value: HarvestBox_product_eggplant
@@ -1163,7 +1179,7 @@ MonoBehaviour:
   m_text: New Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
-  m_sharedMaterial: {fileID: 4605633425389029597, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
+  m_sharedMaterial: {fileID: -9006823458091169354, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1687,6 +1703,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4421504448336962453, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421504448336962453, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -9006823458091169354, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
     - target: {fileID: 8404325233409519954, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
       propertyPath: m_Name
       value: HarvestBox_product_cabbage
@@ -1796,7 +1820,7 @@ MonoBehaviour:
   m_text: 99,999+
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
-  m_sharedMaterial: {fileID: 4605633425389029597, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
+  m_sharedMaterial: {fileID: -9006823458091169354, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1932,7 +1956,7 @@ MonoBehaviour:
   m_text: ASDASD!!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
-  m_sharedMaterial: {fileID: 4605633425389029597, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
+  m_sharedMaterial: {fileID: -9006823458091169354, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2403,6 +2427,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4421504448336962453, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421504448336962453, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -9006823458091169354, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
     - target: {fileID: 8404325233409519954, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
       propertyPath: m_Name
       value: HarvestBox_product_mushroom
@@ -2588,6 +2620,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4421504448336962453, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421504448336962453, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -9006823458091169354, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
     - target: {fileID: 8404325233409519954, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
       propertyPath: m_Name
       value: HarvestBox_product_potato
@@ -2995,6 +3035,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4421504448336962453, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421504448336962453, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -9006823458091169354, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
     - target: {fileID: 8404325233409519954, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
       propertyPath: m_Name
       value: HarvestBox_product_carrot
@@ -3683,7 +3731,7 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
-  m_sharedMaterial: {fileID: 4605633425389029597, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
+  m_sharedMaterial: {fileID: -9006823458091169354, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3777,7 +3825,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4605633425389029597, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
+  - {fileID: -9006823458091169354, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3981,7 +4029,7 @@ MonoBehaviour:
   m_text: 5s
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
-  m_sharedMaterial: {fileID: 4605633425389029597, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
+  m_sharedMaterial: {fileID: -9006823458091169354, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4227,7 +4275,7 @@ MonoBehaviour:
   m_text: 5m
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
-  m_sharedMaterial: {fileID: 4605633425389029597, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
+  m_sharedMaterial: {fileID: -9006823458091169354, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4534,6 +4582,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4421504448336962453, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421504448336962453, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -9006823458091169354, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
     - target: {fileID: 8404325233409519954, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
       propertyPath: m_Name
       value: HarvestBox_product_sweetpotato
@@ -4688,7 +4744,7 @@ MonoBehaviour:
   m_text: Pause
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
-  m_sharedMaterial: {fileID: 4605633425389029597, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
+  m_sharedMaterial: {fileID: -9006823458091169354, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4936,6 +4992,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4421504448336962453, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421504448336962453, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -9006823458091169354, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
     - target: {fileID: 8404325233409519954, guid: 4f7b8c2936ed0f247a8cd4c4ad4cc596, type: 3}
       propertyPath: m_Name
       value: HarvestBox_product_corn
@@ -5010,7 +5074,7 @@ MonoBehaviour:
   m_text: Test
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
-  m_sharedMaterial: {fileID: 4605633425389029597, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
+  m_sharedMaterial: {fileID: -9006823458091169354, guid: adec1b8ce47c7c540be77e653ff448ab, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
