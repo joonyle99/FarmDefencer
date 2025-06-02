@@ -54,14 +54,14 @@ public class WaveUI : MonoBehaviour
 
     public void SetTargetSpawnCountText(int count)
     {
-        _targetSpawnCountText.text = $"TargetSpawn: {count}";
+        _targetSpawnCountText.text = $"목표 생성 수: {count}";
     }
     public void SetTotalSpawnCountText(int count)
     {
-        _totalSpawnCountText.text = $"TotalSpawn: {count}";
+        _totalSpawnCountText.text = $"전체 생성 수: {count}";
     }
     public void SetSurvivedCountText(int count)
     {
-        _survivedCountText.text = $"Survived: {count}";
+        _survivedCountText.text = $"생존 수: {count}";
     }
 }
