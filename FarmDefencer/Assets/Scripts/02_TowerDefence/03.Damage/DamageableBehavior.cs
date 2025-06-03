@@ -125,16 +125,9 @@ public abstract class DamageableBehavior : MonoBehaviour
         }
     }
 
+    // normal
     public abstract void TakeDamage(int damage, ProjectileType type);
     public abstract void Kill();
-
-    // stun
-    //public IEnumerator StunCo(float duration)
-    //{
-    //    IsStun = true;
-    //    yield return new WaitForSeconds(duration);
-    //    IsStun = false;
-    //}
 
     // tick
     public void TakeTickDamage(int count, float interval, int damage, ProjectileType type)
@@ -168,10 +161,11 @@ public abstract class DamageableBehavior : MonoBehaviour
         spineController.ResetColor();
     }
 
-    // effect
-    // TODO: 일단 슬로우 전용 함수로 생성
-    public void TakeEffect(float slowRate, float duration, ProjectileType type)
-    {
-        // do nothing
-    }
+    // stun
+    //public IEnumerator StunCo(float duration)
+    //{
+    //    IsStun = true;
+    //    yield return new WaitForSeconds(duration);
+    //    IsStun = false;
+    //}
 }

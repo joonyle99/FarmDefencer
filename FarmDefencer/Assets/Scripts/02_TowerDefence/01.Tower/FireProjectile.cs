@@ -3,7 +3,7 @@ using DG.Tweening;
 
 /// <summary>
 /// 불덩이 투사체 탄환
-/// 타격 시 화상 효과를 적용
+/// 타격 시 화상 효과(틱 데미지)를 적용
 /// </summary>
 public sealed class FireProjectile : ParabolicProjectile
 {
@@ -29,22 +29,24 @@ public sealed class FireProjectile : ParabolicProjectile
         damager.DealDamage(currentTarget, ProjectileType.Fire);
 
         // 화상 효과
-        DealThickDamage();
+        DealTickDamage();
     }
     protected override void DealEffect()
     {
         // do nothing
     }
-
-    private void DealThickDamage()
+    private void DealTickDamage()
     {
-        // 지속(Tick) 데미지
         var originCell = currentTarget.GridMovement.CurrGridCell;
 
         foreach (var dir in DIRECTION)
         {
             var cell = DefenceContext.Current.GridMap.GetCell(originCell.cellPosition.x + dir.x, originCell.cellPosition.y + dir.y);
-            if (cell == null) continue;
+            if (cell == null)
+            {
+                // 유효하지 않은 셀에 대해서는 처리하지 않는다
+                continue;
+            }
 
             // 1) 지속 데미지 부여
             // currentTarget 뿐만 아니라 monstersInCell에 있는 모든 몬스터에 대해 유효성 검사를 진행해야 한다
@@ -66,7 +68,8 @@ public sealed class FireProjectile : ParabolicProjectile
             }
             else
             {
-                cell.transform?.DOScale(1.5f, 0.25f).SetEase(Ease.OutBack).OnComplete(() => { cell.transform.DOScale(1f, 0.25f).SetEase(Ease.InBack); });
+                cell.transform.DOScale(1.5f, 0.25f).SetEase(Ease.OutBack).OnComplete(()
+                    => { cell.transform.DOScale(1f, 0.25f).SetEase(Ease.InBack); });
             }
         }
     }

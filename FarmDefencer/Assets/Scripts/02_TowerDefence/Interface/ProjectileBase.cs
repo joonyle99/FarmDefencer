@@ -5,19 +5,21 @@ public abstract class ProjectileBase : MonoBehaviour
     [Header("──────── ProjectileBase ────────")]
     [Space]
 
+    // 기본
     [SerializeField] protected Damager damager;
     [SerializeField] protected float moveDuration = 1.5f;
-    //[SerializeField] protected float hitThreshold = 0.05f;
 
+    // 효과 - 슬로우
     protected float slowRate;
     protected float slowDuration;
 
     protected TargetableBehavior currentTarget;
 
-    protected Vector3 startPos;
     protected bool isTriggered = false;
-    protected float elapsedTime = 0f;
-    protected float linearT = 0f;
+
+    protected Vector3 startPos; // 투사체의 시작 위치 (생성 위치)
+    protected float linearT = 0f; // 투사체의 이동 비율 (0f ~ 1f)
+    protected float elapsedTime = 0f; // 투사체가 생성된 이후 이동 시간
 
     private void Start()
     {

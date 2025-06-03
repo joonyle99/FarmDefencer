@@ -5140,7 +5140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce0ecca6646906489677b4c88e8aac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damager: {fileID: 0}
+  damager: {fileID: 2493848825862227538}
   moveDuration: 1
   _peekHeight: 2
   _curve:
