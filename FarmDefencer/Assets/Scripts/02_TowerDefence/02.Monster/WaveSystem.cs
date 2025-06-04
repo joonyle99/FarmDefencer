@@ -27,7 +27,7 @@ public class WaveSystem : MonoBehaviour
 
     // progress bar
     [SerializeField] private ProgressBar _progressBar;
-    [SerializeField] private StageData stageData;
+    [SerializeField] private StageData _stageData;
     private int _maxWaveCount;
     private int _currentWave;
 
@@ -80,11 +80,22 @@ public class WaveSystem : MonoBehaviour
 
     private void Start()
     {
-        _maxWaveCount = stageData.Waves.Count;
+        _maxWaveCount = _stageData.Waves.Count;
         _currentWave = 0;
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            OnSuccess?.Invoke();
+            return;
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            OnFailure?.Invoke();
+            return;
+        }
+
         if (GameStateManager.Instance.CurrentState == GameState.Wave)
         {
             // 남은 웨이브에 따라서...?
@@ -126,7 +137,7 @@ public class WaveSystem : MonoBehaviour
     private IEnumerator WaveSpawnCo()
     {
         // 모든 웨이브를 순회한다
-        foreach (var wave in stageData.Waves)
+        foreach (var wave in _stageData.Waves)
         {
             _currentWave++;
 
@@ -193,7 +204,6 @@ public class WaveSystem : MonoBehaviour
     {
         // TODO: Fight 버튼, 타워 설치, 등 불가능하게 막기
         GameStateManager.Instance.ChangeState(GameState.DefenceEnd);
-        SoundManager.Instance.StopBgm();
 
         if (SurvivedCount > 0)
         {

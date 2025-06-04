@@ -11,4 +11,12 @@ public sealed class MapEntry : ScriptableObject
 
     public int MapId => mapId;
     public string MapCode => mapCode;
+
+    [SerializeField] private Monster[] monsters;
+
+    public Monster[] Monsters => monsters;
+
+    [SerializeField] private string[] crops;
+
+    public string[] Crops => crops;
 }

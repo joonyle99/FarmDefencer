@@ -107,6 +107,6 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     }
     private void HandleDefenceEndState()
     {
-
+        SoundManager.Instance.StopBgm();
     }
 }
