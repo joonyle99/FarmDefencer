@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ca377f679925dd143bc1323a175b721a
+guid: 38804a6081c9c3b499d79fb752fd4fc6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3236101441782676418
-    second: stone_1_0
+      213: 8399011212269539787
+    second: Stone_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: stone_1_0
+      name: turret_0_Lv1_0
       rect:
         serializedVersion: 2
         x: 76
@@ -121,15 +121,15 @@ TextureImporter:
         width: 474
         height: 346
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2cbf59e9d11f8ec20800000000000000
-      internalID: 3236101441782676418
+      spriteID: bc159db92384f8470800000000000000
+      internalID: 8399011212269539787
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 27483946a15fc274c8c2b63e93c5e218
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      stone_1_0: 3236101441782676418
+      turret_0_Lv1_0: 8399011212269539787
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

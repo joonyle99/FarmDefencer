@@ -5,7 +5,16 @@ using UnityEngine.UI;
 
 public class UpgradeUI : MonoBehaviour
 {
+    // horizontal elements
+    [Header("horizontal elements")]
+    [SerializeField] private GameObject _sellUI;
+    [SerializeField] private GameObject _infoUI;
+    [SerializeField] private GameObject _upgradeUI;
+
+    [Space]
+
     // tower info - info
+    [Header("tower info - info")]
     [SerializeField] [FormerlySerializedAs("_iconImage")] private Image _iconImage;
     [SerializeField] [FormerlySerializedAs("_nameText")] private TextMeshProUGUI _nameText;
     [SerializeField] [FormerlySerializedAs("_descriptionText")] private TextMeshProUGUI _descriptionText;
@@ -14,6 +23,7 @@ public class UpgradeUI : MonoBehaviour
     [Space]
 
     // tower info - stats
+    [Header("tower info - stats")]
     [SerializeField] [FormerlySerializedAs("_attackDamageText")] private TextMeshProUGUI _attackDamageText;
     [SerializeField] [FormerlySerializedAs("_attackRateText")] private TextMeshProUGUI _attackRateText;
     [SerializeField] [FormerlySerializedAs("_slowRateText")] private TextMeshProUGUI _slowRateText;
@@ -21,8 +31,15 @@ public class UpgradeUI : MonoBehaviour
     [Space]
 
     // tower info - cost
+    [Header("tower info - cost")]
     [SerializeField] [FormerlySerializedAs("_sellCostText")] private TextMeshProUGUI _sellCostText;
     [SerializeField] [FormerlySerializedAs("_upgradeCostText")] private TextMeshProUGUI _upgradeCostText;
+
+    [Space]
+
+    [Header("ETC")]
+    [SerializeField] private Sprite _normalUpgradeSprite;
+    [SerializeField] private Sprite _maxUpgradeSprite;
 
     private Tower _tower;
 
@@ -35,8 +52,16 @@ public class UpgradeUI : MonoBehaviour
             return;
         }
 
+        {
+            // 업그레이드 UI를 업데이트
+            updateUpgradeUI(_tower.CurrentLevel);
+        }
+
         _tower.OnLevelChanged -= SetLevel;
         _tower.OnLevelChanged += SetLevel;
+
+        _tower.OnLevelChanged -= updateUpgradeUI;
+        _tower.OnLevelChanged += updateUpgradeUI;
 
         _tower.OnAttackRateChanged -= SetAttackRate;
         _tower.OnAttackRateChanged += SetAttackRate;
@@ -61,6 +86,7 @@ public class UpgradeUI : MonoBehaviour
         }
 
         _tower.OnLevelChanged -= SetLevel;
+        _tower.OnLevelChanged -= updateUpgradeUI;
         _tower.OnAttackRateChanged -= SetAttackRate;
         _tower.OnAttackDamageChanged -= SetAttackDamage;
         _tower.OnSellCostChanged -= SetSellCost;
@@ -134,6 +160,28 @@ public class UpgradeUI : MonoBehaviour
     private void SetLevel(int level)
     {
         _levelText.text = $"Lv.{level}";
+    }
+
+    /// <summary>
+    /// 레벨이 변경될 때, 추가적으로 처리해줘야 하는 작업
+    /// e.g) 최대 레벨 처리
+    /// </summary>
+    private void updateUpgradeUI(int level)
+    {
+        void SetChildrenActive(Transform parent, bool isActive)
+        {
+            foreach (Transform child in parent)
+            {
+                child.gameObject.SetActive(isActive);
+            }
+        }
+
+        // 돌은 업그레이드 UI를 보여주지 않음
+        _upgradeUI.SetActive(_tower.ID != 0 ? true : false);
+        var upgradeImage = _upgradeUI.GetComponent<Image>();
+        var isMaxLevel = (level == _tower.MaxLevel);
+        upgradeImage.sprite = isMaxLevel ? _maxUpgradeSprite : _normalUpgradeSprite;
+        SetChildrenActive(_upgradeUI.transform, !isMaxLevel);
     }
 
     // tower info - stats

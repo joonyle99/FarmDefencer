@@ -201,6 +201,7 @@ MonoBehaviour:
   - idle_Lv3
   AttackAnimationNames: []
   LevelUpAnimationNames: []
+  _canAttack: 0
   _flipAimer: {fileID: 0}
   _projectilePrefab: {fileID: 0}
 --- !u!210 &5803083254459691797

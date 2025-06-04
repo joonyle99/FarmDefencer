@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d23d5d10bfc7ab40a374edf33b6caf0, type: 3}
   m_Name: Tower03_2
   m_EditorClassIdentifier: 
-  Icon: {fileID: -45897730112380504, guid: 7e7e08deac251054b914baacf773e9fc, type: 3}
+  Icon: {fileID: -4781675758089898383, guid: e5a55cd9f7655f741aef299eea967b90, type: 3}
   Name: "\uD0C0\uC6CC3: \uB9C8\uBE44\uB3C5"
   Description: "\uB9C8\uBE44\uB3C5\uC774 \uBAAC\uC2A4\uD130\uC758 \uC774\uB3D9 \uC18D\uB3C4\uB97C
     \uB0AE\uCDA5\uB2C8\uB2E4"
   Level: 2
+  AttackDamage: 0
   AttackRate: 1.8
   SlowRate: 0.6667
   SlowDuration: 2.5
-  Damage: 0
   ValueCost: 80
   SellCost: 55
   FireReady: {fileID: 8300000, guid: 346103af5015d5a4f9d03819e1304f99, type: 3}

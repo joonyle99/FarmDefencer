@@ -67,11 +67,12 @@ public sealed class Tower : TargetableBehavior
     public string LevelUpAnimation => LevelUpAnimationNames[CurrentLevel - 1];
     private float[] _attackDuration;
     public float AttackDuration => _attackDuration[CurrentLevel - 1];
-    private bool _isAttacking = false;
     private float _attackCooldownTimer = 0f;
     private float _attackDurationTimer = 0f;
 
     [Header("Fire")]
+    [SerializeField] private bool _canAttack = true;
+    private bool _isAttacking = false;
     [SerializeField] private FlipAimer _flipAimer;
     public FlipAimer FlipAimer => _flipAimer;
     [SerializeField] private GameObject _projectilePrefab;
@@ -190,6 +191,12 @@ public sealed class Tower : TargetableBehavior
     // upgrade
     public void Upgrade()
     {
+        // check stone (not tower, can not upgrade)
+        if (ID == 0)
+        {
+            return;
+        }
+
         if (CurrentLevel >= MaxLevel)
         {
             Debug.Log("최고 레벨이므로 타워를 업그레이드 할 수 없습니다");
@@ -231,6 +238,12 @@ public sealed class Tower : TargetableBehavior
     // fire
     private void UpdateAttackState()
     {
+        // check can attack
+        if (_canAttack == false)
+        {
+            return;
+        }
+
         // wait attack duration
         if (_isAttacking == true)
         {
