@@ -11,21 +11,15 @@ public class ProgressBar : MonoBehaviour
     [SerializeField] private Sprite _normalSprite;
     [SerializeField] private Sprite _dangerSprite;
 
-    [SerializeField] private Animator _rabbitAnimator; // TODO: Follower로 만들기 Animator가 아니라
-
     private float _dangerousThreshold;
     private bool _isDangerous;
     private bool _isFinished;
 
     const float EPSILON = 0.01f;
 
-    public Action OnDangerous;
+    public Action OnStart;
     public Action OnFinished;
-
-    private void OnEnable()
-    {
-        Initialize();
-    }
+    public Action OnDangerous;
 
     public void Initialize()
     {
@@ -34,17 +28,7 @@ public class ProgressBar : MonoBehaviour
 
         ChangeToNormal();
 
-        if (_rabbitAnimator != null)
-        {
-            _rabbitAnimator.gameObject.SetActive(true);
-            _rabbitAnimator.Play("Play");
-            OnFinished = null;
-            OnFinished += () =>
-            {
-                _rabbitAnimator.Play("Stop");
-                _rabbitAnimator.gameObject.SetActive(false);
-            };
-        }
+        OnStart?.Invoke();
     }
 
     public void ChangeToNormal()
@@ -79,6 +63,9 @@ public class ProgressBar : MonoBehaviour
 
         if (!_isDangerous && fillAmount <= _dangerousThreshold + EPSILON)
         {
+            Debug.Log($"fillAmount: {fillAmount}");
+            Debug.Log($"_dangerousThreshold: {_dangerousThreshold}");
+
             _isDangerous = true;
             OnDangerous?.Invoke();
 

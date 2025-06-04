@@ -121,7 +121,7 @@ public abstract class DamageableBehavior : MonoBehaviour
         if (_healthBar != null)
         {
             _healthBar.UpdateProgressBar((float)_hp, (float)startHp);
-            _healthBar.SetDangerousThreshold(_hp / _maxHp);
+            _healthBar.SetDangerousThreshold(0.5f);
         }
     }
 

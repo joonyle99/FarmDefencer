@@ -258,9 +258,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 4159104016721875392}
   _maxHp: 185
-  _stunDuration: 0.03
-  _isDead: 0
-  _isStun: 0
   _targetPoint: {fileID: 6219046591756985945}
   _originFactory: {fileID: 0}
   _monsterName: capybara
@@ -451,6 +448,10 @@ PrefabInstance:
       propertyPath: _normalSprite
       value: 
       objectReference: {fileID: -403631209242680886, guid: e6d944f3438b0f34f9d09b210f0c4e1a, type: 3}
+    - target: {fileID: 9177198034803129409, guid: ac73a8c8d91c83842bec0255423aebde, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 247
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
