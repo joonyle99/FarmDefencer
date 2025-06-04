@@ -7,9 +7,8 @@ using UnityEngine;
 public sealed class MapEntry : ScriptableObject
 {
     [SerializeField] private int mapId;
-    [SerializeField] private string mapName;
+    [SerializeField] private string mapCode;
 
     public int MapId => mapId;
-    public MAP_CODE MapCode => (MAP_CODE)mapId;
-    public string MapName => mapName;
+    public string MapCode => mapCode;
 }

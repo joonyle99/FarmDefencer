@@ -95,11 +95,11 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     // Defence
     private void HandleBuildState()
     {
-
+        SoundManager.Instance.PlayMapAmb();
     }
     private void HandleWaveState()
     {
-
+        SoundManager.Instance.PlayMapSong();
     }
     private void HandleWaveAfterState()
     {

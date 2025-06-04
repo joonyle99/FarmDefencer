@@ -50,15 +50,6 @@ public class BuildSystem : MonoBehaviour
                 _progressBar.UpdateProgressBar(0f, _buildDuration);
 
                 GameStateManager.Instance.ChangeState(GameState.Wave);
-                var mapCode = MapManager.Instance.CurrentMap.MapCode;
-                if (mapCode == MAP_CODE.FOREST)
-                {
-                    SoundManager.Instance.PlayBgm("BGM_D_forest_song", 0.7f);
-                }
-                else if (mapCode == MAP_CODE.BEACH)
-                {
-                    SoundManager.Instance.PlayBgm("BGM_D_beach_song", 0.7f);
-                }
                 DefenceContext.Current.WaveSystem.StartWaveProcess();
             }
         }

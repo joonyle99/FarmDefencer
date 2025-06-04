@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MapEntry_Cave
   m_EditorClassIdentifier: 
   mapId: 2
-  mapName: "\uB3D9\uAD74"
+  mapCode: cave

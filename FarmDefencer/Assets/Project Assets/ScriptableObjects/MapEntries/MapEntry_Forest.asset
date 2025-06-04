@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MapEntry_Forest
   m_EditorClassIdentifier: 
   mapId: 0
-  mapName: "\uCD08\uC6D0"
+  mapCode: forest

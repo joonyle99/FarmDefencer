@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MapEntry_Beach
   m_EditorClassIdentifier: 
   mapId: 1
-  mapName: "\uD574\uBCC0"
+  mapCode: beach

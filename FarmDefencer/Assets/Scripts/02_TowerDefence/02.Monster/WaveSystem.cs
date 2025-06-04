@@ -179,15 +179,6 @@ public class WaveSystem : MonoBehaviour
     private IEnumerator WaveProcessCo()
     {
         GameStateManager.Instance.ChangeState(GameState.Wave);
-        var mapCode = MapManager.Instance.CurrentMap.MapCode;
-        if (mapCode == MAP_CODE.FOREST)
-        {
-            SoundManager.Instance.PlayBgm("BGM_D_forest_song", 0.7f);
-        }
-        else if (mapCode == MAP_CODE.BEACH)
-        {
-            SoundManager.Instance.PlayBgm("BGM_D_beach_song", 0.7f);
-        }
 
         yield return DefenceContext.Current.GridMap.FindPathOnStartCo();
         yield return WaveSpawnCo();

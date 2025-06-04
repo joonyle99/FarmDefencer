@@ -25,8 +25,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
     /// </summary>
     public void PlayBgm(string name, float volume = 1.0f)
     {
-        Debug.Log(name);
-
         if (_bgmDictionary.ContainsKey(name) == false)
         {
             var newBgm = Resources.Load<AudioClip>($"_Bgm/{name}");
@@ -52,6 +50,18 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
         {
             _bgmAudioSource1.Stop();
         }
+    }
+    public void PlayMapSong()
+    {
+        var currentMap = MapManager.Instance.CurrentMap;
+        var mapSongName = $"BGM_D_{currentMap.MapCode}_song";
+        PlayBgm(mapSongName, 0.7f);
+    }
+    public void PlayMapAmb()
+    {
+        var currentMap = MapManager.Instance.CurrentMap;
+        var mapSongName = $"BGM_D_{currentMap.MapCode}_amb";
+        PlayBgm(mapSongName);
     }
 
     /// <summary>
