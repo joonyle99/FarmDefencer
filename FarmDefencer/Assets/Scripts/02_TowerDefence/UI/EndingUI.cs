@@ -29,13 +29,15 @@ public class EndingUI : MonoBehaviour
         _lineLeft.gameObject.SetActive(true);
         _lineRight.gameObject.SetActive(true);
         _successImage.gameObject.SetActive(true);
+        _failureImage.gameObject.SetActive(false);
         SoundManager.Instance.PlaySfx("SFX_D_stage_success", 0.7f);
     }
     public void ShowFailure()
     {
-        _lineLeft.gameObject.SetActive(false);
-        _lineRight.gameObject.SetActive(false);
-        _failureImage.gameObject.SetActive(false);
+        _lineLeft.gameObject.SetActive(true);
+        _lineRight.gameObject.SetActive(true);
+        _successImage.gameObject.SetActive(false);
+        _failureImage.gameObject.SetActive(true);
         SoundManager.Instance.PlaySfx("SFX_D_stage_fail", 0.7f);
     }
 }
