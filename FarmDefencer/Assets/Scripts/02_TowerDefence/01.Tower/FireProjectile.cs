@@ -14,15 +14,6 @@ public sealed class FireProjectile : ParabolicProjectile
     [SerializeField] private float _tickInterval;
     [SerializeField] private int _tickDamage;
 
-    private static readonly (int x, int y)[] DIRECTION = new (int x, int y)[]
-    {
-        (0, 0),    // origin
-        (-1, 0),   // left
-        (1, 0),    // right
-        (0, -1),   // down
-        (0, 1)     // up
-    };
-
     protected override void DealDamage()
     {
         // 직접 데미지
@@ -39,7 +30,7 @@ public sealed class FireProjectile : ParabolicProjectile
     {
         var originCell = currentTarget.GridMovement.CurrGridCell;
 
-        foreach (var dir in DIRECTION)
+        foreach (var dir in ConstantConfig.DIRECTIONS)
         {
             var cell = DefenceContext.Current.GridMap.GetCell(originCell.cellPosition.x + dir.x, originCell.cellPosition.y + dir.y);
             if (cell == null)

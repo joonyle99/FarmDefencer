@@ -29,12 +29,6 @@ public class BuildSystem : MonoBehaviour
     private Tower _ghostTower;
     private GridCell _hoveringGridCell;
 
-    // Color 같은 구조체엔 const 대신 항상 static을 써야 함
-    public static readonly Color RED_GHOST_COLOR = new Color(1f, 0f, 0f, 0.7f);
-    public static readonly Color NORMAL_GHOST_COLOR = new Color(1f, 1f, 1f, 0.7f);
-    public static readonly Color RED_RANGE_COLOR = new Color(1f, 0f, 0f, 0.8f);
-    public static readonly Color BLUE_RANGE_COLOR = new Color(0f, 0f, 1f, 0.8f);
-
     private void Start()
     {
         _progressBar.Initialize();
@@ -101,7 +95,7 @@ public class BuildSystem : MonoBehaviour
         {
             MoveGhostTower(worldPos);
 
-            _ghostTower.SpineController.SetColor(RED_GHOST_COLOR);
+            _ghostTower.SpineController.SetColor(ConstantConfig.RED_GHOST);
             _ghostTower.Detector.EraseRange();
             _hoveringGridCell = null;
         }
@@ -117,8 +111,8 @@ public class BuildSystem : MonoBehaviour
             {
                 MoveGhostTower(gridCell.worldPosition);
 
-                _ghostTower.SpineController.SetColor(RED_GHOST_COLOR);
-                _ghostTower.Detector.PaintRange(RED_RANGE_COLOR);
+                _ghostTower.SpineController.SetColor(ConstantConfig.RED_GHOST);
+                _ghostTower.Detector.PaintRange(ConstantConfig.RED_RANGE);
                 _hoveringGridCell = gridCell;
             }
             // 그 이외의 모든 경우는 빈 셀이고 사용 가능한 셀인 경우
@@ -127,7 +121,7 @@ public class BuildSystem : MonoBehaviour
                 MoveGhostTower(gridCell.worldPosition);
 
                 _ghostTower.SpineController.ResetColor();
-                _ghostTower.Detector.PaintRange(BLUE_RANGE_COLOR);
+                _ghostTower.Detector.PaintRange(ConstantConfig.BLUE_RANGE);
                 _hoveringGridCell = gridCell;
             }
         }
