@@ -2,6 +2,13 @@ using System;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
+public enum MAP_CODE
+{
+    FOREST = 0,
+    BEACH = 1,
+    CAVE = 2,
+}
+
 public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmSerializable
 {
     // map entry

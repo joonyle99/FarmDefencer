@@ -10,5 +10,6 @@ public sealed class MapEntry : ScriptableObject
     [SerializeField] private string mapName;
 
     public int MapId => mapId;
+    public MAP_CODE MapCode => (MAP_CODE)mapId;
     public string MapName => mapName;
 }

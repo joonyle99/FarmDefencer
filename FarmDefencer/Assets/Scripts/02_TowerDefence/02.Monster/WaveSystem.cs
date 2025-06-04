@@ -179,12 +179,12 @@ public class WaveSystem : MonoBehaviour
     private IEnumerator WaveProcessCo()
     {
         GameStateManager.Instance.ChangeState(GameState.Wave);
-        var id = MapManager.Instance.CurrentMap.MapId;
-        if (id == 1)
+        var mapCode = MapManager.Instance.CurrentMap.MapCode;
+        if (mapCode == MAP_CODE.FOREST)
         {
             SoundManager.Instance.PlayBgm("BGM_D_forest_song", 0.7f);
         }
-        else if (id == 2)
+        else if (mapCode == MAP_CODE.BEACH)
         {
             SoundManager.Instance.PlayBgm("BGM_D_beach_song", 0.7f);
         }
