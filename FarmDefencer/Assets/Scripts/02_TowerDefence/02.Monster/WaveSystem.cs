@@ -71,8 +71,7 @@ public class WaveSystem : MonoBehaviour
     public event System.Action<int> OnTotalSpawnCountChanged;
     public event System.Action<int> OnSurvivedCountChanged;
 
-    public event System.Action OnSuccess;
-    public event System.Action OnFailure;
+    public event System.Action<EndingType> OnEnding;
 
     #endregion
 
@@ -87,12 +86,12 @@ public class WaveSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            OnSuccess?.Invoke();
+            OnEnding?.Invoke(EndingType.Success);
             return;
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
-            OnFailure?.Invoke();
+            OnEnding?.Invoke(EndingType.Failure);
             return;
         }
 
@@ -207,11 +206,11 @@ public class WaveSystem : MonoBehaviour
 
         if (SurvivedCount > 0)
         {
-            OnFailure?.Invoke();
+            OnEnding?.Invoke(EndingType.Failure);
         }
         else
         {
-            OnSuccess?.Invoke();
+            OnEnding?.Invoke(EndingType.Success);
         }
     }
 

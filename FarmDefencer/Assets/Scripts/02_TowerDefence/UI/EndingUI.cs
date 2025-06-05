@@ -32,12 +32,10 @@ public class EndingUI : MonoBehaviour
 
     private void Start()
     {
-        DefenceContext.Current.WaveSystem.OnSuccess -= ShowSuccess;
-        DefenceContext.Current.WaveSystem.OnSuccess += ShowSuccess;
+        DefenceContext.Current.WaveSystem.OnEnding -= ShowEnding;
+        DefenceContext.Current.WaveSystem.OnEnding += ShowEnding;
 
-        DefenceContext.Current.WaveSystem.OnFailure -= ShowFailure;
-        DefenceContext.Current.WaveSystem.OnFailure += ShowFailure;
-
+        // 색상 초기화
         _fadeImage.color = new Color(_fadeImage.color.r, _fadeImage.color.g, _fadeImage.color.b, 0f);
         _lineLeft.color = new Color(_lineLeft.color.r, _lineLeft.color.g, _lineLeft.color.b, 0f);
         _lineRight.color = new Color(_lineRight.color.r, _lineRight.color.g, _lineRight.color.b, 0f);
@@ -48,19 +46,18 @@ public class EndingUI : MonoBehaviour
     {
         if (DefenceContext.Current == null) return;
 
-        DefenceContext.Current.WaveSystem.OnSuccess -= ShowSuccess;
-        DefenceContext.Current.WaveSystem.OnFailure -= ShowFailure;
+        DefenceContext.Current.WaveSystem.OnEnding -= ShowEnding;
     }
 
-    public void ShowSuccess()
+    private void ShowEnding(EndingType endingType)
     {
-        SoundManager.Instance.PlaySfx("SFX_D_stage_success", 0.7f);
+        SoundManager.Instance.PlaySfx($"SFX_D_stage_{ConvertToEndingText(endingType)}", 0.7f);
 
-        _fadeImage.gameObject.SetActive(true);
-        _lineLeft.gameObject.SetActive(true);
-        _lineRight.gameObject.SetActive(true);
-        _successImage.gameObject.SetActive(true);
-        _failureImage.gameObject.SetActive(false);
+        _fadeImage.gameObject.SetActive(endingType == EndingType.Success);
+        _lineLeft.gameObject.SetActive(endingType == EndingType.Success);
+        _lineRight.gameObject.SetActive(endingType == EndingType.Success);
+        _successImage.gameObject.SetActive(endingType == EndingType.Success);
+        _failureImage.gameObject.SetActive(endingType == EndingType.Failure);
 
         _fadeImage.DOFade(_dimAlpha, _duration).SetEase(Ease.InOutSine);
         _lineLeft.DOFade(1f, _duration).SetEase(Ease.InOutSine);
@@ -68,24 +65,20 @@ public class EndingUI : MonoBehaviour
         _successImage.DOFade(1f, _duration).SetEase(Ease.InOutSine);
         _failureImage.DOFade(1f, _duration).SetEase(Ease.InOutSine);
 
-        _monsterUI.ShowMonsterUI(EndingType.Success);
+        _monsterUI.ShowMonsterUI(endingType);
     }
-    public void ShowFailure()
+
+    private string ConvertToEndingText(EndingType endingType)
     {
-        SoundManager.Instance.PlaySfx("SFX_D_stage_fail", 0.7f);
+        if (endingType == EndingType.Success)
+        {
+            return "success";
+        }
+        else if (endingType == EndingType.Failure)
+        {
+            return "fail";
+        }
 
-        _fadeImage.gameObject.SetActive(true);
-        _lineLeft.gameObject.SetActive(true);
-        _lineRight.gameObject.SetActive(true);
-        _successImage.gameObject.SetActive(false);
-        _failureImage.gameObject.SetActive(true);
-
-        _fadeImage.DOFade(_dimAlpha, _duration).SetEase(Ease.InOutSine);
-        _lineLeft.DOFade(1f, _duration).SetEase(Ease.InOutSine);
-        _lineRight.DOFade(1f, _duration).SetEase(Ease.InOutSine);
-        _successImage.DOFade(1f, _duration).SetEase(Ease.InOutSine);
-        _failureImage.DOFade(1f, _duration).SetEase(Ease.InOutSine);
-
-        _monsterUI.ShowMonsterUI(EndingType.Failure);
+        return "";
     }
 }

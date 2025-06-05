@@ -350,6 +350,26 @@ public class GridMap : MonoBehaviour
         return gridPath;
     }
 
+    // occupied
+    public int CalculateAllOccupiedTowerCost()
+    {
+        var total = 0;
+
+        // 그리드 셀을 순회
+        foreach (var gridCell in _myGridMap)
+        {
+            // 점유되어 있는지 확인
+            if (gridCell.occupiedTower != null)
+            {
+                var tower = gridCell.occupiedTower;
+                var cost = tower.CurrentCost;
+                total += cost;
+            }
+        }
+
+        return total;
+    }
+
     // etc
     public void SavePrevDistanceCost()
     {

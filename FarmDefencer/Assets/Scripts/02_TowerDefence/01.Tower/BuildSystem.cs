@@ -156,7 +156,7 @@ public class BuildSystem : MonoBehaviour
 
         DefenceContext.Current.GridMap.LastGridCell = _hoveringGridCell;
 
-        // 
+        //
         if (!CheckPath(_hoveringGridCell))
         {
             CancelBuild();
