@@ -84,6 +84,8 @@ public class WaveSystem : MonoBehaviour
     }
     private void Update()
     {
+        #if UNITY_EDITOR
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             OnEnding?.Invoke(EndingType.Success);
@@ -94,6 +96,8 @@ public class WaveSystem : MonoBehaviour
             OnEnding?.Invoke(EndingType.Failure);
             return;
         }
+
+        #endif
 
         if (GameStateManager.Instance.CurrentState == GameState.Wave)
         {
@@ -204,12 +208,21 @@ public class WaveSystem : MonoBehaviour
         // TODO: Fight 버튼, 타워 설치, 등 불가능하게 막기
         GameStateManager.Instance.ChangeState(GameState.DefenceEnd);
 
+        // 설치한 타워 가격의 총합
+        var totalCost = DefenceContext.Current.GridMap.CalculateAllOccupiedTowerCost();
+
         if (SurvivedCount > 0)
         {
+            // 실패 시 설치한 타워 가격의 100%를 돌려줌
+            ResourceManager.Instance.EarnGold(totalCost);
+
             OnEnding?.Invoke(EndingType.Failure);
         }
         else
         {
+            // 성공 시 설치한 타워 가격의 50%를 돌려줌
+            ResourceManager.Instance.EarnGold((int)(totalCost * 0.5f));
+
             OnEnding?.Invoke(EndingType.Success);
         }
     }

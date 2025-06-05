@@ -1,4 +1,6 @@
 using DG.Tweening;
+using Spine.Unity;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,6 +30,17 @@ public class EndingUI : MonoBehaviour
     [SerializeField] private Image _lineRight;
     [SerializeField] private Image _successImage;
     [SerializeField] private Image _failureImage;
+
+    [Space]
+
+    [Header("Coin")]
+    [SerializeField] private SkeletonGraphic _coinSkeletonGraphic01;
+    [SerializeField] private SkeletonGraphic _coinSkeletonGraphic02;
+    [SerializeField] private TextMeshProUGUI _costText;
+
+    [Space]
+
+    [Header("Monster")]
     [SerializeField] private MonsterUI _monsterUI;
 
     private void Start()
@@ -53,9 +66,9 @@ public class EndingUI : MonoBehaviour
     {
         SoundManager.Instance.PlaySfx($"SFX_D_stage_{ConvertToEndingText(endingType)}", 0.7f);
 
-        _fadeImage.gameObject.SetActive(endingType == EndingType.Success);
-        _lineLeft.gameObject.SetActive(endingType == EndingType.Success);
-        _lineRight.gameObject.SetActive(endingType == EndingType.Success);
+        _fadeImage.gameObject.SetActive(true);
+        _lineLeft.gameObject.SetActive(true);
+        _lineRight.gameObject.SetActive(true);
         _successImage.gameObject.SetActive(endingType == EndingType.Success);
         _failureImage.gameObject.SetActive(endingType == EndingType.Failure);
 
@@ -64,6 +77,18 @@ public class EndingUI : MonoBehaviour
         _lineRight.DOFade(1f, _duration).SetEase(Ease.InOutSine);
         _successImage.DOFade(1f, _duration).SetEase(Ease.InOutSine);
         _failureImage.DOFade(1f, _duration).SetEase(Ease.InOutSine);
+
+        _coinSkeletonGraphic01.gameObject.SetActive(endingType == EndingType.Success);
+        _coinSkeletonGraphic02.gameObject.SetActive(endingType == EndingType.Success);
+
+        _coinSkeletonGraphic01.startingAnimation = "coin_rotation";
+        _coinSkeletonGraphic02.startingAnimation = "coin_rotation";
+
+        _coinSkeletonGraphic01.Initialize(true);
+        _coinSkeletonGraphic02.Initialize(true);
+
+        _costText.gameObject.SetActive(endingType == EndingType.Success);
+        _costText.text = $"돌려받은 골드: {(int)(DefenceContext.Current.GridMap.CalculateAllOccupiedTowerCost() * 0.5f)}원";
 
         _monsterUI.ShowMonsterUI(endingType);
     }
