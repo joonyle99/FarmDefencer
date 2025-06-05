@@ -9,6 +9,7 @@ public static class ConstantConfig
     public static readonly Color WHITE_GHOST= new Color(1f, 1f, 1f, 0.7f);
     public static readonly Color RED_GHOST = new Color(1f, 0f, 0f, 0.7f);
     public static readonly Color RED_RANGE = new Color(1f, 0f, 0f, 0.8f);
+    public static readonly Color GREEN = new Color(0f, 0.7f, 0f, 1f);
     public static readonly Color GREEN_GHOST = new Color(0f, 1f, 0f, 0.7f);
     public static readonly Color GREEN_RANGE = new Color(0f, 1f, 0f, 0.8f);
     public static readonly Color BLUE_GHOST = new Color(0f, 0f, 1f, 0.7f);

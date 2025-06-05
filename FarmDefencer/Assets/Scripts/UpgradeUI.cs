@@ -54,14 +54,14 @@ public class UpgradeUI : MonoBehaviour
 
         {
             // 업그레이드 UI를 업데이트
-            updateUpgradeUI(_tower.CurrentLevel);
+            SetOthers(_tower.CurrentLevel);
         }
 
         _tower.OnLevelChanged -= SetLevel;
         _tower.OnLevelChanged += SetLevel;
 
-        _tower.OnLevelChanged -= updateUpgradeUI;
-        _tower.OnLevelChanged += updateUpgradeUI;
+        _tower.OnLevelChanged -= SetOthers;
+        _tower.OnLevelChanged += SetOthers;
 
         _tower.OnAttackRateChanged -= SetAttackRate;
         _tower.OnAttackRateChanged += SetAttackRate;
@@ -86,7 +86,7 @@ public class UpgradeUI : MonoBehaviour
         }
 
         _tower.OnLevelChanged -= SetLevel;
-        _tower.OnLevelChanged -= updateUpgradeUI;
+        _tower.OnLevelChanged -= SetOthers;
         _tower.OnAttackRateChanged -= SetAttackRate;
         _tower.OnAttackDamageChanged -= SetAttackDamage;
         _tower.OnSellCostChanged -= SetSellCost;
@@ -166,8 +166,20 @@ public class UpgradeUI : MonoBehaviour
     /// 레벨이 변경될 때, 추가적으로 처리해줘야 하는 작업
     /// e.g) 최대 레벨 처리
     /// </summary>
-    private void updateUpgradeUI(int level)
+    private void SetOthers(int level)
     {
+        // 0. '돌'은 Upgrade Image를 비활성화
+        _upgradeUI.SetActive(_tower.ID != 0 ? true : false);
+
+        // 1. Icon 변경
+        SetIcon(_tower.CurrentLevelData.Icon);
+
+        // 2. Upgrade Image 변경
+        var isMaxLevel = (level == _tower.MaxLevel);
+        var upgradeImage = _upgradeUI.GetComponent<Image>();
+        upgradeImage.sprite = isMaxLevel ? _maxUpgradeSprite : _normalUpgradeSprite;
+
+        // 3. Upgrade Image의 자식들 활성화/비활성화
         void SetChildrenActive(Transform parent, bool isActive)
         {
             foreach (Transform child in parent)
@@ -175,12 +187,6 @@ public class UpgradeUI : MonoBehaviour
                 child.gameObject.SetActive(isActive);
             }
         }
-
-        // 돌은 업그레이드 UI를 보여주지 않음
-        _upgradeUI.SetActive(_tower.ID != 0 ? true : false);
-        var upgradeImage = _upgradeUI.GetComponent<Image>();
-        var isMaxLevel = (level == _tower.MaxLevel);
-        upgradeImage.sprite = isMaxLevel ? _maxUpgradeSprite : _normalUpgradeSprite;
         SetChildrenActive(_upgradeUI.transform, !isMaxLevel);
     }
 

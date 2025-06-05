@@ -18,7 +18,7 @@ public class SlowEffector : MonoBehaviour
 
         if (!_isActive)
         {
-            damagableBehavior.SpineController.SetColor(ConstantConfig.GREEN_GHOST);
+            damagableBehavior.SpineController.SetColor(ConstantConfig.GREEN);
             damagableBehavior.GridMovement.MoveSpeed *= slowRate;
             _isActive = true;
         }
