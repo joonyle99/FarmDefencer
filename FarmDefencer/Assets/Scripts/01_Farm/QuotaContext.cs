@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -9,6 +10,7 @@ using Random = UnityEngine.Random;
 
 public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
 {
+    public const int SpecialProductTurnInterval = 4;
     [Serializable]
     public class QuotaRules
     {
@@ -32,12 +34,29 @@ public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
     private Dictionary<ProductEntry, int> _remainingQuotas; // 키가 없으면 잠긴 작물
     
     private Func<string, ProductEntry> _getProductEntry;
+
+    private int _turn;
     
     public bool IsAllQuotaFilled => _remainingQuotas.Values.All(v => v <= 0);
 
     public void Init(Func<string, ProductEntry> getProductEntry) => _getProductEntry = getProductEntry;
 
-    public JObject Serialize() => JObject.FromObject(_remainingQuotas.ToDictionary(kv => kv.Key.ProductName, kv => kv.Value));
+    public JObject Serialize()
+    {
+        var json = JObject.FromObject(_remainingQuotas.ToDictionary(kv => kv.Key.ProductName, kv => kv.Value));
+        json.Add(new JProperty("Turn", _turn));
+        if (HotProduct is not null)
+        {
+            json.Add(new JProperty("HotProduct", HotProduct.ProductName));
+        }
+
+        if (SpecialProduct is not null)
+        {
+            json.Add(new JProperty("SpecialProduct", SpecialProduct.ProductName));
+        }
+
+        return json;
+    }
 
     public void Deserialize(JObject json)
     {
@@ -45,7 +64,7 @@ public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
 
         var dictionary = json
             .Properties()
-            .Where(p => p.Value.Type == JTokenType.Integer)
+            .Where(p => p.Value.Type == JTokenType.Integer && !p.Name.Equals("Turn"))
             .ToDictionary(p => p.Name, p => p.Value.Value<int>());
 
         foreach (var (productName, quota) in dictionary)
@@ -58,6 +77,10 @@ public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
             }
             _remainingQuotas.Add(entry, quota);
         }
+        
+        _turn = json.Property("Turn")?.Value.Value<int>() ?? 0;
+        HotProduct = json.Property("HotProduct")?.Value.Value<string>() is string hotProductName ? _getProductEntry(hotProductName) : null;
+        SpecialProduct = json.Property("SpecialProduct")?.Value.Value<string>() is string specialProductName ? _getProductEntry(specialProductName) : null;
         
         QuotaContextUpdated?.Invoke();
     }
@@ -116,9 +139,12 @@ public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
         return totalPrice;
     }
 
-    public void AssignQuotas(int currentMapId, bool isSpecial)
+    public void AssignQuotas(int currentMapId)
     {
         _remainingQuotas.Clear();
+        
+        _turn = (_turn + 1) % SpecialProductTurnInterval;
+        var isSpecial = _turn == SpecialProductTurnInterval - 1;
 
         var ruleForMap = quotaRules.FirstOrDefault(r => r.Map.MapId == currentMapId);
         if (ruleForMap is null)

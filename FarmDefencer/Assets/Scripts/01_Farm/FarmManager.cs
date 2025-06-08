@@ -35,8 +35,7 @@ public sealed class FarmManager : MonoBehaviour
         if (ignoreSaveFile)
         {
             // 디버그용 할당 코드 등 여기에...
-            var isSpecialProductTurn = MapManager.Instance.CurrentTurn % 4 == 3;
-            quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId, isSpecialProductTurn);
+            quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
             var monsters = new List<string>();
             monsters.Add("Rabbit");
             monsters.Add("Rabbit");
@@ -89,8 +88,7 @@ public sealed class FarmManager : MonoBehaviour
 
         if (quotaContext.IsAllQuotaFilled)
         {
-            var isSpecialProductTurn = MapManager.Instance.CurrentTurn % 4 == 3;
-            quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId, isSpecialProductTurn);
+            quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
             farmUI.PlayQuotaAssignAnimation(productEntry => quotaContext.IsProductAvailable(productEntry),
                 productEntry => quotaContext.TryGetQuota(productEntry.ProductName, out var quota) ? quota : 0);
         }
