@@ -16,6 +16,3 @@ MonoBehaviour:
   - crop: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
     minimumCount: 1
     maximumCount: 1
-  - crop: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
-    minimumCount: 1
-    maximumCount: 1

@@ -13,8 +13,8 @@ public sealed class FarmInput : MonoBehaviour
 	private const float MaximumProjectionSize = 10.0f; // 가장 넓게 볼 때의 크기를 의미.
 	private const float MinimumProjectionSize = 5.0f; // 가장 좁게 볼 때의 크기를 의미.
 
-	private const float MovableWidth = 15.0f;
-	private const float MovableHeight = 10.0f;
+	private const float MovableWidth = 10.8f;
+	private const float MovableHeight = 4.9f;
 
 	[SerializeField] private InputActionReference interactAction;
 	

@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: c8e94f9f52e636247ac59f98812849b1
+guid: 30b7a56f9a83a9b4b971c895b68a6ad8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1738554099287679684
-    second: "\uC6B8\uD0C0\uB9AC_0"
+      213: -282546378091776943
+    second: "\uB3CC\uB9F9\uC7741_0"
+  - first:
+      213: 3992548770918084507
+    second: "\uB3CC\uB9F9\uC7741_1"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fence_0
+      name: stone_1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 243
-        height: 89
+        width: 112
+        height: 61
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +131,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c3d9829024a6fd7e0800000000000000
-      internalID: -1738554099287679684
+      spriteID: 154344de091341cf0800000000000000
+      internalID: -282546378091776943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uB3CC\uB9F9\uC7741_1"
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 2
+        width: 43
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9faef624f1686730800000000000000
+      internalID: 3992548770918084507
       vertices: []
       indices: 
       edges: []
@@ -138,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b4bfd0aff50743a4cabaa1a78775c105
+    spriteID: 14ac107d112ccdf4bbc871ea3e170188
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      fence_0: -1738554099287679684
+      stone_1_0: -282546378091776943
+      "\uB3CC\uB9F9\uC7741_1": 3992548770918084507
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
