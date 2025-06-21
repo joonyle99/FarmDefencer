@@ -126,40 +126,8 @@ public abstract class DamageableBehavior : MonoBehaviour
     }
 
     // normal
-    public abstract void TakeDamage(int damage, ProjectileType type);
+    public abstract void TakeDamage(int damage, DamageType type);
     public abstract void Kill();
-
-    // tick
-    public void TakeTickDamage(int count, float interval, int damage, ProjectileType type)
-    {
-        // TODO: 중복이 될지 안될지를 확인해야 한다
-        if (tickDamageCo != null)
-        {
-            StopCoroutine(tickDamageCo);
-            tickDamageCo = null;
-        }
-
-        var newCo = StartCoroutine(TickDamageCo(count, interval, damage, type));
-        tickDamageCo = newCo;
-    }
-    public IEnumerator TickDamageCo(int count, float interval, int damage, ProjectileType type)
-    {
-        spineController.SetColor(new Color(0.7f, 0f, 0f, 1f));
-
-        for (int i = 0; i < count; i++)
-        {
-            if (IsDead)
-            {
-                tickDamageCo = null;
-                yield break;
-            }
-
-            TakeDamage(damage, type);
-            yield return new WaitForSeconds(interval);
-        }
-
-        spineController.ResetColor();
-    }
 
     // stun
     //public IEnumerator StunCo(float duration)

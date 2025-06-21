@@ -63,8 +63,8 @@ public class ProgressBar : MonoBehaviour
 
         if (!_isDangerous && fillAmount <= _dangerousThreshold + EPSILON)
         {
-            Debug.Log($"fillAmount: {fillAmount}");
-            Debug.Log($"_dangerousThreshold: {_dangerousThreshold}");
+            //Debug.Log($"fillAmount: {fillAmount}");
+            //Debug.Log($"_dangerousThreshold: {_dangerousThreshold}");
 
             _isDangerous = true;
             OnDangerous?.Invoke();

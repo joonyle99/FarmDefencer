@@ -1,9 +1,9 @@
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 
 /// <summary>
 /// 불덩이 투사체 탄환
-/// 타격 시 화상 효과(틱 데미지)를 적용
+/// 타격 시 화상 효과를 적용
 /// </summary>
 public sealed class FireProjectile : ParabolicProjectile
 {
@@ -16,26 +16,20 @@ public sealed class FireProjectile : ParabolicProjectile
 
     protected override void DealDamage()
     {
-        // 직접 데미지
-        damager.DealDamage(currentTarget, ProjectileType.Fire);
-
-        // 화상 효과
-        DealTickDamage();
+        damager.DealDamage(currentTarget, DamageType.Normal);
     }
     protected override void DealEffect()
     {
-        // do nothing
-    }
-    private void DealTickDamage()
-    {
+        // 범위 내 모든 적에게 화상 효과를 적용한다
         var originCell = currentTarget.GridMovement.CurrGridCell;
-
         foreach (var dir in ConstantConfig.DIRECTIONS)
         {
-            var cell = DefenceContext.Current.GridMap.GetCell(originCell.cellPosition.x + dir.x, originCell.cellPosition.y + dir.y);
+            var posX = originCell.cellPosition.x + dir.x;
+            var posY = originCell.cellPosition.y + dir.y;
+            var cell = DefenceContext.Current.GridMap.GetCell(posX, posY);
             if (cell == null)
             {
-                // 유효하지 않은 셀에 대해서는 처리하지 않는다
+                // 유효하지 않은 그리드 셀에 대해서는 처리하지 않는다
                 continue;
             }
 
@@ -48,7 +42,9 @@ public sealed class FireProjectile : ParabolicProjectile
                 if (monster == null || monster.Equals(null)) return;
                 if (!monster.gameObject.activeInHierarchy) return;
 
-                damager.DealTickDamage(monster, _tickCount, _tickInterval, _tickDamage, ProjectileType.Fire);
+                // 화상 효과 적용 (중복 적용 가능)
+                var burnEffector = monster.gameObject.AddComponent<BurnEffector>();
+                burnEffector.Activate(monster, _tickCount, _tickInterval, _tickDamage);
             });
 
             // 2) 셀 시각 효과
@@ -60,7 +56,8 @@ public sealed class FireProjectile : ParabolicProjectile
             else
             {
                 cell.transform.DOScale(1.5f, 0.25f).SetEase(Ease.OutBack).OnComplete(()
-                    => { cell.transform.DOScale(1f, 0.25f).SetEase(Ease.InBack); });
+                    =>
+                { cell.transform.DOScale(1f, 0.25f).SetEase(Ease.InBack); });
             }
         }
     }

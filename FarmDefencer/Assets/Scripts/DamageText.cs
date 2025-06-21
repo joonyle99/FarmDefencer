@@ -51,7 +51,7 @@ public class DamageText : MonoBehaviour
         }
     }
 
-    public void Init(string message, ProjectileType type, Transform origin)
+    public void Init(string message, DamageType type, Transform origin)
     {
         _text.text = message;
         _text.color = GetColorByType(type);
@@ -65,20 +65,20 @@ public class DamageText : MonoBehaviour
 
         _isTrigger = true;
     }
-    private Color GetColorByType(ProjectileType type)
+    private Color GetColorByType(DamageType type)
     {
         switch (type)
         {
-            case ProjectileType.Fire:
-                return new Color(0.8f, 0f, 0f, 0.8f);
-            case ProjectileType.Poison:
-                return Color.green;
-            case ProjectileType.Electric:
-                return Color.yellow;
-            case ProjectileType.Normal:
-                return Color.white;
+            case DamageType.Fire:
+                return ConstantConfig.RED;
+            case DamageType.Poison:
+                return ConstantConfig.GREEN;
+            case DamageType.Electric:
+                return ConstantConfig.YELLOW;
+            case DamageType.Normal:
+                return ConstantConfig.WHITE;
             default:
-                return Color.white;
+                return ConstantConfig.WHITE;
         }
     }
 }

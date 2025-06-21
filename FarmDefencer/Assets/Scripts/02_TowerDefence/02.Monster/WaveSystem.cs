@@ -197,8 +197,8 @@ public class WaveSystem : MonoBehaviour
         yield return DefenceContext.Current.GridMap.FindPathOnStartCo();
         yield return WaveSpawnCo();
     }
-
     //
+
     private void CompleteWaveProcess()
     {
         // Do Something

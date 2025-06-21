@@ -1,47 +1,37 @@
 using UnityEngine;
 
-public class SlowEffector : MonoBehaviour
+/// <summary>
+/// 대상에 슬로우 효과를 적용하는 컴포넌트
+/// </summary>
+public sealed class SlowEffector : EffectorBase
 {
     private float _slowRate = 1f;
     private float _duration = 0f;
-    private float _startDuration = 0f;
-    private bool _isActive = false;
 
-    private DamageableBehavior _damagableBehavior;
+    private float _curDuration = 0f;
 
-    public void Activate(DamageableBehavior damagableBehavior, float slowRate, float duration)
+    protected override void OnActivate(params object[] args)
     {
-        this._damagableBehavior = damagableBehavior;
-        this._slowRate = slowRate;
-        this._duration = duration;
-        this._startDuration = duration;
+        if (args.Length != 2) return;
 
-        if (!_isActive)
-        {
-            damagableBehavior.SpineController.SetColor(ConstantConfig.GREEN);
-            damagableBehavior.GridMovement.MoveSpeed *= slowRate;
-            _isActive = true;
-        }
+        _slowRate = (float)args[0];
+        _duration = (float)args[1];
+
+        _curDuration = 0f;
+
+        _damagableBehavior.GridMovement.MoveSpeed *= _slowRate;
     }
-    public void ReActivate()
+    protected override void OnDeactivate()
     {
-        if (_isActive)
-        {
-            _duration = _startDuration;
-        }
+        _damagableBehavior.GridMovement.MoveSpeed /= _slowRate;
     }
-
-    private void Update()
+    protected override void OnEffectUpdate()
     {
-        if (!_isActive) return;
+        _curDuration += Time.deltaTime;
 
-        _duration -= Time.deltaTime;
-        if (_duration <= 0f)
+        if (_curDuration >= _duration)
         {
-            _damagableBehavior.SpineController.ResetColor();
-            _damagableBehavior.GridMovement.MoveSpeed /= _slowRate;
-            _isActive = false;
-            Destroy(this);
+            DeActivate();
         }
     }
 }

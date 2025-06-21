@@ -11,24 +11,12 @@ public sealed class PoisonProjectile : LinearProjectile
 
     protected override void DealDamage()
     {
-        damager.DealDamage(currentTarget, ProjectileType.Poison);
+        damager.DealDamage(currentTarget, DamageType.Normal);
     }
     protected override void DealEffect()
     {
-        // REF
-        //damager.DealEffect(currentTarget, _slowRate, _duration, ProjectileType.Poison);
-
-        var slowEffector = currentTarget.GetComponent<SlowEffector>();
-        if (slowEffector != null)
-        {
-            // 이미 슬로우 효과가 적용되어 있다면 지속 시간 초기화
-            slowEffector.ReActivate();
-        }
-        else
-        {
-            // 슬로우 효과가 없다면 새로 생성하여 적용
-            slowEffector = currentTarget.gameObject.AddComponent<SlowEffector>();
-            slowEffector.Activate(currentTarget, slowRate, slowDuration);
-        }
+        // 슬로우 효과 적용 (중복 적용 가능)
+        var slowEffector = currentTarget.gameObject.AddComponent<SlowEffector>();
+        slowEffector.Activate(currentTarget, slowRate, slowDuration);
     }
 }

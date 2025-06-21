@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum ProjectileType
+public enum DamageType
 {
     Normal,
     Fire,
@@ -23,12 +23,8 @@ public class Damager : MonoBehaviour
     {
         _damage = damage;
     }
-    public void DealDamage(DamageableBehavior damageable, ProjectileType type)
+    public void DealDamage(DamageableBehavior damageable, DamageType type)
     {
         damageable.TakeDamage(_damage, type);
-    }
-    public void DealTickDamage(DamageableBehavior damageable, int count, float interval, int damage, ProjectileType type)
-    {
-        damageable.TakeTickDamage(count, interval, damage, type);
     }
 }
