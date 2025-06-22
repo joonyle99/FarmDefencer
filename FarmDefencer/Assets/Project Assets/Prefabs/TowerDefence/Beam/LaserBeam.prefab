@@ -58,7 +58,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 66a6dbf832585e042afe6df9f8419034, type: 2}
+  - {fileID: 2100000, guid: 1a7896437edde564db5fe62575bf9157, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -76,15 +76,15 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -448409883
+  m_SortingLayer: 7
+  m_SortingOrder: 10
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 5, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.3
+    widthMultiplier: 0.25
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -133,7 +133,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 1
+    textureMode: 0
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0

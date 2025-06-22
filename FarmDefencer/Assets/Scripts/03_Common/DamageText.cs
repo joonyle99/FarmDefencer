@@ -76,7 +76,7 @@ public class DamageText : MonoBehaviour
             case DamageType.Poison:
                 return ConstantConfig.GREEN;
             case DamageType.Laser:
-                return ConstantConfig.BLUE;
+                return ConstantConfig.PINK;
             case DamageType.Electric:
                 return ConstantConfig.YELLOW;
             default:

@@ -25,6 +25,14 @@ public static class ConstantConfig
     public static readonly Color YELLOW_GHOST = new Color(1f, 1f, 0f, 0.7f);
     public static readonly Color YELLOW_RANGE = new Color(1f, 1f, 0f, 0.8f);
 
+    public static readonly Color PINK = new Color(0.7f, 0f, 0.7f, 1f);
+    public static readonly Color PINK_GHOST = new Color(1f, 0f, 1f, 0.7f);
+    public static readonly Color PINK_RANGE = new Color(1f, 0f, 1f, 0.8f);
+
+    public static readonly Color CYAN = new Color(0f, 1f, 1f, 1f);
+    public static readonly Color CYAN_GHOST = new Color(0f, 1f, 1f, 0.7f);
+    public static readonly Color CYAN_RANGE = new Color(0f, 1f, 1f, 0.8f);
+
     // 방향
     public static readonly (int x, int y)[] DIRECTIONS = new (int x, int y)[]
     {
