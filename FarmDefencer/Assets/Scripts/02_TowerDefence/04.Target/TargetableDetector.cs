@@ -35,6 +35,15 @@ public class TargetableDetector : MonoBehaviour
 
         return _currentTargets[0];
     }
+    public TargetableBehavior GetBackTarget()
+    {
+        if (_currentTargets.Count == 0)
+        {
+            return null;
+        }
+
+        return _currentTargets[_currentTargets.Count - 1];
+    }
 
     private void Update()
     {
@@ -155,6 +164,13 @@ public class TargetableDetector : MonoBehaviour
             _currentTargets.Remove(deletableTarget);
             OnExitTarget?.Invoke(deletableTarget);
         }
+    }
+
+    //
+    public bool IsIncludeTarget(TargetableBehavior target)
+    {
+        // target이 _currentTargets에 포함되어 있는지 확인
+        return _currentTargets.Contains(target);
     }
 
     /// <summary>

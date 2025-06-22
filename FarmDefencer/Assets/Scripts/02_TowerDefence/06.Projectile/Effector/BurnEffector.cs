@@ -36,7 +36,7 @@ public sealed class BurnEffector : EffectorBase
             {
                 _curTickCount++;
                 _curTickInterval = 0f;
-                _damagableBehavior.TakeDamage(_tickDamage, DamageType.Fire);
+                _damagableBehavior.TakeDamage(_tickDamage, DamageType.Burn);
             }
         }
         else

@@ -47,8 +47,8 @@ MonoBehaviour:
   _targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  _widthRange: 2
-  _heightRange: 2
+  _widthRange: 1
+  _heightRange: 1
 --- !u!1 &8016940742814412144
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,8 +205,10 @@ MonoBehaviour:
   LevelUpAnimationNames:
   - level_up_1_to_2
   - level_up_2_to_3
+  _canAttack: 1
   _flipAimer: {fileID: 4414608076142748444}
-  _projectilePrefab: {fileID: 5744434242594404492, guid: 438d299e19f6cdd489eaafc552f76a0e, type: 3}
+  _projectilePrefab: {fileID: 0}
+  _beamPrefab: {fileID: 5744434242594404492, guid: f496bd8d248e62e44b0f2ddbfaa5aef3, type: 3}
 --- !u!210 &5803083254459691797
 SortingGroup:
   m_ObjectHideFlags: 0

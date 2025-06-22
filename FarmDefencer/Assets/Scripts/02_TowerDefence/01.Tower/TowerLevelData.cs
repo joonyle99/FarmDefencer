@@ -20,4 +20,7 @@ public class TowerLevelData : ScriptableObject
 
     [BoxGroup("사운드")] public AudioClip FireReady;
     [BoxGroup("사운드")] public AudioClip FireShot;
+
+    [BoxGroup("기타 - 레이저 빔")] public float StayDuration; 
+    [BoxGroup("기타 - 레이저 빔")] public float DealInterval; 
 }

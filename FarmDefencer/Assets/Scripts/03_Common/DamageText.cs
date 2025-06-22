@@ -69,14 +69,16 @@ public class DamageText : MonoBehaviour
     {
         switch (type)
         {
-            case DamageType.Fire:
+            case DamageType.Normal:
+                return ConstantConfig.WHITE;
+            case DamageType.Burn:
                 return ConstantConfig.RED;
             case DamageType.Poison:
                 return ConstantConfig.GREEN;
+            case DamageType.Laser:
+                return ConstantConfig.BLUE;
             case DamageType.Electric:
                 return ConstantConfig.YELLOW;
-            case DamageType.Normal:
-                return ConstantConfig.WHITE;
             default:
                 return ConstantConfig.WHITE;
         }

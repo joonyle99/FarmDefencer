@@ -17,11 +17,13 @@ MonoBehaviour:
   Description: "\uB808\uC774\uC800\uAC00  \uBAAC\uC2A4\uD130\uC5D0\uAC8C \uC9C0\uC18D\uC801\uC778
     \uB370\uBBF8\uC9C0\uB97C \uC785\uD788\uACE0 \uC774\uB3D9 \uC18D\uB3C4\uB97C \uB0AE\uCDA5\uB2C8\uB2E4"
   Level: 3
-  AttackDamage: 0
+  AttackDamage: 6
   AttackRate: 1.5
   SlowRate: 0
   SlowDuration: 0
   ValueCost: 250
   SellCost: 161
-  FireReady: {fileID: 8300000, guid: e78548deedea2d2458b4d90a0acf9ef5, type: 3}
-  FireShot: {fileID: 8300000, guid: 67250d290b860b54b9364e27818cbcfa, type: 3}
+  FireReady: {fileID: 0}
+  FireShot: {fileID: 0}
+  StayDuration: 1.2
+  DealInterval: 0.1

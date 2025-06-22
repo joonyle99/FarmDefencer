@@ -3,8 +3,9 @@ using UnityEngine;
 public enum DamageType
 {
     Normal,
-    Fire,
+    Burn,
     Poison,
+    Laser,
     Electric,
 }
 

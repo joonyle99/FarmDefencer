@@ -11,7 +11,7 @@ public sealed class PoisonProjectile : LinearProjectile
 
     protected override void DealDamage()
     {
-        damager.DealDamage(currentTarget, DamageType.Normal);
+        damager.DealDamage(currentTarget, DamageType.Poison);
     }
     protected override void DealEffect()
     {

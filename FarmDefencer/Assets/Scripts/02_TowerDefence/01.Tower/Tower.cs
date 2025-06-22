@@ -76,6 +76,7 @@ public sealed class Tower : TargetableBehavior
     [SerializeField] private FlipAimer _flipAimer;
     public FlipAimer FlipAimer => _flipAimer;
     [SerializeField] private GameObject _projectilePrefab;
+    [SerializeField] private GameObject _beamPrefab;
 
     // build
     private GridCell _occupyingGridCell;
@@ -105,6 +106,14 @@ public sealed class Tower : TargetableBehavior
         base.Awake();
 
         _cost = CurrentLevelData.ValueCost;
+
+        bool isProjectileAssigned = _projectilePrefab != null;
+        bool isBeamAssigned = _beamPrefab != null;
+        // 둘 다 null이거나 둘 다 할당된 경우
+        if (isProjectileAssigned == isBeamAssigned)
+        {
+            Debug.LogError("_projectilePrefab 또는 _beamPrefab 중 하나만 할당하세요.");
+        }
     }
     protected override void OnEnable()
     {
@@ -274,7 +283,14 @@ public sealed class Tower : TargetableBehavior
     }
     private void UpdateTarget()
     {
-        _currentTarget = Detector.GetFrontTarget();
+        if (_projectilePrefab != null)
+        {
+            _currentTarget = Detector.GetFrontTarget();
+        }
+        else if (_beamPrefab != null)
+        {
+            _currentTarget = Detector.GetBackTarget();
+        }
     }
     private void Attack()
     {
@@ -299,19 +315,41 @@ public sealed class Tower : TargetableBehavior
 
         _flipAimer.FlipAim(CurrentTarget.transform.position);
 
-        var projectileGO = Instantiate(_projectilePrefab, spineController.GetShootingBonePos(CurrentLevel), Quaternion.identity);
-        var projectile = projectileGO.GetComponent<ProjectileBase>();
-
-        if (projectile == null)
+        if (_projectilePrefab != null)
         {
-            Debug.LogWarning($"projectile is null");
-            return;
-        }
+            var projectileGO = Instantiate(_projectilePrefab, spineController.GetShootingBonePos(CurrentLevel), Quaternion.identity);
+            var projectile = projectileGO.GetComponent<ProjectileBase>();
 
-        projectile.SetTarget(CurrentTarget);
-        projectile.SetDamage(CurrentLevelData.AttackDamage);
-        projectile.SetSlow(CurrentLevelData.SlowRate, CurrentLevelData.SlowDuration);
-        projectile.Trigger();
+            if (projectile == null)
+            {
+                Debug.LogWarning($"projectile is null");
+                return;
+            }
+
+            projectile.SetTarget(CurrentTarget);
+            projectile.SetDamage(CurrentLevelData.AttackDamage);
+            projectile.SetSlow(CurrentLevelData.SlowRate, CurrentLevelData.SlowDuration);
+            projectile.Trigger();
+        }
+        else if (_beamPrefab != null)
+        {
+            var beamGo = Instantiate(_beamPrefab, spineController.GetShootingBonePos(CurrentLevel), Quaternion.identity);
+            var beam = beamGo.GetComponent<BeamBase>();
+
+            if (beam == null)
+            {
+                Debug.LogWarning($"beam is null");
+                return;
+            }
+
+            beam.SetTarget(CurrentTarget);
+            beam.SetDamage(CurrentLevelData.AttackDamage);
+            beam.SetSlow(CurrentLevelData.SlowRate, CurrentLevelData.SlowDuration);
+            beam.SetTower(this);
+            beam.SetStayDuration(CurrentLevelData.StayDuration);
+            beam.SetDealInterval(CurrentLevelData.DealInterval);
+            beam.Trigger();
+        }
 
         // sound
         if (CurrentLevelData.FireShot != null)
