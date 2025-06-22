@@ -186,7 +186,8 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmS
     {
         if (!_monsterPrefabCache.TryGetValue(monsterName, out var monsterPrefab))
         {
-            monsterPrefab = Resources.Load($"Prefabs/Monster/{monsterName}") as GameObject;
+            var mapIndex = MapManager.Instance.CurrentMapIndex;
+            monsterPrefab = Resources.Load($"Prefabs/Monster/Map_{mapIndex}/{monsterName}") as GameObject;
             _monsterPrefabCache.Add(monsterName, monsterPrefab);
         }
 

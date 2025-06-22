@@ -12,4 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3b3c3cfd96ffb4c8da6ae81f5d7314, type: 3}
   m_Name: StageData_2-4
   m_EditorClassIdentifier: 
-  Waves: []
+  Waves:
+  - WaveMonster: {fileID: 8244829762353483558, guid: 3020189df1f79bf409d60b0e79598c7b, type: 3}
+    SpawnCountRange:
+      Start: 8
+      End: 12
+  - WaveMonster: {fileID: 6808927289791045662, guid: 871f81cfd2528d74eb008bfec735d5b0, type: 3}
+    SpawnCountRange:
+      Start: 4
+      End: 6

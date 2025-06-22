@@ -1,0 +1,1430 @@
+fileFormatVersion: 2
+guid: ee316f5b6e69a1e4285f01c10cfc233a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7274009834985925372
+    second: monster_squid_0
+  - first:
+      213: 4178651516266885615
+    second: monster_squid_1
+  - first:
+      213: 8091990008160508944
+    second: monster_squid_2
+  - first:
+      213: -1766084384452648881
+    second: monster_squid_3
+  - first:
+      213: 3109217625106997192
+    second: monster_squid_4
+  - first:
+      213: 2527061271003834316
+    second: monster_squid_5
+  - first:
+      213: 5671116427859303749
+    second: monster_squid_6
+  - first:
+      213: 3637723498172262471
+    second: monster_squid_7
+  - first:
+      213: -4647341818201919276
+    second: monster_squid_8
+  - first:
+      213: 7311339361107129243
+    second: monster_squid_9
+  - first:
+      213: -2219433744327270840
+    second: monster_squid_10
+  - first:
+      213: -5271562617640006654
+    second: monster_squid_11
+  - first:
+      213: 7312417919901452252
+    second: monster_squid_12
+  - first:
+      213: 6922914190590282804
+    second: monster_squid_13
+  - first:
+      213: 488971869958314319
+    second: monster_squid_14
+  - first:
+      213: 8537598360503445378
+    second: monster_squid_15
+  - first:
+      213: 8973440591901152271
+    second: monster_squid_16
+  - first:
+      213: 1826986430078352263
+    second: monster_squid_17
+  - first:
+      213: -7979490192627280145
+    second: monster_squid_18
+  - first:
+      213: -3614475305163859902
+    second: monster_squid_19
+  - first:
+      213: -63389344549900611
+    second: monster_squid_20
+  - first:
+      213: 1746117898370243615
+    second: monster_squid_21
+  - first:
+      213: 6386660962038267540
+    second: monster_squid_22
+  - first:
+      213: -7655734986221457874
+    second: monster_squid_23
+  - first:
+      213: 8214758409675757861
+    second: monster_squid_24
+  - first:
+      213: -305412929391956262
+    second: monster_squid_25
+  - first:
+      213: 4859059760285670957
+    second: monster_squid_26
+  - first:
+      213: 4268441687775518747
+    second: monster_squid_27
+  - first:
+      213: -7319306783274139477
+    second: monster_squid_28
+  - first:
+      213: -2614934285711674948
+    second: monster_squid_29
+  - first:
+      213: 1729282933505865652
+    second: monster_squid_30
+  - first:
+      213: 40480749961413017
+    second: monster_squid_31
+  - first:
+      213: -1555685661392435925
+    second: monster_squid_32
+  - first:
+      213: 4628311595455500781
+    second: monster_squid_33
+  - first:
+      213: -1489084672841349316
+    second: monster_squid_34
+  - first:
+      213: -6278736040675158240
+    second: monster_squid_35
+  - first:
+      213: -9203781642807608452
+    second: monster_squid_36
+  - first:
+      213: -5383878719343668269
+    second: monster_squid_37
+  - first:
+      213: 8262732427575495131
+    second: monster_squid_38
+  - first:
+      213: -4567829984216952628
+    second: monster_squid_39
+  - first:
+      213: -7659050931685239205
+    second: monster_squid_40
+  - first:
+      213: -670904909263276116
+    second: monster_squid_41
+  - first:
+      213: 902576843343296228
+    second: monster_squid_42
+  - first:
+      213: 8125229072266749480
+    second: monster_squid_43
+  - first:
+      213: 4387402856920381465
+    second: monster_squid_44
+  - first:
+      213: -2985137049076205021
+    second: monster_squid_45
+  - first:
+      213: 6046043717353199991
+    second: monster_squid_46
+  - first:
+      213: 3952301195027119805
+    second: monster_squid_47
+  - first:
+      213: -9091433254920020926
+    second: monster_squid_48
+  - first:
+      213: -5425786449162217507
+    second: monster_squid_49
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: monster_squid_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 924
+        width: 119
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfaa803d76972f460800000000000000
+      internalID: 7274009834985925372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_1
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 928
+        width: 68
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe13c332a6d8df930800000000000000
+      internalID: 4178651516266885615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_2
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 984
+        width: 55
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01cda6a0a068c4070800000000000000
+      internalID: 8091990008160508944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_3
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 928
+        width: 42
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f40e5550c9b9d77e0800000000000000
+      internalID: -1766084384452648881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_4
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 799
+        width: 119
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cfd2e9e4f8262b20800000000000000
+      internalID: 3109217625106997192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_5
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 799
+        width: 56
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc7a4d746dce11320800000000000000
+      internalID: 2527061271003834316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_6
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 887
+        width: 43
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54d9f62285ad3be40800000000000000
+      internalID: 5671116427859303749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_7
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 799
+        width: 51
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74826a38f3acb7230800000000000000
+      internalID: 3637723498172262471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_8
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 830
+        width: 46
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d0b1403d33518fb0800000000000000
+      internalID: -4647341818201919276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_9
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 779
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b933f1b6968177560800000000000000
+      internalID: 7311339361107129243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_10
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 338
+        width: 199
+        height: 460
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84e9bd2c4ccf231e0800000000000000
+      internalID: -2219433744327270840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_11
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 672
+        width: 68
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20cc65caab5a7d6b0800000000000000
+      internalID: -5271562617640006654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_12
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 569
+        width: 85
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd74de4fa5dea7560800000000000000
+      internalID: 7312417919901452252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_13
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 569
+        width: 59
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43c05a4f6c1231060800000000000000
+      internalID: 6922914190590282804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_14
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 561
+        width: 66
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f491606335d29c600800000000000000
+      internalID: 488971869958314319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_15
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 623
+        width: 32
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 287e3c88974ab7670800000000000000
+      internalID: 8537598360503445378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_16
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 560
+        width: 42
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f04d65dcca0188c70800000000000000
+      internalID: 8973440591901152271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_17
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 595
+        width: 33
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78b77467a72ca5910800000000000000
+      internalID: 1826986430078352263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_18
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 462
+        width: 119
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe6dcbb62f7234190800000000000000
+      internalID: -7979490192627280145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_19
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 458
+        width: 85
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 248594a3cddc6ddc0800000000000000
+      internalID: -3614475305163859902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_20
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 498
+        width: 68
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbeee8b1abbce1ff0800000000000000
+      internalID: -63389344549900611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_21
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 560
+        width: 31
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1c5f4c2af47b3810800000000000000
+      internalID: 1746117898370243615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_22
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 550
+        width: 31
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49e35279e4af1a850800000000000000
+      internalID: 6386660962038267540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_23
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 499
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2e6db3879d51c590800000000000000
+      internalID: -7655734986221457874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_24
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 466
+        width: 57
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 529506cff3fa00270800000000000000
+      internalID: 8214758409675757861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_25
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 443
+        width: 72
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adee7c11f84f2cbf0800000000000000
+      internalID: -305412929391956262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_26
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 483
+        width: 24
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2ed83a8b19de6340800000000000000
+      internalID: 4859059760285670957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_27
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 466
+        width: 24
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b102450991d8c3b30800000000000000
+      internalID: 4268441687775518747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_28
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 419
+        width: 79
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba086dc82499c6a90800000000000000
+      internalID: -7319306783274139477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_29
+      rect:
+        serializedVersion: 2
+        x: 646
+        y: 419
+        width: 66
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb17a252f13e5bbd0800000000000000
+      internalID: -2614934285711674948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_30
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 337
+        width: 119
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b733c77aa5aff710800000000000000
+      internalID: 1729282933505865652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_31
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 337
+        width: 92
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99101b11701df8000800000000000000
+      internalID: 40480749961413017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_32
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 337
+        width: 72
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2509822228196ae0800000000000000
+      internalID: -1555685661392435925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_33
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 419
+        width: 82
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de152fccfd01b3040800000000000000
+      internalID: 4628311595455500781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_34
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 337
+        width: 92
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3700da2165b55be0800000000000000
+      internalID: -1489084672841349316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_35
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 358
+        width: 81
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0275d1156d27dd8a0800000000000000
+      internalID: -6278736040675158240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_36
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 358
+        width: 49
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7bf03e0c59954080800000000000000
+      internalID: -9203781642807608452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_37
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2
+        width: 396
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d35cbb64de9845b0800000000000000
+      internalID: -5383878719343668269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_38
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 302
+        width: 204
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd90db37d5f1ba270800000000000000
+      internalID: 8262732427575495131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_39
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 302
+        width: 103
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc0de5ca4decb90c0800000000000000
+      internalID: -4567829984216952628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_40
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 2
+        width: 319
+        height: 299
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b56d64cc1c595b590800000000000000
+      internalID: -7659050931685239205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_41
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 224
+        width: 96
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca7fb452a8770b6f0800000000000000
+      internalID: -670904909263276116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_42
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 246
+        width: 19
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e678f16bd8968c00800000000000000
+      internalID: 902576843343296228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_43
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 212
+        width: 20
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 826e22bbacc92c070800000000000000
+      internalID: 8125229072266749480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_44
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 108
+        width: 96
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 918f54527af23ec30800000000000000
+      internalID: 4387402856920381465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_45
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 1
+        width: 119
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32a74f77ba9a296d0800000000000000
+      internalID: -2985137049076205021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_46
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 108
+        width: 21
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 779d1554abcd7e350800000000000000
+      internalID: 6046043717353199991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_47
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 86
+        width: 51
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbe71f62ff469d630800000000000000
+      internalID: 3952301195027119805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_48
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 1
+        width: 117
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24c91558f9db4d180800000000000000
+      internalID: -9091433254920020926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_squid_49
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 1
+        width: 63
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd7de86b8fbb3b4b0800000000000000
+      internalID: -5425786449162217507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      monster_squid_0: 7274009834985925372
+      monster_squid_1: 4178651516266885615
+      monster_squid_10: -2219433744327270840
+      monster_squid_11: -5271562617640006654
+      monster_squid_12: 7312417919901452252
+      monster_squid_13: 6922914190590282804
+      monster_squid_14: 488971869958314319
+      monster_squid_15: 8537598360503445378
+      monster_squid_16: 8973440591901152271
+      monster_squid_17: 1826986430078352263
+      monster_squid_18: -7979490192627280145
+      monster_squid_19: -3614475305163859902
+      monster_squid_2: 8091990008160508944
+      monster_squid_20: -63389344549900611
+      monster_squid_21: 1746117898370243615
+      monster_squid_22: 6386660962038267540
+      monster_squid_23: -7655734986221457874
+      monster_squid_24: 8214758409675757861
+      monster_squid_25: -305412929391956262
+      monster_squid_26: 4859059760285670957
+      monster_squid_27: 4268441687775518747
+      monster_squid_28: -7319306783274139477
+      monster_squid_29: -2614934285711674948
+      monster_squid_3: -1766084384452648881
+      monster_squid_30: 1729282933505865652
+      monster_squid_31: 40480749961413017
+      monster_squid_32: -1555685661392435925
+      monster_squid_33: 4628311595455500781
+      monster_squid_34: -1489084672841349316
+      monster_squid_35: -6278736040675158240
+      monster_squid_36: -9203781642807608452
+      monster_squid_37: -5383878719343668269
+      monster_squid_38: 8262732427575495131
+      monster_squid_39: -4567829984216952628
+      monster_squid_4: 3109217625106997192
+      monster_squid_40: -7659050931685239205
+      monster_squid_41: -670904909263276116
+      monster_squid_42: 902576843343296228
+      monster_squid_43: 8125229072266749480
+      monster_squid_44: 4387402856920381465
+      monster_squid_45: -2985137049076205021
+      monster_squid_46: 6046043717353199991
+      monster_squid_47: 3952301195027119805
+      monster_squid_48: -9091433254920020926
+      monster_squid_49: -5425786449162217507
+      monster_squid_5: 2527061271003834316
+      monster_squid_6: 5671116427859303749
+      monster_squid_7: 3637723498172262471
+      monster_squid_8: -4647341818201919276
+      monster_squid_9: 7311339361107129243
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

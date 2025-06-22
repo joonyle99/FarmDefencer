@@ -1,0 +1,1456 @@
+fileFormatVersion: 2
+guid: 0291537564c78884c89e3e4d0f5d3332
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3853933458083206368
+    second: monster_toad_0
+  - first:
+      213: 2628998915456951605
+    second: monster_toad_1
+  - first:
+      213: 3399539149903915883
+    second: monster_toad_2
+  - first:
+      213: -2609272929422764650
+    second: monster_toad_3
+  - first:
+      213: 2809684623872976387
+    second: monster_toad_4
+  - first:
+      213: 2262966811090281840
+    second: monster_toad_5
+  - first:
+      213: -1868014159435139033
+    second: monster_toad_6
+  - first:
+      213: 7518717410959965011
+    second: monster_toad_7
+  - first:
+      213: -7725164702919015906
+    second: monster_toad_8
+  - first:
+      213: 4788965059260870560
+    second: monster_toad_9
+  - first:
+      213: 8159504815908466278
+    second: monster_toad_10
+  - first:
+      213: -4383862694416997498
+    second: monster_toad_11
+  - first:
+      213: 1116549358293475341
+    second: monster_toad_12
+  - first:
+      213: -5646392618578433560
+    second: monster_toad_13
+  - first:
+      213: -4525003236663955510
+    second: monster_toad_14
+  - first:
+      213: 8641836585322137822
+    second: monster_toad_15
+  - first:
+      213: 5725786322602967238
+    second: monster_toad_16
+  - first:
+      213: -3612493663521744561
+    second: monster_toad_17
+  - first:
+      213: 1282779051126894069
+    second: monster_toad_18
+  - first:
+      213: 6760516862962762609
+    second: monster_toad_19
+  - first:
+      213: 1047785141392368428
+    second: monster_toad_20
+  - first:
+      213: -7355415459581605227
+    second: monster_toad_21
+  - first:
+      213: -1077827163390192092
+    second: monster_toad_22
+  - first:
+      213: 4787080510400641692
+    second: monster_toad_23
+  - first:
+      213: -3114911723999725018
+    second: monster_toad_24
+  - first:
+      213: 734480945494163679
+    second: monster_toad_25
+  - first:
+      213: -1956678962197390959
+    second: monster_toad_26
+  - first:
+      213: 8515114560565997964
+    second: monster_toad_27
+  - first:
+      213: 4707751063611191207
+    second: monster_toad_28
+  - first:
+      213: 7417689997357792308
+    second: monster_toad_29
+  - first:
+      213: 5845437470197884491
+    second: monster_toad_30
+  - first:
+      213: 3968422046596925304
+    second: monster_toad_31
+  - first:
+      213: -2670457502439349492
+    second: monster_toad_32
+  - first:
+      213: -1829262711980134788
+    second: monster_toad_33
+  - first:
+      213: -1343773388055333481
+    second: monster_toad_34
+  - first:
+      213: -1361357166463063789
+    second: monster_toad_35
+  - first:
+      213: -7272155442461606239
+    second: monster_toad_36
+  - first:
+      213: 2545699084422095250
+    second: monster_toad_37
+  - first:
+      213: 3959190414650305866
+    second: monster_toad_38
+  - first:
+      213: 6672782133277167191
+    second: monster_toad_39
+  - first:
+      213: 5509747304377037767
+    second: monster_toad_40
+  - first:
+      213: -8023790693397429018
+    second: monster_toad_41
+  - first:
+      213: 4044832769038100995
+    second: monster_toad_42
+  - first:
+      213: -4748400575946866378
+    second: monster_toad_43
+  - first:
+      213: -8370241119850752030
+    second: monster_toad_44
+  - first:
+      213: 6050530534900382226
+    second: monster_toad_45
+  - first:
+      213: 90395560226451017
+    second: monster_toad_46
+  - first:
+      213: -7201943279933873124
+    second: monster_toad_47
+  - first:
+      213: 3040186175428005422
+    second: monster_toad_48
+  - first:
+      213: 6199073329274502338
+    second: monster_toad_49
+  - first:
+      213: 1351380851411521675
+    second: monster_toad_50
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: monster_toad_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 715
+        width: 72
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02b25fa50f3148ac0800000000000000
+      internalID: -3853933458083206368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_1
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 715
+        width: 85
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 535e2b6a5941c7420800000000000000
+      internalID: 2628998915456951605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_2
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 734
+        width: 103
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6b6e0668d69d2f20800000000000000
+      internalID: 3399539149903915883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_3
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 749
+        width: 55
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69596bf58100acbd0800000000000000
+      internalID: -2609272929422764650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_4
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 749
+        width: 42
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30663d077410ef620800000000000000
+      internalID: 2809684623872976387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_5
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 759
+        width: 89
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 075e881335ca76f10800000000000000
+      internalID: 2262966811090281840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_6
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 765
+        width: 82
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 728f777e40b7316e0800000000000000
+      internalID: -1868014159435139033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_7
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 686
+        width: 69
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35b30de36a9d75860800000000000000
+      internalID: 7518717410959965011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_8
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 757
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e124023e1a3bac490800000000000000
+      internalID: -7725164702919015906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_9
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 678
+        width: 103
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0af600f2952d57240800000000000000
+      internalID: 4788965059260870560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_10
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 686
+        width: 96
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66e205f26626c3170800000000000000
+      internalID: 8159504815908466278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_11
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 686
+        width: 96
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 683203b2b146923c0800000000000000
+      internalID: -4383862694416997498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_12
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 708
+        width: 61
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d00e543c9b7ce7f00800000000000000
+      internalID: 1116549358293475341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_13
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 716
+        width: 43
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e9ae3b44dbf3a1b0800000000000000
+      internalID: -5646392618578433560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_14
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 647
+        width: 66
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acfe62fd785f331c0800000000000000
+      internalID: -4525003236663955510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_15
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 507
+        width: 158
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed8c9138698fde770800000000000000
+      internalID: 8641836585322137822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_16
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 507
+        width: 103
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c04a8ae254167f40800000000000000
+      internalID: 5725786322602967238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_17
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 648
+        width: 85
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f49df602728ddddc0800000000000000
+      internalID: -3612493663521744561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_18
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 669
+        width: 28
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fd2bb320c85dc110800000000000000
+      internalID: 1282779051126894069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_19
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 647
+        width: 81
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1730fe2a44e22dd50800000000000000
+      internalID: 6760516862962762609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_20
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 643
+        width: 39
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c23ef91e80b7a8e00800000000000000
+      internalID: 1047785141392368428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_21
+      rect:
+        serializedVersion: 2
+        x: 711
+        y: 629
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59ac8343c905ce990800000000000000
+      internalID: -7355415459581605227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_22
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 523
+        width: 119
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4265cdcc7e9ca01f0800000000000000
+      internalID: -1077827163390192092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_23
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 523
+        width: 119
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9a30a57c502f6240800000000000000
+      internalID: 4787080510400641692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_24
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 551
+        width: 116
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62afb406a4c95c4d0800000000000000
+      internalID: -3114911723999725018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_25
+      rect:
+        serializedVersion: 2
+        x: 620
+        y: 551
+        width: 82
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd0097a4786613a00800000000000000
+      internalID: 734480945494163679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_26
+      rect:
+        serializedVersion: 2
+        x: 702
+        y: 541
+        width: 51
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1999ebec9da78d4e0800000000000000
+      internalID: -1956678962197390959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_27
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 543
+        width: 66
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c81fa4ce393cb2670800000000000000
+      internalID: 8515114560565997964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_28
+      rect:
+        serializedVersion: 2
+        x: 762
+        y: 624
+        width: 46
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7af238d46aa455140800000000000000
+      internalID: 4707751063611191207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_29
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 338
+        width: 273
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43cba7280cde0f660800000000000000
+      internalID: 7417689997357792308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_30
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 479
+        width: 82
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4627ef986a2f1150800000000000000
+      internalID: 5845437470197884491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_31
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 505
+        width: 30
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8770d3663daa21730800000000000000
+      internalID: 3968422046596925304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_32
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 467
+        width: 42
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c03635bdc01a0fad0800000000000000
+      internalID: -2670457502439349492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_33
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 444
+        width: 119
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7e6e8b51472d96e0800000000000000
+      internalID: -1829262711980134788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_34
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 456
+        width: 117
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 795b6522935f95de0800000000000000
+      internalID: -1343773388055333481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_35
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 481
+        width: 68
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3196980bedc7b1de0800000000000000
+      internalID: -1361357166463063789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_36
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 339
+        width: 185
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1aef6a4972d141b90800000000000000
+      internalID: -7272155442461606239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_37
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 338
+        width: 56
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 291240064d3245320800000000000000
+      internalID: 2545699084422095250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_38
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 337
+        width: 119
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4dec5794bed1f630800000000000000
+      internalID: 3959190414650305866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_39
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 337
+        width: 96
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75e0f8d0ffb7a9c50800000000000000
+      internalID: 6672782133277167191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_40
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 387
+        width: 68
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c33f8f3bfd867c40800000000000000
+      internalID: 5509747304377037767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_41
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 280
+        width: 68
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e406ff40e4c5a090800000000000000
+      internalID: -8023790693397429018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_42
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 512
+        height: 337
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30a206619f1222830800000000000000
+      internalID: 4044832769038100995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_43
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 291
+        width: 85
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6314d6395da4a1eb0800000000000000
+      internalID: -4748400575946866378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_44
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 311
+        width: 19
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e79de68c0ee6db80800000000000000
+      internalID: -8370241119850752030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_45
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 280
+        width: 33
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21a3463e67dc7f350800000000000000
+      internalID: 6050530534900382226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_46
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 242
+        width: 51
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94ee1987846214100800000000000000
+      internalID: 90395560226451017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_47
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 259
+        width: 25
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c14a7039ebe8d0c90800000000000000
+      internalID: -7201943279933873124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_48
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 188
+        width: 121
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2e807d0839e03a20800000000000000
+      internalID: 3040186175428005422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_49
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 2
+        width: 182
+        height: 239
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cc31005958870650800000000000000
+      internalID: 6199073329274502338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_toad_50
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 2
+        width: 117
+        height: 185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8016a479b111c210800000000000000
+      internalID: 1351380851411521675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      monster_toad_0: -3853933458083206368
+      monster_toad_1: 2628998915456951605
+      monster_toad_10: 8159504815908466278
+      monster_toad_11: -4383862694416997498
+      monster_toad_12: 1116549358293475341
+      monster_toad_13: -5646392618578433560
+      monster_toad_14: -4525003236663955510
+      monster_toad_15: 8641836585322137822
+      monster_toad_16: 5725786322602967238
+      monster_toad_17: -3612493663521744561
+      monster_toad_18: 1282779051126894069
+      monster_toad_19: 6760516862962762609
+      monster_toad_2: 3399539149903915883
+      monster_toad_20: 1047785141392368428
+      monster_toad_21: -7355415459581605227
+      monster_toad_22: -1077827163390192092
+      monster_toad_23: 4787080510400641692
+      monster_toad_24: -3114911723999725018
+      monster_toad_25: 734480945494163679
+      monster_toad_26: -1956678962197390959
+      monster_toad_27: 8515114560565997964
+      monster_toad_28: 4707751063611191207
+      monster_toad_29: 7417689997357792308
+      monster_toad_3: -2609272929422764650
+      monster_toad_30: 5845437470197884491
+      monster_toad_31: 3968422046596925304
+      monster_toad_32: -2670457502439349492
+      monster_toad_33: -1829262711980134788
+      monster_toad_34: -1343773388055333481
+      monster_toad_35: -1361357166463063789
+      monster_toad_36: -7272155442461606239
+      monster_toad_37: 2545699084422095250
+      monster_toad_38: 3959190414650305866
+      monster_toad_39: 6672782133277167191
+      monster_toad_4: 2809684623872976387
+      monster_toad_40: 5509747304377037767
+      monster_toad_41: -8023790693397429018
+      monster_toad_42: 4044832769038100995
+      monster_toad_43: -4748400575946866378
+      monster_toad_44: -8370241119850752030
+      monster_toad_45: 6050530534900382226
+      monster_toad_46: 90395560226451017
+      monster_toad_47: -7201943279933873124
+      monster_toad_48: 3040186175428005422
+      monster_toad_49: 6199073329274502338
+      monster_toad_5: 2262966811090281840
+      monster_toad_50: 1351380851411521675
+      monster_toad_6: -1868014159435139033
+      monster_toad_7: 7518717410959965011
+      monster_toad_8: -7725164702919015906
+      monster_toad_9: 4788965059260870560
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

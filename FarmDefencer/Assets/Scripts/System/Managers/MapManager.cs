@@ -11,9 +11,11 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
     // current map
     private int _currentMapIndex = 1;
     public int CurrentMapIndex { get => _currentMapIndex; set => _currentMapIndex = Mathf.Clamp(value, 1, MapCount); }
-    public MapEntry CurrentMap => _mapEntries[Mathf.Clamp(CurrentMapIndex - 1, 0, MapCount - 1)];   
-    
-    public int CurrentStage => 2;
+    public MapEntry CurrentMap => _mapEntries[Mathf.Clamp(CurrentMapIndex - 1, 0, MapCount - 1)];
+
+    // current stage
+    private int _currentStageIndex = 1;
+    public int CurrentStageIndex { get => _currentStageIndex; set => _currentStageIndex = Mathf.Max(1, value); }
 
     // event
     public event Action<MapEntry> OnMapChanged;

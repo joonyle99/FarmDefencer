@@ -27,7 +27,8 @@ public class WaveSystem : MonoBehaviour
 
     // progress bar
     [SerializeField] private ProgressBar _progressBar;
-    [SerializeField] private StageData _stageData;
+    [SerializeField] private List<MapData> _mapData;
+    private StageData _stageData;
     private int _maxWaveCount;
     private int _currentWave;
 
@@ -112,6 +113,10 @@ public class WaveSystem : MonoBehaviour
 
     private void InitSomething()
     {
+        var mapIndex = MapManager.Instance.CurrentMapIndex;
+        var stageIndex = MapManager.Instance.CurrentStageIndex;
+        var stageDataList = _mapData[mapIndex - 1].StateData;
+        _stageData = stageDataList[stageIndex - 1];
         _maxWaveCount = _stageData.Waves.Count;
         _currentWave = 0;
     }

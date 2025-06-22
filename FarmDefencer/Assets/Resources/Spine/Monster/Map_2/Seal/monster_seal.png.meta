@@ -1,0 +1,1638 @@
+fileFormatVersion: 2
+guid: 27459ba20bdb22b4184b5310d0387a3c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5070731785480026138
+    second: monster_seal_0
+  - first:
+      213: 1231198119970320102
+    second: monster_seal_1
+  - first:
+      213: 5789122907226530861
+    second: monster_seal_2
+  - first:
+      213: 741964656294033858
+    second: monster_seal_3
+  - first:
+      213: -6242071031384601133
+    second: monster_seal_4
+  - first:
+      213: -2880587349726774511
+    second: monster_seal_5
+  - first:
+      213: 5225708352034199646
+    second: monster_seal_6
+  - first:
+      213: 7226225198192048547
+    second: monster_seal_7
+  - first:
+      213: -6042940440399953804
+    second: monster_seal_8
+  - first:
+      213: -8167212465029488253
+    second: monster_seal_9
+  - first:
+      213: -5296181134030396002
+    second: monster_seal_10
+  - first:
+      213: 7415991741007251357
+    second: monster_seal_11
+  - first:
+      213: -5327862980120365252
+    second: monster_seal_12
+  - first:
+      213: -2715598428816585297
+    second: monster_seal_13
+  - first:
+      213: -1846504071481331022
+    second: monster_seal_14
+  - first:
+      213: 4344062786564678630
+    second: monster_seal_15
+  - first:
+      213: 7453738267113624845
+    second: monster_seal_16
+  - first:
+      213: -7551368357803960295
+    second: monster_seal_17
+  - first:
+      213: -4078716206880648479
+    second: monster_seal_18
+  - first:
+      213: 3688190457931515790
+    second: monster_seal_19
+  - first:
+      213: -2053046227950795354
+    second: monster_seal_20
+  - first:
+      213: 7005060901010737058
+    second: monster_seal_21
+  - first:
+      213: -1598727215555645814
+    second: monster_seal_22
+  - first:
+      213: 4725128121627487976
+    second: monster_seal_23
+  - first:
+      213: 5915699349266246314
+    second: monster_seal_24
+  - first:
+      213: 5596472435937933373
+    second: monster_seal_25
+  - first:
+      213: -6429574215682615591
+    second: monster_seal_26
+  - first:
+      213: 610139812500271079
+    second: monster_seal_27
+  - first:
+      213: -2247891871272342013
+    second: monster_seal_28
+  - first:
+      213: 5777488403471552107
+    second: monster_seal_29
+  - first:
+      213: -3300504709218325080
+    second: monster_seal_30
+  - first:
+      213: 4422997316044499826
+    second: monster_seal_31
+  - first:
+      213: -642260687855422598
+    second: monster_seal_32
+  - first:
+      213: -2940859240345079854
+    second: monster_seal_33
+  - first:
+      213: -7520432310093591598
+    second: monster_seal_34
+  - first:
+      213: -1704334407605106892
+    second: monster_seal_35
+  - first:
+      213: 5555860742330310059
+    second: monster_seal_36
+  - first:
+      213: -798703743016122767
+    second: monster_seal_37
+  - first:
+      213: -1493177477884506052
+    second: monster_seal_38
+  - first:
+      213: 1522721772932510754
+    second: monster_seal_39
+  - first:
+      213: -1691780772489226487
+    second: monster_seal_40
+  - first:
+      213: 7578757336682847309
+    second: monster_seal_41
+  - first:
+      213: -7702778991374719473
+    second: monster_seal_42
+  - first:
+      213: -3164450747065278519
+    second: monster_seal_43
+  - first:
+      213: -7519188032029204593
+    second: monster_seal_44
+  - first:
+      213: -3593744416792615929
+    second: monster_seal_45
+  - first:
+      213: 2203190552774297757
+    second: monster_seal_46
+  - first:
+      213: 2258417986045171881
+    second: monster_seal_47
+  - first:
+      213: -1828869242319714809
+    second: monster_seal_48
+  - first:
+      213: 2146990507797793047
+    second: monster_seal_49
+  - first:
+      213: -8623342659217426714
+    second: monster_seal_50
+  - first:
+      213: -42002398381738090
+    second: monster_seal_51
+  - first:
+      213: 5211884195915683444
+    second: monster_seal_52
+  - first:
+      213: 4823109466269059238
+    second: monster_seal_53
+  - first:
+      213: 6539895589747379542
+    second: monster_seal_54
+  - first:
+      213: -3036335494282689857
+    second: monster_seal_55
+  - first:
+      213: -7937438299966121612
+    second: monster_seal_56
+  - first:
+      213: 577971789998535130
+    second: monster_seal_57
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: monster_seal_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 613
+        width: 72
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e74e279e4421a9b0800000000000000
+      internalID: -5070731785480026138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_1
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 613
+        width: 39
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6eea5fcba28161110800000000000000
+      internalID: 1231198119970320102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_2
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 613
+        width: 26
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d24605eac98175050800000000000000
+      internalID: 5789122907226530861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_3
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 598
+        width: 107
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c9fc4e7cecfb4a00800000000000000
+      internalID: 741964656294033858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_4
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 613
+        width: 88
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dd80970875bf59a0800000000000000
+      internalID: -6242071031384601133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_5
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 613
+        width: 41
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11b3d0341191608d0800000000000000
+      internalID: -2880587349726774511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_6
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 624
+        width: 46
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e585ac62f02758840800000000000000
+      internalID: 5225708352034199646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_7
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 624
+        width: 63
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a9b6351885b84460800000000000000
+      internalID: 7226225198192048547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_8
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 637
+        width: 27
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4704e13bfa9232ca0800000000000000
+      internalID: -6042940440399953804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_9
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 590
+        width: 82
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38166c8e88b38ae80800000000000000
+      internalID: -8167212465029488253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_10
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 637
+        width: 26
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e952ef7a15f2086b0800000000000000
+      internalID: -5296181134030396002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_11
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 579
+        width: 59
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d97c7f36235eae660800000000000000
+      internalID: 7415991741007251357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_12
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 579
+        width: 61
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c37b8f909d0af06b0800000000000000
+      internalID: -5327862980120365252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_13
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 615
+        width: 56
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fad47c9ed91405ad0800000000000000
+      internalID: -2715598428816585297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_14
+      rect:
+        serializedVersion: 2
+        x: 756
+        y: 615
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b2fa078456ef56e0800000000000000
+      internalID: -1846504071481331022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_15
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 611
+        width: 33
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e36e2ba616394c30800000000000000
+      internalID: 4344062786564678630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_16
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 611
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d051b0c567ff07760800000000000000
+      internalID: 7453738267113624845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_17
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 474
+        width: 136
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91858f8cc76243790800000000000000
+      internalID: -7551368357803960295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_18
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 473
+        width: 119
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e21045483d7567c0800000000000000
+      internalID: -4078716206880648479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_19
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 583
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e874efc3ea51f2330800000000000000
+      internalID: 3688190457931515790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_20
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 580
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a5898b455d1283e0800000000000000
+      internalID: -2053046227950795354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_21
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 594
+        width: 40
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a709ba66c9f63160800000000000000
+      internalID: 7005060901010737058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_22
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 592
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8e6e00611e20d9e0800000000000000
+      internalID: -1598727215555645814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_23
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 559
+        width: 92
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8eea0d7edf6039140800000000000000
+      internalID: 4725128121627487976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_24
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 549
+        width: 68
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aaa26072739c81250800000000000000
+      internalID: 5915699349266246314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_25
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 473
+        width: 119
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d387853770aaaad40800000000000000
+      internalID: 5596472435937933373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_26
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 569
+        width: 36
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d61a31f05095c6a0800000000000000
+      internalID: -6429574215682615591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_27
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 473
+        width: 119
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7efe6634de6a77800800000000000000
+      internalID: 610139812500271079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_28
+      rect:
+        serializedVersion: 2
+        x: 459
+        y: 569
+        width: 36
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30ee25fb042edc0e0800000000000000
+      internalID: -2247891871272342013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_29
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 473
+        width: 85
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6e4cdea713cd2050800000000000000
+      internalID: 5777488403471552107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_30
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 473
+        width: 72
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ada98b24704232d0800000000000000
+      internalID: -3300504709218325080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_31
+      rect:
+        serializedVersion: 2
+        x: 652
+        y: 464
+        width: 56
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27ba659ff94a16d30800000000000000
+      internalID: 4422997316044499826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_32
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 455
+        width: 85
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a73fd27ae4b3617f0800000000000000
+      internalID: -642260687855422598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_33
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 528
+        width: 19
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2df6ecc2a18ff27d0800000000000000
+      internalID: -2940859240345079854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_34
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 453
+        width: 73
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2db408fa8ae02a790800000000000000
+      internalID: -7520432310093591598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_35
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2
+        width: 588
+        height: 470
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 437c830e2ecf858e0800000000000000
+      internalID: -1704334407605106892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_36
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 368
+        width: 116
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: badd220b8e16a1d40800000000000000
+      internalID: 5555860742330310059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_37
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 370
+        width: 103
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 176cfbc6d2f6ae4f0800000000000000
+      internalID: -798703743016122767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_38
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 455
+        width: 19
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c30941cbefa274be0800000000000000
+      internalID: -1493177477884506052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_39
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 385
+        width: 94
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 224356f726bc12510800000000000000
+      internalID: 1522721772932510754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_40
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 304
+        width: 66
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90791f1d9569588e0800000000000000
+      internalID: -1691780772489226487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_41
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 261
+        width: 119
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4cdddbc4a72d2960800000000000000
+      internalID: 7578757336682847309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_42
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 360
+        width: 31
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f06a4c3815b3a1590800000000000000
+      internalID: -7702778991374719473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_43
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 304
+        width: 129
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cf54ffbfcc9514d0800000000000000
+      internalID: -3164450747065278519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_44
+      rect:
+        serializedVersion: 2
+        x: 789
+        y: 360
+        width: 27
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8fd78fb25a76a790800000000000000
+      internalID: -7519188032029204593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_45
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 279
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 704688f4e74702ec0800000000000000
+      internalID: -3593744416792615929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_46
+      rect:
+        serializedVersion: 2
+        x: 729
+        y: 280
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d98cb9e722e439e10800000000000000
+      internalID: 2203190552774297757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_47
+      rect:
+        serializedVersion: 2
+        x: 744
+        y: 241
+        width: 96
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a853945133875f10800000000000000
+      internalID: 2258417986045171881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_48
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 238
+        width: 49
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70645e62d1d8e96e0800000000000000
+      internalID: -1828869242319714809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_49
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 136
+        width: 119
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7194c69dd74abcd10800000000000000
+      internalID: 2146990507797793047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_50
+      rect:
+        serializedVersion: 2
+        x: 744
+        y: 120
+        width: 92
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e67fd43a8bb35880800000000000000
+      internalID: -8623342659217426714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_51
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 172
+        width: 69
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 697fdbc8a07ca6ff0800000000000000
+      internalID: -42002398381738090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_52
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 93
+        width: 69
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 476d60cff05545840800000000000000
+      internalID: 5211884195915683444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_53
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 1
+        width: 118
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a88ac171802fe240800000000000000
+      internalID: 4823109466269059238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_54
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 120
+        width: 15
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65d4907936062ca50800000000000000
+      internalID: 6539895589747379542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_55
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 120
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb2ce5484f4ccd5d0800000000000000
+      internalID: -3036335494282689857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_56
+      rect:
+        serializedVersion: 2
+        x: 711
+        y: 2
+        width: 111
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47950f7abed88d190800000000000000
+      internalID: -7937438299966121612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_seal_57
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 1
+        width: 82
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad13f01e74e550800800000000000000
+      internalID: 577971789998535130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      monster_seal_0: -5070731785480026138
+      monster_seal_1: 1231198119970320102
+      monster_seal_10: -5296181134030396002
+      monster_seal_11: 7415991741007251357
+      monster_seal_12: -5327862980120365252
+      monster_seal_13: -2715598428816585297
+      monster_seal_14: -1846504071481331022
+      monster_seal_15: 4344062786564678630
+      monster_seal_16: 7453738267113624845
+      monster_seal_17: -7551368357803960295
+      monster_seal_18: -4078716206880648479
+      monster_seal_19: 3688190457931515790
+      monster_seal_2: 5789122907226530861
+      monster_seal_20: -2053046227950795354
+      monster_seal_21: 7005060901010737058
+      monster_seal_22: -1598727215555645814
+      monster_seal_23: 4725128121627487976
+      monster_seal_24: 5915699349266246314
+      monster_seal_25: 5596472435937933373
+      monster_seal_26: -6429574215682615591
+      monster_seal_27: 610139812500271079
+      monster_seal_28: -2247891871272342013
+      monster_seal_29: 5777488403471552107
+      monster_seal_3: 741964656294033858
+      monster_seal_30: -3300504709218325080
+      monster_seal_31: 4422997316044499826
+      monster_seal_32: -642260687855422598
+      monster_seal_33: -2940859240345079854
+      monster_seal_34: -7520432310093591598
+      monster_seal_35: -1704334407605106892
+      monster_seal_36: 5555860742330310059
+      monster_seal_37: -798703743016122767
+      monster_seal_38: -1493177477884506052
+      monster_seal_39: 1522721772932510754
+      monster_seal_4: -6242071031384601133
+      monster_seal_40: -1691780772489226487
+      monster_seal_41: 7578757336682847309
+      monster_seal_42: -7702778991374719473
+      monster_seal_43: -3164450747065278519
+      monster_seal_44: -7519188032029204593
+      monster_seal_45: -3593744416792615929
+      monster_seal_46: 2203190552774297757
+      monster_seal_47: 2258417986045171881
+      monster_seal_48: -1828869242319714809
+      monster_seal_49: 2146990507797793047
+      monster_seal_5: -2880587349726774511
+      monster_seal_50: -8623342659217426714
+      monster_seal_51: -42002398381738090
+      monster_seal_52: 5211884195915683444
+      monster_seal_53: 4823109466269059238
+      monster_seal_54: 6539895589747379542
+      monster_seal_55: -3036335494282689857
+      monster_seal_56: -7937438299966121612
+      monster_seal_57: 577971789998535130
+      monster_seal_6: 5225708352034199646
+      monster_seal_7: 7226225198192048547
+      monster_seal_8: -6042940440399953804
+      monster_seal_9: -8167212465029488253
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

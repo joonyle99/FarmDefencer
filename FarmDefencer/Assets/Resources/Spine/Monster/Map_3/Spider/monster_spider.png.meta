@@ -1,0 +1,1638 @@
+fileFormatVersion: 2
+guid: e2f1032264222bc408e34d01a38dec55
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5379698352289114770
+    second: monster_spider_0
+  - first:
+      213: -3256869752428220960
+    second: monster_spider_1
+  - first:
+      213: 2155757203118606847
+    second: monster_spider_2
+  - first:
+      213: 8862580845000468680
+    second: monster_spider_3
+  - first:
+      213: -4828013943914134652
+    second: monster_spider_4
+  - first:
+      213: -4580373854978099820
+    second: monster_spider_5
+  - first:
+      213: -8076755757371171716
+    second: monster_spider_6
+  - first:
+      213: -1674612551181644660
+    second: monster_spider_7
+  - first:
+      213: -4327076047841173092
+    second: monster_spider_8
+  - first:
+      213: 581365414397646653
+    second: monster_spider_9
+  - first:
+      213: -2112992444524745487
+    second: monster_spider_10
+  - first:
+      213: 8068892068625922427
+    second: monster_spider_11
+  - first:
+      213: -8612277486723670352
+    second: monster_spider_12
+  - first:
+      213: 4493828262918522348
+    second: monster_spider_13
+  - first:
+      213: -6185352695854527356
+    second: monster_spider_14
+  - first:
+      213: 8559246721849579935
+    second: monster_spider_15
+  - first:
+      213: 471765570544877474
+    second: monster_spider_16
+  - first:
+      213: 4538786279464386996
+    second: monster_spider_17
+  - first:
+      213: -7478073174697612757
+    second: monster_spider_18
+  - first:
+      213: -7064796484859835443
+    second: monster_spider_19
+  - first:
+      213: 8846407952922784086
+    second: monster_spider_20
+  - first:
+      213: -6361205010747740607
+    second: monster_spider_21
+  - first:
+      213: -3103011239085512266
+    second: monster_spider_22
+  - first:
+      213: 3794243261182701665
+    second: monster_spider_23
+  - first:
+      213: -5985661489072396931
+    second: monster_spider_24
+  - first:
+      213: -3873913594849602563
+    second: monster_spider_25
+  - first:
+      213: -5326448202276338911
+    second: monster_spider_26
+  - first:
+      213: 8078804335891214985
+    second: monster_spider_27
+  - first:
+      213: 4796301014877348452
+    second: monster_spider_28
+  - first:
+      213: 207573663446056861
+    second: monster_spider_29
+  - first:
+      213: 798648839869079496
+    second: monster_spider_30
+  - first:
+      213: -7525496660282312310
+    second: monster_spider_31
+  - first:
+      213: 6205879181598220826
+    second: monster_spider_32
+  - first:
+      213: 3869573688874590563
+    second: monster_spider_33
+  - first:
+      213: 6311458450720517594
+    second: monster_spider_34
+  - first:
+      213: 7352866812357231610
+    second: monster_spider_35
+  - first:
+      213: 3778610888151126133
+    second: monster_spider_36
+  - first:
+      213: 2214068029112556842
+    second: monster_spider_37
+  - first:
+      213: 4642360675904050412
+    second: monster_spider_38
+  - first:
+      213: -4456408754141539375
+    second: monster_spider_39
+  - first:
+      213: -7157138523708356142
+    second: monster_spider_40
+  - first:
+      213: -8961499050671560043
+    second: monster_spider_41
+  - first:
+      213: 5060347839422551249
+    second: monster_spider_42
+  - first:
+      213: 4648844389075943306
+    second: monster_spider_43
+  - first:
+      213: -7568700410206280238
+    second: monster_spider_44
+  - first:
+      213: -1884188903980015436
+    second: monster_spider_45
+  - first:
+      213: -2555898883295896746
+    second: monster_spider_46
+  - first:
+      213: 8769669786259583899
+    second: monster_spider_47
+  - first:
+      213: -4548155150940727840
+    second: monster_spider_48
+  - first:
+      213: 9136639547910072679
+    second: monster_spider_49
+  - first:
+      213: 4742235103702236293
+    second: monster_spider_50
+  - first:
+      213: 2110586195550203017
+    second: monster_spider_51
+  - first:
+      213: -408798427292592023
+    second: monster_spider_52
+  - first:
+      213: -2945342865531194962
+    second: monster_spider_53
+  - first:
+      213: -7259845542581990864
+    second: monster_spider_54
+  - first:
+      213: -6364369155549959180
+    second: monster_spider_55
+  - first:
+      213: 7187505219215415612
+    second: monster_spider_56
+  - first:
+      213: -5184178558088620885
+    second: monster_spider_57
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: monster_spider_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 679
+        width: 119
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e659d09f9d87755b0800000000000000
+      internalID: -5379698352289114770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_1
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 764
+        width: 121
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ed2dce37364dc2d0800000000000000
+      internalID: -3256869752428220960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_2
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 645
+        width: 107
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff9cfd921c9caed10800000000000000
+      internalID: 2155757203118606847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_3
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 700
+        width: 117
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c82f6392563efa70800000000000000
+      internalID: 8862580845000468680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_4
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 687
+        width: 72
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4838d5ed5e27ffcb0800000000000000
+      internalID: -4828013943914134652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_5
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 687
+        width: 85
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4953b8b2f3e3f60c0800000000000000
+      internalID: -4580373854978099820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_6
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 678
+        width: 56
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7cdc406e6999ef80800000000000000
+      internalID: -8076755757371171716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_7
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 744
+        width: 46
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8c4866d1c492c8e0800000000000000
+      internalID: -1674612551181644660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_8
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 746
+        width: 56
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c916354a24323f3c0800000000000000
+      internalID: -4327076047841173092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_9
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 667
+        width: 51
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d379ed1a3cc611800800000000000000
+      internalID: 581365414397646653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_10
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 604
+        width: 119
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fca40b11942da2e0800000000000000
+      internalID: -2112992444524745487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_11
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 595
+        width: 121
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b793a69e5967aff60800000000000000
+      internalID: 8068892068625922427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_12
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 683
+        width: 49
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0beddb0714b0b7880800000000000000
+      internalID: -8612277486723670352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_13
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 621
+        width: 68
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce58edceef84d5e30800000000000000
+      internalID: 4493828262918522348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_14
+      rect:
+        serializedVersion: 2
+        x: 661
+        y: 683
+        width: 42
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48c06199e76392aa0800000000000000
+      internalID: -6185352695854527356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_15
+      rect:
+        serializedVersion: 2
+        x: 703
+        y: 664
+        width: 33
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9955c07b8d88c670800000000000000
+      internalID: 8559246721849579935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_16
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 664
+        width: 28
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2af3691794c0c8600800000000000000
+      internalID: 471765570544877474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_17
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 397
+        width: 104
+        height: 282
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b144ead2120dfe30800000000000000
+      internalID: 4538786279464386996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_18
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 397
+        width: 129
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2a65c1711c883890800000000000000
+      internalID: -7478073174697612757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_19
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 397
+        width: 46
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcb4085270dc4fd90800000000000000
+      internalID: -7064796484859835443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_20
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 635
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6513724b921c4ca70800000000000000
+      internalID: 8846407952922784086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_21
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 479
+        width: 27
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14e22feeeb578b7a0800000000000000
+      internalID: -6361205010747740607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_22
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 575
+        width: 85
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b96340f7b3efe4d0800000000000000
+      internalID: -3103011239085512266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_23
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 613
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 160f63ea42cd7a430800000000000000
+      internalID: 3794243261182701665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_24
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 479
+        width: 119
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d75aa1ec698aeeca0800000000000000
+      internalID: -5985661489072396931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_25
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 470
+        width: 119
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df3de604c181d3ac0800000000000000
+      internalID: -3873913594849602563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_26
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 468
+        width: 68
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1230dcca497a416b0800000000000000
+      internalID: -5326448202276338911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_27
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 549
+        width: 55
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9827eaa7dbdad1070800000000000000
+      internalID: 8078804335891214985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_28
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 574
+        width: 55
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4622c937c52ef8240800000000000000
+      internalID: 4796301014877348452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_29
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 523
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9fbd6aa52371e200800000000000000
+      internalID: 207573663446056861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_30
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 329
+        width: 132
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cf9ca073ee551b00800000000000000
+      internalID: 798648839869079496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_31
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 329
+        width: 84
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a89fb75c8a0109790800000000000000
+      internalID: -7525496660282312310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_32
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 373
+        width: 101
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a12672a4c36bf1650800000000000000
+      internalID: 6205879181598220826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_33
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 399
+        width: 79
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3616195a4cc73b530800000000000000
+      internalID: 3869573688874590563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_34
+      rect:
+        serializedVersion: 2
+        x: 613
+        y: 468
+        width: 66
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: add65d9750ec69750800000000000000
+      internalID: 6311458450720517594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_35
+      rect:
+        serializedVersion: 2
+        x: 679
+        y: 454
+        width: 66
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af3cf4f9861aa0660800000000000000
+      internalID: 7352866812357231610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_36
+      rect:
+        serializedVersion: 2
+        x: 745
+        y: 454
+        width: 41
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 570dba43592507430800000000000000
+      internalID: 3778610888151126133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_37
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 407
+        width: 82
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2d9dcf4423f9be10800000000000000
+      internalID: 2214068029112556842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_38
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 346
+        width: 81
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce4d08e307afc6040800000000000000
+      internalID: 4642360675904050412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_39
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 234
+        width: 260
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d3d37369d7a722c0800000000000000
+      internalID: -4456408754141539375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_40
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 329
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d9891ece6cbcac90800000000000000
+      internalID: -7157138523708356142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_41
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 263
+        width: 80
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59aa8bde71c52a380800000000000000
+      internalID: -8961499050671560043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_42
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 340
+        width: 89
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d452b09c87f93640800000000000000
+      internalID: 5060347839422551249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_43
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 258
+        width: 92
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8f70fa5753048040800000000000000
+      internalID: 4648844389075943306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_44
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 278
+        width: 94
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d52d4ed31396f690800000000000000
+      internalID: -7568700410206280238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_45
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 299
+        width: 222
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b0e988bc240ad5e0800000000000000
+      internalID: -1884188903980015436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_46
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 263
+        width: 264
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65b9453e18f978cd0800000000000000
+      internalID: -2555898883295896746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_47
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 310
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b937a77f43024b970800000000000000
+      internalID: 8769669786259583899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_48
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 234
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e590d4ccf4b1e0c0800000000000000
+      internalID: -4548155150940727840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_49
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 212
+        width: 290
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76927f5c24ddbce70800000000000000
+      internalID: 9136639547910072679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_50
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 142
+        width: 96
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58c3f8d83bdcfc140800000000000000
+      internalID: 4742235103702236293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_51
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 215
+        width: 96
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98cec9566fe4a4d10800000000000000
+      internalID: 2110586195550203017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_52
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 158
+        width: 257
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9689c7c0ff7a35af0800000000000000
+      internalID: -408798427292592023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_53
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 1
+        width: 258
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea13846d44a0027d0800000000000000
+      internalID: -2945342865531194962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_54
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 142
+        width: 32
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03a823e71f8df3b90800000000000000
+      internalID: -7259845542581990864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_55
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 142
+        width: 96
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fbedff09f73da7a0800000000000000
+      internalID: -6364369155549959180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_56
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 1
+        width: 149
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c39d9947ae52fb360800000000000000
+      internalID: 7187505219215415612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_spider_57
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 1
+        width: 56
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba45ee081191e08b0800000000000000
+      internalID: -5184178558088620885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      monster_spider_0: -5379698352289114770
+      monster_spider_1: -3256869752428220960
+      monster_spider_10: -2112992444524745487
+      monster_spider_11: 8068892068625922427
+      monster_spider_12: -8612277486723670352
+      monster_spider_13: 4493828262918522348
+      monster_spider_14: -6185352695854527356
+      monster_spider_15: 8559246721849579935
+      monster_spider_16: 471765570544877474
+      monster_spider_17: 4538786279464386996
+      monster_spider_18: -7478073174697612757
+      monster_spider_19: -7064796484859835443
+      monster_spider_2: 2155757203118606847
+      monster_spider_20: 8846407952922784086
+      monster_spider_21: -6361205010747740607
+      monster_spider_22: -3103011239085512266
+      monster_spider_23: 3794243261182701665
+      monster_spider_24: -5985661489072396931
+      monster_spider_25: -3873913594849602563
+      monster_spider_26: -5326448202276338911
+      monster_spider_27: 8078804335891214985
+      monster_spider_28: 4796301014877348452
+      monster_spider_29: 207573663446056861
+      monster_spider_3: 8862580845000468680
+      monster_spider_30: 798648839869079496
+      monster_spider_31: -7525496660282312310
+      monster_spider_32: 6205879181598220826
+      monster_spider_33: 3869573688874590563
+      monster_spider_34: 6311458450720517594
+      monster_spider_35: 7352866812357231610
+      monster_spider_36: 3778610888151126133
+      monster_spider_37: 2214068029112556842
+      monster_spider_38: 4642360675904050412
+      monster_spider_39: -4456408754141539375
+      monster_spider_4: -4828013943914134652
+      monster_spider_40: -7157138523708356142
+      monster_spider_41: -8961499050671560043
+      monster_spider_42: 5060347839422551249
+      monster_spider_43: 4648844389075943306
+      monster_spider_44: -7568700410206280238
+      monster_spider_45: -1884188903980015436
+      monster_spider_46: -2555898883295896746
+      monster_spider_47: 8769669786259583899
+      monster_spider_48: -4548155150940727840
+      monster_spider_49: 9136639547910072679
+      monster_spider_5: -4580373854978099820
+      monster_spider_50: 4742235103702236293
+      monster_spider_51: 2110586195550203017
+      monster_spider_52: -408798427292592023
+      monster_spider_53: -2945342865531194962
+      monster_spider_54: -7259845542581990864
+      monster_spider_55: -6364369155549959180
+      monster_spider_56: 7187505219215415612
+      monster_spider_57: -5184178558088620885
+      monster_spider_6: -8076755757371171716
+      monster_spider_7: -1674612551181644660
+      monster_spider_8: -4327076047841173092
+      monster_spider_9: 581365414397646653
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,1846 @@
+fileFormatVersion: 2
+guid: c2119d5ba13e66b4d9e3267602fe043c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4502152621162098802
+    second: monster_crab_0
+  - first:
+      213: -8836346893187559029
+    second: monster_crab_1
+  - first:
+      213: 6214420329527546512
+    second: monster_crab_2
+  - first:
+      213: -8070041020876104743
+    second: monster_crab_3
+  - first:
+      213: -4823973382420415506
+    second: monster_crab_4
+  - first:
+      213: 8886902066544799868
+    second: monster_crab_5
+  - first:
+      213: -3545164585976219089
+    second: monster_crab_6
+  - first:
+      213: -9218537447023890009
+    second: monster_crab_7
+  - first:
+      213: 7949749903616354142
+    second: monster_crab_8
+  - first:
+      213: -7156259046630032378
+    second: monster_crab_9
+  - first:
+      213: 58154832217549509
+    second: monster_crab_10
+  - first:
+      213: -3759187950929808973
+    second: monster_crab_11
+  - first:
+      213: -3514336385927741735
+    second: monster_crab_12
+  - first:
+      213: -7031559027381714532
+    second: monster_crab_13
+  - first:
+      213: 5113832472488783468
+    second: monster_crab_14
+  - first:
+      213: 2771888353578656096
+    second: monster_crab_15
+  - first:
+      213: 1350746480780054409
+    second: monster_crab_16
+  - first:
+      213: 1646731841401030664
+    second: monster_crab_17
+  - first:
+      213: -3544561358840277666
+    second: monster_crab_18
+  - first:
+      213: -8319303969618278902
+    second: monster_crab_19
+  - first:
+      213: -1203695584034684753
+    second: monster_crab_20
+  - first:
+      213: -3631792184822525458
+    second: monster_crab_21
+  - first:
+      213: -6736361693255141283
+    second: monster_crab_22
+  - first:
+      213: 2147674288558923766
+    second: monster_crab_23
+  - first:
+      213: -7376687465044491936
+    second: monster_crab_24
+  - first:
+      213: -7487535857511552488
+    second: monster_crab_25
+  - first:
+      213: -7016714888110885462
+    second: monster_crab_26
+  - first:
+      213: -3506666659387475846
+    second: monster_crab_27
+  - first:
+      213: -7779199654103661412
+    second: monster_crab_28
+  - first:
+      213: -1622197856700827123
+    second: monster_crab_29
+  - first:
+      213: -3945116600192721069
+    second: monster_crab_30
+  - first:
+      213: 2671377161048938280
+    second: monster_crab_31
+  - first:
+      213: 71118229047265872
+    second: monster_crab_32
+  - first:
+      213: 2112469817193453968
+    second: monster_crab_33
+  - first:
+      213: 2224134669318304501
+    second: monster_crab_34
+  - first:
+      213: -5643295121847949055
+    second: monster_crab_35
+  - first:
+      213: 2184137028535582555
+    second: monster_crab_36
+  - first:
+      213: 4266877659693754917
+    second: monster_crab_37
+  - first:
+      213: -8304882319410503536
+    second: monster_crab_38
+  - first:
+      213: 6461987788085172177
+    second: monster_crab_39
+  - first:
+      213: 2002408741553573651
+    second: monster_crab_40
+  - first:
+      213: 6781619492285352183
+    second: monster_crab_41
+  - first:
+      213: 7426426468133693449
+    second: monster_crab_42
+  - first:
+      213: 3357458099327899957
+    second: monster_crab_43
+  - first:
+      213: -7731979248297238618
+    second: monster_crab_44
+  - first:
+      213: 3035744013091835156
+    second: monster_crab_45
+  - first:
+      213: -8374055464030235067
+    second: monster_crab_46
+  - first:
+      213: -3259537149555457769
+    second: monster_crab_47
+  - first:
+      213: 5407712559806085575
+    second: monster_crab_48
+  - first:
+      213: -6288199493578961920
+    second: monster_crab_49
+  - first:
+      213: -5869633793466136163
+    second: monster_crab_50
+  - first:
+      213: 629428578202007223
+    second: monster_crab_51
+  - first:
+      213: -7508543321908465232
+    second: monster_crab_52
+  - first:
+      213: -2548338050193892642
+    second: monster_crab_53
+  - first:
+      213: 1586564671232785485
+    second: monster_crab_54
+  - first:
+      213: -4284912547271932180
+    second: monster_crab_55
+  - first:
+      213: 8511330329003794685
+    second: monster_crab_56
+  - first:
+      213: 4835538586711982023
+    second: monster_crab_57
+  - first:
+      213: -7355803588065356722
+    second: monster_crab_58
+  - first:
+      213: -1408255662838298653
+    second: monster_crab_59
+  - first:
+      213: 2555427398726353689
+    second: monster_crab_60
+  - first:
+      213: -3151598830106183843
+    second: monster_crab_61
+  - first:
+      213: -1992355803946432325
+    second: monster_crab_62
+  - first:
+      213: -9112898647460575875
+    second: monster_crab_63
+  - first:
+      213: 8170199200885778382
+    second: monster_crab_64
+  - first:
+      213: -2017130648952436003
+    second: monster_crab_65
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: monster_crab_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 956
+        width: 92
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8f0a036b042581c0800000000000000
+      internalID: -4502152621162098802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_1
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 832
+        width: 77
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b81dd6f415dfe5580800000000000000
+      internalID: -8836346893187559029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_2
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 708
+        width: 86
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09294724d5e0e3650800000000000000
+      internalID: 6214420329527546512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_3
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 799
+        width: 34
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9db59dbc274710090800000000000000
+      internalID: -8070041020876104743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_4
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 795
+        width: 61
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eeb34e664cdcd0db0800000000000000
+      internalID: -4823973382420415506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_5
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 794
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c70761e385e945b70800000000000000
+      internalID: 8886902066544799868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_6
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 794
+        width: 41
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2ab796979b0dcec0800000000000000
+      internalID: -3545164585976219089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_7
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 794
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a13189a80d211080800000000000000
+      internalID: -9218537447023890009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_8
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 693
+        width: 61
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e57af32fa6f235e60800000000000000
+      internalID: 7949749903616354142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_9
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 777
+        width: 71
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60cf0f4005cdfac90800000000000000
+      internalID: -7156259046630032378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_10
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 710
+        width: 83
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5caac44038b9ec000800000000000000
+      internalID: 58154832217549509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_11
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 750
+        width: 46
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b176e4c97ea4dbc0800000000000000
+      internalID: -3759187950929808973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_12
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 708
+        width: 56
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9defb8f3da19a3fc0800000000000000
+      internalID: -3514336385927741735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_13
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 724
+        width: 55
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c91c8b3c152ea6e90800000000000000
+      internalID: -7031559027381714532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_14
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 691
+        width: 57
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6e2d8b1a8bf7f640800000000000000
+      internalID: 5113832472488783468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_15
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 601
+        width: 119
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 061291085c9b77620800000000000000
+      internalID: 2771888353578656096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_16
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 708
+        width: 34
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98f018884c0deb210800000000000000
+      internalID: 1350746480780054409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_17
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 616
+        width: 63
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 808880f82ed5ad610800000000000000
+      internalID: 1646731841401030664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_18
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 605
+        width: 56
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e55dfb959303fcec0800000000000000
+      internalID: -3544561358840277666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_19
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 640
+        width: 75
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a06c7600e15eb8c80800000000000000
+      internalID: -8319303969618278902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_20
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 476
+        width: 119
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa008e76e3d9b4fe0800000000000000
+      internalID: -1203695584034684753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_21
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 590
+        width: 85
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee11d9dff38499dc0800000000000000
+      internalID: -3631792184822525458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_22
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 487
+        width: 56
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d587af21bb2a382a0800000000000000
+      internalID: -6736361693255141283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_23
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 486
+        width: 61
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ff5bc6f2621ecd10800000000000000
+      internalID: 2147674288558923766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_24
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 490
+        width: 68
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06142fa75ddb0a990800000000000000
+      internalID: -7376687465044491936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_25
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 597
+        width: 68
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81a260aeecde61890800000000000000
+      internalID: -7487535857511552488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_26
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 593
+        width: 63
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa5b4f34cfe9f9e90800000000000000
+      internalID: -7016714888110885462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_27
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 565
+        width: 72
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a78f08d9041d55fc0800000000000000
+      internalID: -3506666659387475846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_28
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 487
+        width: 85
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c944f4c612bba0490800000000000000
+      internalID: -7779199654103661412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_29
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 408
+        width: 92
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0a72f3e4abcc79e0800000000000000
+      internalID: -1622197856700827123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_30
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 490
+        width: 63
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35f1400ba512049c0800000000000000
+      internalID: -3945116600192721069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_31
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 408
+        width: 47
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 827d969df53a21520800000000000000
+      internalID: 2671377161048938280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_32
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 490
+        width: 72
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05aca6b07a9acf000800000000000000
+      internalID: 71118229047265872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_33
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 294
+        width: 127
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 099dc8c3b10015d10800000000000000
+      internalID: 2112469817193453968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_34
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 419
+        width: 119
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f23951a2b6bdde10800000000000000
+      internalID: 2224134669318304501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_35
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 413
+        width: 96
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 109ee837cfcfea1b0800000000000000
+      internalID: -5643295121847949055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_36
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 445
+        width: 63
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5ff3ae2e0d9f4e10800000000000000
+      internalID: 2184137028535582555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_37
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 377
+        width: 62
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52aa816ef9ef63b30800000000000000
+      internalID: 4266877659693754917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_38
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 465
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0906d1a18812fbc80800000000000000
+      internalID: -8304882319410503536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_39
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 294
+        width: 119
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d79abbf7a79da950800000000000000
+      internalID: 6461987788085172177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_40
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 294
+        width: 96
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31f0077242cf9cb10800000000000000
+      internalID: 2002408741553573651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_41
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 294
+        width: 95
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f888876ff62d1e50800000000000000
+      internalID: 6781619492285352183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_42
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 294
+        width: 40
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 908eaaf9687ff0760800000000000000
+      internalID: 7426426468133693449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_43
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 288
+        width: 59
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53992be4a56189e20800000000000000
+      internalID: 3357458099327899957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_44
+      rect:
+        serializedVersion: 2
+        x: 537
+        y: 288
+        width: 33
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6af1d86e6dd72b490800000000000000
+      internalID: -7731979248297238618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_45
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 292
+        width: 81
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41d8b598811212a20800000000000000
+      internalID: 3035744013091835156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_46
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 292
+        width: 75
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5461f015ce069cb80800000000000000
+      internalID: -8374055464030235067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_47
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 289
+        width: 75
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 711ce847b3cc3c2d0800000000000000
+      internalID: -3259537149555457769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_48
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 289
+        width: 55
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c9f8aefbed0c0b40800000000000000
+      internalID: 5407712559806085575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_49
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 183
+        width: 114
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00c4f6c70e3dbb8a0800000000000000
+      internalID: -6288199493578961920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_50
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 229
+        width: 104
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9982dad92fda8ea0800000000000000
+      internalID: -5869633793466136163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_51
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 108
+        width: 92
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b6b53ff4fd2cb800800000000000000
+      internalID: 629428578202007223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_52
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 217
+        width: 75
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b1b30571ab4cc790800000000000000
+      internalID: -7508543321908465232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_53
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 217
+        width: 75
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edad4968b0c72acd0800000000000000
+      internalID: -2548338050193892642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_54
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 1
+        width: 114
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4cb30a992c940610800000000000000
+      internalID: 1586564671232785485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_55
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 108
+        width: 36
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce60e3e9dbee884c0800000000000000
+      internalID: -4284912547271932180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_56
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 166
+        width: 88
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df0a74ad6d15e1670800000000000000
+      internalID: 8511330329003794685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_57
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 97
+        width: 79
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cf79ae89b84b1340800000000000000
+      internalID: 4835538586711982023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_58
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 97
+        width: 66
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4412dffb9feae990800000000000000
+      internalID: -7355803588065356722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_59
+      rect:
+        serializedVersion: 2
+        x: 796
+        y: 166
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e747979feed47ce0800000000000000
+      internalID: -1408255662838298653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_60
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 107
+        width: 81
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 913826e0ea3b67320800000000000000
+      internalID: 2555427398726353689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_61
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 1
+        width: 119
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d57fbf8df854344d0800000000000000
+      internalID: -3151598830106183843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_62
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 1
+        width: 116
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb8c597c3fab954e0800000000000000
+      internalID: -1992355803946432325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_63
+      rect:
+        serializedVersion: 2
+        x: 815
+        y: 1
+        width: 117
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7589fb56fa788180800000000000000
+      internalID: -9112898647460575875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_64
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 86
+        width: 75
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec72af8b2e0626170800000000000000
+      internalID: 8170199200885778382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_crab_65
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 1
+        width: 72
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dda03abac56b104e0800000000000000
+      internalID: -2017130648952436003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      monster_crab_0: -4502152621162098802
+      monster_crab_1: -8836346893187559029
+      monster_crab_10: 58154832217549509
+      monster_crab_11: -3759187950929808973
+      monster_crab_12: -3514336385927741735
+      monster_crab_13: -7031559027381714532
+      monster_crab_14: 5113832472488783468
+      monster_crab_15: 2771888353578656096
+      monster_crab_16: 1350746480780054409
+      monster_crab_17: 1646731841401030664
+      monster_crab_18: -3544561358840277666
+      monster_crab_19: -8319303969618278902
+      monster_crab_2: 6214420329527546512
+      monster_crab_20: -1203695584034684753
+      monster_crab_21: -3631792184822525458
+      monster_crab_22: -6736361693255141283
+      monster_crab_23: 2147674288558923766
+      monster_crab_24: -7376687465044491936
+      monster_crab_25: -7487535857511552488
+      monster_crab_26: -7016714888110885462
+      monster_crab_27: -3506666659387475846
+      monster_crab_28: -7779199654103661412
+      monster_crab_29: -1622197856700827123
+      monster_crab_3: -8070041020876104743
+      monster_crab_30: -3945116600192721069
+      monster_crab_31: 2671377161048938280
+      monster_crab_32: 71118229047265872
+      monster_crab_33: 2112469817193453968
+      monster_crab_34: 2224134669318304501
+      monster_crab_35: -5643295121847949055
+      monster_crab_36: 2184137028535582555
+      monster_crab_37: 4266877659693754917
+      monster_crab_38: -8304882319410503536
+      monster_crab_39: 6461987788085172177
+      monster_crab_4: -4823973382420415506
+      monster_crab_40: 2002408741553573651
+      monster_crab_41: 6781619492285352183
+      monster_crab_42: 7426426468133693449
+      monster_crab_43: 3357458099327899957
+      monster_crab_44: -7731979248297238618
+      monster_crab_45: 3035744013091835156
+      monster_crab_46: -8374055464030235067
+      monster_crab_47: -3259537149555457769
+      monster_crab_48: 5407712559806085575
+      monster_crab_49: -6288199493578961920
+      monster_crab_5: 8886902066544799868
+      monster_crab_50: -5869633793466136163
+      monster_crab_51: 629428578202007223
+      monster_crab_52: -7508543321908465232
+      monster_crab_53: -2548338050193892642
+      monster_crab_54: 1586564671232785485
+      monster_crab_55: -4284912547271932180
+      monster_crab_56: 8511330329003794685
+      monster_crab_57: 4835538586711982023
+      monster_crab_58: -7355803588065356722
+      monster_crab_59: -1408255662838298653
+      monster_crab_6: -3545164585976219089
+      monster_crab_60: 2555427398726353689
+      monster_crab_61: -3151598830106183843
+      monster_crab_62: -1992355803946432325
+      monster_crab_63: -9112898647460575875
+      monster_crab_64: 8170199200885778382
+      monster_crab_65: -2017130648952436003
+      monster_crab_7: -9218537447023890009
+      monster_crab_8: 7949749903616354142
+      monster_crab_9: -7156259046630032378
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,1430 @@
+fileFormatVersion: 2
+guid: 483c7f36867c2dd4cbffd0d967302564
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4146096115145887049
+    second: monster_tuttle_0
+  - first:
+      213: 216753941075976337
+    second: monster_tuttle_1
+  - first:
+      213: -1566224858067417342
+    second: monster_tuttle_2
+  - first:
+      213: -9057784033132858551
+    second: monster_tuttle_3
+  - first:
+      213: 5485085163660721603
+    second: monster_tuttle_4
+  - first:
+      213: -2142202197667257000
+    second: monster_tuttle_5
+  - first:
+      213: 1636657093430420051
+    second: monster_tuttle_6
+  - first:
+      213: -283879172949610567
+    second: monster_tuttle_7
+  - first:
+      213: 1147434132714375591
+    second: monster_tuttle_8
+  - first:
+      213: 3872558772716057821
+    second: monster_tuttle_9
+  - first:
+      213: 5159675282757530126
+    second: monster_tuttle_10
+  - first:
+      213: -5865069168242608266
+    second: monster_tuttle_11
+  - first:
+      213: 8416766573810259974
+    second: monster_tuttle_12
+  - first:
+      213: -3441245271391145744
+    second: monster_tuttle_13
+  - first:
+      213: -5161283748688862666
+    second: monster_tuttle_14
+  - first:
+      213: 2547900530199200529
+    second: monster_tuttle_15
+  - first:
+      213: -8611113637353541924
+    second: monster_tuttle_16
+  - first:
+      213: -3252778145202608335
+    second: monster_tuttle_17
+  - first:
+      213: 3352958645835259900
+    second: monster_tuttle_18
+  - first:
+      213: 7011865463848569560
+    second: monster_tuttle_19
+  - first:
+      213: 5735442299430735847
+    second: monster_tuttle_20
+  - first:
+      213: 6652806271885805332
+    second: monster_tuttle_21
+  - first:
+      213: 7155191136940268335
+    second: monster_tuttle_22
+  - first:
+      213: -473056065114739117
+    second: monster_tuttle_23
+  - first:
+      213: -5855664660255093412
+    second: monster_tuttle_24
+  - first:
+      213: -4912717599491888703
+    second: monster_tuttle_25
+  - first:
+      213: 4235796996322945056
+    second: monster_tuttle_26
+  - first:
+      213: 1371702338083713536
+    second: monster_tuttle_27
+  - first:
+      213: 5821018567182530116
+    second: monster_tuttle_28
+  - first:
+      213: 6641116033855937905
+    second: monster_tuttle_29
+  - first:
+      213: -6126514953124667366
+    second: monster_tuttle_30
+  - first:
+      213: -8597486623198088317
+    second: monster_tuttle_31
+  - first:
+      213: -2435624774367647268
+    second: monster_tuttle_32
+  - first:
+      213: 3625083268752724844
+    second: monster_tuttle_33
+  - first:
+      213: -341681964077367895
+    second: monster_tuttle_34
+  - first:
+      213: -2760254503305851537
+    second: monster_tuttle_35
+  - first:
+      213: 237104407900439971
+    second: monster_tuttle_36
+  - first:
+      213: 8279241347733437799
+    second: monster_tuttle_37
+  - first:
+      213: 8707596123377221576
+    second: monster_tuttle_38
+  - first:
+      213: -5368543257660948946
+    second: monster_tuttle_39
+  - first:
+      213: -4733213968542176034
+    second: monster_tuttle_40
+  - first:
+      213: -504910388708504234
+    second: monster_tuttle_41
+  - first:
+      213: -1229493043834866866
+    second: monster_tuttle_42
+  - first:
+      213: 1145669593303470027
+    second: monster_tuttle_43
+  - first:
+      213: -3825081251587764223
+    second: monster_tuttle_44
+  - first:
+      213: -1922908942725597340
+    second: monster_tuttle_45
+  - first:
+      213: 2343712428669793242
+    second: monster_tuttle_46
+  - first:
+      213: 2331339830296381561
+    second: monster_tuttle_47
+  - first:
+      213: 3190904090135632528
+    second: monster_tuttle_48
+  - first:
+      213: -291590866889736481
+    second: monster_tuttle_49
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: monster_tuttle_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 504
+        height: 426
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94dc5e32374e98930800000000000000
+      internalID: 4146096115145887049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_1
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 318
+        width: 125
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 190ef7d9f80120300800000000000000
+      internalID: 216753941075976337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_2
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 318
+        width: 125
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20741803ac6a34ae0800000000000000
+      internalID: -1566224858067417342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_3
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 311
+        width: 92
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94339ec79694c4280800000000000000
+      internalID: -9057784033132858551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_4
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 304
+        width: 56
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cd33c625efee1c40800000000000000
+      internalID: 5485085163660721603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_5
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 423
+        width: 25
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8556bfa737e5542e0800000000000000
+      internalID: -2142202197667257000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_6
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 304
+        width: 107
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3522b0184f296b610800000000000000
+      internalID: 1636657093430420051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_7
+      rect:
+        serializedVersion: 2
+        x: 1106
+        y: 415
+        width: 35
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bfe43175657f0cf0800000000000000
+      internalID: -283879172949610567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_8
+      rect:
+        serializedVersion: 2
+        x: 1141
+        y: 415
+        width: 35
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a9499ba3418cef00800000000000000
+      internalID: 1147434132714375591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_9
+      rect:
+        serializedVersion: 2
+        x: 1192
+        y: 287
+        width: 163
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd43093afa71eb530800000000000000
+      internalID: 3872558772716057821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_10
+      rect:
+        serializedVersion: 2
+        x: 1355
+        y: 353
+        width: 92
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0230212559da9740800000000000000
+      internalID: 5159675282757530126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_11
+      rect:
+        serializedVersion: 2
+        x: 1447
+        y: 344
+        width: 59
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 677bdcb7aa61b9ea0800000000000000
+      internalID: -5865069168242608266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_12
+      rect:
+        serializedVersion: 2
+        x: 1506
+        y: 384
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 608975dda9c5ec470800000000000000
+      internalID: 8416766573810259974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_13
+      rect:
+        serializedVersion: 2
+        x: 1010
+        y: 301
+        width: 96
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f0fcbd78ad3e30d0800000000000000
+      internalID: -3441245271391145744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_14
+      rect:
+        serializedVersion: 2
+        x: 1106
+        y: 298
+        width: 85
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6326766b6cf6f58b0800000000000000
+      internalID: -5161283748688862666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_15
+      rect:
+        serializedVersion: 2
+        x: 1355
+        y: 257
+        width: 73
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1138d896806fb5320800000000000000
+      internalID: 2547900530199200529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_16
+      rect:
+        serializedVersion: 2
+        x: 1428
+        y: 250
+        width: 68
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cde250d35cd2f7880800000000000000
+      internalID: -8611113637353541924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_17
+      rect:
+        serializedVersion: 2
+        x: 1506
+        y: 335
+        width: 61
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1376b0ac28fcbd2d0800000000000000
+      internalID: -3252778145202608335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_18
+      rect:
+        serializedVersion: 2
+        x: 1539
+        y: 266
+        width: 66
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cffd597af1a188e20800000000000000
+      internalID: 3352958645835259900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_19
+      rect:
+        serializedVersion: 2
+        x: 1567
+        y: 335
+        width: 39
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8da06892d762f4160800000000000000
+      internalID: 7011865463848569560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_20
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 2
+        width: 181
+        height: 315
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ef81573262689f40800000000000000
+      internalID: 5735442299430735847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_21
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 2
+        width: 108
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4178e336e04835c50800000000000000
+      internalID: 6652806271885805332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_22
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 197
+        width: 119
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2b1951ed685c4360800000000000000
+      internalID: 7155191136940268335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_23
+      rect:
+        serializedVersion: 2
+        x: 917
+        y: 197
+        width: 68
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35eedffd30e5f69f0800000000000000
+      internalID: -473056065114739117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_24
+      rect:
+        serializedVersion: 2
+        x: 985
+        y: 195
+        width: 72
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5dcfa124008cbea0800000000000000
+      internalID: -5855664660255093412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_25
+      rect:
+        serializedVersion: 2
+        x: 1057
+        y: 195
+        width: 85
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c9e9783f5582dbb0800000000000000
+      internalID: -4912717599491888703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_26
+      rect:
+        serializedVersion: 2
+        x: 1142
+        y: 171
+        width: 96
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 028ee7a0de298ca30800000000000000
+      internalID: 4235796996322945056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_27
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 171
+        width: 85
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0027d074204490310800000000000000
+      internalID: 1371702338083713536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_28
+      rect:
+        serializedVersion: 2
+        x: 1323
+        y: 257
+        width: 31
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4463ed7bb8968c050800000000000000
+      internalID: 5821018567182530116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_29
+      rect:
+        serializedVersion: 2
+        x: 1323
+        y: 154
+        width: 56
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17d522eb8dbf92c50800000000000000
+      internalID: 6641116033855937905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_30
+      rect:
+        serializedVersion: 2
+        x: 1506
+        y: 250
+        width: 33
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a10a2eb1c1f3afaa0800000000000000
+      internalID: -6126514953124667366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_31
+      rect:
+        serializedVersion: 2
+        x: 1540
+        y: 185
+        width: 66
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 383fa17b7779fa880800000000000000
+      internalID: -8597486623198088317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_32
+      rect:
+        serializedVersion: 2
+        x: 1379
+        y: 154
+        width: 63
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd9eca51c2ce23ed0800000000000000
+      internalID: -2435624774367647268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_33
+      rect:
+        serializedVersion: 2
+        x: 1442
+        y: 154
+        width: 47
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c63d733c602ee4230800000000000000
+      internalID: 3625083268752724844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_34
+      rect:
+        serializedVersion: 2
+        x: 1489
+        y: 199
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9adb201601a124bf0800000000000000
+      internalID: -341681964077367895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_35
+      rect:
+        serializedVersion: 2
+        x: 1489
+        y: 153
+        width: 44
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6d48c8572b91b9d0800000000000000
+      internalID: -2760254503305851537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_36
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 1
+        width: 154
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a5c597e33d5a4300800000000000000
+      internalID: 237104407900439971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_37
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 1
+        width: 155
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76db065f326c5e270800000000000000
+      internalID: 8279241347733437799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_38
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 171
+        width: 27
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cfb7751a8897d870800000000000000
+      internalID: 8707596123377221576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_39
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 1
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2efcc5d95a1f75b0800000000000000
+      internalID: -5368543257660948946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_40
+      rect:
+        serializedVersion: 2
+        x: 1533
+        y: 106
+        width: 69
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edc602729fe305eb0800000000000000
+      internalID: -4733213968542176034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_41
+      rect:
+        serializedVersion: 2
+        x: 1279
+        y: 2
+        width: 101
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65d00a53da23ef8f0800000000000000
+      internalID: -504910388708504234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_42
+      rect:
+        serializedVersion: 2
+        x: 1381
+        y: 82
+        width: 55
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e43b86c3796ffeee0800000000000000
+      internalID: -1229493043834866866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_43
+      rect:
+        serializedVersion: 2
+        x: 1436
+        y: 111
+        width: 41
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcfc1d2dc6c36ef00800000000000000
+      internalID: 1145669593303470027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_44
+      rect:
+        serializedVersion: 2
+        x: 1442
+        y: 43
+        width: 62
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 100da1a2ed49aeac0800000000000000
+      internalID: -3825081251587764223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_45
+      rect:
+        serializedVersion: 2
+        x: 1477
+        y: 111
+        width: 56
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4673b6d21847055e0800000000000000
+      internalID: -1922908942725597340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_46
+      rect:
+        serializedVersion: 2
+        x: 1381
+        y: 1
+        width: 61
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad3f78e490a868020800000000000000
+      internalID: 2343712428669793242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_47
+      rect:
+        serializedVersion: 2
+        x: 1506
+        y: 1
+        width: 88
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 978098349359a5020800000000000000
+      internalID: 2331339830296381561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_48
+      rect:
+        serializedVersion: 2
+        x: 1533
+        y: 52
+        width: 73
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09a10e42d5e584c20800000000000000
+      internalID: 3190904090135632528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_tuttle_49
+      rect:
+        serializedVersion: 2
+        x: 1442
+        y: 1
+        width: 63
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdef947c6af04fbf0800000000000000
+      internalID: -291590866889736481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      monster_tuttle_0: 4146096115145887049
+      monster_tuttle_1: 216753941075976337
+      monster_tuttle_10: 5159675282757530126
+      monster_tuttle_11: -5865069168242608266
+      monster_tuttle_12: 8416766573810259974
+      monster_tuttle_13: -3441245271391145744
+      monster_tuttle_14: -5161283748688862666
+      monster_tuttle_15: 2547900530199200529
+      monster_tuttle_16: -8611113637353541924
+      monster_tuttle_17: -3252778145202608335
+      monster_tuttle_18: 3352958645835259900
+      monster_tuttle_19: 7011865463848569560
+      monster_tuttle_2: -1566224858067417342
+      monster_tuttle_20: 5735442299430735847
+      monster_tuttle_21: 6652806271885805332
+      monster_tuttle_22: 7155191136940268335
+      monster_tuttle_23: -473056065114739117
+      monster_tuttle_24: -5855664660255093412
+      monster_tuttle_25: -4912717599491888703
+      monster_tuttle_26: 4235796996322945056
+      monster_tuttle_27: 1371702338083713536
+      monster_tuttle_28: 5821018567182530116
+      monster_tuttle_29: 6641116033855937905
+      monster_tuttle_3: -9057784033132858551
+      monster_tuttle_30: -6126514953124667366
+      monster_tuttle_31: -8597486623198088317
+      monster_tuttle_32: -2435624774367647268
+      monster_tuttle_33: 3625083268752724844
+      monster_tuttle_34: -341681964077367895
+      monster_tuttle_35: -2760254503305851537
+      monster_tuttle_36: 237104407900439971
+      monster_tuttle_37: 8279241347733437799
+      monster_tuttle_38: 8707596123377221576
+      monster_tuttle_39: -5368543257660948946
+      monster_tuttle_4: 5485085163660721603
+      monster_tuttle_40: -4733213968542176034
+      monster_tuttle_41: -504910388708504234
+      monster_tuttle_42: -1229493043834866866
+      monster_tuttle_43: 1145669593303470027
+      monster_tuttle_44: -3825081251587764223
+      monster_tuttle_45: -1922908942725597340
+      monster_tuttle_46: 2343712428669793242
+      monster_tuttle_47: 2331339830296381561
+      monster_tuttle_48: 3190904090135632528
+      monster_tuttle_49: -291590866889736481
+      monster_tuttle_5: -2142202197667257000
+      monster_tuttle_6: 1636657093430420051
+      monster_tuttle_7: -283879172949610567
+      monster_tuttle_8: 1147434132714375591
+      monster_tuttle_9: 3872558772716057821
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

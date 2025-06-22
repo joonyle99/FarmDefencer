@@ -115,7 +115,7 @@ public sealed class FarmManager : MonoBehaviour
         farmUI.Init(farmInput,
             productDatabase,
             MapManager.Instance.CurrentMap.MapId,
-            MapManager.Instance.CurrentStage,
+            MapManager.Instance.CurrentStageIndex,
             farm.WateringAction,
             farmClock.SetRemainingDaytimeBy,
             OpenDefenceScene,
