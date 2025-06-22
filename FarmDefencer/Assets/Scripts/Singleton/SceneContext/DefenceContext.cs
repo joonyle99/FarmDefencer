@@ -65,14 +65,11 @@ public class DefenceContext : SceneContext
         // 맵을 로드하고 변경될 때마다 배경 비디오를 갱신
         MapManager.Instance.OnMapChanged -= BackgroundVideoHandler;
         MapManager.Instance.OnMapChanged += BackgroundVideoHandler;
-        MapManager.Instance.LoadCurrentMap();
-
-        GameStateManager.Instance.ChangeState(GameState.Build);
     }
 
     public void BackgroundVideoHandler(MapEntry map)
     {
-        Debug.Log("Background Video Handler: " + map.name);
+        //Debug.Log("Background Video Handler: " + map.name);
 
         _videoController.StopVideo();
         _videoController.PlayVideo(map.MapId);

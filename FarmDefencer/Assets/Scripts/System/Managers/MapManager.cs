@@ -10,48 +10,48 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
 
     // current map
     private int _currentMapIndex = 1;
-    public MapEntry CurrentMap => _mapEntries[Mathf.Clamp(_currentMapIndex-1, 0, MapCount - 1)];   
+    public int CurrentMapIndex { get => _currentMapIndex; set => _currentMapIndex = Mathf.Clamp(value, 1, MapCount); }
+    public MapEntry CurrentMap => _mapEntries[Mathf.Clamp(CurrentMapIndex - 1, 0, MapCount - 1)];   
     
     public int CurrentStage => 2;
 
     // event
     public event Action<MapEntry> OnMapChanged;
 
-    public JObject Serialize() => new(new JProperty("CurrentMapIndex", _currentMapIndex));
+    public JObject Serialize() => new(new JProperty("CurrentMapIndex", CurrentMapIndex));
 
     public void Deserialize(JObject json)
     {
-        _currentMapIndex = json.Property("CurrentMapIndex")?.Value.Value<int>() ?? 0;
+        CurrentMapIndex = json.Property("CurrentMapIndex")?.Value.Value<int>() ?? 0;
         LoadCurrentMap();
     }
 
     public void MoveToNextMap()
     {
-        if (_currentMapIndex + 1 >= MapCount)
+        if (CurrentMapIndex + 1 >= MapCount)
         {
             Debug.Log("마지막 맵입니다. 더 이상 이동할 수 없습니다.");
             return;
         }
 
-        _currentMapIndex++;
+        CurrentMapIndex++;
         LoadCurrentMap();
     }
     public void MoteToPreviousMap()
     {
-        if (_currentMapIndex - 1 < 1)
+        if (CurrentMapIndex - 1 < 1)
         {
             Debug.Log("첫 번째 맵입니다. 더 이상 이동할 수 없습니다.");
             return;
         }
 
-        _currentMapIndex--;
+        CurrentMapIndex--;
         LoadCurrentMap();
     }
 
     public void LoadCurrentMap()
     {
         var currentMap = CurrentMap;
-        //currentMap.Initialize();
         OnMapChanged?.Invoke(currentMap);
     }
 }

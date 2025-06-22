@@ -110,7 +110,7 @@ public sealed class Tower : TargetableBehavior
         bool isProjectileAssigned = _projectilePrefab != null;
         bool isBeamAssigned = _beamPrefab != null;
         // 둘 다 null이거나 둘 다 할당된 경우
-        if (isProjectileAssigned == isBeamAssigned)
+        if (isProjectileAssigned == true && isBeamAssigned == true)
         {
             Debug.LogError("_projectilePrefab 또는 _beamPrefab 중 하나만 할당하세요.");
         }

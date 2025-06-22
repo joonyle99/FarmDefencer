@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,7 +24,14 @@ public enum GameState
 public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
 {
     public GameState CurrentState { get; private set; } = GameState.None;
-    
+
+    public Action OnNormalState;
+    public Action OnPauseState;
+    public Action OnBuildState;
+    public Action OnWaveState;
+    public Action OnWaveAfterState;
+    public Action OnDefenceEndState;
+
     /// <summary>
     /// 메인메뉴에서 타이쿤 씬으로 이동하기 전 true로 설정하여 타이쿤 씬에서 ResourceManager 등의 값들을 JSON에서 불러오도록 하는 프로퍼티.
     /// 디펜스에서 이동하여 false인 경우에는 기존 ResourceManager 등에 설정된 값을 그대로 사용함.
@@ -34,7 +42,7 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     {
         ChangeState(GameState.Normal);
     }
-    
+
     private void Update()
     {
         // CHEAT: Scene Reload
@@ -83,11 +91,11 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     // Common
     private void HandleNormalState()
     {
-
+        OnNormalState?.Invoke();
     }
     private void HandlePauseState()
     {
-
+        OnPauseState?.Invoke();
     }
 
     // Tycoon
@@ -95,18 +103,29 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     // Defence
     private void HandleBuildState()
     {
+        Debug.Log("Enter Build State");
+
+        OnBuildState?.Invoke();
         SoundManager.Instance.PlayMapAmb();
     }
     private void HandleWaveState()
     {
+        Debug.Log("Enter Wave State");
+
+        OnWaveState?.Invoke();
         SoundManager.Instance.PlayMapSong();
     }
     private void HandleWaveAfterState()
     {
+        Debug.Log("Enter WaveAfter State");
 
+        OnWaveAfterState?.Invoke();
     }
     private void HandleDefenceEndState()
     {
+        Debug.Log("Enter DefenceEnd State");
+
+        OnDefenceEndState?.Invoke();
         SoundManager.Instance.StopBgm();
     }
 }

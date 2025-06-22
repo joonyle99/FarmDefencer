@@ -48,7 +48,10 @@ public class ProcessUI : MonoBehaviour
     // 1
     public void Fight()
     {
-        _waveSystem.StartWaveProcess();
+        if (GameStateManager.Instance.CurrentState is not GameState.Build)
+            return;
+
+        GameStateManager.Instance.ChangeState(GameState.Wave);
 
         _fightButton.gameObject.SetActive(false);
         _pauseButton.gameObject.SetActive(true);
@@ -58,6 +61,10 @@ public class ProcessUI : MonoBehaviour
     }
     public void Pause()
     {
+        if (GameStateManager.Instance.CurrentState is not GameState.Wave
+            && GameStateManager.Instance.CurrentState is not GameState.WaveAfter)
+            return;
+
         // pause 시점의 timeScale을 저장
         _savedTimeScale = Time.timeScale;
         Time.timeScale = 0f;
@@ -67,6 +74,10 @@ public class ProcessUI : MonoBehaviour
     }
     public void Resume()
     {
+        if (GameStateManager.Instance.CurrentState is not GameState.Wave
+            && GameStateManager.Instance.CurrentState is not GameState.WaveAfter)
+            return;
+
         // pause 시점의 timeScale을 복원
         Time.timeScale = _savedTimeScale;
 
@@ -77,6 +88,10 @@ public class ProcessUI : MonoBehaviour
     // 2
     public void PlayX1()
     {
+        if (GameStateManager.Instance.CurrentState is not GameState.Wave
+            && GameStateManager.Instance.CurrentState is not GameState.WaveAfter)
+            return;
+
         Time.timeScale = 1f;
         _savedTimeScale = Time.timeScale;
 
@@ -85,6 +100,10 @@ public class ProcessUI : MonoBehaviour
     }
     public void PlayX2()
     {
+        if (GameStateManager.Instance.CurrentState is not GameState.Wave
+            && GameStateManager.Instance.CurrentState is not GameState.WaveAfter)
+            return;
+
         Time.timeScale = 3f;
         _savedTimeScale = Time.timeScale;
 

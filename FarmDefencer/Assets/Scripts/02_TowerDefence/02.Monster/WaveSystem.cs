@@ -79,43 +79,46 @@ public class WaveSystem : MonoBehaviour
 
     private void Start()
     {
-        _maxWaveCount = _stageData.Waves.Count;
-        _currentWave = 0;
+        GameStateManager.Instance.OnWaveState -= InitSomething;
+        GameStateManager.Instance.OnWaveState += InitSomething;
+
+        GameStateManager.Instance.OnWaveState -= InitProgressBar;
+        GameStateManager.Instance.OnWaveState += InitProgressBar;
+
+        GameStateManager.Instance.OnWaveState -= StartWaveProcess;
+        GameStateManager.Instance.OnWaveState += StartWaveProcess;
     }
     private void Update()
     {
-        #if UNITY_EDITOR
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            OnEnding?.Invoke(EndingType.Success);
+        if (GameStateManager.Instance.CurrentState is not GameState.Wave
+            && GameStateManager.Instance.CurrentState is not GameState.WaveAfter)
             return;
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
+
+        // TODO: 남은 웨이브에 따라서...?
+        // 근데 웨이브 단위가 아닌 몬스터 단위로 해야 자연스러울 거 같은데
+        // 그러려면 나올 몬스터를 미리 다 정해놔야 하지 않을까..?
+        var remainWaveCount = _maxWaveCount - _currentWave;
+        if (remainWaveCount > 0)
         {
-            OnEnding?.Invoke(EndingType.Failure);
-            return;
+            _progressBar.UpdateProgressBar((float)remainWaveCount, (float)_maxWaveCount);
         }
-
-        #endif
-
-        if (GameStateManager.Instance.CurrentState == GameState.Wave)
+        else
         {
-            // 남은 웨이브에 따라서...?
-            // 근데 웨이브 단위가 아닌 몬스터 단위로 해야 자연스러울 거 같은데
-            // 그러려면 나올 몬스터를 미리 다 정해놔야 하지 않을까..?
-            var remainWaveCount = _maxWaveCount - _currentWave;
-            if (remainWaveCount > 0)
-            {
-                _progressBar.UpdateProgressBar((float)remainWaveCount, (float)_maxWaveCount);
-            }
-            else
-            {
-                _progressBar.UpdateProgressBar(0f, (float)_maxWaveCount);
+            _progressBar.UpdateProgressBar(0f, (float)_maxWaveCount);
 
-                GameStateManager.Instance.ChangeState(GameState.WaveAfter);
-            }
+            GameStateManager.Instance.ChangeState(GameState.WaveAfter);
         }
+    }
+
+    private void InitSomething()
+    {
+        _maxWaveCount = _stageData.Waves.Count;
+        _currentWave = 0;
+    }
+    private void InitProgressBar()
+    {
+        _progressBar.Initialize();
+        _progressBar.SetDangerousThreshold(0.5f);
     }
 
     // wave process
@@ -185,19 +188,17 @@ public class WaveSystem : MonoBehaviour
     }
     public void StartWaveProcess()
     {
-        _progressBar.Initialize();
-        _progressBar.SetDangerousThreshold(0.5f);
+        if (GameStateManager.Instance.CurrentState is not GameState.Wave
+            && GameStateManager.Instance.CurrentState is not GameState.WaveAfter)
+            return;
 
         StartCoroutine(WaveProcessCo());
     }
     private IEnumerator WaveProcessCo()
     {
-        GameStateManager.Instance.ChangeState(GameState.Wave);
-
         yield return DefenceContext.Current.GridMap.FindPathOnStartCo();
         yield return WaveSpawnCo();
     }
-    //
 
     private void CompleteWaveProcess()
     {
@@ -205,6 +206,9 @@ public class WaveSystem : MonoBehaviour
     }
     private void CompleteStageProcess()
     {
+        if (GameStateManager.Instance.CurrentState is not GameState.WaveAfter)
+            return;
+
         // TODO: Fight 버튼, 타워 설치, 등 불가능하게 막기
         GameStateManager.Instance.ChangeState(GameState.DefenceEnd);
 

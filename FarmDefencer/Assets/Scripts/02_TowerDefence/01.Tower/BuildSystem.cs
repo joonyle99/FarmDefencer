@@ -23,7 +23,7 @@ public class BuildSystem : MonoBehaviour
     private float _buildTimer = 0f;
 
     // build panel
-    public PanelToggler PanelToggler; // // TODO: 구조 변경하기..
+    public PanelToggler PanelToggler; // TODO: 구조 변경하기..
 
     // dynamic variable
     private Tower _ghostTower;
@@ -31,28 +31,40 @@ public class BuildSystem : MonoBehaviour
 
     private void Start()
     {
-        _progressBar.Initialize();
-        _progressBar.SetDangerousThreshold(0.5f);
+        GameStateManager.Instance.OnBuildState -= InitSomething;
+        GameStateManager.Instance.OnBuildState += InitSomething;
+
+        GameStateManager.Instance.OnBuildState -= InitProgressBar;
+        GameStateManager.Instance.OnBuildState += InitProgressBar;
     }
     private void Update()
     {
-        if (GameStateManager.Instance.CurrentState == GameState.Build)
-        {
-            _buildTimer += Time.deltaTime;
-            if (_buildTimer < _buildDuration)
-            {
-                var remainBuildTime = _buildDuration - _buildTimer;
-                _progressBar.UpdateProgressBar(remainBuildTime, _buildDuration);
-            }
-            else
-            {
-                _buildTimer = 0f;
-                _progressBar.UpdateProgressBar(0f, _buildDuration);
+        if (GameStateManager.Instance.CurrentState is not GameState.Build)
+            return;
 
-                GameStateManager.Instance.ChangeState(GameState.Wave);
-                DefenceContext.Current.WaveSystem.StartWaveProcess();
-            }
+        _buildTimer += Time.deltaTime;
+        if (_buildTimer < _buildDuration)
+        {
+            var remainBuildTime = _buildDuration - _buildTimer;
+            _progressBar.UpdateProgressBar(remainBuildTime, _buildDuration);
         }
+        else
+        {
+            _buildTimer = 0f;
+            _progressBar.UpdateProgressBar(0f, _buildDuration);
+
+            GameStateManager.Instance.ChangeState(GameState.Wave);
+        }
+    }
+
+    private void InitSomething()
+    {
+        _buildTimer = 0f;
+    }
+    private void InitProgressBar()
+    {
+        _progressBar.Initialize();
+        _progressBar.SetDangerousThreshold(0.5f);
     }
 
     // 타워를 집고, 옮기고, 놓는 기능을 처리하는 메소드들
