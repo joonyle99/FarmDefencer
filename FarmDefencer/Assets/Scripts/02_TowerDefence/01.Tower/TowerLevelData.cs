@@ -1,7 +1,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-[CreateAssetMenu(fileName = "TowerLevelData", menuName = "Scriptable Objects/TowerDefence/TowerLevelData")]
+[CreateAssetMenu(fileName = "TowerLevelData", menuName = "Scriptable Objects/TowerDefence/TowerLevelData", order = 10)]
 public class TowerLevelData : ScriptableObject
 {
     [BoxGroup("외형")] public Sprite Icon;
@@ -21,6 +21,6 @@ public class TowerLevelData : ScriptableObject
     [BoxGroup("사운드")] public AudioClip FireReady;
     [BoxGroup("사운드")] public AudioClip FireShot;
 
-    [BoxGroup("기타 - 레이저 빔")] public float StayDuration; 
-    [BoxGroup("기타 - 레이저 빔")] public float DealInterval; 
+    [BoxGroup("기타 - 레이저 빔")] public float StayDuration;
+    [BoxGroup("기타 - 레이저 빔")] public float DealInterval;
 }
