@@ -86,8 +86,7 @@ public sealed class WateringCan :
 
 		Using = true;
 		// 물뿌리개 위치를 현재 커서 위치로 옮기기
-		_rectTransform.localPosition = pointerEventData.position;
-
+		_rectTransform.anchoredPosition = pointerEventData.position;
 		// 물뿌리개의 월드 위치 구하기
 		var pointerScreenPosition = pointerEventData.position;
 		var pointerWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(pointerScreenPosition.x, pointerScreenPosition.y, 10.0f));

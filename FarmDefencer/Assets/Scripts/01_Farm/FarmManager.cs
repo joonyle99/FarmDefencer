@@ -37,20 +37,7 @@ public sealed class FarmManager : MonoBehaviour
             // 디버그용 할당 코드 등 여기에...
             quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
             var monsters = new List<string>();
-            monsters.Add("Rabbit");
-            monsters.Add("Rabbit");
-            monsters.Add("Rabbit");
-            monsters.Add("Rabbit");
-            monsters.Add("Capybara");
-            monsters.Add("Capybara");
-            monsters.Add("Capybara");
-            monsters.Add("Capybara");
-            monsters.Add("Capybara");
-            monsters.Add("Squirrel");
-            monsters.Add("Squirrel");
-            monsters.Add("Squirrel");
-            monsters.Add("Squirrel");
-            monsters.Add("Squirrel");
+            harvestTutorialGiver.AddTutorial("product_carrot");
             penaltyGiver.SpawnMonsters(MapManager.Instance.CurrentMap.MapId, monsters);
         }
         else
