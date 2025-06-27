@@ -4,6 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 
+public abstract class CropCommand{}
+
+public sealed class WaterCommand : CropCommand{}
+
+public sealed class GrowCommand : CropCommand{}
+
 public enum RequiredCropAction
 {
 	None,
@@ -65,6 +71,8 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 	public bool AABB(Vector2 worldPosition) =>
 		Mathf.Abs(worldPosition.x - transform.position.x) < 0.5f &&
 		Mathf.Abs(worldPosition.y - transform.position.y) < 0.5f;
+
+	public abstract void ApplyCommand(CropCommand cropCommand);
 
 	/// <summary>
 	/// 한 손가락으로 탭할 때의 동작을 정의.

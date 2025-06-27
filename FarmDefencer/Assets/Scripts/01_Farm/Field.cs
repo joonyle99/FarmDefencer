@@ -45,6 +45,14 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
 
     public bool AllLocked => Array.TrueForAll(_crops, c => _lockedCrops.Contains(c));
 
+    public void ApplyCropCommand(CropCommand cropCommand)
+    {
+        foreach (var crop in _crops)
+        {
+            crop.ApplyCommand(cropCommand);
+        }
+    }
+
     public JObject Serialize()
     {
         var jsonCrops = new JObject();

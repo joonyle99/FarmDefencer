@@ -64,7 +64,31 @@ public sealed class CropCabbage : Crop
 	
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
-
+	
+	public override void ApplyCommand(CropCommand cropCommand)
+	{
+		var currentStage = GetCurrentStage(_currentState);
+		
+		switch (cropCommand)
+		{
+			case GrowCommand when currentStage is CabbageStage.Stage1_Growing:
+			{
+				_currentState.GrowthSeconds = Stage1_GrowthSeconds;
+				break;
+			}
+			case GrowCommand when currentStage is CabbageStage.Stage2_Growing:
+			{
+				_currentState.GrowthSeconds = Stage2_GrowthSeconds;
+				break;
+			}
+			case WaterCommand when currentStage is CabbageStage.Stage1_BeforeWater or CabbageStage.Stage2_BeforeWater:
+			{
+				_currentState.Watered = true;
+				break;
+			}
+		}
+	}
+	
 	public override JObject Serialize() => JObject.FromObject(_currentState);
 
 	public override void Deserialize(JObject json)

@@ -39,8 +39,27 @@ public sealed class CropCarrot : Crop
 
 	private SpriteRenderer _spriteRenderer;
 	private CarrotState _currentState;
-
+	
 	public override RequiredCropAction RequiredCropAction => GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+	
+	public override void ApplyCommand(CropCommand cropCommand)
+	{
+		var currentStage = GetCurrentStage(_currentState);
+		
+		switch (cropCommand)
+		{
+			case GrowCommand when currentStage == CarrotStage.Growing:
+			{
+				_currentState.GrowthSeconds = MatureSeconds;
+				break;
+			}
+			case WaterCommand when currentStage == CarrotStage.BeforeWater:
+			{
+				_currentState.Watered = true;
+				break;
+			}
+		}
+	}
 
 	public override JObject Serialize() => JObject.FromObject(_currentState);
 

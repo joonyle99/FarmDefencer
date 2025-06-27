@@ -15,6 +15,19 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFarm
 
     public int InputPriority => IFarmInputLayer.Priority_Farm;
 
+    public void ApplyCropCommand(CropCommand cropCommand)
+    {
+        foreach (var field in _fields)
+        {
+            if (!field.IsAvailable)
+            {
+                continue;
+            }
+            
+            field.ApplyCropCommand(cropCommand);
+        }
+    }
+
     public JObject Serialize()
     {
         var jsonFields = new JObject();

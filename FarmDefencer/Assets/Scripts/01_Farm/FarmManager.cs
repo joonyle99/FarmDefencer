@@ -28,6 +28,8 @@ public sealed class FarmManager : MonoBehaviour
     [SerializeField] private FarmInput farmInput;
     [SerializeField] private ProductDatabase productDatabase;
     [SerializeField] private HarvestTutorialGiver harvestTutorialGiver;
+    [SerializeField] private WeatherShopUI weatherShopUI;
+    [SerializeField] private WeatherGiver weatherGiver;
 
     private void Start()
     {
@@ -94,6 +96,7 @@ public sealed class FarmManager : MonoBehaviour
         farmClock.AddPauseCondition(() => penaltyGiver.IsAnimationPlaying);
         farmClock.AddPauseCondition(() => harvestTutorialGiver.IsPlayingTutorial);
         farmClock.AddPauseCondition(() => farmUI.IsPaused);
+        farmClock.AddPauseCondition(() => weatherGiver.IsWeatherOnGoing);
 
         quotaContext.Init(productName => productDatabase.Products.FirstOrDefault(p => p.ProductName == productName));
 
@@ -116,6 +119,14 @@ public sealed class FarmManager : MonoBehaviour
         penaltyGiver.Init(farm);
 
         quotaContext.QuotaContextUpdated += QuotaContextChangedHandler;
+        
+        weatherShopUI.Init(weatherGiver.SetWeather);
+        weatherShopUI.AddItem(new SunItem(20 + MapManager.Instance.CurrentMap.MapId*10));
+        weatherShopUI.AddItem(new RainItem(10, 10));
+        weatherShopUI.AddItem(new RainItem(30, 30));
+        weatherShopUI.AddItem(new RainItem(50, 50));
+        
+        weatherGiver.Init(farm.ApplyCropCommand);
     }
 
     private void DeserializeFromSaveFile()
@@ -171,5 +182,21 @@ public sealed class FarmManager : MonoBehaviour
             productEntry => quotaContext.TryGetQuota(productEntry.ProductName, out var outQuota) ? outQuota : 0,
             () => quotaContext.HotProduct,
             () => quotaContext.SpecialProduct);
+    }
+
+    private bool OnWeatherShopItemBought(WeatherShopItem item)
+    {
+        if (ResourceManager.Instance.Gold < item.Price)
+        {
+            return false;
+        }
+
+        var isWeatherGiven = weatherGiver.SetWeather(item);
+        if (isWeatherGiven)
+        {
+            ResourceManager.Instance.Gold -= item.Price;
+        }
+        
+        return isWeatherGiven;
     }
 }

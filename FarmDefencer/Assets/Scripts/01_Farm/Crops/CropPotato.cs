@@ -45,6 +45,25 @@ public sealed class CropPotato : Crop
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
 	
+	public override void ApplyCommand(CropCommand cropCommand)
+	{
+		var currentStage = GetCurrentStage(_currentState);
+		
+		switch (cropCommand)
+		{
+			case GrowCommand when currentStage == PotatoStage.Growing:
+			{
+				_currentState.GrowthSeconds = MatureSeconds;
+				break;
+			}
+			case WaterCommand when currentStage == PotatoStage.BeforeWater:
+			{
+				_currentState.Watered = true;
+				break;
+			}
+		}
+	}
+	
 	public override JObject Serialize() => JObject.FromObject(_currentState);
 
 	public override void Deserialize(JObject json)

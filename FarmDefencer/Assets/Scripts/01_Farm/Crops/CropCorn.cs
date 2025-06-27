@@ -54,6 +54,30 @@ public sealed class CropCorn : Crop
 	private SpriteRenderer _spriteRenderer;
 	private CornState _currentState;
 
+	public override void ApplyCommand(CropCommand cropCommand)
+	{
+		var currentStage = GetCurrentStage(_currentState);
+		
+		switch (cropCommand)
+		{
+			case GrowCommand when currentStage is CornStage.Stage1_Growing:
+			{
+				_currentState.GrowthSeconds = Stage1_GrowthSeconds;
+				break;
+			}
+			case GrowCommand when currentStage is CornStage.Stage2_Growing:
+			{
+				_currentState.GrowthSeconds = Stage2_GrowthSeconds;
+				break;
+			}
+			case WaterCommand when currentStage is CornStage.Stage1_BeforeWater or CornStage.Stage2_BeforeWater:
+			{
+				_currentState.Watered = true;
+				break;
+			}
+		}
+	}
+	
 	public override JObject Serialize() => JObject.FromObject(_currentState);
 
 	public override void Deserialize(JObject json)
