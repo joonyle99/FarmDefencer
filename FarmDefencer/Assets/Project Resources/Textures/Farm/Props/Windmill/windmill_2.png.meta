@@ -3,8 +3,8 @@ guid: c835ef838500100418b35b9c880f5a37
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4557938578374111430
-    second: "\uD48D\uC7902_0"
+      213: 8593468589729308410
+    second: windmill_2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +49,7 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 7
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uD48D\uC7902_0"
+      name: windmill_2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1
+        x: 2
+        y: 0
         width: 284
-        height: 361
+        height: 362
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a3f46ff0303feb0c0800000000000000
-      internalID: -4557938578374111430
+      spriteID: afeda47f622224770800000000000000
+      internalID: 8593468589729308410
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\uD48D\uC7902_0": -4557938578374111430
+      windmill_2_0: 8593468589729308410
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
