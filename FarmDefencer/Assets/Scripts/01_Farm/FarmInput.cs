@@ -1,6 +1,8 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
+using System;
+using System.Linq;
 
 /// <summary>
 /// 타이쿤 씬에서 유저 입력을 받는 컴포넌트.
@@ -47,6 +49,8 @@ public sealed class FarmInput : MonoBehaviour
 	private Vector2 _lastInteractedWorldPosition;
 	private Vector2 _initialSingleHoldingWorldPosition;
 	private List<IFarmInputLayer> _inputLayers;
+	private List<Func<bool>> _canInputConditions;
+	private bool _canInput; // Update()에서 _canInputConditions에 의해 평가됨.
 
 	private float _zoomMomentum;
 
@@ -60,9 +64,16 @@ public sealed class FarmInput : MonoBehaviour
 		_inputLayers.Add(inputLayer);
 		_inputLayers.Sort((left, right) => right.InputPriority.CompareTo(left.InputPriority));
 	}
+	
+	public void AddCanInputCondition(Func<bool> condition) => _canInputConditions.Add(condition);
 
 	private void OnSingleTap()
 	{
+		if (!_canInput)
+		{
+			return;
+		}
+		
 		foreach (var inputLayer in _inputLayers)
 		{
 			if (inputLayer.InputPriority < InputPriorityCut)
@@ -81,6 +92,11 @@ public sealed class FarmInput : MonoBehaviour
 	// 누르는 순간, 떼는 순간만 감지하기 때문에, 실제 호출은 Update()에서 진행.
 	private void OnSingleHold(InputValue inputValue)
 	{
+		if (!_canInput)
+		{
+			return;
+		}
+		
 		var isCurrentFrameHolding = inputValue.Get<float>() >= 0.5f;
 
 		if (!_isSingleHolding && isCurrentFrameHolding)
@@ -93,6 +109,11 @@ public sealed class FarmInput : MonoBehaviour
 
 	private void OnMouseWheel(InputValue inputValue)
 	{
+		if (!_canInput)
+		{
+			return;
+		}
+		
 		var input = inputValue.Get<float>();
 		if (input != 0.0f)
 		{
@@ -103,6 +124,8 @@ public sealed class FarmInput : MonoBehaviour
 
 	private void Update()
 	{
+		_canInput = _canInputConditions.All(canInput => canInput());
+		
 		var interactScreenPosition = interactAction.action.ReadValue<Vector2>();
 		var interactWorldPosition = _camera.ScreenToWorldPoint(new Vector3(interactScreenPosition.x, interactScreenPosition.y, 10.0f));
 		var deltaWorldPosition = new Vector2(interactWorldPosition.x, interactWorldPosition.y) - _lastInteractedWorldPosition;
@@ -162,7 +185,8 @@ public sealed class FarmInput : MonoBehaviour
 
 	private void Awake()
 	{
-		_inputLayers = new List<IFarmInputLayer>();
+		_canInputConditions = new();
+		_inputLayers = new();
 		_camera = GetComponent<Camera>();
 		_camera.tag = "MainCamera";
 	}

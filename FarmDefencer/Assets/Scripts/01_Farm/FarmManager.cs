@@ -66,6 +66,8 @@ public sealed class FarmManager : MonoBehaviour
         }
 
         farmUI.WateringCanAvailable = !harvestTutorialGiver.gameObject.activeSelf;
+
+        farmUI.GoDefenceUIEnabled = ratio == 0.0f;
     }
 
     private void QuotaContextChangedHandler()
@@ -85,6 +87,7 @@ public sealed class FarmManager : MonoBehaviour
     {
         farmInput.RegisterInputLayer(farm);
         farmInput.RegisterInputLayer(harvestTutorialGiver);
+        farmInput.AddCanInputCondition(() => farmClock.RemainingDaytime > 0.0f);
 
         farmClock.RegisterFarmUpdatableObject(farm);
         farmClock.RegisterFarmUpdatableObject(penaltyGiver);
