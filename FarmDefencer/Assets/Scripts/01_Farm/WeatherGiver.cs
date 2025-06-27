@@ -11,12 +11,13 @@ public class WeatherGiver : MonoBehaviour
     private Coroutine _onGoingWeather;
     private Action<CropCommand> _applyCropCommand;
     private TMP_Text _weatherText; // Test
+    private bool _wasSunBought;
     
     public void Init(Action<CropCommand> applyCropCommand) => _applyCropCommand = applyCropCommand;
 
     public bool SetWeather(WeatherShopItem item)
     {
-        if (IsWeatherOnGoing)
+        if (IsWeatherOnGoing || item is SunItem && _wasSunBought)
         {
             return false;
         }
@@ -34,6 +35,7 @@ public class WeatherGiver : MonoBehaviour
         {
             case SunItem:
             {
+                _wasSunBought = true;
                 _weatherText.SetText("*SUN*");
                 yield return new WaitForSeconds(1.0f);
                 _applyCropCommand(new GrowCommand());
