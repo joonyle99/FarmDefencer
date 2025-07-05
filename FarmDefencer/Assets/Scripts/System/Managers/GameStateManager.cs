@@ -72,7 +72,7 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
         }
 
         CurrentState = nextState;
-        Debug.Log($"Current State: {CurrentState.ToString()}");
+        Debug.Log($"<color=orange>Current State: {CurrentState.ToString()}</color>");
 
         switch (CurrentState)
         {
@@ -112,29 +112,25 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     // Defence
     private void HandleBuildState()
     {
-        Debug.Log("Enter Build State");
-
         OnBuildState?.Invoke();
         SoundManager.Instance.PlayMapAmb();
     }
     private void HandleWaveState()
     {
-        Debug.Log("Enter Wave State");
-
         OnWaveState?.Invoke();
         SoundManager.Instance.PlayMapSong();
     }
     private void HandleWaveAfterState()
     {
-        Debug.Log("Enter WaveAfter State");
-
         OnWaveAfterState?.Invoke();
     }
     private void HandleDefenceEndState()
     {
-        Debug.Log("Enter DefenceEnd State");
-
         OnDefenceEndState?.Invoke();
         SoundManager.Instance.StopBgm();
+
+        // TODO: Fight 버튼, 타워 설치, 등 불가능하게 막기
+        // TODO: 게임 배속 복구하기
+        Time.timeScale = 1f;
     }
 }

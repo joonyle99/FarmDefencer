@@ -43,7 +43,7 @@ public class DefenceContext : SceneContext
         {
             string log = "";
 
-            log += "DefenceContext is ready.\n";
+            log += $"<color=green>DefenceContext is ready.</color>\n";
             //log += $"============================\n";
             log += $"{nameof(GridMap)} is ready.\n";
             log += $"{nameof(BuildSystem)} is ready.\n";

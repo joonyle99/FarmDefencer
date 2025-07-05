@@ -220,7 +220,7 @@ public class WaveSystem : MonoBehaviour
     private void CompleteWaveProcess()
     {
         // Do Something
-        Debug.Log($"Wave {_currentWave} completed!");
+        Debug.Log($"<color=orange>Complete {_currentWave} Wave</color>");
     }
     private void CompleteStageProcess()
     {
