@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8697a5b2d6d3c40943ade1280a3abf, type: 3}
+  m_Name: MapEntry_02_Beach
+  m_EditorClassIdentifier: 
+  mapId: 2
+  mapCode: beach
+  monsters:
+  - {fileID: 8504615390514146694, guid: 83c5e4ce8fc25124589524377a783765, type: 3}
+  - {fileID: 8244829762353483558, guid: 3020189df1f79bf409d60b0e79598c7b, type: 3}
+  - {fileID: 6808927289791045662, guid: 871f81cfd2528d74eb008bfec735d5b0, type: 3}
+  - {fileID: 4154301835580674965, guid: 50c583a48eb37834cb49f51de47d72f7, type: 3}
+  - {fileID: 761433559861001395, guid: b97306ced56f74f4c957a74918b2b214, type: 3}
+  crops: []

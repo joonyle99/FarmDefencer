@@ -119,13 +119,9 @@ public class WaveSystem : MonoBehaviour
     private void InitStageData()
     {
         var mapIndex = MapManager.Instance.CurrentMapIndex;
-        Debug.Log(mapIndex);
         var stageIndex = MapManager.Instance.CurrentStageIndex;
-        Debug.Log(stageIndex);
         var stageDataList = _mapData[mapIndex - 1].StateDataList;
-        Debug.Log(stageDataList.Count);
         _stageData = stageDataList[stageIndex - 1];
-        Debug.Log(_stageData.Waves.Count);
         _maxWaveCount = _stageData.Waves.Count;
         _currentWave = 0;
     }
