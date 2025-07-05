@@ -2372,9 +2372,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f94573617cc02824db1d924acd237100, type: 2}
   - {fileID: 11400000, guid: 3036b1042a7157646a4a47b6ce727ec2, type: 2}
   _waitSpawnTimeRange:
-    Start: 1
-    End: 2
-  _waitWaveTime: 3
+    Start: 0.5
+    End: 1.5
+  _waitWaveTimeRange:
+    Start: 2.5
+    End: 4.5
   _progressBar: {fileID: 730172970}
 --- !u!114 &1231187497
 MonoBehaviour:
