@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6994b7fdb8f4d1743b4becb82961e543, type: 3}
   m_Name: MapData_1
   m_EditorClassIdentifier: 
-  StateData:
+  StateDataList:
   - {fileID: 11400000, guid: 89b3ce57e465be248a1afcdf82c6d32c, type: 2}
   - {fileID: 11400000, guid: a79d7d6ba973ac240b076a1bb5ca99ca, type: 2}
   - {fileID: 11400000, guid: 879ae07d036a20d41a34b56b4ef5eae4, type: 2}
