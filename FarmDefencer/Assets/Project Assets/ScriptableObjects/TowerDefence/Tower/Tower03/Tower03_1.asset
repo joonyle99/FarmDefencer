@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d23d5d10bfc7ab40a374edf33b6caf0, type: 3}
   m_Name: Tower03_1
   m_EditorClassIdentifier: 
-  Icon: {fileID: -1552472336689577784, guid: 76f2b3b2a97a7f04c9c626e33fc05dfc, type: 3}
+  Icon: {fileID: -1271769587169515162, guid: 4c990ec83e4b0a14fa41770f3800d158, type: 3}
   Name: "\uD0C0\uC6CC3: \uB9C8\uBE44\uB3C5"
   Description: "\uB9C8\uBE44\uB3C5\uC774 \uBAAC\uC2A4\uD130\uC758 \uC774\uB3D9 \uC18D\uB3C4\uB97C
     \uB0AE\uCDA5\uB2C8\uB2E4"
@@ -25,3 +25,5 @@ MonoBehaviour:
   SellCost: 15
   FireReady: {fileID: 8300000, guid: f842d624dec6c6f469303dac4ebe16ab, type: 3}
   FireShot: {fileID: 8300000, guid: 5d3a5e9212c65f6469dba9187632e86a, type: 3}
+  StayDuration: 0
+  DealInterval: 0
