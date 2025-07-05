@@ -13,24 +13,29 @@ public class WaveSystem : MonoBehaviour
 
     #region Attribute
 
-    [SerializeField] private Factory _factory;              // wave system use factory for spawn spawnedMonster
+    [SerializeField] private Factory _factory;                  // use factory for spawn monster
     public Factory Factory => _factory;
 
     [Space]
 
-    [SerializeField] private RangeFloat _waitSpawnTimeRange;
+    // map - stage - wave
+    [SerializeField] private List<MapData> _mapData;
+    private StageData _stageData;
+    private int _maxWaveCount;
+    private int _currentWave;
+
+    [Space]
+
+    [SerializeField] private RangeFloat _waitSpawnTimeRange;    // 각 몬스터 스폰 간의 대기 시간
     private float _waitSpawnTime = 0f;
-    [SerializeField] private float _waitWaveTime = 2f;
+    [SerializeField] private RangeFloat _waitWaveTimeRange;     // 각 웨이브 간의 대기 시간
+    private float _waitWaveTime = 0f;
     private float _elapsedTime = 0f;
 
     [Space]
 
     // progress bar
     [SerializeField] private ProgressBar _progressBar;
-    [SerializeField] private List<MapData> _mapData;
-    private StageData _stageData;
-    private int _maxWaveCount;
-    private int _currentWave;
 
     // target spawn count
     private int _targetSpawnCount = 0;
@@ -80,8 +85,8 @@ public class WaveSystem : MonoBehaviour
 
     private void Start()
     {
-        GameStateManager.Instance.OnWaveState -= InitSomething;
-        GameStateManager.Instance.OnWaveState += InitSomething;
+        GameStateManager.Instance.OnWaveState -= InitStageData;
+        GameStateManager.Instance.OnWaveState += InitStageData;
 
         GameStateManager.Instance.OnWaveState -= InitProgressBar;
         GameStateManager.Instance.OnWaveState += InitProgressBar;
@@ -111,12 +116,16 @@ public class WaveSystem : MonoBehaviour
         }
     }
 
-    private void InitSomething()
+    private void InitStageData()
     {
         var mapIndex = MapManager.Instance.CurrentMapIndex;
+        Debug.Log(mapIndex);
         var stageIndex = MapManager.Instance.CurrentStageIndex;
-        var stageDataList = _mapData[mapIndex - 1].StateData;
+        Debug.Log(stageIndex);
+        var stageDataList = _mapData[mapIndex - 1].StateDataList;
+        Debug.Log(stageDataList.Count);
         _stageData = stageDataList[stageIndex - 1];
+        Debug.Log(_stageData.Waves.Count);
         _maxWaveCount = _stageData.Waves.Count;
         _currentWave = 0;
     }
@@ -148,35 +157,38 @@ public class WaveSystem : MonoBehaviour
     private IEnumerator WaveSpawnCo()
     {
         // 모든 웨이브를 순회한다
+        // 각 웨이브는 동일한 몬스터를 여러 번 스폰한다
         foreach (var wave in _stageData.Waves)
         {
+            // wave setting
             _currentWave++;
+            _waitWaveTime = _waitWaveTimeRange.Random(); // 웨이브 대기 시간
 
-            var waveMonster = wave.WaveMonster;
-            var spawnCount = wave.SpawnCountRange.Random();
-
+            // spawn setting
+            var monster = wave.Monster;
+            var spawnCount = wave.SpawnCountRange.Random(); // 몬스터 스폰 횟수
             TargetSpawnCount = spawnCount;
-
             _currentSpawnCount = 0;
 
-            // 해당 웨이브 진입
-            // e.g) 토끼(8~12) + 고양이(4~6)
+            // 해당 웨이브 진입하여 몬스터를 스폰한다
+            // e.g) 토끼(8~12)
             while (true)
             {
                 // complete wave
                 if (_currentSpawnCount >= TargetSpawnCount)
                 {
+                    // 웨이브 종료
                     CompleteWaveProcess();
                     break;
                 }
 
-                // wait time
+                // wait spawn time for each same monster
                 if (_elapsedTime >= _waitSpawnTime)
                 {
                     _elapsedTime = 0f;
-                    _waitSpawnTime = _waitSpawnTimeRange.Random();
+                    _waitSpawnTime = _waitSpawnTimeRange.Random(); // 몬스터 스폰 대기 시간
 
-                    Spawn(waveMonster);
+                    Spawn(monster);
                 }
 
                 yield return null;
@@ -187,8 +199,11 @@ public class WaveSystem : MonoBehaviour
             // 다음 웨이브 대기
             yield return new WaitForSeconds(_waitWaveTime);
         }
+
+        // 모든 웨이브가 종료되면 스테이지 종료 처리
         yield return new WaitUntil(() => CompleteStage == true);
 
+        // 스테이지 종료
         CompleteStageProcess();
     }
     public void StartWaveProcess()
@@ -205,9 +220,11 @@ public class WaveSystem : MonoBehaviour
         yield return WaveSpawnCo();
     }
 
+    // complete process
     private void CompleteWaveProcess()
     {
         // Do Something
+        Debug.Log($"Wave {_currentWave} completed!");
     }
     private void CompleteStageProcess()
     {

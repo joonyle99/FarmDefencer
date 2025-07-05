@@ -41,7 +41,7 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFa
     {
 #if UNITY_EDITOR
         // CHEAT: Earn Gold
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.F1))
         {
             var amount = 100;
 
@@ -49,7 +49,7 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFa
             Debug.Log($"earn {amount} gold (<color=orange>current: {_gold}</color>)");
         }
         // CHEAT: Spend Gold
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.F2))
         {
             var amount = 100;
 

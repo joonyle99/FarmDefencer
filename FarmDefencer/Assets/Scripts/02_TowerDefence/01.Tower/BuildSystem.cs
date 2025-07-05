@@ -17,13 +17,15 @@ public class BuildSystem : MonoBehaviour
 
     [Space]
 
+    // build panel
+    [SerializeField] private PanelToggler _panelToggler; // TODO: 구조 변경하기..
+
+    [Space]
+
     // progress bar
     [SerializeField] private ProgressBar _progressBar;
     [SerializeField] private float _buildDuration = 20f;
     private float _buildTimer = 0f;
-
-    // build panel
-    public PanelToggler PanelToggler; // TODO: 구조 변경하기..
 
     // dynamic variable
     private Tower _ghostTower;
@@ -43,6 +45,7 @@ public class BuildSystem : MonoBehaviour
             return;
 
         _buildTimer += Time.deltaTime;
+
         if (_buildTimer < _buildDuration)
         {
             var remainBuildTime = _buildDuration - _buildTimer;
@@ -85,9 +88,9 @@ public class BuildSystem : MonoBehaviour
         }
 
         // 열려 있는 타워 설치 패널을 닫기
-        if (PanelToggler.IsExpanded)
+        if (_panelToggler.IsExpanded)
         {
-            PanelToggler.TogglePanel();
+            _panelToggler.TogglePanel();
         }
 
         Vector3 worldPos = ConvertToWorldPos(eventData.position);
@@ -140,9 +143,9 @@ public class BuildSystem : MonoBehaviour
         _ghostTower.Detector.EraseRange();
 
         // 닫혀있는 타워 설치 패널을 열기
-        if (!PanelToggler.IsExpanded)
+        if (!_panelToggler.IsExpanded)
         {
-            PanelToggler.TogglePanel();
+            _panelToggler.TogglePanel();
         }
 
         // 호버링 중인 셀이 없는 경우

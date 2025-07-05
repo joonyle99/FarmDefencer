@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class WaveData
 {
-    public Monster WaveMonster;
+    public Monster Monster;
     public JoonyleGameDevKit.RangeInt SpawnCountRange;
 }
 

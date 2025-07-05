@@ -5,5 +5,5 @@ using UnityEngine;
 public class MapData : ScriptableObject
 {
     // Map -> Stage -> Wave -> Monster
-    public List<StageData> StateData = new List<StageData>();
+    public List<StageData> StateDataList = new List<StageData>();
 }

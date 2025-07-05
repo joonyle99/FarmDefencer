@@ -28,8 +28,17 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     public Action OnNormalState;
     public Action OnPauseState;
     public Action OnBuildState;
+    /// <summary>
+    /// 웨이브가 시작되기 직전에 호출되는 이벤트
+    /// </summary>
     public Action OnWaveState;
+    /// <summary>
+    /// 모든 웨이브가 끝난 후 호출되는 이벤트
+    /// </summary>
     public Action OnWaveAfterState;
+    /// <summary>
+    /// 몬스터가 모두 사라진 후 호출되는 이벤트
+    /// </summary>
     public Action OnDefenceEndState;
 
     /// <summary>
