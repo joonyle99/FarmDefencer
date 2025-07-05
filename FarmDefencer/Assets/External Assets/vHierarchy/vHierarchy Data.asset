@@ -15,6 +15,7 @@ MonoBehaviour:
   sceneDatas_byGuid:
     keys:
     - fbc992a771481c1478c3d5bc97f3d28a
+    - 551a0fbec1091d24989be45886ee6fb5
     values:
     - goDatas_byGlobalId:
         keys:
@@ -39,4 +40,25 @@ MonoBehaviour:
         - colorIndex: 3
           iconNameOrGuid: 
         - colorIndex: 6
+          iconNameOrGuid: 
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-2-551a0fbec1091d24989be45886ee6fb5-327674815-0
+        - globalObjectIdString: GlobalObjectId_V1-2-551a0fbec1091d24989be45886ee6fb5-678263503-0
+        - globalObjectIdString: GlobalObjectId_V1-2-551a0fbec1091d24989be45886ee6fb5-1483215521-0
+        - globalObjectIdString: GlobalObjectId_V1-2-551a0fbec1091d24989be45886ee6fb5-251258572-0
+        - globalObjectIdString: GlobalObjectId_V1-2-551a0fbec1091d24989be45886ee6fb5-2071467304-0
+        - globalObjectIdString: GlobalObjectId_V1-2-551a0fbec1091d24989be45886ee6fb5-1627537141-0
+        values:
+        - colorIndex: 8
+          iconNameOrGuid: 
+        - colorIndex: 3
+          iconNameOrGuid: 
+        - colorIndex: 4
+          iconNameOrGuid: 
+        - colorIndex: 7
+          iconNameOrGuid: 
+        - colorIndex: 9
+          iconNameOrGuid: 
+        - colorIndex: 5
           iconNameOrGuid: 
