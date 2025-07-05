@@ -1,0 +1,1482 @@
+fileFormatVersion: 2
+guid: a062bf8b3586ddd4db77163017f3c5c0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6841292229798056767
+    second: monster_blowfish_0
+  - first:
+      213: 9092313087272497193
+    second: monster_blowfish_1
+  - first:
+      213: -2656246345353098059
+    second: monster_blowfish_2
+  - first:
+      213: 5729292082153227741
+    second: monster_blowfish_3
+  - first:
+      213: -132503240248820587
+    second: monster_blowfish_4
+  - first:
+      213: 1271739147763133967
+    second: monster_blowfish_5
+  - first:
+      213: 2807412177442584990
+    second: monster_blowfish_6
+  - first:
+      213: -1803342508704986635
+    second: monster_blowfish_7
+  - first:
+      213: -1225305508589174849
+    second: monster_blowfish_8
+  - first:
+      213: -8034007013323282674
+    second: monster_blowfish_9
+  - first:
+      213: -6936293790474121314
+    second: monster_blowfish_10
+  - first:
+      213: 6354283803620488458
+    second: monster_blowfish_11
+  - first:
+      213: -97564630224890971
+    second: monster_blowfish_12
+  - first:
+      213: -3718825430233853426
+    second: monster_blowfish_13
+  - first:
+      213: 5136629497160932063
+    second: monster_blowfish_14
+  - first:
+      213: 8030234658365679407
+    second: monster_blowfish_15
+  - first:
+      213: 5758711678695801237
+    second: monster_blowfish_16
+  - first:
+      213: -363595104767196022
+    second: monster_blowfish_17
+  - first:
+      213: -8924441937573698095
+    second: monster_blowfish_18
+  - first:
+      213: -8643230912798843356
+    second: monster_blowfish_19
+  - first:
+      213: -6907904928035340445
+    second: monster_blowfish_20
+  - first:
+      213: 288689683000212450
+    second: monster_blowfish_21
+  - first:
+      213: -4732690907757519990
+    second: monster_blowfish_22
+  - first:
+      213: 9064090946076716439
+    second: monster_blowfish_23
+  - first:
+      213: -4964346856660277038
+    second: monster_blowfish_24
+  - first:
+      213: -1908879635653362815
+    second: monster_blowfish_25
+  - first:
+      213: 7792378180800456250
+    second: monster_blowfish_26
+  - first:
+      213: -8993119442203191164
+    second: monster_blowfish_27
+  - first:
+      213: 4324753431071928691
+    second: monster_blowfish_28
+  - first:
+      213: -9216569845612676732
+    second: monster_blowfish_29
+  - first:
+      213: 712168650714094682
+    second: monster_blowfish_30
+  - first:
+      213: 6049567045569281901
+    second: monster_blowfish_31
+  - first:
+      213: -8903669492928835309
+    second: monster_blowfish_32
+  - first:
+      213: -7919671659587897872
+    second: monster_blowfish_33
+  - first:
+      213: -1340471795609271114
+    second: monster_blowfish_34
+  - first:
+      213: -2860127234340841337
+    second: monster_blowfish_35
+  - first:
+      213: -2839365301900637092
+    second: monster_blowfish_36
+  - first:
+      213: 832780551302537604
+    second: monster_blowfish_37
+  - first:
+      213: -6178124088487956218
+    second: monster_blowfish_38
+  - first:
+      213: -1764785285048341372
+    second: monster_blowfish_39
+  - first:
+      213: -4994062637278232284
+    second: monster_blowfish_40
+  - first:
+      213: 735715612169247694
+    second: monster_blowfish_41
+  - first:
+      213: -8408045845834539358
+    second: monster_blowfish_42
+  - first:
+      213: -4555204861632224972
+    second: monster_blowfish_43
+  - first:
+      213: 1862071171914404414
+    second: monster_blowfish_44
+  - first:
+      213: 4233464158420341403
+    second: monster_blowfish_45
+  - first:
+      213: -4029357311649863866
+    second: monster_blowfish_46
+  - first:
+      213: 6941183662074954017
+    second: monster_blowfish_47
+  - first:
+      213: 4346994329069827444
+    second: monster_blowfish_48
+  - first:
+      213: -5767134872259111315
+    second: monster_blowfish_49
+  - first:
+      213: -4990169154213666646
+    second: monster_blowfish_50
+  - first:
+      213: 3088755092054887685
+    second: monster_blowfish_51
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: monster_blowfish_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 527
+        height: 455
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cc2f36b6f8de01a0800000000000000
+      internalID: -6841292229798056767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_1
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 358
+        width: 116
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 920338964926e2e70800000000000000
+      internalID: 9092313087272497193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_2
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 359
+        width: 86
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bc8c45b50e132bd0800000000000000
+      internalID: -2656246345353098059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_3
+      rect:
+        serializedVersion: 2
+        x: 730
+        y: 435
+        width: 51
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd5833b2bc8828f40800000000000000
+      internalID: 5729292082153227741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_4
+      rect:
+        serializedVersion: 2
+        x: 730
+        y: 367
+        width: 107
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59c71694101492ef0800000000000000
+      internalID: -132503240248820587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_5
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 435
+        width: 49
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0e2165540026a110800000000000000
+      internalID: 1271739147763133967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_6
+      rect:
+        serializedVersion: 2
+        x: 837
+        y: 429
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e993296408ee5f620800000000000000
+      internalID: 2807412177442584990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_7
+      rect:
+        serializedVersion: 2
+        x: 867
+        y: 429
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f90748fa8d39f6e0800000000000000
+      internalID: -1803342508704986635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_8
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 386
+        width: 69
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbf7633c127defee0800000000000000
+      internalID: -1225305508589174849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_9
+      rect:
+        serializedVersion: 2
+        x: 1060
+        y: 386
+        width: 62
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e076ed7ff29718090800000000000000
+      internalID: -8034007013323282674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_10
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 377
+        width: 49
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9fca013c855dbf90800000000000000
+      internalID: -6936293790474121314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_11
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 311
+        width: 103
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0531d4f373fe2850800000000000000
+      internalID: 6354283803620488458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_12
+      rect:
+        serializedVersion: 2
+        x: 837
+        y: 333
+        width: 73
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a39dc85c7165aef0800000000000000
+      internalID: -97564630224890971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_13
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 362
+        width: 81
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e02d83179f3146cc0800000000000000
+      internalID: -3718825430233853426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_14
+      rect:
+        serializedVersion: 2
+        x: 1010
+        y: 331
+        width: 72
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fda12190059f84740800000000000000
+      internalID: 5136629497160932063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_15
+      rect:
+        serializedVersion: 2
+        x: 1082
+        y: 331
+        width: 39
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f27aae230ef117f60800000000000000
+      internalID: 8030234658365679407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_16
+      rect:
+        serializedVersion: 2
+        x: 1121
+        y: 326
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5918e84c2cd0bef40800000000000000
+      internalID: 5758711678695801237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_17
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 363
+        width: 43
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a84c74abd2044faf0800000000000000
+      internalID: -363595104767196022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_18
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 319
+        width: 46
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d5225c6753062480800000000000000
+      internalID: -8924441937573698095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_19
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 251
+        width: 119
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42e13f257431d0880800000000000000
+      internalID: -8643230912798843356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_20
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 256
+        width: 85
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36f784e41113220a0800000000000000
+      internalID: -6907904928035340445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_21
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 229
+        width: 92
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2eb3c85bcb1a10400800000000000000
+      internalID: 288689683000212450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_22
+      rect:
+        serializedVersion: 2
+        x: 835
+        y: 237
+        width: 63
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8b546bb1ba125eb0800000000000000
+      internalID: -4732690907757519990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_23
+      rect:
+        serializedVersion: 2
+        x: 898
+        y: 265
+        width: 33
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79dacbc11be1acd70800000000000000
+      internalID: 9064090946076716439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_24
+      rect:
+        serializedVersion: 2
+        x: 931
+        y: 281
+        width: 79
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d8efea06d81b1bb0800000000000000
+      internalID: -4964346856660277038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_25
+      rect:
+        serializedVersion: 2
+        x: 931
+        y: 192
+        width: 59
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18b77e5c51c4285e0800000000000000
+      internalID: -1908879635653362815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_26
+      rect:
+        serializedVersion: 2
+        x: 1010
+        y: 262
+        width: 79
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a36ad1e6ba6142c60800000000000000
+      internalID: 7792378180800456250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_27
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 262
+        width: 81
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 488d1d0d385023380800000000000000
+      internalID: -8993119442203191164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_28
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 268
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 371b130055c940c30800000000000000
+      internalID: 4324753431071928691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_29
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 126
+        width: 119
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 489fda09e8a281080800000000000000
+      internalID: -9216569845612676732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_30
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 137
+        width: 96
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5c9bf55d9122e900800000000000000
+      internalID: 712168650714094682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_31
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 108
+        width: 92
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6ff01c0d2164f350800000000000000
+      internalID: 6049567045569281901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_32
+      rect:
+        serializedVersion: 2
+        x: 835
+        y: 108
+        width: 56
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3119e7415cfcf6480800000000000000
+      internalID: -8903669492928835309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_33
+      rect:
+        serializedVersion: 2
+        x: 898
+        y: 192
+        width: 33
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f5f888f59ca71290800000000000000
+      internalID: -7919671659587897872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_34
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 179
+        width: 61
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b487470100b56de0800000000000000
+      internalID: -1340471795609271114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_35
+      rect:
+        serializedVersion: 2
+        x: 1051
+        y: 181
+        width: 79
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78891b81f69ce48d0800000000000000
+      internalID: -2860127234340841337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_36
+      rect:
+        serializedVersion: 2
+        x: 1130
+        y: 180
+        width: 47
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5c84a03d4c8898d0800000000000000
+      internalID: -2839365301900637092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_37
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 212
+        width: 42
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 481ed38cf71ae8b00800000000000000
+      internalID: 832780551302537604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_38
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 149
+        width: 42
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6013467efd4e24aa0800000000000000
+      internalID: -6178124088487956218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_39
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 1
+        width: 119
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48c6bdb22293287e0800000000000000
+      internalID: -1764785285048341372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_40
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 1
+        width: 96
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4210bf6bd7681bab0800000000000000
+      internalID: -4994062637278232284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_41
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 86
+        width: 72
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecb9e078379c53a00800000000000000
+      internalID: 735715612169247694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_42
+      rect:
+        serializedVersion: 2
+        x: 963
+        y: 93
+        width: 90
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ae55d7d9de905b80800000000000000
+      internalID: -8408045845834539358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_43
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 93
+        width: 51
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43167471059a8c0c0800000000000000
+      internalID: -4555204861632224972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_44
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 86
+        width: 68
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e32147c7dd767d910800000000000000
+      internalID: 1862071171914404414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_45
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 116
+        width: 57
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b921ef3e83940ca30800000000000000
+      internalID: 4233464158420341403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_46
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 79
+        width: 34
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 647acfd9fd8d418c0800000000000000
+      internalID: -4029357311649863866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_47
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 1
+        width: 119
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12109b2c3c9045060800000000000000
+      internalID: 6941183662074954017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_48
+      rect:
+        serializedVersion: 2
+        x: 862
+        y: 1
+        width: 117
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47538d89f40a35c30800000000000000
+      internalID: 4346994329069827444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_49
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 1
+        width: 110
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d665a37a36507ffa0800000000000000
+      internalID: -5767134872259111315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_50
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 1
+        width: 103
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa0abf1e79b5fbab0800000000000000
+      internalID: -4990169154213666646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_blowfish_51
+      rect:
+        serializedVersion: 2
+        x: 1192
+        y: 1
+        width: 36
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50d4c1c24667dda20800000000000000
+      internalID: 3088755092054887685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      monster_blowfish_0: -6841292229798056767
+      monster_blowfish_1: 9092313087272497193
+      monster_blowfish_10: -6936293790474121314
+      monster_blowfish_11: 6354283803620488458
+      monster_blowfish_12: -97564630224890971
+      monster_blowfish_13: -3718825430233853426
+      monster_blowfish_14: 5136629497160932063
+      monster_blowfish_15: 8030234658365679407
+      monster_blowfish_16: 5758711678695801237
+      monster_blowfish_17: -363595104767196022
+      monster_blowfish_18: -8924441937573698095
+      monster_blowfish_19: -8643230912798843356
+      monster_blowfish_2: -2656246345353098059
+      monster_blowfish_20: -6907904928035340445
+      monster_blowfish_21: 288689683000212450
+      monster_blowfish_22: -4732690907757519990
+      monster_blowfish_23: 9064090946076716439
+      monster_blowfish_24: -4964346856660277038
+      monster_blowfish_25: -1908879635653362815
+      monster_blowfish_26: 7792378180800456250
+      monster_blowfish_27: -8993119442203191164
+      monster_blowfish_28: 4324753431071928691
+      monster_blowfish_29: -9216569845612676732
+      monster_blowfish_3: 5729292082153227741
+      monster_blowfish_30: 712168650714094682
+      monster_blowfish_31: 6049567045569281901
+      monster_blowfish_32: -8903669492928835309
+      monster_blowfish_33: -7919671659587897872
+      monster_blowfish_34: -1340471795609271114
+      monster_blowfish_35: -2860127234340841337
+      monster_blowfish_36: -2839365301900637092
+      monster_blowfish_37: 832780551302537604
+      monster_blowfish_38: -6178124088487956218
+      monster_blowfish_39: -1764785285048341372
+      monster_blowfish_4: -132503240248820587
+      monster_blowfish_40: -4994062637278232284
+      monster_blowfish_41: 735715612169247694
+      monster_blowfish_42: -8408045845834539358
+      monster_blowfish_43: -4555204861632224972
+      monster_blowfish_44: 1862071171914404414
+      monster_blowfish_45: 4233464158420341403
+      monster_blowfish_46: -4029357311649863866
+      monster_blowfish_47: 6941183662074954017
+      monster_blowfish_48: 4346994329069827444
+      monster_blowfish_49: -5767134872259111315
+      monster_blowfish_5: 1271739147763133967
+      monster_blowfish_50: -4990169154213666646
+      monster_blowfish_51: 3088755092054887685
+      monster_blowfish_6: 2807412177442584990
+      monster_blowfish_7: -1803342508704986635
+      monster_blowfish_8: -1225305508589174849
+      monster_blowfish_9: -8034007013323282674
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

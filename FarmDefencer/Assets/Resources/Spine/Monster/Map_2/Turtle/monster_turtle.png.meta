@@ -1,0 +1,1430 @@
+fileFormatVersion: 2
+guid: 84e28ac3934ecd442942e2b245cafa01
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8058890759347137183
+    second: monster_turtle_0
+  - first:
+      213: 1842940624825014040
+    second: monster_turtle_1
+  - first:
+      213: 822607499504211712
+    second: monster_turtle_2
+  - first:
+      213: 4476242516691389276
+    second: monster_turtle_3
+  - first:
+      213: 3124602536853831787
+    second: monster_turtle_4
+  - first:
+      213: 2528074755384293722
+    second: monster_turtle_5
+  - first:
+      213: 4294550537826594896
+    second: monster_turtle_6
+  - first:
+      213: 1455502486379971912
+    second: monster_turtle_7
+  - first:
+      213: -7289846583938806210
+    second: monster_turtle_8
+  - first:
+      213: -4538882678652355923
+    second: monster_turtle_9
+  - first:
+      213: 1172129856722412861
+    second: monster_turtle_10
+  - first:
+      213: -949342676244995053
+    second: monster_turtle_11
+  - first:
+      213: 1610117035286474121
+    second: monster_turtle_12
+  - first:
+      213: 6494319466439630181
+    second: monster_turtle_13
+  - first:
+      213: -2456645930938090308
+    second: monster_turtle_14
+  - first:
+      213: -8101107374773178441
+    second: monster_turtle_15
+  - first:
+      213: -9215906998905452115
+    second: monster_turtle_16
+  - first:
+      213: 3594753903649838434
+    second: monster_turtle_17
+  - first:
+      213: 5214284851645107484
+    second: monster_turtle_18
+  - first:
+      213: -2361190063840613247
+    second: monster_turtle_19
+  - first:
+      213: -6542322542697705787
+    second: monster_turtle_20
+  - first:
+      213: -3644729397626000932
+    second: monster_turtle_21
+  - first:
+      213: -6266097067746159163
+    second: monster_turtle_22
+  - first:
+      213: -2733439023428616439
+    second: monster_turtle_23
+  - first:
+      213: 389671292281082663
+    second: monster_turtle_24
+  - first:
+      213: -2412027952733482955
+    second: monster_turtle_25
+  - first:
+      213: -3987819630678455719
+    second: monster_turtle_26
+  - first:
+      213: -4551212266100230014
+    second: monster_turtle_27
+  - first:
+      213: 4416781110262985121
+    second: monster_turtle_28
+  - first:
+      213: -3894605405258693732
+    second: monster_turtle_29
+  - first:
+      213: -4055345399430178934
+    second: monster_turtle_30
+  - first:
+      213: 3705393370257921818
+    second: monster_turtle_31
+  - first:
+      213: -4027821424332462406
+    second: monster_turtle_32
+  - first:
+      213: -7293673569330396962
+    second: monster_turtle_33
+  - first:
+      213: 6257337797418071341
+    second: monster_turtle_34
+  - first:
+      213: 6487388078042622541
+    second: monster_turtle_35
+  - first:
+      213: -743983955149930267
+    second: monster_turtle_36
+  - first:
+      213: 6372007626702195428
+    second: monster_turtle_37
+  - first:
+      213: 8497413557679563822
+    second: monster_turtle_38
+  - first:
+      213: -6937122115435860745
+    second: monster_turtle_39
+  - first:
+      213: 2928259225175402380
+    second: monster_turtle_40
+  - first:
+      213: -6316442717632614322
+    second: monster_turtle_41
+  - first:
+      213: 814658858570320140
+    second: monster_turtle_42
+  - first:
+      213: 2372648553965594590
+    second: monster_turtle_43
+  - first:
+      213: -1924275147063878868
+    second: monster_turtle_44
+  - first:
+      213: -413162336816221998
+    second: monster_turtle_45
+  - first:
+      213: -9187058312600160151
+    second: monster_turtle_46
+  - first:
+      213: -584076111116711712
+    second: monster_turtle_47
+  - first:
+      213: 1762334052448662528
+    second: monster_turtle_48
+  - first:
+      213: 6725809051942033408
+    second: monster_turtle_49
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: monster_turtle_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 504
+        height: 426
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1659f6d5d81192090800000000000000
+      internalID: -8058890759347137183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_1
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 318
+        width: 125
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 817d4d4ebb0739910800000000000000
+      internalID: 1842940624825014040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_2
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 318
+        width: 125
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0075585992d7a6b00800000000000000
+      internalID: 822607499504211712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_3
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 311
+        width: 92
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5b04ef4adece1e30800000000000000
+      internalID: 4476242516691389276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_4
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 304
+        width: 56
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b600571d371dc5b20800000000000000
+      internalID: 3124602536853831787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_5
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 423
+        width: 25
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5930508896851320800000000000000
+      internalID: 2528074755384293722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_6
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 304
+        width: 107
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 050fd1de5fe499b30800000000000000
+      internalID: 4294550537826594896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_7
+      rect:
+        serializedVersion: 2
+        x: 1106
+        y: 415
+        width: 35
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 845406ebccbf23410800000000000000
+      internalID: 1455502486379971912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_8
+      rect:
+        serializedVersion: 2
+        x: 1141
+        y: 415
+        width: 35
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3e8b39b72345da90800000000000000
+      internalID: -7289846583938806210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_9
+      rect:
+        serializedVersion: 2
+        x: 1192
+        y: 287
+        width: 163
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: daab0c57046a201c0800000000000000
+      internalID: -4538882678652355923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_10
+      rect:
+        serializedVersion: 2
+        x: 1355
+        y: 353
+        width: 92
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d35a19cf4ed344010800000000000000
+      internalID: 1172129856722412861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_11
+      rect:
+        serializedVersion: 2
+        x: 1447
+        y: 344
+        width: 59
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3146c44add143d2f0800000000000000
+      internalID: -949342676244995053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_12
+      rect:
+        serializedVersion: 2
+        x: 1506
+        y: 384
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98d2e0fa9e8485610800000000000000
+      internalID: 1610117035286474121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_13
+      rect:
+        serializedVersion: 2
+        x: 1010
+        y: 301
+        width: 96
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56dd9077525702a50800000000000000
+      internalID: 6494319466439630181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_14
+      rect:
+        serializedVersion: 2
+        x: 1106
+        y: 298
+        width: 85
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbcb68baa8d38edd0800000000000000
+      internalID: -2456645930938090308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_15
+      rect:
+        serializedVersion: 2
+        x: 1355
+        y: 257
+        width: 73
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bfe85f93c5139f80800000000000000
+      internalID: -8101107374773178441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_16
+      rect:
+        serializedVersion: 2
+        x: 1428
+        y: 250
+        width: 68
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da9443799658a1080800000000000000
+      internalID: -9215906998905452115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_17
+      rect:
+        serializedVersion: 2
+        x: 1506
+        y: 335
+        width: 61
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2655ff921a123e130800000000000000
+      internalID: 3594753903649838434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_18
+      rect:
+        serializedVersion: 2
+        x: 1539
+        y: 266
+        width: 66
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1dc104327cdc5840800000000000000
+      internalID: 5214284851645107484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_19
+      rect:
+        serializedVersion: 2
+        x: 1567
+        y: 335
+        width: 39
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18c2995a52e5b3fd0800000000000000
+      internalID: -2361190063840613247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_20
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 2
+        width: 181
+        height: 315
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ce09746f400535a0800000000000000
+      internalID: -6542322542697705787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_21
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 2
+        width: 108
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd924186ce15b6dc0800000000000000
+      internalID: -3644729397626000932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_22
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 197
+        width: 119
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c59fd48ae95a09a0800000000000000
+      internalID: -6266097067746159163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_23
+      rect:
+        serializedVersion: 2
+        x: 917
+        y: 197
+        width: 68
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90fb859c0bfd01ad0800000000000000
+      internalID: -2733439023428616439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_24
+      rect:
+        serializedVersion: 2
+        x: 985
+        y: 195
+        width: 72
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 723d49bc9f3686500800000000000000
+      internalID: 389671292281082663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_25
+      rect:
+        serializedVersion: 2
+        x: 1057
+        y: 195
+        width: 85
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53012014b51c68ed0800000000000000
+      internalID: -2412027952733482955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_26
+      rect:
+        serializedVersion: 2
+        x: 1142
+        y: 171
+        width: 96
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95ac41d9c2b68a8c0800000000000000
+      internalID: -3987819630678455719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_27
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 171
+        width: 85
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 288f1bdae88d6d0c0800000000000000
+      internalID: -4551212266100230014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_28
+      rect:
+        serializedVersion: 2
+        x: 1323
+        y: 257
+        width: 31
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a171e7c40f8b4d30800000000000000
+      internalID: 4416781110262985121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_29
+      rect:
+        serializedVersion: 2
+        x: 1323
+        y: 154
+        width: 56
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c934d37b40593f9c0800000000000000
+      internalID: -3894605405258693732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_30
+      rect:
+        serializedVersion: 2
+        x: 1506
+        y: 250
+        width: 33
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a87137968d488b7c0800000000000000
+      internalID: -4055345399430178934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_31
+      rect:
+        serializedVersion: 2
+        x: 1540
+        y: 185
+        width: 66
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a179f4363a33c6330800000000000000
+      internalID: 3705393370257921818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_32
+      rect:
+        serializedVersion: 2
+        x: 1379
+        y: 154
+        width: 63
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab6a4ff31cd4a18c0800000000000000
+      internalID: -4027821424332462406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_33
+      rect:
+        serializedVersion: 2
+        x: 1442
+        y: 154
+        width: 47
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed00860488aa7ca90800000000000000
+      internalID: -7293673569330396962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_34
+      rect:
+        serializedVersion: 2
+        x: 1489
+        y: 199
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d25babee29786d650800000000000000
+      internalID: 6257337797418071341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_35
+      rect:
+        serializedVersion: 2
+        x: 1489
+        y: 153
+        width: 44
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4aa5d7d515d70a50800000000000000
+      internalID: 6487388078042622541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_36
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 1
+        width: 154
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e0c2bad886dca5f0800000000000000
+      internalID: -743983955149930267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_37
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 1
+        width: 155
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ea0aa71d2bed6850800000000000000
+      internalID: 6372007626702195428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_38
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 171
+        width: 27
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2424170c90ece570800000000000000
+      internalID: 8497413557679563822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_39
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 1
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fc60f1c0346abf90800000000000000
+      internalID: -6937122115435860745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_40
+      rect:
+        serializedVersion: 2
+        x: 1533
+        y: 106
+        width: 69
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8727de204443a820800000000000000
+      internalID: 2928259225175402380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_41
+      rect:
+        serializedVersion: 2
+        x: 1279
+        y: 2
+        width: 101
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e40b76370dc7758a0800000000000000
+      internalID: -6316442717632614322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_42
+      rect:
+        serializedVersion: 2
+        x: 1381
+        y: 82
+        width: 55
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0985366aef3e4b00800000000000000
+      internalID: 814658858570320140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_43
+      rect:
+        serializedVersion: 2
+        x: 1436
+        y: 111
+        width: 41
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed7a6fbf9475de020800000000000000
+      internalID: 2372648553965594590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_44
+      rect:
+        serializedVersion: 2
+        x: 1442
+        y: 43
+        width: 62
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2b1521f2f99b45e0800000000000000
+      internalID: -1924275147063878868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_45
+      rect:
+        serializedVersion: 2
+        x: 1477
+        y: 111
+        width: 56
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d0bf7f2b07244af0800000000000000
+      internalID: -413162336816221998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_46
+      rect:
+        serializedVersion: 2
+        x: 1381
+        y: 1
+        width: 61
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 968faaac323018080800000000000000
+      internalID: -9187058312600160151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_47
+      rect:
+        serializedVersion: 2
+        x: 1506
+        y: 1
+        width: 88
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e8c81b1fd1f4e7f0800000000000000
+      internalID: -584076111116711712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_48
+      rect:
+        serializedVersion: 2
+        x: 1533
+        y: 52
+        width: 73
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 004f6c3cb71157810800000000000000
+      internalID: 1762334052448662528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_turtle_49
+      rect:
+        serializedVersion: 2
+        x: 1442
+        y: 1
+        width: 63
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0089c18a2bfd65d50800000000000000
+      internalID: 6725809051942033408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      monster_turtle_0: -8058890759347137183
+      monster_turtle_1: 1842940624825014040
+      monster_turtle_10: 1172129856722412861
+      monster_turtle_11: -949342676244995053
+      monster_turtle_12: 1610117035286474121
+      monster_turtle_13: 6494319466439630181
+      monster_turtle_14: -2456645930938090308
+      monster_turtle_15: -8101107374773178441
+      monster_turtle_16: -9215906998905452115
+      monster_turtle_17: 3594753903649838434
+      monster_turtle_18: 5214284851645107484
+      monster_turtle_19: -2361190063840613247
+      monster_turtle_2: 822607499504211712
+      monster_turtle_20: -6542322542697705787
+      monster_turtle_21: -3644729397626000932
+      monster_turtle_22: -6266097067746159163
+      monster_turtle_23: -2733439023428616439
+      monster_turtle_24: 389671292281082663
+      monster_turtle_25: -2412027952733482955
+      monster_turtle_26: -3987819630678455719
+      monster_turtle_27: -4551212266100230014
+      monster_turtle_28: 4416781110262985121
+      monster_turtle_29: -3894605405258693732
+      monster_turtle_3: 4476242516691389276
+      monster_turtle_30: -4055345399430178934
+      monster_turtle_31: 3705393370257921818
+      monster_turtle_32: -4027821424332462406
+      monster_turtle_33: -7293673569330396962
+      monster_turtle_34: 6257337797418071341
+      monster_turtle_35: 6487388078042622541
+      monster_turtle_36: -743983955149930267
+      monster_turtle_37: 6372007626702195428
+      monster_turtle_38: 8497413557679563822
+      monster_turtle_39: -6937122115435860745
+      monster_turtle_4: 3124602536853831787
+      monster_turtle_40: 2928259225175402380
+      monster_turtle_41: -6316442717632614322
+      monster_turtle_42: 814658858570320140
+      monster_turtle_43: 2372648553965594590
+      monster_turtle_44: -1924275147063878868
+      monster_turtle_45: -413162336816221998
+      monster_turtle_46: -9187058312600160151
+      monster_turtle_47: -584076111116711712
+      monster_turtle_48: 1762334052448662528
+      monster_turtle_49: 6725809051942033408
+      monster_turtle_5: 2528074755384293722
+      monster_turtle_6: 4294550537826594896
+      monster_turtle_7: 1455502486379971912
+      monster_turtle_8: -7289846583938806210
+      monster_turtle_9: -4538882678652355923
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
