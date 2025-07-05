@@ -6,17 +6,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MapEntry", menuName = "Scriptable Objects/MapEntry")]
 public sealed class MapEntry : ScriptableObject
 {
-    [SerializeField] private int mapId;
+    [SerializeField] private int mapId; // 1 ~ N
     [SerializeField] private string mapCode;
 
     public int MapId => mapId;
     public string MapCode => mapCode;
 
     [SerializeField] private Monster[] monsters;
-
     public Monster[] Monsters => monsters;
 
     [SerializeField] private string[] crops;
-
     public string[] Crops => crops;
 }

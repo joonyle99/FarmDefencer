@@ -17,7 +17,7 @@ public class VideoController : MonoBehaviour
 
     public void PlayVideo(int idx)
     {
-        _videoPlayer.clip = _videoClips[idx];
+        _videoPlayer.clip = _videoClips[idx - 1];
         _videoPlayer.Play();
     }
     public void StopVideo()
