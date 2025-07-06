@@ -29,6 +29,7 @@ public sealed class FarmManager : MonoBehaviour
     [SerializeField] private ProductDatabase productDatabase;
     [SerializeField] private HarvestTutorialGiver harvestTutorialGiver;
     [SerializeField] private WeatherShopUI weatherShopUI;
+    [SerializeField] private GoDefenceUI goDefenceUI;
     [SerializeField] private WeatherGiver weatherGiver;
 
     private void Start()
@@ -69,7 +70,7 @@ public sealed class FarmManager : MonoBehaviour
 
         farmUI.WateringCanAvailable = !harvestTutorialGiver.gameObject.activeSelf;
 
-        farmUI.GoDefenceUIEnabled = ratio == 0.0f;
+        goDefenceUI.gameObject.SetActive(ratio == 0.0f);
     }
 
     private void QuotaContextChangedHandler()
@@ -89,6 +90,7 @@ public sealed class FarmManager : MonoBehaviour
     {
         farmInput.RegisterInputLayer(farm);
         farmInput.RegisterInputLayer(harvestTutorialGiver);
+        farmInput.RegisterInputLayer(goDefenceUI);
         farmInput.AddCanInputCondition(() => farmClock.RemainingDaytime > 0.0f);
 
         farmClock.RegisterFarmUpdatableObject(farm);
@@ -125,6 +127,8 @@ public sealed class FarmManager : MonoBehaviour
         weatherShopUI.AddItem(new RainItem(10, 10));
         weatherShopUI.AddItem(new RainItem(30, 30));
         weatherShopUI.AddItem(new RainItem(50, 50));
+        
+        goDefenceUI.Init(OpenDefenceScene);
         
         weatherGiver.Init(farm.ApplyCropCommand);
     }

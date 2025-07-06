@@ -11,7 +11,6 @@ public sealed class FarmUI : MonoBehaviour
 	private TimerUI _timerUI;
 	private CropGuide _cropGuide;
 	private FarmDebugUI _farmDebugUI;
-	private GoDefenceUI _goDefenceUI;
 
 	public bool WateringCanAvailable
 	{
@@ -33,12 +32,10 @@ public sealed class FarmUI : MonoBehaviour
 		_wateringCan.Init(() => !isFarmPaused(), onWatering);
 		farmInput.RegisterInputLayer(_wateringCan);
 		farmInput.RegisterInputLayer(_cropGuide);
-		farmInput.RegisterInputLayer(_goDefenceUI);
 		
 		_harvestInventory.Init(productDatabase);
 		_farmDebugUI.Init(setDaytime, getDaytime, onGoDefenceButtonClickedHandler);
 		_timerUI.Init(currentMap, currentStage, getRemainingDaytimeAlpha);
-		_goDefenceUI.Init(onGoDefenceButtonClickedHandler);
 	}
 
 	public void PlayProductFillAnimation(ProductEntry entry, Vector2 cropWorldPosition, int count)
@@ -52,12 +49,6 @@ public sealed class FarmUI : MonoBehaviour
 		=> _harvestInventory.UpdateInventory(isProductAvailable, getProductQuota, getHotProduct, getSpecialProduct);
 
 	public void PlayCoinAnimation() => _coinsUI.PlayAnimation();
-
-	public bool GoDefenceUIEnabled
-	{
-		get => _goDefenceUI.gameObject.activeSelf;
-		set => _goDefenceUI.gameObject.SetActive(value);
-	}
 	
 	private void Awake()
 	{
@@ -67,7 +58,6 @@ public sealed class FarmUI : MonoBehaviour
 		_timerUI = GetComponentInChildren<TimerUI>();
 		_cropGuide = GetComponentInChildren<CropGuide>();
 		_farmDebugUI = GetComponentInChildren<FarmDebugUI>();
-		_goDefenceUI = GetComponentInChildren<GoDefenceUI>();
 		ResourceManager.Instance.OnGoldChanged += _coinsUI.SetCoin;
 	}
 

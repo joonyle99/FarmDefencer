@@ -1,0 +1,728 @@
+fileFormatVersion: 2
+guid: 13994e895d3a79744a40c22254673d6d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6511851169461113641
+    second: stage_timer_alarm_0
+  - first:
+      213: 2014136825032923055
+    second: stage_timer_alarm_1
+  - first:
+      213: 4024600831085517201
+    second: stage_timer_alarm_2
+  - first:
+      213: 3272384499865521979
+    second: stage_timer_alarm_3
+  - first:
+      213: -8371993680508385776
+    second: stage_timer_alarm_4
+  - first:
+      213: -1518444239647191123
+    second: stage_timer_alarm_5
+  - first:
+      213: 2508243590749907214
+    second: stage_timer_alarm_6
+  - first:
+      213: -7850212104081377279
+    second: stage_timer_alarm_7
+  - first:
+      213: 1171058806580530811
+    second: stage_timer_alarm_8
+  - first:
+      213: -8229437572363721712
+    second: stage_timer_alarm_9
+  - first:
+      213: -250889450576292733
+    second: stage_timer_alarm_10
+  - first:
+      213: -1292764907804288571
+    second: stage_timer_alarm_11
+  - first:
+      213: -3887037964145742548
+    second: stage_timer_alarm_12
+  - first:
+      213: -6284718832217660917
+    second: stage_timer_alarm_13
+  - first:
+      213: -8112144126840594332
+    second: stage_timer_alarm_14
+  - first:
+      213: -1775640819661846563
+    second: stage_timer_alarm_15
+  - first:
+      213: 1010516941754908600
+    second: stage_timer_alarm_16
+  - first:
+      213: 6161538596414904474
+    second: stage_timer_alarm_17
+  - first:
+      213: 3451414971916152693
+    second: stage_timer_alarm_18
+  - first:
+      213: -3217840754906245601
+    second: stage_timer_alarm_19
+  - first:
+      213: 3663853945194041276
+    second: stage_timer_alarm_20
+  - first:
+      213: -8186610421175221314
+    second: stage_timer_alarm_21
+  - first:
+      213: 1997482210283107558
+    second: stage_timer_alarm_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: stage_timer_alarm_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 584
+        width: 406
+        height: 406
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92311f9232ebe5a50800000000000000
+      internalID: 6511851169461113641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_1
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 865
+        width: 129
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa7de1165c6a3fb10800000000000000
+      internalID: 2014136825032923055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_2
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 875
+        width: 146
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1991893f1214ad730800000000000000
+      internalID: 4024600831085517201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_3
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 729
+        width: 106
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3f8af26d58d96d20800000000000000
+      internalID: 3272384499865521979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_4
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 829
+        width: 104
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0168b73ba14b0db80800000000000000
+      internalID: -8371993680508385776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_5
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 725
+        width: 140
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: daf479452076deae0800000000000000
+      internalID: -1518444239647191123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_6
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 584
+        width: 141
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e096ccca1421fc220800000000000000
+      internalID: 2508243590749907214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_7
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 584
+        width: 105
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 108f1ccfea17e0390800000000000000
+      internalID: -7850212104081377279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_8
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 684
+        width: 104
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7e4351b7cf604010800000000000000
+      internalID: 1171058806580530811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_9
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 583
+        height: 583
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 014e10e112a2bcd80800000000000000
+      internalID: -8229437572363721712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_10
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 410
+        width: 129
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 384d18cbf59a48cf0800000000000000
+      internalID: -250889450576292733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_11
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 538
+        width: 105
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c91c3c6a2d2f0ee0800000000000000
+      internalID: -1292764907804288571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_12
+      rect:
+        serializedVersion: 2
+        x: 758
+        y: 533
+        width: 91
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2da2a6e0977e0ac0800000000000000
+      internalID: -3887037964145742548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_13
+      rect:
+        serializedVersion: 2
+        x: 713
+        y: 442
+        width: 132
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b02657c158138c8a0800000000000000
+      internalID: -6284718832217660917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_14
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 350
+        width: 134
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46025e885efdb6f80800000000000000
+      internalID: -8112144126840594332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_15
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 270
+        width: 139
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd74f5f0518ab57e0800000000000000
+      internalID: -1775640819661846563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_16
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 258
+        width: 132
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bfb0d8fdc3160e00800000000000000
+      internalID: 1010516941754908600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_17
+      rect:
+        serializedVersion: 2
+        x: 856
+        y: 257
+        width: 133
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a985b2d45be228550800000000000000
+      internalID: 6161538596414904474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_18
+      rect:
+        serializedVersion: 2
+        x: 857
+        y: 349
+        width: 134
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57fe68d61a3e5ef20800000000000000
+      internalID: 3451414971916152693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_19
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 129
+        width: 140
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f16d90cd1eee753d0800000000000000
+      internalID: -3217840754906245601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_20
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 1
+        width: 388
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbf443050cf98d230800000000000000
+      internalID: 3663853945194041276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_21
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 129
+        width: 129
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb3075b4231536e80800000000000000
+      internalID: -8186610421175221314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_22
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 129
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e43615bc7b78bb10800000000000000
+      internalID: 1997482210283107558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      stage_timer_alarm_0: 6511851169461113641
+      stage_timer_alarm_1: 2014136825032923055
+      stage_timer_alarm_10: -250889450576292733
+      stage_timer_alarm_11: -1292764907804288571
+      stage_timer_alarm_12: -3887037964145742548
+      stage_timer_alarm_13: -6284718832217660917
+      stage_timer_alarm_14: -8112144126840594332
+      stage_timer_alarm_15: -1775640819661846563
+      stage_timer_alarm_16: 1010516941754908600
+      stage_timer_alarm_17: 6161538596414904474
+      stage_timer_alarm_18: 3451414971916152693
+      stage_timer_alarm_19: -3217840754906245601
+      stage_timer_alarm_2: 4024600831085517201
+      stage_timer_alarm_20: 3663853945194041276
+      stage_timer_alarm_21: -8186610421175221314
+      stage_timer_alarm_22: 1997482210283107558
+      stage_timer_alarm_3: 3272384499865521979
+      stage_timer_alarm_4: -8371993680508385776
+      stage_timer_alarm_5: -1518444239647191123
+      stage_timer_alarm_6: 2508243590749907214
+      stage_timer_alarm_7: -7850212104081377279
+      stage_timer_alarm_8: 1171058806580530811
+      stage_timer_alarm_9: -8229437572363721712
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
