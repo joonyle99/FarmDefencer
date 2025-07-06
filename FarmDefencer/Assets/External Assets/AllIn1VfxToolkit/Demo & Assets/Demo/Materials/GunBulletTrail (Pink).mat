@@ -15,9 +15,7 @@ Material:
   - ADDITIVECONFIG_ON
   - GLOW_ON
   - PREMULTIPLYCOLOR_ON
-  - SHAPE1CONTRAST_ON
   - SHAPE1DISTORT_ON
-  - SHAPE2_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -136,7 +134,7 @@ Material:
     - _FadeScrollXSpeed: 0
     - _FadeScrollYSpeed: 0
     - _FadeTransition: 0.075
-    - _Glow: 0.7
+    - _Glow: 1
     - _GlowGlobal: 1
     - _HandDrawnAmount: 12.6
     - _HandDrawnSpeed: 5.7
@@ -201,9 +199,9 @@ Material:
     - _ShapeBrightness: 0
     - _ShapeColorWeight: 1
     - _ShapeContrast: 0.3
-    - _ShapeDistortAmount: 0.3
-    - _ShapeDistortXSpeed: -2
-    - _ShapeDistortYSpeed: -3
+    - _ShapeDistortAmount: 0.6
+    - _ShapeDistortXSpeed: -1.5
+    - _ShapeDistortYSpeed: -2.5
     - _ShapeRotationOffset: 0
     - _ShapeRotationSpeed: 0
     - _ShapeXSpeed: -1
@@ -241,9 +239,9 @@ Material:
     - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Shape2Color: {r: 2, g: 0, b: 2, a: 1}
+    - _Shape2Color: {r: 2.670157, g: 2.670157, b: 2.670157, a: 1}
     - _Shape3Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ShapeColor: {r: 3.5648696, g: 3.5648696, b: 3.5648696, a: 1}
+    - _ShapeColor: {r: 5.9181786, g: 0, b: 5.9921565, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!28 &28761834029838142
