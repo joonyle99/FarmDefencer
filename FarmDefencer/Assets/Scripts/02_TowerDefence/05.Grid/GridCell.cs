@@ -202,7 +202,7 @@ public class GridCell : MonoBehaviour
         }
     }
 
-    // 
+    //
     public void ApplyGlow()
     {
         InstantMaterial.SetFloat("_GlowGlobal", _targetIntensity);
@@ -210,5 +210,12 @@ public class GridCell : MonoBehaviour
     public void ResetGlow()
     {
         InstantMaterial.SetFloat("_GlowGlobal", _defaultIntensity);
+    }
+
+    public void SetSprite(Sprite sprite)
+    {
+        _spriteRenderer.sprite = sprite;
+        _spriteRenderer.color = new Color(1, 1, 1, 1f);
+        _spriteRenderer.material = new Material(Shader.Find("Sprites/Default"));
     }
 }

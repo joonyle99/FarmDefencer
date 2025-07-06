@@ -63,11 +63,8 @@ public class GridMap : MonoBehaviour
     private Vector2Int[] _possiblePoints;
     private Vector2Int[] _oppositePoints;
 
-    // GetBone for debug
-    public GameObject debugStartPointObject;
-    public GameObject debugEndPointObject;
-    public LineRenderer debugLine;
-    private float _debugLineDuration = 0.3f;
+    [SerializeField] private LineRenderer _pathLineRenderer;
+    [SerializeField] private float _pathLineDuration = 0.3f;
 
     [Space]
 
@@ -141,13 +138,14 @@ public class GridMap : MonoBehaviour
     }
     private void Start()
     {
-        CreateGridMap();
+        GameStateManager.Instance.OnBuildState += CreateGridMap;
+        GameStateManager.Instance.OnWaveState += CreateGridMap;
     }
 
-    private void CreateGridMap()
+    public void CreateGridMap()
     {
-        var startObj = Instantiate(debugStartPointObject, StartWorldPoint, Quaternion.identity);
-        var endObj = Instantiate(debugEndPointObject, EndWorldPoint, Quaternion.identity);
+        var departureSprite = Resources.Load<Sprite>($"Texture/GridMap/{MapManager.Instance.CurrentMap.MapCode}_departure");
+        var arrivalSprite = Resources.Load<Sprite>($"Texture/GridMap/{MapManager.Instance.CurrentMap.MapCode}_arrival");
 
         for (int h = 0; h < _height; h++)
         {
@@ -168,6 +166,7 @@ public class GridMap : MonoBehaviour
                 if (cellPos == StartCellPoint || cellPos == EndCellPoint)
                 {
                     _myGridMap[h, w].UnUsable();
+                    _myGridMap[h, w].SetSprite(cellPos == StartCellPoint ? departureSprite : arrivalSprite);
                 }
             }
         }
@@ -427,12 +426,12 @@ public class GridMap : MonoBehaviour
     }
     public IEnumerator DrawPathCo(List<GridCell> gridPath, Color? endColor = null)
     {
-        var lineObject = Instantiate(debugLine, Vector3.zero, Quaternion.identity);
-        lineObject.positionCount = 0;
+        var pathLineObject = Instantiate(_pathLineRenderer, Vector3.zero, Quaternion.identity);
+        pathLineObject.positionCount = 0;
 
         if (endColor != null)
         {
-            lineObject.endColor = endColor.Value;
+            pathLineObject.endColor = endColor.Value;
         }
 
         // gridPath를 복사해야 한다.
@@ -442,8 +441,8 @@ public class GridMap : MonoBehaviour
         for (int i = 0; i < copiedGridPath.Count; i++)
         {
             //Debug.Log(copiedGridPath.Count);
-            lineObject.positionCount = i + 1;
-            lineObject.SetPosition(i, copiedGridPath[i].transform.position);
+            pathLineObject.positionCount = i + 1;
+            pathLineObject.SetPosition(i, copiedGridPath[i].transform.position);
 
             var originScale = copiedGridPath[i].transform.localScale;
 
@@ -452,7 +451,7 @@ public class GridMap : MonoBehaviour
             copiedGridPath[i].transform.localScale = originScale;
         }
 
-        yield return new WaitForSeconds(_debugLineDuration);
-        Destroy(lineObject.gameObject);
+        yield return new WaitForSeconds(_pathLineDuration);
+        Destroy(pathLineObject.gameObject);
     }
 }

@@ -420,9 +420,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25130f449ef24e946831118be0991b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugStartPointObject: {fileID: 8191035743945103105, guid: a3a6266bef3fc6e499f6d5db521726aa, type: 3}
-  debugEndPointObject: {fileID: 6326032123971646499, guid: 6545076009e330f4383c0f51d2f7bcc3, type: 3}
-  debugLine: {fileID: 3119231953507566084, guid: f92605f6a83016948b58f9e8c0d1e8e4, type: 3}
+  _pathLineRenderer: {fileID: 3119231953507566084, guid: f92605f6a83016948b58f9e8c0d1e8e4, type: 3}
+  _pathLineDuration: 0.3
+  _departureSprite: {fileID: 21300000, guid: c8c8e92cdb784364a99be2ab889b2109, type: 3}
+  _arrivalSprite: {fileID: 21300000, guid: 2e2594c49efcf7c409ef0e6ce5dfcedc, type: 3}
   _gridCellPrefab: {fileID: 5452235141227775536, guid: 20e9a4561dd28f94996acde895b08146, type: 3}
   _originGridPath: []
   LastGridCell: {fileID: 0}
