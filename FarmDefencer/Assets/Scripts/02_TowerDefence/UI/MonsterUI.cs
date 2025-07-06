@@ -41,6 +41,8 @@ public class MonsterUI : MonoBehaviour
             graphic.UnscaledTime = true;
             graphic.color = new Color(1f, 1f, 1f, 0f);
 
+            StartCoroutine(FadeInCo(graphic, 0.5f));
+
             // 3. 애니메이션 설정
             if (endingType == EndingType.Success)
             {
@@ -138,12 +140,12 @@ public class MonsterUI : MonoBehaviour
 
             // 4. 초기화
             graphic.Initialize(true);
-
-            StartCoroutine(FadeInCo(graphic, 1f));
         }
     }
-    private IEnumerator FadeInCo(SkeletonGraphic graphic, float duration)
+    private IEnumerator FadeInCo(SkeletonGraphic graphic, float duration, float waitTime = 0f)
     {
+        yield return new WaitForSeconds(waitTime);
+
         var color = graphic.color;
         var eTime = 0f;
         while (eTime < duration)
@@ -156,23 +158,22 @@ public class MonsterUI : MonoBehaviour
         }
         color.a = 1f;
         graphic.color = color;
-        Debug.Log(graphic.color);
     }
-    private IEnumerator FadeOutCo(SkeletonGraphic graphic, float duration, float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
+    //private IEnumerator FadeOutCo(SkeletonGraphic graphic, float duration, float waitTime = 0f)
+    //{
+    //    yield return new WaitForSeconds(waitTime);
 
-        var color = graphic.color;
-        var eTime = 0f;
-        while (eTime < duration)
-        {
-            var t = eTime / duration;
-            color.a = Mathf.Lerp(1f, 0f, t);
-            graphic.color = color;
-            yield return null;
-            eTime += Time.deltaTime;
-        }
-        color.a = 0f;
-        graphic.color = color;
-    }
+    //    var color = graphic.color;
+    //    var eTime = 0f;
+    //    while (eTime < duration)
+    //    {
+    //        var t = eTime / duration;
+    //        color.a = Mathf.Lerp(1f, 0f, t);
+    //        graphic.color = color;
+    //        yield return null;
+    //        eTime += Time.deltaTime;
+    //    }
+    //    color.a = 0f;
+    //    graphic.color = color;
+    //}
 }

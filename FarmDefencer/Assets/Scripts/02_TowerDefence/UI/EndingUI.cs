@@ -81,7 +81,7 @@ public class EndingUI : MonoBehaviour
         _coinSkeletonGraphic02.Initialize(true);
 
         _costText.gameObject.SetActive(endingType == EndingType.Success);
-        _costText.text = $"돌려받은 골드: {(int)(DefenceContext.Current.GridMap.CalculateAllOccupiedTowerCost() * 0.5f)}원";
+        _costText.text = $"돌려받은 골드\n{(int)(DefenceContext.Current.GridMap.CalculateAllOccupiedTowerCost() * 0.5f)}원";
 
         // result (success, failure)
         _successImage.gameObject.SetActive(endingType == EndingType.Success);
