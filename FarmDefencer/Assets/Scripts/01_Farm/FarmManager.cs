@@ -120,7 +120,7 @@ public sealed class FarmManager : MonoBehaviour
 
         quotaContext.QuotaContextUpdated += QuotaContextChangedHandler;
         
-        weatherShopUI.Init(weatherGiver.SetWeather);
+        weatherShopUI.Init(OnWeatherShopItemBought);
         weatherShopUI.AddItem(new SunItem(20 + MapManager.Instance.CurrentMap.MapId*10));
         weatherShopUI.AddItem(new RainItem(10, 10));
         weatherShopUI.AddItem(new RainItem(30, 30));
