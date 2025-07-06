@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 0d024d441d036174cbb61644210aee17
+guid: 70c8f644d01f1af4f83c6ba379bc7228
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5811628204408125784
-    second: clear_defeat_line_0
+      213: -4496730489455679178
+    second: clear_line_0
   - first:
-      213: 732776422851416364
-    second: clear_defeat_line_1
+      213: -6300823007361962798
+    second: clear_line_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: clear_defeat_line_0
+      name: clear_line_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 824
-        height: 15
+        width: 823
+        height: 53
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 85933628f0d07a050800000000000000
-      internalID: 5811628204408125784
+      spriteID: 639635dc1776891c0800000000000000
+      internalID: -4496730489455679178
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: clear_defeat_line_1
+      name: clear_line_1
       rect:
         serializedVersion: 2
-        x: 1516
+        x: 1517
         y: 0
-        width: 824
-        height: 15
+        width: 823
+        height: 53
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c2117df26485b2a00800000000000000
-      internalID: 732776422851416364
+      spriteID: 2dce495abdafe88a0800000000000000
+      internalID: -6300823007361962798
       vertices: []
       indices: 
       edges: []
@@ -163,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -173,8 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      clear_defeat_line_0: 5811628204408125784
-      clear_defeat_line_1: 732776422851416364
+      clear_line_0: -4496730489455679178
+      clear_line_1: -6300823007361962798
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
