@@ -19,7 +19,13 @@ public sealed class SlowEffector : EffectorBase
 
         _curDuration = 0f;
 
+        // TODO: 슬로우 효과가 중복으로 적용되는 것에 대한 처리가 필요하다..
+        // 단순히 더하고 빼는 방식이 아닌 곱하고 나누는 방식이라 원래 값으로 돌아가지 못하는 경우가 발생한다 (기준이 바뀌어 버린다)
+        // slowRate가 모두 동일하면 상관 없겠지만..?
         _damagableBehavior.GridMovement.MoveSpeed *= _slowRate;
+
+        ColorEffect colorEffect = new ColorEffect(ConstantConfig.GREEN, _duration);
+        _damagableBehavior.SpineController.AddColorEffect(colorEffect);
     }
     protected override void OnDeactivate()
     {

@@ -2,6 +2,21 @@ using Spine;
 using Spine.Unity;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
+using TMPro;
+
+public class ColorEffect
+{
+    public Color color = Color.white;
+    public float duration = 0f;
+    public float eTime = 0f;
+
+    public ColorEffect(Color color, float duration)
+    {
+        this.color = color;
+        this.duration = duration;
+    }
+}
 
 public class SpineController : MonoBehaviour
 {
@@ -21,6 +36,13 @@ public class SpineController : MonoBehaviour
     private Color _originalColor;
     private Dictionary<int, Bone> _cachedShootingBones;
 
+    // color effect
+    private List<ColorEffect> _colorEffectList = new List<ColorEffect>();
+    private ColorEffect _curColorEffect;
+    // for debug
+    public TextMeshPro TextMeshPro1;
+    public TextMeshPro TextMeshPro2;
+
     private void Awake()
     {
         //
@@ -33,6 +55,64 @@ public class SpineController : MonoBehaviour
 
         //
         InitShootingBone();
+    }
+    private void Update()
+    {
+        if (_colorEffectList.Count == 0)
+        {
+            if (_curColorEffect != null || !IsOriginalColor())
+            {
+                _curColorEffect = null;
+                ResetColor();
+            }
+
+            return;
+        }
+
+        // TEMP
+        if (TextMeshPro1 != null)
+        {
+            TextMeshPro1.text = $"cnt: {_colorEffectList.Count}";
+        }
+
+        // 가장 최근에 추가된 컬러 이펙트를 사용
+        var topColorEffect = _colorEffectList[_colorEffectList.Count - 1];
+        if (_curColorEffect != topColorEffect)
+        {
+            _curColorEffect = topColorEffect;
+
+            // 다른 컬러 이펙트라도 색상이 같을 수가 있는데
+            // 이런 경우 중복 처리를 방지하기 위해 처리
+            if (GetColor() != topColorEffect.color)
+            {
+                SetColor(topColorEffect.color);
+            }
+        }
+
+        // 모든 컬러 이펙트 시간을 업데이트함
+        for (int i = 0; i < _colorEffectList.Count; i++)
+        {
+            var colorEffect = _colorEffectList[i];
+
+            colorEffect.eTime += Time.deltaTime;
+            if (colorEffect.eTime >= colorEffect.duration)
+            {
+                _colorEffectList.RemoveAt(i);
+
+                // 인덱스 조정
+                // 처음, 중간, 마지막 중 어떤걸 제거하든 유효한 인덱스 조정
+                i--;
+            }
+        }
+
+        // TEMP
+        if (TextMeshPro2 != null)
+        {
+            if (_curColorEffect != null)
+            {
+                TextMeshPro2.text = $"eTime: {_curColorEffect.eTime.ToString("F2")}";
+            }
+        }
     }
 
     public void SetAnimation(string animationName, bool loop)
@@ -48,18 +128,37 @@ public class SpineController : MonoBehaviour
 
     public Color GetColor()
     {
+        if (!_skeletonAnimation)
+        {
+            return Color.white;
+        }
+
         return _skeletonAnimation.Skeleton.GetColor();
     }
     public void SetColor(Color color)
     {
+        if (!_skeletonAnimation)
+        {
+            return;
+        }
         _skeletonAnimation.Skeleton.SetColor(color);
     }
     public void ResetColor()
     {
-        if (_skeletonAnimation)
+        if (!_skeletonAnimation)
         {
-            _skeletonAnimation.Skeleton.SetColor(_originalColor);
+            return;
         }
+
+        _skeletonAnimation.Skeleton.SetColor(_originalColor);
+    }
+    public bool IsOriginalColor()
+    {
+        return GetColor() == _originalColor;
+    }
+    public void AddColorEffect(ColorEffect colorEffect)
+    {
+        _colorEffectList.Add(colorEffect);
     }
 
     public void InitShootingBone()

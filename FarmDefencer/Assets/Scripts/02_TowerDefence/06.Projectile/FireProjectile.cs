@@ -47,18 +47,18 @@ public sealed class FireProjectile : ParabolicProjectile
                 burnEffector.Activate(monster, _tickCount, _tickInterval, _tickDamage);
             });
 
-            // 2) 셀 시각 효과
-            if (DOTween.IsTweening(cell.transform))
-            {
-                //DOTween.Kill(cell.transform);
-                continue;
-            }
-            else
-            {
-                cell.transform.DOScale(1.5f, 0.25f).SetEase(Ease.OutBack).OnComplete(()
-                    =>
-                { cell.transform.DOScale(1f, 0.25f).SetEase(Ease.InBack); });
-            }
+            // // 2) 셀 시각 효과
+            // if (DOTween.IsTweening(cell.transform))
+            // {
+            //     //DOTween.Kill(cell.transform);
+            //     continue;
+            // }
+            // else
+            // {
+            //     cell.transform.DOScale(1.5f, 0.25f).SetEase(Ease.OutBack).OnComplete(()
+            //         =>
+            //     { cell.transform.DOScale(1f, 0.25f).SetEase(Ease.InBack); });
+            // }
         }
     }
 }
