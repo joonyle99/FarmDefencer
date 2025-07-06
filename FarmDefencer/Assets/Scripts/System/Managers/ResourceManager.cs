@@ -8,7 +8,7 @@ using UnityEngine;
 public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFarmSerializable
 {
     public List<string> SurvivedMonsters { get; private set; }
-    
+
     private int _gold;
     public int Gold
     {
@@ -46,7 +46,7 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFa
             var amount = 100;
 
             EarnGold(amount);
-            Debug.Log($"earn {amount} gold (<color=orange>current: {_gold}</color>)");
+            Debug.Log($"earn {amount} gold (<color=yellow>current: {_gold}</color>)");
         }
         // CHEAT: Spend Gold
         else if (Input.GetKeyDown(KeyCode.F2))
@@ -54,7 +54,7 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFa
             var amount = 100;
 
             SpendGold(amount);
-            Debug.Log($"spend {amount} gold (<color=orange>current: {_gold}</color>)");
+            Debug.Log($"spend {amount} gold (<color=yellow>current: {_gold}</color>)");
         }
 #endif
     }
@@ -69,7 +69,7 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFa
     {
         if (Gold < amount)
         {
-            Debug.Log("You don't have enough gold to build this tower");
+            Debug.Log($"You don't have enough gold to build this tower");
             return false;
         }
         SpendGold(amount);
