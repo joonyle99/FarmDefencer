@@ -52,7 +52,7 @@ public sealed class Tower : TargetableBehavior
         }
     }
 
-    [Header("Stats")]
+    [Header("Data")]
     [SerializeField] private TowerLevelData[] _levelData;
     public TowerLevelData[] LevelData => _levelData;
     public TowerLevelData DefaultLevelData => _levelData[0];
@@ -99,7 +99,7 @@ public sealed class Tower : TargetableBehavior
 
     #endregion
 
-    #region Fnctions
+    #region Functions
 
     protected override void Awake()
     {

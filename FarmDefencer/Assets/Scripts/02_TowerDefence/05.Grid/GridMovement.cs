@@ -18,7 +18,7 @@ public class GridMovement : MonoBehaviour
             _moveSpeed = value;
 
             // 몬스터의 움직임 애니메이션 속도 조절
-            if (_monster != null)
+            if (_monster != null && _monster.SpineController != null)
             {
                 _monster.SpineController.SpineAnimationState.TimeScale = _moveSpeed;
             }

@@ -9,9 +9,12 @@ using UnityEngine.Rendering;
 /// </summary>
 public abstract class Monster : TargetableBehavior, IProduct
 {
+    #region Attributes
+
     [Header("──────── IProduct ────────")]
     [Space]
 
+    [Header("Factory")]
     [SerializeField] private Factory _originFactory;
     public Factory OriginFactory
     {
@@ -30,11 +33,13 @@ public abstract class Monster : TargetableBehavior, IProduct
     [Header("──────── Monster ────────")]
     [Space]
 
-    [SerializeField] private string _monsterName;
-    public string MonsterName => _monsterName;
+    [Header("Data")]
+    [SerializeField] private MonsterData _monsterData;
+    public MonsterData MonsterData => _monsterData;
 
     [Space]
 
+    [Header("Etc")]
     [SerializeField] private Transform _headPoint;
     public Transform HeadPoint
     {
@@ -51,23 +56,24 @@ public abstract class Monster : TargetableBehavior, IProduct
 
     [Space]
 
-    // default animation names
-    [SpineAnimation]
-    public string IdleAnimationName;
-    [SpineAnimation]
-    public string WalkAnimationName;
-    [SpineAnimation]
-    public string WalkDamagedAnimationName;
-    [SpineAnimation]
-    public string DissappearAnimationName;
+    [Header("Animation")]
+    [SpineAnimation] public string IdleAnimationName;
+    [SpineAnimation] public string WalkAnimationName;
+    [SpineAnimation] public string WalkDamagedAnimationName;
+    [SpineAnimation] public string DissappearAnimationName;
 
     // events
     public event System.Action<int> OnDamaged;
     public event System.Action<Monster> OnKilled;
     public event System.Action<Monster> OnSurvived;
 
+    // sorting
     private SortingGroup _sortingGroup;
     private int _defaultSortingOrder;
+
+    #endregion
+
+    #region Functions
 
     protected override void Awake()
     {
@@ -113,7 +119,7 @@ public abstract class Monster : TargetableBehavior, IProduct
         {
             return;
         }
-        
+
         var dirX = DefenceContext.Current.GridMap.DirectionToEndX; // 1 or -1
 
         // cf)
@@ -171,7 +177,7 @@ public abstract class Monster : TargetableBehavior, IProduct
         // TEMP: 이동 중지
         GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
 
-        SoundManager.Instance.PlaySfx($"SFX_D_{_monsterName}_dead");
+        SoundManager.Instance.PlaySfx($"SFX_D_{MonsterData.Name}_dead");
 
         StartCoroutine(KillCo(DissappearAnimationName));
 
@@ -277,10 +283,12 @@ public abstract class Monster : TargetableBehavior, IProduct
 
         OnSurvived?.Invoke(this);
 
-        DefenceContext.Current.WaveSystem.AddSurvivedMonster(_monsterName);
+        DefenceContext.Current.WaveSystem.AddSurvivedMonster(MonsterData.Name);
 
         //TODO: 오브젝트 풀링은 현재는 안사용하고 있기 때문에 주석 처리
         //OriginFactory.ReturnProduct(this);
         Destroy(this.gameObject);
     }
+
+    #endregion
 }

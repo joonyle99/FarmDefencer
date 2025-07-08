@@ -13,7 +13,7 @@ public class MonsterUI : MonoBehaviour
         foreach (var monster in monsters)
         {
             // 1. SkeletonDataAsset 로드
-            var lowerName = monster.MonsterName;
+            var lowerName = monster.MonsterData.Name;
             var upperedName = char.ToUpper(lowerName[0]) + lowerName.Substring(1);
             var dataPath = $"Spine/Monster/Map_{MapManager.Instance.CurrentMapIndex}/{upperedName}/monster_{lowerName}_SkeletonData";
             var materialPath = $"Spine/Monster/Map_{MapManager.Instance.CurrentMapIndex}/{upperedName}/monster_{lowerName}_Material";
