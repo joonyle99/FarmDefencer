@@ -68,7 +68,6 @@ public sealed class Tower : TargetableBehavior
     private float[] _attackDuration;
     public float AttackDuration => _attackDuration[CurrentLevel - 1];
     private float _attackCooldownTimer = 0f;
-    private float _attackDurationTimer = 0f;
 
     [Header("Fire")]
     [SerializeField] private bool _canAttack = true;
@@ -85,8 +84,8 @@ public sealed class Tower : TargetableBehavior
     // target
     private TargetableBehavior _currentTarget;
     public TargetableBehavior CurrentTarget => _currentTarget;
-    public bool IsValidTarget => _currentTarget != null && _currentTarget.gameObject.activeSelf;
-    public bool IsAttackableTarget => IsValidTarget && !_currentTarget.IsDead;
+    public bool HasValidTarget => _currentTarget != null && _currentTarget.gameObject.activeSelf;
+    public bool HasAttackableTarget => HasValidTarget && !_currentTarget.IsDead;
 
     // actions
     public event System.Action<int> OnLevelChanged;
@@ -118,13 +117,26 @@ public sealed class Tower : TargetableBehavior
     protected override void OnEnable()
     {
         base.OnEnable();
+
+        OnLevelChanged -= InitAttackDurations;
+        OnLevelChanged += InitAttackDurations;
+    }
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+
+        OnLevelChanged -= InitAttackDurations;
+        spineController.SkeletonAnimation.AnimationState.Event -= HandleSpineEvent;
     }
     protected override void Start()
     {
         base.Start();
 
-        InitializeAttackDurations();
-        InitilaizeSpineEvent();
+        InitAttackDurations();
+
+        // TODO: 이후에 Try 함수를 만들어서 OnEnable, Start, Setter 등 사용하는 곳에서 호출해주어 구독을 빼먹지 않도록 한다..
+        spineController.SkeletonAnimation.AnimationState.Event -= HandleSpineEvent;
+        spineController.SkeletonAnimation.AnimationState.Event += HandleSpineEvent;
     }
     private void Update()
     {
@@ -135,7 +147,7 @@ public sealed class Tower : TargetableBehavior
     }
 
     // initialize
-    private void InitializeAttackDurations()
+    private void InitAttackDurations(int _ = 0)
     {
         var skeletonData = spineController.Skeleton.Data;
         _attackDuration = new float[AttackAnimationNames.Length];
@@ -143,12 +155,38 @@ public sealed class Tower : TargetableBehavior
         for (int i = 0; i < _attackDuration.Length; i++)
         {
             var animation = skeletonData.FindAnimation(AttackAnimationNames[i]);
-            _attackDuration[i] = (animation != null) ? animation.Duration : 0f;
+            if (animation != null)
+            {
+                var eventTime = 0f;
+
+                foreach (var timeline in animation.Timelines)
+                {
+                    if (timeline is Spine.EventTimeline eventTimeline)
+                    {
+                        for (int j = 0; j < eventTimeline.Events.Length; j++)
+                        {
+                            var evt = eventTimeline.Events[j];
+                            if (evt.Data.Name == "fire" || evt.Data.Name == "shoot")
+                            {
+                                eventTime = evt.Time;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (Mathf.Approximately(eventTime, 0f))
+                {
+                    eventTime = animation.Duration;
+                }
+
+                _attackDuration[i] = eventTime;
+            }
+            else
+            {
+                _attackDuration[i] = 0f;
+            }
         }
-    }
-    private void InitilaizeSpineEvent()
-    {
-        spineController.SkeletonAnimation.AnimationState.Event += HandleSpineEvent;
     }
     private void HandleSpineEvent(Spine.TrackEntry trackEntry, Spine.Event e)
     {
@@ -253,17 +291,6 @@ public sealed class Tower : TargetableBehavior
             return;
         }
 
-        // wait attack duration
-        if (_isAttacking == true)
-        {
-            _attackDurationTimer += Time.deltaTime;
-            if (_attackDurationTimer >= AttackDuration)
-            {
-                _attackDurationTimer = 0f;
-                _isAttacking = false;
-            }
-        }
-
         // find
         if (_isAttacking == false) // 공격 애니메이션 재생 중에 다른 곳을 바라보지 않도록 하기 위함
         {
@@ -272,11 +299,11 @@ public sealed class Tower : TargetableBehavior
 
         // attack
         _attackCooldownTimer += Time.deltaTime; // 공격 쿨타임은 공격 애니메이션 재생 중에도 증가
-        if (_attackCooldownTimer >= CurrentLevelData.AttackRate)
+        if (_attackCooldownTimer >= CurrentLevelData.AttackRate && _attackCooldownTimer >= AttackDuration)
         {
-            _attackCooldownTimer = 0f;
-            if (IsAttackableTarget)
+            if (HasAttackableTarget)
             {
+                _attackCooldownTimer = 0f;
                 Attack();
             }
         }
@@ -308,7 +335,9 @@ public sealed class Tower : TargetableBehavior
     }
     private void Fire()
     {
-        if (!IsValidTarget)
+        _isAttacking = false;
+
+        if (!HasValidTarget)
         {
             return;
         }
