@@ -3,29 +3,26 @@ using UnityEngine;
 
 public class GridMovement : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed = 1f;
-    /// <summary>
-    /// 몬스터가 이동하는 속도입니다.
-    /// 기본 값은 1입니다. (1초에 1칸 이동)
-    /// 값이 2인 경우 -> 1초에 2칸 이동합니다.
-    /// 값이 0.5인 경우 -> 1초에 0.5칸 이동합니다.
-    /// </summary>
-    public float MoveSpeed
+    // move
+    private float _moveSpeed = 1f;
+    public float MoveSpeed => _moveSpeed;
+    private float _speedFactor = 1f;
+    public float SpeedFactor
     {
-        get => _moveSpeed;
+        get => _speedFactor;
         set
         {
-            _moveSpeed = value;
+            _speedFactor = value;
 
-            // 몬스터의 움직임 애니메이션 속도 조절
-            if (_monster != null && _monster.SpineController != null)
-            {
-                _monster.SpineController.SpineAnimationState.TimeScale = _moveSpeed;
-            }
+            // 이동 속도 반영
+            _moveSpeed = _monster.MonsterData.OriginMoveSpeed * _speedFactor;
+            // 몬스터 애니메이션 속도 반영
+            _monster.SpineController.SpineAnimationState.TimeScale = _speedFactor;
         }
     }
     [SerializeField] private float _arrivalThreshold = 0.05f;
 
+    // grid cell
     private GridCell _currGridCell;
     private GridCell _nextGridCell;
     private int _pathIndex = 0;
@@ -167,7 +164,7 @@ public class GridMovement : MonoBehaviour
 
         // move
         var dirVec = (_nextGridCell.worldPosition - transform.position).normalized;
-        _rigidbody.linearVelocity = dirVec * DefenceContext.Current.GridMap.UnitCellSize * _moveSpeed;
+        _rigidbody.linearVelocity = dirVec * DefenceContext.Current.GridMap.UnitCellSize * MoveSpeed;
 
 #if UNITY_EDITOR
         // 몬스터 1초당 이동거리 계산
@@ -190,6 +187,8 @@ public class GridMovement : MonoBehaviour
             Debug.LogError("failed to calculate");
             return;
         }
+
+        _moveSpeed = _monster.MonsterData.OriginMoveSpeed * _speedFactor;
 
         // 걷기 애니메이션
         _monster.SpineController.SetAnimation(_monster.WalkAnimationName, true);
