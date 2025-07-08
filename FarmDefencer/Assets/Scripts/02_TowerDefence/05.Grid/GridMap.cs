@@ -138,8 +138,8 @@ public class GridMap : MonoBehaviour
     }
     private void Start()
     {
+        GameStateManager.Instance.OnBuildState -= CreateGridMap;
         GameStateManager.Instance.OnBuildState += CreateGridMap;
-        GameStateManager.Instance.OnWaveState += CreateGridMap;
     }
 
     public void CreateGridMap()
