@@ -40,6 +40,8 @@ public class SpineController : MonoBehaviour
     private List<ColorEffect> _colorEffectList = new List<ColorEffect>();
     private ColorEffect _curColorEffect;
 
+    private DamageableBehavior _damagableBehavior;
+
     private void Awake()
     {
         //
@@ -52,9 +54,17 @@ public class SpineController : MonoBehaviour
 
         //
         InitShootingBone();
+
+        //
+        _damagableBehavior = GetComponent<DamageableBehavior>() ?? GetComponentInParent<DamageableBehavior>();
     }
     private void Update()
     {
+        if (_damagableBehavior != null && _damagableBehavior.IsActivated == false)
+        {
+            return;
+        }
+
         // 모든 컬러 이펙트 시간을 업데이트
         // 컬러 이펙트 시간이 종료되면 리스트에서 제거
         _colorEffectList.RemoveAll(effect => (effect.eTime += Time.deltaTime) >= effect.duration);
