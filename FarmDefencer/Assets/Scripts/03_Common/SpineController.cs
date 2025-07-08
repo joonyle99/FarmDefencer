@@ -39,9 +39,6 @@ public class SpineController : MonoBehaviour
     // color effect
     private List<ColorEffect> _colorEffectList = new List<ColorEffect>();
     private ColorEffect _curColorEffect;
-    // for debug
-    public TextMeshPro TextMeshPro1;
-    public TextMeshPro TextMeshPro2;
 
     private void Awake()
     {
@@ -58,59 +55,33 @@ public class SpineController : MonoBehaviour
     }
     private void Update()
     {
+        // 모든 컬러 이펙트 시간을 업데이트
+        // 컬러 이펙트 시간이 종료되면 리스트에서 제거
+        _colorEffectList.RemoveAll(effect => (effect.eTime += Time.deltaTime) >= effect.duration);
+
+        // 적용할 컬러 이펙트가 없다면 원래 색상으로 복구
         if (_colorEffectList.Count == 0)
         {
-            if (_curColorEffect != null || !IsOriginalColor())
+            if (!IsOriginalColor())
             {
-                _curColorEffect = null;
                 ResetColor();
             }
+
+            _curColorEffect = null;
 
             return;
         }
 
-        // TEMP
-        if (TextMeshPro1 != null)
-        {
-            TextMeshPro1.text = $"cnt: {_colorEffectList.Count}";
-        }
-
         // 가장 최근에 추가된 컬러 이펙트를 사용
         var topColorEffect = _colorEffectList[_colorEffectList.Count - 1];
-        if (_curColorEffect != topColorEffect)
+        if (topColorEffect != _curColorEffect)
         {
             _curColorEffect = topColorEffect;
 
-            // 다른 컬러 이펙트라도 색상이 같을 수가 있는데
-            // 이런 경우 중복 처리를 방지하기 위해 처리
-            if (GetColor() != topColorEffect.color)
+            // 색상이 같을 경우 중복 처리를 방지
+            if (IsDifferentColor(topColorEffect.color))
             {
                 SetColor(topColorEffect.color);
-            }
-        }
-
-        // 모든 컬러 이펙트 시간을 업데이트함
-        for (int i = 0; i < _colorEffectList.Count; i++)
-        {
-            var colorEffect = _colorEffectList[i];
-
-            colorEffect.eTime += Time.deltaTime;
-            if (colorEffect.eTime >= colorEffect.duration)
-            {
-                _colorEffectList.RemoveAt(i);
-
-                // 인덱스 조정
-                // 처음, 중간, 마지막 중 어떤걸 제거하든 유효한 인덱스 조정
-                i--;
-            }
-        }
-
-        // TEMP
-        if (TextMeshPro2 != null)
-        {
-            if (_curColorEffect != null)
-            {
-                TextMeshPro2.text = $"eTime: {_curColorEffect.eTime.ToString("F2")}";
             }
         }
     }
@@ -155,6 +126,10 @@ public class SpineController : MonoBehaviour
     public bool IsOriginalColor()
     {
         return GetColor() == _originalColor;
+    }
+    public bool IsDifferentColor(Color color)
+    {
+        return GetColor() != color;
     }
     public void AddColorEffect(ColorEffect colorEffect)
     {
