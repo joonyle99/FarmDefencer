@@ -2908,7 +2908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8251504787961832259, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
       propertyPath: m_BlockingMask.m_Bits
-      value: 4294967295
+      value: 247
       objectReference: {fileID: 0}
     - target: {fileID: 8798167006038881594, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
       propertyPath: m_SizeDelta.x
