@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d47a6dc6eafb8f47a4591886e5abaaf, type: 3}
-  m_Name: Turtle
+  m_Name: Blowfish
   m_EditorClassIdentifier: 
-  Name: turtle
+  Name: blowfish
   Description: 
-  MoveSpeed: 1
+  OriginMoveSpeed: 0.7

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: squid
   Description: 
-  MoveSpeed: 1
+  OriginMoveSpeed: 0.7
