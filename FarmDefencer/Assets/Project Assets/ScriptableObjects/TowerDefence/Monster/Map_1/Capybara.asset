@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d47a6dc6eafb8f47a4591886e5abaaf, type: 3}
   m_Name: Capybara
   m_EditorClassIdentifier: 
-  Name: blowfish
+  Name: capybara
   Description: 
-  MoveSpeed: 1
+  OriginMoveSpeed: 1
