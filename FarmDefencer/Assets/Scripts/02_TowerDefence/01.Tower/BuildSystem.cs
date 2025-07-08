@@ -204,6 +204,7 @@ public class BuildSystem : MonoBehaviour
     private void CreateGhostTower(Vector3 worldPos)
     {
         _ghostTower = Instantiate(SelectedTower, worldPos, Quaternion.identity);
+        _ghostTower.Deactivate();
     }
     private void MoveGhostTower(Vector3 worldPos)
     {
@@ -214,7 +215,7 @@ public class BuildSystem : MonoBehaviour
         _hoveringGridCell.Occupy(_ghostTower);
         _hoveringGridCell.UnUsable();
 
-        _ghostTower.enabled = true;
+        _ghostTower.Activate();
         _ghostTower.SpineController.ResetColor();
 
         ResourceManager.Instance.SpendGold(_ghostTower.CurrentCost);

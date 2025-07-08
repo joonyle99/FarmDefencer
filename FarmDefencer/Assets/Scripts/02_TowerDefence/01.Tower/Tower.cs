@@ -106,9 +106,9 @@ public sealed class Tower : TargetableBehavior
 
         _cost = CurrentLevelData.ValueCost;
 
+        // 둘 다 null이거나 둘 다 할당된 경우
         bool isProjectileAssigned = _projectilePrefab != null;
         bool isBeamAssigned = _beamPrefab != null;
-        // 둘 다 null이거나 둘 다 할당된 경우
         if (isProjectileAssigned == true && isBeamAssigned == true)
         {
             Debug.LogError("_projectilePrefab 또는 _beamPrefab 중 하나만 할당하세요.");
@@ -140,6 +140,11 @@ public sealed class Tower : TargetableBehavior
     }
     private void Update()
     {
+        if (isActivated == false)
+        {
+            return;
+        }
+
         if (AttackAnimationNames.Length > 0 && string.IsNullOrEmpty(AttackAnimation) == false)
         {
             UpdateAttackState();

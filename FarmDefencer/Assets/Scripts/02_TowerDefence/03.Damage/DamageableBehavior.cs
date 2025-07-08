@@ -89,6 +89,9 @@ public abstract class DamageableBehavior : MonoBehaviour
     //protected Dictionary<Status, Coroutine> activeEffects = new();
     protected Coroutine tickDamageCo;
 
+    protected bool isActivated = false;
+    public bool IsActivated => isActivated;
+
     protected virtual void Awake()
     {
         var damageZone = GetComponent<DamageableZone>();
@@ -136,4 +139,14 @@ public abstract class DamageableBehavior : MonoBehaviour
     //    yield return new WaitForSeconds(duration);
     //    IsStun = false;
     //}
+
+    // activate
+    public void Activate()
+    {
+        isActivated = true;
+    }
+    public void Deactivate()
+    {
+        isActivated = false;
+    }
 }
