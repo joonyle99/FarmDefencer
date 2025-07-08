@@ -33,8 +33,8 @@ public class BuildSystem : MonoBehaviour
 
     private void Start()
     {
-        GameStateManager.Instance.OnBuildState -= InitSomething;
-        GameStateManager.Instance.OnBuildState += InitSomething;
+        GameStateManager.Instance.OnBuildState -= InitBuildTimer;
+        GameStateManager.Instance.OnBuildState += InitBuildTimer;
 
         GameStateManager.Instance.OnBuildState -= InitProgressBar;
         GameStateManager.Instance.OnBuildState += InitProgressBar;
@@ -60,7 +60,7 @@ public class BuildSystem : MonoBehaviour
         }
     }
 
-    private void InitSomething()
+    private void InitBuildTimer()
     {
         _buildTimer = 0f;
     }
@@ -200,7 +200,7 @@ public class BuildSystem : MonoBehaviour
         return pos;
     }
 
-    //
+    // TODO: 타워가 동작하지 않도록 해야한다.. (활성화 / 비활성화)
     private void CreateGhostTower(Vector3 worldPos)
     {
         _ghostTower = Instantiate(SelectedTower, worldPos, Quaternion.identity);
