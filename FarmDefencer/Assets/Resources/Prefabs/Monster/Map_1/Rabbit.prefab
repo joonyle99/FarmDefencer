@@ -214,6 +214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f64264dfc9b1f49ab5fda2efdc8920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TextMeshPro1: {fileID: 0}
+  TextMeshPro2: {fileID: 0}
 --- !u!58 &3216986904248962249
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -323,6 +325,7 @@ MonoBehaviour:
   _targetPoint: {fileID: 325706902821444277}
   _originFactory: {fileID: 0}
   _monsterName: rabbit
+  _monsterData: {fileID: 11400000, guid: 32b4222f6fe998d449fb0b8a214d6426, type: 2}
   _headPoint: {fileID: 6396965322642998772}
   IdleAnimationName: idle
   WalkAnimationName: walk

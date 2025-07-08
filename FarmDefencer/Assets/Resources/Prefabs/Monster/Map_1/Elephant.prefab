@@ -152,6 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f64264dfc9b1f49ab5fda2efdc8920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TextMeshPro1: {fileID: 0}
+  TextMeshPro2: {fileID: 0}
 --- !u!58 &3216986904248962249
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -258,12 +260,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 4159104016721875392}
   _maxHp: 200
-  _stunDuration: 0.03
-  _isDead: 0
-  _isStun: 0
   _targetPoint: {fileID: 6219046591756985945}
   _originFactory: {fileID: 0}
   _monsterName: elephant
+  _monsterData: {fileID: 11400000, guid: 052c9d2c1f8a9dc4b8c3fe524f3da159, type: 2}
   _headPoint: {fileID: 3303656651166622180}
   IdleAnimationName: idle
   WalkAnimationName: walk
