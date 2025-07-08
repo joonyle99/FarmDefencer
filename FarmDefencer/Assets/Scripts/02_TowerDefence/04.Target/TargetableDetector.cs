@@ -18,7 +18,7 @@ public class TargetableDetector : MonoBehaviour
 
     private const int BUCKET_CAPACITY = 100;
 
-    private TargetableBehavior _currentTarget;
+    // private TargetableBehavior _currentTarget;
 
     public event Action<TargetableBehavior> OnEnterTarget;
     public event Action<TargetableBehavior> OnExitTarget;
@@ -201,9 +201,15 @@ public class TargetableDetector : MonoBehaviour
 
                 var targetCellPos = thisCellPos + offset;
                 var targetCell = DefenceContext.Current.GridMap.GetCell(targetCellPos.x, targetCellPos.y);
+
+                // 유효하지 않는 셀이라면 탐지 범위에 포함되지 않는다. (e.g 맵 밖)
                 if (targetCell == null)
                 {
-                    // 유효하지 않는 셀이라면 탐지 범위에 포함되지 않는다. (e.g 맵 밖)
+                    continue;
+                }
+                // 사용 불가능한 셀이라면 탐지 범위에 포함되지 않는다. (e.g 출발점 / 도착점, 타워가 설치된 셀)
+                else if (targetCell.isUsable == false)
+                {
                     continue;
                 }
 
