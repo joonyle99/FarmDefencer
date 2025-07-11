@@ -79,10 +79,6 @@ public class TutorialHand : MonoBehaviour
                 Action_Water();
                 break;
             }            
-            default:
-            {
-                break;
-            }
         }
     }
 

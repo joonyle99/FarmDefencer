@@ -56,8 +56,6 @@ public sealed class FarmManager : MonoBehaviour
 
     private void Update()
     {
-        var ratio = farmClock.LengthOfDaytime == 0.0f ? 0.0f : farmClock.RemainingDaytime / farmClock.LengthOfDaytime;
-
         if (harvestTutorialGiver.IsPlayingTutorial)
         {
             harvestTutorialGiver.gameObject.SetActive(!penaltyGiver.IsAnimationPlaying);
@@ -70,7 +68,7 @@ public sealed class FarmManager : MonoBehaviour
 
         farmUI.WateringCanAvailable = !harvestTutorialGiver.gameObject.activeSelf;
         weatherShopUI.gameObject.SetActive(!harvestTutorialGiver.IsPlayingTutorial);
-        goDefenceUI.gameObject.SetActive(ratio == 0.0f && !harvestTutorialGiver.IsPlayingTutorial);
+        goDefenceUI.gameObject.SetActive(farmClock.Daytime == 0.0f && !harvestTutorialGiver.IsPlayingTutorial);
     }
 
     private void QuotaContextChangedHandler()
@@ -100,8 +98,9 @@ public sealed class FarmManager : MonoBehaviour
         farmClock.AddPauseCondition(() => penaltyGiver.IsAnimationPlaying);
         farmClock.AddPauseCondition(() => harvestTutorialGiver.IsPlayingTutorial);
         farmClock.AddPauseCondition(() => farmDebugUI.IsPaused);
-        farmDebugUI.Init(farmClock.SetRemainingDaytimeBy, () => farmClock.RemainingDaytime, OpenDefenceScene);
+        farmDebugUI.Init(farmClock.SetDaytime, () => farmClock.RemainingDaytime, OpenDefenceScene);
         farmClock.AddPauseCondition(() => weatherGiver.IsWeatherOnGoing);
+        farmClock.AddPauseCondition(() => pestGiver.IsWarningShowing);
 
         quotaContext.Init(GetProductEntry);
 
@@ -135,6 +134,7 @@ public sealed class FarmManager : MonoBehaviour
         pestGiver.Init(
             productName => quotaContext.IsProductAvailable(GetProductEntry(productName)),
             GetProductEntry,
+            () => farmClock.Daytime,
             EarnGold);
     }
 

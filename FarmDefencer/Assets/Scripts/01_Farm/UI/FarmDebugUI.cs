@@ -11,18 +11,18 @@ public sealed class FarmDebugUI : MonoBehaviour
 	private Button _goDefenceButton;
 	private Button _setDaytimeButton;
 	private Button _setDaytime5sButton;
-	private Action<float> _setRemainingDaytime;
-	private Func<float> _getRemainingDaytime;
+	private Action<float> _setDaytime;
+	private Func<float> _getDaytime;
 	
 	public bool IsPaused { get; private set; }
 
-	public void Init(Action<float> setRemainingDaytime, Func<float> getRemainingDaytime, Action onGoDefenceButtonClickedHandler)
+	public void Init(Action<float> setDaytime, Func<float> getRemainingDaytime, Action onGoDefenceButtonClickedHandler)
 	{
-		_setRemainingDaytime = setRemainingDaytime;
-		_getRemainingDaytime = getRemainingDaytime;
+		_setDaytime = setDaytime;
+		_getDaytime = getRemainingDaytime;
 		
-		_setDaytimeButton.onClick.AddListener(() => setRemainingDaytime(300.0f));
-		_setDaytime5sButton.onClick.AddListener(() => setRemainingDaytime(5.0f));
+		_setDaytimeButton.onClick.AddListener(() => setDaytime(0.0f));
+		_setDaytime5sButton.onClick.AddListener(() => setDaytime(295.0f));
 		
 		_goDefenceButton.onClick.AddListener(() => onGoDefenceButtonClickedHandler());
 	}
@@ -52,6 +52,6 @@ public sealed class FarmDebugUI : MonoBehaviour
 	private void Update()
 	{
 		var deltaTime = Time.deltaTime;
-		_remainingDaytimeText.text = _getRemainingDaytime().ToString();
+		_remainingDaytimeText.text = _getDaytime().ToString();
 	}
 }
