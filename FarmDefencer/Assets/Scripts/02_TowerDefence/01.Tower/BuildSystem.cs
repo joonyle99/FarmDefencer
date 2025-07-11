@@ -169,7 +169,7 @@ public class BuildSystem : MonoBehaviour
             return;
         }
 
-        DefenceContext.Current.GridMap.LastGridCell = _hoveringGridCell;
+        DefenceContext.Current.GridMap.LastPlacedGridCell = _hoveringGridCell;
 
         //
         if (!CheckPath(_hoveringGridCell))
@@ -179,6 +179,8 @@ public class BuildSystem : MonoBehaviour
         }
 
         PlaceGhostTower();
+
+        DefenceContext.Current.GridMap.LastPlacedGridCell = null;
 
         _hoveringGridCell = null;
         _ghostTower = null;

@@ -80,7 +80,7 @@ public class GridMap : MonoBehaviour
     private int[] _dx = new int[4] { -1, 0, 1, 0 };
     private int[] _dy = new int[4] { 0, 1, 0, -1 };
 
-    public GridCell LastGridCell = null;
+    public GridCell LastPlacedGridCell = null;
 
     private void Awake()
     {

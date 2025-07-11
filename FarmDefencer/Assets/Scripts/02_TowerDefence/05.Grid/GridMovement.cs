@@ -188,6 +188,7 @@ public class GridMovement : MonoBehaviour
             return;
         }
 
+        // 이동 속도 설정
         _moveSpeed = _monster.MonsterData.OriginMoveSpeed * _speedFactor;
 
         // 걷기 애니메이션
@@ -199,7 +200,7 @@ public class GridMovement : MonoBehaviour
         // 몬스터 리스트에 추가
         _currGridCell.monstersInCell.Add(_monster);
     }
-    /// <summary> 원래 경로(출발 지점에서 도착 지점의 경로)를 사용합니다. </summary>
+    /// <summary> Start Point <---> End Point 경로를 계산합니다. </summary>
     public bool UseOriginGridPath()
     {
         var originGridPath = DefenceContext.Current.GridMap.OriginGridPath;
@@ -210,8 +211,8 @@ public class GridMovement : MonoBehaviour
         }
 
         int tempPathIndex = 0;
-        GridCell tempCurrGridCell = null;
-        GridCell tempNextGridCell = null;
+        GridCell tempCurrGridCell;
+        GridCell tempNextGridCell;
 
         tempCurrGridCell = originGridPath[tempPathIndex++]; // index = 0
         if (tempCurrGridCell == null)
@@ -234,13 +235,13 @@ public class GridMovement : MonoBehaviour
 
         return true;
     }
-    /// <summary> 몬스터의 현재 지점에서 도착 지점까지의 경로를 사용합니다. </summary>
+    /// <summary> Monster <---> End Point 경로를 계산합니다. </summary>
     public bool CalcEachGridPath()
     {
         var gridMap = DefenceContext.Current.GridMap;
 
-        // 다음 목적지에는 타워를 설치할 수 없다
-        if (gridMap.LastGridCell == _nextGridCell)
+        // 가장 최근에 선택된 셀에는 타워를 설치할 수 없다
+        if (gridMap.LastPlacedGridCell == _nextGridCell)
         {
             Debug.Log("cannot be installed in the next grid cell.");
             return false;
@@ -254,8 +255,8 @@ public class GridMovement : MonoBehaviour
             return false;
         }
 
-        GridCell tempCurrGridCell = null;
-        GridCell tempNextGridCell = null;
+        GridCell tempCurrGridCell;
+        GridCell tempNextGridCell;
 
         // 방향 전환이 필요한 경우
         var newNextGridCell = eachGridPath[0];
