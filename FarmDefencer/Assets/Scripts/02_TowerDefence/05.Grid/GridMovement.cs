@@ -249,10 +249,19 @@ public class GridMovement : MonoBehaviour
 
         // _nextGridCell을 기준으로 EndCellPoint까지의 경로를 계산합니다
         var eachGridPath = gridMap.CalculateEachPath(_nextGridCell.cellPosition, gridMap.EndCellPoint);
+        var isArrived = _nextGridCell.cellPosition == gridMap.EndCellPoint;
         if (eachGridPath == null || eachGridPath.Count < 2)
         {
-            Debug.Log("each grid path is invalid");
-            return false;
+            if (isArrived == true)
+            {
+                Debug.Log("next grid cell is end cell point");
+                eachGridPath = new List<GridCell> { _nextGridCell };
+            }
+            else
+            {
+                Debug.Log("each grid path is invalid");
+                return false;
+            }
         }
 
         GridCell tempCurrGridCell;
