@@ -139,6 +139,7 @@ public class WaveSystem : MonoBehaviour
         //TODO: 오브젝트 풀링을 여러 종류의 몬스터를 생성할 수 있도록 수정
         //var spawnedMonster = _factory.GetProduct<Monster>();
         var spawnedMonster = Instantiate(monster, Vector3.zero, Quaternion.identity);
+        spawnedMonster.Activate(); // 몬스터 활성화
 
         spawnedMonster.GridMovement.Initialize();
 

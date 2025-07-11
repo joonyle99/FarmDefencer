@@ -60,14 +60,11 @@ public class SpineController : MonoBehaviour
     }
     private void Update()
     {
+        // 비활성화 되어었지 않으면 종료
         if (_damagableBehavior != null && _damagableBehavior.IsActivated == false)
         {
             return;
         }
-
-        // 모든 컬러 이펙트 시간을 업데이트
-        // 컬러 이펙트 시간이 종료되면 리스트에서 제거
-        _colorEffectList.RemoveAll(effect => (effect.eTime += Time.deltaTime) >= effect.duration);
 
         // 적용할 컬러 이펙트가 없다면 원래 색상으로 복구
         if (_colorEffectList.Count == 0)
@@ -92,6 +89,22 @@ public class SpineController : MonoBehaviour
             if (IsDifferentColor(topColorEffect.color))
             {
                 SetColor(topColorEffect.color);
+            }
+        }
+
+        // 모든 컬러 이펙트 시간을 업데이트
+        // 컬러 이펙트 시간이 종료되면 리스트에서 제거
+        for (int index = 0; index < _colorEffectList.Count; index++)
+        {
+            var colorEffect = _colorEffectList[index];
+
+            colorEffect.eTime += Time.deltaTime;
+            if (colorEffect.eTime >= colorEffect.duration)
+            {
+                _colorEffectList.RemoveAt(index);
+
+                // 처음, 중간, 마지막 중 어떤걸 제거하든 유효한 인덱스 조정
+                index--;
             }
         }
     }

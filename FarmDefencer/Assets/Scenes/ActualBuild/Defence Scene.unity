@@ -424,7 +424,7 @@ MonoBehaviour:
   _pathLineDuration: 0.3
   _gridCellPrefab: {fileID: 5452235141227775536, guid: 20e9a4561dd28f94996acde895b08146, type: 3}
   _originGridPath: []
-  LastGridCell: {fileID: 0}
+  LastPlacedGridCell: {fileID: 0}
 --- !u!483693784 &841568041
 TilemapRenderer:
   m_ObjectHideFlags: 0
