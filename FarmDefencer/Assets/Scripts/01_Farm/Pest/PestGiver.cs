@@ -9,6 +9,8 @@ public sealed class PestGiver : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
 {
     public int InputPriority => IFarmInputLayer.Priority_PestGiver;
 
+    public bool IsWarningShowing => _pestWarningUI.IsWarningShowing;
+
     [Serializable]
     public struct PestPrefabData
     {
@@ -25,23 +27,31 @@ public sealed class PestGiver : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
     [SerializeField] private float distanceBetweenArrivedPests = 0.2f;
     [SerializeField] private float pestClickSize = 0.1f; // 해충 클릭 판정되는 크기.
     [SerializeField] private float pestDieTime = 0.5f; // 해충 잡았을 때 투명해져 완전히 사라질때까지 걸리는 시간.
+    [SerializeField] private float pestWarningDuration = 3.0f;
     [SerializeField] private List<PestPrefabData> pestPrefabs;
 
     private Func<string, bool> _isProductAvailable;
     private Func<string, ProductEntry> _getProductEntry;
+    private Func<float> _getDaytime;
     private Action<int> _onPestCatchGoldEarned;
     private GameObject _pestsObject;
     private Dictionary<string, PestDestination> _pestDestinations;
     private Dictionary<PestOrigin, Vector2> _pestOrigins;
     private float _pestSpawnTime;
     private bool _isPestSpawned;
+    private PestWarningUI _pestWarningUI;
 
     private List<Pest> _runningPests;
 
-    public void Init(Func<string, bool> isProductAvailable, Func<string, ProductEntry> getProductEntry, Action<int> onPestCatchGoldEarned)
+    public void Init(
+        Func<string, bool> isProductAvailable, 
+        Func<string, ProductEntry> getProductEntry,
+        Func<float> getDaytime,
+        Action<int> onPestCatchGoldEarned)
     {
         _isProductAvailable = isProductAvailable;
         _getProductEntry = getProductEntry;
+        _getDaytime = getDaytime;
         _onPestCatchGoldEarned = onPestCatchGoldEarned;
     }
 
@@ -65,45 +75,43 @@ public sealed class PestGiver : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
 
     public void OnFarmUpdate(float deltaTime)
     {
-        if (!_isPestSpawned)
+        if (!_isPestSpawned && _getDaytime() >= _pestSpawnTime)
         {
-            _pestSpawnTime -= deltaTime;
-            if (_pestSpawnTime <= 0)
+            _isPestSpawned = true;
+            
+            _pestWarningUI.ShowWarning();
+            var pestSpawnRule = CreatePestSpawnRule(_isProductAvailable);
+            var availableProducts = GetAvailableTargetProducts(_isProductAvailable, _getProductEntry);
+
+            foreach (var (pestOrigin, pestSize) in pestSpawnRule)
             {
-                _isPestSpawned = true;
-                var pestSpawnRule = CreatePestSpawnRule(_isProductAvailable);
-                var availableProducts = GetAvailableTargetProducts(_isProductAvailable, _getProductEntry);
-
-                foreach (var (pestOrigin, pestSize) in pestSpawnRule)
+                var seed = Random.Range(0, 10000);
+                var target = SelectTarget(pestOrigin, availableProducts);
+                if (target is null)
                 {
-                    var seed = Random.Range(0, 10000);
-                    var target = SelectTarget(pestOrigin, availableProducts);
-                    if (target is null)
-                    {
-                        Debug.LogError($"PestOrigin {pestOrigin}, PestSize {pestSize} 에 대한 해충 타겟을 찾을 수 없습니다.");
-                        continue;
-                    }
-
-                    var pestPrefab = pestPrefabs.Find(data => data.Size == pestSize).Prefab;
-                    var pestObject = Instantiate(pestPrefab, _pestsObject.transform);
-                    pestObject.name = $"Pest_{target.ProductName}_{pestSize}";
-                    pestObject.transform.position = _pestOrigins[pestOrigin];
-
-                    var pestComponent = pestObject.AddComponent<Pest>();
-                    pestComponent.Init(
-                        pestSize,
-                        pestOrigin,
-                        seed,
-                        target,
-                        _pestDestinations[target.ProductName].transform.position,
-                        pestMoveSpeed,
-                        pestBeginDirectToDestinationCriterion,
-                        pestDieTime);
-                    _runningPests.Add(pestComponent);
+                    Debug.LogError($"PestOrigin {pestOrigin}, PestSize {pestSize} 에 대한 해충 타겟을 찾을 수 없습니다.");
+                    continue;
                 }
 
-                StartCoroutine(DoRunPests());
+                var pestPrefab = pestPrefabs.Find(data => data.Size == pestSize).Prefab;
+                var pestObject = Instantiate(pestPrefab, _pestsObject.transform);
+                pestObject.name = $"Pest_{target.ProductName}_{pestSize}";
+                pestObject.transform.position = _pestOrigins[pestOrigin];
+
+                var pestComponent = pestObject.AddComponent<Pest>();
+                pestComponent.Init(
+                    pestSize,
+                    pestOrigin,
+                    seed,
+                    target,
+                    _pestDestinations[target.ProductName].transform.position,
+                    pestMoveSpeed,
+                    pestBeginDirectToDestinationCriterion,
+                    pestDieTime);
+                _runningPests.Add(pestComponent);
             }
+
+            StartCoroutine(DoRunPests());
         }
         
         _runningPests.ForEach(p => p.ManualUpdate(deltaTime));
@@ -157,6 +165,7 @@ public sealed class PestGiver : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
         _pestOrigins = new Dictionary<PestOrigin, Vector2>();
         _pestsObject = transform.Find("Pests").gameObject;
         _runningPests = new List<Pest>();
+        _pestWarningUI = transform.Find("PestWarningUI").GetComponent<PestWarningUI>();
 
         var pestDestinationsObject = transform.Find("PestDestinations");
         for (int i = 0; i < pestDestinationsObject.childCount; ++i)

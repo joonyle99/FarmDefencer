@@ -22,24 +22,14 @@ public interface IFarmUpdatable
 /// </summary>
 public sealed class FarmClock : MonoBehaviour
 {
-    private float _remainingDaytime;
+    [SerializeField] private float lengthOfDaytime = 300.0f;
+    public float LengthOfDaytime => lengthOfDaytime;
+    
+    public float Daytime { get; private set; }
 
-    public float RemainingDaytime
-    {
-        get => _remainingDaytime;
-        private set
-        {
-            _remainingDaytime = value;
-            if (_remainingDaytime < 0.0f)
-            {
-                _remainingDaytime = 0.0f;
-            }
-        }
-    }
+    public float RemainingDaytime => lengthOfDaytime - Daytime;
 
     public bool Stopped { get; private set; }
-
-    public float LengthOfDaytime { get; private set; }
 
     private List<Func<bool>> _pauseConditions;
 
@@ -50,13 +40,8 @@ public sealed class FarmClock : MonoBehaviour
         _pauseConditions.Add(condition);
     }
 
-    public void SetRemainingDaytimeBy(float daytime)
-    {
-        LengthOfDaytime = daytime;
-        _remainingDaytime = daytime;
-    }
+    public void SetDaytime(float daytime) => Daytime = Mathf.Clamp(daytime, 0.0f, lengthOfDaytime);
 
-    public void SetRemainingDaytimeRandom(float min, float max) => SetRemainingDaytimeBy(Random.Range(min, max));
     public void RegisterFarmUpdatableObject(IFarmUpdatable farmUpdatable) => _farmUpdatables.Add(farmUpdatable);
 
     private void Awake()
@@ -69,7 +54,7 @@ public sealed class FarmClock : MonoBehaviour
     {
         Stopped = _pauseConditions.Any(cond => cond()) || RemainingDaytime == 0.0f;
         var deltaTime = Stopped ? 0.0f : Time.deltaTime;
-        RemainingDaytime -= deltaTime;
+        Daytime += deltaTime;
         _farmUpdatables.ForEach(f => f.OnFarmUpdate(deltaTime));
     }
 }
