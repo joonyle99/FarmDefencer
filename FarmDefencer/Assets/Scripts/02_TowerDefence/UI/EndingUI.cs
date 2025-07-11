@@ -64,7 +64,7 @@ public class EndingUI : MonoBehaviour
 
     private void ShowEnding(EndingType endingType)
     {
-        SoundManager.Instance.PlaySfx($"SFX_D_stage_{ConvertToEndingText(endingType)}", 0.7f);
+        SoundManager.Instance.PlaySfx($"SFX_D_stage_{ConvertToEndingText(endingType)}");
 
         // fade
         _fadeImage.gameObject.SetActive(true);

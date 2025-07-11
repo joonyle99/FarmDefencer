@@ -23,7 +23,7 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
     /// 내부 캐시에서 Bgm을 불러와 재생하는 메소드.
     /// 캐시에 존재하지 않을 경우 Resources/_Bgm에서 불러와 캐시에 넣고 재생함.
     /// </summary>
-    public void PlayBgm(string name, float volume = 1.0f)
+    public void PlayBgm(string name, float volume = 0.5f)
     {
         if (_bgmDictionary.ContainsKey(name) == false)
         {
@@ -55,7 +55,7 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
     {
         var currentMap = MapManager.Instance.CurrentMap;
         var mapSongName = $"BGM_D_{currentMap.MapCode}_song";
-        PlayBgm(mapSongName, 0.7f);
+        PlayBgm(mapSongName);
     }
     public void PlayMapAmb()
     {
@@ -67,19 +67,19 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
     /// <summary>
     /// 내부 캐시에서 SFX를 불러와 재생하는 메소드.
     /// 캐시에 존재하지 않을 경우 Resources/_Sfx에서 불러와 캐시에 넣고 재생함.
-    /// 
+    ///
     /// PlayOneShot()에만 의존하는 함수,, AudioSource.volume × volumeScale로 오디오 볼륨을 조절
     /// AudioSource.volume에 영향을 받는다는 치명적인 단점이 존재
-    /// 
+    ///
     /// 1. AudioSource.volume: 0.2f volumeScale: 0.5f = 0.1f
     /// 2. PlayOneShot()
     /// 3. AudioSource.volume: 0.8f volumeScale: 0.5f = 0.4f
     /// </summary>
-    public void PlaySfx(AudioClip audioClip, float volume = 1.0f, float pitch = 1.0f)
+    public void PlaySfx(AudioClip audioClip, float volume = 0.5f, float pitch = 1.0f)
     {
         _sfxAudioSource.PlayOneShot(audioClip, volume);
     }
-    public void PlaySfx(SoundData soundData, float volume = 1.0f, float pitch = 1.0f)
+    public void PlaySfx(SoundData soundData, float volume = 0.5f, float pitch = 1.0f)
     {
         if (soundData.audioClip != null)
         {
@@ -90,7 +90,7 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
             Debug.LogError($"사운드 데이터에 오디오 클립이 비어있습니다.: {soundData.audioName}");
         }
     }
-    public void PlaySfx(string name, float volume = 1.0f, float pitch = 1.0f)
+    public void PlaySfx(string name, float volume = 0.5f, float pitch = 1.0f)
 	{
 		if (_sfxDictionary.ContainsKey(name) == false)
 		{
