@@ -30,7 +30,9 @@ public sealed class FarmManager : MonoBehaviour
     [SerializeField] private HarvestTutorialGiver harvestTutorialGiver;
     [SerializeField] private WeatherShopUI weatherShopUI;
     [SerializeField] private GoDefenceUI goDefenceUI;
+    [SerializeField] private FarmDebugUI farmDebugUI;
     [SerializeField] private WeatherGiver weatherGiver;
+    [SerializeField] private PestGiver pestGiver;
 
     private void Start()
     {
@@ -39,9 +41,7 @@ public sealed class FarmManager : MonoBehaviour
         {
             // 디버그용 할당 코드 등 여기에...
             quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
-            var monsters = new List<string>();
-            harvestTutorialGiver.AddTutorial("product_carrot");
-            penaltyGiver.SpawnMonsters(MapManager.Instance.CurrentMap.MapId, monsters);
+			pestGiver.SpawnPestsAt(10.0f);
         }
         else
         {
@@ -91,16 +91,19 @@ public sealed class FarmManager : MonoBehaviour
         farmInput.RegisterInputLayer(farm);
         farmInput.RegisterInputLayer(harvestTutorialGiver);
         farmInput.RegisterInputLayer(goDefenceUI);
+        farmInput.RegisterInputLayer(pestGiver);
         farmInput.AddCanInputCondition(() => farmClock.RemainingDaytime > 0.0f || harvestTutorialGiver.gameObject.activeSelf);
 
         farmClock.RegisterFarmUpdatableObject(farm);
         farmClock.RegisterFarmUpdatableObject(penaltyGiver);
+        farmClock.RegisterFarmUpdatableObject(pestGiver);
         farmClock.AddPauseCondition(() => penaltyGiver.IsAnimationPlaying);
         farmClock.AddPauseCondition(() => harvestTutorialGiver.IsPlayingTutorial);
-        farmClock.AddPauseCondition(() => farmUI.IsPaused);
+        farmClock.AddPauseCondition(() => farmDebugUI.IsPaused);
+        farmDebugUI.Init(farmClock.SetRemainingDaytimeBy, () => farmClock.RemainingDaytime, OpenDefenceScene);
         farmClock.AddPauseCondition(() => weatherGiver.IsWeatherOnGoing);
 
-        quotaContext.Init(productName => productDatabase.Products.FirstOrDefault(p => p.ProductName == productName));
+        quotaContext.Init(GetProductEntry);
 
         farm.Init(
             entry => quotaContext.TryGetQuota(entry.ProductName, out var quota) ? quota : 0,
@@ -112,9 +115,6 @@ public sealed class FarmManager : MonoBehaviour
             MapManager.Instance.CurrentMap.MapId,
             MapManager.Instance.CurrentStageIndex,
             farm.WateringAction,
-            farmClock.SetRemainingDaytimeBy,
-            OpenDefenceScene,
-            () => farmClock.RemainingDaytime,
             () => farmClock.Stopped,
             () => farmClock.LengthOfDaytime == 0.0f ? 0.0f : farmClock.RemainingDaytime / farmClock.LengthOfDaytime);
 
@@ -131,6 +131,11 @@ public sealed class FarmManager : MonoBehaviour
         goDefenceUI.Init(OpenDefenceScene);
         
         weatherGiver.Init(farm.ApplyCropCommand);
+        
+        pestGiver.Init(
+            productName => quotaContext.IsProductAvailable(GetProductEntry(productName)),
+            GetProductEntry,
+            EarnGold);
     }
 
     private void DeserializeFromSaveFile()
@@ -171,12 +176,17 @@ public sealed class FarmManager : MonoBehaviour
 
     private void OnFarmQuotaFilledHandler(ProductEntry entry, Vector2 cropWorldPosition, int quota)
     {
-        var currentMapId = MapManager.Instance.CurrentMap.MapId;
-        ResourceManager.Instance.Gold += quotaContext.FillQuota(entry.ProductName, quota, currentMapId);
-        farmUI.PlayProductFillAnimation(entry, cropWorldPosition, quota);
-        farmUI.PlayCoinAnimation();
-        UpdateHarvestInventory();
-        SoundManager.Instance.PlaySfx("SFX_T_coin");
+        var quotaAfterPestsEat = pestGiver.LetPestsEat(entry.ProductName, quota);
+
+        if (quotaAfterPestsEat > 0)
+        {
+            var currentMapId = MapManager.Instance.CurrentMap.MapId;
+            var goldEarnedFromSelling = quotaContext.FillQuota(entry.ProductName, quotaAfterPestsEat, currentMapId);
+            farmUI.PlayProductFillAnimation(entry, cropWorldPosition, quotaAfterPestsEat);
+            UpdateHarvestInventory();
+            
+            EarnGold(goldEarnedFromSelling);
+        }
     }
 
     private void UpdateHarvestInventory()
@@ -202,5 +212,14 @@ public sealed class FarmManager : MonoBehaviour
         }
         
         return isWeatherGiven;
+    }
+    
+    private ProductEntry GetProductEntry(string productName) => productDatabase.Products.FirstOrDefault(p => p.ProductName == productName);
+
+    private void EarnGold(int gold)
+    {
+        ResourceManager.Instance.Gold += gold;
+        farmUI.PlayCoinAnimation();
+        SoundManager.Instance.PlaySfx("SFX_T_coin");
     }
 }

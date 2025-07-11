@@ -3,14 +3,11 @@ using UnityEngine;
 
 public sealed class FarmUI : MonoBehaviour
 {
-	public bool IsPaused => _farmDebugUI.IsPaused;
-	
 	private CoinsUI _coinsUI;
 	private WateringCan _wateringCan;
 	private HarvestInventory _harvestInventory;
 	private TimerUI _timerUI;
 	private CropGuide _cropGuide;
-	private FarmDebugUI _farmDebugUI;
 
 	public bool WateringCanAvailable
 	{
@@ -23,9 +20,6 @@ public sealed class FarmUI : MonoBehaviour
 		int currentMap,
 		int currentStage,
 		Action<Vector2> onWatering,
-		Action<float> setDaytime,
-		Action onGoDefenceButtonClickedHandler,
-		Func<float> getDaytime, 
 		Func<bool> isFarmPaused,
 		Func<float> getRemainingDaytimeAlpha)
 	{
@@ -34,7 +28,6 @@ public sealed class FarmUI : MonoBehaviour
 		farmInput.RegisterInputLayer(_cropGuide);
 		
 		_harvestInventory.Init(productDatabase);
-		_farmDebugUI.Init(setDaytime, getDaytime, onGoDefenceButtonClickedHandler);
 		_timerUI.Init(currentMap, currentStage, getRemainingDaytimeAlpha);
 	}
 
@@ -57,7 +50,6 @@ public sealed class FarmUI : MonoBehaviour
 		_harvestInventory = GetComponentInChildren<HarvestInventory>();
 		_timerUI = GetComponentInChildren<TimerUI>();
 		_cropGuide = GetComponentInChildren<CropGuide>();
-		_farmDebugUI = GetComponentInChildren<FarmDebugUI>();
 		ResourceManager.Instance.OnGoldChanged += _coinsUI.SetCoin;
 	}
 

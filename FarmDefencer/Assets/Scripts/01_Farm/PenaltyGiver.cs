@@ -219,7 +219,7 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmS
         {
             monsterComponent.SpineController.Skeleton.SetSkin(productName.Split("_")[1]);
         }
-        catch (Exception _)
+        catch (Exception)
         {
             Debug.LogError($"Monster의 skin 이름을 설정할 수 없습니다: {productName}");
         }

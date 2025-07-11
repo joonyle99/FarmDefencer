@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public interface IFarmInputLayer
 {
+    public const int Priority_PestGiver = 1000;
     public const int Priority_CropGuide = 800;
     public const int Priority_WateringCan = 400;
     public const int Priority_HarvestTutorialGiver = 399;
