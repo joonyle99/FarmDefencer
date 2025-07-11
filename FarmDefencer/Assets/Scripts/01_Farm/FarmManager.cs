@@ -41,7 +41,7 @@ public sealed class FarmManager : MonoBehaviour
         {
             // 디버그용 할당 코드 등 여기에...
             quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
-			pestGiver.SpawnPestsAt(10.0f);
+			pestGiver.SpawnPestsAt(1.0f);
         }
         else
         {
@@ -145,6 +145,7 @@ public sealed class FarmManager : MonoBehaviour
         quotaContext.Deserialize(saveJson["QuotaContext"] as JObject ?? new JObject());
         penaltyGiver.Deserialize(saveJson["PenaltyGiver"] as JObject ?? new JObject());
         farm.Deserialize(saveJson["Farm"] as JObject ?? new JObject());
+        pestGiver.Deserialize(saveJson["PestGiver"] as JObject ?? new JObject());
 
         if (GameStateManager.Instance.IsTycoonInitialLoad)
         {
@@ -159,6 +160,7 @@ public sealed class FarmManager : MonoBehaviour
     {
         var saveJson = new JObject();
 
+        saveJson.Add("PestGiver", pestGiver.Serialize());
         saveJson.Add("QuotaContext", quotaContext.Serialize());
         saveJson.Add("PenaltyGiver", penaltyGiver.Serialize());
         saveJson.Add("Farm", farm.Serialize());

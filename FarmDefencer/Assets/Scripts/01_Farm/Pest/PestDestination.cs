@@ -9,6 +9,8 @@ public sealed class PestDestination : MonoBehaviour
     public ProductEntry TargetProduct => targetProduct;
 
     private List<Pest> _pests;
+    public IReadOnlyList<Pest> Pests => _pests;
+        
     private float _distanceBetweenPests;
 
     private TMP_Text _countText;

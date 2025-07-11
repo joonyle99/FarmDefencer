@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Newtonsoft.Json.Linq;
 using Spine.Unity;
 using UnityEngine;
 
@@ -28,7 +29,7 @@ public enum PestState
     Arrived
 }
 
-public sealed class Pest : MonoBehaviour
+public sealed class Pest : MonoBehaviour, IFarmSerializable
 {
     public PestSize PestSize { get; private set; }
     public PestOrigin PestOrigin { get; private set; }
@@ -36,15 +37,16 @@ public sealed class Pest : MonoBehaviour
     public ProductEntry TargetProduct { get; private set; }
     public Vector2 Destination { get; private set; }
     public float MoveSpeed { get; private set; }
+    
+    private float _remainingDieTime;
     public PestState State { get; private set; }
     private int _remainingCropEatCount;
     public int RemainingCropEatCount => _remainingCropEatCount;
-
+    
+    // 저장되지 않는 값들
     private float _pestBeginDirectToDestinationCriterion;
-    private float _elapsedTime;
     private Action _onArrived;
     private float _originalDieTime;
-    private float _remainingDieTime;
     private int _remainingClickCount;
     private SkeletonAnimation _skeletonAnimation;
     
@@ -151,8 +153,6 @@ public sealed class Pest : MonoBehaviour
             return;
         }
 
-        _elapsedTime += deltaTime;
-
         var vectorToDestination =
             new Vector2(Destination.x - transform.position.x, Destination.y - transform.position.y);
         var remainingDistanceSquared = vectorToDestination.sqrMagnitude;
@@ -179,8 +179,34 @@ public sealed class Pest : MonoBehaviour
 
         transform.position = new Vector3(
             transform.position.x + MoveSpeed * deltaTime * (PestOrigin == PestOrigin.Right ? -1.0f : 1.0f),
-            GetDesiredZigZagHeight(Seed, _elapsedTime, MoveSpeed),
+            GetDesiredZigZagHeight(Seed, transform.position.x),
             transform.position.z);
+    }
+    
+    public JObject Serialize()
+    {
+        var jsonObject = new JObject();
+        jsonObject.Add("RemainingDieTime", _remainingDieTime);
+        jsonObject.Add("State", (int)State);
+        jsonObject.Add("RemainingCropEatCount", _remainingCropEatCount);
+        jsonObject.Add("PestSize", (int)PestSize);
+        jsonObject.Add("PestOrigin", (int)PestOrigin);
+        jsonObject.Add("Seed", Seed);
+        jsonObject.Add("TargetProduct", TargetProduct.ProductName);
+        jsonObject.Add("MoveSpeed", MoveSpeed);
+        jsonObject.Add("X", transform.position.x);
+        return jsonObject;
+    }
+
+    public void Deserialize(JObject json)
+    {
+        _remainingDieTime = json["RemainingDieTime"]?.Value<float?>() ?? _originalDieTime;
+        State = (PestState)(json["State"]?.Value<int?>() ?? (int)PestState.Initialized);
+        _remainingCropEatCount = json["RemainingCropEatCount"]?.Value<int?>() ?? (int)PestSize;
+        var x = json["X"]?.Value<float?>() ?? 0.0f;
+        var position = transform.position;
+        position.x = x;
+        transform.position = position;
     }
 
     private void Update()
@@ -206,6 +232,6 @@ public sealed class Pest : MonoBehaviour
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
     }
 
-    private static float GetDesiredZigZagHeight(int seed, float elapsedTime, float moveSpeed) =>
-        Mathf.Sin(elapsedTime * moveSpeed + seed);
+    private static float GetDesiredZigZagHeight(int seed, float x) =>
+        Mathf.Sin(x + seed);
 }

@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using System;
 using System.Collections;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 using Random = UnityEngine.Random;
 
-public sealed class PestGiver : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
+public sealed class PestGiver 
+    : MonoBehaviour, 
+    IFarmUpdatable,
+    IFarmInputLayer,
+    IFarmSerializable
 {
     public int InputPriority => IFarmInputLayer.Priority_PestGiver;
 
@@ -35,13 +40,15 @@ public sealed class PestGiver : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
     private Func<float> _getDaytime;
     private Action<int> _onPestCatchGoldEarned;
     private GameObject _pestsObject;
-    private Dictionary<string, PestDestination> _pestDestinations;
     private Dictionary<PestOrigin, Vector2> _pestOrigins;
-    private float _pestSpawnTime;
-    private bool _isPestSpawned;
     private PestWarningUI _pestWarningUI;
-
+    private float _remainingNextRunTime;
+    
+    // 저장되는 값들
+    private float _pestSpawnTime;
+    private bool _shouldSpawnPests;
     private List<Pest> _runningPests;
+    private Dictionary<string, PestDestination> _pestDestinations;
 
     public void Init(
         Func<string, bool> isProductAvailable, 
@@ -69,15 +76,15 @@ public sealed class PestGiver : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
     /// <param name="pestSpawnTime">낮 시간 기준으로 몇 초에 스폰할지.</param>
     public void SpawnPestsAt(float pestSpawnTime)
     {
-        _isPestSpawned = false;
+        _shouldSpawnPests = true;
         _pestSpawnTime = pestSpawnTime;
     }
 
     public void OnFarmUpdate(float deltaTime)
     {
-        if (!_isPestSpawned && _getDaytime() >= _pestSpawnTime)
+        if (_shouldSpawnPests && _getDaytime() >= _pestSpawnTime)
         {
-            _isPestSpawned = true;
+            _shouldSpawnPests = false;
             
             _pestWarningUI.ShowWarning();
             var pestSpawnRule = CreatePestSpawnRule(_isProductAvailable);
@@ -93,27 +100,23 @@ public sealed class PestGiver : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
                     continue;
                 }
 
-                var pestPrefab = pestPrefabs.Find(data => data.Size == pestSize).Prefab;
-                var pestObject = Instantiate(pestPrefab, _pestsObject.transform);
-                pestObject.name = $"Pest_{target.ProductName}_{pestSize}";
-                pestObject.transform.position = _pestOrigins[pestOrigin];
-
-                var pestComponent = pestObject.AddComponent<Pest>();
-                pestComponent.Init(
-                    pestSize,
-                    pestOrigin,
-                    seed,
-                    target,
-                    _pestDestinations[target.ProductName].transform.position,
-                    pestMoveSpeed,
-                    pestBeginDirectToDestinationCriterion,
-                    pestDieTime);
+                var pestComponent = InstantiatePest(pestSize, pestOrigin, target, seed);
                 _runningPests.Add(pestComponent);
             }
+        }
 
-            StartCoroutine(DoRunPests());
+        if (_runningPests.Count > 0 && _runningPests.Any(p => p.State == PestState.Initialized))
+        {
+            _remainingNextRunTime -= deltaTime;
+            if (_remainingNextRunTime <= 0.0f)
+            {
+                _remainingNextRunTime = Random.Range(minimumPestSpawnInterval, maximumPestSpawnInterval);
+                var firstPest = _runningPests.OrderBy(p => p.Seed).First(p => p.State == PestState.Initialized);
+                firstPest.Run();
+            }
         }
         
+
         _runningPests.ForEach(p => p.ManualUpdate(deltaTime));
         foreach (var arrivedPest in _runningPests.Where(p => p.State == PestState.Arrived))
         {
@@ -158,6 +161,86 @@ public sealed class PestGiver : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
 
     public bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd,
         float deltaHoldTime) => false;
+    
+    public JObject Serialize()
+    {
+        var jsonObject = new JObject();
+        jsonObject.Add("PestSpawnTime", _pestSpawnTime);
+        jsonObject.Add("ShouldSpawnPests", _shouldSpawnPests);
+
+        var jsonRunningPests = new JArray();
+        foreach (var runningPest in _runningPests)
+        {
+            jsonRunningPests.Add(runningPest.Serialize());
+        }
+        jsonObject.Add("RunningPests", jsonRunningPests);
+
+        var jsonArrivedPests = new JObject();
+        foreach (var (targetProductName, pestDestination) in _pestDestinations)
+        {
+            var arrivedPests = pestDestination.Pests.Reverse(); // AddPest()가 앞에 채워넣을 것이므로, 역직렬화시를 대비해 역순으로 직렬화함.
+            var jsonArrivedPestsPerProduct = new JArray();
+            foreach (var arrivedPest in arrivedPests)
+            {
+                jsonArrivedPestsPerProduct.Add(arrivedPest.Serialize());
+            }
+            jsonArrivedPests.Add(targetProductName, jsonArrivedPestsPerProduct);
+        }
+        jsonObject.Add("ArrivedPests", jsonArrivedPests);
+
+        return jsonObject;
+    }
+
+    public void Deserialize(JObject json)
+    {
+        _pestSpawnTime = json.Property("PestSpawnTime")?.Value.Value<int>() ?? 0.0f;
+        _shouldSpawnPests = json.Property("ShouldSpawnPests")?.Value.Value<bool>() ?? false;
+
+        if (json["RunningPests"] is JArray jsonRunningPests)
+        {
+            foreach (var jsonRunningPestToken in jsonRunningPests)
+            {
+                Debug.Log($"{jsonRunningPestToken.ToString()}");
+                var jsonRunningPest = jsonRunningPestToken as JObject;
+                if (jsonRunningPest is null)
+                {
+                    continue;
+                }
+
+                var runningPest = InstantiatePest(jsonRunningPest);
+                if (runningPest is not null)
+                {
+                    _runningPests.Add(runningPest);
+                    runningPest.Deserialize(jsonRunningPest);
+                }
+            }
+        }
+
+        if (json["ArrivedPests"] is JObject jsonArrivedPests)
+        {
+            foreach (var jsonPestDestination in jsonArrivedPests.Values<JProperty>())
+            {
+                var targetProductName = jsonPestDestination.Name;
+                var jsonArrivedPestsPerProduct = jsonPestDestination.Value as JArray;
+                if (jsonArrivedPestsPerProduct is null || !_pestDestinations.TryGetValue(targetProductName, out var pestDestination))
+                {
+                    continue;
+                }
+
+                foreach (var jsonArrivedPestToken in jsonArrivedPestsPerProduct)
+                {
+                    var jsonArrivedPest = jsonArrivedPestToken as JObject;
+                    if (jsonArrivedPest is null)
+                    {
+                        continue;
+                    }
+
+                    var arrivedPest = InstantiatePest(jsonArrivedPest);
+                    pestDestination.AddPest(arrivedPest);
+                }
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -179,16 +262,41 @@ public sealed class PestGiver : MonoBehaviour, IFarmUpdatable, IFarmInputLayer
         _pestOrigins.Add(PestOrigin.Right, transform.Find("PestOrigins/Right").position);
     }
 
-    private IEnumerator DoRunPests()
+    private Pest InstantiatePest(PestSize pestSize, PestOrigin pestOrigin, ProductEntry target, int seed)
     {
-        foreach (var pest in _runningPests.OrderBy(p => p.Seed))
+        var pestPrefab = pestPrefabs.Find(data => data.Size == pestSize).Prefab;
+        var pestObject = Instantiate(pestPrefab, _pestsObject.transform);
+        pestObject.name = $"Pest_{target.ProductName}_{pestSize}";
+        pestObject.transform.position = _pestOrigins[pestOrigin];
+        pestObject.transform.parent = _pestsObject.transform;
+
+        var pestComponent = pestObject.AddComponent<Pest>();
+        pestComponent.Init(
+            pestSize,
+            pestOrigin,
+            seed,
+            target,
+            _pestDestinations[target.ProductName].transform.position,
+            pestMoveSpeed,
+            pestBeginDirectToDestinationCriterion,
+            pestDieTime);
+
+        return pestComponent;
+    }
+    
+    private Pest InstantiatePest(JObject jsonObject)
+    {
+        var pestSize = jsonObject["PestSize"]?.Value<int>();
+        var pestOrigin = jsonObject["PestOrigin"]?.Value<int>();
+        var targetProductName = jsonObject["TargetProduct"]?.Value<string>();
+        var seed = jsonObject["Seed"]?.Value<int>();
+        if (pestSize is null || pestOrigin is null || targetProductName is null || seed is null)
         {
-            pest.Run();
-            var randomInterval = Random.Range(minimumPestSpawnInterval, maximumPestSpawnInterval);
-            yield return new WaitForSeconds(randomInterval);
+            return null;
         }
 
-        yield return null;
+        var pest = InstantiatePest((PestSize)pestSize.Value, (PestOrigin)pestOrigin.Value, _getProductEntry(targetProductName), seed.Value);
+        return pest;
     }
 
     private static List<Tuple<PestOrigin, PestSize>> CreatePestSpawnRule(Func<string, bool> isProductAvailable)

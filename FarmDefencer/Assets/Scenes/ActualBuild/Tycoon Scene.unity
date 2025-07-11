@@ -5000,7 +5000,7 @@ MonoBehaviour:
   _pathLineDuration: 0.3
   _gridCellPrefab: {fileID: 0}
   _originGridPath: []
-  LastGridCell: {fileID: 0}
+  LastPlacedGridCell: {fileID: 0}
 --- !u!1839735485 &774366447
 Tilemap:
   m_ObjectHideFlags: 0
@@ -8837,7 +8837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911982a6f0e14bd4b88047c9f5a89f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreSaveFile: 1
+  ignoreSaveFile: 0
   farm: {fileID: 876821029}
   penaltyGiver: {fileID: 1187482620}
   quotaContext: {fileID: 287826021}
