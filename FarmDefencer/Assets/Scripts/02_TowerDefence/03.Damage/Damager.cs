@@ -6,7 +6,7 @@ public enum DamageType
     Burn,
     Poison,
     Laser,
-    Electric,
+    Lightning,
 }
 
 public class Damager : MonoBehaviour

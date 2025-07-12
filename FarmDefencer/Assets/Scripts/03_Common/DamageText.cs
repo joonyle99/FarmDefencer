@@ -77,7 +77,7 @@ public class DamageText : MonoBehaviour
                 return ConstantConfig.GREEN;
             case DamageType.Laser:
                 return ConstantConfig.PINK;
-            case DamageType.Electric:
+            case DamageType.Lightning:
                 return ConstantConfig.YELLOW;
             default:
                 return ConstantConfig.WHITE;
