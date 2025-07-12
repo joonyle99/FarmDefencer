@@ -201,7 +201,7 @@ public class SpineController : MonoBehaviour
         }
 
         Debug.LogError($"타워 레벨 {towerLevel}에 해당하는 shoot bone이 없습니다");
-        return null; // fallback`
+        return null; // fallback
     }
     public Vector3 GetShootingBonePos(int towerLevel)
     {

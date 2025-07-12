@@ -47,8 +47,8 @@ MonoBehaviour:
   _targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  _widthRange: 2
-  _heightRange: 2
+  _widthRange: 1
+  _heightRange: 1
 --- !u!1 &8016940742814412144
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,8 +205,10 @@ MonoBehaviour:
   LevelUpAnimationNames:
   - level_up_1_to_2
   - level_up_2_to_3
+  _canAttack: 1
   _flipAimer: {fileID: 4414608076142748444}
-  _projectilePrefab: {fileID: 5744434242594404492, guid: 5949fc53ae8e0ad4080564acac3a6c09, type: 3}
+  _projectilePrefab: {fileID: 5744434242594404492, guid: 3bcdcd662c3736a48a134b0cb67baa82, type: 3}
+  _beamPrefab: {fileID: 0}
 --- !u!210 &5803083254459691797
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -286,7 +288,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4c2bd195ca7566645b08314c0983da5f, type: 2}
+  - {fileID: 2100000, guid: e8c44b049f9c1a24392349c8282b160b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -320,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 0f22faf1e3d169d4482e3c0c09d4c43c, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 45afd42844c2e054288d0fe5c9df0902, type: 2}
   initialSkinName: 
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0

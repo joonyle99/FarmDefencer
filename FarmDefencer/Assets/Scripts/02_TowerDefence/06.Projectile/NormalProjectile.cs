@@ -11,7 +11,7 @@ public sealed class NormalProjectile : LinearProjectile
 
     protected override void DealDamage()
     {
-        damager.DealDamage(currentTarget, DamageType.Normal);
+        damager.DealDamage(target, DamageType.Normal);
     }
     protected override void DealEffect()
     {

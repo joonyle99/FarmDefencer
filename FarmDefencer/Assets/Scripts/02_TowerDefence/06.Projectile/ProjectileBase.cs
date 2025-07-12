@@ -13,7 +13,8 @@ public abstract class ProjectileBase : MonoBehaviour
     protected float slowRate;
     protected float slowDuration;
 
-    protected TargetableBehavior currentTarget;
+    protected Tower caster;
+    protected TargetableBehavior target;
 
     protected bool isTriggered = false;
 
@@ -30,7 +31,7 @@ public abstract class ProjectileBase : MonoBehaviour
         if (isTriggered)
         {
             // 타겟이 없으면 파괴
-            if (currentTarget == null || currentTarget.gameObject.activeSelf == false)
+            if (target == null || target.gameObject.activeSelf == false)
             {
                 Destroy(gameObject);
                 return;
@@ -62,9 +63,13 @@ public abstract class ProjectileBase : MonoBehaviour
         this.slowRate = slowRate;
         this.slowDuration = slowDuration;
     }
+    public void SetCaster(Tower caster)
+    {
+        this.caster = caster;
+    }
     public void SetTarget(TargetableBehavior target)
     {
-        currentTarget = target;
+        this.target = target;
     }
 
     public int GetDamage()
@@ -73,7 +78,7 @@ public abstract class ProjectileBase : MonoBehaviour
     }
     public TargetableBehavior GetTarget()
     {
-        return currentTarget;
+        return target;
     }
 
     protected abstract void Move();

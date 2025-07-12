@@ -16,12 +16,12 @@ public sealed class FireProjectile : ParabolicProjectile
 
     protected override void DealDamage()
     {
-        damager.DealDamage(currentTarget, DamageType.Normal);
+        damager.DealDamage(target, DamageType.Normal);
     }
     protected override void DealEffect()
     {
         // 범위 내 모든 적에게 화상 효과를 적용한다
-        var originCell = currentTarget.GridMovement.CurrGridCell;
+        var originCell = target.GridMovement.CurrGridCell;
         foreach (var dir in ConstantConfig.DIRECTIONS)
         {
             var posX = originCell.cellPosition.x + dir.x;

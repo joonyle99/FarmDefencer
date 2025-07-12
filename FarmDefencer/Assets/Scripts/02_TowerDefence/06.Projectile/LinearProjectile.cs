@@ -11,7 +11,7 @@ public abstract class LinearProjectile : ProjectileBase
     protected override void Move()
     {
         // 투사체는 몬스터를 따라가는데, 속도가 느린 경우 부자연스러울 수 있음
-        transform.position = Vector2.Lerp(startPos, currentTarget.transform.position, linearT);
+        transform.position = Vector2.Lerp(startPos, target.transform.position, linearT);
     }
     protected override void Rotate()
     {

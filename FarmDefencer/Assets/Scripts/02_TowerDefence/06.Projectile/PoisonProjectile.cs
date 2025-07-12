@@ -11,12 +11,12 @@ public sealed class PoisonProjectile : LinearProjectile
 
     protected override void DealDamage()
     {
-        damager.DealDamage(currentTarget, DamageType.Poison);
+        damager.DealDamage(target, DamageType.Poison);
     }
     protected override void DealEffect()
     {
         // 슬로우 효과 적용 (중복 적용 가능)
-        var slowEffector = currentTarget.gameObject.AddComponent<SlowEffector>();
-        slowEffector.Activate(currentTarget, slowRate, slowDuration);
+        var slowEffector = target.gameObject.AddComponent<SlowEffector>();
+        slowEffector.Activate(target, slowRate, slowDuration);
     }
 }

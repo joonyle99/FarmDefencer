@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1380989034864402756}
   - component: {fileID: 7444625088565266660}
   - component: {fileID: 2493848825862227538}
-  - component: {fileID: 5453232584081015376}
+  - component: {fileID: 941957323700338944}
   m_Layer: 0
   m_Name: LightningProjectile
   m_TagString: Untagged
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 20
---- !u!114 &5453232584081015376
+--- !u!114 &941957323700338944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5744434242594404492}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 508db4fe0dfe01b41a1bd7ed6f2a6e99, type: 3}
+  m_Script: {fileID: 11500000, guid: 00d1f476a83af3e4993d1c7b0cccdbd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damager: {fileID: 2493848825862227538}

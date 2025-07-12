@@ -360,6 +360,7 @@ public sealed class Tower : TargetableBehavior
                 return;
             }
 
+            projectile.SetCaster(this);
             projectile.SetTarget(CurrentTarget);
             projectile.SetDamage(CurrentLevelData.AttackDamage);
             projectile.SetSlow(CurrentLevelData.SlowRate, CurrentLevelData.SlowDuration);
