@@ -30,6 +30,7 @@ public sealed class FarmManager : MonoBehaviour
     [SerializeField] private WeatherShopUI weatherShopUI;
     [SerializeField] private GoDefenceUI goDefenceUI;
     [SerializeField] private WeatherGiver weatherGiver;
+    [SerializeField] private TimerUI timerUI;
     [SerializeField] private FarmDebugUI farmDebugUI;
 
     private void Start()
@@ -113,11 +114,8 @@ public sealed class FarmManager : MonoBehaviour
 
         farmUI.Init(farmInput,
             productDatabase,
-            MapManager.Instance.CurrentMap.MapId,
-            MapManager.Instance.CurrentStageIndex,
             farm.WateringAction,
-            () => farmClock.Stopped,
-            () => farmClock.LengthOfDaytime == 0.0f ? 0.0f : farmClock.RemainingDaytime / farmClock.LengthOfDaytime);
+            () => farmClock.Stopped);
 
         penaltyGiver.Init(farm);
 
@@ -130,6 +128,10 @@ public sealed class FarmManager : MonoBehaviour
         weatherShopUI.AddItem(new RainItem(50, 50));
         
         goDefenceUI.Init(OpenDefenceScene);
+
+        var currentMap = MapManager.Instance.CurrentMap.MapId;
+        var currentStage = MapManager.Instance.CurrentStageIndex;
+		timerUI.Init(currentMap, currentStage, () => farmClock.RemainingDaytime / farmClock.LengthOfDaytime);
         
         weatherGiver.Init(farm.ApplyCropCommand);
         

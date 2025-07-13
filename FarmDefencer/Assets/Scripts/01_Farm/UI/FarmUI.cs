@@ -6,7 +6,6 @@ public sealed class FarmUI : MonoBehaviour
 	private CoinsUI _coinsUI;
 	private WateringCan _wateringCan;
 	private HarvestInventory _harvestInventory;
-	private TimerUI _timerUI;
 	private CropGuide _cropGuide;
 
 	public bool WateringCanAvailable
@@ -17,18 +16,14 @@ public sealed class FarmUI : MonoBehaviour
 
 	public void Init(FarmInput farmInput,
 		ProductDatabase productDatabase,
-		int currentMap,
-		int currentStage,
 		Action<Vector2> onWatering,
-		Func<bool> isFarmPaused,
-		Func<float> getRemainingDaytimeAlpha)
+		Func<bool> isFarmPaused)
 	{
 		_wateringCan.Init(() => !isFarmPaused(), onWatering);
 		farmInput.RegisterInputLayer(_wateringCan);
 		farmInput.RegisterInputLayer(_cropGuide);
 		
 		_harvestInventory.Init(productDatabase);
-		_timerUI.Init(currentMap, currentStage, getRemainingDaytimeAlpha);
 	}
 
 	public void PlayProductFillAnimation(ProductEntry entry, Vector2 cropWorldPosition, int count)
@@ -48,7 +43,6 @@ public sealed class FarmUI : MonoBehaviour
 		_coinsUI = GetComponentInChildren<CoinsUI>();
 		_wateringCan = GetComponentInChildren<WateringCan>();
 		_harvestInventory = GetComponentInChildren<HarvestInventory>();
-		_timerUI = GetComponentInChildren<TimerUI>();
 		_cropGuide = GetComponentInChildren<CropGuide>();
 		ResourceManager.Instance.OnGoldChanged += _coinsUI.SetCoin;
 	}

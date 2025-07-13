@@ -8,7 +8,7 @@ public sealed class MainSceneUI : MonoBehaviour
     
     private void Awake()
     {
-        _goTycoonButton = transform.Find("GoTycoonButton").GetComponent<Button>();
+        _goTycoonButton = transform.Find("FarmButton").GetComponent<Button>();
         _goTycoonButton.onClick.AddListener(OnTycoonButtonClickedHandler);
     }
 

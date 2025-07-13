@@ -8,50 +8,61 @@ public sealed class TimerUI : MonoBehaviour
 
     private Func<float> _getRemainingDaytimeAlpha; // 0이면 낮 시작, 1이면 낮 끝
     private Image _dayArea;
+    private GameObject _rootObject;
+    private GameObject _stageImagesRootObject;
+    private GameObject _activeMapImageRootObject;
+    private GameObject _inactiveMapImagesRootObject;
     
-    public void Init(int map, int stage, Func<float> getRemainingDaytimeAlpha)
+    public void Init(int currentMap, int currentStage, Func<float> getRemainingDaytimeAlpha)
     {
         _getRemainingDaytimeAlpha = getRemainingDaytimeAlpha;
         
         // 맵 스위치
+        var radius = ((RectTransform)_rootObject.transform).sizeDelta.x;
         for (int mapToDraw = 1; mapToDraw <= 3; ++mapToDraw)
         {
-            var imageObject = new GameObject { name = $"Map{mapToDraw}", transform = { parent = transform.Find(mapToDraw == map ? "ActiveMapImage" : "InactiveMapImages") }};
+            var imageObject = new GameObject($"Map{mapToDraw}");
+            imageObject.transform.parent = mapToDraw == currentMap ? _activeMapImageRootObject.transform : _inactiveMapImagesRootObject.transform;
+            imageObject.transform.localScale = Vector3.one;
+            imageObject.transform.localPosition = Vector3.zero;
+            
             var imageComponent = imageObject.AddComponent<Image>();
-            imageObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             var rectTransform = (RectTransform)imageObject.transform;
             
-            var sprite = stageTimerSprites.GetMapSprite(mapToDraw, mapToDraw == map);
+            var sprite = stageTimerSprites.GetMapSprite(mapToDraw, mapToDraw == currentMap);
             imageComponent.sprite = sprite;
-            rectTransform.sizeDelta = sprite.rect.size * 0.4f;
+            rectTransform.sizeDelta = sprite.rect.size;
             
             var degrees = 360.0f / 12 * (-mapToDraw + 2.0f) + 90.0f;
-            var radius = ((RectTransform)transform).rect.width / 2.0f * 1.4f;
-            if (mapToDraw == 3)
+            var adjustedMapImageRadius = radius * 1.75f;
+            if (mapToDraw == 2)
             {
-                radius *= 0.8f;
+                adjustedMapImageRadius *= 1.25f;
             }
             
             var radians = degrees / 180.0f * Mathf.PI;
-            var localX = radius * Mathf.Cos(radians);
-            var localY = radius * Mathf.Sin(radians);
-            imageComponent.transform.localPosition = new Vector3(localX, localY, 1.0f);
+            var localX = adjustedMapImageRadius * Mathf.Cos(radians);
+            var localY = adjustedMapImageRadius * Mathf.Sin(radians);
+            rectTransform.anchoredPosition = new Vector2(localX, localY);
         }
         
         // 스테이지 스위치
         for (int stageToDraw = 1; stageToDraw <= 10; ++stageToDraw)
         {
-            var imageObject = new GameObject { name = $"Stage{stageToDraw}", transform = { parent = transform.Find("StageImages") }};
+            var imageObject = new GameObject($"Stage{stageToDraw}");
+            imageObject.transform.parent = _stageImagesRootObject.transform;
+            imageObject.transform.localScale = Vector3.one;
+            imageObject.transform.localPosition = Vector3.zero;
+            
             var imageComponent = imageObject.AddComponent<Image>();
-            imageObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             var rectTransform = (RectTransform)imageObject.transform;
             
-            var sprite = stageTimerSprites.GetStageSprite(stageToDraw, stageToDraw <= stage);
+            var sprite = stageTimerSprites.GetStageSprite(stageToDraw, stageToDraw <= currentStage);
             imageComponent.sprite = sprite;
-            rectTransform.sizeDelta = sprite.rect.size * 0.5f;
+            rectTransform.sizeDelta = sprite.rect.size;
             
             var degrees = 360.0f / 12 * (-stageToDraw - 0.5f) + 90.0f;
-            var radius = ((RectTransform)transform).rect.width / 2.0f * 0.825f;
+            var adjustedStageImageRadius = radius * 1.20f;
             
             // 이상하게 오차가 생겨서 보정
             if (stageToDraw % 3 == 0)
@@ -64,19 +75,23 @@ public sealed class TimerUI : MonoBehaviour
             }
             else
             {
-                radius += 1.0f;
+                adjustedStageImageRadius *= 1.025f;
             }
             
             var radians = degrees / 180.0f * Mathf.PI;
-            var localX = radius * Mathf.Cos(radians);
-            var localY = radius * Mathf.Sin(radians);
-            imageComponent.transform.localPosition = new Vector3(localX, localY, 0.0f);
+            var localX = adjustedStageImageRadius * Mathf.Cos(radians);
+            var localY = adjustedStageImageRadius * Mathf.Sin(radians);
+            rectTransform.anchoredPosition = new Vector2(localX, localY);
         }
     }
 
     private void Awake()
     {
-        _dayArea = transform.Find("DayArea").GetComponent<Image>();
+        _dayArea = transform.Find("Root/DayArea").GetComponent<Image>();
+        _rootObject = transform.Find("Root").gameObject;
+        _stageImagesRootObject = transform.Find("Root/StageImages").gameObject;
+        _activeMapImageRootObject = transform.Find("Root/ActiveMapImage").gameObject;
+        _inactiveMapImagesRootObject = transform.Find("Root/InactiveMapImages").gameObject;
     }
     
     private void Update()
