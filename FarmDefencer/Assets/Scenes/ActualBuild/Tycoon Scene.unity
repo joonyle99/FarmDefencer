@@ -1477,7 +1477,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
     - target: {fileID: 6958325958928047378, guid: 2cc53a267a488a342a64a7fd6d787e13, type: 3}
       propertyPath: m_Name
-      value: PestDestinationCorn
+      value: PestEatingPointCorn
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6431,7 +6431,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1088927214}
   m_Layer: 0
-  m_Name: Pests
+  m_Name: RunningPests
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6506,7 +6506,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 7dafbc71fcd9c0846b0f38a024abc95b, type: 2}
     - target: {fileID: 6958325958928047378, guid: 2cc53a267a488a342a64a7fd6d787e13, type: 3}
       propertyPath: m_Name
-      value: PestDestinationEggplant
+      value: PestEatingPointEggplant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7565,7 +7565,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
     - target: {fileID: 6958325958928047378, guid: 2cc53a267a488a342a64a7fd6d787e13, type: 3}
       propertyPath: m_Name
-      value: PestDestinationCucumber
+      value: PestEatingPointCucumber
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8004,7 +8004,8 @@ MonoBehaviour:
   distanceBetweenArrivedPests: 1
   pestClickSize: 1
   pestDieTime: 1
-  pestWarningDuration: 3
+  minimumRandomPestSpawnDaytime: 1
+  maximumRandomPestSpawnDaytime: 1
   pestPrefabs:
   - size: 0
     prefab: {fileID: 8835415012596115015, guid: c9bc3eb1cef0c354a8525468c7315474, type: 3}
@@ -8449,7 +8450,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
     - target: {fileID: 6958325958928047378, guid: 2cc53a267a488a342a64a7fd6d787e13, type: 3}
       propertyPath: m_Name
-      value: PestDestinationCabbage
+      value: PestEatingPointCabbage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8839,18 +8840,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignoreSaveFile: 0
   farm: {fileID: 876821029}
-  penaltyGiver: {fileID: 1187482620}
   quotaContext: {fileID: 287826021}
-  farmUI: {fileID: 257351987}
   farmClock: {fileID: 790447940}
+  penaltyGiver: {fileID: 1187482620}
+  pestGiver: {fileID: 1346437755}
+  farmUI: {fileID: 257351987}
   farmInput: {fileID: 2078747845}
   productDatabase: {fileID: 11400000, guid: 306ee76be7a6f2c4a962c5707f74017f, type: 2}
   harvestTutorialGiver: {fileID: 1928820689}
   weatherShopUI: {fileID: 59965878}
   goDefenceUI: {fileID: 1429330862}
-  farmDebugUI: {fileID: 127228677}
   weatherGiver: {fileID: 2120870755}
-  pestGiver: {fileID: 1346437755}
+  farmDebugUI: {fileID: 127228677}
 --- !u!4 &1503578050
 Transform:
   m_ObjectHideFlags: 0
@@ -9417,7 +9418,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1628521770}
   m_Layer: 0
-  m_Name: PestDestinations
+  m_Name: PestEatingPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10055,7 +10056,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: bbf41d007f26d6049ba7c478bd5f3ecd, type: 2}
     - target: {fileID: 6958325958928047378, guid: 2cc53a267a488a342a64a7fd6d787e13, type: 3}
       propertyPath: m_Name
-      value: PestDestinationSweetpotato
+      value: PestEatingPointSweetpotato
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10290,7 +10291,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
     - target: {fileID: 6958325958928047378, guid: 2cc53a267a488a342a64a7fd6d787e13, type: 3}
       propertyPath: m_Name
-      value: PestDestinationCarrot
+      value: PestEatingPointCarrot
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10440,7 +10441,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
     - target: {fileID: 6958325958928047378, guid: 2cc53a267a488a342a64a7fd6d787e13, type: 3}
       propertyPath: m_Name
-      value: PestDestinationPotato
+      value: PestEatingPointPotato
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10560,7 +10561,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: cc99559fa3cd81c4f9e227728fe5fe8c, type: 2}
     - target: {fileID: 6958325958928047378, guid: 2cc53a267a488a342a64a7fd6d787e13, type: 3}
       propertyPath: m_Name
-      value: PestDestinationMushroom
+      value: PestEatingPointMushroom
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

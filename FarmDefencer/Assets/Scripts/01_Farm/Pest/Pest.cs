@@ -22,83 +22,57 @@ public enum PestOrigin
 [Serializable]
 public enum PestState
 {
-    Uninitialized,
     Initialized,
     Dying,
     Running,
     Arrived
 }
 
-public sealed class Pest : MonoBehaviour, IFarmSerializable
+public sealed class Pest : MonoBehaviour
 {
     public PestSize PestSize { get; private set; }
-    public PestOrigin PestOrigin { get; private set; }
     public int Seed { get; private set; }
-    public ProductEntry TargetProduct { get; private set; }
+    public string TargetProduct { get; private set; }
     public Vector2 Destination { get; private set; }
-    public float MoveSpeed { get; private set; }
     
-    private float _remainingDieTime;
     public PestState State { get; private set; }
+    
     private int _remainingCropEatCount;
     public int RemainingCropEatCount => _remainingCropEatCount;
     
     // 저장되지 않는 값들
-    private float _pestBeginDirectToDestinationCriterion;
-    private Action _onArrived;
-    private float _originalDieTime;
+    private float _remainingDieTime;
+    private float _moveSpeed;
     private int _remainingClickCount;
+    private float _beginDirectToDestinationCriterion;
+    private float _originalDieTime;
     private SkeletonAnimation _skeletonAnimation;
     
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="pestSize"></param>
-    /// <param name="pestOrigin"></param>
-    /// <param name="seed"></param>
-    /// <param name="targetProduct"></param>
-    /// <param name="destination"></param>
-    /// <param name="moveSpeed"></param>
-    /// <param name="pestBeginDirectToDestinationCriterion">현재 위치와 도착 위치를 비교했을 때 이 값보다 작으면 더 이상 지그재그 횡보하지 않고 목적지 이동을 시작함.</param>
-    /// <param name="dieTime"></param>
-    public void Init(
-        PestSize pestSize, 
-        PestOrigin pestOrigin, 
-        int seed, 
-        ProductEntry targetProduct, 
-        Vector2 destination,
-        float moveSpeed,
-        float pestBeginDirectToDestinationCriterion,
-        float dieTime)
+    public void Init(PestSize pestSize, float moveSpeed, float dieTime, float beginDirectToDestinationCriterion)
     {
-        if (State != PestState.Uninitialized)
-        {
-            return;
-        }
-
         PestSize = pestSize;
-        PestOrigin = pestOrigin;
+        _moveSpeed = moveSpeed;
+        _remainingCropEatCount = pestSize switch
+        {
+            PestSize.Big => 3,
+            PestSize.Medium => 2,
+            _ => 1
+        };
+        _remainingClickCount = pestSize switch
+        {
+            PestSize.Big => 3,
+            PestSize.Medium => 2,
+            _ => 1
+        };
+        _originalDieTime = dieTime;
+        _beginDirectToDestinationCriterion = beginDirectToDestinationCriterion;
+    }
+
+    public void SetParameters(int seed, string targetProduct, Vector2 destination)
+    {
         Seed = seed;
         TargetProduct = targetProduct;
         Destination = destination;
-        MoveSpeed = moveSpeed;
-
-        _remainingCropEatCount = PestSize switch
-        {
-            PestSize.Big => 3,
-            PestSize.Medium => 2,
-            _ => 1
-        };
-        _remainingClickCount = PestSize switch
-        {
-            PestSize.Big => 3,
-            PestSize.Medium => 2,
-            _ => 1
-        };
-        _pestBeginDirectToDestinationCriterion = pestBeginDirectToDestinationCriterion;
-        _originalDieTime = _remainingDieTime = dieTime;
-        
-        State = PestState.Initialized;
     }
 
     /// <summary>
@@ -132,6 +106,7 @@ public sealed class Pest : MonoBehaviour, IFarmSerializable
         _remainingClickCount -= 1;
         if (_remainingClickCount <= 0)
         {
+            _remainingDieTime = _originalDieTime;
             State = PestState.Dying;
         }
     }
@@ -158,17 +133,17 @@ public sealed class Pest : MonoBehaviour, IFarmSerializable
         var remainingDistanceSquared = vectorToDestination.sqrMagnitude;
         var currentPosition = transform.position;
 
-        if (remainingDistanceSquared < _pestBeginDirectToDestinationCriterion * _pestBeginDirectToDestinationCriterion)
+        if (remainingDistanceSquared < _beginDirectToDestinationCriterion * _beginDirectToDestinationCriterion)
         {
 
-            if (MoveSpeed * MoveSpeed * deltaTime * deltaTime > remainingDistanceSquared)
+            if (_moveSpeed * _moveSpeed * deltaTime * deltaTime > remainingDistanceSquared)
             {
                 transform.position = new Vector3(Destination.x, Destination.y, transform.position.z);
                 State = PestState.Arrived;
                 return;
             }
 
-            var stepForThisFrame = vectorToDestination.normalized * (MoveSpeed * deltaTime);
+            var stepForThisFrame = vectorToDestination.normalized * (_moveSpeed * deltaTime);
             var nextPosition = new Vector3(
                 currentPosition.x + stepForThisFrame.x,
                 currentPosition.y + stepForThisFrame.y, 
@@ -177,8 +152,9 @@ public sealed class Pest : MonoBehaviour, IFarmSerializable
             return;
         }
 
+        var origin = transform.position.x < Destination.x ? PestOrigin.Left : PestOrigin.Right;
         transform.position = new Vector3(
-            transform.position.x + MoveSpeed * deltaTime * (PestOrigin == PestOrigin.Right ? -1.0f : 1.0f),
+            transform.position.x + _moveSpeed * deltaTime * (origin == PestOrigin.Right ? -1.0f : 1.0f),
             GetDesiredZigZagHeight(Seed, transform.position.x),
             transform.position.z);
     }
@@ -186,23 +162,27 @@ public sealed class Pest : MonoBehaviour, IFarmSerializable
     public JObject Serialize()
     {
         var jsonObject = new JObject();
-        jsonObject.Add("RemainingDieTime", _remainingDieTime);
+        jsonObject.Add("PestSize", (int)PestSize);
         jsonObject.Add("State", (int)State);
         jsonObject.Add("RemainingCropEatCount", _remainingCropEatCount);
-        jsonObject.Add("PestSize", (int)PestSize);
-        jsonObject.Add("PestOrigin", (int)PestOrigin);
         jsonObject.Add("Seed", Seed);
-        jsonObject.Add("TargetProduct", TargetProduct.ProductName);
-        jsonObject.Add("MoveSpeed", MoveSpeed);
+        jsonObject.Add("TargetProduct", TargetProduct);
         jsonObject.Add("X", transform.position.x);
+        jsonObject.Add("DestinationX", Destination.x);
+        jsonObject.Add("DestinationY", Destination.y);
         return jsonObject;
     }
 
     public void Deserialize(JObject json)
     {
-        _remainingDieTime = json["RemainingDieTime"]?.Value<float?>() ?? _originalDieTime;
+        // PestSize는 객체 생성 단계에서부터 알아야 하며, Init()에서 설정됨.
         State = (PestState)(json["State"]?.Value<int?>() ?? (int)PestState.Initialized);
-        _remainingCropEatCount = json["RemainingCropEatCount"]?.Value<int?>() ?? (int)PestSize;
+        TargetProduct = json["TargetProduct"]?.Value<string>();
+        var destinationX = json["DestinationX"]?.Value<float>() ?? 0.0f;
+        var destinationY = json["DestinationY"]?.Value<float>() ?? 0.0f;
+        Destination = new Vector2(destinationX, destinationY);
+        
+        _remainingCropEatCount = json["RemainingCropEatCount"]?.Value<int?>() ?? 0;
         var x = json["X"]?.Value<float?>() ?? 0.0f;
         var position = transform.position;
         position.x = x;
@@ -217,7 +197,7 @@ public sealed class Pest : MonoBehaviour, IFarmSerializable
         }
         
         _remainingDieTime -= Time.deltaTime;
-        if (_remainingDieTime < 0.0f)
+        if (_remainingDieTime <= 0.0f)
         {
             Destroy(gameObject);
             return;

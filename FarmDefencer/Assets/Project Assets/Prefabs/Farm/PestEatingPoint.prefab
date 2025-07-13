@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 3250885046876297081}
   - component: {fileID: 3342135901061992581}
   m_Layer: 0
-  m_Name: PestDestination
+  m_Name: PestEatingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
