@@ -1,10 +1,14 @@
+using System;
 using Newtonsoft.Json.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public sealed class MainScene : MonoBehaviour
 {
+    private TMP_Text _harvestableTimeText;
+    private TMP_Text _availableCoinText;
     private Button _goTycoonButton;
     private TimerUI _timerUI;
     
@@ -12,6 +16,8 @@ public sealed class MainScene : MonoBehaviour
     {
         _goTycoonButton = transform.Find("FarmButton").GetComponent<Button>();
         _goTycoonButton.onClick.AddListener(OnTycoonButtonClickedHandler);
+        _harvestableTimeText = transform.Find("FarmButton/HarvestableTimeText").GetComponent<TMP_Text>();
+        _availableCoinText = transform.Find("BattleButton/AvailableCoinText").GetComponent<TMP_Text>();
         _timerUI = GameObject.Find("TimerUI").GetComponent<TimerUI>();
     }
 
@@ -24,10 +30,19 @@ public sealed class MainScene : MonoBehaviour
         
         // 타이머 불러오기
         var jsonFarmClock = loadedSave["FarmClock"] ?? new JObject();
-        var remainingDaytime = jsonFarmClock["RemainingDaytime"]?.Value<float>() ?? 0.0f;
+        var currentDaytime = jsonFarmClock["CurrentDaytime"]?.Value<float>() ?? 0.0f;
         var lengthOfDaytime = jsonFarmClock["LengthOfDaytime"]?.Value<float>() ?? 300.0f;
         
-        _timerUI.Init(MapManager.Instance.CurrentMapIndex, MapManager.Instance.CurrentStageIndex, () => remainingDaytime / lengthOfDaytime);
+        // 재배 가능 시간 설정
+        var remainingDaytimeSpan = TimeSpan.FromSeconds(lengthOfDaytime - currentDaytime);
+        var remainingDaytimeMinutes = remainingDaytimeSpan.Minutes;
+        var remainingDaytimeSeconds = remainingDaytimeSpan.Seconds;
+        _harvestableTimeText.text = $"남은 재배 가능 시간\n:{remainingDaytimeMinutes:D2}분 {remainingDaytimeSeconds:D2}초";
+        
+        // 사용 가능 코인 설정
+        _availableCoinText.text = $"사용 가능 코인\n:{ResourceManager.Instance.Gold}";
+        
+        _timerUI.Init(MapManager.Instance.CurrentMapIndex, MapManager.Instance.CurrentStageIndex, () => (lengthOfDaytime - currentDaytime) / lengthOfDaytime);
     }
 
     private void OnTycoonButtonClickedHandler()
