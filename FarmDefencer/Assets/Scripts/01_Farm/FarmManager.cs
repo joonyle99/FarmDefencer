@@ -144,7 +144,7 @@ public sealed class FarmManager : MonoBehaviour
 
     private void DeserializeFromSaveFile()
     {
-        var saveJson = FarmSerializer.ReadSave();
+        var saveJson = SaveManager.Instance.LoadedSave;
 
         quotaContext.Deserialize(saveJson["QuotaContext"] as JObject ?? new JObject());
         penaltyGiver.Deserialize(saveJson["PenaltyGiver"] as JObject ?? new JObject());
@@ -172,7 +172,7 @@ public sealed class FarmManager : MonoBehaviour
         saveJson.Add("MapManager", MapManager.Instance.Serialize());
         saveJson.Add("ResourceManager", ResourceManager.Instance.Serialize());
 
-        FarmSerializer.WriteSave(saveJson);
+        SaveManager.Instance.WriteSave(saveJson);
     }
 
     private void OpenDefenceScene()
