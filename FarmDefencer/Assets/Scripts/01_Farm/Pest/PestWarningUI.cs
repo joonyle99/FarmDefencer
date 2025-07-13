@@ -37,13 +37,19 @@ public sealed class PestWarningUI : MonoBehaviour
         {
             var policeLineObject = new GameObject($"PoliceLine_{i}");
             policeLineObject.transform.parent = policeLinesObject.transform;
+            policeLineObject.layer = LayerMask.NameToLayer("UI");
             var imageComponent = policeLineObject.AddComponent<Image>();
             imageComponent.sprite = policeLineSprite;
 
             var rectTransform = imageComponent.transform as RectTransform;
             rectTransform.sizeDelta = policeLineSprite.rect.size;
             rectTransform.localScale = Vector3.one * 2.5f;
+            rectTransform.pivot = new Vector2(1.0f, 0.5f);
 
+            var newLocalPosition = rectTransform.localPosition;
+            newLocalPosition.z = 0.0f;
+            rectTransform.localPosition = newLocalPosition;
+            
             var newRotation = Vector3.zero;
             var positionDelta = policeLineDatas[i].endPosition - policeLineDatas[i].beginPosition;
             newRotation.z = Mathf.Atan2(positionDelta.y, positionDelta.x) * Mathf.Rad2Deg;
@@ -80,8 +86,9 @@ public sealed class PestWarningUI : MonoBehaviour
                 {
                     alpha = (elapsedTime - beginTime) / enterTimeForEachPoliceLine;
                 }
-
-                image.transform.position = Vector2.LerpUnclamped(beginPosition, endPosition, alpha);
+                
+                var rectTransform = (RectTransform)image.transform;
+                rectTransform.anchoredPosition = Vector2.LerpUnclamped(beginPosition, endPosition, alpha);
             }
 
             yield return null;

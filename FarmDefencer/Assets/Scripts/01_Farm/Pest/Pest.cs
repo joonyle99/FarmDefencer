@@ -135,7 +135,6 @@ public sealed class Pest : MonoBehaviour
 
         if (remainingDistanceSquared < _beginDirectToDestinationCriterion * _beginDirectToDestinationCriterion)
         {
-
             if (_moveSpeed * _moveSpeed * deltaTime * deltaTime > remainingDistanceSquared)
             {
                 transform.position = new Vector3(Destination.x, Destination.y, transform.position.z);
