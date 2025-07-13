@@ -41,12 +41,6 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     /// </summary>
     public Action OnDefenceEndState;
 
-    /// <summary>
-    /// 메인메뉴에서 타이쿤 씬으로 이동하기 전 true로 설정하여 타이쿤 씬에서 ResourceManager 등의 값들을 JSON에서 불러오도록 하는 프로퍼티.
-    /// 디펜스에서 이동하여 false인 경우에는 기존 ResourceManager 등에 설정된 값을 그대로 사용함.
-    /// </summary>
-    public bool IsTycoonInitialLoad { get; set; }
-
     private void Start()
     {
         ChangeState(GameState.Normal);

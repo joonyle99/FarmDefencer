@@ -151,13 +151,6 @@ public sealed class FarmManager : MonoBehaviour
         farm.Deserialize(saveJson["Farm"] as JObject ?? new JObject());
         pestGiver.Deserialize(saveJson["PestGiver"] as JObject ?? new JObject());
         farmClock.Deserialize(saveJson["FarmClock"] as JObject ?? new JObject());
-
-        if (GameStateManager.Instance.IsTycoonInitialLoad)
-        {
-            MapManager.Instance.Deserialize(saveJson["MapManager"] as JObject ?? new JObject());
-            ResourceManager.Instance.Deserialize(saveJson["ResourceManager"] as JObject ?? new JObject());
-        }
-        GameStateManager.Instance.IsTycoonInitialLoad = false;
     }
 
     private void SerializeToSaveFile()
