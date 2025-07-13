@@ -39,7 +39,6 @@ public sealed class FarmManager : MonoBehaviour
         {
             // 디버그용 할당 코드 등 여기에...
             quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
-			pestGiver.SpawnPestsAt(1.0f);
         }
         else
         {
@@ -50,6 +49,11 @@ public sealed class FarmManager : MonoBehaviour
         ResourceManager.Instance.SurvivedMonsters.Clear();
         farmUI.PlayQuotaAssignAnimation(productEntry => quotaContext.IsProductAvailable(productEntry),
             productEntry => quotaContext.TryGetQuota(productEntry.ProductName, out var quota) ? quota : 0);
+
+        if (pestGiver.ShouldReservePestSpawn)
+        {
+            pestGiver.ReserveRandomPestSpawn();
+        }
     }
 
     private void Update()
@@ -151,7 +155,6 @@ public sealed class FarmManager : MonoBehaviour
             MapManager.Instance.Deserialize(saveJson["MapManager"] as JObject ?? new JObject());
             ResourceManager.Instance.Deserialize(saveJson["ResourceManager"] as JObject ?? new JObject());
         }
-
         GameStateManager.Instance.IsTycoonInitialLoad = false;
     }
 

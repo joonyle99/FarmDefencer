@@ -12,9 +12,18 @@ public sealed class PestGiver
     IFarmInputLayer,
     IFarmSerializable
 {
+    private enum PestSpawnState
+    {
+        NotRequested,
+        Requested,
+        Spawned
+    }
+    
     public int InputPriority => IFarmInputLayer.Priority_PestGiver;
 
     public bool IsWarningShowing => _pestWarningUI.IsWarningShowing;
+
+    public bool ShouldReservePestSpawn => _pestSpawnState == PestSpawnState.NotRequested;
 
     [Serializable]
     public struct PestPrefabData
@@ -25,15 +34,16 @@ public sealed class PestGiver
         public GameObject Prefab => prefab;
     }
 
-    [SerializeField] private float pestMoveSpeed = 10.0f;
-    [SerializeField] private float minimumPestSpawnInterval = 0.1f;
-    [SerializeField] private float maximumPestSpawnInterval = 1.0f;
-    [SerializeField] private float pestBeginDirectToDestinationCriterion = 5.0f; // 달리는 중인 해충의 도착지와의 거리값이 이 값보다 작으면 지그재그 이동 대신 목적지로 직접 향하기 시작함.
+    [Tooltip("해충 뛰는 속도")] [SerializeField] private float pestMoveSpeed = 10.0f;
+    [Tooltip("앞에서 출발한 해충과의 최소 시간 간격")] [SerializeField] private float minimumPestSpawnInterval = 0.1f;
+    [Tooltip("앞에서 출발한 해충과의 최대 시간 간격")] [SerializeField] private float maximumPestSpawnInterval = 1.0f;
+    [Tooltip("지그재그로 움직이다가 곧장 도착지로 향하기 시작하는 거리 기준")] [SerializeField] private float pestBeginDirectToDestinationCriterion = 5.0f;
     [SerializeField] private float distanceBetweenArrivedPests = 0.2f;
-    [SerializeField] private float pestClickSize = 0.1f; // 해충 클릭 판정되는 크기.
-    [SerializeField] private float pestDieTime = 0.5f; // 해충 잡았을 때 투명해져 완전히 사라질때까지 걸리는 시간.
-    [SerializeField] private float pestWarningDuration = 3.0f;
-    [SerializeField] private List<PestPrefabData> pestPrefabs;
+    [Tooltip("해충 클릭 판정되는 크기")] [SerializeField] private float pestClickSize = 0.1f; // 해충 클릭 판정되는 크기.
+    [Tooltip("잡힌 해충 사라지는데 걸리는 시간")] [SerializeField] private float pestDieTime = 0.5f; // 해충 잡았을 때 투명해져 완전히 사라질때까지 걸리는 시간.
+    [Tooltip("해충 웨이브 발생하는 최소 시각")] [SerializeField] private float minimumRandomPestSpawnDaytime = 30.0f;
+    [Tooltip("해충 웨이브 발생하는 최대 시각")] [SerializeField] private float maximumRandomPestSpawnDaytime = 200.0f;
+    [Tooltip("해충 프리팹들")][SerializeField] private List<PestPrefabData> pestPrefabs;
 
     private Func<string, bool> _isProductAvailable;
     private Func<string, ProductEntry> _getProductEntry;
@@ -46,7 +56,7 @@ public sealed class PestGiver
     
     // 저장되는 값들
     private float _pestSpawnTime;
-    private bool _shouldSpawnPests;
+    private PestSpawnState _pestSpawnState;
     private List<Pest> _runningPests;
     private Dictionary<string, PestDestination> _pestDestinations;
 
@@ -70,21 +80,17 @@ public sealed class PestGiver
     /// <returns></returns>
     public int LetPestsEat(string productName, int count) => _pestDestinations[productName].LetPestsEat(count);
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="pestSpawnTime">낮 시간 기준으로 몇 초에 스폰할지.</param>
-    public void SpawnPestsAt(float pestSpawnTime)
+    public void ReserveRandomPestSpawn()
     {
-        _shouldSpawnPests = true;
-        _pestSpawnTime = pestSpawnTime;
+        _pestSpawnState = PestSpawnState.Requested;
+        _pestSpawnTime = Random.Range(minimumRandomPestSpawnDaytime, maximumPestSpawnInterval);
     }
 
     public void OnFarmUpdate(float deltaTime)
     {
-        if (_shouldSpawnPests && _getDaytime() >= _pestSpawnTime)
+        if (_pestSpawnState == PestSpawnState.Requested && _getDaytime() >= _pestSpawnTime)
         {
-            _shouldSpawnPests = false;
+            _pestSpawnState = PestSpawnState.Spawned;
             
             _pestWarningUI.ShowWarning();
             var pestSpawnRule = CreatePestSpawnRule(_isProductAvailable);
@@ -116,7 +122,6 @@ public sealed class PestGiver
             }
         }
         
-
         _runningPests.ForEach(p => p.ManualUpdate(deltaTime));
         foreach (var arrivedPest in _runningPests.Where(p => p.State == PestState.Arrived))
         {
@@ -166,7 +171,7 @@ public sealed class PestGiver
     {
         var jsonObject = new JObject();
         jsonObject.Add("PestSpawnTime", _pestSpawnTime);
-        jsonObject.Add("ShouldSpawnPests", _shouldSpawnPests);
+        jsonObject.Add("PestSpawnState", (int)_pestSpawnState);
 
         var jsonRunningPests = new JArray();
         foreach (var runningPest in _runningPests)
@@ -193,14 +198,13 @@ public sealed class PestGiver
 
     public void Deserialize(JObject json)
     {
-        _pestSpawnTime = json.Property("PestSpawnTime")?.Value.Value<int>() ?? 0.0f;
-        _shouldSpawnPests = json.Property("ShouldSpawnPests")?.Value.Value<bool>() ?? false;
+        _pestSpawnTime = json["PestSpawnTime"]?.Value<int>() ?? 0.0f;
+        _pestSpawnState = (PestSpawnState)(json["PestSpawnState"]?.Value<int>() ?? 0);
 
         if (json["RunningPests"] is JArray jsonRunningPests)
         {
             foreach (var jsonRunningPestToken in jsonRunningPests)
             {
-                Debug.Log($"{jsonRunningPestToken.ToString()}");
                 var jsonRunningPest = jsonRunningPestToken as JObject;
                 if (jsonRunningPest is null)
                 {
