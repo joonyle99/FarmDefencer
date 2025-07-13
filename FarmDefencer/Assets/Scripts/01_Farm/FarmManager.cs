@@ -12,27 +12,25 @@ public sealed class FarmManager : MonoBehaviour
     [Header("디버그용 세이브 무시")] [SerializeField]
     private bool ignoreSaveFile;
 
-    [Header("저장 대상 오브젝트들")] [SerializeField]
-    private Farm farm;
-
-    [SerializeField] private PenaltyGiver penaltyGiver;
-
+    [Header("의존성 오브젝트 설정")]
+    [Tooltip("여기에서는 프로그래밍 파트 외에서 조정할 것은 없음.")]
+    [SerializeField] private Farm farm;
     [SerializeField] private QuotaContext quotaContext;
+    [SerializeField] private FarmClock farmClock;
+    [SerializeField] private PenaltyGiver penaltyGiver;
+    [SerializeField] private PestGiver pestGiver;
     // ResourceManager
     // MapManager
 
-    [Header("저장되지 않는 오브젝트들")] [SerializeField]
-    private FarmUI farmUI;
-
-    [SerializeField] private FarmClock farmClock;
+    // 저장되지 않는 오브젝트들
+    [SerializeField] private FarmUI farmUI;
     [SerializeField] private FarmInput farmInput;
     [SerializeField] private ProductDatabase productDatabase;
     [SerializeField] private HarvestTutorialGiver harvestTutorialGiver;
     [SerializeField] private WeatherShopUI weatherShopUI;
     [SerializeField] private GoDefenceUI goDefenceUI;
-    [SerializeField] private FarmDebugUI farmDebugUI;
     [SerializeField] private WeatherGiver weatherGiver;
-    [SerializeField] private PestGiver pestGiver;
+    [SerializeField] private FarmDebugUI farmDebugUI;
 
     private void Start()
     {
@@ -68,7 +66,7 @@ public sealed class FarmManager : MonoBehaviour
 
         farmUI.WateringCanAvailable = !harvestTutorialGiver.gameObject.activeSelf;
         weatherShopUI.gameObject.SetActive(!harvestTutorialGiver.IsPlayingTutorial);
-        goDefenceUI.gameObject.SetActive(farmClock.Daytime == 0.0f && !harvestTutorialGiver.IsPlayingTutorial);
+        goDefenceUI.gameObject.SetActive(farmClock.CurrentDaytime == 0.0f && !harvestTutorialGiver.IsPlayingTutorial);
     }
 
     private void QuotaContextChangedHandler()
@@ -134,7 +132,7 @@ public sealed class FarmManager : MonoBehaviour
         pestGiver.Init(
             productName => quotaContext.IsProductAvailable(GetProductEntry(productName)),
             GetProductEntry,
-            () => farmClock.Daytime,
+            () => farmClock.CurrentDaytime,
             EarnGold);
     }
 
@@ -146,6 +144,7 @@ public sealed class FarmManager : MonoBehaviour
         penaltyGiver.Deserialize(saveJson["PenaltyGiver"] as JObject ?? new JObject());
         farm.Deserialize(saveJson["Farm"] as JObject ?? new JObject());
         pestGiver.Deserialize(saveJson["PestGiver"] as JObject ?? new JObject());
+        farmClock.Deserialize(saveJson["FarmClock"] as JObject ?? new JObject());
 
         if (GameStateManager.Instance.IsTycoonInitialLoad)
         {
@@ -160,6 +159,7 @@ public sealed class FarmManager : MonoBehaviour
     {
         var saveJson = new JObject();
 
+        saveJson.Add("FarmClock", farmClock.Serialize());
         saveJson.Add("PestGiver", pestGiver.Serialize());
         saveJson.Add("QuotaContext", quotaContext.Serialize());
         saveJson.Add("PenaltyGiver", penaltyGiver.Serialize());

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using VTabs.Libs;
 using Random = UnityEngine.Random;
@@ -20,14 +21,14 @@ public interface IFarmUpdatable
 /// <summary>
 /// 일시정지될 수 있고 IFarmUpdatable 객체에 대해 OnFarmUpdate()를 호출하는 클래스.
 /// </summary>
-public sealed class FarmClock : MonoBehaviour
+public sealed class FarmClock : MonoBehaviour, IFarmSerializable
 {
     [SerializeField] private float lengthOfDaytime = 300.0f;
     public float LengthOfDaytime => lengthOfDaytime;
     
-    public float Daytime { get; private set; }
+    public float CurrentDaytime { get; private set; }
 
-    public float RemainingDaytime => lengthOfDaytime - Daytime;
+    public float RemainingDaytime => lengthOfDaytime - CurrentDaytime;
 
     public bool Stopped { get; private set; }
 
@@ -40,9 +41,17 @@ public sealed class FarmClock : MonoBehaviour
         _pauseConditions.Add(condition);
     }
 
-    public void SetDaytime(float daytime) => Daytime = Mathf.Clamp(daytime, 0.0f, lengthOfDaytime);
+    public void SetDaytime(float daytime) => CurrentDaytime = Mathf.Clamp(daytime, 0.0f, lengthOfDaytime);
 
     public void RegisterFarmUpdatableObject(IFarmUpdatable farmUpdatable) => _farmUpdatables.Add(farmUpdatable);
+
+    public JObject Serialize() => new(new JProperty("LengthOfDaytime", lengthOfDaytime), new JProperty("CurrentDaytime", CurrentDaytime));
+
+    public void Deserialize(JObject json)
+    {
+        lengthOfDaytime = json["LengthOfDaytime"]?.Value<float>() ?? 300.0f;
+        CurrentDaytime = json["CurrentDaytime"]?.Value<float>() ?? 0.0f;
+    }
 
     private void Awake()
     {
@@ -54,7 +63,7 @@ public sealed class FarmClock : MonoBehaviour
     {
         Stopped = _pauseConditions.Any(cond => cond()) || RemainingDaytime == 0.0f;
         var deltaTime = Stopped ? 0.0f : Time.deltaTime;
-        Daytime += deltaTime;
+        CurrentDaytime += deltaTime;
         _farmUpdatables.ForEach(f => f.OnFarmUpdate(deltaTime));
     }
 }
