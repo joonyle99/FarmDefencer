@@ -47,6 +47,8 @@ public sealed class Pest : MonoBehaviour
     private float _originalDieTime;
     private SkeletonAnimation _skeletonAnimation;
     
+    // 저장과는 무관한 초기 설정값들을 설정함.
+    // 참고: PestSize는 예외적으로 저장됨. 객체 생성과 밀접하게 관련되어 있으므로.
     public void Init(PestSize pestSize, float dieTime, float beginDirectToDestinationCriterion)
     {
         PestSize = pestSize;
@@ -66,6 +68,7 @@ public sealed class Pest : MonoBehaviour
         _beginDirectToDestinationCriterion = beginDirectToDestinationCriterion;
     }
 
+    // 저장되는, 해충의 고유 속성을 정의하는 값들을 설정함.
     public void SetParameters(int seed, string targetProduct, Vector2 destination, float moveSpeed)
     {
         Seed = seed;
@@ -176,6 +179,7 @@ public sealed class Pest : MonoBehaviour
     {
         // PestSize는 객체 생성 단계에서부터 알아야 하며, Init()에서 설정됨.
         State = (PestState)(json["State"]?.Value<int?>() ?? (int)PestState.Initialized);
+        Seed = json["Seed"]?.Value<int?>() ?? 0;
         TargetProduct = json["TargetProduct"]?.Value<string>();
         MoveSpeed = json["MoveSpeed"]?.Value<float>() ?? 0.0f;
         var destinationX = json["DestinationX"]?.Value<float>() ?? 0.0f;
