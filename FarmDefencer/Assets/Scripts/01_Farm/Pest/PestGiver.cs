@@ -44,6 +44,7 @@ public sealed class PestGiver
     [Tooltip("해충 웨이브 발생하는 최소 시각")] [SerializeField] private float minimumRandomPestSpawnDaytime = 30.0f;
     [Tooltip("해충 웨이브 발생하는 최대 시각")] [SerializeField] private float maximumRandomPestSpawnDaytime = 200.0f;
     [Tooltip("해충 프리팹들")][SerializeField] private List<PestPrefabData> pestPrefabs;
+    [Header("해충 스폰 규칙")] [SerializeField] private PestSpawnRule pestSpawnRule;
 
     private Func<string, bool> _isProductAvailable;
     private Func<string, ProductEntry> _getProductEntry;
@@ -93,10 +94,10 @@ public sealed class PestGiver
             _pestSpawnState = PestSpawnState.Spawned;
             
             _pestWarningUI.ShowWarning();
-            var pestSpawnRule = CreatePestSpawnRule(_isProductAvailable);
+            var pestSpawnList = CreatePestSpawnRule(_isProductAvailable, pestSpawnRule);
             var availableProducts = GetAvailableTargetProducts(_isProductAvailable, _getProductEntry);
 
-            foreach (var (pestOrigin, pestSize) in pestSpawnRule)
+            foreach (var (pestOrigin, pestSize) in pestSpawnList)
             {
                 var seed = Random.Range(0, 10000);
                 var target = SelectTarget(pestOrigin, availableProducts);
@@ -158,7 +159,7 @@ public sealed class PestGiver
         _runningPests.Remove(pest);
         var gold = pest.PestSize switch
         {
-            PestSize.Big => 3,
+            PestSize.Large => 3,
             PestSize.Medium => 2,
             _ => 1
         };
@@ -267,49 +268,12 @@ public sealed class PestGiver
         return pestComponent;
     }
 
-    private static List<Tuple<PestOrigin, PestSize>> CreatePestSpawnRule(Func<string, bool> isProductAvailable)
+    private static List<(PestOrigin, PestSize)> CreatePestSpawnRule(Func<string, bool> isProductAvailable, PestSpawnRule pestSpawnRule)
     {
-        if (isProductAvailable("product_mushroom"))
-        {
-            return generateList(5, 5, 5, 5, 5, 5);
-        }
+        var selectedEntry = pestSpawnRule.Rule.Reverse()
+            .FirstOrDefault(entry => isProductAvailable(entry.PreconditionEnabledProduct.ProductName));
 
-        if (isProductAvailable("product_sweetpotato"))
-        {
-            return generateList(4, 4, 5, 4, 5, 5);
-        }
-
-        if (isProductAvailable("product_eggplant"))
-        {
-            return generateList(4, 4, 4, 4, 4, 4);
-        }
-
-        if (isProductAvailable("product_cucumber"))
-        {
-            return generateList(3, 3, 3, 4, 3, 4);
-        }
-
-        if (isProductAvailable("product_cabbage"))
-        {
-            return generateList(1, 2, 2, 2, 4, 3);
-        }
-
-        return generateList(0, 0, 0, 3, 5, 5);
-
-        List<Tuple<PestOrigin, PestSize>> generateList(int remainingLeftLarge, int remainingLeftMedium,
-            int remainingLeftSmall, int remainingRightLarge, int remainingRightMedium, int remainingRightSmall)
-        {
-            var spawnRule = new List<Tuple<PestOrigin, PestSize>>();
-
-            for (int i = 0; i < remainingLeftLarge; i++) spawnRule.Add(new(PestOrigin.Left, PestSize.Big));
-            for (int i = 0; i < remainingLeftMedium; i++) spawnRule.Add(new(PestOrigin.Left, PestSize.Medium));
-            for (int i = 0; i < remainingLeftSmall; i++) spawnRule.Add(new(PestOrigin.Left, PestSize.Small));
-            for (int i = 0; i < remainingRightLarge; i++) spawnRule.Add(new(PestOrigin.Right, PestSize.Big));
-            for (int i = 0; i < remainingRightMedium; i++) spawnRule.Add(new(PestOrigin.Right, PestSize.Medium));
-            for (int i = 0; i < remainingRightSmall; i++) spawnRule.Add(new(PestOrigin.Right, PestSize.Small));
-
-            return spawnRule;
-        }
+        return selectedEntry.ToList();
     }
 
     private static List<Tuple<PestOrigin, ProductEntry>> GetAvailableTargetProducts(

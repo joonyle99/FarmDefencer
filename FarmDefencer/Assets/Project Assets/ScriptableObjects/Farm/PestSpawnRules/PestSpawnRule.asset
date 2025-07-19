@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3930d1495a5fd74398c1841311724ab, type: 3}
+  m_Name: PestSpawnRule
+  m_EditorClassIdentifier: 
+  rule:
+  - preconditionEnabledProduct: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
+    leftSmallCount: 0
+    leftMediumCount: 0
+    leftLargeCount: 0
+    rightSmallCount: 5
+    rightMediumCount: 5
+    rightLargeCount: 3
+  - preconditionEnabledProduct: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
+    leftSmallCount: 2
+    leftMediumCount: 2
+    leftLargeCount: 1
+    rightSmallCount: 5
+    rightMediumCount: 5
+    rightLargeCount: 3
+  - preconditionEnabledProduct: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
+    leftSmallCount: 3
+    leftMediumCount: 3
+    leftLargeCount: 3
+    rightSmallCount: 4
+    rightMediumCount: 3
+    rightLargeCount: 4
+  - preconditionEnabledProduct: {fileID: 11400000, guid: 7dafbc71fcd9c0846b0f38a024abc95b, type: 2}
+    leftSmallCount: 4
+    leftMediumCount: 4
+    leftLargeCount: 4
+    rightSmallCount: 4
+    rightMediumCount: 4
+    rightLargeCount: 4
+  - preconditionEnabledProduct: {fileID: 11400000, guid: bbf41d007f26d6049ba7c478bd5f3ecd, type: 2}
+    leftSmallCount: 5
+    leftMediumCount: 5
+    leftLargeCount: 4
+    rightSmallCount: 5
+    rightMediumCount: 4
+    rightLargeCount: 4
+  - preconditionEnabledProduct: {fileID: 11400000, guid: cc99559fa3cd81c4f9e227728fe5fe8c, type: 2}
+    leftSmallCount: 5
+    leftMediumCount: 5
+    leftLargeCount: 5
+    rightSmallCount: 5
+    rightMediumCount: 5
+    rightLargeCount: 5

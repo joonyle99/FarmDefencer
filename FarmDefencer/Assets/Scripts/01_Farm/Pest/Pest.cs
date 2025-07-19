@@ -9,7 +9,7 @@ public enum PestSize
 {
     Small,
     Medium,
-    Big
+    Large
 }
 
 [Serializable]
@@ -54,13 +54,13 @@ public sealed class Pest : MonoBehaviour
         _moveSpeed = moveSpeed;
         _remainingCropEatCount = pestSize switch
         {
-            PestSize.Big => 3,
+            PestSize.Large => 3,
             PestSize.Medium => 2,
             _ => 1
         };
         _remainingClickCount = pestSize switch
         {
-            PestSize.Big => 3,
+            PestSize.Large => 3,
             PestSize.Medium => 2,
             _ => 1
         };

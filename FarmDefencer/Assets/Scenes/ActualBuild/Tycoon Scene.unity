@@ -7577,6 +7577,7 @@ MonoBehaviour:
     prefab: {fileID: 4557596464678433035, guid: 24cf356dcd12e824f886be0cde85d107, type: 3}
   - size: 2
     prefab: {fileID: 8843196452521465285, guid: cb289177aad739a41a75e7c3ce06e811, type: 3}
+  pestSpawnRule: {fileID: 11400000, guid: d8335e5a3d634f84d8a54fe9a93bfd70, type: 2}
 --- !u!4 &1346437756
 Transform:
   m_ObjectHideFlags: 0
@@ -8402,7 +8403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911982a6f0e14bd4b88047c9f5a89f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreSaveFile: 0
+  ignoreSaveFile: 1
   farm: {fileID: 876821029}
   quotaContext: {fileID: 287826021}
   farmClock: {fileID: 790447940}
