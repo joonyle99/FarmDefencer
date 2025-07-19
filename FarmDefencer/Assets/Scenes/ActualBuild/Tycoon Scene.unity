@@ -7564,7 +7564,6 @@ MonoBehaviour:
   minimumPestSpawnInterval: 0.1
   maximumPestSpawnInterval: 1
   pestBeginDirectToDestinationCriterion: 5
-  distanceBetweenArrivedPests: 1
   pestClickSize: 1
   pestDieTime: 1
   minimumRandomPestSpawnDaytime: 1
