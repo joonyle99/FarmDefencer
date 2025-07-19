@@ -34,7 +34,7 @@ public sealed class Pest : MonoBehaviour
     public int Seed { get; private set; }
     public string TargetProduct { get; private set; }
     public Vector2 Destination { get; private set; }
-    
+    public float MoveSpeed { get; private set; }    
     public PestState State { get; private set; }
     
     private int _remainingCropEatCount;
@@ -42,16 +42,14 @@ public sealed class Pest : MonoBehaviour
     
     // 저장되지 않는 값들
     private float _remainingDieTime;
-    private float _moveSpeed;
     private int _remainingClickCount;
     private float _beginDirectToDestinationCriterion;
     private float _originalDieTime;
     private SkeletonAnimation _skeletonAnimation;
     
-    public void Init(PestSize pestSize, float moveSpeed, float dieTime, float beginDirectToDestinationCriterion)
+    public void Init(PestSize pestSize, float dieTime, float beginDirectToDestinationCriterion)
     {
         PestSize = pestSize;
-        _moveSpeed = moveSpeed;
         _remainingCropEatCount = pestSize switch
         {
             PestSize.Large => 3,
@@ -68,11 +66,12 @@ public sealed class Pest : MonoBehaviour
         _beginDirectToDestinationCriterion = beginDirectToDestinationCriterion;
     }
 
-    public void SetParameters(int seed, string targetProduct, Vector2 destination)
+    public void SetParameters(int seed, string targetProduct, Vector2 destination, float moveSpeed)
     {
         Seed = seed;
         TargetProduct = targetProduct;
         Destination = destination;
+        MoveSpeed = moveSpeed;
     }
 
     /// <summary>
@@ -135,14 +134,14 @@ public sealed class Pest : MonoBehaviour
 
         if (remainingDistanceSquared < _beginDirectToDestinationCriterion * _beginDirectToDestinationCriterion)
         {
-            if (_moveSpeed * _moveSpeed * deltaTime * deltaTime > remainingDistanceSquared)
+            if (MoveSpeed * MoveSpeed * deltaTime * deltaTime > remainingDistanceSquared)
             {
                 transform.position = new Vector3(Destination.x, Destination.y, transform.position.z);
                 State = PestState.Arrived;
                 return;
             }
 
-            var stepForThisFrame = vectorToDestination.normalized * (_moveSpeed * deltaTime);
+            var stepForThisFrame = vectorToDestination.normalized * (MoveSpeed * deltaTime);
             var nextPosition = new Vector3(
                 currentPosition.x + stepForThisFrame.x,
                 currentPosition.y + stepForThisFrame.y, 
@@ -153,7 +152,7 @@ public sealed class Pest : MonoBehaviour
 
         var origin = transform.position.x < Destination.x ? PestOrigin.Left : PestOrigin.Right;
         transform.position = new Vector3(
-            transform.position.x + _moveSpeed * deltaTime * (origin == PestOrigin.Right ? -1.0f : 1.0f),
+            transform.position.x + MoveSpeed * deltaTime * (origin == PestOrigin.Right ? -1.0f : 1.0f),
             GetDesiredZigZagHeight(Seed, transform.position.x),
             transform.position.z);
     }
@@ -169,6 +168,7 @@ public sealed class Pest : MonoBehaviour
         jsonObject.Add("X", transform.position.x);
         jsonObject.Add("DestinationX", Destination.x);
         jsonObject.Add("DestinationY", Destination.y);
+        jsonObject.Add("MoveSpeed", MoveSpeed);
         return jsonObject;
     }
 
@@ -177,6 +177,7 @@ public sealed class Pest : MonoBehaviour
         // PestSize는 객체 생성 단계에서부터 알아야 하며, Init()에서 설정됨.
         State = (PestState)(json["State"]?.Value<int?>() ?? (int)PestState.Initialized);
         TargetProduct = json["TargetProduct"]?.Value<string>();
+        MoveSpeed = json["MoveSpeed"]?.Value<float>() ?? 0.0f;
         var destinationX = json["DestinationX"]?.Value<float>() ?? 0.0f;
         var destinationY = json["DestinationY"]?.Value<float>() ?? 0.0f;
         Destination = new Vector2(destinationX, destinationY);

@@ -34,7 +34,6 @@ public sealed class PestGiver
         public GameObject Prefab => prefab;
     }
 
-    [Tooltip("해충 뛰는 속도")] [SerializeField] private float pestMoveSpeed = 10.0f;
     [Tooltip("앞에서 출발한 해충과의 최소 시간 간격")] [SerializeField] private float minimumPestSpawnInterval = 0.1f;
     [Tooltip("앞에서 출발한 해충과의 최대 시간 간격")] [SerializeField] private float maximumPestSpawnInterval = 1.0f;
     [Tooltip("지그재그로 움직이다가 곧장 도착지로 향하기 시작하는 거리 기준")] [SerializeField] private float pestBeginDirectToDestinationCriterion = 5.0f;
@@ -45,6 +44,7 @@ public sealed class PestGiver
     [Tooltip("해충 웨이브 발생하는 최대 시각")] [SerializeField] private float maximumRandomPestSpawnDaytime = 200.0f;
     [Tooltip("해충 프리팹들")][SerializeField] private List<PestPrefabData> pestPrefabs;
     [Header("해충 스폰 규칙")] [SerializeField] private PestSpawnRule pestSpawnRule;
+    [Header("해충 속도 규칙")] [SerializeField] private PestSpeedRule pestSpeedRule;
 
     private Func<string, bool> _isProductAvailable;
     private Func<string, ProductEntry> _getProductEntry;
@@ -107,10 +107,20 @@ public sealed class PestGiver
                     continue;
                 }
 
+                var speedRuleEntry = pestSpeedRule.Rule.FirstOrDefault(entry =>
+                    entry.PreconditionCurrentMap.MapId == MapManager.Instance.CurrentMapIndex);
+                var speedRange = pestSize switch
+                {
+                    PestSize.Small => speedRuleEntry.SmallPestSpeedRange,
+                    PestSize.Medium => speedRuleEntry.MediumPestSpeedRange,
+                    _ => speedRuleEntry.LargePestSpeedRange
+                };
+                var speed = Random.Range(speedRange.x, speedRange.y);
+
                 var pestComponent = InstantiatePest(pestSize);
                 pestComponent.transform.parent = _runningPestParentObject.transform;
                 pestComponent.transform.position = _pestOrigins[pestOrigin];
-                pestComponent.SetParameters(seed, target.ProductName, _pestEatingPoints[target.ProductName].transform.position);
+                pestComponent.SetParameters(seed, target.ProductName, _pestEatingPoints[target.ProductName].transform.position, speed);
                 _runningPests.Add(pestComponent);
             }
         }
@@ -261,7 +271,6 @@ public sealed class PestGiver
         var pestComponent = pestObject.AddComponent<Pest>();
         pestComponent.Init(
             pestSize,
-            pestMoveSpeed,
             pestDieTime,
             pestBeginDirectToDestinationCriterion);
 
