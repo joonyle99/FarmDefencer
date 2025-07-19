@@ -1,7 +1,6 @@
 using Spine.Unity;
 using System.Collections;
 using UnityEngine;
-using VInspector.Libs;
 
 public class MonsterUI : MonoBehaviour
 {
@@ -130,7 +129,7 @@ public class MonsterUI : MonoBehaviour
                         break;
                 }
 
-                if (graphic.initialSkinName.IsNullOrEmpty())
+                if (string.IsNullOrEmpty(graphic.initialSkinName))
                 {
                     graphic.initialSkinName = currentMap.Crops[Random.Range(0, currentMap.Crops.Length)];
                 }

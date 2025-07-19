@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
-using VTabs.Libs;
-using Random = UnityEngine.Random;
 
 /// <summary>
 /// FarmClock에 의해 Update될 객체에 대한 인터페이스.
