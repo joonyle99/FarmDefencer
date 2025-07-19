@@ -20,11 +20,18 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
     // event
     public event Action<MapEntry> OnMapChanged;
 
-    public JObject Serialize() => new(new JProperty("CurrentMapIndex", CurrentMapIndex));
+    public JObject Serialize()
+    {
+        var jsonObject = new JObject();
+        jsonObject.Add("CurrentMapIndex", CurrentMapIndex);
+        jsonObject.Add("CurrentStageIndex", CurrentStageIndex);
+        return jsonObject;
+    }
 
     public void Deserialize(JObject json)
     {
-        CurrentMapIndex = json.Property("CurrentMapIndex")?.Value.Value<int>() ?? 0;
+        CurrentMapIndex = json.Property("CurrentMapIndex")?.Value.Value<int>() ?? 1;
+        CurrentStageIndex = json.Property("CurrentStageIndex")?.Value.Value<int>() ?? 1;
         LoadCurrentMap();
     }
 
