@@ -17,18 +17,16 @@ public sealed class SlowEffector : EffectorBase
         _slowRate = (float)args[0];
         _duration = (float)args[1];
 
-        _curDuration = 0f;
-
         // 슬로우 효과 적용
-        _damagableBehavior.GridMovement.SpeedFactor *= _slowRate;
+        affectedTarget.GridMovement.SpeedFactor *= _slowRate;
 
         // 컬러 이펙트 적용
         ColorEffect colorEffect = new ColorEffect(ConstantConfig.GREEN, _duration);
-        _damagableBehavior.SpineController.AddColorEffect(colorEffect);
+        affectedTarget.SpineController.AddColorEffect(colorEffect);
     }
     protected override void OnDeactivate()
     {
-        _damagableBehavior.GridMovement.SpeedFactor /= _slowRate;
+        affectedTarget.GridMovement.SpeedFactor /= _slowRate;
     }
     protected override void OnEffectUpdate()
     {

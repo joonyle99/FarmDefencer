@@ -36,6 +36,13 @@ public static class ConstantConfig
     // 방향
     public static readonly (int x, int y)[] DIRECTIONS = new (int x, int y)[]
     {
+        (-1, 0),   // left
+        (1, 0),    // right
+        (0, -1),   // down
+        (0, 1)     // up
+    };
+    public static readonly (int x, int y)[] DirectionsWithOrigin = new (int x, int y)[]
+    {
         (0, 0),    // origin
         (-1, 0),   // left
         (1, 0),    // right

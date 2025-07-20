@@ -2,34 +2,34 @@ using UnityEngine;
 
 public abstract class EffectorBase : MonoBehaviour
 {
-    protected DamageableBehavior _damagableBehavior;
-    protected bool _isActive = false;
+    protected DamageableBehavior affectedTarget;
+    protected bool isActive = false;
 
     protected abstract void OnActivate(params object[] args);
     protected abstract void OnDeactivate();
     protected abstract void OnEffectUpdate();
 
-    public virtual void Activate(DamageableBehavior damagableBehavior, params object[] args)
+    public virtual void Activate(DamageableBehavior target, params object[] args)
     {
-        if (_isActive == true)
+        if (isActive == true)
             return;
 
-        _damagableBehavior = damagableBehavior;
-        _isActive = true;
+        affectedTarget = target;
+        isActive = true;
         OnActivate(args);
     }
     public virtual void DeActivate()
     {
-        if (_isActive == false)
+        if (isActive == false)
             return;
 
-        _isActive = false;
+        isActive = false;
         OnDeactivate();
         Destroy(this);
     }
     private void Update()
     {
-        if (_isActive == false)
+        if (isActive == false)
             return;
 
         OnEffectUpdate();

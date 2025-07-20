@@ -5,32 +5,28 @@ using UnityEngine;
 /// </summary>
 public sealed class LightningEffector : EffectorBase
 {
-    private float _tempDuration = 0.5f;
+    private float _duration = 0.5f;
+    private float _curDuration = 0f;
 
     protected override void OnActivate(params object[] args)
     {
-        if (args.Length != 3) return;
-
-        var caster = (DamageableBehavior)args[0];
-        var maxChainCount = (int)args[1];
-        var curChainCount = (int)args[2];
-
-        // 최대 체인 횟수를 초과하면 효과 적용 종료
-        if (curChainCount >= maxChainCount)
-        {
-            return;
-        }
+        if (args.Length != 0) return;
 
         // 컬러 이펙트 적용
-        ColorEffect colorEffect = new ColorEffect(ConstantConfig.YELLOW, _tempDuration);
-        _damagableBehavior.SpineController.AddColorEffect(colorEffect);
+        ColorEffect colorEffect = new ColorEffect(ConstantConfig.YELLOW, _duration);
+        affectedTarget.SpineController.AddColorEffect(colorEffect);
     }
     protected override void OnDeactivate()
     {
-
+        // do something
     }
     protected override void OnEffectUpdate()
     {
+        _curDuration += Time.deltaTime;
 
+        if (_curDuration >= _duration)
+        {
+            DeActivate();
+        }
     }
 }

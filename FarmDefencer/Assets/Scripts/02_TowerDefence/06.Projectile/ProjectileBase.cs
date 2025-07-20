@@ -86,6 +86,11 @@ public abstract class ProjectileBase : MonoBehaviour
     protected abstract void DealDamage();
     protected abstract void DealEffect();
 
+    protected virtual void OnDestroy()
+    {
+        
+    }
+
     public void Trigger()
     {
         isTriggered = true;

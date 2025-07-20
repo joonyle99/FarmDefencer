@@ -10,6 +10,8 @@ public sealed class FireProjectile : ParabolicProjectile
     [Header("──────── Fire Projectile ────────")]
     [Space]
 
+    // TODO: 이거 tower stats에서 정할 수 있도록 한다
+
     [SerializeField] private int _tickCount;
     [SerializeField] private float _tickInterval;
     [SerializeField] private int _tickDamage;
@@ -22,7 +24,7 @@ public sealed class FireProjectile : ParabolicProjectile
     {
         // 범위 내 모든 적에게 화상 효과를 적용한다
         var originCell = target.GridMovement.CurrGridCell;
-        foreach (var dir in ConstantConfig.DIRECTIONS)
+        foreach (var dir in ConstantConfig.DirectionsWithOrigin)
         {
             var posX = originCell.cellPosition.x + dir.x;
             var posY = originCell.cellPosition.y + dir.y;

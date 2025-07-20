@@ -377,6 +377,7 @@ public sealed class Tower : TargetableBehavior
                 return;
             }
 
+            // beam.SetCaster(this);
             beam.SetTarget(CurrentTarget);
             beam.SetDamage(CurrentLevelData.AttackDamage);
             beam.SetSlow(CurrentLevelData.SlowRate, CurrentLevelData.SlowDuration);

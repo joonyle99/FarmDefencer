@@ -305,13 +305,21 @@ public class GridMovement : MonoBehaviour
         if (_currGridCell != null)
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawLine(transform.position, _currGridCell.worldPosition);
+            Gizmos.DrawLine(_currGridCell.worldPosition, _monster.HeadPoint.position);
+
+            // circle 표시
+            Gizmos.DrawWireSphere(_currGridCell.worldPosition, 0.05f);
+            Gizmos.DrawWireSphere(_monster.HeadPoint.position, 0.05f);
         }
 
         if (_nextGridCell != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, _nextGridCell.worldPosition);
+            Gizmos.DrawLine(_nextGridCell.worldPosition, _monster.HeadPoint.position);
+
+            // circle 표시
+            Gizmos.DrawWireSphere(_nextGridCell.worldPosition, 0.07f);
+            Gizmos.DrawWireSphere(_monster.HeadPoint.position, 0.07f);
         }
     }
 }

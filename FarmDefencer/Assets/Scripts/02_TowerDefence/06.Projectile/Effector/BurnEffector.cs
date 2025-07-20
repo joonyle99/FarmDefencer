@@ -24,7 +24,7 @@ public sealed class BurnEffector : EffectorBase
         _curTickInterval = _tickInterval; // 즉시 데미지 주기 위해 초기값 설정
 
         ColorEffect colorEffect = new ColorEffect(ConstantConfig.RED, _tickCount * _tickInterval);
-        _damagableBehavior.SpineController.AddColorEffect(colorEffect);
+        affectedTarget.SpineController.AddColorEffect(colorEffect);
     }
     protected override void OnDeactivate()
     {
@@ -39,7 +39,7 @@ public sealed class BurnEffector : EffectorBase
             {
                 _curTickCount++;
                 _curTickInterval = 0f;
-                _damagableBehavior.TakeDamage(_tickDamage, DamageType.Burn);
+                affectedTarget.TakeDamage(_tickDamage, DamageType.Burn);
             }
         }
         else
