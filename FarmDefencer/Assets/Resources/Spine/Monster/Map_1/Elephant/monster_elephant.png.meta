@@ -3,164 +3,164 @@ guid: f4bcc38474e73074187923c1f833d0b3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4353034432692280064
-    second: monster_elephant 1_0
+      213: -9220702712917976310
+    second: monster_elephant_0
   - first:
-      213: 8916913985114286140
-    second: monster_elephant 1_1
+      213: 5771997050999009704
+    second: monster_elephant_1
   - first:
-      213: 6490027399016195998
-    second: monster_elephant 1_2
+      213: -167803144179860355
+    second: monster_elephant_2
   - first:
-      213: -8591819169389992847
-    second: monster_elephant 1_3
+      213: -8501205954516912543
+    second: monster_elephant_3
   - first:
-      213: -2731372287494437728
-    second: monster_elephant 1_4
+      213: -4118211155320254861
+    second: monster_elephant_4
   - first:
-      213: -7739876998101774988
-    second: monster_elephant 1_5
+      213: 6836778219511315610
+    second: monster_elephant_5
   - first:
-      213: 961304326348993279
-    second: monster_elephant 1_6
+      213: -8452825020515959715
+    second: monster_elephant_6
   - first:
-      213: -7116966376824962391
-    second: monster_elephant 1_7
+      213: -3349419485418860410
+    second: monster_elephant_7
   - first:
-      213: 6684484513230756288
-    second: monster_elephant 1_8
+      213: 1085048633401997370
+    second: monster_elephant_8
   - first:
-      213: 7320292943968777946
-    second: monster_elephant 1_9
+      213: -4359171113386568416
+    second: monster_elephant_9
   - first:
-      213: 5141660148620454267
-    second: monster_elephant 1_10
+      213: -1472900356168093962
+    second: monster_elephant_10
   - first:
-      213: 1548240273441637590
-    second: monster_elephant 1_11
+      213: -3396398739017988321
+    second: monster_elephant_11
   - first:
-      213: 7610948584743927153
-    second: monster_elephant 1_12
+      213: 2054387465890802406
+    second: monster_elephant_12
   - first:
-      213: -4117427815439419999
-    second: monster_elephant 1_13
+      213: 8804953607773475860
+    second: monster_elephant_13
   - first:
-      213: 1407772403599767105
-    second: monster_elephant 1_14
+      213: -2261566812862555755
+    second: monster_elephant_14
   - first:
-      213: 7660546594392535143
-    second: monster_elephant 1_15
+      213: -5454168271508398725
+    second: monster_elephant_15
   - first:
-      213: -2011447159356513896
-    second: monster_elephant 1_16
+      213: 7943910889885792453
+    second: monster_elephant_16
   - first:
-      213: 3204160880452717830
-    second: monster_elephant 1_17
+      213: 2195985254140181958
+    second: monster_elephant_17
   - first:
-      213: -5241578040671302602
-    second: monster_elephant 1_18
+      213: 2004275803884979171
+    second: monster_elephant_18
   - first:
-      213: -6063732107804329143
-    second: monster_elephant 1_19
+      213: -3922827388123576522
+    second: monster_elephant_19
   - first:
-      213: -1251196550709839810
-    second: monster_elephant 1_20
+      213: -9122224667009224256
+    second: monster_elephant_20
   - first:
-      213: -1600039250338043559
-    second: monster_elephant 1_21
+      213: 4911649908029586865
+    second: monster_elephant_21
   - first:
-      213: -3105347586776867266
-    second: monster_elephant 1_22
+      213: 7759228478422183456
+    second: monster_elephant_22
   - first:
-      213: 2491845776476485475
-    second: monster_elephant 1_23
+      213: 579314528475587454
+    second: monster_elephant_23
   - first:
-      213: 2688178698232292774
-    second: monster_elephant 1_24
+      213: -2408075903223331315
+    second: monster_elephant_24
   - first:
-      213: -5770882340285434878
-    second: monster_elephant 1_25
+      213: 5304620949604480081
+    second: monster_elephant_25
   - first:
-      213: -4618811739711291741
-    second: monster_elephant 1_26
+      213: -6253269452780890997
+    second: monster_elephant_26
   - first:
-      213: 3642105503724634375
-    second: monster_elephant 1_27
+      213: 8268268592908087964
+    second: monster_elephant_27
   - first:
-      213: -6290170455371737310
-    second: monster_elephant 1_28
+      213: -9147472613869285385
+    second: monster_elephant_28
   - first:
-      213: -6197148599782734511
-    second: monster_elephant 1_29
+      213: -5651169931784274530
+    second: monster_elephant_29
   - first:
-      213: 904191518974076870
-    second: monster_elephant 1_30
+      213: -2795330644751142023
+    second: monster_elephant_30
   - first:
-      213: -6933788931502472517
-    second: monster_elephant 1_31
+      213: -8193118314823909175
+    second: monster_elephant_31
   - first:
-      213: -627625787635780210
-    second: monster_elephant 1_32
+      213: 3793623997914770337
+    second: monster_elephant_32
   - first:
-      213: 126898219041366421
-    second: monster_elephant 1_33
+      213: 7146226547373779628
+    second: monster_elephant_33
   - first:
-      213: -658206129452149564
-    second: monster_elephant 1_34
+      213: -2842805304241724793
+    second: monster_elephant_34
   - first:
-      213: 4846348851542765990
-    second: monster_elephant 1_35
+      213: 4552544266255960485
+    second: monster_elephant_35
   - first:
-      213: 4419706850042724262
-    second: monster_elephant 1_36
+      213: -7036372690593246058
+    second: monster_elephant_36
   - first:
-      213: -1842593338189986023
-    second: monster_elephant 1_37
+      213: 1988903696286936368
+    second: monster_elephant_37
   - first:
-      213: -67188743167581241
-    second: monster_elephant 1_38
+      213: -2044835363190619877
+    second: monster_elephant_38
   - first:
-      213: 4409068179645319554
-    second: monster_elephant 1_39
+      213: 2143401358396180941
+    second: monster_elephant_39
   - first:
-      213: 5575117087988462213
-    second: monster_elephant 1_40
+      213: 3314554348769390229
+    second: monster_elephant_40
   - first:
-      213: -66595661820622705
-    second: monster_elephant 1_41
+      213: -7320943532702408620
+    second: monster_elephant_41
   - first:
-      213: 3900225216047342004
-    second: monster_elephant 1_42
+      213: 168986641599225795
+    second: monster_elephant_42
   - first:
-      213: 1710157808697713409
-    second: monster_elephant 1_43
+      213: 6159485772220304016
+    second: monster_elephant_43
   - first:
-      213: -9144196824833035387
-    second: monster_elephant 1_44
+      213: 7186584767806133925
+    second: monster_elephant_44
   - first:
-      213: -7482273965891394833
-    second: monster_elephant 1_45
+      213: -6026602228818060922
+    second: monster_elephant_45
   - first:
-      213: -4132429266973288681
-    second: monster_elephant 1_46
+      213: -6099568014303199170
+    second: monster_elephant_46
   - first:
-      213: -7493024693185328885
-    second: monster_elephant 1_47
+      213: -1352487327120614662
+    second: monster_elephant_47
   - first:
-      213: 5285177298568211296
-    second: monster_elephant 1_48
+      213: 8850694792646770142
+    second: monster_elephant_48
   - first:
-      213: -7047633896958541849
-    second: monster_elephant 1_49
+      213: 9008506782527000085
+    second: monster_elephant_49
   - first:
-      213: -2662417315714822461
-    second: monster_elephant 1_50
+      213: -4345647423314305216
+    second: monster_elephant_50
   - first:
-      213: -557670764223819742
-    second: monster_elephant 1_51
+      213: -7952367606920115924
+    second: monster_elephant_51
   - first:
-      213: 9137109329732790265
-    second: monster_elephant 1_52
+      213: -4845060779071437183
+    second: monster_elephant_52
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -202,7 +202,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 0
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -231,7 +231,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -269,7 +269,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: monster_elephant 1_0
+      name: monster_elephant_0
       rect:
         serializedVersion: 2
         x: 2
@@ -284,14 +284,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 00bdaafc0c5196c30800000000000000
-      internalID: 4353034432692280064
+      spriteID: a0b1b096cbb790080800000000000000
+      internalID: -9220702712917976310
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_1
+      name: monster_elephant_1
       rect:
         serializedVersion: 2
         x: 207
@@ -306,14 +306,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c38237f860e3fbb70800000000000000
-      internalID: 8916913985114286140
+      spriteID: 8a1f56d8cb04a1050800000000000000
+      internalID: 5771997050999009704
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_2
+      name: monster_elephant_2
       rect:
         serializedVersion: 2
         x: 207
@@ -328,14 +328,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e97a9e4a885311a50800000000000000
-      internalID: 6490027399016195998
+      spriteID: d7c37feede7dbadf0800000000000000
+      internalID: -167803144179860355
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_3
+      name: monster_elephant_3
       rect:
         serializedVersion: 2
         x: 315
@@ -350,14 +350,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1742e12acf9b3c880800000000000000
-      internalID: -8591819169389992847
+      spriteID: 1667596c936a50a80800000000000000
+      internalID: -8501205954516912543
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_4
+      name: monster_elephant_4
       rect:
         serializedVersion: 2
         x: 403
@@ -372,14 +372,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0a44c8e3067381ad0800000000000000
-      internalID: -2731372287494437728
+      spriteID: 37ec51106cc29d6c0800000000000000
+      internalID: -4118211155320254861
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_5
+      name: monster_elephant_5
       rect:
         serializedVersion: 2
         x: 315
@@ -394,14 +394,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 47d4deab0ee669490800000000000000
-      internalID: -7739876998101774988
+      spriteID: a9c791e519d11ee50800000000000000
+      internalID: 6836778219511315610
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_6
+      name: monster_elephant_6
       rect:
         serializedVersion: 2
         x: 400
@@ -416,14 +416,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ff2f31d013d375d00800000000000000
-      internalID: 961304326348993279
+      spriteID: d5cbc97cd6881ba80800000000000000
+      internalID: -8452825020515959715
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_7
+      name: monster_elephant_7
       rect:
         serializedVersion: 2
         x: 403
@@ -438,14 +438,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9a203fe99c47b3d90800000000000000
-      internalID: -7116966376824962391
+      spriteID: 68056d759b87481d0800000000000000
+      internalID: -3349419485418860410
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_8
+      name: monster_elephant_8
       rect:
         serializedVersion: 2
         x: 2
@@ -460,14 +460,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0c918b5bf3f04cc50800000000000000
-      internalID: 6684484513230756288
+      spriteID: a38f2f5bbfdde0f00800000000000000
+      internalID: 1085048633401997370
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_9
+      name: monster_elephant_9
       rect:
         serializedVersion: 2
         x: 187
@@ -482,14 +482,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ad6be01e5a7e69560800000000000000
-      internalID: 7320292943968777946
+      spriteID: 025137fd7fc1183c0800000000000000
+      internalID: -4359171113386568416
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_10
+      name: monster_elephant_10
       rect:
         serializedVersion: 2
         x: 309
@@ -504,14 +504,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b79ed4ad9a8da5740800000000000000
-      internalID: 5141660148620454267
+      spriteID: 6feed090ee43f8be0800000000000000
+      internalID: -1472900356168093962
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_11
+      name: monster_elephant_11
       rect:
         serializedVersion: 2
         x: 425
@@ -526,14 +526,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6d4417563547c7510800000000000000
-      internalID: 1548240273441637590
+      spriteID: f178f3d77519dd0d0800000000000000
+      internalID: -3396398739017988321
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_12
+      name: monster_elephant_12
       rect:
         serializedVersion: 2
         x: 425
@@ -548,14 +548,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 17d7c6dc9658f9960800000000000000
-      internalID: 7610948584743927153
+      spriteID: 6eaaf6ff386a28c10800000000000000
+      internalID: 2054387465890802406
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_13
+      name: monster_elephant_13
       rect:
         serializedVersion: 2
         x: 309
@@ -570,14 +570,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1a5bb688735fbd6c0800000000000000
-      internalID: -4117427815439419999
+      spriteID: 414d127d7aa713a70800000000000000
+      internalID: 8804953607773475860
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_14
+      name: monster_elephant_14
       rect:
         serializedVersion: 2
         x: 416
@@ -592,14 +592,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1467929da89698310800000000000000
-      internalID: 1407772403599767105
+      spriteID: 599d38b47fc4d90e0800000000000000
+      internalID: -2261566812862555755
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_15
+      name: monster_elephant_15
       rect:
         serializedVersion: 2
         x: 477
@@ -614,14 +614,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 76078105a8abf4a60800000000000000
-      internalID: 7660546594392535143
+      spriteID: b7d198fbad6ee44b0800000000000000
+      internalID: -5454168271508398725
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_16
+      name: monster_elephant_16
       rect:
         serializedVersion: 2
         x: 491
@@ -636,14 +636,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 89126163777e514e0800000000000000
-      internalID: -2011447159356513896
+      spriteID: 5c8fffe9dd07e3e60800000000000000
+      internalID: 7943910889885792453
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_17
+      name: monster_elephant_17
       rect:
         serializedVersion: 2
         x: 416
@@ -658,14 +658,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 60d469a2857777c20800000000000000
-      internalID: 3204160880452717830
+      spriteID: 6cd750d24f4b97e10800000000000000
+      internalID: 2195985254140181958
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_18
+      name: monster_elephant_18
       rect:
         serializedVersion: 2
         x: 477
@@ -680,14 +680,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 63c8c470b8c2247b0800000000000000
-      internalID: -5241578040671302602
+      spriteID: 3e3897a793e90db10800000000000000
+      internalID: 2004275803884979171
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_19
+      name: monster_elephant_19
       rect:
         serializedVersion: 2
         x: 519
@@ -702,14 +702,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 94b313566cb49dba0800000000000000
-      internalID: -6063732107804329143
+      spriteID: 63788b746415f89c0800000000000000
+      internalID: -3922827388123576522
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_20
+      name: monster_elephant_20
       rect:
         serializedVersion: 2
         x: 2
@@ -724,14 +724,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e38feb2cd5bd2aee0800000000000000
-      internalID: -1251196550709839810
+      spriteID: 0c1fb993ff8576180800000000000000
+      internalID: -9122224667009224256
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_21
+      name: monster_elephant_21
       rect:
         serializedVersion: 2
         x: 281
@@ -746,14 +746,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9592be877c48bc9e0800000000000000
-      internalID: -1600039250338043559
+      spriteID: 1bdfe2d719fa92440800000000000000
+      internalID: 4911649908029586865
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_22
+      name: monster_elephant_22
       rect:
         serializedVersion: 2
         x: 387
@@ -768,14 +768,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e3e5c0a92d697e4d0800000000000000
-      internalID: -3105347586776867266
+      spriteID: 02ee273e0315eab60800000000000000
+      internalID: 7759228478422183456
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_23
+      name: monster_elephant_23
       rect:
         serializedVersion: 2
         x: 455
@@ -790,14 +790,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 36730f50880d49220800000000000000
-      internalID: 2491845776476485475
+      spriteID: e73a20b8e732a0800800000000000000
+      internalID: 579314528475587454
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_24
+      name: monster_elephant_24
       rect:
         serializedVersion: 2
         x: 514
@@ -812,14 +812,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6a568e098445e4520800000000000000
-      internalID: 2688178698232292774
+      spriteID: d06023c79bbc49ed0800000000000000
+      internalID: -2408075903223331315
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_25
+      name: monster_elephant_25
       rect:
         serializedVersion: 2
         x: 539
@@ -834,14 +834,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 20436b24615b9efa0800000000000000
-      internalID: -5770882340285434878
+      spriteID: 154354906accd9940800000000000000
+      internalID: 5304620949604480081
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_26
+      name: monster_elephant_26
       rect:
         serializedVersion: 2
         x: 281
@@ -856,14 +856,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3aeba1ab13fa6efb0800000000000000
-      internalID: -4618811739711291741
+      spriteID: b84913e509ce739a0800000000000000
+      internalID: -6253269452780890997
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_27
+      name: monster_elephant_27
       rect:
         serializedVersion: 2
         x: 514
@@ -878,14 +878,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7018000b8ab5b8230800000000000000
-      internalID: 3642105503724634375
+      spriteID: c923ec36a7aceb270800000000000000
+      internalID: 8268268592908087964
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_28
+      name: monster_elephant_28
       rect:
         serializedVersion: 2
         x: 514
@@ -900,14 +900,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 22719ee2c43d4b8a0800000000000000
-      internalID: -6290170455371737310
+      spriteID: 7ff05b18f16ad0180800000000000000
+      internalID: -9147472613869285385
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_29
+      name: monster_elephant_29
       rect:
         serializedVersion: 2
         x: 281
@@ -922,14 +922,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 15504a1be2e4ff9a0800000000000000
-      internalID: -6197148599782734511
+      spriteID: e9d31a263e20391b0800000000000000
+      internalID: -5651169931784274530
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_30
+      name: monster_elephant_30
       rect:
         serializedVersion: 2
         x: 363
@@ -944,14 +944,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6c7ee5955655c8c00800000000000000
-      internalID: 904191518974076870
+      spriteID: 97338d1c69df439d0800000000000000
+      internalID: -2795330644751142023
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_31
+      name: monster_elephant_31
       rect:
         serializedVersion: 2
         x: 373
@@ -966,14 +966,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bb2824e14bb36cf90800000000000000
-      internalID: -6933788931502472517
+      spriteID: 9c08c2a3d423c4e80800000000000000
+      internalID: -8193118314823909175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_32
+      name: monster_elephant_32
       rect:
         serializedVersion: 2
         x: 458
@@ -988,14 +988,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e853814eba93a47f0800000000000000
-      internalID: -627625787635780210
+      spriteID: 1ab6b173de8a5a430800000000000000
+      internalID: 3793623997914770337
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_33
+      name: monster_elephant_33
       rect:
         serializedVersion: 2
         x: 514
@@ -1010,14 +1010,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 59127940245d2c100800000000000000
-      internalID: 126898219041366421
+      spriteID: caa2ea8be2f7c2360800000000000000
+      internalID: 7146226547373779628
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_34
+      name: monster_elephant_34
       rect:
         serializedVersion: 2
         x: 492
@@ -1032,14 +1032,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4c4150933059dd6f0800000000000000
-      internalID: -658206129452149564
+      spriteID: 782631b33a35c88d0800000000000000
+      internalID: -2842805304241724793
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_35
+      name: monster_elephant_35
       rect:
         serializedVersion: 2
         x: 543
@@ -1054,14 +1054,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6a134d97a90b14340800000000000000
-      internalID: 4846348851542765990
+      spriteID: 5a98d66c3e2ed2f30800000000000000
+      internalID: 4552544266255960485
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_36
+      name: monster_elephant_36
       rect:
         serializedVersion: 2
         x: 565
@@ -1076,14 +1076,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6af3828a6f3f55d30800000000000000
-      internalID: 4419706850042724262
+      spriteID: 6941ee57158c95e90800000000000000
+      internalID: -7036372690593246058
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_37
+      name: monster_elephant_37
       rect:
         serializedVersion: 2
         x: 586
@@ -1098,14 +1098,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9174fa31f1bcd66e0800000000000000
-      internalID: -1842593338189986023
+      spriteID: 03de4a5cf510a9b10800000000000000
+      internalID: 1988903696286936368
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_38
+      name: monster_elephant_38
       rect:
         serializedVersion: 2
         x: 672
@@ -1120,14 +1120,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7c3679ea13c411ff0800000000000000
-      internalID: -67188743167581241
+      spriteID: b11cdd832194f93e0800000000000000
+      internalID: -2044835363190619877
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_39
+      name: monster_elephant_39
       rect:
         serializedVersion: 2
         x: 775
@@ -1142,14 +1142,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 289cc3e2628203d30800000000000000
-      internalID: 4409068179645319554
+      spriteID: dc94b42ed24eebd10800000000000000
+      internalID: 2143401358396180941
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_40
+      name: monster_elephant_40
       rect:
         serializedVersion: 2
         x: 871
@@ -1164,14 +1164,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 58233ca047bce5d40800000000000000
-      internalID: 5575117087988462213
+      spriteID: 59e20237e99affd20800000000000000
+      internalID: 3314554348769390229
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_41
+      name: monster_elephant_41
       rect:
         serializedVersion: 2
         x: 967
@@ -1186,14 +1186,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f8889913997631ff0800000000000000
-      internalID: -66595661820622705
+      spriteID: 450649025a8c66a90800000000000000
+      internalID: -7320943532702408620
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_42
+      name: monster_elephant_42
       rect:
         serializedVersion: 2
         x: 1
@@ -1208,14 +1208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4b1e5827b22602630800000000000000
-      internalID: 3900225216047342004
+      spriteID: 3cfde48847c585200800000000000000
+      internalID: 168986641599225795
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_43
+      name: monster_elephant_43
       rect:
         serializedVersion: 2
         x: 363
@@ -1230,14 +1230,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 103a9495773bbb710800000000000000
-      internalID: 1710157808697713409
+      spriteID: 09a834ceca3ea7550800000000000000
+      internalID: 6159485772220304016
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_44
+      name: monster_elephant_44
       rect:
         serializedVersion: 2
         x: 518
@@ -1252,14 +1252,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 58372939f69491180800000000000000
-      internalID: -9144196824833035387
+      spriteID: 5a6515925c0ebb360800000000000000
+      internalID: 7186584767806133925
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_45
+      name: monster_elephant_45
       rect:
         serializedVersion: 2
         x: 797
@@ -1274,14 +1274,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fe2e3e6887f992890800000000000000
-      internalID: -7482273965891394833
+      spriteID: 689d8b404353d5ca0800000000000000
+      internalID: -6026602228818060922
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_46
+      name: monster_elephant_46
       rect:
         serializedVersion: 2
         x: 922
@@ -1296,14 +1296,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 71711aae979a6a6c0800000000000000
-      internalID: -4132429266973288681
+      spriteID: e308f18353bf95ba0800000000000000
+      internalID: -6099568014303199170
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_47
+      name: monster_elephant_47
       rect:
         serializedVersion: 2
         x: 967
@@ -1318,14 +1318,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b094575cdbd630890800000000000000
-      internalID: -7493024693185328885
+      spriteID: afa12c711fffa3de0800000000000000
+      internalID: -1352487327120614662
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_48
+      name: monster_elephant_48
       rect:
         serializedVersion: 2
         x: 364
@@ -1340,14 +1340,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 06bed1040c8b85940800000000000000
-      internalID: 5285177298568211296
+      spriteID: edd3c1b550cf3da70800000000000000
+      internalID: 8850694792646770142
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_49
+      name: monster_elephant_49
       rect:
         serializedVersion: 2
         x: 565
@@ -1362,14 +1362,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7efb8c88f46c13e90800000000000000
-      internalID: -7047633896958541849
+      spriteID: 51e08398035a40d70800000000000000
+      internalID: 9008506782527000085
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_50
+      name: monster_elephant_50
       rect:
         serializedVersion: 2
         x: 690
@@ -1384,14 +1384,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3ce08f4be813d0bd0800000000000000
-      internalID: -2662417315714822461
+      spriteID: 04f524651b821b3c0800000000000000
+      internalID: -4345647423314305216
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_51
+      name: monster_elephant_51
       rect:
         serializedVersion: 2
         x: 805
@@ -1406,14 +1406,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 22091d40561c248f0800000000000000
-      internalID: -557670764223819742
+      spriteID: c2904328bc383a190800000000000000
+      internalID: -7952367606920115924
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_elephant 1_52
+      name: monster_elephant_52
       rect:
         serializedVersion: 2
         x: 566
@@ -1428,8 +1428,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9f761a066888dce70800000000000000
-      internalID: 9137109329732790265
+      spriteID: 186054444e2e2ccb0800000000000000
+      internalID: -4845060779071437183
       vertices: []
       indices: 
       edges: []
@@ -1448,59 +1448,59 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      monster_elephant 1_0: 4353034432692280064
-      monster_elephant 1_1: 8916913985114286140
-      monster_elephant 1_10: 5141660148620454267
-      monster_elephant 1_11: 1548240273441637590
-      monster_elephant 1_12: 7610948584743927153
-      monster_elephant 1_13: -4117427815439419999
-      monster_elephant 1_14: 1407772403599767105
-      monster_elephant 1_15: 7660546594392535143
-      monster_elephant 1_16: -2011447159356513896
-      monster_elephant 1_17: 3204160880452717830
-      monster_elephant 1_18: -5241578040671302602
-      monster_elephant 1_19: -6063732107804329143
-      monster_elephant 1_2: 6490027399016195998
-      monster_elephant 1_20: -1251196550709839810
-      monster_elephant 1_21: -1600039250338043559
-      monster_elephant 1_22: -3105347586776867266
-      monster_elephant 1_23: 2491845776476485475
-      monster_elephant 1_24: 2688178698232292774
-      monster_elephant 1_25: -5770882340285434878
-      monster_elephant 1_26: -4618811739711291741
-      monster_elephant 1_27: 3642105503724634375
-      monster_elephant 1_28: -6290170455371737310
-      monster_elephant 1_29: -6197148599782734511
-      monster_elephant 1_3: -8591819169389992847
-      monster_elephant 1_30: 904191518974076870
-      monster_elephant 1_31: -6933788931502472517
-      monster_elephant 1_32: -627625787635780210
-      monster_elephant 1_33: 126898219041366421
-      monster_elephant 1_34: -658206129452149564
-      monster_elephant 1_35: 4846348851542765990
-      monster_elephant 1_36: 4419706850042724262
-      monster_elephant 1_37: -1842593338189986023
-      monster_elephant 1_38: -67188743167581241
-      monster_elephant 1_39: 4409068179645319554
-      monster_elephant 1_4: -2731372287494437728
-      monster_elephant 1_40: 5575117087988462213
-      monster_elephant 1_41: -66595661820622705
-      monster_elephant 1_42: 3900225216047342004
-      monster_elephant 1_43: 1710157808697713409
-      monster_elephant 1_44: -9144196824833035387
-      monster_elephant 1_45: -7482273965891394833
-      monster_elephant 1_46: -4132429266973288681
-      monster_elephant 1_47: -7493024693185328885
-      monster_elephant 1_48: 5285177298568211296
-      monster_elephant 1_49: -7047633896958541849
-      monster_elephant 1_5: -7739876998101774988
-      monster_elephant 1_50: -2662417315714822461
-      monster_elephant 1_51: -557670764223819742
-      monster_elephant 1_52: 9137109329732790265
-      monster_elephant 1_6: 961304326348993279
-      monster_elephant 1_7: -7116966376824962391
-      monster_elephant 1_8: 6684484513230756288
-      monster_elephant 1_9: 7320292943968777946
+      monster_elephant_0: -9220702712917976310
+      monster_elephant_1: 5771997050999009704
+      monster_elephant_10: -1472900356168093962
+      monster_elephant_11: -3396398739017988321
+      monster_elephant_12: 2054387465890802406
+      monster_elephant_13: 8804953607773475860
+      monster_elephant_14: -2261566812862555755
+      monster_elephant_15: -5454168271508398725
+      monster_elephant_16: 7943910889885792453
+      monster_elephant_17: 2195985254140181958
+      monster_elephant_18: 2004275803884979171
+      monster_elephant_19: -3922827388123576522
+      monster_elephant_2: -167803144179860355
+      monster_elephant_20: -9122224667009224256
+      monster_elephant_21: 4911649908029586865
+      monster_elephant_22: 7759228478422183456
+      monster_elephant_23: 579314528475587454
+      monster_elephant_24: -2408075903223331315
+      monster_elephant_25: 5304620949604480081
+      monster_elephant_26: -6253269452780890997
+      monster_elephant_27: 8268268592908087964
+      monster_elephant_28: -9147472613869285385
+      monster_elephant_29: -5651169931784274530
+      monster_elephant_3: -8501205954516912543
+      monster_elephant_30: -2795330644751142023
+      monster_elephant_31: -8193118314823909175
+      monster_elephant_32: 3793623997914770337
+      monster_elephant_33: 7146226547373779628
+      monster_elephant_34: -2842805304241724793
+      monster_elephant_35: 4552544266255960485
+      monster_elephant_36: -7036372690593246058
+      monster_elephant_37: 1988903696286936368
+      monster_elephant_38: -2044835363190619877
+      monster_elephant_39: 2143401358396180941
+      monster_elephant_4: -4118211155320254861
+      monster_elephant_40: 3314554348769390229
+      monster_elephant_41: -7320943532702408620
+      monster_elephant_42: 168986641599225795
+      monster_elephant_43: 6159485772220304016
+      monster_elephant_44: 7186584767806133925
+      monster_elephant_45: -6026602228818060922
+      monster_elephant_46: -6099568014303199170
+      monster_elephant_47: -1352487327120614662
+      monster_elephant_48: 8850694792646770142
+      monster_elephant_49: 9008506782527000085
+      monster_elephant_5: 6836778219511315610
+      monster_elephant_50: -4345647423314305216
+      monster_elephant_51: -7952367606920115924
+      monster_elephant_52: -4845060779071437183
+      monster_elephant_6: -8452825020515959715
+      monster_elephant_7: -3349419485418860410
+      monster_elephant_8: 1085048633401997370
+      monster_elephant_9: -4359171113386568416
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

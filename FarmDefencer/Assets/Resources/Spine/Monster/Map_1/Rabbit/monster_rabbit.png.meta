@@ -3,158 +3,164 @@ guid: 1d07274105d46454fb6470ac56c1e569
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8278367498157364038
-    second: monster_rabbit 1_0
+      213: -3620542095179217727
+    second: monster_rabbit_0
   - first:
-      213: -3271133947937143953
-    second: monster_rabbit 1_1
+      213: -2428571439766813657
+    second: monster_rabbit_1
   - first:
-      213: -1222159399226209134
-    second: monster_rabbit 1_2
+      213: 4376296231492683551
+    second: monster_rabbit_2
   - first:
-      213: -6949112817336531549
-    second: monster_rabbit 1_3
+      213: 8910098432135398597
+    second: monster_rabbit_3
   - first:
-      213: -5475850740099014646
-    second: monster_rabbit 1_4
+      213: 8148780938964682136
+    second: monster_rabbit_4
   - first:
-      213: -2101807601872205177
-    second: monster_rabbit 1_5
+      213: 4978604928624387511
+    second: monster_rabbit_5
   - first:
-      213: -4085917798834778902
-    second: monster_rabbit 1_6
+      213: 6036499042473315570
+    second: monster_rabbit_6
   - first:
-      213: -3618645264341191467
-    second: monster_rabbit 1_7
+      213: 4827905199311815782
+    second: monster_rabbit_7
   - first:
-      213: 9046877413306470887
-    second: monster_rabbit 1_8
+      213: 7871714856199923610
+    second: monster_rabbit_8
   - first:
-      213: 1509988026972152109
-    second: monster_rabbit 1_9
+      213: -8094809252048707173
+    second: monster_rabbit_9
   - first:
-      213: -6667516304026492362
-    second: monster_rabbit 1_10
+      213: 1277077265158881302
+    second: monster_rabbit_10
   - first:
-      213: -1313471306672069093
-    second: monster_rabbit 1_11
+      213: -1043281703872908530
+    second: monster_rabbit_11
   - first:
-      213: 3232149580197500658
-    second: monster_rabbit 1_12
+      213: -8087763574038391766
+    second: monster_rabbit_12
   - first:
-      213: 3594908999315285221
-    second: monster_rabbit 1_13
+      213: -1362294920913018094
+    second: monster_rabbit_13
   - first:
-      213: -1244649187443080852
-    second: monster_rabbit 1_14
+      213: 8190152541841478710
+    second: monster_rabbit_14
   - first:
-      213: -8296049974940973013
-    second: monster_rabbit 1_15
+      213: -3009084130736486416
+    second: monster_rabbit_15
   - first:
-      213: 7752020262835449454
-    second: monster_rabbit 1_16
+      213: 8297144064762272078
+    second: monster_rabbit_16
   - first:
-      213: -9028032573840071633
-    second: monster_rabbit 1_17
+      213: -3865228737661657343
+    second: monster_rabbit_17
   - first:
-      213: 651467064473185435
-    second: monster_rabbit 1_18
+      213: 599244958189903196
+    second: monster_rabbit_18
   - first:
-      213: -7744558247340805527
-    second: monster_rabbit 1_19
+      213: -3211764443862015648
+    second: monster_rabbit_19
   - first:
-      213: 325875132239461451
-    second: monster_rabbit 1_20
+      213: -1237473566704545534
+    second: monster_rabbit_20
   - first:
-      213: -6777005483885603
-    second: monster_rabbit 1_21
+      213: 6981928624348447430
+    second: monster_rabbit_21
   - first:
-      213: -9097778554823924519
-    second: monster_rabbit 1_22
+      213: 8551075426484468302
+    second: monster_rabbit_22
   - first:
-      213: 2181443027064350518
-    second: monster_rabbit 1_23
+      213: -6217275573084696583
+    second: monster_rabbit_23
   - first:
-      213: 5239432962550091178
-    second: monster_rabbit 1_24
+      213: 5681880071929218448
+    second: monster_rabbit_24
   - first:
-      213: -8392655367925100204
-    second: monster_rabbit 1_25
+      213: -6855700273048480407
+    second: monster_rabbit_25
   - first:
-      213: 5583072065669884403
-    second: monster_rabbit 1_26
+      213: 8079902664155543376
+    second: monster_rabbit_26
   - first:
-      213: -8876371518857344194
-    second: monster_rabbit 1_27
+      213: 5761198550966203921
+    second: monster_rabbit_27
   - first:
-      213: -3576168105613928672
-    second: monster_rabbit 1_28
+      213: -4146664746436948042
+    second: monster_rabbit_28
   - first:
-      213: 521938937849722120
-    second: monster_rabbit 1_29
+      213: -1080790113845012510
+    second: monster_rabbit_29
   - first:
-      213: -1020565295659037500
-    second: monster_rabbit 1_30
+      213: -4200293757066401855
+    second: monster_rabbit_30
   - first:
-      213: -1299058403882290507
-    second: monster_rabbit 1_31
+      213: -625596465719662347
+    second: monster_rabbit_31
   - first:
-      213: 7812852907629601971
-    second: monster_rabbit 1_32
+      213: -4843267764013888414
+    second: monster_rabbit_32
   - first:
-      213: 5477747912401076219
-    second: monster_rabbit 1_33
+      213: 804872978218777837
+    second: monster_rabbit_33
   - first:
-      213: -7287468200149443390
-    second: monster_rabbit 1_34
+      213: -396982937312796991
+    second: monster_rabbit_34
   - first:
-      213: -6165371903468575343
-    second: monster_rabbit 1_35
+      213: -792151115980169252
+    second: monster_rabbit_35
   - first:
-      213: -7030373388830214054
-    second: monster_rabbit 1_36
+      213: -8217404034459350611
+    second: monster_rabbit_36
   - first:
-      213: 1177239703677796876
-    second: monster_rabbit 1_37
+      213: 454677267056756591
+    second: monster_rabbit_37
   - first:
-      213: -2465824584040475278
-    second: monster_rabbit 1_38
+      213: -3811205122627761649
+    second: monster_rabbit_38
   - first:
-      213: 297116078109538884
-    second: monster_rabbit 1_39
+      213: -3195243268479007587
+    second: monster_rabbit_39
   - first:
-      213: 3832973257647386423
-    second: monster_rabbit 1_40
+      213: -7448292623245960118
+    second: monster_rabbit_40
   - first:
-      213: -3276964834821432793
-    second: monster_rabbit 1_41
+      213: -1736438453677810619
+    second: monster_rabbit_41
   - first:
-      213: -713834971776586923
-    second: monster_rabbit 1_42
+      213: 2132450373679125804
+    second: monster_rabbit_42
   - first:
-      213: -4648337640264294534
-    second: monster_rabbit 1_43
+      213: 814527831132649623
+    second: monster_rabbit_43
   - first:
-      213: 5978506115509120278
-    second: monster_rabbit 1_44
+      213: 8839068930993828365
+    second: monster_rabbit_44
   - first:
-      213: -4674805906025045646
-    second: monster_rabbit 1_45
+      213: -7346452769136406707
+    second: monster_rabbit_45
   - first:
-      213: -738736053795722075
-    second: monster_rabbit 1_46
+      213: 139100325861878136
+    second: monster_rabbit_46
   - first:
-      213: -6691802326610097468
-    second: monster_rabbit 1_47
+      213: 4633341878476017663
+    second: monster_rabbit_47
   - first:
-      213: 8106690260932252037
-    second: monster_rabbit 1_48
+      213: 5667192007809425010
+    second: monster_rabbit_48
   - first:
-      213: -4648215161158221481
-    second: monster_rabbit 1_49
+      213: -8430055126714453513
+    second: monster_rabbit_49
   - first:
-      213: -8926412938517063363
-    second: monster_rabbit 1_50
+      213: -1898503373774364515
+    second: monster_rabbit_50
+  - first:
+      213: 6454469417972137002
+    second: monster_rabbit_51
+  - first:
+      213: -4158397298639084768
+    second: monster_rabbit_52
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -196,7 +202,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 0
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -225,7 +231,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -263,7 +269,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: monster_rabbit 1_0
+      name: monster_rabbit_0
       rect:
         serializedVersion: 2
         x: 1
@@ -278,14 +284,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: abce0300f945d1d80800000000000000
-      internalID: -8278367498157364038
+      spriteID: 1c48e7a952041cdc0800000000000000
+      internalID: -3620542095179217727
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_1
+      name: monster_rabbit_1
       rect:
         serializedVersion: 2
         x: 122
@@ -300,14 +306,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f634c7c61099a92d0800000000000000
-      internalID: -3271133947937143953
+      spriteID: 7244a05842bfb4ed0800000000000000
+      internalID: -2428571439766813657
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_2
+      name: monster_rabbit_2
       rect:
         serializedVersion: 2
         x: 204
@@ -322,14 +328,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 29c873e60840a0fe0800000000000000
-      internalID: -1222159399226209134
+      spriteID: f1780066c3abbbc30800000000000000
+      internalID: 4376296231492683551
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_3
+      name: monster_rabbit_3
       rect:
         serializedVersion: 2
         x: 321
@@ -344,14 +350,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3a5ca8ae5bacf8f90800000000000000
-      internalID: -6949112817336531549
+      spriteID: 5c40239f05707ab70800000000000000
+      internalID: 8910098432135398597
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_4
+      name: monster_rabbit_4
       rect:
         serializedVersion: 2
         x: 424
@@ -366,14 +372,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a00a651a3ced104b0800000000000000
-      internalID: -5475850740099014646
+      spriteID: 895c6730719461170800000000000000
+      internalID: 8148780938964682136
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_5
+      name: monster_rabbit_5
       rect:
         serializedVersion: 2
         x: 424
@@ -388,14 +394,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 78a01383f11e4d2e0800000000000000
-      internalID: -2101807601872205177
+      spriteID: 7b56aa70ece871540800000000000000
+      internalID: 4978604928624387511
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_6
+      name: monster_rabbit_6
       rect:
         serializedVersion: 2
         x: 466
@@ -410,14 +416,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aecc10bf867eb47c0800000000000000
-      internalID: -4085917798834778902
+      spriteID: 2fc8b9975e3f5c350800000000000000
+      internalID: 6036499042473315570
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_7
+      name: monster_rabbit_7
       rect:
         serializedVersion: 2
         x: 530
@@ -432,14 +438,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5d43bc2fd4df7cdc0800000000000000
-      internalID: -3618645264341191467
+      spriteID: 6640e3e033a200340800000000000000
+      internalID: 4827905199311815782
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_8
+      name: monster_rabbit_8
       rect:
         serializedVersion: 2
         x: 537
@@ -454,14 +460,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7e113a23317fc8d70800000000000000
-      internalID: 9046877413306470887
+      spriteID: a9726f0a4f2fd3d60800000000000000
+      internalID: 7871714856199923610
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_9
+      name: monster_rabbit_9
       rect:
         serializedVersion: 2
         x: 626
@@ -476,14 +482,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d21a4ca3c1e84f410800000000000000
-      internalID: 1509988026972152109
+      spriteID: b9167179fd579af80800000000000000
+      internalID: -8094809252048707173
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_10
+      name: monster_rabbit_10
       rect:
         serializedVersion: 2
         x: 2
@@ -498,14 +504,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 632206c5f393873a0800000000000000
-      internalID: -6667516304026492362
+      spriteID: 610c584a10719b110800000000000000
+      internalID: 1277077265158881302
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_11
+      name: monster_rabbit_11
       rect:
         serializedVersion: 2
         x: 537
@@ -520,14 +526,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b16a42f3ecc95cde0800000000000000
-      internalID: -1313471306672069093
+      spriteID: e03bdff51d48581f0800000000000000
+      internalID: -1043281703872908530
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_12
+      name: monster_rabbit_12
       rect:
         serializedVersion: 2
         x: 537
@@ -542,14 +548,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2f699942be6eadc20800000000000000
-      internalID: 3232149580197500658
+      spriteID: a24191651ed72cf80800000000000000
+      internalID: -8087763574038391766
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_13
+      name: monster_rabbit_13
       rect:
         serializedVersion: 2
         x: 1504
@@ -564,14 +570,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5e4ea0030bea3e130800000000000000
-      internalID: 3594908999315285221
+      spriteID: 21329a7bcf7281de0800000000000000
+      internalID: -1362294920913018094
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_14
+      name: monster_rabbit_14
       rect:
         serializedVersion: 2
         x: 1567
@@ -586,14 +592,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c610a70982e1abee0800000000000000
-      internalID: -1244649187443080852
+      spriteID: 63459b0f75449a170800000000000000
+      internalID: 8190152541841478710
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_15
+      name: monster_rabbit_15
       rect:
         serializedVersion: 2
         x: 1628
@@ -608,14 +614,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b2841cc80828edc80800000000000000
-      internalID: -8296049974940973013
+      spriteID: 0f7cf280de59d36d0800000000000000
+      internalID: -3009084130736486416
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_16
+      name: monster_rabbit_16
       rect:
         serializedVersion: 2
         x: 1670
@@ -630,14 +636,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e6eefe96b55b49b60800000000000000
-      internalID: 7752020262835449454
+      spriteID: e4955661190652370800000000000000
+      internalID: 8297144064762272078
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_17
+      name: monster_rabbit_17
       rect:
         serializedVersion: 2
         x: 1721
@@ -652,14 +658,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f246b97e43cf5b280800000000000000
-      internalID: -9028032573840071633
+      spriteID: 10f9b0421f2fb5ac0800000000000000
+      internalID: -3865228737661657343
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_18
+      name: monster_rabbit_18
       rect:
         serializedVersion: 2
         x: 1745
@@ -674,14 +680,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b9c6ac0f7d97a0900800000000000000
-      internalID: 651467064473185435
+      spriteID: c5d5a525d12f05800800000000000000
+      internalID: 599244958189903196
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_19
+      name: monster_rabbit_19
       rect:
         serializedVersion: 2
         x: 1745
@@ -696,14 +702,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 962fde47e4dc58490800000000000000
-      internalID: -7744558247340805527
+      spriteID: 061ef5541458d63d0800000000000000
+      internalID: -3211764443862015648
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_20
+      name: monster_rabbit_20
       rect:
         serializedVersion: 2
         x: 537
@@ -718,14 +724,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b4c344ac4bdb58400800000000000000
-      internalID: 325875132239461451
+      spriteID: 201d3a5f85c93dee0800000000000000
+      internalID: -1237473566704545534
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_21
+      name: monster_rabbit_21
       rect:
         serializedVersion: 2
         x: 1010
@@ -740,14 +746,58 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ddbfd73795ce7eff0800000000000000
-      internalID: -6777005483885603
+      spriteID: 6c2cb6d871bc4e060800000000000000
+      internalID: 6981928624348447430
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_22
+      name: monster_rabbit_22
+      rect:
+        serializedVersion: 2
+        x: 1049
+        y: 116
+        width: 34
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4abd2b7bc58ba670800000000000000
+      internalID: 8551075426484468302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_rabbit_23
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 116
+        width: 32
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ffc29b8eccc7b9a0800000000000000
+      internalID: -6217275573084696583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_rabbit_24
       rect:
         serializedVersion: 2
         x: 1256
@@ -762,14 +812,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9d4ad824b923eb180800000000000000
-      internalID: -9097778554823924519
+      spriteID: 09546bf42d71ade40800000000000000
+      internalID: 5681880071929218448
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_23
+      name: monster_rabbit_25
       rect:
         serializedVersion: 2
         x: 1344
@@ -784,14 +834,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6376ce510ea064e10800000000000000
-      internalID: 2181443027064350518
+      spriteID: 965956abce8abd0a0800000000000000
+      internalID: -6855700273048480407
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_24
+      name: monster_rabbit_26
       rect:
         serializedVersion: 2
         x: 1425
@@ -806,14 +856,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aad454d058436b840800000000000000
-      internalID: 5239432962550091178
+      spriteID: 05739b4f9a4912070800000000000000
+      internalID: 8079902664155543376
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_25
+      name: monster_rabbit_27
       rect:
         serializedVersion: 2
         x: 1504
@@ -828,14 +878,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4519c88b86c478b80800000000000000
-      internalID: -8392655367925100204
+      spriteID: 116f5d6de83e3ff40800000000000000
+      internalID: 5761198550966203921
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_26
+      name: monster_rabbit_28
       rect:
         serializedVersion: 2
         x: 1583
@@ -850,14 +900,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3f9e8ad967e0b7d40800000000000000
-      internalID: 5583072065669884403
+      spriteID: 6bf8df112661476c0800000000000000
+      internalID: -4146664746436948042
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_27
+      name: monster_rabbit_29
       rect:
         serializedVersion: 2
         x: 1665
@@ -872,14 +922,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e3b0d14f12bc0d480800000000000000
-      internalID: -8876371518857344194
+      spriteID: 2e793832e134001f0800000000000000
+      internalID: -1080790113845012510
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_28
+      name: monster_rabbit_30
       rect:
         serializedVersion: 2
         x: 1704
@@ -894,14 +944,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 027dcc72e06ee5ec0800000000000000
-      internalID: -3576168105613928672
+      spriteID: 1c724c1051f85b5c0800000000000000
+      internalID: -4200293757066401855
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_29
+      name: monster_rabbit_31
       rect:
         serializedVersion: 2
         x: 1875
@@ -916,14 +966,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8053af8d2bc4e3700800000000000000
-      internalID: 521938937849722120
+      spriteID: 5f82a08345f6157f0800000000000000
+      internalID: -625596465719662347
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_30
+      name: monster_rabbit_32
       rect:
         serializedVersion: 2
         x: 1941
@@ -938,14 +988,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4ccc622554936d1f0800000000000000
-      internalID: -1020565295659037500
+      spriteID: 26c0add11a149ccb0800000000000000
+      internalID: -4843267764013888414
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_31
+      name: monster_rabbit_33
       rect:
         serializedVersion: 2
         x: 1941
@@ -960,14 +1010,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5b23c1ea341d8fde0800000000000000
-      internalID: -1299058403882290507
+      spriteID: dec7a0495bb7b2b00800000000000000
+      internalID: 804872978218777837
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_32
+      name: monster_rabbit_34
       rect:
         serializedVersion: 2
         x: 2009
@@ -982,14 +1032,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3b4e3a14354dc6c60800000000000000
-      internalID: 7812852907629601971
+      spriteID: 1ce549f2f12ad7af0800000000000000
+      internalID: -396982937312796991
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_33
+      name: monster_rabbit_35
       rect:
         serializedVersion: 2
         x: 650
@@ -1004,14 +1054,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bffbdc734bed40c40800000000000000
-      internalID: 5477747912401076219
+      spriteID: cdf929bc1c6b105f0800000000000000
+      internalID: -792151115980169252
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_34
+      name: monster_rabbit_36
       rect:
         serializedVersion: 2
         x: 772
@@ -1026,14 +1076,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2cc132a5846bdda90800000000000000
-      internalID: -7287468200149443390
+      spriteID: da9403e719ae5fd80800000000000000
+      internalID: -8217404034459350611
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_35
+      name: monster_rabbit_37
       rect:
         serializedVersion: 2
         x: 891
@@ -1048,14 +1098,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 195e4995be2307aa0800000000000000
-      internalID: -6165371903468575343
+      spriteID: f670d5eb0965f4600800000000000000
+      internalID: 454677267056756591
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_36
+      name: monster_rabbit_38
       rect:
         serializedVersion: 2
         x: 1010
@@ -1070,14 +1120,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a587a60c6a81f6e90800000000000000
-      internalID: -7030373388830214054
+      spriteID: f0a8f933221eb1bc0800000000000000
+      internalID: -3811205122627761649
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_37
+      name: monster_rabbit_39
       rect:
         serializedVersion: 2
         x: 1137
@@ -1092,14 +1142,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c028331f545665010800000000000000
-      internalID: 1177239703677796876
+      spriteID: d94c95b2d2738a3d0800000000000000
+      internalID: -3195243268479007587
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_38
+      name: monster_rabbit_40
       rect:
         serializedVersion: 2
         x: 1256
@@ -1114,14 +1164,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 27597d5fa91a7cdd0800000000000000
-      internalID: -2465824584040475278
+      spriteID: a4c1348625952a890800000000000000
+      internalID: -7448292623245960118
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_39
+      name: monster_rabbit_41
       rect:
         serializedVersion: 2
         x: 1375
@@ -1136,14 +1186,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 44ab6c4bf719f1400800000000000000
-      internalID: 297116078109538884
+      spriteID: 54c943a2d6ee6e7e0800000000000000
+      internalID: -1736438453677810619
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_40
+      name: monster_rabbit_42
       rect:
         serializedVersion: 2
         x: 1491
@@ -1158,14 +1208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 73fe4afaed4713530800000000000000
-      internalID: 3832973257647386423
+      spriteID: c251b40115cf79d10800000000000000
+      internalID: 2132450373679125804
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_41
+      name: monster_rabbit_43
       rect:
         serializedVersion: 2
         x: 1594
@@ -1180,14 +1230,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 72a950748d1e582d0800000000000000
-      internalID: -3276964834821432793
+      spriteID: 798b4523fb8cd4b00800000000000000
+      internalID: 814527831132649623
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_42
+      name: monster_rabbit_44
       rect:
         serializedVersion: 2
         x: 1683
@@ -1202,14 +1252,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 55b610f00e2f716f0800000000000000
-      internalID: -713834971776586923
+      spriteID: d0234118c5eaaaa70800000000000000
+      internalID: 8839068930993828365
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_43
+      name: monster_rabbit_45
       rect:
         serializedVersion: 2
         x: 1722
@@ -1224,14 +1274,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a7f18fb4b89cd7fb0800000000000000
-      internalID: -4648337640264294534
+      spriteID: d4f807031282c0a90800000000000000
+      internalID: -7346452769136406707
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_44
+      name: monster_rabbit_46
       rect:
         serializedVersion: 2
         x: 1803
@@ -1246,14 +1296,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 61deb66f2abe7f250800000000000000
-      internalID: 5978506115509120278
+      spriteID: 8796327620f2ee100800000000000000
+      internalID: 139100325861878136
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_45
+      name: monster_rabbit_47
       rect:
         serializedVersion: 2
         x: 1830
@@ -1268,14 +1318,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 271aa71fbc0cf1fb0800000000000000
-      internalID: -4674805906025045646
+      spriteID: fff0185d3efec4040800000000000000
+      internalID: 4633341878476017663
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_46
+      name: monster_rabbit_48
       rect:
         serializedVersion: 2
         x: 2009
@@ -1290,14 +1340,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5ac6bba197b7fb5f0800000000000000
-      internalID: -738736053795722075
+      spriteID: 27ed963ea19e5ae40800000000000000
+      internalID: 5667192007809425010
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_47
+      name: monster_rabbit_49
       rect:
         serializedVersion: 2
         x: 1594
@@ -1312,14 +1362,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4cac5471d31f123a0800000000000000
-      internalID: -6691802326610097468
+      spriteID: 7f1793fc68d620b80800000000000000
+      internalID: -8430055126714453513
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_48
+      name: monster_rabbit_50
       rect:
         serializedVersion: 2
         x: 1723
@@ -1334,14 +1384,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5815cfa57dfb08070800000000000000
-      internalID: 8106690260932252037
+      spriteID: d906c418d3927a5e0800000000000000
+      internalID: -1898503373774364515
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_49
+      name: monster_rabbit_51
       rect:
         serializedVersion: 2
         x: 1926
@@ -1356,14 +1406,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 751449f20f83e7fb0800000000000000
-      internalID: -4648215161158221481
+      spriteID: a2cf9d70db1e29950800000000000000
+      internalID: 6454469417972137002
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster_rabbit 1_50
+      name: monster_rabbit_52
       rect:
         serializedVersion: 2
         x: 2020
@@ -1378,8 +1428,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d395d310ab20f1480800000000000000
-      internalID: -8926412938517063363
+      spriteID: 0236ca360b76a46c0800000000000000
+      internalID: -4158397298639084768
       vertices: []
       indices: 
       edges: []
@@ -1398,57 +1448,59 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      monster_rabbit 1_0: -8278367498157364038
-      monster_rabbit 1_1: -3271133947937143953
-      monster_rabbit 1_10: -6667516304026492362
-      monster_rabbit 1_11: -1313471306672069093
-      monster_rabbit 1_12: 3232149580197500658
-      monster_rabbit 1_13: 3594908999315285221
-      monster_rabbit 1_14: -1244649187443080852
-      monster_rabbit 1_15: -8296049974940973013
-      monster_rabbit 1_16: 7752020262835449454
-      monster_rabbit 1_17: -9028032573840071633
-      monster_rabbit 1_18: 651467064473185435
-      monster_rabbit 1_19: -7744558247340805527
-      monster_rabbit 1_2: -1222159399226209134
-      monster_rabbit 1_20: 325875132239461451
-      monster_rabbit 1_21: -6777005483885603
-      monster_rabbit 1_22: -9097778554823924519
-      monster_rabbit 1_23: 2181443027064350518
-      monster_rabbit 1_24: 5239432962550091178
-      monster_rabbit 1_25: -8392655367925100204
-      monster_rabbit 1_26: 5583072065669884403
-      monster_rabbit 1_27: -8876371518857344194
-      monster_rabbit 1_28: -3576168105613928672
-      monster_rabbit 1_29: 521938937849722120
-      monster_rabbit 1_3: -6949112817336531549
-      monster_rabbit 1_30: -1020565295659037500
-      monster_rabbit 1_31: -1299058403882290507
-      monster_rabbit 1_32: 7812852907629601971
-      monster_rabbit 1_33: 5477747912401076219
-      monster_rabbit 1_34: -7287468200149443390
-      monster_rabbit 1_35: -6165371903468575343
-      monster_rabbit 1_36: -7030373388830214054
-      monster_rabbit 1_37: 1177239703677796876
-      monster_rabbit 1_38: -2465824584040475278
-      monster_rabbit 1_39: 297116078109538884
-      monster_rabbit 1_4: -5475850740099014646
-      monster_rabbit 1_40: 3832973257647386423
-      monster_rabbit 1_41: -3276964834821432793
-      monster_rabbit 1_42: -713834971776586923
-      monster_rabbit 1_43: -4648337640264294534
-      monster_rabbit 1_44: 5978506115509120278
-      monster_rabbit 1_45: -4674805906025045646
-      monster_rabbit 1_46: -738736053795722075
-      monster_rabbit 1_47: -6691802326610097468
-      monster_rabbit 1_48: 8106690260932252037
-      monster_rabbit 1_49: -4648215161158221481
-      monster_rabbit 1_5: -2101807601872205177
-      monster_rabbit 1_50: -8926412938517063363
-      monster_rabbit 1_6: -4085917798834778902
-      monster_rabbit 1_7: -3618645264341191467
-      monster_rabbit 1_8: 9046877413306470887
-      monster_rabbit 1_9: 1509988026972152109
+      monster_rabbit_0: -3620542095179217727
+      monster_rabbit_1: -2428571439766813657
+      monster_rabbit_10: 1277077265158881302
+      monster_rabbit_11: -1043281703872908530
+      monster_rabbit_12: -8087763574038391766
+      monster_rabbit_13: -1362294920913018094
+      monster_rabbit_14: 8190152541841478710
+      monster_rabbit_15: -3009084130736486416
+      monster_rabbit_16: 8297144064762272078
+      monster_rabbit_17: -3865228737661657343
+      monster_rabbit_18: 599244958189903196
+      monster_rabbit_19: -3211764443862015648
+      monster_rabbit_2: 4376296231492683551
+      monster_rabbit_20: -1237473566704545534
+      monster_rabbit_21: 6981928624348447430
+      monster_rabbit_22: 8551075426484468302
+      monster_rabbit_23: -6217275573084696583
+      monster_rabbit_24: 5681880071929218448
+      monster_rabbit_25: -6855700273048480407
+      monster_rabbit_26: 8079902664155543376
+      monster_rabbit_27: 5761198550966203921
+      monster_rabbit_28: -4146664746436948042
+      monster_rabbit_29: -1080790113845012510
+      monster_rabbit_3: 8910098432135398597
+      monster_rabbit_30: -4200293757066401855
+      monster_rabbit_31: -625596465719662347
+      monster_rabbit_32: -4843267764013888414
+      monster_rabbit_33: 804872978218777837
+      monster_rabbit_34: -396982937312796991
+      monster_rabbit_35: -792151115980169252
+      monster_rabbit_36: -8217404034459350611
+      monster_rabbit_37: 454677267056756591
+      monster_rabbit_38: -3811205122627761649
+      monster_rabbit_39: -3195243268479007587
+      monster_rabbit_4: 8148780938964682136
+      monster_rabbit_40: -7448292623245960118
+      monster_rabbit_41: -1736438453677810619
+      monster_rabbit_42: 2132450373679125804
+      monster_rabbit_43: 814527831132649623
+      monster_rabbit_44: 8839068930993828365
+      monster_rabbit_45: -7346452769136406707
+      monster_rabbit_46: 139100325861878136
+      monster_rabbit_47: 4633341878476017663
+      monster_rabbit_48: 5667192007809425010
+      monster_rabbit_49: -8430055126714453513
+      monster_rabbit_5: 4978604928624387511
+      monster_rabbit_50: -1898503373774364515
+      monster_rabbit_51: 6454469417972137002
+      monster_rabbit_52: -4158397298639084768
+      monster_rabbit_6: 6036499042473315570
+      monster_rabbit_7: 4827905199311815782
+      monster_rabbit_8: 7871714856199923610
+      monster_rabbit_9: -8094809252048707173
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
