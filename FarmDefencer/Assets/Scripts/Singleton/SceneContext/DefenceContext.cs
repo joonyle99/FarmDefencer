@@ -78,6 +78,9 @@ public class DefenceContext : SceneContext
 
     private void OnDestroy()
     {
-        MapManager.Instance.OnMapChanged -= BackgroundVideoHandler;
+        if (GameStateManager.Instance is not null)
+        {
+            MapManager.Instance.OnMapChanged -= BackgroundVideoHandler;
+        }
     }
 }

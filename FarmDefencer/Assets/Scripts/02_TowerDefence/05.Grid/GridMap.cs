@@ -145,7 +145,10 @@ public class GridMap : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameStateManager.Instance.OnBuildState -= CreateGridMap;
+        if (GameStateManager.Instance is not null)
+        {
+            GameStateManager.Instance.OnBuildState -= CreateGridMap;
+        }
     }
 
     public void CreateGridMap()

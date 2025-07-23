@@ -16,7 +16,10 @@ public sealed class DefenceSceneTransitioner : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameStateManager.Instance.OnLeavingDefenceSceneState -= OnLeavingDefenceSceneState;
+        if (GameStateManager.Instance is not null)
+        {
+            GameStateManager.Instance.OnLeavingDefenceSceneState -= OnLeavingDefenceSceneState;
+        }
     }
 
     private void OnLeavingDefenceSceneState()

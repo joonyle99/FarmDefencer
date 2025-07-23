@@ -26,25 +26,25 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
 {
     public GameState CurrentState { get; private set; } = GameState.None;
 
-    public Action OnNormalState;
-    public Action OnPauseState;
-    public Action OnBuildState;
+    public event Action OnNormalState;
+    public event Action OnPauseState;
+    public event Action OnBuildState;
     /// <summary>
     /// 웨이브가 시작되기 직전에 호출되는 이벤트
     /// </summary>
-    public Action OnWaveState;
+    public event Action OnWaveState;
     /// <summary>
     /// 모든 웨이브가 끝난 후 호출되는 이벤트
     /// </summary>
-    public Action OnWaveAfterState;
+    public event Action OnWaveAfterState;
     /// <summary>
     /// 몬스터가 모두 사라진 후 호출되는 이벤트
     /// </summary>
-    public Action OnDefenceEndState;
+    public event Action OnDefenceEndState;
     /// <summary>
     /// EndingUI까지 모두 보여준 후 다른 씬으로 이동해야 할 때 호출되는 이벤트
     /// </summary>
-    public Action OnLeavingDefenceSceneState;
+    public event Action OnLeavingDefenceSceneState;
     
     private void Start()
     {

@@ -40,6 +40,11 @@ public class BuildSystem : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (GameStateManager.Instance is null)
+        {
+            return;
+        }
+
         GameStateManager.Instance.OnBuildState -= InitBuildTimer;
         GameStateManager.Instance.OnBuildState -= InitProgressBar;
     }
