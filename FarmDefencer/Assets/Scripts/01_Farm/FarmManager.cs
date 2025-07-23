@@ -119,6 +119,9 @@ public sealed class FarmManager : MonoBehaviour
             productDatabase,
             farm.WateringAction,
             OpenDefenceScene,
+            () => { SerializeToSaveFile();
+                SceneManager.LoadScene("Main Scene");
+            },
             () => farmClock.Paused);
 
         penaltyGiver.Init(farm);

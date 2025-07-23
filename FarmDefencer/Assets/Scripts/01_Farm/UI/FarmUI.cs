@@ -22,6 +22,7 @@ public sealed class FarmUI : MonoBehaviour
 		ProductDatabase productDatabase,
 		Action<Vector2> onWatering,
 		Action onBattleButtonClicked,
+		Action onQuitRequested,
 		Func<bool> isFarmPaused)
 	{
 		_wateringCan.Init(() => !isFarmPaused(), onWatering);
@@ -29,7 +30,8 @@ public sealed class FarmUI : MonoBehaviour
 		farmInput.RegisterInputLayer(_cropGuide);
 		
 		_battleButton.onClick.AddListener(() => onBattleButtonClicked());
-		
+		// TODO 실제 설정창 구현하기
+		_settingButton.onClick.AddListener(() => onQuitRequested());
 		_harvestInventory.Init(productDatabase);
 	}
 
@@ -53,8 +55,6 @@ public sealed class FarmUI : MonoBehaviour
 		_cropGuide = GetComponentInChildren<CropGuide>();
 		_battleButton = transform.Find("BattleButton").GetComponent<Button>();
 		_settingButton = transform.Find("SettingButton").GetComponent<Button>();
-		// TODO 실제 설정창 구현하기
-		_settingButton.onClick.AddListener(() => SceneManager.LoadScene("Main Scene"));
 		ResourceManager.Instance.OnGoldChanged += _coinsUI.SetCoin;
 	}
 
