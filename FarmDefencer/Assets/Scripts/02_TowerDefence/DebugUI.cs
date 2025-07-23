@@ -13,8 +13,7 @@ public class DebugUI : MonoBehaviour
         var mapIndexStr = _tmpInputField.text;
         if (int.TryParse(mapIndexStr, out int mapIndexInt))
         {
-            MapManager.Instance.CurrentMapIndex = mapIndexInt;
-            MapManager.Instance.LoadCurrentMap();
+            MapManager.Instance.Debug_SetCurrentMap(mapIndexInt);
             GameStateManager.Instance.ChangeState(GameState.Build);
         }
         else

@@ -25,7 +25,7 @@ public sealed class SaveManager : JoonyleGameDevKit.Singleton<SaveManager>
                 try
                 {
                     var file = File.ReadAllText(SavePath);
-                    _loadedSave = JObject.Parse(file)["FarmDefencerSave"] as JObject ?? new JObject();
+                    _loadedSave = JObject.Parse(file);
                 }
                 catch (Exception e)
                 {
@@ -47,13 +47,20 @@ public sealed class SaveManager : JoonyleGameDevKit.Singleton<SaveManager>
     /// <param name="jsonObject"></param>
     public void WriteSave([NotNull] JObject jsonObject)
     {
+        _loadedSave = jsonObject;
+        FlushSave();
+    }
+    
+    /// <summary>
+    /// LoadedSave를 파일에 저장하는 메소드. 새로운 JSON Object가 아니라 일부 프로퍼티만 편집할 때에 사용된다.
+    /// </summary>
+    public void FlushSave()
+    {
         if (File.Exists(SavePath))
         {
             File.Delete(SavePath);
         }
-
-        var rootObject = new JObject(new JProperty("FarmDefencerSave", jsonObject));
-        File.WriteAllText(SavePath, rootObject.ToString());
-        _loadedSave = rootObject;
+        
+        File.WriteAllText(SavePath, LoadedSave.ToString());
     }
 }

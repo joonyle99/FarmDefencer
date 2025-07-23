@@ -28,9 +28,40 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFa
 
     public event System.Action<int> OnGoldChanged;
 
-    public JObject Serialize() => new(new JProperty("Gold", _gold));
+    public JObject Serialize()
+    {
+        var jsonObject = new JObject();
+        jsonObject.Add("Gold", _gold);
 
-    public void Deserialize(JObject json) => Gold = json.Property("Gold")?.Value.Value<int>() ?? 0;
+        var jsonSurvivedMonsters = new JArray();
+        foreach (var survivedMonster in SurvivedMonsters)
+        {
+            jsonSurvivedMonsters.Add(survivedMonster);   
+        }
+        jsonObject.Add("SurvivedMonsters", jsonSurvivedMonsters);
+
+        return jsonObject;
+    }
+
+    public void Deserialize(JObject json)
+    {
+        Gold = json.ParsePropertyOrAssign("Gold", 0);
+        
+        SurvivedMonsters.Clear();
+        if (json["SurvivedMonsters"] is JArray jsonSurvivedMonsters)
+        {
+            foreach (var jsonSurvivedMonster in jsonSurvivedMonsters)
+            {
+                var survivedMonster = jsonSurvivedMonster.Value<string>();
+                if (survivedMonster is null)
+                {
+                    continue;
+                }
+                
+                SurvivedMonsters.Add(survivedMonster);
+            }
+        }
+    }
 
     private void Start()
     {

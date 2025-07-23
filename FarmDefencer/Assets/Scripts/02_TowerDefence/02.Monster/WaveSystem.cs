@@ -68,6 +68,7 @@ public class WaveSystem : MonoBehaviour
     private List<Monster> _fieldMonsters = new List<Monster>();
     public List<Monster> FieldMonsters => _fieldMonsters;
     private List<string> _survivedMonsters = new List<string>();
+    public IReadOnlyList<string> SurvivedMonsters => _survivedMonsters;
 
     public int FieldCount => _fieldMonsters.Count;
     public int SurvivedCount => _survivedMonsters.Count;

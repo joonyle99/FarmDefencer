@@ -7,15 +7,11 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
     // map entry
     [SerializeField] private MapEntry[] _mapEntries;
     public int MapCount => _mapEntries.Length;
-
-    // current map
-    private int _currentMapIndex = 1;
-    public int CurrentMapIndex { get => _currentMapIndex; set => _currentMapIndex = Mathf.Clamp(value, 1, MapCount); }
     public MapEntry CurrentMap => _mapEntries[Mathf.Clamp(CurrentMapIndex - 1, 0, MapCount - 1)];
-
-    // current stage
-    private int _currentStageIndex = 1;
-    public int CurrentStageIndex { get => _currentStageIndex; set => _currentStageIndex = Mathf.Max(1, value); }
+    public int CurrentMapIndex { get; private set; }
+    public int CurrentStageIndex { get; private set; }
+    public int LastOpenedMapIndex { get; private set; }
+    public int LastOpenedStageIndex { get; private set; }
 
     // event
     public event Action<MapEntry> OnMapChanged;
@@ -24,43 +20,99 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
     {
         var jsonObject = new JObject();
         jsonObject.Add("CurrentMapIndex", CurrentMapIndex);
-        jsonObject.Add("CurrentStageIndex", CurrentStageIndex);
+        jsonObject.Add("CurrentStageIndex", CurrentStageIndex);       
+        jsonObject.Add("LastOpenedMapIndex", LastOpenedMapIndex);
+        jsonObject.Add("LastOpenedStageIndex", LastOpenedStageIndex);
         return jsonObject;
     }
 
     public void Deserialize(JObject json)
     {
-        CurrentMapIndex = json.Property("CurrentMapIndex")?.Value.Value<int>() ?? 1;
-        CurrentStageIndex = json.Property("CurrentStageIndex")?.Value.Value<int>() ?? 1;
-        LoadCurrentMap();
+        LastOpenedMapIndex = json.ParsePropertyOrAssign("LastOpenedMapIndex", 1);
+        LastOpenedStageIndex = json.ParsePropertyOrAssign("LastOpenedStageIndex", 1);
+        CurrentMapIndex = json.ParsePropertyOrAssign("CurrentMapIndex", LastOpenedMapIndex);
+        CurrentStageIndex = json.ParsePropertyOrAssign("CurrentStageIndex", LastOpenedStageIndex);
+        
+        // Current Index <= Last Opened Index 보정
+        if (CurrentMapIndex > LastOpenedMapIndex)
+        {
+            CurrentMapIndex = LastOpenedMapIndex;
+        }
+
+        if (CurrentStageIndex > LastOpenedStageIndex && CurrentMapIndex == LastOpenedMapIndex)
+        {
+            CurrentStageIndex = LastOpenedStageIndex;    
+        }
+        
+        OnMapChanged?.Invoke(CurrentMap);
     }
 
-    public void MoveToNextMap()
+    /// <summary>
+    /// 디펜스에서 현재 스테이지를 클리어한 모든 상황에서 호출하는 메소드.
+    /// 
+    /// <remarks>마지막 맵 마지막 스테이지거나, 가장 마지막 스테이지를 클리어한게 아닐 때에 대한 처리를 진행하므로 호출자 코드에서 분기할 필요 없음.</remarks>
+    /// </summary>
+    public void ClearCurrentStage()
     {
-        if (CurrentMapIndex + 1 >= MapCount)
+        if (CurrentMapIndex != LastOpenedMapIndex || CurrentStageIndex != LastOpenedStageIndex || // 최신 스테이지를 클리어한게 아니거나
+            LastOpenedMapIndex == 3 && LastOpenedStageIndex == 10) // 마지막 스테이지라면 처리할게 없음
         {
-            Debug.Log("마지막 맵입니다. 더 이상 이동할 수 없습니다.");
             return;
         }
 
-        CurrentMapIndex++;
-        LoadCurrentMap();
-    }
-    public void MoteToPreviousMap()
-    {
-        if (CurrentMapIndex - 1 < 1)
+        LastOpenedStageIndex += 1;
+        if (LastOpenedStageIndex > 10)
         {
-            Debug.Log("첫 번째 맵입니다. 더 이상 이동할 수 없습니다.");
-            return;
+            LastOpenedStageIndex = 1;
+            LastOpenedMapIndex += 1;
+        }
+        
+        OnMapChanged?.Invoke(CurrentMap);
+    }
+
+    public void Debug_SetCurrentMap(int mapIndex)
+    {
+        if (mapIndex < 0 || mapIndex >= MapCount)
+        {
+            throw new ArgumentOutOfRangeException(nameof(mapIndex));
         }
 
-        CurrentMapIndex--;
-        LoadCurrentMap();
+        CurrentMapIndex = mapIndex;
+        OnMapChanged?.Invoke(CurrentMap);
     }
 
-    public void LoadCurrentMap()
+    protected override void Awake()
     {
-        var currentMap = CurrentMap;
-        OnMapChanged?.Invoke(currentMap);
+        base.Awake();
+        
+        LastOpenedMapIndex = 1;
+        LastOpenedStageIndex = 1;
+        CurrentMapIndex = LastOpenedMapIndex;
+        CurrentStageIndex = LastOpenedStageIndex;
+        
+        OnMapChanged?.Invoke(CurrentMap);
     }
+    
+    // public void MoveToNextMap()
+    // {
+    //     if (CurrentMapIndex + 1 >= MapCount)
+    //     {
+    //         Debug.Log("마지막 맵입니다. 더 이상 이동할 수 없습니다.");
+    //         return;
+    //     }
+    //
+    //     CurrentMapIndex++;
+    //     LoadCurrentMap();
+    // }
+    // public void MoteToPreviousMap()
+    // {
+    //     if (CurrentMapIndex - 1 < 1)
+    //     {
+    //         Debug.Log("첫 번째 맵입니다. 더 이상 이동할 수 없습니다.");
+    //         return;
+    //     }
+    //
+    //     CurrentMapIndex--;
+    //     LoadCurrentMap();
+    // }
 }

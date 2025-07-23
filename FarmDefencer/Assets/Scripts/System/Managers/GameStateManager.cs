@@ -19,6 +19,7 @@ public enum GameState
     Wave,
     WaveAfter,
     DefenceEnd,
+    LeavingDefenceScene,
 }
 
 public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
@@ -40,7 +41,11 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     /// 몬스터가 모두 사라진 후 호출되는 이벤트
     /// </summary>
     public Action OnDefenceEndState;
-
+    /// <summary>
+    /// EndingUI까지 모두 보여준 후 다른 씬으로 이동해야 할 때 호출되는 이벤트
+    /// </summary>
+    public Action OnLeavingDefenceSceneState;
+    
     private void Start()
     {
         ChangeState(GameState.Normal);
@@ -88,6 +93,9 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
             case GameState.DefenceEnd:
                 HandleDefenceEndState();
                 break;
+            case GameState.LeavingDefenceScene :
+                HandleLeavingDefenceSceneState();
+                break;
         }
     }
 
@@ -126,5 +134,10 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
         // TODO: Fight 버튼, 타워 설치, 등 불가능하게 막기
         // TODO: 게임 배속 복구하기
         Time.timeScale = 1f;
+    }
+
+    private void HandleLeavingDefenceSceneState()
+    {
+        OnLeavingDefenceSceneState?.Invoke();
     }
 }
