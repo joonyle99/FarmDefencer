@@ -104,7 +104,7 @@ public sealed class FarmManager : MonoBehaviour
         farmClock.AddPauseCondition(() => penaltyGiver.IsAnimationPlaying);
         farmClock.AddPauseCondition(() => harvestTutorialGiver.IsPlayingTutorial);
         farmClock.AddPauseCondition(() => farmDebugUI.IsPaused);
-        farmDebugUI.Init(farmClock.SetDaytime, () => farmClock.RemainingDaytime, OpenDefenceScene);
+        farmDebugUI.Init(farmClock.SetDaytime, () => farmClock.RemainingDaytime);
         farmClock.AddPauseCondition(() => weatherGiver.IsWeatherOnGoing);
         farmClock.AddPauseCondition(() => pestGiver.IsWarningShowing);
 
@@ -118,6 +118,7 @@ public sealed class FarmManager : MonoBehaviour
         farmUI.Init(farmInput,
             productDatabase,
             farm.WateringAction,
+            OpenDefenceScene,
             () => farmClock.Paused);
 
         penaltyGiver.Init(farm);

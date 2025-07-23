@@ -48,6 +48,9 @@ public sealed class MapStageSelectSceneUI : MonoBehaviour
         
         _settingButton = transform.Find("SettingButton").GetComponent<Button>();
         
+        // TODO 실제 설정창 구현하기
+        _settingButton.onClick.AddListener(() => SceneManager.LoadScene("Main Scene"));
+        
         _debugCurrentMapCode = transform.Find("Debug_CurrentMapCode").GetComponent<TMP_Text>();
         _debugCurrentMapCode.text = SceneMapEntry.MapCode;
     }

@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public sealed class FarmUI : MonoBehaviour
 {
@@ -7,6 +9,8 @@ public sealed class FarmUI : MonoBehaviour
 	private WateringCan _wateringCan;
 	private HarvestInventory _harvestInventory;
 	private CropGuide _cropGuide;
+	private Button _battleButton;
+	private Button _settingButton;
 
 	public bool WateringCanAvailable
 	{
@@ -17,11 +21,14 @@ public sealed class FarmUI : MonoBehaviour
 	public void Init(FarmInput farmInput,
 		ProductDatabase productDatabase,
 		Action<Vector2> onWatering,
+		Action onBattleButtonClicked,
 		Func<bool> isFarmPaused)
 	{
 		_wateringCan.Init(() => !isFarmPaused(), onWatering);
 		farmInput.RegisterInputLayer(_wateringCan);
 		farmInput.RegisterInputLayer(_cropGuide);
+		
+		_battleButton.onClick.AddListener(() => onBattleButtonClicked());
 		
 		_harvestInventory.Init(productDatabase);
 	}
@@ -44,6 +51,10 @@ public sealed class FarmUI : MonoBehaviour
 		_wateringCan = GetComponentInChildren<WateringCan>();
 		_harvestInventory = GetComponentInChildren<HarvestInventory>();
 		_cropGuide = GetComponentInChildren<CropGuide>();
+		_battleButton = transform.Find("BattleButton").GetComponent<Button>();
+		_settingButton = transform.Find("SettingButton").GetComponent<Button>();
+		// TODO 실제 설정창 구현하기
+		_settingButton.onClick.AddListener(() => SceneManager.LoadScene("Main Scene"));
 		ResourceManager.Instance.OnGoldChanged += _coinsUI.SetCoin;
 	}
 
