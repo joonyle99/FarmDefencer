@@ -9,13 +9,16 @@ public sealed class MainScene : MonoBehaviour
 {
     private TMP_Text _harvestableTimeText;
     private TMP_Text _availableCoinText;
-    private Button _goTycoonButton;
+    private Button _farmButton;
+    private Button _battleButton;
     private TimerUI _timerUI;
     
     private void Awake()
     {
-        _goTycoonButton = transform.Find("FarmButton").GetComponent<Button>();
-        _goTycoonButton.onClick.AddListener(OnTycoonButtonClickedHandler);
+        _farmButton = transform.Find("FarmButton").GetComponent<Button>();
+        _farmButton.onClick.AddListener(OnFarmButtonClicked);        
+        _battleButton = transform.Find("BattleButton").GetComponent<Button>();
+        _battleButton.onClick.AddListener(OnBattleButtonClicked);
         _harvestableTimeText = transform.Find("FarmButton/HarvestableTimeText").GetComponent<TMP_Text>();
         _availableCoinText = transform.Find("BattleButton/AvailableCoinText").GetComponent<TMP_Text>();
         _timerUI = GameObject.Find("TimerUI").GetComponent<TimerUI>();
@@ -45,8 +48,14 @@ public sealed class MainScene : MonoBehaviour
         _timerUI.Init(MapManager.Instance.CurrentMapIndex, MapManager.Instance.CurrentStageIndex, () => (lengthOfDaytime - currentDaytime) / lengthOfDaytime);
     }
 
-    private void OnTycoonButtonClickedHandler()
+    private void OnFarmButtonClicked()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Tycoon Scene");
+    }
+
+    private void OnBattleButtonClicked()
+    {
+        var currentMap = MapManager.Instance.CurrentMap;
+        SceneManager.LoadScene($"MapStageSelectScene_{currentMap.MapCode}");
     }
 }

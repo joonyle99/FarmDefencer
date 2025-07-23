@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
@@ -8,40 +9,88 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
     [SerializeField] private MapEntry[] _mapEntries;
     public int MapCount => _mapEntries.Length;
     public MapEntry CurrentMap => _mapEntries[Mathf.Clamp(CurrentMapIndex - 1, 0, MapCount - 1)];
-    public int CurrentMapIndex { get; private set; }
-    public int CurrentStageIndex { get; private set; }
-    public int LastOpenedMapIndex { get; private set; }
-    public int LastOpenedStageIndex { get; private set; }
+
+    private int _currentMapIndex;
+    /// <summary>
+    /// 디펜스를 위해 사용. 현재 선택된 맵.
+    /// </summary>
+    public int CurrentMapIndex
+    {
+        get => _currentMapIndex;
+        set
+        {
+            if (value <= 0 || value > MaximumUnlockedMapIndex)
+            {
+                Debug.LogError($"CurrentMapIndex은 0보다 크고 MaximumUnlockedMapIndex({MaximumUnlockedStageIndex})보다 작거나 같아야 합니다.");
+            }
+
+            _currentMapIndex = Math.Clamp(value, 1, MaximumUnlockedMapIndex);
+            OnMapChanged?.Invoke(CurrentMap);
+        }
+    }
+
+    private int _currentStageIndex;
+
+    /// <summary>
+    /// 디펜스를 위해 사용. 현재 선택된 스테이지.
+    /// </summary>
+    public int CurrentStageIndex
+    {
+        get => _currentStageIndex;
+        set
+        {
+            if (value <= 0 || CurrentMapIndex == MaximumUnlockedStageIndex && value > MaximumUnlockedStageIndex)
+            {
+                Debug.LogError($"CurrentStageIndex는 0보다 크고 CurrentMapIndex == MaximumUnlockedMapIndex인 경우 MaximumUnlockedStageIndex({MaximumUnlockedStageIndex})보다 작거나 같아야 합니다.");
+            }
+
+            _currentStageIndex = value;
+            if (_currentStageIndex <= 0 ||
+                CurrentMapIndex == MaximumUnlockedMapIndex && _currentStageIndex > MaximumUnlockedStageIndex)
+            {
+                _currentStageIndex = MaximumUnlockedStageIndex;
+            }
+        }
+    }
+    
+    public int MaximumUnlockedMapIndex { get; private set; }
+    public int MaximumUnlockedStageIndex { get; private set; }
 
     // event
     public event Action<MapEntry> OnMapChanged;
 
+    public MapEntry GetMapEntryOf(int mapIndex) => _mapEntries[mapIndex-1];
+
+    public MapEntry GetMapEntryOf(string mapCode) => _mapEntries.FirstOrDefault(entry => entry.MapCode.Equals(mapCode));
+
+    public void InvokeOnMapChanged() => OnMapChanged?.Invoke(CurrentMap);
+    
     public JObject Serialize()
     {
         var jsonObject = new JObject();
         jsonObject.Add("CurrentMapIndex", CurrentMapIndex);
         jsonObject.Add("CurrentStageIndex", CurrentStageIndex);       
-        jsonObject.Add("LastOpenedMapIndex", LastOpenedMapIndex);
-        jsonObject.Add("LastOpenedStageIndex", LastOpenedStageIndex);
+        jsonObject.Add("MaximumUnlockedMapIndex", MaximumUnlockedMapIndex);
+        jsonObject.Add("MaximumUnlockedStageIndex", MaximumUnlockedStageIndex);
         return jsonObject;
     }
 
     public void Deserialize(JObject json)
     {
-        LastOpenedMapIndex = json.ParsePropertyOrAssign("LastOpenedMapIndex", 1);
-        LastOpenedStageIndex = json.ParsePropertyOrAssign("LastOpenedStageIndex", 1);
-        CurrentMapIndex = json.ParsePropertyOrAssign("CurrentMapIndex", LastOpenedMapIndex);
-        CurrentStageIndex = json.ParsePropertyOrAssign("CurrentStageIndex", LastOpenedStageIndex);
+        MaximumUnlockedMapIndex = json.ParsePropertyOrAssign("LastOpenedMapIndex", 1);
+        MaximumUnlockedStageIndex = json.ParsePropertyOrAssign("MaximumUnlockedStageIndex", 1);
+        CurrentMapIndex = json.ParsePropertyOrAssign("CurrentMapIndex", MaximumUnlockedMapIndex);
+        CurrentStageIndex = json.ParsePropertyOrAssign("CurrentStageIndex", MaximumUnlockedStageIndex);
         
-        // Current Index <= Last Opened Index 보정
-        if (CurrentMapIndex > LastOpenedMapIndex)
+        // Current Index <= Maximum Unlocked Index 보정
+        if (CurrentMapIndex > MaximumUnlockedMapIndex)
         {
-            CurrentMapIndex = LastOpenedMapIndex;
+            CurrentMapIndex = MaximumUnlockedMapIndex;
         }
 
-        if (CurrentStageIndex > LastOpenedStageIndex && CurrentMapIndex == LastOpenedMapIndex)
+        if (CurrentStageIndex > MaximumUnlockedStageIndex && CurrentMapIndex == MaximumUnlockedMapIndex)
         {
-            CurrentStageIndex = LastOpenedStageIndex;    
+            CurrentStageIndex = MaximumUnlockedStageIndex;    
         }
         
         OnMapChanged?.Invoke(CurrentMap);
@@ -54,17 +103,17 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
     /// </summary>
     public void ClearCurrentStage()
     {
-        if (CurrentMapIndex != LastOpenedMapIndex || CurrentStageIndex != LastOpenedStageIndex || // 최신 스테이지를 클리어한게 아니거나
-            LastOpenedMapIndex == 3 && LastOpenedStageIndex == 10) // 마지막 스테이지라면 처리할게 없음
+        if (CurrentMapIndex != MaximumUnlockedMapIndex || CurrentStageIndex != MaximumUnlockedStageIndex || // 최신 스테이지를 클리어한게 아니거나
+            MaximumUnlockedMapIndex == 3 && MaximumUnlockedStageIndex == 10) // 마지막 스테이지라면 처리할게 없음
         {
             return;
         }
 
-        LastOpenedStageIndex += 1;
-        if (LastOpenedStageIndex > 10)
+        MaximumUnlockedStageIndex += 1;
+        if (MaximumUnlockedStageIndex > 10)
         {
-            LastOpenedStageIndex = 1;
-            LastOpenedMapIndex += 1;
+            MaximumUnlockedStageIndex = 1;
+            MaximumUnlockedMapIndex += 1;
         }
         
         OnMapChanged?.Invoke(CurrentMap);
@@ -85,10 +134,10 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
     {
         base.Awake();
         
-        LastOpenedMapIndex = 1;
-        LastOpenedStageIndex = 1;
-        CurrentMapIndex = LastOpenedMapIndex;
-        CurrentStageIndex = LastOpenedStageIndex;
+        MaximumUnlockedMapIndex = 1;
+        MaximumUnlockedStageIndex = 1;
+        CurrentMapIndex = MaximumUnlockedMapIndex;
+        CurrentStageIndex = MaximumUnlockedStageIndex;
         
         OnMapChanged?.Invoke(CurrentMap);
     }
