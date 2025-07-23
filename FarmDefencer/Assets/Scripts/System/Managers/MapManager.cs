@@ -21,7 +21,7 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
         {
             if (value <= 0 || value > MaximumUnlockedMapIndex)
             {
-                Debug.LogError($"CurrentMapIndex은 0보다 크고 MaximumUnlockedMapIndex({MaximumUnlockedStageIndex})보다 작거나 같아야 합니다.");
+                Debug.LogError($"CurrentMapIndex는 0보다 크고 MaximumUnlockedMapIndex({MaximumUnlockedStageIndex})보다 작거나 같아야 합니다.");
             }
 
             _currentMapIndex = Math.Clamp(value, 1, MaximumUnlockedMapIndex);
@@ -77,7 +77,7 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
 
     public void Deserialize(JObject json)
     {
-        MaximumUnlockedMapIndex = json.ParsePropertyOrAssign("LastOpenedMapIndex", 1);
+        MaximumUnlockedMapIndex = json.ParsePropertyOrAssign("MaximumUnlockedMapIndex", 1);
         MaximumUnlockedStageIndex = json.ParsePropertyOrAssign("MaximumUnlockedStageIndex", 1);
         CurrentMapIndex = json.ParsePropertyOrAssign("CurrentMapIndex", MaximumUnlockedMapIndex);
         CurrentStageIndex = json.ParsePropertyOrAssign("CurrentStageIndex", MaximumUnlockedStageIndex);

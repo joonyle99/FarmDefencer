@@ -33,10 +33,12 @@ public sealed class MapStageSelectSceneUI : MonoBehaviour
         
         _goPreviousMapButton = transform.Find("GoPreviousMapButton").GetComponent<Button>();
         _goPreviousMapButton.gameObject.SetActive(SceneMapEntry.MapId > 1);
+        _goPreviousMapButton.onClick.AddListener(() => MoveToAnotherSelectSceneFor(SceneMapEntry.MapId - 1));
         
         _goNextMapButton = transform.Find("GoNextMapButton").GetComponent<Button>();
         _goNextMapButton.gameObject.SetActive(SceneMapEntry.MapId < 3);
-        _goNextMapButton.interactable = SceneMapEntry.MapId + 1 >= MapManager.Instance.MaximumUnlockedMapIndex;
+        _goNextMapButton.interactable = SceneMapEntry.MapId + 1 <= MapManager.Instance.MaximumUnlockedMapIndex;
+        _goNextMapButton.onClick.AddListener(() => MoveToAnotherSelectSceneFor(SceneMapEntry.MapId + 1));
         
         _gold = transform.Find("Gold").GetComponent<CoinsUI>();
         _gold.SetCoin(ResourceManager.Instance.Gold);
@@ -59,8 +61,7 @@ public sealed class MapStageSelectSceneUI : MonoBehaviour
         {
             var stageButton = stageButtonsRootObject.transform.GetChild(childIndex).GetComponent<StageButton>();
             stageButton.OnClicked += OnStageButtonClicked;
-            stageButton.SetStageButtonEnabled(stageButton.MapIndex <= maximumUnlockedMapIndex && stageButton.StageIndex <= maximumUnlockedStageIndex);
-            Debug.Log($"{stageButton.MapIndex} - {stageButton.StageIndex}");
+            stageButton.SetStageButtonEnabled(stageButton.MapIndex < maximumUnlockedMapIndex || stageButton.MapIndex == maximumUnlockedMapIndex && stageButton.StageIndex <= maximumUnlockedStageIndex);
         }
     }
 
@@ -74,5 +75,11 @@ public sealed class MapStageSelectSceneUI : MonoBehaviour
         DontDestroyOnLoad(defenceSceneOpenContext);
         
         SceneManager.LoadScene("Defence Scene");
+    }
+
+    private void MoveToAnotherSelectSceneFor(int anotherMapId)
+    {
+        var anotherMap = MapManager.Instance.GetMapEntryOf(anotherMapId);
+        SceneManager.LoadScene($"MapStageSelectScene_{anotherMap.MapCode}");
     }
 }
