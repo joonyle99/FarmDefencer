@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
@@ -51,10 +52,12 @@ public sealed class FarmManager : MonoBehaviour
         farmUI.PlayQuotaAssignAnimation(productEntry => quotaContext.IsProductAvailable(productEntry),
             productEntry => quotaContext.TryGetQuota(productEntry.ProductName, out var quota) ? quota : 0);
 
-        if (pestGiver.ShouldReservePestSpawn)
+        if (farmClock.CurrentDaytime == 0.0f)
         {
             pestGiver.ReserveRandomPestSpawn();
         }
+
+        Application.wantsToQuit += SaveOnQuit;
     }
 
     private void Update()
@@ -71,7 +74,7 @@ public sealed class FarmManager : MonoBehaviour
 
         farmUI.WateringCanAvailable = !harvestTutorialGiver.gameObject.activeSelf;
         weatherShopUI.gameObject.SetActive(!harvestTutorialGiver.IsPlayingTutorial);
-        goDefenceUI.gameObject.SetActive(farmClock.CurrentDaytime == 0.0f && !harvestTutorialGiver.IsPlayingTutorial);
+        goDefenceUI.gameObject.SetActive(farmClock.CurrentDaytime >= farmClock.LengthOfDaytime && !harvestTutorialGiver.IsPlayingTutorial);
     }
 
     private void QuotaContextChangedHandler()
@@ -115,7 +118,7 @@ public sealed class FarmManager : MonoBehaviour
         farmUI.Init(farmInput,
             productDatabase,
             farm.WateringAction,
-            () => farmClock.Stopped);
+            () => farmClock.Paused);
 
         penaltyGiver.Init(farm);
 
@@ -139,6 +142,7 @@ public sealed class FarmManager : MonoBehaviour
             productName => quotaContext.IsProductAvailable(GetProductEntry(productName)),
             GetProductEntry,
             () => farmClock.CurrentDaytime,
+            () => farmClock.Paused,
             EarnGold);
     }
 
@@ -170,8 +174,15 @@ public sealed class FarmManager : MonoBehaviour
 
     private void OpenDefenceScene()
     {
+        MapManager.Instance.CurrentMapIndex = MapManager.Instance.MaximumUnlockedMapIndex;
+        MapManager.Instance.CurrentStageIndex = MapManager.Instance.MaximumUnlockedStageIndex;
+
+        var defenceSceneOpenContextObject = new GameObject("DefenceSceneOpenContext");
+        defenceSceneOpenContextObject.AddComponent<DefenceSceneOpenContext>();
+        DontDestroyOnLoad(defenceSceneOpenContextObject);
+        
         SerializeToSaveFile();
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("Defence Scene");
     }
 
     private void OnFarmQuotaFilledHandler(ProductEntry entry, Vector2 cropWorldPosition, int quota)
@@ -221,5 +232,16 @@ public sealed class FarmManager : MonoBehaviour
         ResourceManager.Instance.Gold += gold;
         farmUI.PlayCoinAnimation();
         SoundManager.Instance.PlaySfx("SFX_T_coin");
+    }
+
+    private bool SaveOnQuit()
+    {
+        SerializeToSaveFile();
+        return true;
+    }
+
+    private void OnDestroy()
+    {
+        Application.wantsToQuit -= SaveOnQuit;
     }
 }

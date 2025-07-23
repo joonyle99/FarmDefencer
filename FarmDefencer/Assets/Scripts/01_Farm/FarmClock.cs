@@ -26,9 +26,9 @@ public sealed class FarmClock : MonoBehaviour, IFarmSerializable
     
     public float CurrentDaytime { get; private set; }
 
-    public float RemainingDaytime => lengthOfDaytime - CurrentDaytime;
+    public float RemainingDaytime => Mathf.Max(lengthOfDaytime - CurrentDaytime, 0.0f);
 
-    public bool Stopped { get; private set; }
+    public bool Paused { get; private set; }
 
     private List<Func<bool>> _pauseConditions;
 
@@ -59,9 +59,11 @@ public sealed class FarmClock : MonoBehaviour, IFarmSerializable
 
     private void Update()
     {
-        Stopped = _pauseConditions.Any(cond => cond()) || RemainingDaytime == 0.0f;
-        var deltaTime = Stopped ? 0.0f : Time.deltaTime;
-        CurrentDaytime += deltaTime;
+        Paused = _pauseConditions.Any(cond => cond()) || RemainingDaytime == 0.0f;
+
+        var nextDaytime = Paused ? CurrentDaytime : Mathf.Min(CurrentDaytime + Time.deltaTime, lengthOfDaytime);
+        var deltaTime = nextDaytime - CurrentDaytime;
+        CurrentDaytime = nextDaytime;
         _farmUpdatables.ForEach(f => f.OnFarmUpdate(deltaTime));
     }
 }

@@ -12,18 +12,9 @@ public sealed class PestGiver
     IFarmInputLayer,
     IFarmSerializable
 {
-    private enum PestSpawnState
-    {
-        NotRequested,
-        Requested,
-        Spawned
-    }
-    
     public int InputPriority => IFarmInputLayer.Priority_PestGiver;
 
     public bool IsWarningShowing => _pestWarningUI.IsWarningShowing;
-
-    public bool ShouldReservePestSpawn => _pestSpawnState == PestSpawnState.NotRequested;
 
     [Serializable]
     public struct PestPrefabData
@@ -48,6 +39,7 @@ public sealed class PestGiver
     private Func<string, bool> _isProductAvailable;
     private Func<string, ProductEntry> _getProductEntry;
     private Func<float> _getDaytime;
+    private Func<bool> _isFarmPaused;
     private Action<int> _onPestCatchGoldEarned;
     private GameObject _runningPestParentObject;
     private Dictionary<PestOrigin, Vector2> _pestOrigins;
@@ -56,7 +48,7 @@ public sealed class PestGiver
     
     // 저장되는 값들
     private float _pestSpawnTime;
-    private PestSpawnState _pestSpawnState;
+    private bool _isPestSpawnReserved;
     private List<Pest> _runningPests;
     private Dictionary<string, PestEatingPoint> _pestEatingPoints;
 
@@ -64,11 +56,13 @@ public sealed class PestGiver
         Func<string, bool> isProductAvailable, 
         Func<string, ProductEntry> getProductEntry,
         Func<float> getDaytime,
+        Func<bool> isFarmPaused,
         Action<int> onPestCatchGoldEarned)
     {
         _isProductAvailable = isProductAvailable;
         _getProductEntry = getProductEntry;
         _getDaytime = getDaytime;
+        _isFarmPaused = isFarmPaused;
         _onPestCatchGoldEarned = onPestCatchGoldEarned;
     }
 
@@ -82,15 +76,15 @@ public sealed class PestGiver
 
     public void ReserveRandomPestSpawn()
     {
-        _pestSpawnState = PestSpawnState.Requested;
+        _isPestSpawnReserved = true;
         _pestSpawnTime = Random.Range(minimumRandomPestSpawnDaytime, maximumPestSpawnInterval);
     }
 
     public void OnFarmUpdate(float deltaTime)
     {
-        if (_pestSpawnState == PestSpawnState.Requested && _getDaytime() >= _pestSpawnTime)
+        if (_isPestSpawnReserved && _getDaytime() >= _pestSpawnTime)
         {
-            _pestSpawnState = PestSpawnState.Spawned;
+            _isPestSpawnReserved = false;
             
             _pestWarningUI.ShowWarning();
             var pestSpawnList = CreatePestSpawnRule(_isProductAvailable, pestSpawnRule);
@@ -147,6 +141,11 @@ public sealed class PestGiver
 
     public bool OnSingleTap(Vector2 worldPosition)
     {
+        if (_isFarmPaused())
+        {
+            return false;
+        }
+        
         var pest = _runningPests.Find(p =>
         {
             var distanceSquared =
@@ -184,7 +183,7 @@ public sealed class PestGiver
     {
         var jsonObject = new JObject();
         jsonObject.Add("PestSpawnTime", _pestSpawnTime);
-        jsonObject.Add("PestSpawnState", (int)_pestSpawnState);
+        jsonObject.Add("IsPestSpawnReserved", _isPestSpawnReserved);
 
         var jsonRunningPests = new JArray();
         foreach (var runningPest in _runningPests)
@@ -206,7 +205,7 @@ public sealed class PestGiver
     public void Deserialize(JObject json)
     {
         _pestSpawnTime = json["PestSpawnTime"]?.Value<int>() ?? 0.0f;
-        _pestSpawnState = (PestSpawnState)(json["PestSpawnState"]?.Value<int>() ?? 0);
+        _isPestSpawnReserved = json["IsPestSpawnReserved"]?.Value<bool>() ?? false;
 
         if (json["RunningPests"] is JArray jsonRunningPests)
         {

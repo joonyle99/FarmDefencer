@@ -2146,7 +2146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quotaRules:
   - map: {fileID: 11400000, guid: 469c6bef7dd249949a7b8eeb0f2cb2fd, type: 2}
-    quotaFillingRule: {fileID: 11400000, guid: 2cfffec73e4aabc4ba65c4a28ac7228d, type: 2}
+    quotaFillingRule: {fileID: 11400000, guid: 09d4708b0d0daa646bab5f5be0ea9b87, type: 2}
     specialProductBonusRule: {fileID: 11400000, guid: 074d1c613d4868f4cbe4f9afc46e167a, type: 2}
   - map: {fileID: 11400000, guid: d3f7f1726e9b95244b71fd8ff050326f, type: 2}
     quotaFillingRule: {fileID: 11400000, guid: 2cfffec73e4aabc4ba65c4a28ac7228d, type: 2}
@@ -7355,8 +7355,8 @@ MonoBehaviour:
   pestBeginDirectToDestinationCriterion: 5
   pestClickSize: 1
   pestDieTime: 1
-  minimumRandomPestSpawnDaytime: 1
-  maximumRandomPestSpawnDaytime: 1
+  minimumRandomPestSpawnDaytime: 10
+  maximumRandomPestSpawnDaytime: 250
   pestPrefabs:
   - size: 0
     prefab: {fileID: 8835415012596115015, guid: c9bc3eb1cef0c354a8525468c7315474, type: 3}
@@ -8191,7 +8191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911982a6f0e14bd4b88047c9f5a89f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreSaveFile: 1
+  ignoreSaveFile: 0
   farm: {fileID: 876821029}
   quotaContext: {fileID: 287826021}
   farmClock: {fileID: 790447940}

@@ -11,14 +11,12 @@ public sealed class FarmDebugUI : MonoBehaviour
 	private Button _goDefenceButton;
 	private Button _setDaytimeButton;
 	private Button _setDaytime5sButton;
-	private Action<float> _setDaytime;
 	private Func<float> _getDaytime;
 	
 	public bool IsPaused { get; private set; }
 
 	public void Init(Action<float> setDaytime, Func<float> getRemainingDaytime, Action onGoDefenceButtonClickedHandler)
 	{
-		_setDaytime = setDaytime;
 		_getDaytime = getRemainingDaytime;
 		
 		_setDaytimeButton.onClick.AddListener(() => setDaytime(0.0f));

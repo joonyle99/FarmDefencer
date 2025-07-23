@@ -12,6 +12,7 @@ public sealed class MainScene : MonoBehaviour
     private Button _farmButton;
     private Button _battleButton;
     private TimerUI _timerUI;
+    private Button _debugResetSaveAndRestartButton;
     
     private void Awake()
     {
@@ -22,6 +23,8 @@ public sealed class MainScene : MonoBehaviour
         _harvestableTimeText = transform.Find("FarmButton/HarvestableTimeText").GetComponent<TMP_Text>();
         _availableCoinText = transform.Find("BattleButton/AvailableCoinText").GetComponent<TMP_Text>();
         _timerUI = GameObject.Find("TimerUI").GetComponent<TimerUI>();
+        _debugResetSaveAndRestartButton = transform.Find("Debug_ResetSaveAndRestartButton").GetComponent<Button>();
+        _debugResetSaveAndRestartButton.onClick.AddListener(OnResetSaveAndRestartButtonClicked);
     }
 
     private void Start()
@@ -57,5 +60,11 @@ public sealed class MainScene : MonoBehaviour
     {
         var currentMap = MapManager.Instance.CurrentMap;
         SceneManager.LoadScene($"MapStageSelectScene_{currentMap.MapCode}");
+    }
+
+    private void OnResetSaveAndRestartButtonClicked()
+    {
+        SaveManager.Instance.WriteSave(new JObject());
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
