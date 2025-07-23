@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 using JoonyleGameDevKit;
 using System.Collections;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// GridMap의 각 Cell은 이동할 수 있는 땅인지의 정보를 가지며,
@@ -138,8 +140,12 @@ public class GridMap : MonoBehaviour
     }
     private void Start()
     {
-        GameStateManager.Instance.OnBuildState -= CreateGridMap;
         GameStateManager.Instance.OnBuildState += CreateGridMap;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnBuildState -= CreateGridMap;
     }
 
     public void CreateGridMap()

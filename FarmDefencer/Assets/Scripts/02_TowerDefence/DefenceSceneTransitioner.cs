@@ -14,6 +14,11 @@ public sealed class DefenceSceneTransitioner : MonoBehaviour
         GameStateManager.Instance.OnLeavingDefenceSceneState += OnLeavingDefenceSceneState;
     }
 
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnLeavingDefenceSceneState -= OnLeavingDefenceSceneState;
+    }
+
     private void OnLeavingDefenceSceneState()
     {
         ResourceManager.Instance.SurvivedMonsters.Clear();

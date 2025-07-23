@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -33,12 +34,16 @@ public class BuildSystem : MonoBehaviour
 
     private void Start()
     {
-        GameStateManager.Instance.OnBuildState -= InitBuildTimer;
         GameStateManager.Instance.OnBuildState += InitBuildTimer;
-
-        GameStateManager.Instance.OnBuildState -= InitProgressBar;
         GameStateManager.Instance.OnBuildState += InitProgressBar;
     }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnBuildState -= InitBuildTimer;
+        GameStateManager.Instance.OnBuildState -= InitProgressBar;
+    }
+
     private void Update()
     {
         if (GameStateManager.Instance.CurrentState is not GameState.Build)

@@ -1,3 +1,4 @@
+using System;
 using JoonyleGameDevKit;
 using System.Collections;
 using System.Collections.Generic;
@@ -86,15 +87,18 @@ public class WaveSystem : MonoBehaviour
 
     private void Start()
     {
-        GameStateManager.Instance.OnWaveState -= InitStageData;
         GameStateManager.Instance.OnWaveState += InitStageData;
-
-        GameStateManager.Instance.OnWaveState -= InitProgressBar;
         GameStateManager.Instance.OnWaveState += InitProgressBar;
-
-        GameStateManager.Instance.OnWaveState -= StartWaveProcess;
         GameStateManager.Instance.OnWaveState += StartWaveProcess;
     }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnWaveState -= InitStageData;
+        GameStateManager.Instance.OnWaveState -= InitProgressBar;
+        GameStateManager.Instance.OnWaveState -= StartWaveProcess;
+    }
+
     private void Update()
     {
         if (GameStateManager.Instance.CurrentState is not GameState.Wave

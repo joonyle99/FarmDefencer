@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class DefenceContext : SceneContext
@@ -73,5 +74,10 @@ public class DefenceContext : SceneContext
 
         _videoController.StopVideo();
         _videoController.PlayVideo(map.MapId);
+    }
+
+    private void OnDestroy()
+    {
+        MapManager.Instance.OnMapChanged -= BackgroundVideoHandler;
     }
 }
