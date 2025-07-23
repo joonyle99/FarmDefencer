@@ -13,7 +13,7 @@ public interface IFarmSerializable
 
 public sealed class SaveManager : JoonyleGameDevKit.Singleton<SaveManager>
 {
-    private static readonly string SavePath = Path.Combine(Application.dataPath, "FarmDefencerSave.json");
+    private static string GetSavePath() => Path.Combine(Application.persistentDataPath, "FarmDefencerSave.json");
     
     private JObject _loadedSave;
     public JObject LoadedSave
@@ -24,7 +24,7 @@ public sealed class SaveManager : JoonyleGameDevKit.Singleton<SaveManager>
             {
                 try
                 {
-                    var file = File.ReadAllText(SavePath);
+                    var file = File.ReadAllText(GetSavePath());
                     _loadedSave = JObject.Parse(file);
                 }
                 catch (Exception e)
@@ -56,11 +56,11 @@ public sealed class SaveManager : JoonyleGameDevKit.Singleton<SaveManager>
     /// </summary>
     public void FlushSave()
     {
-        if (File.Exists(SavePath))
+        if (File.Exists(GetSavePath()))
         {
-            File.Delete(SavePath);
+            File.Delete(GetSavePath());
         }
         
-        File.WriteAllText(SavePath, LoadedSave.ToString());
+        File.WriteAllText(GetSavePath(), LoadedSave.ToString());
     }
 }
