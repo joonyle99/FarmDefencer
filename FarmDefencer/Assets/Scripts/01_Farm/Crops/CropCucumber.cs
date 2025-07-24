@@ -15,7 +15,6 @@ public sealed class CropCucumber : Crop
 		public float GrowthSeconds { get; set; }
 		public bool Watered { get; set; }
 		public bool Harvested { get; set; }
-		public float HoldingTime { get; set; }
 		public int RemainingQuota { get; set; }
 		public bool ShortTrelisPlaced { get; set; }
 		public bool LongtrelisPlaced { get; set; }
@@ -123,14 +122,14 @@ public sealed class CropCucumber : Crop
 			(transform.position, transform.position);
 	}
 
-	public override void OnSingleTap(Vector2 worldPosition)
+	public override void OnTap(Vector2 worldPosition)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
-			OnSingleTapFunctions[GetCurrentStage(_currentState)],
+			OnTapFunctions[GetCurrentStage(_currentState)],
 			_currentState)
 
 			(worldPosition, transform.position);
@@ -214,7 +213,7 @@ public sealed class CropCucumber : Crop
 		{CucumberStage.Harvested, (beforeState, deltaTime) => DoNothing(beforeState) },
 	};
 
-	private static readonly Dictionary<CucumberStage, Func<CucumberState, CucumberState>> OnSingleTapFunctions = new()
+	private static readonly Dictionary<CucumberStage, Func<CucumberState, CucumberState>> OnTapFunctions = new()
 	{
 		{CucumberStage.Seed, Plant },
 

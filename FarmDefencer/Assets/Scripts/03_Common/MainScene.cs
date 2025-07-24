@@ -16,6 +16,8 @@ public sealed class MainScene : MonoBehaviour
     
     private void Awake()
     {
+        Application.targetFrameRate = 60;
+        
         _farmButton = transform.Find("FarmButton").GetComponent<Button>();
         _farmButton.onClick.AddListener(OnFarmButtonClicked);        
         _battleButton = transform.Find("BattleButton").GetComponent<Button>();

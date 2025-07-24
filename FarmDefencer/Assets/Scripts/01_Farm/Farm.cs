@@ -148,12 +148,12 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFarm
 
     public void UnlockCropAt(Vector2 cropPosition) => Array.ForEach(_fields, f => f.UnlockCropAt(cropPosition));
 
-    public bool OnSingleTap(Vector2 worldPosition) =>
-        DoActionTo(field => field.OnSingleTap(worldPosition), worldPosition);
+    public bool OnTap(Vector2 worldPosition) =>
+        DoActionTo(field => field.OnTap(worldPosition), worldPosition);
 
-    public bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd,
+    public bool OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd,
         float deltaHoldTime)
-        => DoActionTo(field => field.OnSingleHolding(initialWorldPosition, deltaWorldPosition, isEnd, deltaHoldTime),
+        => DoActionTo(field => field.OnHold(initialWorldPosition, deltaWorldPosition, isEnd, deltaHoldTime),
             initialWorldPosition);
 
     public void WateringAction(Vector2 position) => DoActionTo(field => field.OnWatering(position), position);

@@ -3,201 +3,255 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using TMPro;
 
 /// <summary>
 /// 타이쿤 씬에서 유저 입력을 받는 컴포넌트.
 /// </summary>
 public sealed class FarmInput : MonoBehaviour
 {
-	private const float MaximumCameraMovementScale = 10.0f;
-	private const float MinimumCameraMovementScale = 0.1f;
+    private struct PointerData
+    {
+        public Vector2 PreviousScreenPosition;
+        public Vector2 CurrentScreenPosition;
+        public bool WasPreviousFrameInput;
+    }
+    private const float MaximumCameraMovementScale = 10.0f;
+    private const float MinimumCameraMovementScale = 0.1f;
 
-	private const float MaximumProjectionSize = 10.0f; // 가장 넓게 볼 때의 크기를 의미.
-	private const float MinimumProjectionSize = 5.0f; // 가장 좁게 볼 때의 크기를 의미.
+    private const float MaximumProjectionSize = 10.0f; // 가장 넓게 볼 때의 크기를 의미.
+    private const float MinimumProjectionSize = 5.0f; // 가장 좁게 볼 때의 크기를 의미.
 
-	private const float MovableWidth = 10.8f;
-	private const float MovableHeight = 4.9f;
+    private const float MovableWidth = 10.8f;
+    private const float MovableHeight = 4.9f;
 
-	[SerializeField] private InputActionReference interactAction;
-	
-	public float InputPriorityCut { get; set; } // 이 수치보다 작은 Priority를 가진 레이어는 입력 처리 대상이 아니도로 하는 프로퍼티.
-	
-	private float _cameraMovementScale = 0.1f;
-	public float CameraMovementScale
-	{
-		get
-		{
-			return _cameraMovementScale;
-		}
-		set
-		{
-			if (value < MinimumCameraMovementScale || value > MaximumCameraMovementScale)
-			{
-				Debug.LogError($"FarmInput.CameraMovementScale은 {MinimumCameraMovementScale} 이상 {MaximumCameraMovementScale} 이하의 값을 가져야 합니다.");
-			}
-			else
-			{
-				_cameraMovementScale = value;
-			}
-		}
-	}
+    [SerializeField] private InputActionReference tapAction;
+    [SerializeField] private InputActionReference holdAction;
+    [SerializeField] private InputActionReference mouseWheelAction;
+    [SerializeField] private InputActionReference primaryPointerAction;
+    [SerializeField] private InputActionReference secondaryPointerAction;
 
-	private Camera _camera;
+    private PointerData _primaryPointerData;
+    private PointerData _secondaryPointerData;
+    private TMP_Text _debugText;
 
-	private bool _isSingleHolding;
-	private float _singleHoldingTimeElapsed;
-	private Vector2 _lastInteractedWorldPosition;
-	private Vector2 _initialSingleHoldingWorldPosition;
-	private List<IFarmInputLayer> _inputLayers;
-	private List<Func<bool>> _canInputConditions;
-	private bool _canInput; // Update()에서 _canInputConditions에 의해 평가됨.
+    public float InputPriorityCut { get; set; } // 이 수치보다 작은 Priority를 가진 레이어는 입력 처리 대상이 아니도로 하는 프로퍼티.
 
-	private float _zoomMomentum;
+    private float _cameraMovementScale = 0.1f;
 
-	public void FullZoomOut()
-	{
-		_camera.orthographicSize = MaximumProjectionSize;
-	}
+    public float CameraMovementScale
+    {
+        get { return _cameraMovementScale; }
+        set
+        {
+            if (value < MinimumCameraMovementScale || value > MaximumCameraMovementScale)
+            {
+                Debug.LogError(
+                    $"FarmInput.CameraMovementScale은 {MinimumCameraMovementScale} 이상 {MaximumCameraMovementScale} 이하의 값을 가져야 합니다.");
+            }
+            else
+            {
+                _cameraMovementScale = value;
+            }
+        }
+    }
 
-	public void RegisterInputLayer(IFarmInputLayer inputLayer)
-	{
-		_inputLayers.Add(inputLayer);
-		_inputLayers.Sort((left, right) => right.InputPriority.CompareTo(left.InputPriority));
-	}
-	
-	public void AddCanInputCondition(Func<bool> condition) => _canInputConditions.Add(condition);
+    private Camera _camera;
 
-	private void OnSingleTap()
-	{
-		if (!_canInput)
-		{
-			return;
-		}
-		
-		foreach (var inputLayer in _inputLayers)
-		{
-			if (inputLayer.InputPriority < InputPriorityCut)
-			{
-				continue;
-			}
-			
-			if (inputLayer.OnSingleTap(_lastInteractedWorldPosition))
-			{
-				break;
-			}
-		}
-	}
+    private IFarmInputLayer _holdingLayer;
+
+    private Vector2 _initialHoldWorldPosition;
+    private List<IFarmInputLayer> _inputLayers;
+    private List<Func<bool>> _canInputConditions;
+    private bool _canInput; // Update()에서 _canInputConditions에 의해 평가됨.
+
+    private float _zoomMomentum;
+
+    public void FullZoomOut()
+    {
+        _camera.orthographicSize = MaximumProjectionSize;
+    }
+
+    public void RegisterInputLayer(IFarmInputLayer inputLayer)
+    {
+        _inputLayers.Add(inputLayer);
+        _inputLayers.Sort((left, right) => right.InputPriority.CompareTo(left.InputPriority));
+    }
+
+    public void AddCanInputCondition(Func<bool> condition) => _canInputConditions.Add(condition);
+
+    private void FixedUpdate()
+    {
+        _primaryPointerData.PreviousScreenPosition = _primaryPointerData.CurrentScreenPosition;
+        _secondaryPointerData.PreviousScreenPosition = _secondaryPointerData.CurrentScreenPosition;
+        _primaryPointerData.CurrentScreenPosition = primaryPointerAction.action.ReadValue<Vector2>();
+        _secondaryPointerData.CurrentScreenPosition = secondaryPointerAction.action.ReadValue<Vector2>();
+
+        var isPrimaryPointerCurrentInput = primaryPointerAction.action.phase != InputActionPhase.Waiting;
+        var isSecondaryPointerCurrentInput = secondaryPointerAction.action.phase != InputActionPhase.Waiting;
+        if (!_primaryPointerData.WasPreviousFrameInput && isPrimaryPointerCurrentInput)
+        {
+            _primaryPointerData.PreviousScreenPosition = _primaryPointerData.CurrentScreenPosition;
+        }
+        if (!_secondaryPointerData.WasPreviousFrameInput && isSecondaryPointerCurrentInput)
+        {
+            _secondaryPointerData.PreviousScreenPosition = _secondaryPointerData.CurrentScreenPosition;
+        }
+
+        _primaryPointerData.WasPreviousFrameInput = isPrimaryPointerCurrentInput;
+        _secondaryPointerData.WasPreviousFrameInput = isSecondaryPointerCurrentInput;
+        
+        _canInput = _canInputConditions.All(canInput => canInput());
+        if (!_canInput)
+        {
+            return;
+        }
+
+        var currentPointerWorldPosition = GetCurrentPrimaryPointerWorldPosition();
+        if (holdAction.action.phase == InputActionPhase.Started)
+        {
+            _initialHoldWorldPosition = currentPointerWorldPosition;
+        }
+
+        HandleHolding(currentPointerWorldPosition);
+        HandleCameraMove();
+        HandleZoom();
+    }
+
+    private void Awake()
+    {
+        _canInputConditions = new();
+        _inputLayers = new();
+        _camera = GetComponent<Camera>();
+        _camera.tag = "MainCamera";
+
+        tapAction.action.performed += _ => OnTapActionPerformed();
+        
+        _debugText = transform.Find("Canvas/AA").GetComponent<TMP_Text>();
+    }
+
+    private void MoveCamera(Vector2 worldPosition)
+    {
+        var newPosition = new Vector3(worldPosition.x, worldPosition.y, -10.0f);
+        var movableMultiplier = (MaximumProjectionSize - _camera.orthographicSize) /
+                                (MaximumProjectionSize - MinimumProjectionSize);
+
+        newPosition.x = Mathf.Clamp(newPosition.x, -MovableWidth * movableMultiplier, MovableWidth * movableMultiplier);
+        newPosition.y = Mathf.Clamp(newPosition.y, -MovableHeight * movableMultiplier,
+            MovableHeight * movableMultiplier);
+        transform.position = newPosition;
+    }
+
+    private void HandleHolding(Vector2 currentPointerWorldPosition)
+    {
+        var isHolding = holdAction.action.phase == InputActionPhase.Performed;
+        if (!isHolding)
+        {
+            if (_holdingLayer is not null)
+            {
+                _holdingLayer.OnHold(_initialHoldWorldPosition, Vector2.zero, true, 0.0f);
+                _holdingLayer = null;
+            }
+            return;
+        }
+
+        var deltaWorldPosition = new Vector2(currentPointerWorldPosition.x - _initialHoldWorldPosition.x,
+            currentPointerWorldPosition.y - _initialHoldWorldPosition.y);
+
+        if (_holdingLayer is not null)
+        {
+            _holdingLayer.OnHold(_initialHoldWorldPosition, deltaWorldPosition, false, Time.deltaTime);
+            return;
+        }
+
+        foreach (var inputLayer in _inputLayers)
+        {
+            if (inputLayer.InputPriority < InputPriorityCut)
+            {
+                continue;
+            }
+
+            if (inputLayer.OnHold(
+                    _initialHoldWorldPosition,
+                    Vector2.zero,
+                    false,
+                    0.0f
+                ))
+            {
+                _holdingLayer = inputLayer;
+                break;
+            }
+        }
+    }
+
+    private void HandleCameraMove()
+    {
+        if (holdAction.action.phase != InputActionPhase.Performed || 
+            _holdingLayer is not null)
+        {
+            return;
+        }
+
+        var previousCameraScreenPosition = _camera.WorldToScreenPoint(transform.position);
+        var deltaScreenPosition = _primaryPointerData.CurrentScreenPosition - _primaryPointerData.PreviousScreenPosition;
+        if (secondaryPointerAction.action.phase != InputActionPhase.Waiting)
+        {
+            deltaScreenPosition += _secondaryPointerData.CurrentScreenPosition - _secondaryPointerData.PreviousScreenPosition;
+            deltaScreenPosition /= 2.0f;
+        }
+
+        deltaScreenPosition *= _camera.orthographicSize;
+
+        var currentCameraScreenPosition = new Vector2(previousCameraScreenPosition.x - deltaScreenPosition.x,
+            previousCameraScreenPosition.y - deltaScreenPosition.y);
+        
+        var currentCameraWorldPosition = _camera.ScreenToWorldPoint(currentCameraScreenPosition);
+        MoveCamera(currentCameraWorldPosition);
+    }
+
+    private void HandleZoom()
+    {
+        var mouseWheelActionValue = mouseWheelAction.action.ReadValue<float>();
+        if (mouseWheelActionValue != 0.0f)
+        {
+            _zoomMomentum = -5.0f * mouseWheelActionValue;
+        }
+
+        if (primaryPointerAction.action.phase != InputActionPhase.Waiting &&
+            secondaryPointerAction.action.phase != InputActionPhase.Waiting)
+        {
+            var previousDelta = _primaryPointerData.PreviousScreenPosition - _secondaryPointerData.PreviousScreenPosition;
+            var currentDelta = _primaryPointerData.CurrentScreenPosition - _secondaryPointerData.CurrentScreenPosition;
+
+            var scale = currentDelta.sqrMagnitude != 0.0f ? previousDelta.magnitude / currentDelta.magnitude : 1.0f;
+            var previousOrthographicSize = _camera.orthographicSize;
+            _camera.orthographicSize = Mathf.Clamp(previousOrthographicSize * scale, MinimumProjectionSize, MaximumProjectionSize);
+        }
+
+        var currentProjectionSize = _camera.orthographicSize;
+        var newProjectionSize = Mathf.Clamp(currentProjectionSize + _zoomMomentum * 0.07f, MinimumProjectionSize,
+            MaximumProjectionSize);
+        _camera.orthographicSize = newProjectionSize;
 
 
-	// 누르는 순간, 떼는 순간만 감지하기 때문에, 실제 호출은 Update()에서 진행.
-	private void OnSingleHold(InputValue inputValue)
-	{
-		if (!_canInput)
-		{
-			return;
-		}
-		
-		var isCurrentFrameHolding = inputValue.Get<float>() >= 0.5f;
+        var dampedMomentum = _zoomMomentum < 0.0f
+            ? Mathf.Min(_zoomMomentum + Time.deltaTime * 5.0f, 0.0f)
+            : Mathf.Max(_zoomMomentum - Time.deltaTime * 5.0f, 0.0f);
+        _zoomMomentum = dampedMomentum;
+        MoveCamera(new Vector2(transform.position.x, transform.position.y));
+    }
 
-		if (!_isSingleHolding && isCurrentFrameHolding)
-		{
-			_initialSingleHoldingWorldPosition = _lastInteractedWorldPosition;
-		}
+    private void OnTapActionPerformed()
+    {
+        foreach (var inputLayer in _inputLayers)
+        {
+            if (inputLayer.OnTap(GetCurrentPrimaryPointerWorldPosition()))
+            {
+                break;
+            }
+        }
+    }
 
-		_isSingleHolding = isCurrentFrameHolding;
-	}
-
-	private void OnMouseWheel(InputValue inputValue)
-	{
-		if (!_canInput)
-		{
-			return;
-		}
-		
-		var input = inputValue.Get<float>();
-		if (input != 0.0f)
-		{
-			_zoomMomentum = -1.0f * input;
-		}
-	}
-
-
-	private void Update()
-	{
-		_canInput = _canInputConditions.All(canInput => canInput());
-		
-		var interactScreenPosition = interactAction.action.ReadValue<Vector2>();
-		var interactWorldPosition = _camera.ScreenToWorldPoint(new Vector3(interactScreenPosition.x, interactScreenPosition.y, 10.0f));
-		var deltaWorldPosition = new Vector2(interactWorldPosition.x, interactWorldPosition.y) - _lastInteractedWorldPosition;
-		_lastInteractedWorldPosition = interactWorldPosition;
-		
-		if (_isSingleHolding)
-		{
-			_singleHoldingTimeElapsed += Time.deltaTime;
-
-			bool isHandled = false;
-			foreach (var inputLayer in _inputLayers)
-			{
-				if (inputLayer.InputPriority < InputPriorityCut)
-				{
-					continue;
-				}
-				
-				if (inputLayer.OnSingleHolding(
-					_initialSingleHoldingWorldPosition,
-					new Vector2(interactWorldPosition.x, interactWorldPosition.y) - _initialSingleHoldingWorldPosition,
-					false,
-					Time.deltaTime
-				))
-				{
-					isHandled = true;
-					break;
-				}
-			}
-
-			if (!isHandled)
-			{
-				var cameraDelta = new Vector2(deltaWorldPosition.x * -1.0f, deltaWorldPosition.y * -1.0f);
-				MoveCamera(new Vector2(transform.position.x, transform.position.y) + cameraDelta * (CameraMovementScale * _camera.orthographicSize));
-			}
-		}
-		else if (_singleHoldingTimeElapsed > 0.0f) // Single Hold가 종료된 이후의 첫 프레임임을 의미.
-		{
-			_singleHoldingTimeElapsed = 0.0f;
-
-			_inputLayers.ForEach(inputLayer => inputLayer.OnSingleHolding(
-					_initialSingleHoldingWorldPosition,
-					Vector2.zero,
-					true,
-					Time.deltaTime
-				));
-		}
-
-		var currentProjectionSize = _camera.orthographicSize;
-		var newProjectionSize = Mathf.Clamp(currentProjectionSize + _zoomMomentum * 0.07f, MinimumProjectionSize, MaximumProjectionSize);
-		_camera.orthographicSize = newProjectionSize;
-
-
-		var dampedMomentum = _zoomMomentum < 0.0f ? Mathf.Min(_zoomMomentum + Time.deltaTime * 5.0f, 0.0f) : Mathf.Max(_zoomMomentum - Time.deltaTime * 5.0f, 0.0f);
-		_zoomMomentum = dampedMomentum;
-		MoveCamera(new Vector2(transform.position.x, transform.position.y));
-	}
-
-	private void Awake()
-	{
-		_canInputConditions = new();
-		_inputLayers = new();
-		_camera = GetComponent<Camera>();
-		_camera.tag = "MainCamera";
-	}
-
-	private void MoveCamera(Vector2 worldPosition)
-	{
-		var newPosition = new Vector3(worldPosition.x, worldPosition.y, -10.0f);
-		var movableMultiplier = (MaximumProjectionSize - _camera.orthographicSize) / (MaximumProjectionSize - MinimumProjectionSize);
-
-		newPosition.x = Mathf.Clamp(newPosition.x, -MovableWidth * movableMultiplier, MovableWidth * movableMultiplier);
-		newPosition.y = Mathf.Clamp(newPosition.y, -MovableHeight * movableMultiplier, MovableHeight * movableMultiplier);
-		transform.position = newPosition;
-	}
+    private Vector2 GetCurrentPrimaryPointerWorldPosition() =>
+        _camera.ScreenToWorldPoint(_primaryPointerData.CurrentScreenPosition);
 }

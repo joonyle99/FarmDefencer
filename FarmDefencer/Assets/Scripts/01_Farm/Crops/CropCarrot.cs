@@ -72,14 +72,14 @@ public sealed class CropCarrot : Crop
 		}
 	}
 
-	public override void OnSingleTap(Vector2 inputWorldPosition)
+	public override void OnTap(Vector2 inputWorldPosition)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
-			OnSingleTapFunctions[GetCurrentStage(_currentState)], _currentState)
+			OnTapFunctions[GetCurrentStage(_currentState)], _currentState)
 
 			(inputWorldPosition, transform.position);
 	}
@@ -147,7 +147,7 @@ public sealed class CropCarrot : Crop
 		{CarrotStage.Harvested, DoNothing_OnFarmUpdate },
 	};
 
-	private static readonly Dictionary<CarrotStage, Func<CarrotState, CarrotState>> OnSingleTapFunctions = new()
+	private static readonly Dictionary<CarrotStage, Func<CarrotState, CarrotState>> OnTapFunctions = new()
 	{
 		{CarrotStage.Seed, Plant },
 		{CarrotStage.BeforeWater, DoNothing },

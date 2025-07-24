@@ -107,7 +107,7 @@ public sealed class EffectPlayer : MonoBehaviour
 		_vfxAnimator = transform.GetChild(1).GetComponent<Animator>();
 	}
 
-	private void Update()
+	private void FixedUpdate()
 	{
 		if (!_isHolding)
 		{

@@ -37,7 +37,7 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
         _background.gameObject.SetActive(true);
     }
     
-    public bool OnSingleTap(Vector2 worldPosition)
+    public bool OnTap(Vector2 worldPosition)
     {
         if (!gameObject.activeSelf
             ||_currentTutorialField is null)
@@ -49,7 +49,7 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
         {
             if (_currentTutorialField.TargetCrop.AABB(worldPosition))
             {
-                _currentTutorialField.TargetCrop.OnSingleTap(worldPosition);
+                _currentTutorialField.TargetCrop.OnTap(worldPosition);
             }
             
             _lastInputTime = Time.time;
@@ -60,7 +60,7 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
         return false;
     }
 
-    public bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 offset, bool isEnd, float deltaHoldTime)
+    public bool OnHold(Vector2 initialWorldPosition, Vector2 offset, bool isEnd, float deltaHoldTime)
     {
         if (!gameObject.activeSelf
             || _currentTutorialField is null)
@@ -72,7 +72,7 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
         {
             if (_currentTutorialField.TargetCrop.AABB(initialWorldPosition))
             {
-                _currentTutorialField.Field.OnSingleHolding(initialWorldPosition, offset, isEnd, deltaHoldTime);
+                _currentTutorialField.Field.OnHold(initialWorldPosition, offset, isEnd, deltaHoldTime);
             }
             
             _lastInputTime = Time.time;

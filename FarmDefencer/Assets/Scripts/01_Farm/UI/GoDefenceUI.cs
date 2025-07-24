@@ -19,12 +19,12 @@ public sealed class GoDefenceUI : MonoBehaviour, IFarmInputLayer
 
     public int InputPriority => 1000;
     
-    public bool OnSingleTap(Vector2 worldPosition)
+    public bool OnTap(Vector2 worldPosition)
     {
         return gameObject.activeSelf;
     }
 
-    public bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
+    public bool OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
     {
         return gameObject.activeSelf;
     }

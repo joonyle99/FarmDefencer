@@ -125,14 +125,14 @@ public sealed class CropEggplant : Crop
 			(transform.position, transform.position);
 	}
 
-	public override void OnSingleTap(Vector2 worldPosition)
+	public override void OnTap(Vector2 worldPosition)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
-			OnSingleTapFunctions[GetCurrentStage(_currentState)], 
+			OnTapFunctions[GetCurrentStage(_currentState)], 
 			_currentState)
 
 			(worldPosition, transform.position);
@@ -219,7 +219,7 @@ public sealed class CropEggplant : Crop
 
 	};
 
-	private static readonly Dictionary<EggplantStage, Func<EggplantState, EggplantState>> OnSingleTapFunctions = new()
+	private static readonly Dictionary<EggplantStage, Func<EggplantState, EggplantState>> OnTapFunctions = new()
 	{
 		{EggplantStage.Seed, Plant },
 

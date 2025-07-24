@@ -78,7 +78,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 	/// 한 손가락으로 탭할 때의 동작을 정의.
 	/// </summary>
 	/// <param name="inputWorldPosition"></param>
-	public virtual void OnSingleTap(Vector2 inputWorldPosition) { }
+	public virtual void OnTap(Vector2 inputWorldPosition) { }
 
 	/// <summary>
 	/// 한 손가락으로 꾹 누를 때의 동작을 정의.
@@ -87,7 +87,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 	/// <param name="deltaWorldPosition">첫 홀드 위치와 현재 홀드 위치의 차이.</param>
 	/// <param name="isEnd">홀드가 종료되어 마지막 액션인 경우 true.</param>
 	/// <param name="deltaHoldTime"></param>
-	public virtual void OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime) { }
+	public virtual void OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime) { }
 
 	public virtual void OnWatering() { }
 
@@ -170,7 +170,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 			}
 		};
 	}
-	protected static TState DoNothing_OnSingleHolding<TState>(TState beforeState, Vector2 initialWorldPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime) where TState : struct, ICommonCropState => DoNothing(beforeState);
+	protected static TState DoNothing_OnHold<TState>(TState beforeState, Vector2 initialWorldPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime) where TState : struct, ICommonCropState => DoNothing(beforeState);
 	protected static TState DoNothing_OnFarmUpdate<TState>(TState beforeState, float deltaTime) where TState : struct, ICommonCropState => DoNothing(beforeState);
 
 	// 이펙트 조건 및 실행 함수

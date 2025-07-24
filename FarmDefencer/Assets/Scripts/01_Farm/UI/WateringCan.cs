@@ -54,12 +54,12 @@ public sealed class WateringCan :
 	private Spine.AnimationState _spineAnimationState;
 	private bool _isWateredThisTime; // 이벤트 중복 호출 방지용
 
-	public bool OnSingleTap(Vector2 worldPosition)
+	public bool OnTap(Vector2 worldPosition)
 	{
 		return false;
 	}
 
-	public bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
+	public bool OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
 	{
 		if (isEnd)
 		{

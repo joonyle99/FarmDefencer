@@ -6,55 +6,46 @@
             "id": "031d350d-7080-4aec-b29e-bdd3d0d809e0",
             "actions": [
                 {
-                    "name": "CameraMove",
-                    "type": "Value",
-                    "id": "517c9ba2-cfd1-4ef5-9471-ecb5c70f0c61",
-                    "expectedControlType": "Vector2",
-                    "processors": "InvertVector2",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Interact",
-                    "type": "Value",
-                    "id": "58edcc13-703e-4865-ab07-34ac5c6e6ea7",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "SingleTap",
+                    "name": "Tap",
                     "type": "Button",
                     "id": "ec52ef3c-a03e-428a-bb16-d0ec481e883c",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": true
                 },
                 {
-                    "name": "SingleHold",
-                    "type": "Value",
+                    "name": "Hold",
+                    "type": "Button",
                     "id": "4319d5e5-4895-4e3a-90d9-09ed7e710c85",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "DoubleHold",
-                    "type": "Value",
-                    "id": "54c9e419-7fab-46c8-b2b9-978683f823a0",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": true
                 },
                 {
                     "name": "MouseWheel",
                     "type": "Value",
                     "id": "b01dba77-ed71-47a7-8905-bafbc5e10e50",
-                    "expectedControlType": "",
+                    "expectedControlType": "Delta",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "PrimaryPointer",
+                    "type": "Value",
+                    "id": "bf1e29f4-8eff-4edd-8b89-a178382ac19d",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SecondaryPointer",
+                    "type": "Value",
+                    "id": "76708ea8-bfbb-487e-8ee6-9cf61e0ea082",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -62,134 +53,13 @@
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
-                    "id": "3c5fad80-8454-4dbb-b626-28fa90e1b162",
-                    "path": "2DVector(mode=2)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraMove",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "ee631ae9-4ae3-43f8-ac98-598035446c73",
-                    "path": "<Mouse>/delta/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";PC(Debug)",
-                    "action": "CameraMove",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "b7692771-50f8-4326-9252-a68c4624a01f",
-                    "path": "<Mouse>/delta/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";PC(Debug)",
-                    "action": "CameraMove",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "76d24182-eb06-4998-9e07-d398f0a0fc55",
-                    "path": "<Mouse>/delta/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";PC(Debug)",
-                    "action": "CameraMove",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "7758f04a-6d93-4c40-9aea-cf10c4b8456a",
-                    "path": "<Mouse>/delta/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";PC(Debug)",
-                    "action": "CameraMove",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "2D Vector",
-                    "id": "a77dab22-02c5-480a-9c39-23936b1faa41",
-                    "path": "2DVector(mode=2)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraMove",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "4856a27f-d19f-4c59-bd92-378971db4faa",
-                    "path": "<Touchscreen>/delta/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Mobile",
-                    "action": "CameraMove",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "d4f94087-e9e4-4305-8ea6-43c648641915",
-                    "path": "<Touchscreen>/delta/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Mobile",
-                    "action": "CameraMove",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "f8916b79-9cac-4fcf-b2ec-cb0f242d8b11",
-                    "path": "<Touchscreen>/delta/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Mobile",
-                    "action": "CameraMove",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "4b2075f0-c437-41a3-b928-2c53be379b25",
-                    "path": "<Touchscreen>/delta/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Mobile",
-                    "action": "CameraMove",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "149916c4-b9a5-4f81-b6d8-8ba1e2c1c9c6",
-                    "path": "<Pointer>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";PC(Debug);Mobile",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "",
                     "id": "aec43232-a461-4642-b972-91a5a731eb71",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": ";PC(Debug)",
-                    "action": "SingleTap",
+                    "action": "Tap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -200,7 +70,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Mobile",
-                    "action": "SingleTap",
+                    "action": "Tap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -211,40 +81,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";PC(Debug)",
-                    "action": "SingleHold",
+                    "action": "Hold",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "c5763549-f7b5-4aae-945c-f0942099e1b9",
-                    "path": "<Touchscreen>/pressure",
+                    "id": "74be4ceb-422a-4a5b-a067-7853d434b2aa",
+                    "path": "<Touchscreen>/Press",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Mobile",
-                    "action": "SingleHold",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "94382cc1-73e1-4d6c-b107-f7948d78ecfc",
-                    "path": "<Mouse>/middleButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";PC(Debug)",
-                    "action": "DoubleHold",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b364b182-df64-4ace-a018-999a3e9ac3ae",
-                    "path": "<Touchscreen>/touch*/Press",
-                    "interactions": "",
-                    "processors": "Scale",
-                    "groups": ";Mobile",
-                    "action": "DoubleHold",
+                    "action": "Hold",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -258,6 +106,83 @@
                     "action": "MouseWheel",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ef2bbb99-2c5b-42eb-a6d7-b3aa8bd1b843",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";PC(Debug)",
+                    "action": "PrimaryPointer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "3ac6ae16-7fb3-434d-8c5f-ce40e3f56aa4",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrimaryPointer",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "e4eb40f0-22b2-4ec8-a1ef-8fdc4c9c0677",
+                    "path": "<Touchscreen>/touch0/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Mobile",
+                    "action": "PrimaryPointer",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "4788e177-8d32-43cf-80f1-9a7120cf2f2c",
+                    "path": "<Touchscreen>/touch0/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Mobile",
+                    "action": "PrimaryPointer",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "f5d8154a-aca6-4718-a41c-6ddb34095daa",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SecondaryPointer",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "41d45766-863d-4b51-9854-921a7ea1a351",
+                    "path": "<Touchscreen>/touch1/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Mobile",
+                    "action": "SecondaryPointer",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "a7c91640-b0f0-4b79-8f28-27f5f66f9681",
+                    "path": "<Touchscreen>/touch1/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Mobile",
+                    "action": "SecondaryPointer",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

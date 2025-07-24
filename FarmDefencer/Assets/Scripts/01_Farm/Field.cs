@@ -141,13 +141,13 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
         }
     }
 
-    public bool OnSingleTap(Vector2 worldPosition)
+    public bool OnTap(Vector2 worldPosition)
     {
         if (IsAvailable
             && TryFindCropAt(worldPosition, out var crop)
             && !_lockedCrops.Contains(crop))
         {
-            crop.OnSingleTap(worldPosition);
+            crop.OnTap(worldPosition);
             return true;
         }
 
@@ -170,14 +170,14 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
         }
     }
 
-    public bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd,
+    public bool OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd,
         float deltaHoldTime)
     {
         if (IsAvailable
             && TryFindCropAt(initialWorldPosition, out var crop)
             && !_lockedCrops.Contains(crop))
         {
-            crop.OnSingleHolding(initialWorldPosition, deltaWorldPosition, isEnd, deltaHoldTime);
+            crop.OnHold(initialWorldPosition, deltaWorldPosition, isEnd, deltaHoldTime);
             return true;
         }
 

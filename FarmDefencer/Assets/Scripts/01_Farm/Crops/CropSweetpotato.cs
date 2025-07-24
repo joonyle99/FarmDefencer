@@ -124,20 +124,20 @@ public sealed class CropSweetpotato : Crop
 		}
 	}
 	
-	public override void OnSingleTap(Vector2 worldPosition)
+	public override void OnTap(Vector2 worldPosition)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
-			OnSingleTapFunctions[GetCurrentStage(_currentState)],
+			OnTapFunctions[GetCurrentStage(_currentState)],
 			_currentState)
 
 			(worldPosition, transform.position);
 	}
 
-	public override void OnSingleHolding(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
+	public override void OnHold(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
 	{
 		var currentStage = GetCurrentStage(_currentState);
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
@@ -147,7 +147,7 @@ public sealed class CropSweetpotato : Crop
 			NotifyQuotaFilled,
 			(beforeState) =>
 			{
-				return OnSingleHoldingFunctions[currentStage](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime);
+				return OnHoldFunctions[currentStage](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime);
 			},
 			_currentState)
 
@@ -552,7 +552,7 @@ public sealed class CropSweetpotato : Crop
 		{SweetpotatoStage.Harvested, DoNothing_OnFarmUpdate },
 	};
 
-	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, SweetpotatoState>> OnSingleTapFunctions = new()
+	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, SweetpotatoState>> OnTapFunctions = new()
 	{
 		{SweetpotatoStage.Unplowed, DoNothing },
 
@@ -573,25 +573,25 @@ public sealed class CropSweetpotato : Crop
 		{SweetpotatoStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, beforeState.RemainingSweetpotatoCount) },
 	};
 
-	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, Vector2, Vector2, bool, float, SweetpotatoState>> OnSingleHoldingFunctions = new()
+	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, Vector2, Vector2, bool, float, SweetpotatoState>> OnHoldFunctions = new()
 	{
 		{SweetpotatoStage.Unplowed, Plow },
 
-		{SweetpotatoStage.Stage1_Dead, DoNothing_OnSingleHolding },
-		{SweetpotatoStage.Stage1_BeforeWater, DoNothing_OnSingleHolding },
-		{SweetpotatoStage.Stage1_Growing, DoNothing_OnSingleHolding },
+		{SweetpotatoStage.Stage1_Dead, DoNothing_OnHold },
+		{SweetpotatoStage.Stage1_BeforeWater, DoNothing_OnHold },
+		{SweetpotatoStage.Stage1_Growing, DoNothing_OnHold },
 
-		{SweetpotatoStage.Stage2_BeforeWater, DoNothing_OnSingleHolding },
-		{SweetpotatoStage.Stage2_Dead, DoNothing_OnSingleHolding },
-		{SweetpotatoStage.Stage2_Growing, DoNothing_OnSingleHolding },
+		{SweetpotatoStage.Stage2_BeforeWater, DoNothing_OnHold },
+		{SweetpotatoStage.Stage2_Dead, DoNothing_OnHold },
+		{SweetpotatoStage.Stage2_Growing, DoNothing_OnHold },
 
 		{SweetpotatoStage.Stage3_BeforeWrap, Wrap },
-		{SweetpotatoStage.Stage3_AfterWrap, DoNothing_OnSingleHolding },
+		{SweetpotatoStage.Stage3_AfterWrap, DoNothing_OnHold },
 
-		{SweetpotatoStage.Stage4, DoNothing_OnSingleHolding },
+		{SweetpotatoStage.Stage4, DoNothing_OnHold },
 
-		{SweetpotatoStage.Mature, DoNothing_OnSingleHolding },
-		{SweetpotatoStage.Harvested, DoNothing_OnSingleHolding },
+		{SweetpotatoStage.Mature, DoNothing_OnHold },
+		{SweetpotatoStage.Harvested, DoNothing_OnHold },
 	};	
 	
 	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, RequiredCropAction>> GetRequiredCropActionFunctions = new()

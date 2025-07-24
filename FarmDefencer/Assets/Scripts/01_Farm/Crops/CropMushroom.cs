@@ -135,20 +135,20 @@ public sealed class CropMushroom : Crop
 		}
 	}
 	
-	public override void OnSingleTap(Vector2 worldPosition)
+	public override void OnTap(Vector2 worldPosition)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
-			OnSingleTapFunctions[GetCurrentStage(_currentState)],
+			OnTapFunctions[GetCurrentStage(_currentState)],
 			_currentState)
 
 			(worldPosition, transform.position);
 	}
 
-	public override void OnSingleHolding(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
+	public override void OnHold(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
@@ -158,7 +158,7 @@ public sealed class CropMushroom : Crop
 			(beforeState)
 			=>
 			{
-				return OnSingleHoldingFunctions[GetCurrentStage(_currentState)](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime);
+				return OnHoldFunctions[GetCurrentStage(_currentState)](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime);
 			},
 			_currentState)
 
@@ -485,7 +485,7 @@ public sealed class CropMushroom : Crop
 
 	};
 
-	private static readonly Dictionary<MushroomStage, Func<MushroomState, MushroomState>> OnSingleTapFunctions = new()
+	private static readonly Dictionary<MushroomStage, Func<MushroomState, MushroomState>> OnTapFunctions = new()
 	{
 		{MushroomStage.Unplowed, DoNothing },
 
@@ -505,24 +505,24 @@ public sealed class CropMushroom : Crop
 		{MushroomStage.Harvested, FillQuotaOneAndResetIfSucceeded },
 	};
 
-	private static readonly Dictionary<MushroomStage, Func<MushroomState, Vector2, Vector2, bool, float, MushroomState>> OnSingleHoldingFunctions = new()
+	private static readonly Dictionary<MushroomStage, Func<MushroomState, Vector2, Vector2, bool, float, MushroomState>> OnHoldFunctions = new()
 	{
 		{MushroomStage.Unplowed, Plow },
 
-		{MushroomStage.Stage1_Dead, DoNothing_OnSingleHolding },
-		{MushroomStage.Stage1_BeforeWater, DoNothing_OnSingleHolding },
-		{MushroomStage.Stage1_Growing, DoNothing_OnSingleHolding },
+		{MushroomStage.Stage1_Dead, DoNothing_OnHold },
+		{MushroomStage.Stage1_BeforeWater, DoNothing_OnHold },
+		{MushroomStage.Stage1_Growing, DoNothing_OnHold },
 
-		{MushroomStage.Stage2_BeforeWater, DoNothing_OnSingleHolding },
-		{MushroomStage.Stage2_Dead, DoNothing_OnSingleHolding },
-		{MushroomStage.Stage2_Growing, DoNothing_OnSingleHolding },
+		{MushroomStage.Stage2_BeforeWater, DoNothing_OnHold },
+		{MushroomStage.Stage2_Dead, DoNothing_OnHold },
+		{MushroomStage.Stage2_Growing, DoNothing_OnHold },
 
 		{MushroomStage.Stage3_BeforeInoculation, Inoculate },
-		{MushroomStage.Stage3_AfterInoculation, DoNothing_OnSingleHolding },
+		{MushroomStage.Stage3_AfterInoculation, DoNothing_OnHold },
 
-		{MushroomStage.Mature, DoNothing_OnSingleHolding },
-		{MushroomStage.Booming, DoNothing_OnSingleHolding },
-		{MushroomStage.Harvested, DoNothing_OnSingleHolding },
+		{MushroomStage.Mature, DoNothing_OnHold },
+		{MushroomStage.Booming, DoNothing_OnHold },
+		{MushroomStage.Harvested, DoNothing_OnHold },
 	};
 	
 	private static readonly Dictionary<MushroomStage, Func<MushroomState, RequiredCropAction>> GetRequiredCropActionFunctions = new()

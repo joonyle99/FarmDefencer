@@ -139,7 +139,7 @@ public sealed class PestGiver
         _runningPests.RemoveAll(p => p.State == PestState.Arrived);
     }
 
-    public bool OnSingleTap(Vector2 worldPosition)
+    public bool OnTap(Vector2 worldPosition)
     {
         if (_isFarmPaused())
         {
@@ -176,7 +176,7 @@ public sealed class PestGiver
         return true;
     }
 
-    public bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd,
+    public bool OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd,
         float deltaHoldTime) => false;
     
     public JObject Serialize()

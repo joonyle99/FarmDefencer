@@ -23,5 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ActualBuild/MapStageSelectScenes/MapStageSelectScene_cave.unity
     guid: bbfcf24cdfaf1ce40848cbd348f4190f
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 13ae7c0add592614f8cc9c847d92eb1d, type: 2}
   m_UseUCBPForAssetBundles: 0

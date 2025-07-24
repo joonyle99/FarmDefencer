@@ -75,20 +75,20 @@ public sealed class CropPotato : Crop
 		}
 	}
 	
-	public override void OnSingleTap(Vector2 inputWorldPosition)
+	public override void OnTap(Vector2 inputWorldPosition)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
-			OnSingleTapFunctions[GetCurrentStage(_currentState)],
+			OnTapFunctions[GetCurrentStage(_currentState)],
 			_currentState)
 
 			(inputWorldPosition, transform.position);
 	}
 
-	public override void OnSingleHolding(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
+	public override void OnHold(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
@@ -98,7 +98,7 @@ public sealed class CropPotato : Crop
 			(beforeState)
 			=>
 			{
-				return OnSingleHoldingFunctions[GetCurrentStage(_currentState)](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime);
+				return OnHoldFunctions[GetCurrentStage(_currentState)](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime);
 			},
 			_currentState)
 
@@ -168,7 +168,7 @@ public sealed class CropPotato : Crop
 		{PotatoStage.Harvested, DoNothing_OnFarmUpdate },
 	};
 
-	private static readonly Dictionary<PotatoStage, Func<PotatoState, PotatoState>> OnSingleTapFunctions = new()
+	private static readonly Dictionary<PotatoStage, Func<PotatoState, PotatoState>> OnTapFunctions = new()
 	{
 		{PotatoStage.Seed, Plant },
 		{PotatoStage.BeforeWater, DoNothing },
@@ -178,13 +178,13 @@ public sealed class CropPotato : Crop
 		{PotatoStage.Harvested, FillQuotaOneAndResetIfSucceeded },
 	};
 
-	private static readonly Dictionary<PotatoStage, Func<PotatoState, Vector2, Vector2, bool, float, PotatoState>> OnSingleHoldingFunctions = new()
+	private static readonly Dictionary<PotatoStage, Func<PotatoState, Vector2, Vector2, bool, float, PotatoState>> OnHoldFunctions = new()
 	{
-		{PotatoStage.Seed, DoNothing_OnSingleHolding },
-		{PotatoStage.BeforeWater, DoNothing_OnSingleHolding },
-		{PotatoStage.Dead, DoNothing_OnSingleHolding },
-		{PotatoStage.Growing, DoNothing_OnSingleHolding },
-		{PotatoStage.Harvested, DoNothing_OnSingleHolding },
+		{PotatoStage.Seed, DoNothing_OnHold },
+		{PotatoStage.BeforeWater, DoNothing_OnHold },
+		{PotatoStage.Dead, DoNothing_OnHold },
+		{PotatoStage.Growing, DoNothing_OnHold },
+		{PotatoStage.Harvested, DoNothing_OnHold },
 		{
 			PotatoStage.Mature,
 			(beforeState, _, _, isEnd, deltaHoldTime) =>

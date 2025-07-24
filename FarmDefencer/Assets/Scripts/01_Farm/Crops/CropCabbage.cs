@@ -19,7 +19,6 @@ public sealed class CropCabbage : Crop
 		public float GrowthSeconds { get; set; }
 		public bool Watered { get; set; }
 		public bool Harvested { get; set; }
-		public float HoldingTime { get; set; }
 		public int RemainingQuota { get; set; }
 		public float Shake { get; set; }
 		public int ShakeCount { get; set; }
@@ -100,14 +99,14 @@ public sealed class CropCabbage : Crop
 		}
 	}
 	
-	public override void OnSingleTap(Vector2 worldPosition)
+	public override void OnTap(Vector2 worldPosition)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
-			OnSingleTapFunctions[GetCurrentStage(_currentState)], _currentState)
+			OnTapFunctions[GetCurrentStage(_currentState)], _currentState)
 
 			(worldPosition, transform.position);
 	}
@@ -125,7 +124,7 @@ public sealed class CropCabbage : Crop
 			(transform.position, transform.position);
 	}
 
-	public override void OnSingleHolding(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
+	public override void OnHold(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
 
@@ -135,7 +134,7 @@ public sealed class CropCabbage : Crop
 			(beforeState)
 			=>
 			{
-				return OnSingleHoldingFunctions[GetCurrentStage(_currentState)](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime);
+				return OnHoldFunctions[GetCurrentStage(_currentState)](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime);
 			},
 			_currentState)
 
@@ -308,7 +307,7 @@ public sealed class CropCabbage : Crop
 		},
 	};
 
-	private static readonly Dictionary<CabbageStage, Func<CabbageState, CabbageState>> OnSingleTapFunctions = new()
+	private static readonly Dictionary<CabbageStage, Func<CabbageState, CabbageState>> OnTapFunctions = new()
 	{
 		{CabbageStage.Seed, Plant },
 		{CabbageStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
@@ -324,19 +323,19 @@ public sealed class CropCabbage : Crop
 	};
 
 
-	private static readonly Dictionary<CabbageStage, Func<CabbageState, Vector2, Vector2, bool, float, CabbageState>> OnSingleHoldingFunctions = new Dictionary<CabbageStage, Func<CabbageState, Vector2, Vector2, bool, float, CabbageState>>
+	private static readonly Dictionary<CabbageStage, Func<CabbageState, Vector2, Vector2, bool, float, CabbageState>> OnHoldFunctions = new()
 	{
-		{CabbageStage.Seed, DoNothing_OnSingleHolding },
-		{CabbageStage.Harvested, DoNothing_OnSingleHolding },
+		{CabbageStage.Seed, DoNothing_OnHold },
+		{CabbageStage.Harvested, DoNothing_OnHold },
 		{CabbageStage.Mature, ShakeAndHarvest },
 		
-		{CabbageStage.Stage2_BeforeWater, DoNothing_OnSingleHolding },
-		{CabbageStage.Stage2_Dead, DoNothing_OnSingleHolding },
-		{CabbageStage.Stage2_Growing, DoNothing_OnSingleHolding },
+		{CabbageStage.Stage2_BeforeWater, DoNothing_OnHold },
+		{CabbageStage.Stage2_Dead, DoNothing_OnHold },
+		{CabbageStage.Stage2_Growing, DoNothing_OnHold },
 		
-		{CabbageStage.Stage1_BeforeWater, DoNothing_OnSingleHolding },
-		{CabbageStage.Stage1_Dead, DoNothing_OnSingleHolding },
-		{CabbageStage.Stage1_Growing, DoNothing_OnSingleHolding },
+		{CabbageStage.Stage1_BeforeWater, DoNothing_OnHold },
+		{CabbageStage.Stage1_Dead, DoNothing_OnHold },
+		{CabbageStage.Stage1_Growing, DoNothing_OnHold },
 	};
 	
 	private static readonly Dictionary<CabbageStage, Func<CabbageState, RequiredCropAction>> GetRequiredCropActionFunctions = new()

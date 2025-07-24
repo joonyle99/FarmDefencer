@@ -248,4 +248,6 @@ public sealed class FarmManager : MonoBehaviour
     {
         Application.wantsToQuit -= SaveOnQuit;
     }
+
+    private void OnApplicationPause(bool pauseStatus) => SerializeToSaveFile();
 }

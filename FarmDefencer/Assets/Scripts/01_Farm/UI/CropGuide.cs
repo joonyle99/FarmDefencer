@@ -17,12 +17,12 @@ public sealed class CropGuide : MonoBehaviour, IFarmInputLayer
 	
 	private Image _image;
 
-	public bool OnSingleHolding(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
+	public bool OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
 	{
 		return false;
 	}
 
-	public bool OnSingleTap(Vector2 worldPosition)
+	public bool OnTap(Vector2 worldPosition)
 	{
 		if (_image.sprite != null)
 		{
