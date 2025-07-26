@@ -30,7 +30,7 @@ public sealed class CropPotato : Crop
 	}
 
 	private const float MatureSeconds = 15.0f;
-	private const float HarvestHoldTime = 2.0f;
+	private const float HarvestHoldTime = 0.75f;
 
 	[SerializeField] private Sprite seedSprite;
 	[SerializeField] private Sprite matureSprite;

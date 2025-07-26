@@ -50,7 +50,7 @@ public sealed class CropSweetpotato : Crop
 	private const float Stage2_GrowthSeconds = 15.0f;
 	private const float Stage3_GrowthSeconds = 10.0f;
 	private const float Stage4_GrowthSeconds = 5.0f;
-	private const float WrapHoldingSecondsCriterion = 2.0f;
+	private const float WrapHoldingSecondsCriterion = 1.0f;
 
 	[SerializeField] private Sprite stage1_beforeWaterSprite;
 	[SerializeField] private Sprite stage1_deadSprite;
