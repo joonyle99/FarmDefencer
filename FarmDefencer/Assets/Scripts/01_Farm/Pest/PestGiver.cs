@@ -77,7 +77,7 @@ public sealed class PestGiver
     public void ReserveRandomPestSpawn()
     {
         _isPestSpawnReserved = true;
-        _pestSpawnTime = Random.Range(minimumRandomPestSpawnDaytime, maximumPestSpawnInterval);
+        _pestSpawnTime = Random.Range(minimumRandomPestSpawnDaytime, maximumRandomPestSpawnDaytime);
     }
 
     public void OnFarmUpdate(float deltaTime)
