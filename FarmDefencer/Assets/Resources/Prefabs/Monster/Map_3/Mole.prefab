@@ -75,7 +75,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5c9f3888bd7dd274bbc246734bb0ef0d, type: 2}
+  - {fileID: 2100000, guid: 35c9f9d0682fbc1479e07482db56b0dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 7768b94b18dd72f4ca85af018efed6cd, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: b0f335c55aacd4e4293f87d254ca7d46, type: 2}
   initialSkinName: 
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
@@ -240,7 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a18c4236f6596f46afedecd77bac26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 1
   _arrivalThreshold: 0.05
   eTime: 0
   distance: 0
@@ -260,12 +259,13 @@ MonoBehaviour:
   _maxHp: 100
   _targetPoint: {fileID: 0}
   _originFactory: {fileID: 0}
-  _monsterName: 
+  _monsterData: {fileID: 0}
   _headPoint: {fileID: 0}
-  IdleAnimationName: 
-  WalkAnimationName: 
-  WalkDamagedAnimationName: 
-  DissappearAnimationName: 
+  IdleAnimationName: idle
+  WalkAnimationName: walk
+  WalkDamagedAnimationName: walk_damaged
+  DissappearAnimationName: disappear
+  _deadVolume: 0.5
 --- !u!210 &1519744171091044436
 SortingGroup:
   m_ObjectHideFlags: 0
