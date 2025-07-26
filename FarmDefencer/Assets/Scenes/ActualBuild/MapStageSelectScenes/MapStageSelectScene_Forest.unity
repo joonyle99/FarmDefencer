@@ -1585,6 +1585,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 203420090917964391, guid: d71e9b8131c61bb4bbb3ade7f5dc39ad, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 247
+      objectReference: {fileID: 0}
     - target: {fileID: 867997132849244881, guid: d71e9b8131c61bb4bbb3ade7f5dc39ad, type: 3}
       propertyPath: stageButtonsRootObject
       value: 

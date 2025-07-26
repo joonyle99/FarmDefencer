@@ -1024,6 +1024,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StageButton_2_4
       objectReference: {fileID: 0}
+    - target: {fileID: 1665731221043822916, guid: e1e11b91a612f76448a7798441427687, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2123546613722191322, guid: e1e11b91a612f76448a7798441427687, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
