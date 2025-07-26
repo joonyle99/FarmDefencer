@@ -6,15 +6,13 @@ using UnityEngine.UI;
 public sealed class StageButton : MonoBehaviour
 {
     public event Action<int, int> OnClicked;
+
     public int MapIndex { get; private set; }
     public int StageIndex { get; private set; }
-    
+
     private Button _button;
-
     private TMP_Text _mapStageText;
-    
     private Image _lockedImage;
-
 
     public void SetStageButtonEnabled(bool stageButtonEnabled)
     {
@@ -26,11 +24,11 @@ public sealed class StageButton : MonoBehaviour
     private void Awake()
     {
         var objectName = gameObject.name;
-            
+
         var parts = objectName.Split('_');
         MapIndex = int.Parse(parts[1]);
         StageIndex = int.Parse(parts[2]);
-        
+
         _button = GetComponent<Button>();
         _button.onClick.AddListener(OnButtonPressed);
         _mapStageText = transform.Find("MapStageText").GetComponent<TMP_Text>();
