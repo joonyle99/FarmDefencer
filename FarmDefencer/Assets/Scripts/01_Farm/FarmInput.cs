@@ -16,8 +16,6 @@ public sealed class FarmInput : MonoBehaviour
         public Vector2 CurrentScreenPosition;
         public bool WasPreviousFrameInput;
     }
-    private const float MaximumCameraMovementScale = 10.0f;
-    private const float MinimumCameraMovementScale = 0.1f;
 
     private const float MaximumProjectionSize = 10.0f; // 가장 넓게 볼 때의 크기를 의미.
     private const float MinimumProjectionSize = 5.0f; // 가장 좁게 볼 때의 크기를 의미.
@@ -33,28 +31,8 @@ public sealed class FarmInput : MonoBehaviour
 
     private PointerData _primaryPointerData;
     private PointerData _secondaryPointerData;
-    private TMP_Text _debugText;
 
     public float InputPriorityCut { get; set; } // 이 수치보다 작은 Priority를 가진 레이어는 입력 처리 대상이 아니도로 하는 프로퍼티.
-
-    private float _cameraMovementScale = 0.1f;
-
-    public float CameraMovementScale
-    {
-        get { return _cameraMovementScale; }
-        set
-        {
-            if (value < MinimumCameraMovementScale || value > MaximumCameraMovementScale)
-            {
-                Debug.LogError(
-                    $"FarmInput.CameraMovementScale은 {MinimumCameraMovementScale} 이상 {MaximumCameraMovementScale} 이하의 값을 가져야 합니다.");
-            }
-            else
-            {
-                _cameraMovementScale = value;
-            }
-        }
-    }
 
     private Camera _camera;
 
@@ -134,9 +112,6 @@ public sealed class FarmInput : MonoBehaviour
         _inputLayers = new();
         _camera = GetComponent<Camera>();
         _camera.tag = "MainCamera";
-
-        
-        _debugText = transform.Find("Canvas/AA").GetComponent<TMP_Text>();
     }
 
     private void MoveCamera(Vector2 worldPosition)
@@ -201,21 +176,29 @@ public sealed class FarmInput : MonoBehaviour
             return;
         }
 
-        var previousCameraScreenPosition = _camera.WorldToScreenPoint(transform.position);
-        var deltaScreenPosition = _primaryPointerData.CurrentScreenPosition - _primaryPointerData.PreviousScreenPosition;
+        var previousTouchScreenPosition = _primaryPointerData.PreviousScreenPosition;
+        var previousTouchWorldPosition = _camera.ScreenToWorldPoint(previousTouchScreenPosition);
+        var currentTouchScreenPosition = _primaryPointerData.CurrentScreenPosition;
+        var currentTouchWorldPosition = _camera.ScreenToWorldPoint(currentTouchScreenPosition);
+
+        var deltaWorldPosition = currentTouchWorldPosition - previousTouchWorldPosition;
         if (secondaryPointerAction.action.phase != InputActionPhase.Waiting)
         {
-            deltaScreenPosition += _secondaryPointerData.CurrentScreenPosition - _secondaryPointerData.PreviousScreenPosition;
-            deltaScreenPosition /= 2.0f;
+            var previousSecondaryTouchScreenPosition = _secondaryPointerData.PreviousScreenPosition;
+            var previousSecondaryTouchWorldPosition = _camera.ScreenToWorldPoint(previousSecondaryTouchScreenPosition);    
+            var currentSecondaryTouchScreenPosition = _secondaryPointerData.CurrentScreenPosition;
+            var currentSecondaryTouchWorldPosition = _camera.ScreenToWorldPoint(currentSecondaryTouchScreenPosition);
+
+            deltaWorldPosition += currentSecondaryTouchWorldPosition - previousSecondaryTouchWorldPosition;
         }
 
-        deltaScreenPosition *= _camera.orthographicSize;
+        deltaWorldPosition *= -1.0f;
 
-        var currentCameraScreenPosition = new Vector2(previousCameraScreenPosition.x - deltaScreenPosition.x,
-            previousCameraScreenPosition.y - deltaScreenPosition.y);
+        var nextPosition = transform.position += deltaWorldPosition;
+        nextPosition.x = Mathf.Clamp(nextPosition.x, -MovableWidth, MovableWidth);
+        nextPosition.y = Mathf.Clamp(nextPosition.y, -MovableHeight, MovableWidth);
         
-        var currentCameraWorldPosition = _camera.ScreenToWorldPoint(currentCameraScreenPosition);
-        MoveCamera(currentCameraWorldPosition);
+        MoveCamera(nextPosition);
     }
 
     private void HandleZoom()
