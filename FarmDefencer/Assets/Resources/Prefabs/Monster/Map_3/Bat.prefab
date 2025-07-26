@@ -290,7 +290,7 @@ MonoBehaviour:
   _maxHp: 100
   _targetPoint: {fileID: 0}
   _originFactory: {fileID: 0}
-  _monsterData: {fileID: 0}
+  _monsterData: {fileID: 11400000, guid: eac46cdb67d9e6246b0c29f7ca1bf276, type: 2}
   _headPoint: {fileID: 0}
   IdleAnimationName: idle
   WalkAnimationName: walk

@@ -22,12 +22,12 @@ public class AudioFadeTest : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            var playingSource = introSource.isPlaying ? introSource : loopSource;
-            var otherSource = playingSource == introSource ? loopSource : introSource;
-            StartCoroutine(FadeCo(playingSource, otherSource, fadeDuration));
-        }
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //    var playingSource = introSource.isPlaying ? introSource : loopSource;
+        //    var otherSource = playingSource == introSource ? loopSource : introSource;
+        //    StartCoroutine(FadeCo(playingSource, otherSource, fadeDuration));
+        // }
     }
 
     private IEnumerator FadeCo(AudioSource from, AudioSource to, float duration)

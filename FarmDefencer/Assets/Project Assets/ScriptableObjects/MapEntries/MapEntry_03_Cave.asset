@@ -15,11 +15,11 @@ MonoBehaviour:
   mapId: 3
   mapCode: cave
   monsters:
-  - {fileID: 8504615390514146694, guid: 83c5e4ce8fc25124589524377a783765, type: 3}
-  - {fileID: 8244829762353483558, guid: 3020189df1f79bf409d60b0e79598c7b, type: 3}
-  - {fileID: 6808927289791045662, guid: 871f81cfd2528d74eb008bfec735d5b0, type: 3}
-  - {fileID: 4154301835580674965, guid: 50c583a48eb37834cb49f51de47d72f7, type: 3}
-  - {fileID: 761433559861001395, guid: b97306ced56f74f4c957a74918b2b214, type: 3}
+  - {fileID: 1560164754338435320, guid: 731143e25bfdea6488f1aa31efc50559, type: 3}
+  - {fileID: 8091056638516497859, guid: d4240e065ba94e248918f53d93631554, type: 3}
+  - {fileID: 569761387002377847, guid: d59b0497983034143ba42b3bb90a1030, type: 3}
+  - {fileID: 8463569131803787445, guid: d7094afe2578c2449a9df673ad25b931, type: 3}
+  - {fileID: 8866683495499688535, guid: 62c3ec754eaca684c998d8a99f6d3822, type: 3}
   crops:
   - carrot
   - corn

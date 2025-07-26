@@ -45,22 +45,10 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     /// EndingUI까지 모두 보여준 후 다른 씬으로 이동해야 할 때 호출되는 이벤트
     /// </summary>
     public event Action OnLeavingDefenceSceneState;
-    
+
     private void Start()
     {
         ChangeState(GameState.Normal);
-    }
-
-    private void Update()
-    {
-        // CHEAT: Scene Reload
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Scene currentScene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(currentScene.name);
-
-            ResourceManager.Instance.Initialize();
-        }
     }
 
     public void ChangeState(GameState nextState)

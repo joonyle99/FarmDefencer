@@ -36,7 +36,7 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFa
         var jsonSurvivedMonsters = new JArray();
         foreach (var survivedMonster in SurvivedMonsters)
         {
-            jsonSurvivedMonsters.Add(survivedMonster);   
+            jsonSurvivedMonsters.Add(survivedMonster);
         }
         jsonObject.Add("SurvivedMonsters", jsonSurvivedMonsters);
 
@@ -46,7 +46,7 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFa
     public void Deserialize(JObject json)
     {
         Gold = json.ParsePropertyOrAssign("Gold", 0);
-        
+
         SurvivedMonsters.Clear();
         if (json["SurvivedMonsters"] is JArray jsonSurvivedMonsters)
         {
@@ -57,7 +57,7 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFa
                 {
                     continue;
                 }
-                
+
                 SurvivedMonsters.Add(survivedMonster);
             }
         }
@@ -73,27 +73,6 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFa
     private void Start()
     {
         Initialize();
-    }
-    private void Update()
-    {
-#if UNITY_EDITOR
-        // CHEAT: Earn Gold
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            var amount = 100;
-
-            EarnGold(amount);
-            Debug.Log($"earn {amount} gold (<color=yellow>current: {_gold}</color>)");
-        }
-        // CHEAT: Spend Gold
-        else if (Input.GetKeyDown(KeyCode.F2))
-        {
-            var amount = 100;
-
-            SpendGold(amount);
-            Debug.Log($"spend {amount} gold (<color=yellow>current: {_gold}</color>)");
-        }
-#endif
     }
 
     public void Initialize()
