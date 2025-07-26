@@ -9,9 +9,13 @@ public sealed class HarvestAnimationObject : MonoBehaviour
 
 	public void PlayAnimation(ProductEntry productEntry, float duration, Vector2 screenFrom, Vector2 screenTo, UnityAction callback)
 	{
+		RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)transform.parent, screenFrom, Camera.main,
+			out var anchoredScreenFrom);
+		
 		_image.sprite = productEntry.ProductSprite;
 		gameObject.SetActive(true);
-		_rectTransform.position = screenFrom;
+		_rectTransform.anchoredPosition = anchoredScreenFrom;
+		_rectTransform.localScale = Vector3.one;
 		_rectTransform
 			.DOMove(screenTo, duration)
 			.SetEase(Ease.OutCirc)

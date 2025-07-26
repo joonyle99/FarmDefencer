@@ -118,6 +118,16 @@ public sealed class FarmInput : MonoBehaviour
         HandleZoom();
     }
 
+    private void OnEnable()
+    {
+        tapAction.action.performed += OnTapActionPerformed;
+    }
+
+    private void OnDisable()
+    {
+        tapAction.action.performed -= OnTapActionPerformed;
+    }
+
     private void Awake()
     {
         _canInputConditions = new();
@@ -125,7 +135,6 @@ public sealed class FarmInput : MonoBehaviour
         _camera = GetComponent<Camera>();
         _camera.tag = "MainCamera";
 
-        tapAction.action.performed += _ => OnTapActionPerformed();
         
         _debugText = transform.Find("Canvas/AA").GetComponent<TMP_Text>();
     }
@@ -241,7 +250,7 @@ public sealed class FarmInput : MonoBehaviour
         MoveCamera(new Vector2(transform.position.x, transform.position.y));
     }
 
-    private void OnTapActionPerformed()
+    private void OnTapActionPerformed(InputAction.CallbackContext context)
     {
         foreach (var inputLayer in _inputLayers)
         {
