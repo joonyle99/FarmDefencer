@@ -12,4 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3b3c3cfd96ffb4c8da6ae81f5d7314, type: 3}
   m_Name: StageData_3-9
   m_EditorClassIdentifier: 
-  Waves: []
+  Waves:
+  - Monster: {fileID: 8091056638516497859, guid: d4240e065ba94e248918f53d93631554, type: 3}
+    SpawnCountRange:
+      Start: 2
+      End: 4
+  - Monster: {fileID: 569761387002377847, guid: d59b0497983034143ba42b3bb90a1030, type: 3}
+    SpawnCountRange:
+      Start: 3
+      End: 5
+  - Monster: {fileID: 8463569131803787445, guid: d7094afe2578c2449a9df673ad25b931, type: 3}
+    SpawnCountRange:
+      Start: 4
+      End: 6
+  - Monster: {fileID: 8866683495499688535, guid: 62c3ec754eaca684c998d8a99f6d3822, type: 3}
+    SpawnCountRange:
+      Start: 2
+      End: 4
