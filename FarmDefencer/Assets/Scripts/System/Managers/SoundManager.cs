@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 /// <summary>
 /// 게임에 필요한 사운드를 관리하는 매니저입니다
@@ -18,6 +18,9 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
 	[SerializeField] private AudioSource _bgmAudioSource1;
     [SerializeField] private AudioSource _bgmAudioSource2;
     [SerializeField] private AudioSource _sfxAudioSource;
+
+    [SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _ambVolume = 0.5f;
+    [SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _songVolume = 0.5f;
 
     /// <summary>
     /// 내부 캐시에서 Bgm을 불러와 재생하는 메소드.
@@ -51,17 +54,17 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
             _bgmAudioSource1.Stop();
         }
     }
+    public void PlayMapAmb()
+    {
+        var currentMap = MapManager.Instance.CurrentMap;
+        var mapAmbName = $"BGM_D_{currentMap.MapCode}_amb";
+        PlayBgm(mapAmbName, _ambVolume);
+    }
     public void PlayMapSong()
     {
         var currentMap = MapManager.Instance.CurrentMap;
         var mapSongName = $"BGM_D_{currentMap.MapCode}_song";
-        PlayBgm(mapSongName);
-    }
-    public void PlayMapAmb()
-    {
-        var currentMap = MapManager.Instance.CurrentMap;
-        var mapSongName = $"BGM_D_{currentMap.MapCode}_amb";
-        PlayBgm(mapSongName);
+        PlayBgm(mapSongName, _songVolume);
     }
 
     /// <summary>

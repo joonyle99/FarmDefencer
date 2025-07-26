@@ -2,6 +2,7 @@ using Spine.Unity;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Sirenix.OdinInspector;
 
 /// <summary>
 ///
@@ -69,6 +70,8 @@ public abstract class Monster : TargetableBehavior, IProduct
     // sorting
     private SortingGroup _sortingGroup;
     private int _defaultSortingOrder;
+
+	[SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _deadVolume = 0.5f;
 
     #endregion
 
@@ -176,7 +179,7 @@ public abstract class Monster : TargetableBehavior, IProduct
         // TEMP: 이동 중지
         GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
 
-        SoundManager.Instance.PlaySfx($"SFX_D_{MonsterData.Name}_dead");
+        SoundManager.Instance.PlaySfx($"SFX_D_{MonsterData.Name}_dead", _deadVolume);
 
         StartCoroutine(KillCo(DissappearAnimationName));
 

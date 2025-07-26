@@ -1,6 +1,7 @@
 using Spine.Unity;
 using System;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 /// <summary>
 ///
@@ -95,6 +96,11 @@ public sealed class Tower : TargetableBehavior
     public event System.Action<int> OnCostChanged;
     public event System.Action<int> OnSellCostChanged;
     public event System.Action<int> OnUpgradeCostChanged;
+
+	[SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _removeVolume = 0.5f;
+	[SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _upgradeVolume = 0.5f;
+    [SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _fireReadyVolume = 0.5f;
+    [SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _fireShotVolume = 0.5f;
 
     #endregion
 
@@ -228,7 +234,7 @@ public sealed class Tower : TargetableBehavior
         _occupyingGridCell.DeleteOccupiedTower();
 
         ResourceManager.Instance.EarnGold(CurrentLevelData.SellCost);
-        SoundManager.Instance.PlaySfx("SFX_D_tower_remove");
+        SoundManager.Instance.PlaySfx("SFX_D_tower_remove", _removeVolume);
 
         // detector
         Detector.EraseRange();
@@ -284,7 +290,7 @@ public sealed class Tower : TargetableBehavior
         OnAttackRateChanged?.Invoke(CurrentLevelData.AttackRate);
         OnSlowRateChanged?.Invoke(CurrentLevelData.SlowRate);
 
-        SoundManager.Instance.PlaySfx("SFX_D_tower_upgrade");
+        SoundManager.Instance.PlaySfx("SFX_D_tower_upgrade", _upgradeVolume);
     }
 
     // fire
@@ -335,7 +341,7 @@ public sealed class Tower : TargetableBehavior
         // sound
         if (CurrentLevelData.FireReady != null)
         {
-            SoundManager.Instance.PlaySfx(CurrentLevelData.FireReady);
+            SoundManager.Instance.PlaySfx(CurrentLevelData.FireReady, _fireReadyVolume);
         }
     }
     private void Fire()
@@ -390,7 +396,7 @@ public sealed class Tower : TargetableBehavior
         // sound
         if (CurrentLevelData.FireShot != null)
         {
-            SoundManager.Instance.PlaySfx(CurrentLevelData.FireShot);
+            SoundManager.Instance.PlaySfx(CurrentLevelData.FireShot, _fireShotVolume);
         }
     }
 
