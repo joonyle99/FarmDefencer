@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Sirenix.OdinInspector;
 
 public enum FadeType
 {
@@ -44,6 +45,8 @@ public class EndingUI : MonoBehaviour
     [Header("Monster")]
     [SerializeField] private MonsterUI _monsterUI;
 
+	[SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _endingVolume = 0.5f;
+
     private void Start()
     {
         DefenceContext.Current.WaveSystem.OnEnding -= ShowEnding;
@@ -65,7 +68,7 @@ public class EndingUI : MonoBehaviour
 
     private void ShowEnding(EndingType endingType)
     {
-        SoundManager.Instance.PlaySfx($"SFX_D_stage_{ConvertToEndingText(endingType)}");
+        SoundManager.Instance.PlaySfx($"SFX_D_stage_{ConvertToEndingText(endingType)}", _endingVolume);
 
         // fade
         _fadeImage.gameObject.SetActive(true);
@@ -97,7 +100,7 @@ public class EndingUI : MonoBehaviour
 
         // TODO 임시 GameState 전환 코루틴
         StartCoroutine(DoChangeStateToLeavingDefenceScene());
-        
+
         // monster
         _monsterUI.ShowMonsterUI(endingType);
     }
@@ -115,7 +118,7 @@ public class EndingUI : MonoBehaviour
 
         return "";
     }
-    
+
     // TODO 실제 UI 표시 이후 GameState 전환 로직을 구현하기 전 임시 로직. 단순히 2초 대기 후 GameState를 LeavingDefenceScene으로 바꾸는 코루틴.
     private IEnumerator DoChangeStateToLeavingDefenceScene()
     {
