@@ -63,9 +63,15 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFa
         }
     }
 
+    protected override void Awake()
+    {
+        base.Awake();
+        
+        SurvivedMonsters = new List<string>();
+    }
+
     private void Start()
     {
-        SurvivedMonsters = new List<string>();
         Initialize();
     }
     private void Update()

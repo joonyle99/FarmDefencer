@@ -22,21 +22,7 @@ public sealed class WateringCan :
 	private const float WateringAnimationTimePoint = 0.5f;
 	private Action<Vector2> _onWatering;
 	private bool _using;
-	public bool Using
-	{
-		get
-		{
-			return _using;
-		}
-		private set
-		{
-			if (_using != value)
-			{
-				_using = value;
-				OnUsingStateChanged();
-			}
-		}
-	}
+	public bool Using => _using;
 
 	private Vector2 _currentWateringWorldPosition;
 	private Vector2 _initialScreenLocalPosition; // 이 물뿌리개를 사용하지 않을 때 위치할 화면 위치. 에디터 상에서 놓은 위치를 기억해서 사용함.
@@ -61,30 +47,35 @@ public sealed class WateringCan :
 
 	public bool OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
 	{
-		if (isEnd)
-		{
-			return false;
-		}
-
 		return _using;
 	}
 
 	public void OnPointerDown(PointerEventData eventData) => OnDrag(eventData);
 	public void OnPointerUp(PointerEventData pointerEventData) => MoveToInitialPosition();
-	public void OnPointerExit(PointerEventData pointerEventData) => MoveToInitialPosition();
+
+	public void OnPointerExit(PointerEventData pointerEventData)
+	{
+
+	}
 
 	public void OnDrag(PointerEventData pointerEventData)
 	{
 		if (!_isWaterable())
 		{
-			if (Using)
+			if (_using)
 			{
 				MoveToInitialPosition();
 			}
+
 			return;
 		}
 
-		Using = true;
+		if (!_using)
+		{
+			_using = true;
+			OnUsingStateChanged();
+		}
+
 		// 물뿌리개 위치를 현재 커서 위치로 옮기기
 		_rectTransform.anchoredPosition = pointerEventData.position;
 		// 물뿌리개의 월드 위치 구하기
@@ -104,7 +95,7 @@ public sealed class WateringCan :
 		_rectTransform = GetComponent<RectTransform>();
 		_initialScreenLocalPosition = _rectTransform.localPosition;
 
-		_skeletonGraphic = GetComponent<SkeletonGraphic>();
+		_skeletonGraphic = transform.Find("Animation").GetComponent<SkeletonGraphic>();
 		_spineAnimationState = _skeletonGraphic.AnimationState;
 	}
 
@@ -128,14 +119,15 @@ public sealed class WateringCan :
 		else if (!_isWateredThisTime)
 		{
 			_isWateredThisTime = true;
-			_onWatering?.Invoke(_currentWateringWorldPosition);
+			_onWatering?.Invoke(_currentWateringWorldPosition + new Vector2(2, -2));
 		}
 	}
 
 	private void MoveToInitialPosition()
 	{
 		_rectTransform.localPosition = _initialScreenLocalPosition;
-		Using = false;
+		_using = false;
+		OnUsingStateChanged();
 	}
 
 	private void OnUsingStateChanged()
