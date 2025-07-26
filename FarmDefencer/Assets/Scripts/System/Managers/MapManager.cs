@@ -142,7 +142,7 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
 
         MaximumUnlockedMapIndex = 1;
         MaximumUnlockedStageIndex = 1;
-        
+
         CurrentMapIndex = MaximumUnlockedMapIndex;
         CurrentStageIndex = MaximumUnlockedStageIndex;
 

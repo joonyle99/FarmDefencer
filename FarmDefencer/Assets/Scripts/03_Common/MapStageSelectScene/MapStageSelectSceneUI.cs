@@ -27,8 +27,8 @@ public sealed class MapStageSelectSceneUI : MonoBehaviour
         SceneMapEntry = MapManager.Instance.GetMapEntryOf(mapCode);
 
         // Current 정보 초기화
-        MapManager.Instance.CurrentMapIndex = MapManager.Instance.MaximumUnlockedMapIndex;
-        MapManager.Instance.CurrentStageIndex = MapManager.Instance.MaximumUnlockedStageIndex;
+        // MapManager.Instance.CurrentMapIndex = MapManager.Instance.MaximumUnlockedMapIndex;
+        // MapManager.Instance.CurrentStageIndex = MapManager.Instance.MaximumUnlockedStageIndex;
 
         _goPreviousMapButton = transform.Find("GoPreviousMapButton").GetComponent<Button>();
         _goPreviousMapButton.gameObject.SetActive(SceneMapEntry.MapId > 1);

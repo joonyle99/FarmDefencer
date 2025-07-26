@@ -10,7 +10,7 @@ public sealed class DefenceSceneOpenContext : MonoBehaviour
 
     private IEnumerator DoStartDefence()
     {
-        yield return new WaitForSeconds(1);
+        yield return null;
         
         MapManager.Instance.InvokeOnMapChanged();
         GameStateManager.Instance.ChangeState(GameState.Build);

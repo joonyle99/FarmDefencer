@@ -18,6 +18,7 @@ public class DebugSelectMapUI : MonoBehaviour
 
         var mapIndexStr = _mapIndex.text;
         var stageIndexStr = _stageIndex.text;
+
         if (int.TryParse(mapIndexStr, out int mapIndexInt) && int.TryParse(stageIndexStr, out int stageIndexInt))
         {
             MapManager.Instance.Debug_SetCurrentMap(mapIndexInt, stageIndexInt);
