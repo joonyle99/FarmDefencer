@@ -1,9 +1,8 @@
-using System.Collections;
-using Sirenix.OdinInspector;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
+using TMPro;
 
 [InfoBox("이 오브젝트를 배치한 씬의 이름은 MapStageSelectScene_{MapCode}로 둘 것.")]
 public sealed class MapStageSelectSceneUI : MonoBehaviour
@@ -12,7 +11,7 @@ public sealed class MapStageSelectSceneUI : MonoBehaviour
     
     [InfoBox("StageButton_{MapIndex}_{StageIndex} 이름을 가진 Button들을 자식으로 갖는 오브젝트를 등록하면 됨.")]
     [SerializeField] private GameObject stageButtonsRootObject;
-    
+
     private Button _goPreviousMapButton;
     private Button _goNextMapButton;
     private CoinsUI _gold;
@@ -30,7 +29,7 @@ public sealed class MapStageSelectSceneUI : MonoBehaviour
         // Current 정보 초기화
         MapManager.Instance.CurrentMapIndex = MapManager.Instance.MaximumUnlockedMapIndex;
         MapManager.Instance.CurrentStageIndex = MapManager.Instance.MaximumUnlockedStageIndex;
-        
+
         _goPreviousMapButton = transform.Find("GoPreviousMapButton").GetComponent<Button>();
         _goPreviousMapButton.gameObject.SetActive(SceneMapEntry.MapId > 1);
         _goPreviousMapButton.onClick.AddListener(() => MoveToAnotherSelectSceneFor(SceneMapEntry.MapId - 1));
