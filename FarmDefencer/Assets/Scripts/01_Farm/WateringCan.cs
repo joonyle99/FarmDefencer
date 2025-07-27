@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Spine.Unity;
 using System;
+using Sirenix.OdinInspector;
 
 /// <summary>
 /// UI로 구현되는 물뿌리개.
@@ -15,6 +16,9 @@ public sealed class WateringCan :
 	IPointerUpHandler,
 	IPointerExitHandler
 {
+	[InfoBox("실제 물주기 판정이 판정이 발생할 위치의 물뿌리개 몸체로부터의 오프셋. 카메라 OrthographicSize 1 기준, 월드 크기.")]
+	[SerializeField] private Vector2 wateringOffset = new Vector2(0.4f, -0.4f);
+	public Vector2 WateringOffset => wateringOffset;
 	
 	public int InputPriority => IFarmInputLayer.Priority_WateringCan;
 
@@ -92,10 +96,10 @@ public sealed class WateringCan :
 
 	private void Awake()
 	{
-		_rectTransform = GetComponent<RectTransform>();
+		_rectTransform = transform.Find("Root").GetComponent<RectTransform>();
 		_initialScreenLocalPosition = _rectTransform.localPosition;
 
-		_skeletonGraphic = transform.Find("Animation").GetComponent<SkeletonGraphic>();
+		_skeletonGraphic = transform.Find("Root/Animation").GetComponent<SkeletonGraphic>();
 		_spineAnimationState = _skeletonGraphic.AnimationState;
 	}
 
@@ -119,7 +123,7 @@ public sealed class WateringCan :
 		else if (!_isWateredThisTime)
 		{
 			_isWateredThisTime = true;
-			_onWatering?.Invoke(_currentWateringWorldPosition + new Vector2(2, -2));
+			_onWatering?.Invoke(_currentWateringWorldPosition);
 		}
 	}
 

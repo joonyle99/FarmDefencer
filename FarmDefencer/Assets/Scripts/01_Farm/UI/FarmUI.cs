@@ -6,27 +6,16 @@ using UnityEngine.UI;
 public sealed class FarmUI : MonoBehaviour
 {
 	private CoinsUI _coinsUI;
-	private WateringCan _wateringCan;
 	private HarvestInventory _harvestInventory;
 	private CropGuide _cropGuide;
 	private Button _battleButton;
 	private Button _settingButton;
 
-	public bool WateringCanAvailable
-	{
-		get => _wateringCan.gameObject.activeSelf;
-		set => _wateringCan.gameObject.SetActive(value);
-	}
-
 	public void Init(FarmInput farmInput,
 		ProductDatabase productDatabase,
-		Action<Vector2> onWatering,
 		Action onBattleButtonClicked,
-		Action onQuitRequested,
-		Func<bool> isFarmPaused)
+		Action onQuitRequested)
 	{
-		_wateringCan.Init(() => !isFarmPaused(), onWatering);
-		farmInput.RegisterInputLayer(_wateringCan);
 		farmInput.RegisterInputLayer(_cropGuide);
 		
 		_battleButton.onClick.AddListener(() => onBattleButtonClicked());
@@ -50,7 +39,6 @@ public sealed class FarmUI : MonoBehaviour
 	private void Awake()
 	{
 		_coinsUI = GetComponentInChildren<CoinsUI>();
-		_wateringCan = GetComponentInChildren<WateringCan>();
 		_harvestInventory = GetComponentInChildren<HarvestInventory>();
 		_cropGuide = GetComponentInChildren<CropGuide>();
 		_battleButton = transform.Find("BattleButton").GetComponent<Button>();

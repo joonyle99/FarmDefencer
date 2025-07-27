@@ -27,6 +27,7 @@ public sealed class FarmManager : MonoBehaviour
     [SerializeField] private FarmUI farmUI;
     [SerializeField] private FarmInput farmInput;
     [SerializeField] private ProductDatabase productDatabase;
+    [SerializeField] private WateringCan wateringCan;
     [SerializeField] private HarvestTutorialGiver harvestTutorialGiver;
     [SerializeField] private WeatherShopUI weatherShopUI;
     [SerializeField] private GoDefenceUI goDefenceUI;
@@ -41,6 +42,14 @@ public sealed class FarmManager : MonoBehaviour
         {
             // 디버그용 할당 코드 등 여기에...
             quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
+            harvestTutorialGiver.AddTutorial("product_carrot");
+            harvestTutorialGiver.AddTutorial("product_potato");
+            harvestTutorialGiver.AddTutorial("product_corn");
+            harvestTutorialGiver.AddTutorial("product_cabbage");
+            harvestTutorialGiver.AddTutorial("product_cucumber");
+            harvestTutorialGiver.AddTutorial("product_eggplant");
+            harvestTutorialGiver.AddTutorial("product_sweetpotato");
+            harvestTutorialGiver.AddTutorial("product_mushroom");
         }
         else
         {
@@ -72,7 +81,7 @@ public sealed class FarmManager : MonoBehaviour
             farmInput.InputPriorityCut = 0;
         }
 
-        farmUI.WateringCanAvailable = !harvestTutorialGiver.gameObject.activeSelf;
+        wateringCan.gameObject.SetActive(!harvestTutorialGiver.IsPlayingTutorial);
         weatherShopUI.gameObject.SetActive(!harvestTutorialGiver.IsPlayingTutorial);
         goDefenceUI.gameObject.SetActive(farmClock.CurrentDaytime >= farmClock.LengthOfDaytime && !harvestTutorialGiver.IsPlayingTutorial);
     }
@@ -96,6 +105,7 @@ public sealed class FarmManager : MonoBehaviour
         farmInput.RegisterInputLayer(harvestTutorialGiver);
         farmInput.RegisterInputLayer(goDefenceUI);
         farmInput.RegisterInputLayer(pestGiver);
+        farmInput.RegisterInputLayer(wateringCan);
         farmInput.AddCanInputCondition(() => farmClock.RemainingDaytime > 0.0f || harvestTutorialGiver.gameObject.activeSelf);
 
         farmClock.RegisterFarmUpdatableObject(farm);
@@ -117,13 +127,21 @@ public sealed class FarmManager : MonoBehaviour
 
         farmUI.Init(farmInput,
             productDatabase,
-            farm.WateringAction,
             OpenDefenceScene,
-            () => { SerializeToSaveFile();
+            () =>
+            { 
+                SerializeToSaveFile();
                 SceneManager.LoadScene("Main Scene");
-            },
-            () => farmClock.Paused);
+            });
 
+        wateringCan.Init(() => !farmClock.Paused, 
+            
+            wateringCanPosition =>
+            {
+                var cameraOrthographicSize = farmInput.CameraOrthographicSize;
+                farm.WateringAction(wateringCanPosition + wateringCan.WateringOffset * cameraOrthographicSize);
+            });
+        
         penaltyGiver.Init(farm);
 
         quotaContext.QuotaContextUpdated += QuotaContextChangedHandler;

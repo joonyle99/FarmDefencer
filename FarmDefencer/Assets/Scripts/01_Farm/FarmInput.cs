@@ -22,6 +22,8 @@ public sealed class FarmInput : MonoBehaviour
 
     private const float MovableWidth = 10.8f;
     private const float MovableHeight = 4.9f;
+    
+    public float CameraOrthographicSize => _camera.orthographicSize;
 
     [SerializeField] private InputActionReference tapAction;
     [SerializeField] private InputActionReference holdAction;
