@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +14,8 @@ public class ProgressBar : MonoBehaviour
     [SerializeField] private Sprite _normalSprite;
     [SerializeField] private Sprite _dangerSprite;
 
+    private Image[] _images;
+
     private float _dangerousThreshold;
     private bool _isDangerous;
     private bool _isFinished;
@@ -21,6 +26,10 @@ public class ProgressBar : MonoBehaviour
     public Action OnFinished;
     public Action OnDangerous;
 
+    private void Awake()
+    {
+        _images = GetComponentsInChildren<Image>();
+    }
     public void Initialize()
     {
         _isDangerous = false;
@@ -89,5 +98,18 @@ public class ProgressBar : MonoBehaviour
         // 0: 끝 / 1: 시작
         // 1 -----> 0 으로 향한다
         return 1f - _bar.fillAmount;
+    }
+
+    public void SetAlpha(float a)
+    {
+        if (_images == null || _images.Length == 0)
+        {
+            return;
+        }
+
+        foreach (var image in _images)
+        {
+            image.color = new Color(image.color.r, image.color.g, image.color.b, a);
+        }
     }
 }

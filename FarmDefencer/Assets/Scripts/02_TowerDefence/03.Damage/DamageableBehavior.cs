@@ -100,6 +100,8 @@ public abstract class DamageableBehavior : MonoBehaviour
             throw new System.NullReferenceException($"You should add DamageZone component");
         }
 
+        _healthBar = GetComponentInChildren<ProgressBar>();
+
         spineController = GetComponentInChildren<SpineController>();
         gridMovement = GetComponent<GridMovement>();
 

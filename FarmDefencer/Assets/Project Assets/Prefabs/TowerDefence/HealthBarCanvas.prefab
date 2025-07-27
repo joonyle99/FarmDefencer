@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bar: {fileID: 720290982818461378}
-  _normalBar: {fileID: -403631209242680886, guid: e6d944f3438b0f34f9d09b210f0c4e1a, type: 3}
-  _dangerBar: {fileID: 2375728111882580812, guid: 9a2a89da93a6b4f4883acbd4d148a795, type: 3}
+  _normalSprite: {fileID: -403631209242680886, guid: e6d944f3438b0f34f9d09b210f0c4e1a, type: 3}
+  _dangerSprite: {fileID: 2375728111882580812, guid: 9a2a89da93a6b4f4883acbd4d148a795, type: 3}
 --- !u!1 &6207012289164954028
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &9177198034803129409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,4 +304,4 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 247

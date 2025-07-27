@@ -172,12 +172,9 @@ public abstract class Monster : TargetableBehavior, IProduct, IVolumeControl
     }
     public override void Kill()
     {
-        //Debug.Log("kill");
-
         IsDead = true;
 
-        // TEMP: 이동 중지
-        GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
+        gridMovement.Rigidbody.linearVelocity = Vector2.zero;
 
         SoundManager.Instance.PlaySfx($"SFX_D_{MonsterData.Name}_dead", deadVolume);
 
@@ -195,10 +192,9 @@ public abstract class Monster : TargetableBehavior, IProduct, IVolumeControl
     {
         IsDead = true;
 
-        // TEMP: 이동 중지
-        GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
+        gridMovement.Rigidbody.linearVelocity = Vector2.zero;
 
-        StartCoroutine(SurviveCo(DissappearAnimationName));
+        StartCoroutine(SurviveCo());
 
         /*
         SetAnimation(DissappearAnimationName, false);
@@ -211,11 +207,25 @@ public abstract class Monster : TargetableBehavior, IProduct, IVolumeControl
     // color alpha
     private void InstantTransparent()
     {
-        spineController.Skeleton.A = Mathf.Clamp01(0f);
+        var t = Mathf.Clamp01(0f);
+
+        spineController.Skeleton.A = t;
+
+        if (HealthBar != null)
+        {
+            HealthBar.SetAlpha(t);
+        }
     }
     private void InstantOpaque()
     {
-        spineController.Skeleton.A = Mathf.Clamp01(1f);
+        var t = Mathf.Clamp01(1f);
+
+        spineController.Skeleton.A = t;
+
+        if (HealthBar != null)
+        {
+            HealthBar.SetAlpha(t);
+        }
     }
     private IEnumerator TransparentCo(float duration)
     {
@@ -224,8 +234,14 @@ public abstract class Monster : TargetableBehavior, IProduct, IVolumeControl
         while (eTime < duration)
         {
             var t = eTime / duration;
+            t = Mathf.Clamp01(1f - t);
 
-            spineController.Skeleton.A = Mathf.Clamp01(1f - t);
+            spineController.Skeleton.A = t;
+
+            if (HealthBar != null)
+            {
+                HealthBar.SetAlpha(t);
+            }
 
             yield return null;
 
@@ -252,36 +268,41 @@ public abstract class Monster : TargetableBehavior, IProduct, IVolumeControl
         InstantOpaque();
     }
 
-    private IEnumerator KillCo(string animationName)
+    private IEnumerator KillCo(string animationName = "None")
     {
-        //Debug.Log("kill routine");
-        spineController.SetAnimation(animationName, false);
-
-        var animation = spineController.Skeleton.Data.FindAnimation(animationName);
-        if (animation != null)
+        if (animationName != "None")
         {
-            yield return new WaitForSeconds(animation.Duration);
+            spineController.SetAnimation(animationName, false);
+
+            var animation = spineController.Skeleton.Data.FindAnimation(animationName);
+            if (animation != null)
+            {
+                yield return new WaitForSeconds(animation.Duration);
+            }
         }
 
         yield return TransparentCo(1.5f);
 
         OnKilled?.Invoke(this);
 
-        //TODO: 오브젝트 풀링은 현재는 안사용하고 있기 때문에 주석 처리
+        //TODO: 오브젝트 풀링은 현재는 안 사용하고 있기 때문에 주석 처리
         //OriginFactory.ReturnProduct(this);
         Destroy(this.gameObject);
     }
-    private IEnumerator SurviveCo(string animationName)
+    private IEnumerator SurviveCo(string animationName = "None")
     {
-        spineController.SetAnimation(animationName, false);
-
-        var animation = spineController.Skeleton.Data.FindAnimation(animationName);
-        if (animation != null)
+        if (animationName != "None")
         {
-            yield return new WaitForSeconds(animation.Duration);
+            spineController.SetAnimation(animationName, false);
+
+            var animation = spineController.Skeleton.Data.FindAnimation(animationName);
+            if (animation != null)
+            {
+                yield return new WaitForSeconds(animation.Duration);
+            }
         }
 
-        yield return TransparentCo(1.5f);
+        yield return TransparentCo(0.7f);
 
         OnSurvived?.Invoke(this);
 

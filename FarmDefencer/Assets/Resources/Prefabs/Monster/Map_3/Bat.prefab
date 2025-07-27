@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2458516d85221724e8570e62d6ba16f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthBar: {fileID: 0}
+  _healthBar: {fileID: 4159104016721875392}
   _maxHp: 100
   _targetPoint: {fileID: 0}
   _originFactory: {fileID: 0}
@@ -296,7 +296,7 @@ MonoBehaviour:
   WalkAnimationName: walk
   WalkDamagedAnimationName: walk_damaged_green
   DissappearAnimationName: disappear
-  _deadVolume: 0.5
+  deadVolume: 0.5
 --- !u!210 &1519744171091044436
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -348,6 +348,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 693835973689949412}
     m_Modifications:
+    - target: {fileID: 2986004061367780005, guid: ac73a8c8d91c83842bec0255423aebde, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6740850065851687629, guid: ac73a8c8d91c83842bec0255423aebde, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -458,6 +462,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6740850065851687629, guid: ac73a8c8d91c83842bec0255423aebde, type: 3}
   m_PrefabInstance: {fileID: 6505670202219218649}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4159104016721875392 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7201488375193622297, guid: ac73a8c8d91c83842bec0255423aebde, type: 3}
+  m_PrefabInstance: {fileID: 6505670202219218649}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 147fb69bdcb6a004ba3f217407b487c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6032066207653392411 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 720290982818461378, guid: ac73a8c8d91c83842bec0255423aebde, type: 3}

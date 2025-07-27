@@ -31,6 +31,7 @@ public class GridMovement : MonoBehaviour
     // references
     private Monster _monster;
     private Rigidbody2D _rigidbody;
+    public Rigidbody2D Rigidbody => _rigidbody;
 
     private List<GridCell> _eachGridPath;
 
