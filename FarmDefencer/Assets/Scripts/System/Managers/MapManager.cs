@@ -107,6 +107,17 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
         OnMapChanged?.Invoke(CurrentMap);
     }
 
+    public void Debug_SetMaximumUnlockedMap(int mapIndex, int stageIndex)
+    {
+        if (mapIndex < 1 || mapIndex > MapCount || stageIndex < 1 || stageIndex > 10)
+        {
+            throw new ArgumentOutOfRangeException(nameof(mapIndex));
+        }
+
+        MaximumUnlockedMapIndex = mapIndex;
+        MaximumUnlockedStageIndex = stageIndex;
+    }
+
     public void Debug_SetCurrentMap(int mapIndex, int stageIndex)
     {
         if (mapIndex < 1 || mapIndex > MapCount || stageIndex < 1 || stageIndex > 10)
@@ -117,8 +128,8 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
         MaximumUnlockedMapIndex = mapIndex;
         MaximumUnlockedStageIndex = stageIndex;
 
-        //CurrentMapIndex = mapIndex;
-        //CurrentStageIndex = stageIndex;
+        CurrentMapIndex = mapIndex;
+        CurrentStageIndex = stageIndex;
 
         OnMapChanged?.Invoke(CurrentMap);
     }

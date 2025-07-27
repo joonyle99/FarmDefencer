@@ -2048,7 +2048,7 @@ GameObject:
   - component: {fileID: 1279598487}
   - component: {fileID: 1279598486}
   m_Layer: 5
-  m_Name: Debug_SelectMap
+  m_Name: Debug_SelectMaximumUnlockedMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2091,8 +2091,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mapIndex: {fileID: 1568689567}
   _stageIndex: {fileID: 1298744244}
-  _maxUnlockedMapIndex: 1
-  _maxUnlockedStageIndex: 1
 --- !u!114 &1279598487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3098,8 +3096,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1279598486}
-        m_TargetAssemblyTypeName: DebugUI, Assembly-CSharp
-        m_MethodName: SelectMap
+        m_TargetAssemblyTypeName: DebugSelectMapUI, Assembly-CSharp
+        m_MethodName: SelectMaximumUnlockedMap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
