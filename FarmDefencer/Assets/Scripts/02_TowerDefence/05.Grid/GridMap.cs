@@ -195,8 +195,7 @@ public class GridMap : MonoBehaviour
     }
     public IEnumerator FindPathOnStartCo()
     {
-        var cellMoveTime = _isFirstCalcPath ? 0.15f : 0.1f;
-        var delayTime = _isFirstCalcPath ? 1f : 0f;
+        var isFirst = _isFirstCalcPath;
 
         // 출발점 -> 도착점의 경로 계산을 딱 한 번만 한다
         if (_isFirstCalcPath == true)
@@ -219,7 +218,7 @@ public class GridMap : MonoBehaviour
             StopDrawPath();
         }
 
-        _drawPathCo = StartCoroutine(DrawPathCo(_originGridPath, cellMoveTime, delayTime));
+        _drawPathCo = StartCoroutine(DrawPathCo(_originGridPath, isFirst));
         yield return _drawPathCo;
     }
     public bool FindPathAll()
@@ -459,8 +458,11 @@ public class GridMap : MonoBehaviour
         var thisCellPos = gridCell.cellPosition;
         return targetCellPos == thisCellPos;
     }
-    public IEnumerator DrawPathCo(List<GridCell> gridPath, float cellMoveTime = 0.1f, float delayTime = 0f, Color? endColor = null)
+    public IEnumerator DrawPathCo(List<GridCell> gridPath, bool isFirst, Color? endColor = null)
     {
+        var cellMoveTime = isFirst ? 0.1f : 0.1f;
+        var delayTime = isFirst ? 0f : 0f;
+
         yield return new WaitForSeconds(delayTime);
 
         _pathLineObject = Instantiate(_pathLineRenderer, Vector3.zero, Quaternion.identity);
@@ -492,6 +494,12 @@ public class GridMap : MonoBehaviour
         }
 
         yield return new WaitForSeconds(0.3f); // delay for last point
+
+        if (isFirst)
+        {
+            yield return new WaitWhile(() => GameStateManager.Instance.CurrentState == GameState.Build);
+        }
+
         Destroy(_pathLineObject.gameObject);
         _pathLineObject = null;
     }
