@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: seal
   Description: 
-  OriginMoveSpeed: 0.7
+  OriginMoveSpeed: 1.428

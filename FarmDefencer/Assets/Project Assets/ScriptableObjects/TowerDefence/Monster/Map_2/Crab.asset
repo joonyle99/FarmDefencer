@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: crab
   Description: 
-  OriginMoveSpeed: 0.7
+  OriginMoveSpeed: 1.428
