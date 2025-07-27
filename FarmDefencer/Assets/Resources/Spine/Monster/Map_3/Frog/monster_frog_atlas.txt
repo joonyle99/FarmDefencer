@@ -1,4 +1,4 @@
-monster_toad.png
+monster_frog.png
 size:822,822
 filter:Linear,Linear
 pma:true
