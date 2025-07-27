@@ -2,7 +2,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmSerializable
 {
@@ -13,7 +12,7 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
 
     private int _currentMapIndex = 1;
     /// <summary>
-    /// 디펜스를 위해 사용. 현재 선택된 맵.
+    /// 현재 선택된 맵
     /// </summary>
     public int CurrentMapIndex
     {
@@ -26,6 +25,7 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
             }
 
             _currentMapIndex = Math.Clamp(value, 1, MaximumUnlockedMapIndex);
+
             OnMapChanged?.Invoke(CurrentMap);
         }
     }
@@ -33,38 +33,31 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
     private int _currentStageIndex = 1;
 
     /// <summary>
-    /// 디펜스를 위해 사용. 현재 선택된 스테이지.
+    /// 현재 선택된 스테이지
     /// </summary>
     public int CurrentStageIndex
     {
         get => _currentStageIndex;
         set
         {
-            if (value < 1 || CurrentMapIndex == MaximumUnlockedStageIndex && value > MaximumUnlockedStageIndex)
+            if (value < 1 || value > MaximumUnlockedStageIndex)
             {
                 Debug.LogError($"CurrentStageIndex는 {1} 이상 {MaximumUnlockedStageIndex} 이하여야 합니다. - value({value})");
             }
 
-            _currentStageIndex = value;
-
-            if (_currentStageIndex < 1 || CurrentMapIndex == MaximumUnlockedMapIndex && _currentStageIndex > MaximumUnlockedStageIndex)
-            {
-                _currentStageIndex = MaximumUnlockedStageIndex;
-            }
+            _currentStageIndex = Math.Clamp(value, 1, MaximumUnlockedStageIndex);
         }
     }
 
-    public int MaximumUnlockedMapIndex { get; private set; }
-    public int MaximumUnlockedStageIndex { get; private set; }
+    public int MaximumUnlockedMapIndex { get; private set; } // 해금된 맵 인덱스
+    public int MaximumUnlockedStageIndex { get; private set; } // 해금된 스테이지 인덱스
 
     // event
     public event Action<MapEntry> OnMapChanged;
+    public void InvokeOnMapChanged() => OnMapChanged?.Invoke(CurrentMap);
 
     public MapEntry GetMapEntryOf(int mapIndex) => _mapEntries[mapIndex-1];
-
     public MapEntry GetMapEntryOf(string mapCode) => _mapEntries.FirstOrDefault(entry => entry.MapCode.Equals(mapCode));
-
-    public void InvokeOnMapChanged() => OnMapChanged?.Invoke(CurrentMap);
 
     public JObject Serialize()
     {
@@ -80,19 +73,12 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
     {
         MaximumUnlockedMapIndex = json.ParsePropertyOrAssign("MaximumUnlockedMapIndex", 1);
         MaximumUnlockedStageIndex = json.ParsePropertyOrAssign("MaximumUnlockedStageIndex", 1);
+
         CurrentMapIndex = json.ParsePropertyOrAssign("CurrentMapIndex", MaximumUnlockedMapIndex);
         CurrentStageIndex = json.ParsePropertyOrAssign("CurrentStageIndex", MaximumUnlockedStageIndex);
 
-        // Current Index <= Maximum Unlocked Index 보정
-        if (CurrentMapIndex > MaximumUnlockedMapIndex)
-        {
-            CurrentMapIndex = MaximumUnlockedMapIndex;
-        }
-
-        if (CurrentStageIndex > MaximumUnlockedStageIndex && CurrentMapIndex == MaximumUnlockedMapIndex)
-        {
-            CurrentStageIndex = MaximumUnlockedStageIndex;
-        }
+        CurrentMapIndex = Mathf.Clamp(CurrentMapIndex, 1, MaximumUnlockedMapIndex);
+        CurrentStageIndex = Mathf.Clamp(CurrentMapIndex, 1, MaximumUnlockedStageIndex);
 
         OnMapChanged?.Invoke(CurrentMap);
     }
@@ -111,10 +97,11 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
         }
 
         MaximumUnlockedStageIndex += 1;
+
         if (MaximumUnlockedStageIndex > 10)
         {
-            MaximumUnlockedStageIndex = 1;
             MaximumUnlockedMapIndex += 1;
+            MaximumUnlockedStageIndex = 1;
         }
 
         OnMapChanged?.Invoke(CurrentMap);
@@ -127,11 +114,11 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
             throw new ArgumentOutOfRangeException(nameof(mapIndex));
         }
 
-        MaximumUnlockedMapIndex = 3;
-        MaximumUnlockedStageIndex = 10;
+        MaximumUnlockedMapIndex = mapIndex;
+        MaximumUnlockedStageIndex = stageIndex;
 
-        CurrentMapIndex = mapIndex;
-        CurrentStageIndex = stageIndex;
+        //CurrentMapIndex = mapIndex;
+        //CurrentStageIndex = stageIndex;
 
         OnMapChanged?.Invoke(CurrentMap);
     }
