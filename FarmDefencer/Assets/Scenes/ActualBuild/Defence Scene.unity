@@ -383,7 +383,7 @@ MonoBehaviour:
   _videoClips:
   - {fileID: 32900000, guid: 21703b588c8fa90459e65f2dda92d81d, type: 3}
   - {fileID: 32900000, guid: 2e7e5d0beb9c45d418986f5f67e5a0a6, type: 3}
-  - {fileID: 32900000, guid: 2e7e5d0beb9c45d418986f5f67e5a0a6, type: 3}
+  - {fileID: 32900000, guid: 0024f3ef2c8fb1e4b8b1a54255831844, type: 3}
 --- !u!328 &755706062
 VideoPlayer:
   m_ObjectHideFlags: 0
