@@ -33,7 +33,8 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
     private Tower _ghostTower;
     private GridCell _hoveringGridCell;
 
-    [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float buildVolume = 0.5f;
+    [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float buildSuccessVolume = 0.5f;
+    [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float buildFailureVolume = 0.5f;
 
     private void Start()
     {
@@ -233,7 +234,7 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
         _ghostTower.Activate();
         _ghostTower.SpineController.ResetColor();
 
-        SoundManager.Instance.PlaySfx($"SFX_D_tower_build", buildVolume);
+        SoundManager.Instance.PlaySfx($"SFX_D_tower_build", buildSuccessVolume);
 
         ResourceManager.Instance.SpendGold(_ghostTower.CurrentCost);
     }
@@ -244,6 +245,8 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
 
         if (_ghostTower != null)
         {
+            SoundManager.Instance.PlaySfx($"SFX_D_tower_fail", buildSuccessVolume);
+
             Destroy(_ghostTower.gameObject);
             _ghostTower = null;
         }

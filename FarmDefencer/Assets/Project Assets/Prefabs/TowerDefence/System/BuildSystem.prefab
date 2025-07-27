@@ -55,4 +55,5 @@ MonoBehaviour:
   _panelToggler: {fileID: 0}
   _progressBar: {fileID: 0}
   _buildDuration: 15
-  _buildVolume: 0.5
+  buildSuccessVolume: 0.5
+  buildFailureVolume: 1
