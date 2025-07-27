@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 /// <summary>
 ///
 /// </summary>
-public sealed class Tower : TargetableBehavior
+public sealed class Tower : TargetableBehavior, IVolumeControl
 {
     #region Attributes
 
@@ -97,10 +97,10 @@ public sealed class Tower : TargetableBehavior
     public event System.Action<int> OnSellCostChanged;
     public event System.Action<int> OnUpgradeCostChanged;
 
-	[SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _removeVolume = 0.5f;
-	[SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _upgradeVolume = 0.5f;
-    [SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _fireReadyVolume = 0.5f;
-    [SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _fireShotVolume = 0.5f;
+    [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float removeVolume = 0.5f;
+    [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float upgradeVolume = 0.5f;
+    [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float fireReadyVolume = 0.5f;
+    [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float fireShotVolume = 0.5f;
 
     #endregion
 
@@ -234,7 +234,7 @@ public sealed class Tower : TargetableBehavior
         _occupyingGridCell.DeleteOccupiedTower();
 
         ResourceManager.Instance.EarnGold(CurrentLevelData.SellCost);
-        SoundManager.Instance.PlaySfx("SFX_D_tower_remove", _removeVolume);
+        SoundManager.Instance.PlaySfx("SFX_D_tower_remove", removeVolume);
 
         // detector
         Detector.EraseRange();
@@ -290,7 +290,7 @@ public sealed class Tower : TargetableBehavior
         OnAttackRateChanged?.Invoke(CurrentLevelData.AttackRate);
         OnSlowRateChanged?.Invoke(CurrentLevelData.SlowRate);
 
-        SoundManager.Instance.PlaySfx("SFX_D_tower_upgrade", _upgradeVolume);
+        SoundManager.Instance.PlaySfx("SFX_D_tower_upgrade", upgradeVolume);
     }
 
     // fire
@@ -341,7 +341,7 @@ public sealed class Tower : TargetableBehavior
         // sound
         if (CurrentLevelData.FireReady != null)
         {
-            SoundManager.Instance.PlaySfx(CurrentLevelData.FireReady, _fireReadyVolume);
+            SoundManager.Instance.PlaySfx(CurrentLevelData.FireReady, fireReadyVolume);
         }
     }
     private void Fire()
@@ -396,7 +396,7 @@ public sealed class Tower : TargetableBehavior
         // sound
         if (CurrentLevelData.FireShot != null)
         {
-            SoundManager.Instance.PlaySfx(CurrentLevelData.FireShot, _fireShotVolume);
+            SoundManager.Instance.PlaySfx(CurrentLevelData.FireShot, fireShotVolume);
         }
     }
 

@@ -18,7 +18,7 @@ public enum EndingType
     Failure,
 }
 
-public class EndingUI : MonoBehaviour
+public class EndingUI : MonoBehaviour, IVolumeControl
 {
     [Header("Fade")]
     [SerializeField] private Image _fadeImage; // TODO: 이후에는 EndingUI가 아닌 독립된 클래스로 분리한 후, 현재 팝업? 혹은 UI의 hierarchy index에 넣는 방식으로 변경한다
@@ -45,7 +45,7 @@ public class EndingUI : MonoBehaviour
     [Header("Monster")]
     [SerializeField] private MonsterUI _monsterUI;
 
-	[SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _endingVolume = 0.5f;
+    [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float endingVolume = 0.5f;
 
     private void Start()
     {
@@ -68,7 +68,7 @@ public class EndingUI : MonoBehaviour
 
     private void ShowEnding(EndingType endingType)
     {
-        SoundManager.Instance.PlaySfx($"SFX_D_stage_{ConvertToEndingText(endingType)}", _endingVolume);
+        SoundManager.Instance.PlaySfx($"SFX_D_stage_{ConvertToEndingText(endingType)}", endingVolume);
 
         // fade
         _fadeImage.gameObject.SetActive(true);

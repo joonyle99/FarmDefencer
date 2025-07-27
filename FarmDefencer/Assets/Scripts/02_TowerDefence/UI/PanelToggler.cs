@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
 
-public class PanelToggler : MonoBehaviour
+public class PanelToggler : MonoBehaviour, IVolumeControl
 {
     [Header("──────── Panel Toggler ────────")]
     [Space]
@@ -24,8 +24,8 @@ public class PanelToggler : MonoBehaviour
     [SerializeField] private bool _isExpanded;
     public bool IsExpanded => _isExpanded;
 
-	[SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _expandVolume = 0.5f;
-	[SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _collapseVolume = 0.5f;
+    [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float expandVolume = 0.5f;
+    [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float collapseVolume = 0.5f;
 
     private void Start()
     {
@@ -44,11 +44,11 @@ public class PanelToggler : MonoBehaviour
         // 상태에 따라 사운드 재생
         if (_isExpanded)
         {
-            SoundManager.Instance.PlaySfx("SFX_D_expand", _expandVolume);
+            SoundManager.Instance.PlaySfx("SFX_D_expand", expandVolume);
         }
         else
         {
-            SoundManager.Instance.PlaySfx("SFX_D_collapse", _collapseVolume);
+            SoundManager.Instance.PlaySfx("SFX_D_collapse", collapseVolume);
         }
 
         var targetY = _isExpanded ? _expandedY : _collapsedY;

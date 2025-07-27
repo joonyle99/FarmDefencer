@@ -44,11 +44,11 @@ public sealed class CropPotato : Crop
 
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
-	
+
 	public override void ApplyCommand(CropCommand cropCommand)
 	{
 		var currentStage = GetCurrentStage(_currentState);
-		
+
 		switch (cropCommand)
 		{
 			case GrowCommand when currentStage == PotatoStage.Growing:
@@ -63,7 +63,7 @@ public sealed class CropPotato : Crop
 			}
 		}
 	}
-	
+
 	public override JObject Serialize() => JObject.FromObject(_currentState);
 
 	public override void Deserialize(JObject json)
@@ -74,7 +74,7 @@ public sealed class CropPotato : Crop
 			_currentState = state.Value;
 		}
 	}
-	
+
 	public override void OnTap(Vector2 inputWorldPosition)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
@@ -137,7 +137,7 @@ public sealed class CropPotato : Crop
 
 			(transform.position, transform.position);
 	}
-	
+
 	public override void ResetToInitialState() => _currentState = Reset(_currentState);
 
 	private void Awake()
@@ -203,7 +203,7 @@ public sealed class CropPotato : Crop
 			}
 		},
 	};
-	
+
 	private static readonly Dictionary<PotatoStage, Func<PotatoState, RequiredCropAction>> GetRequiredCropActionFunctions = new()
 	{
 		{PotatoStage.Seed, _ => RequiredCropAction.SingleTap },
@@ -224,7 +224,7 @@ public sealed class CropPotato : Crop
 	private static readonly Func<PotatoState, PotatoState, bool> PlayDustSfxEffectCondition = (beforeState, afterState) => afterState.HoldingTime > 0.0f && beforeState.HoldingTime == 0.0f;
 	private static readonly Action<Vector2, Vector2> PlayDustSfxEffect = (_, _) =>
 	{
-		SoundManager.Instance.PlaySfx("SFX_T_potato_dust");
+		SoundManager.Instance.PlaySfx("SFX_T_potato_dust", SoundManager.Instance.potatoDustVolume);
 	};
 
 	private static readonly Func<PotatoState, PotatoState, bool> StopDustSfxEffectCondition = (beforeState, afterState) => afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;

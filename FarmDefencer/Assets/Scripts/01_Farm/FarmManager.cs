@@ -127,21 +127,21 @@ public sealed class FarmManager : MonoBehaviour
         penaltyGiver.Init(farm);
 
         quotaContext.QuotaContextUpdated += QuotaContextChangedHandler;
-        
+
         weatherShopUI.Init(OnWeatherShopItemBought);
         weatherShopUI.AddItem(new SunItem(20 + MapManager.Instance.CurrentMap.MapId*10));
         weatherShopUI.AddItem(new RainItem(10, 10));
         weatherShopUI.AddItem(new RainItem(30, 30));
         weatherShopUI.AddItem(new RainItem(50, 50));
-        
+
         goDefenceUI.Init(OpenDefenceScene);
 
         var currentMap = MapManager.Instance.CurrentMap.MapId;
         var currentStage = MapManager.Instance.CurrentStageIndex;
 		timerUI.Init(currentMap, currentStage, () => farmClock.RemainingDaytime / farmClock.LengthOfDaytime);
-        
+
         weatherGiver.Init(farm.ApplyCropCommand);
-        
+
         pestGiver.Init(
             productName => quotaContext.IsProductAvailable(GetProductEntry(productName)),
             GetProductEntry,
@@ -184,7 +184,7 @@ public sealed class FarmManager : MonoBehaviour
         var defenceSceneOpenContextObject = new GameObject("DefenceSceneOpenContext");
         defenceSceneOpenContextObject.AddComponent<DefenceSceneOpenContext>();
         DontDestroyOnLoad(defenceSceneOpenContextObject);
-        
+
         SerializeToSaveFile();
         SceneManager.LoadScene("Defence Scene");
     }
@@ -199,7 +199,7 @@ public sealed class FarmManager : MonoBehaviour
             var goldEarnedFromSelling = quotaContext.FillQuota(entry.ProductName, quotaAfterPestsEat, currentMapId);
             farmUI.PlayProductFillAnimation(entry, cropWorldPosition, quotaAfterPestsEat);
             UpdateHarvestInventory();
-            
+
             EarnGold(goldEarnedFromSelling);
         }
     }
@@ -225,17 +225,17 @@ public sealed class FarmManager : MonoBehaviour
         {
             ResourceManager.Instance.Gold -= item.Price;
         }
-        
+
         return isWeatherGiven;
     }
-    
+
     private ProductEntry GetProductEntry(string productName) => productDatabase.Products.FirstOrDefault(p => p.ProductName == productName);
 
     private void EarnGold(int gold)
     {
         ResourceManager.Instance.Gold += gold;
         farmUI.PlayCoinAnimation();
-        SoundManager.Instance.PlaySfx("SFX_T_coin");
+        SoundManager.Instance.PlaySfx("SFX_T_coin", SoundManager.Instance.coinVolume);
     }
 
     private bool SaveOnQuit()

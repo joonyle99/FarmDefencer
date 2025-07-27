@@ -10,7 +10,7 @@ using Sirenix.OdinInspector;
 /// 하나의 이름으로 여러 SFX 버전이 존재하는 경우(ex. sfx_T_harvest_0, sfx_T_harvest_1)
 /// 반드시 0번부터 연속적으로 이름_번호 규격을 맞출 것(ex. 이름: sfx_T_harvest, 번호: _0, _1, _2 ...)
 /// </remarks>
-public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
+public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeControl
 {
     private Dictionary<string, AudioClip> _bgmDictionary;
     private Dictionary<string, List<AudioClip>> _sfxDictionary;
@@ -19,8 +19,20 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
     [SerializeField] private AudioSource _bgmAudioSource2;
     [SerializeField] private AudioSource _sfxAudioSource;
 
-    [SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _ambVolume = 0.5f;
-    [SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _songVolume = 0.5f;
+    [VolumeControl][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float ambVolume = 0.5f;
+    [VolumeControl][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float songVolume = 0.5f;
+
+    [Space]
+
+    [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float coinVolume = 0.5f;
+    [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float waterVolume = 0.5f;
+    [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float plantVolume = 0.5f;
+    [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float harvestVolume = 0.5f;
+    [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float cabbageShakeVolume = 0.5f;
+    [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float eggPlantLeafDropVolume = 0.5f;
+    [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float mushroomShotVolume = 0.5f;
+    [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float potatoDustVolume = 0.5f;
+    [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float SweetPotatoVinylVolume = 0.5f;
 
     /// <summary>
     /// 내부 캐시에서 Bgm을 불러와 재생하는 메소드.
@@ -58,13 +70,13 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>
     {
         var currentMap = MapManager.Instance.CurrentMap;
         var mapAmbName = $"BGM_D_{currentMap.MapCode}_amb";
-        PlayBgm(mapAmbName, _ambVolume);
+        PlayBgm(mapAmbName, ambVolume);
     }
     public void PlayMapSong()
     {
         var currentMap = MapManager.Instance.CurrentMap;
         var mapSongName = $"BGM_D_{currentMap.MapCode}_song";
-        PlayBgm(mapSongName, _songVolume);
+        PlayBgm(mapSongName, songVolume);
     }
 
     /// <summary>

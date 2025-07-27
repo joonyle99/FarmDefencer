@@ -85,14 +85,14 @@ public sealed class CropSweetpotato : Crop
 	private SweetpotatoState _currentState;
 
 	public bool ForceHarvestOne { get; set; } = false;
-	
+
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
-	
+
 	public override void ApplyCommand(CropCommand cropCommand)
 	{
 		var currentStage = GetCurrentStage(_currentState);
-		
+
 		switch (cropCommand)
 		{
 			case GrowCommand when currentStage is SweetpotatoStage.Stage1_Growing:
@@ -112,7 +112,7 @@ public sealed class CropSweetpotato : Crop
 			}
 		}
 	}
-	
+
 	public override JObject Serialize() => JObject.FromObject(_currentState);
 
 	public override void Deserialize(JObject json)
@@ -123,7 +123,7 @@ public sealed class CropSweetpotato : Crop
 			_currentState = state.Value;
 		}
 	}
-	
+
 	public override void OnTap(Vector2 worldPosition)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
@@ -193,7 +193,7 @@ public sealed class CropSweetpotato : Crop
 	}
 
 	public override void ResetToInitialState() => _currentState = Reset(_currentState);
-	
+
 	private void Awake()
 	{
 		_spriteRenderer = GetComponent<SpriteRenderer>();
@@ -271,7 +271,7 @@ public sealed class CropSweetpotato : Crop
 	private static readonly Action<Vector2, Vector2> WrapEffect = (_, cropPosition) =>
 	{
 		EffectPlayer.PlayVfx("VFX_T_SoilDust", cropPosition);
-		SoundManager.Instance.PlaySfx("SFX_T_sweet_vinyl");
+		SoundManager.Instance.PlaySfx("SFX_T_sweet_vinyl", SoundManager.Instance.SweetPotatoVinylVolume);
 	};
 
 	private static readonly Func<SweetpotatoState, SweetpotatoState, bool> SweetpotatoHarvestEffectCondition = (beforeState, afterState) => afterState.TapCount == 2 && beforeState.TapCount != 2;
@@ -297,9 +297,9 @@ public sealed class CropSweetpotato : Crop
 	{
 		{ DeterminedCount: false } => (_) => { },
 		{ Harvested: true } =>
-		(spriteRenderer) 
-		=> 
-		{ 
+		(spriteRenderer)
+		=>
+		{
 			if (state.RemainingSweetpotatoCount == 1)
 			{
 				ApplySprite(harvested_1_sprite, spriteRenderer);
@@ -421,7 +421,7 @@ public sealed class CropSweetpotato : Crop
 		{
 			var nextState = beforeState;
 			nextState.DeterminedCount = true;
-			
+
 			var countDecision = UnityEngine.Random.Range(0.0f, 1.0f);
 
 			if (countDecision >= 0.0f && countDecision < 0.6f)
@@ -503,14 +503,14 @@ public sealed class CropSweetpotato : Crop
 	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, float, SweetpotatoState>> OnFarmUpdateFunctions = new()
 	{
 		{
-			SweetpotatoStage.Unplowed, 
+			SweetpotatoStage.Unplowed,
 			(beforeState, deltaTime) =>
 			{
 				var holdTime = beforeState.HoldingTime;
 				var reset = Reset(beforeState);
 				reset.HoldingTime = holdTime;
 				return reset;
-			} 
+			}
 		},
 
 		{SweetpotatoStage.Stage1_Dead, WaitWater },
@@ -592,8 +592,8 @@ public sealed class CropSweetpotato : Crop
 
 		{SweetpotatoStage.Mature, DoNothing_OnHold },
 		{SweetpotatoStage.Harvested, DoNothing_OnHold },
-	};	
-	
+	};
+
 	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, RequiredCropAction>> GetRequiredCropActionFunctions = new()
 	{
 		{SweetpotatoStage.Unplowed, _ => RequiredCropAction.Drag },

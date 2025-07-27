@@ -60,14 +60,14 @@ public sealed class CropCabbage : Crop
 	private CabbageState _currentState;
 	private GameObject _harvestSoilLayerObject; // 0번 자식
 	private GameObject _harvestCropLayerObject; // 1번 자식
-	
+
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
-	
+
 	public override void ApplyCommand(CropCommand cropCommand)
 	{
 		var currentStage = GetCurrentStage(_currentState);
-		
+
 		switch (cropCommand)
 		{
 			case GrowCommand when currentStage is CabbageStage.Stage1_Growing:
@@ -87,7 +87,7 @@ public sealed class CropCabbage : Crop
 			}
 		}
 	}
-	
+
 	public override JObject Serialize() => JObject.FromObject(_currentState);
 
 	public override void Deserialize(JObject json)
@@ -98,7 +98,7 @@ public sealed class CropCabbage : Crop
 			_currentState = state.Value;
 		}
 	}
-	
+
 	public override void OnTap(Vector2 worldPosition)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
@@ -209,7 +209,7 @@ public sealed class CropCabbage : Crop
 	};
 
 	private static readonly Func<int, Func<CabbageState, CabbageState, bool>> ShakeSfxEffectConditionFor = shakedCount => (beforeState, afterState) => afterState.ShakeCount == shakedCount && beforeState.ShakeCount < shakedCount;
-	private static readonly Func<int, Action<Vector2, Vector2>> ShakeSfxEffectFor = shakedCount => (_, _) => SoundManager.Instance.PlaySfx($"SFX_T_cabbage_shake_{shakedCount}");
+	private static readonly Func<int, Action<Vector2, Vector2>> ShakeSfxEffectFor = shakedCount => (_, _) => SoundManager.Instance.PlaySfx($"SFX_T_cabbage_shake_{shakedCount}", SoundManager.Instance.cabbageShakeVolume);
 
 	private static List<(Func<CabbageState, CabbageState, bool>, Action<Vector2, Vector2>)> Effects = new()
 	{
@@ -312,11 +312,11 @@ public sealed class CropCabbage : Crop
 		{CabbageStage.Seed, Plant },
 		{CabbageStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
 		{CabbageStage.Mature, DoNothing },
-		
+
 		{CabbageStage.Stage2_Dead, DoNothing },
 		{CabbageStage.Stage2_BeforeWater, DoNothing },
 		{CabbageStage.Stage2_Growing, DoNothing },
-		
+
 		{CabbageStage.Stage1_Dead, DoNothing },
 		{CabbageStage.Stage1_BeforeWater, DoNothing },
 		{CabbageStage.Stage1_Growing, DoNothing },
@@ -328,26 +328,26 @@ public sealed class CropCabbage : Crop
 		{CabbageStage.Seed, DoNothing_OnHold },
 		{CabbageStage.Harvested, DoNothing_OnHold },
 		{CabbageStage.Mature, ShakeAndHarvest },
-		
+
 		{CabbageStage.Stage2_BeforeWater, DoNothing_OnHold },
 		{CabbageStage.Stage2_Dead, DoNothing_OnHold },
 		{CabbageStage.Stage2_Growing, DoNothing_OnHold },
-		
+
 		{CabbageStage.Stage1_BeforeWater, DoNothing_OnHold },
 		{CabbageStage.Stage1_Dead, DoNothing_OnHold },
 		{CabbageStage.Stage1_Growing, DoNothing_OnHold },
 	};
-	
+
 	private static readonly Dictionary<CabbageStage, Func<CabbageState, RequiredCropAction>> GetRequiredCropActionFunctions = new()
 	{
 		{CabbageStage.Seed, _ => RequiredCropAction.SingleTap },
 		{CabbageStage.Harvested, _ => RequiredCropAction.SingleTap },
 		{CabbageStage.Mature, _ => RequiredCropAction.Drag },
-		
+
 		{CabbageStage.Stage2_BeforeWater, _ => RequiredCropAction.Water },
 		{CabbageStage.Stage2_Dead, _ => RequiredCropAction.Water },
 		{CabbageStage.Stage2_Growing, _ => RequiredCropAction.None },
-		
+
 		{CabbageStage.Stage1_BeforeWater, _ => RequiredCropAction.Water },
 		{CabbageStage.Stage1_Dead, _ => RequiredCropAction.Water },
 		{CabbageStage.Stage1_Growing, _ => RequiredCropAction.None },

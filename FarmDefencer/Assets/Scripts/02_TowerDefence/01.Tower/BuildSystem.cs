@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 /// <summary>
 /// 타워 건설을 관리하는 시스템
 /// </summary>
-public class BuildSystem : MonoBehaviour
+public class BuildSystem : MonoBehaviour, IVolumeControl
 {
     [Header("━━━━━━━━ Build System ━━━━━━━━")]
     [Space]
@@ -33,7 +33,7 @@ public class BuildSystem : MonoBehaviour
     private Tower _ghostTower;
     private GridCell _hoveringGridCell;
 
-    [SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _buildVolume = 0.5f;
+    [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float buildVolume = 0.5f;
 
     private void Start()
     {
@@ -233,7 +233,7 @@ public class BuildSystem : MonoBehaviour
         _ghostTower.Activate();
         _ghostTower.SpineController.ResetColor();
 
-        SoundManager.Instance.PlaySfx($"SFX_D_tower_build", _buildVolume);
+        SoundManager.Instance.PlaySfx($"SFX_D_tower_build", buildVolume);
 
         ResourceManager.Instance.SpendGold(_ghostTower.CurrentCost);
     }

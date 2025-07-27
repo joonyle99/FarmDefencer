@@ -96,14 +96,14 @@ public sealed class CropMushroom : Crop
 	private MushroomState _currentState;
 
 	public bool ForceHarvestOne { get; set; } = false;
-	
+
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
-	
+
 	public override void ApplyCommand(CropCommand cropCommand)
 	{
 		var currentStage = GetCurrentStage(_currentState);
-		
+
 		switch (cropCommand)
 		{
 			case GrowCommand when currentStage is MushroomStage.Stage1_Growing:
@@ -123,7 +123,7 @@ public sealed class CropMushroom : Crop
 			}
 		}
 	}
-	
+
 	public override JObject Serialize() => JObject.FromObject(_currentState);
 
 	public override void Deserialize(JObject json)
@@ -134,7 +134,7 @@ public sealed class CropMushroom : Crop
 			_currentState = state.Value;
 		}
 	}
-	
+
 	public override void OnTap(Vector2 worldPosition)
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
@@ -205,7 +205,7 @@ public sealed class CropMushroom : Crop
 
 		RenderInoculationAnimation();
 	}
-	
+
 	public override void ResetToInitialState() => _currentState = Reset(_currentState);
 
 	private void Awake()
@@ -328,7 +328,7 @@ public sealed class CropMushroom : Crop
 
 	// 용어 참고: SFX에서의 shot == 코드에서의 inoculation.
 	private static readonly Func<MushroomState, MushroomState, bool> PlayShotSfxEffectCondition = (beforeState, afterState) => GetCurrentStage(beforeState) == MushroomStage.Stage3_BeforeInoculation && afterState.HoldingTime > 0.0f && beforeState.HoldingTime == 0.0f;
-	private static readonly Action<Vector2, Vector2> PlayShotSfxEffect = (_, _) => SoundManager.Instance.PlaySfx("SFX_T_mushroom_shot_1");
+	private static readonly Action<Vector2, Vector2> PlayShotSfxEffect = (_, _) => SoundManager.Instance.PlaySfx("SFX_T_mushroom_shot_1", SoundManager.Instance.mushroomShotVolume);
 
 	private static readonly Func<MushroomState, MushroomState, bool> StopShotSfxEffectCondition = (beforeState, afterState) => GetCurrentStage(beforeState) == MushroomStage.Stage3_BeforeInoculation && afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
 	private static readonly Action<Vector2, Vector2> StopShotSfxEffect = (_, _) => SoundManager.Instance.StopSfx();
@@ -337,7 +337,7 @@ public sealed class CropMushroom : Crop
 	private static readonly Action<Vector2, Vector2> MushroomHarvestEffect = (_, cropPosition) => EffectPlayer.PlayVfx("VFX_T_SoilDust", cropPosition);
 
 	private static readonly Func<MushroomState, MushroomState, bool> HoldStopEffectCondition = (beforeState, afterState) => afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
-	private static readonly Action<Vector2, Vector2> HoldStopEffect = (_, _) => 
+	private static readonly Action<Vector2, Vector2> HoldStopEffect = (_, _) =>
 	{
 		EffectPlayer.StopVfx();
 	};
@@ -434,7 +434,7 @@ public sealed class CropMushroom : Crop
 	private static readonly Dictionary<MushroomStage, Func<MushroomState, float, MushroomState>> OnFarmUpdateFunctions = new()
 	{
 		{
-			MushroomStage.Unplowed, 
+			MushroomStage.Unplowed,
 			(beforeState, deltaTime) =>
 			{
 				var holdTime = beforeState.HoldingTime;
@@ -524,7 +524,7 @@ public sealed class CropMushroom : Crop
 		{MushroomStage.Booming, DoNothing_OnHold },
 		{MushroomStage.Harvested, DoNothing_OnHold },
 	};
-	
+
 	private static readonly Dictionary<MushroomStage, Func<MushroomState, RequiredCropAction>> GetRequiredCropActionFunctions = new()
 	{
 		{MushroomStage.Unplowed, _ => RequiredCropAction.Drag },

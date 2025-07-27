@@ -62,14 +62,14 @@ public sealed class CropEggplant : Crop
 
 	private SpriteRenderer _spriteRenderer;
 	private EggplantState _currentState;
-	
+
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
-	
+
 	public override void ApplyCommand(CropCommand cropCommand)
 	{
 		var currentStage = GetCurrentStage(_currentState);
-		
+
 		switch (cropCommand)
 		{
 			case GrowCommand when currentStage is EggplantStage.Stage1_Growing:
@@ -89,7 +89,7 @@ public sealed class CropEggplant : Crop
 			}
 		}
 	}
-	
+
 	public override JObject Serialize() => JObject.FromObject(_currentState);
 
 	public override void Deserialize(JObject json)
@@ -100,7 +100,7 @@ public sealed class CropEggplant : Crop
 			_currentState = state.Value;
 		}
 	}
-	
+
 	public override void OnWatering()
 	{
 		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
@@ -113,7 +113,7 @@ public sealed class CropEggplant : Crop
 			{
 				var nextState = beforeState;
 				if (beforeState.Planted
-				&& !beforeState.Watered 
+				&& !beforeState.Watered
 				&& (beforeState.GrowthSeconds < Stage1_GrowthSeconds || beforeState.TrelisPlaced))
 				{
 					nextState.Watered = true;
@@ -132,7 +132,7 @@ public sealed class CropEggplant : Crop
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
-			OnTapFunctions[GetCurrentStage(_currentState)], 
+			OnTapFunctions[GetCurrentStage(_currentState)],
 			_currentState)
 
 			(worldPosition, transform.position);
@@ -156,7 +156,7 @@ public sealed class CropEggplant : Crop
 
 			(transform.position, transform.position);
 	}
-	
+
 	public override void ResetToInitialState() => _currentState = Reset(_currentState);
 
 	private void Awake()
@@ -234,11 +234,11 @@ public sealed class CropEggplant : Crop
 
 		{EggplantStage.Stage3_FullLeaves, DropLeafIfDoubleTap },
 		{EggplantStage.Stage3_HalfLeaves, DropLeafIfDoubleTap },
-	
+
 		{EggplantStage.Mature, Harvest },
 		{EggplantStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
-	};	
-	
+	};
+
 	private static readonly Dictionary<EggplantStage, Func<EggplantState, RequiredCropAction>> GetRequiredCropActionFunctions = new()
 	{
 		{EggplantStage.Seed, _ => RequiredCropAction.SingleTap },
@@ -254,7 +254,7 @@ public sealed class CropEggplant : Crop
 
 		{EggplantStage.Stage3_FullLeaves, _ => RequiredCropAction.DoubleTap },
 		{EggplantStage.Stage3_HalfLeaves, _ => RequiredCropAction.DoubleTap },
-	
+
 		{EggplantStage.Mature, _ => RequiredCropAction.SingleTap },
 		{EggplantStage.Harvested, _ => RequiredCropAction.SingleTap },
 	};
@@ -293,7 +293,7 @@ public sealed class CropEggplant : Crop
 		(leavesDropped) =>
 		(inputWorldPosition, cropPosition) =>
 		{
-			SoundManager.Instance.PlaySfx($"SFX_T_eggplant_leaf_{leavesDropped}");
+			SoundManager.Instance.PlaySfx($"SFX_T_eggplant_leaf_{leavesDropped}", SoundManager.Instance.eggPlantLeafDropVolume);
 			if (leavesDropped == 1)
 			{
 				EffectPlayer.PlayVfx("VFX_T_SoilDustL", cropPosition);

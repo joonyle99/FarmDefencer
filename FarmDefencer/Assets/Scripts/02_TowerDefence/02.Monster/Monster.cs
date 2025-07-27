@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 /// <summary>
 ///
 /// </summary>
-public abstract class Monster : TargetableBehavior, IProduct
+public abstract class Monster : TargetableBehavior, IProduct, IVolumeControl
 {
     #region Attributes
 
@@ -71,7 +71,7 @@ public abstract class Monster : TargetableBehavior, IProduct
     private SortingGroup _sortingGroup;
     private int _defaultSortingOrder;
 
-	[SerializeField][BoxGroup("볼륨 조절")][Range(0f, 1f)] private float _deadVolume = 0.5f;
+    [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float deadVolume = 0.5f;
 
     #endregion
 
@@ -179,7 +179,7 @@ public abstract class Monster : TargetableBehavior, IProduct
         // TEMP: 이동 중지
         GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
 
-        SoundManager.Instance.PlaySfx($"SFX_D_{MonsterData.Name}_dead", _deadVolume);
+        SoundManager.Instance.PlaySfx($"SFX_D_{MonsterData.Name}_dead", deadVolume);
 
         StartCoroutine(KillCo(DissappearAnimationName));
 

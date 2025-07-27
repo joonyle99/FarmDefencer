@@ -3,14 +3,14 @@ using UnityEngine;
 public sealed class HarvestTutorialField : MonoBehaviour
 {
     private const float TimeMultiplierWhenWaiting = 7.0f;
-    
+
     public ProductEntry ProductEntry => _field.ProductEntry;
 
     public bool Done { get; private set; }
 
     public Field Field => _field;
     private Field _field;
-    
+
     public Crop TargetCrop => _field.TopLeftCrop;
 
     private void Awake()
@@ -27,8 +27,8 @@ public sealed class HarvestTutorialField : MonoBehaviour
             crop.gameObject.SetActive(true);
         }
         _field.transform.Find("FieldLockedDisplay").gameObject.SetActive(false);
-        
-        _field.Init(_ => 9999, (_, _, _) => { Done = true; SoundManager.Instance.PlaySfx("SFX_T_coin"); }, _ => { });
+
+        _field.Init(_ => 9999, (_, _, _) => { Done = true; SoundManager.Instance.PlaySfx("SFX_T_coin", SoundManager.Instance.coinVolume); }, _ => { });
 
         foreach (var spriteRendererComponent in _field.GetComponentsInChildren(typeof(SpriteRenderer)))
         {
@@ -47,11 +47,11 @@ public sealed class HarvestTutorialField : MonoBehaviour
             cropMushroom.ForceHarvestOne = true;
         }
     }
-    
+
     private void Update()
     {
-        var multiplier = TargetCrop.RequiredCropAction == RequiredCropAction.None ? TimeMultiplierWhenWaiting : 1.0f; 
+        var multiplier = TargetCrop.RequiredCropAction == RequiredCropAction.None ? TimeMultiplierWhenWaiting : 1.0f;
         _field.OnFarmUpdate(Time.deltaTime * multiplier);
-        
+
     }
 }

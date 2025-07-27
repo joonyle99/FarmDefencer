@@ -176,12 +176,12 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 	// 이펙트 조건 및 실행 함수
 
 	protected static bool WaterEffectCondition<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => !beforeState.Watered && afterState.Watered;
-	protected static void WaterEffect(Vector2 inputWorldPosition, Vector2 cropPosition) => SoundManager.Instance.PlaySfx("SFX_T_water_oneshot");
+	protected static void WaterEffect(Vector2 inputWorldPosition, Vector2 cropPosition) => SoundManager.Instance.PlaySfx("SFX_T_water_oneshot", SoundManager.Instance.waterVolume);
 
 	protected static bool PlantEffectCondition<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => !beforeState.Planted && afterState.Planted;
 	protected static void PlantEffect(Vector2 inputWorldPosition, Vector2 cropPosition)
 	{
-		SoundManager.Instance.PlaySfx("SFX_T_plant_seed");
+		SoundManager.Instance.PlaySfx("SFX_T_plant_seed", SoundManager.Instance.plantVolume);
 		EffectPlayer.PlayTabEffect(inputWorldPosition);
 	}
 	protected static bool HarvestEffectCondition<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => !beforeState.Harvested && afterState.Harvested;
@@ -189,14 +189,14 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 	{
 		EffectPlayer.PlayTabEffect(inputWorldPosition);
 		EffectPlayer.PlayVfx("VFX_T_SoilParticle", cropPosition);
-		SoundManager.Instance.PlaySfx("SFX_T_harvest");
+		SoundManager.Instance.PlaySfx("SFX_T_harvest", SoundManager.Instance.harvestVolume);
 	}
 
 	protected static void HarvestEffect_SoilDust(Vector2 inputWorldPosition, Vector2 cropPosition)
 	{
 		EffectPlayer.PlayTabEffect(inputWorldPosition);
 		EffectPlayer.PlayVfx("VFX_T_SoilDust", cropPosition);
-		SoundManager.Instance.PlaySfx("SFX_T_harvest");
+		SoundManager.Instance.PlaySfx("SFX_T_harvest", SoundManager.Instance.harvestVolume);
 	}
 
 	protected static bool QuotaFilledEffectCondition<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => afterState.RemainingQuota < beforeState.RemainingQuota;

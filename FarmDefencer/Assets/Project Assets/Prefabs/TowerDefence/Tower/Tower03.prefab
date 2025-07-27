@@ -205,8 +205,14 @@ MonoBehaviour:
   LevelUpAnimationNames:
   - level_up_1_to_2
   - level_up_2_to_3
+  _canAttack: 1
   _flipAimer: {fileID: 4414608076142748444}
   _projectilePrefab: {fileID: 5744434242594404492, guid: 52e63b37e642a6d4e959958e588224f2, type: 3}
+  _beamPrefab: {fileID: 0}
+  _removeVolume: 0.5
+  _upgradeVolume: 0.5
+  _fireReadyVolume: 0.5
+  _fireShotVolume: 0.5
 --- !u!210 &5803083254459691797
 SortingGroup:
   m_ObjectHideFlags: 0
