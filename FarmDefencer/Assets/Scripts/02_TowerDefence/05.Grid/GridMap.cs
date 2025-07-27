@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
+using DG.Tweening;
 
 /// <summary>
 /// GridMap의 각 Cell은 이동할 수 있는 땅인지의 정보를 가지며,
@@ -66,7 +67,6 @@ public class GridMap : MonoBehaviour
     private Vector2Int[] _oppositePoints;
 
     [SerializeField] private LineRenderer _pathLineRenderer;
-    [SerializeField] private float _pathLineDuration = 0.3f;
 
     [Space]
 
@@ -83,6 +83,9 @@ public class GridMap : MonoBehaviour
     private int[] _dy = new int[4] { 0, 1, 0, -1 };
 
     public GridCell LastPlacedGridCell = null;
+    private bool _isFirstCalcPath = true;
+    private Coroutine _drawPathCo;
+    private LineRenderer _pathLineObject;
 
     private void Awake()
     {
@@ -140,7 +143,10 @@ public class GridMap : MonoBehaviour
     }
     private void Start()
     {
+        GameStateManager.Instance.OnBuildState -= CreateGridMap;
         GameStateManager.Instance.OnBuildState += CreateGridMap;
+        GameStateManager.Instance.OnBuildState -= FindPathOnStart;
+        GameStateManager.Instance.OnBuildState += FindPathOnStart;
     }
 
     private void OnDestroy()
@@ -148,6 +154,7 @@ public class GridMap : MonoBehaviour
         if (GameStateManager.Instance is not null)
         {
             GameStateManager.Instance.OnBuildState -= CreateGridMap;
+            GameStateManager.Instance.OnBuildState -= FindPathOnStart;
         }
     }
 
@@ -182,19 +189,38 @@ public class GridMap : MonoBehaviour
     }
 
     // shortest path finding by using bfs algorithm
+    public void FindPathOnStart()
+    {
+        StartCoroutine(FindPathOnStartCo());
+    }
     public IEnumerator FindPathOnStartCo()
     {
-        var originGridPath = CalculateOriginPath();
-        if (originGridPath == null || originGridPath.Count < 2)
+        var cellMoveTime = _isFirstCalcPath ? 0.15f : 0.1f;
+        var delayTime = _isFirstCalcPath ? 1f : 0f;
+
+        // 출발점 -> 도착점의 경로 계산을 딱 한 번만 한다
+        if (_isFirstCalcPath == true)
         {
-            Debug.Log("origin grid path is invalid");
-            LoadPrevDistanceCost();
-            yield break;
+            _isFirstCalcPath = false;
+
+            var originGridPath = CalculateOriginPath();
+            if (originGridPath == null || originGridPath.Count < 2)
+            {
+                Debug.Log("origin grid path is invalid");
+                LoadPrevDistanceCost();
+                yield break;
+            }
+
+            _originGridPath = originGridPath;
         }
 
-        _originGridPath = originGridPath;
+        if (_drawPathCo != null)
+        {
+            StopDrawPath();
+        }
 
-        yield return DrawPathCo(_originGridPath);
+        _drawPathCo = StartCoroutine(DrawPathCo(_originGridPath, cellMoveTime, delayTime));
+        yield return _drawPathCo;
     }
     public bool FindPathAll()
     {
@@ -433,14 +459,16 @@ public class GridMap : MonoBehaviour
         var thisCellPos = gridCell.cellPosition;
         return targetCellPos == thisCellPos;
     }
-    public IEnumerator DrawPathCo(List<GridCell> gridPath, Color? endColor = null)
+    public IEnumerator DrawPathCo(List<GridCell> gridPath, float cellMoveTime = 0.1f, float delayTime = 0f, Color? endColor = null)
     {
-        var pathLineObject = Instantiate(_pathLineRenderer, Vector3.zero, Quaternion.identity);
-        pathLineObject.positionCount = 0;
+        yield return new WaitForSeconds(delayTime);
+
+        _pathLineObject = Instantiate(_pathLineRenderer, Vector3.zero, Quaternion.identity);
+        _pathLineObject.positionCount = 0;
 
         if (endColor != null)
         {
-            pathLineObject.endColor = endColor.Value;
+            _pathLineObject.endColor = endColor.Value;
         }
 
         // gridPath를 복사해야 한다.
@@ -449,18 +477,37 @@ public class GridMap : MonoBehaviour
 
         for (int i = 0; i < copiedGridPath.Count; i++)
         {
-            //Debug.Log(copiedGridPath.Count);
-            pathLineObject.positionCount = i + 1;
-            pathLineObject.SetPosition(i, copiedGridPath[i].transform.position);
+            _pathLineObject.positionCount = i + 1;
+            _pathLineObject.SetPosition(i, copiedGridPath[i].transform.position);
 
-            var originScale = copiedGridPath[i].transform.localScale;
+            var tf = copiedGridPath[i].transform;
+            var originScale = tf.localScale;
 
-            copiedGridPath[i].transform.localScale = originScale * 1.5f;
-            yield return new WaitForSeconds(0.1f);
-            copiedGridPath[i].transform.localScale = originScale;
+            tf.DOScale(originScale * 1.5f, cellMoveTime * 0.5f).SetEase(Ease.OutQuad).OnComplete(() =>
+            {
+                tf.DOScale(originScale, cellMoveTime * 0.5f).SetEase(Ease.InQuad);
+            });
+
+            yield return new WaitForSeconds(cellMoveTime);
         }
 
-        yield return new WaitForSeconds(_pathLineDuration);
-        Destroy(pathLineObject.gameObject);
+        yield return new WaitForSeconds(0.3f); // delay for last point
+        Destroy(_pathLineObject.gameObject);
+        _pathLineObject = null;
+    }
+
+    private void StopDrawPath()
+    {
+        if (_drawPathCo != null)
+        {
+            StopCoroutine(_drawPathCo);
+            _drawPathCo = null;
+
+            if (_pathLineObject != null)
+            {
+                Destroy(_pathLineObject.gameObject);
+                _pathLineObject = null;
+            }
+        }
     }
 }

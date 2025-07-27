@@ -94,14 +94,12 @@ public class WaveSystem : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (GameStateManager.Instance is null)
+        if (GameStateManager.Instance is not null)
         {
-            return;
+            GameStateManager.Instance.OnWaveState -= InitStageData;
+            GameStateManager.Instance.OnWaveState -= InitProgressBar;
+            GameStateManager.Instance.OnWaveState -= StartWaveProcess;
         }
-        
-        GameStateManager.Instance.OnWaveState -= InitStageData;
-        GameStateManager.Instance.OnWaveState -= InitProgressBar;
-        GameStateManager.Instance.OnWaveState -= StartWaveProcess;
     }
 
     private void Update()

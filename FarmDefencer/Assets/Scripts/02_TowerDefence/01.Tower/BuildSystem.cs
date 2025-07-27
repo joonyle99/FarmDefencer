@@ -37,19 +37,19 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
 
     private void Start()
     {
+        GameStateManager.Instance.OnBuildState -= InitBuildTimer;
         GameStateManager.Instance.OnBuildState += InitBuildTimer;
+        GameStateManager.Instance.OnBuildState -= InitProgressBar;
         GameStateManager.Instance.OnBuildState += InitProgressBar;
     }
 
     private void OnDestroy()
     {
-        if (GameStateManager.Instance is null)
+        if (GameStateManager.Instance is not null)
         {
-            return;
+            GameStateManager.Instance.OnBuildState -= InitBuildTimer;
+            GameStateManager.Instance.OnBuildState -= InitProgressBar;
         }
-
-        GameStateManager.Instance.OnBuildState -= InitBuildTimer;
-        GameStateManager.Instance.OnBuildState -= InitProgressBar;
     }
 
     private void Update()
