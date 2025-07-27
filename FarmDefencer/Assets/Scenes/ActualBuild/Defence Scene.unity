@@ -4142,6 +4142,10 @@ PrefabInstance:
       propertyPath: _panelToggler
       value: 
       objectReference: {fileID: 1399254021}
+    - target: {fileID: 2948256601553943121, guid: 1cc1ea74a50068244bc48645505907bd, type: 3}
+      propertyPath: _buildDuration
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 7445735258670719969, guid: 1cc1ea74a50068244bc48645505907bd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
