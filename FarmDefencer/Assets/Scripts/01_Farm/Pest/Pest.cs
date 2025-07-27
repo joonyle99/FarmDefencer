@@ -104,7 +104,7 @@ public sealed class Pest : MonoBehaviour
             return;
         }
         
-        EffectPlayer.PlayTabEffect(transform.position);
+        EffectPlayer.SceneGlobalInstance.PlayTapEffect(transform.position);
         _remainingClickCount -= 1;
         if (_remainingClickCount <= 0)
         {

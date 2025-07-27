@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 /// <summary>
@@ -7,10 +8,13 @@ using UnityEngine;
 /// </summary>
 public sealed class EffectPlayer : MonoBehaviour
 {
-	private static EffectPlayer s_singleton;
+	[InfoBox("해당 씬에서 SceneGlobalInstance로 접근 가능한 인스턴스인지")]
+	[SerializeField] private bool isSceneGlobalInstance;
 	
 	private Animator _interactEffectAnimator;
 	private Animator _vfxAnimator;
+	private SpriteRenderer _effectSpriteRenderer;
+	private SpriteRenderer _vfxSpriteRenderer;
 	private float _lastVfxDoneTime;
 
 	private bool _isHolding;
@@ -18,11 +22,17 @@ public sealed class EffectPlayer : MonoBehaviour
 	private static readonly int Looping = Animator.StringToHash("Looping");
 	private static readonly int Play = Animator.StringToHash("Play");
 	private static readonly int Enter = Animator.StringToHash("Enter");
+	
+	public static EffectPlayer SceneGlobalInstance { get; private set; }
 
-	public static void PlayTabEffect(Vector2 worldPosition)
+	public void PlayTapEffect(Vector2 worldPosition)
 	{
-		s_singleton._interactEffectAnimator.transform.position = worldPosition;
-		s_singleton._interactEffectAnimator.Play(Enter, 0, 0.0f);
+		if (!gameObject.activeSelf)
+		{
+			return;
+		}
+		_interactEffectAnimator.transform.position = worldPosition;
+		_interactEffectAnimator.Play(Enter, 0, 0.0f);
 	}
 
 	/// <summary>
@@ -30,41 +40,53 @@ public sealed class EffectPlayer : MonoBehaviour
 	/// <seealso cref="StopHoldEffect"/> 참조
 	/// </summary>
 	/// <param name="worldPosition"></param>
-	public static void PlayHoldEffect(Vector2 worldPosition)
+	public void PlayHoldEffect(Vector2 worldPosition)
 	{
-		s_singleton._interactEffectAnimator.transform.position = worldPosition;
-		s_singleton._interactEffectAnimator.SetTrigger(Play);
-		s_singleton._interactEffectAnimator.SetBool(Looping, true);
-		s_singleton._isHolding = true;
+		if (!gameObject.activeSelf)
+		{
+			return;
+		}
+		_interactEffectAnimator.transform.position = worldPosition;
+		_interactEffectAnimator.SetTrigger(Play);
+		_interactEffectAnimator.SetBool(Looping, true);
+		_isHolding = true;
 	}
 
 	/// <summary>
 	/// Hold()를 임의로 해제. Hold()를 매 프레임 호출하다가 특정 순간에 호출하지 않으면 자동으로 호출되는 메소드지만,
 	/// 명시적으로 종료하고자 할 때 호출하는 메소드.
 	/// </summary>
-	public static void StopHoldEffect()
+	public void StopHoldEffect()
 	{
-		if (s_singleton._interactEffectAnimator.GetBool(Looping))
+		if (!gameObject.activeSelf)
 		{
-			s_singleton._interactEffectAnimator.ResetTrigger(Play);
-			s_singleton._interactEffectAnimator.SetBool(Looping, false);
+			return;
+		}
+		if (_interactEffectAnimator.GetBool(Looping))
+		{
+			_interactEffectAnimator.ResetTrigger(Play);
+			_interactEffectAnimator.SetBool(Looping, false);
 		}
 	}
-
+	
 	/// <summary>
 	/// </summary>
 	/// <param name="name">Resources/Vfx에 위치한 Animation Controller의 이름.</param>
 	/// <param name="worldPosition"></param>
 	/// <param name="overwriteEvenIfSame">true일 경우, 동일한 VFX를 요청해도 다시 처음부터 재생.</param>
-	public static void PlayVfx(string name, Vector2 worldPosition, bool overwriteEvenIfSame = true)
+	public void PlayVfx(string name, Vector2 worldPosition, bool overwriteEvenIfSame = true)
 	{
-		if (!s_singleton._vfxControllers.ContainsKey(name))
+		if (!gameObject.activeSelf)
+		{
+			return;
+		}
+		if (!_vfxControllers.ContainsKey(name))
 		{
 			var loadedController = Resources.Load<RuntimeAnimatorController>($"_Vfx/{name}");
-			s_singleton._vfxControllers.Add(name, loadedController);
+			_vfxControllers.Add(name, loadedController);
 		}
 
-		var controller = s_singleton._vfxControllers[name];
+		var controller = _vfxControllers[name];
 		if (controller == null)
 		{
 			Debug.LogError($"존재하지 않는 AnimationController for VFX: {name}");
@@ -73,15 +95,15 @@ public sealed class EffectPlayer : MonoBehaviour
 
 		var currentTime = Time.time;
 
-		if (currentTime >= s_singleton._lastVfxDoneTime || overwriteEvenIfSame || controller != s_singleton._vfxAnimator.runtimeAnimatorController)
+		if (currentTime >= _lastVfxDoneTime || overwriteEvenIfSame || controller != _vfxAnimator.runtimeAnimatorController)
 		{
-			s_singleton._vfxAnimator.runtimeAnimatorController = null;
-			s_singleton._vfxAnimator.transform.position = worldPosition;
-			s_singleton._vfxAnimator.runtimeAnimatorController = controller;
-			s_singleton._lastVfxDoneTime = currentTime;
+			_vfxAnimator.runtimeAnimatorController = null;
+			_vfxAnimator.transform.position = worldPosition;
+			_vfxAnimator.runtimeAnimatorController = controller;
+			_lastVfxDoneTime = currentTime;
 			if (controller.animationClips.Length > 0)
 			{
-				s_singleton._lastVfxDoneTime += controller.animationClips[0].length;
+				_lastVfxDoneTime += controller.animationClips[0].length;
 			}
 		}
 	}
@@ -89,22 +111,33 @@ public sealed class EffectPlayer : MonoBehaviour
 	/// <summary>
 	/// 현재 재생중인 VFX가 있다면 중지.
 	/// </summary>
-	public static void StopVfx()
+	public void StopVfx()
 	{
-		s_singleton._vfxAnimator.runtimeAnimatorController = null;
+		if (!gameObject.activeSelf)
+		{
+			return;
+		}
+		_vfxAnimator.runtimeAnimatorController = null;
+	}
+
+	private void OnDisable()
+	{
+		_effectSpriteRenderer.sprite = null;
+		_vfxSpriteRenderer.sprite = null;
 	}
 
 	private void Awake()
 	{
-		if (s_singleton != null)
+		if (isSceneGlobalInstance)
 		{
-			throw new InvalidOperationException("EffectPlayer의 싱글톤 객체가 유효한 상황에서 Awake()가 다시 호출되었습니다.");
+			SceneGlobalInstance = this;
 		}
-
-		s_singleton = this;
+		
 		_vfxControllers = new Dictionary<string, RuntimeAnimatorController>();
-		_interactEffectAnimator = transform.GetChild(0).GetComponent<Animator>();
-		_vfxAnimator = transform.GetChild(1).GetComponent<Animator>();
+		_effectSpriteRenderer = transform.Find("InteractEffect").GetComponent<SpriteRenderer>();
+		_interactEffectAnimator = transform.Find("InteractEffect").GetComponent<Animator>();
+		_vfxSpriteRenderer = transform.Find("VFX").GetComponent<SpriteRenderer>();
+		_vfxAnimator = transform.Find("VFX").GetComponent<Animator>();
 	}
 
 	private void FixedUpdate()

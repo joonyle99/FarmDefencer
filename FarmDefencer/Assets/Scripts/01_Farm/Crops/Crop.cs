@@ -14,7 +14,9 @@ public enum RequiredCropAction
 {
 	None,
 	SingleTap,
-	Hold,
+	Hold_0_75,
+	Hold_1,
+	Hold_2,
 	DoubleTap,
 	FiveTap,
 	Drag,
@@ -182,25 +184,25 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 	protected static void PlantEffect(Vector2 inputWorldPosition, Vector2 cropPosition)
 	{
 		SoundManager.Instance.PlaySfx("SFX_T_plant_seed", SoundManager.Instance.plantVolume);
-		EffectPlayer.PlayTabEffect(inputWorldPosition);
+		EffectPlayer.SceneGlobalInstance.PlayTapEffect(inputWorldPosition);
 	}
 	protected static bool HarvestEffectCondition<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => !beforeState.Harvested && afterState.Harvested;
 	protected static void HarvestEffect_SoilParticle(Vector2 inputWorldPosition, Vector2 cropPosition)
 	{
-		EffectPlayer.PlayTabEffect(inputWorldPosition);
-		EffectPlayer.PlayVfx("VFX_T_SoilParticle", cropPosition);
+		EffectPlayer.SceneGlobalInstance.PlayTapEffect(inputWorldPosition);
+		EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilParticle", cropPosition);
 		SoundManager.Instance.PlaySfx("SFX_T_harvest", SoundManager.Instance.harvestVolume);
 	}
 
 	protected static void HarvestEffect_SoilDust(Vector2 inputWorldPosition, Vector2 cropPosition)
 	{
-		EffectPlayer.PlayTabEffect(inputWorldPosition);
-		EffectPlayer.PlayVfx("VFX_T_SoilDust", cropPosition);
+		EffectPlayer.SceneGlobalInstance.PlayTapEffect(inputWorldPosition);
+		EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilDust", cropPosition);
 		SoundManager.Instance.PlaySfx("SFX_T_harvest", SoundManager.Instance.harvestVolume);
 	}
 
 	protected static bool QuotaFilledEffectCondition<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => afterState.RemainingQuota < beforeState.RemainingQuota;
-	protected static void QuotaFilledEffect(Vector2 inputWorldPosition, Vector2 cropPosition) => EffectPlayer.PlayTabEffect(inputWorldPosition);
+	protected static void QuotaFilledEffect(Vector2 inputWorldPosition, Vector2 cropPosition) => EffectPlayer.SceneGlobalInstance.PlayTapEffect(inputWorldPosition);
 
 	/// <summary>
 	/// 이전 상태의 RemainingQuota와 count 둘 중 작은 값만큼 다음 상태의 RemainingQuota를 감소시키며,

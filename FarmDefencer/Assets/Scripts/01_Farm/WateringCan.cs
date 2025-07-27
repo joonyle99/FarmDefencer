@@ -16,8 +16,8 @@ public sealed class WateringCan :
 	IPointerUpHandler,
 	IPointerExitHandler
 {
-	[InfoBox("실제 물주기 판정이 판정이 발생할 위치의 물뿌리개 몸체로부터의 오프셋. 카메라 OrthographicSize 1 기준, 월드 크기.")]
-	[SerializeField] private Vector2 wateringOffset = new Vector2(0.4f, -0.4f);
+	[InfoBox("실제 물주기 판정이 판정이 발생할 위치의 물뿌리개 몸체로부터의 오프셋. 화면 해상도 기준.")]
+	[SerializeField] private Vector2 wateringOffset = new Vector2(512.0f, -512.0f);
 	public Vector2 WateringOffset => wateringOffset;
 	
 	public int InputPriority => IFarmInputLayer.Priority_WateringCan;
@@ -25,8 +25,7 @@ public sealed class WateringCan :
 	// 물 주기 판정이 가해지는 watering 애니메이션에서의 시각
 	private const float WateringAnimationTimePoint = 0.5f;
 	private Action<Vector2> _onWatering;
-	private bool _using;
-	public bool Using => _using;
+	public bool Using { get; private set; }
 
 	private Vector2 _currentWateringWorldPosition;
 	private Vector2 _initialScreenLocalPosition; // 이 물뿌리개를 사용하지 않을 때 위치할 화면 위치. 에디터 상에서 놓은 위치를 기억해서 사용함.
@@ -51,7 +50,7 @@ public sealed class WateringCan :
 
 	public bool OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
 	{
-		return _using;
+		return Using;
 	}
 
 	public void OnPointerDown(PointerEventData eventData) => OnDrag(eventData);
@@ -66,7 +65,7 @@ public sealed class WateringCan :
 	{
 		if (!_isWaterable())
 		{
-			if (_using)
+			if (Using)
 			{
 				MoveToInitialPosition();
 			}
@@ -74,9 +73,9 @@ public sealed class WateringCan :
 			return;
 		}
 
-		if (!_using)
+		if (!Using)
 		{
-			_using = true;
+			Using = true;
 			OnUsingStateChanged();
 		}
 
@@ -84,8 +83,8 @@ public sealed class WateringCan :
 		_rectTransform.anchoredPosition = pointerEventData.position;
 		// 물뿌리개의 월드 위치 구하기
 		var pointerScreenPosition = pointerEventData.position;
-		var pointerWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(pointerScreenPosition.x, pointerScreenPosition.y, 10.0f));
-		_currentWateringWorldPosition = pointerWorldPosition;
+		var wateringScreenPosition = pointerScreenPosition + wateringOffset;
+		_currentWateringWorldPosition = Camera.main.ScreenToWorldPoint(wateringScreenPosition);
 	}
 
 	public void Init(Func<bool> isWaterable, Action<Vector2> onWatering)
@@ -130,13 +129,13 @@ public sealed class WateringCan :
 	private void MoveToInitialPosition()
 	{
 		_rectTransform.localPosition = _initialScreenLocalPosition;
-		_using = false;
+		Using = false;
 		OnUsingStateChanged();
 	}
 
 	private void OnUsingStateChanged()
 	{
-		if (_using)
+		if (Using)
 		{
 			_spineAnimationState.SetAnimation(0, wateringAnimationName, true);
 		}

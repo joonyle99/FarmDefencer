@@ -103,6 +103,10 @@ public sealed class CropPotato : Crop
 			_currentState)
 
 			(initialPosition + deltaPosition, transform.position);
+		if (GetCurrentStage(_currentState) == PotatoStage.Harvested)
+		{
+			SoundManager.Instance.StopSfx();
+		}
 	}
 
 	public override void OnWatering()
@@ -210,15 +214,15 @@ public sealed class CropPotato : Crop
 		{PotatoStage.BeforeWater, _ => RequiredCropAction.Water },
 		{PotatoStage.Dead, _ => RequiredCropAction.Water },
 		{PotatoStage.Growing, _ => RequiredCropAction.None },
-		{PotatoStage.Mature, _ => RequiredCropAction.Hold },
+		{PotatoStage.Mature, _ => RequiredCropAction.Hold_0_75 },
 		{PotatoStage.Harvested, _ => RequiredCropAction.SingleTap },
 	};
 
 	private static readonly Func<PotatoState, PotatoState, bool> HoldEffectCondition = (beforeState, afterState) => afterState.HoldingTime > beforeState.HoldingTime;
 	private static readonly Action<Vector2, Vector2> HoldEffect = (inputWorldPosition, cropPosition) =>
 	{
-		EffectPlayer.PlayHoldEffect(inputWorldPosition);
-		EffectPlayer.PlayVfx("VFX_T_SoilStone", cropPosition, false);
+		EffectPlayer.SceneGlobalInstance.PlayHoldEffect(inputWorldPosition);
+		EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilStone", cropPosition, false);
 	};
 
 	private static readonly Func<PotatoState, PotatoState, bool> PlayDustSfxEffectCondition = (beforeState, afterState) => afterState.HoldingTime > 0.0f && beforeState.HoldingTime == 0.0f;
@@ -230,7 +234,7 @@ public sealed class CropPotato : Crop
 	private static readonly Func<PotatoState, PotatoState, bool> StopDustSfxEffectCondition = (beforeState, afterState) => afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
 	private static readonly Action<Vector2, Vector2> StopDustSfxEffect = (_, _) =>
 	{
-		EffectPlayer.StopVfx();
+		EffectPlayer.SceneGlobalInstance.StopVfx();
 		SoundManager.Instance.StopSfx();
 	};
 

@@ -275,8 +275,8 @@ public sealed class CropCucumber : Crop
 	private static readonly Func<CucumberState, CucumberState, bool> TrelisEffectCondition = (beforeState, afterState) => afterState.LongtrelisPlaced && !beforeState.LongtrelisPlaced || afterState.ShortTrelisPlaced && !beforeState.ShortTrelisPlaced;
 	private static readonly Action<Vector2, Vector2> TrelisEffect = (inputWorldPosition, cropPosition) =>
 	{
-		EffectPlayer.PlayTabEffect(inputWorldPosition);
-		EffectPlayer.PlayVfx("VFX_T_SoilParticleWhite", cropPosition);
+		EffectPlayer.SceneGlobalInstance.PlayTapEffect(inputWorldPosition);
+		EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilParticleWhite", cropPosition);
 	};
 
 	private static List<(Func<CucumberState, CucumberState, bool>, Action<Vector2, Vector2>)> Effects = new()

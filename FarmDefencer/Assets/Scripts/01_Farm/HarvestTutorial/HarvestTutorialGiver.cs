@@ -2,10 +2,12 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 
 public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
 {
-    private const float TimeToShowHandFromLastInput = 1.0f;
+    [InfoBox("입력한 이후 잠시 튜토리얼 손이 안 보이는 시간을 정함.")]
+    [SerializeField] private float hideTimeAfterInput = 1.0f;
     
     [SerializeField] private GameObject Prefab_Field_Carrot;
     [SerializeField] private GameObject Prefab_Field_Potato;
@@ -50,10 +52,8 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
             if (_currentTutorialField.TargetCrop.AABB(worldPosition))
             {
                 _currentTutorialField.TargetCrop.OnTap(worldPosition);
+                _tutorialHand.HideForSeconds(hideTimeAfterInput);
             }
-            
-            _lastInputTime = Time.time;
-            _tutorialHand.gameObject.SetActive(false);
             return true;
         }
         
@@ -68,15 +68,19 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
             return false;
         }
         
-        if (_currentTutorialField.TargetCrop.AABB(initialWorldPosition) || _tutorialWateringCan.Using)
+        if (_currentTutorialField.TargetCrop.AABB(initialWorldPosition))
         {
             if (_currentTutorialField.TargetCrop.AABB(initialWorldPosition))
             {
                 _currentTutorialField.Field.OnHold(initialWorldPosition, offset, isEnd, deltaHoldTime);
+                _tutorialHand.HideForSeconds(hideTimeAfterInput);
             }
-            
-            _lastInputTime = Time.time;
-            _tutorialHand.gameObject.SetActive(false);
+            return true;
+        }
+
+        if (_tutorialWateringCan.Using)
+        {
+            _tutorialHand.HideForSeconds(hideTimeAfterInput);
             return true;
         }
         
@@ -88,8 +92,16 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
         _tutorials = new();
         _background = transform.Find("Background").GetComponent<SpriteRenderer>();
         
-        _tutorialWateringCan = transform.GetComponentInChildren<WateringCan>();
-        _tutorialWateringCan.Init(() => true, wateringPosition => { if (_currentTutorialField is not null && _currentTutorialField.TargetCrop.AABB(wateringPosition)) _currentTutorialField.TargetCrop.OnWatering(); });
+        _tutorialWateringCan = transform.Find("TutorialWateringCan").GetComponent<WateringCan>();
+        _tutorialWateringCan.Init(
+            () => true,
+            wateringPosition =>
+            {
+                if (_currentTutorialField is not null && _currentTutorialField.TargetCrop.AABB(wateringPosition))
+                {
+                    _currentTutorialField.TargetCrop.OnWatering();
+                }
+            });
         
         _tutorialHand = transform.GetComponentInChildren<TutorialHand>();
 
@@ -132,11 +144,9 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
                     .AppendCallback(() => _signRectTransform.gameObject.SetActive(false));
             }
         }
-
-        var currentTime = Time.time;
-        _tutorialHand.gameObject.SetActive(currentTime > _lastInputTime + TimeToShowHandFromLastInput);
+        
         _tutorialHand.transform.position = _currentTutorialField.TargetCrop.transform.position;
-        _tutorialHand.CurrentAction = _currentTutorialField.TargetCrop.RequiredCropAction;
+        _tutorialHand.SetTutorialHandMotion(_currentTutorialField.TargetCrop.RequiredCropAction);
 
         if (_currentTutorialField.Done)
         {
@@ -177,7 +187,9 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
             return null;
         }
 
+        var originFieldPosition = GameObject.Find($"Farm/{prefab.name}").transform.position;
         var instantiated = Instantiate(prefab);
+        instantiated.transform.position = originFieldPosition;
         var harvestTutorial = instantiated.AddComponent<HarvestTutorialField>();
 
         return harvestTutorial;

@@ -42,7 +42,6 @@ public sealed class FarmManager : MonoBehaviour
         {
             // 디버그용 할당 코드 등 여기에...
             quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
-            harvestTutorialGiver.AddTutorial("product_carrot");
             harvestTutorialGiver.AddTutorial("product_potato");
             harvestTutorialGiver.AddTutorial("product_corn");
             harvestTutorialGiver.AddTutorial("product_cabbage");
@@ -136,10 +135,9 @@ public sealed class FarmManager : MonoBehaviour
 
         wateringCan.Init(() => !farmClock.Paused, 
             
-            wateringCanPosition =>
+            wateringPosition =>
             {
-                var cameraOrthographicSize = farmInput.CameraOrthographicSize;
-                farm.WateringAction(wateringCanPosition + wateringCan.WateringOffset * cameraOrthographicSize);
+                farm.WateringAction(wateringPosition);
             });
         
         penaltyGiver.Init(farm);

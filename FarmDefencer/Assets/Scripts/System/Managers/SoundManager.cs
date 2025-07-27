@@ -134,6 +134,7 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
             _sfxDictionary.Add(name, newSfxList);
 		}
 
+		_sfxAudioSource.pitch = pitch;
 		var sfxList = _sfxDictionary[name];
 
 		// 유효하지 않은 경우

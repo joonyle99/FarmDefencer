@@ -205,7 +205,7 @@ public sealed class CropCabbage : Crop
 	private static readonly Func<CabbageState, CabbageState, bool> ShakeEffectCondition = (beforeState, afterState) => afterState.ShakeCount > beforeState.ShakeCount;
 	private static readonly Action<Vector2, Vector2> ShakeEffect = (_, cropPosition) =>
 	{
-		EffectPlayer.PlayVfx("VFX_T_SoilParticle", cropPosition);
+		EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilParticle", cropPosition);
 	};
 
 	private static readonly Func<int, Func<CabbageState, CabbageState, bool>> ShakeSfxEffectConditionFor = shakedCount => (beforeState, afterState) => afterState.ShakeCount == shakedCount && beforeState.ShakeCount < shakedCount;

@@ -23,8 +23,6 @@ public sealed class FarmInput : MonoBehaviour
     private const float MovableWidth = 10.8f;
     private const float MovableHeight = 4.9f;
     
-    public float CameraOrthographicSize => _camera.orthographicSize;
-
     [SerializeField] private InputActionReference tapAction;
     [SerializeField] private InputActionReference holdAction;
     [SerializeField] private InputActionReference mouseWheelAction;
@@ -36,7 +34,7 @@ public sealed class FarmInput : MonoBehaviour
 
     public float InputPriorityCut { get; set; } // 이 수치보다 작은 Priority를 가진 레이어는 입력 처리 대상이 아니도로 하는 프로퍼티.
 
-    private Camera _camera;
+    public Camera Camera { get; private set; }
 
     private IFarmInputLayer _holdingLayer;
 
@@ -49,7 +47,7 @@ public sealed class FarmInput : MonoBehaviour
 
     public void FullZoomOut()
     {
-        _camera.orthographicSize = MaximumProjectionSize;
+        Camera.orthographicSize = MaximumProjectionSize;
     }
 
     public void RegisterInputLayer(IFarmInputLayer inputLayer)
@@ -112,14 +110,14 @@ public sealed class FarmInput : MonoBehaviour
     {
         _canInputConditions = new();
         _inputLayers = new();
-        _camera = GetComponent<Camera>();
-        _camera.tag = "MainCamera";
+        Camera = GetComponent<Camera>();
+        Camera.tag = "MainCamera";
     }
 
     private void MoveCamera(Vector2 worldPosition)
     {
         var newPosition = new Vector3(worldPosition.x, worldPosition.y, -10.0f);
-        var movableMultiplier = (MaximumProjectionSize - _camera.orthographicSize) /
+        var movableMultiplier = (MaximumProjectionSize - Camera.orthographicSize) /
                                 (MaximumProjectionSize - MinimumProjectionSize);
 
         newPosition.x = Mathf.Clamp(newPosition.x, -MovableWidth * movableMultiplier, MovableWidth * movableMultiplier);
@@ -179,17 +177,17 @@ public sealed class FarmInput : MonoBehaviour
         }
 
         var previousTouchScreenPosition = _primaryPointerData.PreviousScreenPosition;
-        var previousTouchWorldPosition = _camera.ScreenToWorldPoint(previousTouchScreenPosition);
+        var previousTouchWorldPosition = Camera.ScreenToWorldPoint(previousTouchScreenPosition);
         var currentTouchScreenPosition = _primaryPointerData.CurrentScreenPosition;
-        var currentTouchWorldPosition = _camera.ScreenToWorldPoint(currentTouchScreenPosition);
+        var currentTouchWorldPosition = Camera.ScreenToWorldPoint(currentTouchScreenPosition);
 
         var deltaWorldPosition = currentTouchWorldPosition - previousTouchWorldPosition;
         if (secondaryPointerAction.action.phase != InputActionPhase.Waiting)
         {
             var previousSecondaryTouchScreenPosition = _secondaryPointerData.PreviousScreenPosition;
-            var previousSecondaryTouchWorldPosition = _camera.ScreenToWorldPoint(previousSecondaryTouchScreenPosition);    
+            var previousSecondaryTouchWorldPosition = Camera.ScreenToWorldPoint(previousSecondaryTouchScreenPosition);    
             var currentSecondaryTouchScreenPosition = _secondaryPointerData.CurrentScreenPosition;
-            var currentSecondaryTouchWorldPosition = _camera.ScreenToWorldPoint(currentSecondaryTouchScreenPosition);
+            var currentSecondaryTouchWorldPosition = Camera.ScreenToWorldPoint(currentSecondaryTouchScreenPosition);
 
             deltaWorldPosition += currentSecondaryTouchWorldPosition - previousSecondaryTouchWorldPosition;
         }
@@ -218,14 +216,14 @@ public sealed class FarmInput : MonoBehaviour
             var currentDelta = _primaryPointerData.CurrentScreenPosition - _secondaryPointerData.CurrentScreenPosition;
 
             var scale = currentDelta.sqrMagnitude != 0.0f ? previousDelta.magnitude / currentDelta.magnitude : 1.0f;
-            var previousOrthographicSize = _camera.orthographicSize;
-            _camera.orthographicSize = Mathf.Clamp(previousOrthographicSize * scale, MinimumProjectionSize, MaximumProjectionSize);
+            var previousOrthographicSize = Camera.orthographicSize;
+            Camera.orthographicSize = Mathf.Clamp(previousOrthographicSize * scale, MinimumProjectionSize, MaximumProjectionSize);
         }
 
-        var currentProjectionSize = _camera.orthographicSize;
+        var currentProjectionSize = Camera.orthographicSize;
         var newProjectionSize = Mathf.Clamp(currentProjectionSize + _zoomMomentum * 0.07f, MinimumProjectionSize,
             MaximumProjectionSize);
-        _camera.orthographicSize = newProjectionSize;
+        Camera.orthographicSize = newProjectionSize;
 
 
         var dampedMomentum = _zoomMomentum < 0.0f
@@ -247,5 +245,5 @@ public sealed class FarmInput : MonoBehaviour
     }
 
     private Vector2 GetCurrentPrimaryPointerWorldPosition() =>
-        _camera.ScreenToWorldPoint(_primaryPointerData.CurrentScreenPosition);
+        Camera.ScreenToWorldPoint(_primaryPointerData.CurrentScreenPosition);
 }

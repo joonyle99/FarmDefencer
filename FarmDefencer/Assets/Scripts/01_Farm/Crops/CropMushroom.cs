@@ -314,17 +314,17 @@ public sealed class CropMushroom : Crop
 	private static readonly Func<MushroomState, MushroomState, bool> HoldEffectCondition = (beforeState, afterState) => afterState.HoldingTime > beforeState.HoldingTime;
 	private static readonly Action<Vector2, Vector2> HoldEffect = (inputWorldPosition, _) =>
 	{
-		EffectPlayer.PlayHoldEffect(inputWorldPosition);
+		EffectPlayer.SceneGlobalInstance.PlayHoldEffect(inputWorldPosition);
 	};
 
 	private static readonly Func<MushroomState, MushroomState, bool> SoilStoneEffectCondition = (beforeState, afterState) => HoldEffectCondition(beforeState, afterState) && GetCurrentStage(beforeState) != MushroomStage.Stage3_BeforeInoculation;
 	private static readonly Action<Vector2, Vector2> SoilStoneEffect = (_, cropPosition) =>
 	{
-		EffectPlayer.PlayVfx("VFX_T_SoilStone", cropPosition, false);
+		EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilStone", cropPosition, false);
 	};
 
 	private static readonly Func<MushroomState, MushroomState, bool> TapEffectCondition = (beforeState, afterState) => afterState.LastSingleTapTime > beforeState.LastSingleTapTime;
-	private static readonly Action<Vector2, Vector2> TapEffect = (inputWorldPosition, _) => EffectPlayer.PlayTabEffect(inputWorldPosition);
+	private static readonly Action<Vector2, Vector2> TapEffect = (inputWorldPosition, _) => EffectPlayer.SceneGlobalInstance.PlayTapEffect(inputWorldPosition);
 
 	// 용어 참고: SFX에서의 shot == 코드에서의 inoculation.
 	private static readonly Func<MushroomState, MushroomState, bool> PlayShotSfxEffectCondition = (beforeState, afterState) => GetCurrentStage(beforeState) == MushroomStage.Stage3_BeforeInoculation && afterState.HoldingTime > 0.0f && beforeState.HoldingTime == 0.0f;
@@ -334,12 +334,12 @@ public sealed class CropMushroom : Crop
 	private static readonly Action<Vector2, Vector2> StopShotSfxEffect = (_, _) => SoundManager.Instance.StopSfx();
 
 	private static readonly Func<MushroomState, MushroomState, bool> MushroomHarvestEffectCondition = (beforeState, afterState) => afterState.TapCount == 2 && beforeState.TapCount != 2;
-	private static readonly Action<Vector2, Vector2> MushroomHarvestEffect = (_, cropPosition) => EffectPlayer.PlayVfx("VFX_T_SoilDust", cropPosition);
+	private static readonly Action<Vector2, Vector2> MushroomHarvestEffect = (_, cropPosition) => EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilDust", cropPosition);
 
 	private static readonly Func<MushroomState, MushroomState, bool> HoldStopEffectCondition = (beforeState, afterState) => afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
 	private static readonly Action<Vector2, Vector2> HoldStopEffect = (_, _) =>
 	{
-		EffectPlayer.StopVfx();
+		EffectPlayer.SceneGlobalInstance.StopVfx();
 	};
 
 	private static readonly List<(Func<MushroomState, MushroomState, bool>, Action<Vector2, Vector2>)> Effects = new()
@@ -537,7 +537,7 @@ public sealed class CropMushroom : Crop
 		{MushroomStage.Stage2_Dead, _ => RequiredCropAction.Water },
 		{MushroomStage.Stage2_Growing, _ => RequiredCropAction.None },
 
-		{MushroomStage.Stage3_BeforeInoculation, _ => RequiredCropAction.Hold },
+		{MushroomStage.Stage3_BeforeInoculation, _ => RequiredCropAction.Hold_2 },
 		{MushroomStage.Stage3_AfterInoculation, _ => RequiredCropAction.None },
 
 		{MushroomStage.Mature, _ => RequiredCropAction.FiveTap },

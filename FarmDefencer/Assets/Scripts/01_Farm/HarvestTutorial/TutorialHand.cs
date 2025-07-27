@@ -1,62 +1,73 @@
-using System;
 using Spine.Unity;
 using TMPro;
 using UnityEngine;
 
 public class TutorialHand : MonoBehaviour
 {
-    private static readonly int Play = Animator.StringToHash("Play");
-    private static readonly int Looping = Animator.StringToHash("Looping");
-    private static readonly int Enter = Animator.StringToHash("Enter");
     private static readonly Vector2 HandZeroOffset = new Vector2(-0.5f, -0.8f);
     private static readonly Vector2 HandBeginOffset = new Vector2(-2.0f, -2.3f);
     
-    private float _currentActionElapsed;
-    
-    private Animator _effectAnimator;
-    private SpriteRenderer _effectSpriteRenderer;
+    private EffectPlayer _effectPlayer;
     private SpriteRenderer _hand;
     private SkeletonAnimation _dummyWateringCan;
     private TMP_Text _text;
+    
+    private float _currentActionElapsed;
+    private float _remainingHideSeconds;
+    private RequiredCropAction _requiredCropAction;
 
-    private RequiredCropAction _currentAction;
-    public RequiredCropAction CurrentAction
+    public void SetTutorialHandMotion(RequiredCropAction requiredCropAction)
     {
-        get => _currentAction;
-        set
+        if (requiredCropAction == _requiredCropAction)
         {
-            if (_currentAction != value)
-            {
-                _currentAction = value;
-                OnActionChanged();
-            }
+            return;
         }
+        _requiredCropAction = requiredCropAction;
+        
+        _hand.transform.localPosition = HandZeroOffset;
+        _currentActionElapsed = 0.0f;
     }
 
-    private bool _isHolding;
+    public void HideForSeconds(float seconds) => _remainingHideSeconds = seconds;
     
-    private void Update()
+    private void LateUpdate()
     {
+        _remainingHideSeconds -= Time.deltaTime;
+        if (_remainingHideSeconds <= 0.0f)
+        {
+            _remainingHideSeconds = 0.0f;
+        }
+
+        var notInHideSeconds = _remainingHideSeconds <= 0.0f;
+        _effectPlayer.gameObject.SetActive(notInHideSeconds && _requiredCropAction != RequiredCropAction.None);
+        _hand.gameObject.SetActive(notInHideSeconds && _requiredCropAction != RequiredCropAction.Water && _requiredCropAction != RequiredCropAction.None);
+        _dummyWateringCan.gameObject.SetActive(notInHideSeconds && _requiredCropAction == RequiredCropAction.Water);
+        _text.gameObject.SetActive(notInHideSeconds);
+        
         _currentActionElapsed += Time.deltaTime;
         _text.text = "";
-        _effectAnimator.transform.localPosition = Vector3.zero;
+        _effectPlayer.transform.localPosition = Vector3.zero;
         
-        if (!_isHolding)
-        {
-            StopHoldEffect();
-        }
-        _isHolding = false;
-        
-        switch (_currentAction)
+        switch (_requiredCropAction)
         {
             case RequiredCropAction.SingleTap:
             {
                 Action_SingleTap();
                 break;
             }
-            case RequiredCropAction.Hold:
+            case RequiredCropAction.Hold_0_75:
             {
-                Action_Hold();
+                Action_Hold(0.75f);
+                break;
+            }
+            case RequiredCropAction.Hold_1:
+            {
+                Action_Hold(1.0f);
+                break;
+            }
+            case RequiredCropAction.Hold_2:
+            {
+                Action_Hold(2.0f);
                 break;
             }
             case RequiredCropAction.DoubleTap:
@@ -76,43 +87,17 @@ public class TutorialHand : MonoBehaviour
             }            
             case RequiredCropAction.Water:
             {
-                Action_Water();
                 break;
             }            
         }
     }
 
-    private void OnEnable()
-    {
-        _currentActionElapsed = 0.0f;
-        _effectAnimator.Rebind();
-        _effectSpriteRenderer.sprite = null;
-    }
-
-    private void OnDisable()
-    {
-        _currentActionElapsed = 0.0f;
-        _effectAnimator.Rebind();
-        _effectSpriteRenderer.sprite = null;
-    }
-
     private void Awake()
     {
+        _effectPlayer = transform.Find("EffectPlayer").GetComponent<EffectPlayer>();
         _text = transform.Find("Text").GetComponent<TMP_Text>();
-        _effectAnimator = transform.Find("InteractEffectPlayer").GetComponent<Animator>();
-        _effectSpriteRenderer = transform.Find("InteractEffectPlayer").GetComponent<SpriteRenderer>();
-        
         _hand = transform.Find("Hand").GetComponent<SpriteRenderer>();
         _dummyWateringCan = transform.Find("DummyWateringCan").GetComponent<SkeletonAnimation>();
-    }
-    
-    private void OnActionChanged()
-    {
-        _hand.transform.localPosition = HandZeroOffset;
-        gameObject.SetActive(_currentAction != RequiredCropAction.None);
-        _hand.gameObject.SetActive(_currentAction != RequiredCropAction.Water && _currentAction != RequiredCropAction.None);
-        _dummyWateringCan.gameObject.SetActive(_currentAction == RequiredCropAction.Water);
-        _currentActionElapsed = 0.0f;
     }
 
     private void Action_SingleTap()
@@ -129,14 +114,15 @@ public class TutorialHand : MonoBehaviour
 
         if (currentFrame - Time.deltaTime < handMoveTime)
         {
-            PlayTabEffect();
+            _effectPlayer.PlayTapEffect(transform.position);
         }
     }
 
-    private void Action_Hold()
+    private void Action_Hold(float holdTime)
     {
-        const float duration = 2.5f;
         const float handMoveTime = 0.5f;
+        
+        var duration = handMoveTime + holdTime;
 
         var currentFrame = _currentActionElapsed % duration;
         if (currentFrame <= handMoveTime)
@@ -145,9 +131,21 @@ public class TutorialHand : MonoBehaviour
             return;
         }
 
-        _text.text = "2sec";
-        
-        PlayHoldEffect();
+        // 구간에 따라 숫자 표기 깔끔하게 하기 위해 수동 분기
+        if (holdTime <= 0.75f)
+        {
+            _text.text = "0.75sec";
+        }
+        else if (holdTime <= 1.0f)
+        {
+            _text.text = "1sec";
+        }
+        else
+        {
+            _text.text = "2sec";
+        }
+
+        _effectPlayer.PlayHoldEffect(transform.position);
     }
 
     private void Action_DoubleTap()
@@ -164,10 +162,10 @@ public class TutorialHand : MonoBehaviour
         if (currentFrame - Time.deltaTime < 0.5f)
         {
             _hand.transform.localPosition = HandBeginOffset;
-            PlayTabEffect();
+            _effectPlayer.PlayTapEffect(transform.position);
         }
         
-        _text.text = "2Tab";
+        _text.text = "2Tap";
         
         if (currentFrame < 0.7f)
         {
@@ -177,7 +175,7 @@ public class TutorialHand : MonoBehaviour
         
         if (currentFrame - Time.deltaTime < 0.7f)
         {
-            PlayTabEffect();
+            _effectPlayer.PlayTapEffect(transform.position);
         }
     }
 
@@ -197,11 +195,11 @@ public class TutorialHand : MonoBehaviour
         if (currentFrame - Time.deltaTime < firstDuration)
         {
             _hand.transform.localPosition = HandBeginOffset;
-            PlayTabEffect();
-
+            _effectPlayer.PlayTapEffect(transform.position);
+            
         }
         
-        _text.text = "5Tab";
+        _text.text = "5Tap";
         
         if (currentFrame < firstDuration + repeatDuration * 6)
         {
@@ -216,7 +214,7 @@ public class TutorialHand : MonoBehaviour
                 _hand.transform.localPosition = Vector2.Lerp(HandBeginOffset * 0.5f, HandZeroOffset, repeatLocalFrame % 0.1f / 0.1f);
                 if (repeatLocalFrame + Time.deltaTime > repeatDuration)
                 {
-                    PlayTabEffect();
+                    _effectPlayer.PlayTapEffect(transform.position);
                 }
             }
             return;
@@ -244,37 +242,10 @@ public class TutorialHand : MonoBehaviour
         {
             var rad = (currentFrame - 0.5f) / repeatDuration * (2.0f + 1.5f) * Mathf.PI;
             _hand.transform.localPosition = Vector2.Lerp(leftPosition, rightPosition, Mathf.Sin(rad) * -0.5f + 0.5f);
-            PlayHoldEffect();
-            _effectAnimator.transform.position = _hand.transform.position - new Vector3(HandZeroOffset.x, HandZeroOffset.y);
+            _effectPlayer.PlayHoldEffect(_hand.transform.position - new Vector3(HandZeroOffset.x, HandZeroOffset.y));
             return;
         }
         
         _hand.transform.localPosition = Vector2.Lerp(rightPosition, HandBeginOffset, (currentFrame % 0.5f) / 0.5f);
     }   
-    
-    private void Action_Water()
-    {
-
-    }    
-    
-    private void PlayTabEffect()
-    {
-        _effectAnimator.Play(Enter, 0, 0.0f);
-    }
-    
-    public void PlayHoldEffect()
-    {
-        if (!_isHolding)
-        {
-            _effectAnimator.SetTrigger(Play);
-            _effectAnimator.SetBool(Looping, true);
-        }
-        _isHolding = true;
-    }
-    
-    private void StopHoldEffect()
-    {
-        _effectAnimator.ResetTrigger(Play);
-        _effectAnimator.SetBool(Looping, false);
-    }
 }
