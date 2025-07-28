@@ -48,6 +48,7 @@ public sealed class PestWarningUI : MonoBehaviour
 
     private void OnEnable()
     {
+        Debug.Log($"{Screen.currentResolution}");
         var policeLinesObject = transform.Find("PoliceLines").gameObject;
         for (var i = 0; i < policeLineDatas.Length; ++i)
         {
@@ -64,10 +65,10 @@ public sealed class PestWarningUI : MonoBehaviour
             
             var newRotation = Vector3.zero;
 
-            policeLineDatas[i].BeginScreenPosition.x = Screen.width * policeLineDatas[i].beginXYRatios.x;
-            policeLineDatas[i].BeginScreenPosition.y = Screen.height * policeLineDatas[i].beginXYRatios.y;           
-            policeLineDatas[i].EndScreenPosition.x = Screen.width * policeLineDatas[i].endXYRatios.x;
-            policeLineDatas[i].EndScreenPosition.y = Screen.height * policeLineDatas[i].endXYRatios.y;
+            policeLineDatas[i].BeginScreenPosition.x = Screen.currentResolution.width * policeLineDatas[i].beginXYRatios.x;
+            policeLineDatas[i].BeginScreenPosition.y = Screen.currentResolution.height * policeLineDatas[i].beginXYRatios.y;           
+            policeLineDatas[i].EndScreenPosition.x = Screen.currentResolution.width * policeLineDatas[i].endXYRatios.x;
+            policeLineDatas[i].EndScreenPosition.y = Screen.currentResolution.height * policeLineDatas[i].endXYRatios.y;
             
             var positionDelta = policeLineDatas[i].EndScreenPosition - policeLineDatas[i].BeginScreenPosition;
             newRotation.z = Mathf.Atan2(positionDelta.y, positionDelta.x) * Mathf.Rad2Deg;
