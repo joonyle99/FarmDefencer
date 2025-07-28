@@ -8,6 +8,7 @@ public sealed class TimerUI : MonoBehaviour
 
     private Func<float> _getRemainingDaytimeAlpha; // 0이면 낮 시작, 1이면 낮 끝
     private Image _dayArea;
+    private Image _clockHand;
     private GameObject _rootObject;
     private GameObject _stageImagesRootObject;
     private GameObject _activeMapImageRootObject;
@@ -88,6 +89,7 @@ public sealed class TimerUI : MonoBehaviour
     private void Awake()
     {
         _dayArea = transform.Find("Root/DayArea").GetComponent<Image>();
+        _clockHand = transform.Find("Root/ClockHand").GetComponent<Image>();
         _rootObject = transform.Find("Root").gameObject;
         _stageImagesRootObject = transform.Find("Root/StageImages").gameObject;
         _activeMapImageRootObject = transform.Find("Root/ActiveMapImage").gameObject;
@@ -96,6 +98,11 @@ public sealed class TimerUI : MonoBehaviour
     
     private void Update()
     {
-        _dayArea.fillAmount = _getRemainingDaytimeAlpha();
+        var remainingDaytimeAlpha = _getRemainingDaytimeAlpha();
+        _dayArea.fillAmount = remainingDaytimeAlpha;
+
+        var clockHandEulerAngles = _clockHand.transform.eulerAngles;
+        clockHandEulerAngles.z = remainingDaytimeAlpha * 360.0f;
+        _clockHand.transform.eulerAngles = clockHandEulerAngles;
     }
 }
