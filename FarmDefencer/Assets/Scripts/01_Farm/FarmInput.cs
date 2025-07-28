@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using Sirenix.OdinInspector;
+using TMPro;
 
 /// <summary>
 /// 타이쿤 씬에서 유저 입력을 받는 컴포넌트.
 /// </summary>
 public sealed class FarmInput : MonoBehaviour
 {
+    private TMP_Text _debugText;
     private struct PointerData
     {
         public Vector2 PreviousScreenPosition;
@@ -61,6 +63,7 @@ public sealed class FarmInput : MonoBehaviour
 
     private void FixedUpdate()
     {
+        _debugText.text = $"{primaryPointerAction.action.phase} {secondaryPointerAction.action.phase}";
         if (holdAction.action.phase == InputActionPhase.Started || holdAction.action.phase == InputActionPhase.Performed)
         {
             _elapsedHoldTime += Time.fixedDeltaTime;
@@ -137,6 +140,7 @@ public sealed class FarmInput : MonoBehaviour
 
     private void Awake()
     {
+        _debugText = transform.Find("Canvas/Temp").GetComponent<TMP_Text>();
         _canInputConditions = new();
         _inputLayers = new();
         Camera = GetComponent<Camera>();
@@ -188,27 +192,40 @@ public sealed class FarmInput : MonoBehaviour
 
     private void HandleCameraMove()
     {
-        if (_elapsedHoldTime < 0.1f ||
-            holdAction.action.phase != InputActionPhase.Performed ||
-            _holdingLayer is not null)
+        var primaryPointerActionPhase = primaryPointerAction.action.phase;
+        var secondaryPointerActionPhase = secondaryPointerAction.action.phase;
+        
+        if (_elapsedHoldTime < 0.1f || 
+            _holdingLayer is not null ||
+            primaryPointerActionPhase == InputActionPhase.Waiting && secondaryPointerActionPhase == InputActionPhase.Waiting)
         {
             return;
         }
 
-        var previousTouchScreenPosition = _primaryPointerData.PreviousScreenPosition;
-        var previousTouchWorldPosition = Camera.ScreenToWorldPoint(previousTouchScreenPosition);
-        var currentTouchScreenPosition = _primaryPointerData.CurrentScreenPosition;
-        var currentTouchWorldPosition = Camera.ScreenToWorldPoint(currentTouchScreenPosition);
+        var previousPrimaryTouchScreenPosition = _primaryPointerData.PreviousScreenPosition;
+        var currentPrimaryTouchScreenPosition = _primaryPointerData.CurrentScreenPosition;
+        
+        var previousSecondaryTouchScreenPosition = _secondaryPointerData.PreviousScreenPosition;
+        var currentSecondaryTouchScreenPosition = _secondaryPointerData.CurrentScreenPosition;
+        
+        var previousPrimaryTouchWorldPosition = Camera.ScreenToWorldPoint(previousPrimaryTouchScreenPosition);
+        var currentPrimaryTouchWorldPosition = Camera.ScreenToWorldPoint(currentPrimaryTouchScreenPosition);
+        var previousSecondaryTouchWorldPosition = Camera.ScreenToWorldPoint(previousSecondaryTouchScreenPosition);
+        var currentSecondaryTouchWorldPosition = Camera.ScreenToWorldPoint(currentSecondaryTouchScreenPosition);
 
-        var deltaWorldPosition = currentTouchWorldPosition - previousTouchWorldPosition;
-        if (secondaryPointerAction.action.phase != InputActionPhase.Waiting)
+        Vector3 deltaWorldPosition;
+        if (primaryPointerActionPhase != InputActionPhase.Waiting && secondaryPointerActionPhase != InputActionPhase.Waiting)
         {
-            var previousSecondaryTouchScreenPosition = _secondaryPointerData.PreviousScreenPosition;
-            var previousSecondaryTouchWorldPosition = Camera.ScreenToWorldPoint(previousSecondaryTouchScreenPosition);
-            var currentSecondaryTouchScreenPosition = _secondaryPointerData.CurrentScreenPosition;
-            var currentSecondaryTouchWorldPosition = Camera.ScreenToWorldPoint(currentSecondaryTouchScreenPosition);
-
-            deltaWorldPosition += currentSecondaryTouchWorldPosition - previousSecondaryTouchWorldPosition;
+            deltaWorldPosition = (currentPrimaryTouchWorldPosition - previousPrimaryTouchWorldPosition +
+                                 currentSecondaryTouchWorldPosition - previousSecondaryTouchWorldPosition) / 2.0f;
+        }
+        else if (primaryPointerActionPhase != InputActionPhase.Waiting)
+        {
+            deltaWorldPosition = currentPrimaryTouchWorldPosition - previousPrimaryTouchWorldPosition;
+        }
+        else
+        {
+             deltaWorldPosition = currentSecondaryTouchWorldPosition - previousSecondaryTouchWorldPosition;
         }
 
         deltaWorldPosition *= -1.0f;
