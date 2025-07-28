@@ -11,7 +11,6 @@ using TMPro;
 /// </summary>
 public sealed class FarmInput : MonoBehaviour
 {
-    private TMP_Text _debugText;
     private struct PointerData
     {
         public Vector2 PreviousScreenPosition;
@@ -26,7 +25,6 @@ public sealed class FarmInput : MonoBehaviour
     private Rect mapBounds = new(0.0f, 0.0f, 21.0f, 11.0f);
 
     [SerializeField] private InputActionReference tapAction;
-    [SerializeField] private InputActionReference holdAction;
     [SerializeField] private InputActionReference mouseWheelAction;
     [SerializeField] private InputActionReference primaryPointerAction;
     [SerializeField] private InputActionReference secondaryPointerAction;
@@ -63,8 +61,7 @@ public sealed class FarmInput : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _debugText.text = $"{primaryPointerAction.action.phase} {secondaryPointerAction.action.phase}";
-        if (holdAction.action.phase == InputActionPhase.Started || holdAction.action.phase == InputActionPhase.Performed)
+        if (primaryPointerAction.action.phase != InputActionPhase.Waiting)
         {
             _elapsedHoldTime += Time.fixedDeltaTime;
         }
@@ -80,8 +77,10 @@ public sealed class FarmInput : MonoBehaviour
 
         var isPrimaryPointerCurrentInput = primaryPointerAction.action.phase != InputActionPhase.Waiting;
         var isSecondaryPointerCurrentInput = secondaryPointerAction.action.phase != InputActionPhase.Waiting;
+        var currentPointerWorldPosition = GetCurrentPrimaryPointerWorldPosition();
         if (!_primaryPointerData.WasPreviousFrameInput && isPrimaryPointerCurrentInput)
         {
+            _initialHoldWorldPosition = currentPointerWorldPosition;
             _primaryPointerData.PreviousScreenPosition = _primaryPointerData.CurrentScreenPosition;
         }
 
@@ -97,12 +96,6 @@ public sealed class FarmInput : MonoBehaviour
         if (!_canInput)
         {
             return;
-        }
-
-        var currentPointerWorldPosition = GetCurrentPrimaryPointerWorldPosition();
-        if (holdAction.action.phase == InputActionPhase.Started)
-        {
-            _initialHoldWorldPosition = currentPointerWorldPosition;
         }
 
         HandleHolding(currentPointerWorldPosition);
@@ -140,7 +133,6 @@ public sealed class FarmInput : MonoBehaviour
 
     private void Awake()
     {
-        _debugText = transform.Find("Canvas/Temp").GetComponent<TMP_Text>();
         _canInputConditions = new();
         _inputLayers = new();
         Camera = GetComponent<Camera>();
@@ -149,7 +141,7 @@ public sealed class FarmInput : MonoBehaviour
 
     private void HandleHolding(Vector2 currentPointerWorldPosition)
     {
-        var isHolding = holdAction.action.phase == InputActionPhase.Performed;
+        var isHolding = primaryPointerAction.action.phase != InputActionPhase.Waiting;
         if (!isHolding)
         {
             if (_holdingLayer is not null)
