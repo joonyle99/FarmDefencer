@@ -9,8 +9,11 @@ public sealed class PestWarningUI : MonoBehaviour
     public struct PoliceLineData
     {
         [NonSerialized] public Image Image;
-        [SerializeField] public Vector2 beginPosition;
-        [SerializeField] public Vector2 endPosition;
+        [SerializeField] public Vector2 beginXYRatios;
+        [SerializeField] public Vector2 endXYRatios;
+
+        [NonSerialized] public Vector2 BeginScreenPosition;
+        [NonSerialized] public Vector2 EndScreenPosition;
     }
     
     public bool IsWarningShowing => gameObject.activeSelf;
@@ -40,6 +43,15 @@ public sealed class PestWarningUI : MonoBehaviour
             policeLineObject.layer = LayerMask.NameToLayer("UI");
             var imageComponent = policeLineObject.AddComponent<Image>();
             imageComponent.sprite = policeLineSprite;
+        }
+    }
+
+    private void OnEnable()
+    {
+        var policeLinesObject = transform.Find("PoliceLines").gameObject;
+        for (var i = 0; i < policeLineDatas.Length; ++i)
+        {
+            var imageComponent = policeLinesObject.transform.Find($"PoliceLine_{i}").GetComponent<Image>();
 
             var rectTransform = imageComponent.transform as RectTransform;
             rectTransform.sizeDelta = policeLineSprite.rect.size;
@@ -51,14 +63,20 @@ public sealed class PestWarningUI : MonoBehaviour
             rectTransform.localPosition = newLocalPosition;
             
             var newRotation = Vector3.zero;
-            var positionDelta = policeLineDatas[i].endPosition - policeLineDatas[i].beginPosition;
+
+            policeLineDatas[i].BeginScreenPosition.x = Screen.width * policeLineDatas[i].beginXYRatios.x;
+            policeLineDatas[i].BeginScreenPosition.y = Screen.height * policeLineDatas[i].beginXYRatios.y;           
+            policeLineDatas[i].EndScreenPosition.x = Screen.width * policeLineDatas[i].endXYRatios.x;
+            policeLineDatas[i].EndScreenPosition.y = Screen.height * policeLineDatas[i].endXYRatios.y;
+            
+            var positionDelta = policeLineDatas[i].EndScreenPosition - policeLineDatas[i].BeginScreenPosition;
             newRotation.z = Mathf.Atan2(positionDelta.y, positionDelta.x) * Mathf.Rad2Deg;
             rectTransform.eulerAngles = newRotation;
             
             policeLineDatas[i].Image = imageComponent;
         }
     }
-    
+
     private IEnumerator DoWarning()
     {
         const float enterTimeForEachPoliceLine = 0.7f;
@@ -74,8 +92,8 @@ public sealed class PestWarningUI : MonoBehaviour
                 var beginTime = enterTimeForEachPoliceLine * i;
                 var endTime = enterTimeForEachPoliceLine * (i+1);
                 var image = policeLineDatas[i].Image;
-                var beginPosition = policeLineDatas[i].beginPosition;
-                var endPosition = policeLineDatas[i].endPosition;
+                var beginPosition = policeLineDatas[i].BeginScreenPosition;
+                var endPosition = policeLineDatas[i].EndScreenPosition;
 
                 float alpha;
                 if (elapsedTime > endTime)
