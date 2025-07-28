@@ -26,6 +26,7 @@ public sealed class FarmInput : MonoBehaviour
 
     [SerializeField] private InputActionReference tapAction;
     [SerializeField] private InputActionReference mouseWheelAction;
+    [SerializeField] private InputActionReference holdAction;
     [SerializeField] private InputActionReference primaryPointerAction;
     [SerializeField] private InputActionReference secondaryPointerAction;
 
@@ -80,7 +81,9 @@ public sealed class FarmInput : MonoBehaviour
         var currentPointerWorldPosition = GetCurrentPrimaryPointerWorldPosition();
         if (!_primaryPointerData.WasPreviousFrameInput && isPrimaryPointerCurrentInput)
         {
+#if !UNITY_EDITOR
             _initialHoldWorldPosition = currentPointerWorldPosition;
+#endif
             _primaryPointerData.PreviousScreenPosition = _primaryPointerData.CurrentScreenPosition;
         }
 
@@ -92,6 +95,12 @@ public sealed class FarmInput : MonoBehaviour
         _primaryPointerData.WasPreviousFrameInput = isPrimaryPointerCurrentInput;
         _secondaryPointerData.WasPreviousFrameInput = isSecondaryPointerCurrentInput;
 
+#if UNITY_EDITOR
+        if (holdAction.action.phase == InputActionPhase.Started)
+        {
+            _initialHoldWorldPosition = currentPointerWorldPosition;
+        }
+#endif
         _canInput = _canInputConditions.All(canInput => canInput());
         if (!_canInput)
         {
@@ -141,7 +150,12 @@ public sealed class FarmInput : MonoBehaviour
 
     private void HandleHolding(Vector2 currentPointerWorldPosition)
     {
-        var isHolding = primaryPointerAction.action.phase != InputActionPhase.Waiting;
+        var isHolding =
+#if UNITY_EDITOR
+            holdAction.action.phase == InputActionPhase.Performed;
+#else
+            primaryPointerAction.action.phase == InputActionPhase.Started || primaryPointerAction.action.phase == InputActionPhase.Performed;
+#endif
         if (!isHolding)
         {
             if (_holdingLayer is not null)
@@ -187,9 +201,13 @@ public sealed class FarmInput : MonoBehaviour
         var primaryPointerActionPhase = primaryPointerAction.action.phase;
         var secondaryPointerActionPhase = secondaryPointerAction.action.phase;
         
-        if (_elapsedHoldTime < 0.1f || 
+        if (
+#if UNITY_EDITOR
+            holdAction.action.phase != InputActionPhase.Performed ||
+#endif
+            _elapsedHoldTime < 0.1f || 
             _holdingLayer is not null ||
-            primaryPointerActionPhase == InputActionPhase.Waiting && secondaryPointerActionPhase == InputActionPhase.Waiting)
+            primaryPointerActionPhase != InputActionPhase.Started && secondaryPointerActionPhase == InputActionPhase.Waiting)
         {
             return;
         }
