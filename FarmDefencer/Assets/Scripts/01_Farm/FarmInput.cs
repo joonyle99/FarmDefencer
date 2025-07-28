@@ -17,12 +17,12 @@ public sealed class FarmInput : MonoBehaviour
         public bool WasPreviousFrameInput;
     }
 
-    [InfoBox("가장 좁게, 가까이서 볼 때의 크기를 의미, 기기 화면이 담을 유니티 좌표계 Y 크기를 의미.")]
-    [SerializeField] private float minimumProjectionSize = 5.0f;
+    [InfoBox("가장 좁게, 가까이서 볼 때의 크기를 의미, 기기 화면이 담을 유니티 좌표계 Y 크기를 의미.")] [SerializeField]
+    private float minimumProjectionSize = 5.0f;
 
     [Header("카메라 이동 가능 맵 경계")] [SerializeField]
-    private Rect mapBounds = new(0.0f, 0.0f,21.0f, 11.0f);
-    
+    private Rect mapBounds = new(0.0f, 0.0f, 21.0f, 11.0f);
+
     [SerializeField] private InputActionReference tapAction;
     [SerializeField] private InputActionReference holdAction;
     [SerializeField] private InputActionReference mouseWheelAction;
@@ -31,6 +31,7 @@ public sealed class FarmInput : MonoBehaviour
 
     private PointerData _primaryPointerData;
     private PointerData _secondaryPointerData;
+    private float _elapsedHoldTime;
 
     public float InputPriorityCut { get; set; } // 이 수치보다 작은 Priority를 가진 레이어는 입력 처리 대상이 아니도로 하는 프로퍼티.
 
@@ -60,6 +61,15 @@ public sealed class FarmInput : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (holdAction.action.phase == InputActionPhase.Started || holdAction.action.phase == InputActionPhase.Performed)
+        {
+            _elapsedHoldTime += Time.fixedDeltaTime;
+        }
+        else
+        {
+            _elapsedHoldTime = 0.0f;
+        }
+
         _primaryPointerData.PreviousScreenPosition = _primaryPointerData.CurrentScreenPosition;
         _secondaryPointerData.PreviousScreenPosition = _secondaryPointerData.CurrentScreenPosition;
         _primaryPointerData.CurrentScreenPosition = primaryPointerAction.action.ReadValue<Vector2>();
@@ -71,6 +81,7 @@ public sealed class FarmInput : MonoBehaviour
         {
             _primaryPointerData.PreviousScreenPosition = _primaryPointerData.CurrentScreenPosition;
         }
+
         if (!_secondaryPointerData.WasPreviousFrameInput && isSecondaryPointerCurrentInput)
         {
             _secondaryPointerData.PreviousScreenPosition = _secondaryPointerData.CurrentScreenPosition;
@@ -78,7 +89,7 @@ public sealed class FarmInput : MonoBehaviour
 
         _primaryPointerData.WasPreviousFrameInput = isPrimaryPointerCurrentInput;
         _secondaryPointerData.WasPreviousFrameInput = isSecondaryPointerCurrentInput;
-        
+
         _canInput = _canInputConditions.All(canInput => canInput());
         if (!_canInput)
         {
@@ -98,17 +109,19 @@ public sealed class FarmInput : MonoBehaviour
 
     private void LateUpdate()
     {
-        Camera.orthographicSize = Mathf.Clamp(Camera.orthographicSize, minimumProjectionSize, GetMaximumProjectionSize()); 
+        Camera.orthographicSize =
+            Mathf.Clamp(Camera.orthographicSize, minimumProjectionSize, GetMaximumProjectionSize());
         var cameraPosition = transform.position;
         var newPosition = cameraPosition;
-        
+
         var verticalExtent = Camera.orthographicSize;
         var horizontalExtent = verticalExtent * Camera.aspect;
-        
+
         newPosition.y = Mathf.Clamp(newPosition.y, mapBounds.yMin + verticalExtent, mapBounds.yMax - verticalExtent);
-        newPosition.x = Mathf.Clamp(newPosition.x, mapBounds.xMin + horizontalExtent, mapBounds.xMax - horizontalExtent);
+        newPosition.x = Mathf.Clamp(newPosition.x, mapBounds.xMin + horizontalExtent,
+            mapBounds.xMax - horizontalExtent);
         newPosition.z = -10.0f;
-        
+
         transform.position = newPosition;
     }
 
@@ -129,7 +142,7 @@ public sealed class FarmInput : MonoBehaviour
         Camera = GetComponent<Camera>();
         Camera.tag = "MainCamera";
     }
-    
+
     private void HandleHolding(Vector2 currentPointerWorldPosition)
     {
         var isHolding = holdAction.action.phase == InputActionPhase.Performed;
@@ -140,6 +153,7 @@ public sealed class FarmInput : MonoBehaviour
                 _holdingLayer.OnHold(_initialHoldWorldPosition, Vector2.zero, true, 0.0f);
                 _holdingLayer = null;
             }
+
             return;
         }
 
@@ -174,7 +188,8 @@ public sealed class FarmInput : MonoBehaviour
 
     private void HandleCameraMove()
     {
-        if (holdAction.action.phase != InputActionPhase.Performed || 
+        if (_elapsedHoldTime < 0.1f ||
+            holdAction.action.phase != InputActionPhase.Performed ||
             _holdingLayer is not null)
         {
             return;
@@ -189,7 +204,7 @@ public sealed class FarmInput : MonoBehaviour
         if (secondaryPointerAction.action.phase != InputActionPhase.Waiting)
         {
             var previousSecondaryTouchScreenPosition = _secondaryPointerData.PreviousScreenPosition;
-            var previousSecondaryTouchWorldPosition = Camera.ScreenToWorldPoint(previousSecondaryTouchScreenPosition);    
+            var previousSecondaryTouchWorldPosition = Camera.ScreenToWorldPoint(previousSecondaryTouchScreenPosition);
             var currentSecondaryTouchScreenPosition = _secondaryPointerData.CurrentScreenPosition;
             var currentSecondaryTouchWorldPosition = Camera.ScreenToWorldPoint(currentSecondaryTouchScreenPosition);
 
@@ -213,7 +228,8 @@ public sealed class FarmInput : MonoBehaviour
         if (primaryPointerAction.action.phase != InputActionPhase.Waiting &&
             secondaryPointerAction.action.phase != InputActionPhase.Waiting)
         {
-            var previousDelta = _primaryPointerData.PreviousScreenPosition - _secondaryPointerData.PreviousScreenPosition;
+            var previousDelta = _primaryPointerData.PreviousScreenPosition -
+                                _secondaryPointerData.PreviousScreenPosition;
             var currentDelta = _primaryPointerData.CurrentScreenPosition - _secondaryPointerData.CurrentScreenPosition;
 
             var scale = currentDelta.sqrMagnitude != 0.0f ? previousDelta.magnitude / currentDelta.magnitude : 1.0f;
@@ -244,6 +260,6 @@ public sealed class FarmInput : MonoBehaviour
 
     private Vector2 GetCurrentPrimaryPointerWorldPosition() =>
         Camera.ScreenToWorldPoint(_primaryPointerData.CurrentScreenPosition);
-    
+
     private float GetMaximumProjectionSize() => Mathf.Min(mapBounds.height / 2, mapBounds.width / 2 / Camera.aspect);
 }

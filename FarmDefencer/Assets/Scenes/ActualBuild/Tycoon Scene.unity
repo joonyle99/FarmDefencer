@@ -1955,7 +1955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quotaRules:
   - map: {fileID: 11400000, guid: 469c6bef7dd249949a7b8eeb0f2cb2fd, type: 2}
-    quotaFillingRule: {fileID: 11400000, guid: 09d4708b0d0daa646bab5f5be0ea9b87, type: 2}
+    quotaFillingRule: {fileID: 11400000, guid: 9ab03e326f7494841b84fd368cd09ce0, type: 2}
     specialProductBonusRule: {fileID: 11400000, guid: 074d1c613d4868f4cbe4f9afc46e167a, type: 2}
   - map: {fileID: 11400000, guid: d3f7f1726e9b95244b71fd8ff050326f, type: 2}
     quotaFillingRule: {fileID: 11400000, guid: 2cfffec73e4aabc4ba65c4a28ac7228d, type: 2}
@@ -11191,7 +11191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2183341965526933661, guid: 28700731096a3df4aa92ab40b854076d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 2713217726281102989, guid: 28700731096a3df4aa92ab40b854076d, type: 3}
       propertyPath: m_LocalPosition.x

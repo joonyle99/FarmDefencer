@@ -330,9 +330,12 @@ public sealed class CropMushroom : Crop
 	private static readonly Func<MushroomState, MushroomState, bool> PlayShotSfxEffectCondition = (beforeState, afterState) => GetCurrentStage(beforeState) == MushroomStage.Stage3_BeforeInoculation && afterState.HoldingTime > 0.0f && beforeState.HoldingTime == 0.0f;
 	private static readonly Action<Vector2, Vector2> PlayShotSfxEffect = (_, _) => SoundManager.Instance.PlaySfx("SFX_T_mushroom_shot_1", SoundManager.Instance.mushroomShotVolume);
 
-	private static readonly Func<MushroomState, MushroomState, bool> StopShotSfxEffectCondition = (beforeState, afterState) => GetCurrentStage(beforeState) == MushroomStage.Stage3_BeforeInoculation && afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
+	private static readonly Func<MushroomState, MushroomState, bool> StopShotSfxEffectCondition = (beforeState, afterState) => GetCurrentStage(beforeState) == MushroomStage.Stage3_BeforeInoculation && GetCurrentStage(afterState) == MushroomStage.Stage3_BeforeInoculation && afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
 	private static readonly Action<Vector2, Vector2> StopShotSfxEffect = (_, _) => SoundManager.Instance.StopSfx();
 
+	private static readonly Func<MushroomState, MushroomState, bool> ShotDoneEffectCondition = (beforeState, afterState) => GetCurrentStage(beforeState) == MushroomStage.Stage3_BeforeInoculation && GetCurrentStage(afterState) == MushroomStage.Stage3_AfterInoculation;
+	private static readonly Action<Vector2, Vector2> ShotDoneEffect = (_, _) => SoundManager.Instance.PlaySfx("SFX_T_mushroom_shot_2", SoundManager.Instance.mushroomShotVolume);
+	
 	private static readonly Func<MushroomState, MushroomState, bool> MushroomHarvestEffectCondition = (beforeState, afterState) => afterState.TapCount == 2 && beforeState.TapCount != 2;
 	private static readonly Action<Vector2, Vector2> MushroomHarvestEffect = (_, cropPosition) => EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilDust", cropPosition);
 
@@ -353,6 +356,7 @@ public sealed class CropMushroom : Crop
 		(TapEffectCondition, TapEffect),
 		(PlayShotSfxEffectCondition, PlayShotSfxEffect),
 		(StopShotSfxEffectCondition, StopShotSfxEffect),
+		(ShotDoneEffectCondition, ShotDoneEffect),
 		(MushroomHarvestEffectCondition, MushroomHarvestEffect),
 	};
 
