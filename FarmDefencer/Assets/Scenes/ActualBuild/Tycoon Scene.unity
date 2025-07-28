@@ -11011,7 +11011,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  skeletonDataAsset: {fileID: 11400000, guid: 87e860fd53f0cba4c9074cf60ee786b8, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: acfd2e68fc45dfc46862fa3f7a8898d8, type: 2}
   additiveMaterial: {fileID: 0}
   multiplyMaterial: {fileID: 0}
   screenMaterial: {fileID: 0}

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 13994e895d3a79744a40c22254673d6d
+guid: f66cebcb751c9f1488a7cc90d6f26978
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -71,6 +71,15 @@ TextureImporter:
   - first:
       213: 1997482210283107558
     second: stage_timer_alarm_22
+  - first:
+      213: -4230878350549901682
+    second: stage_timer_alarm_23
+  - first:
+      213: 6792477482828005941
+    second: stage_timer_alarm_24
+  - first:
+      213: -7585728039135400350
+    second: stage_timer_alarm_25
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -183,9 +192,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 584
-        width: 406
-        height: 406
+        y: 992
+        width: 234
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,10 +213,10 @@ TextureImporter:
       name: stage_timer_alarm_1
       rect:
         serializedVersion: 2
-        x: 407
-        y: 865
-        width: 129
-        height: 128
+        x: 1
+        y: 584
+        width: 408
+        height: 408
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,10 +235,10 @@ TextureImporter:
       name: stage_timer_alarm_2
       rect:
         serializedVersion: 2
-        x: 536
-        y: 875
-        width: 146
-        height: 106
+        x: 235
+        y: 992
+        width: 132
+        height: 91
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -248,10 +257,10 @@ TextureImporter:
       name: stage_timer_alarm_3
       rect:
         serializedVersion: 2
-        x: 547
-        y: 729
-        width: 106
-        height: 146
+        x: 537
+        y: 876
+        width: 128
+        height: 129
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -270,10 +279,10 @@ TextureImporter:
       name: stage_timer_alarm_4
       rect:
         serializedVersion: 2
-        x: 682
-        y: 829
-        width: 104
-        height: 145
+        x: 769
+        y: 925
+        width: 132
+        height: 91
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,10 +301,10 @@ TextureImporter:
       name: stage_timer_alarm_5
       rect:
         serializedVersion: 2
-        x: 407
-        y: 725
-        width: 140
-        height: 140
+        x: 409
+        y: 584
+        width: 128
+        height: 388
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -314,10 +323,10 @@ TextureImporter:
       name: stage_timer_alarm_6
       rect:
         serializedVersion: 2
-        x: 407
-        y: 584
-        width: 141
-        height: 141
+        x: 537
+        y: 730
+        width: 106
+        height: 146
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -336,9 +345,9 @@ TextureImporter:
       name: stage_timer_alarm_7
       rect:
         serializedVersion: 2
-        x: 548
-        y: 584
-        width: 105
+        x: 665
+        y: 817
+        width: 104
         height: 145
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -358,10 +367,10 @@ TextureImporter:
       name: stage_timer_alarm_8
       rect:
         serializedVersion: 2
-        x: 653
-        y: 684
-        width: 104
-        height: 145
+        x: 769
+        y: 821
+        width: 145
+        height: 104
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -380,10 +389,10 @@ TextureImporter:
       name: stage_timer_alarm_9
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 583
-        height: 583
+        x: 772
+        y: 693
+        width: 129
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -402,9 +411,9 @@ TextureImporter:
       name: stage_timer_alarm_10
       rect:
         serializedVersion: 2
-        x: 584
-        y: 410
-        width: 129
+        x: 901
+        y: 693
+        width: 128
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -424,10 +433,10 @@ TextureImporter:
       name: stage_timer_alarm_11
       rect:
         serializedVersion: 2
-        x: 653
-        y: 538
-        width: 105
-        height: 146
+        x: 914
+        y: 821
+        width: 132
+        height: 92
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -446,10 +455,10 @@ TextureImporter:
       name: stage_timer_alarm_12
       rect:
         serializedVersion: 2
-        x: 758
-        y: 533
-        width: 91
-        height: 132
+        x: 537
+        y: 584
+        width: 105
+        height: 146
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -468,10 +477,10 @@ TextureImporter:
       name: stage_timer_alarm_13
       rect:
         serializedVersion: 2
-        x: 713
-        y: 442
-        width: 132
-        height: 91
+        x: 642
+        y: 548
+        width: 140
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -490,10 +499,10 @@ TextureImporter:
       name: stage_timer_alarm_14
       rect:
         serializedVersion: 2
-        x: 723
-        y: 350
-        width: 134
-        height: 92
+        x: 643
+        y: 688
+        width: 129
+        height: 129
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -512,10 +521,10 @@ TextureImporter:
       name: stage_timer_alarm_15
       rect:
         serializedVersion: 2
-        x: 584
-        y: 270
-        width: 139
-        height: 140
+        x: 782
+        y: 548
+        width: 105
+        height: 145
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -534,10 +543,10 @@ TextureImporter:
       name: stage_timer_alarm_16
       rect:
         serializedVersion: 2
-        x: 724
-        y: 258
-        width: 132
-        height: 92
+        x: 887
+        y: 547
+        width: 106
+        height: 146
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -556,10 +565,10 @@ TextureImporter:
       name: stage_timer_alarm_17
       rect:
         serializedVersion: 2
-        x: 856
-        y: 257
-        width: 133
-        height: 92
+        x: 1
+        y: 1
+        width: 583
+        height: 583
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -578,10 +587,10 @@ TextureImporter:
       name: stage_timer_alarm_18
       rect:
         serializedVersion: 2
-        x: 857
-        y: 349
-        width: 134
-        height: 92
+        x: 584
+        y: 407
+        width: 141
+        height: 141
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -601,9 +610,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 584
-        y: 129
-        width: 140
-        height: 141
+        y: 1
+        width: 406
+        height: 406
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -622,10 +631,10 @@ TextureImporter:
       name: stage_timer_alarm_20
       rect:
         serializedVersion: 2
-        x: 584
-        y: 1
-        width: 388
-        height: 128
+        x: 725
+        y: 407
+        width: 140
+        height: 141
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -644,10 +653,10 @@ TextureImporter:
       name: stage_timer_alarm_21
       rect:
         serializedVersion: 2
-        x: 724
-        y: 129
-        width: 129
-        height: 129
+        x: 865
+        y: 407
+        width: 139
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -666,10 +675,10 @@ TextureImporter:
       name: stage_timer_alarm_22
       rect:
         serializedVersion: 2
-        x: 853
-        y: 129
-        width: 128
-        height: 128
+        x: 1004
+        y: 402
+        width: 61
+        height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -680,6 +689,72 @@ TextureImporter:
       bones: []
       spriteID: 6e43615bc7b78bb10800000000000000
       internalID: 1997482210283107558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_23
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 269
+        width: 92
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8e159b6e86e845c0800000000000000
+      internalID: -4230878350549901682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_24
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 135
+        width: 92
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5328dc4584ab34e50800000000000000
+      internalID: 6792477482828005941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage_timer_alarm_25
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 1
+        width: 92
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26e2d901a841ab690800000000000000
+      internalID: -7585728039135400350
       vertices: []
       indices: 
       edges: []
@@ -714,6 +789,9 @@ TextureImporter:
       stage_timer_alarm_20: 3663853945194041276
       stage_timer_alarm_21: -8186610421175221314
       stage_timer_alarm_22: 1997482210283107558
+      stage_timer_alarm_23: -4230878350549901682
+      stage_timer_alarm_24: 6792477482828005941
+      stage_timer_alarm_25: -7585728039135400350
       stage_timer_alarm_3: 3272384499865521979
       stage_timer_alarm_4: -8371993680508385776
       stage_timer_alarm_5: -1518444239647191123

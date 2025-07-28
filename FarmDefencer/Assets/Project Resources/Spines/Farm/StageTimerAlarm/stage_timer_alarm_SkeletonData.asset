@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: stage_timer_alarm_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: a7ee00922e2169e48876a8c94dfe9010, type: 2}
+  - {fileID: 11400000, guid: 6ba7afee0ec206f459e1ebc80ac2e38f, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: 313f2aba694cec2469d9e4326ece11a1, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: 9bef678748e907240b5967b2ba98e2f6, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 0
