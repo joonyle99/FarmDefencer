@@ -61,6 +61,7 @@ public sealed class FarmManager : MonoBehaviour
 
         if (farmClock.CurrentDaytime == 0.0f)
         {
+            farmInput.FullZoomOut();
             pestGiver.ReserveRandomPestSpawn();
             quotaContext.AssignQuotas(MapManager.Instance.CurrentMapIndex);
         }

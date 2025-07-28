@@ -10224,8 +10224,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2078747842}
-  - component: {fileID: 2078747839}
   - component: {fileID: 2078747845}
+  - component: {fileID: 2078747839}
   - component: {fileID: 2078747847}
   - component: {fileID: 2078747846}
   m_Layer: 0
@@ -10325,6 +10325,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5348fcbd8afa9a489090c5700073390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minimumProjectionSize: 2
+  mapBounds:
+    serializedVersion: 2
+    x: -21
+    y: -10
+    width: 42
+    height: 20
   tapAction: {fileID: 475374863654459259, guid: edabe5631b3b4524192e549e1b31fcec, type: 3}
   holdAction: {fileID: -4345386989084377754, guid: edabe5631b3b4524192e549e1b31fcec, type: 3}
   mouseWheelAction: {fileID: -6800805905681532418, guid: edabe5631b3b4524192e549e1b31fcec, type: 3}

@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using System;
 using System.Linq;
-using TMPro;
+using Sirenix.OdinInspector;
 
 /// <summary>
 /// 타이쿤 씬에서 유저 입력을 받는 컴포넌트.
@@ -17,11 +17,11 @@ public sealed class FarmInput : MonoBehaviour
         public bool WasPreviousFrameInput;
     }
 
-    private const float MaximumProjectionSize = 10.0f; // 가장 넓게 볼 때의 크기를 의미.
-    private const float MinimumProjectionSize = 5.0f; // 가장 좁게 볼 때의 크기를 의미.
+    [InfoBox("가장 좁게, 가까이서 볼 때의 크기를 의미, 기기 화면이 담을 유니티 좌표계 Y 크기를 의미.")]
+    [SerializeField] private float minimumProjectionSize = 5.0f;
 
-    private const float MovableWidth = 10.8f;
-    private const float MovableHeight = 4.9f;
+    [Header("카메라 이동 가능 맵 경계")] [SerializeField]
+    private Rect mapBounds = new(0.0f, 0.0f,21.0f, 11.0f);
     
     [SerializeField] private InputActionReference tapAction;
     [SerializeField] private InputActionReference holdAction;
@@ -47,7 +47,7 @@ public sealed class FarmInput : MonoBehaviour
 
     public void FullZoomOut()
     {
-        Camera.orthographicSize = MaximumProjectionSize;
+        Camera.orthographicSize = GetMaximumProjectionSize();
     }
 
     public void RegisterInputLayer(IFarmInputLayer inputLayer)
@@ -96,6 +96,22 @@ public sealed class FarmInput : MonoBehaviour
         HandleZoom();
     }
 
+    private void LateUpdate()
+    {
+        Camera.orthographicSize = Mathf.Clamp(Camera.orthographicSize, minimumProjectionSize, GetMaximumProjectionSize()); 
+        var cameraPosition = transform.position;
+        var newPosition = cameraPosition;
+        
+        var verticalExtent = Camera.orthographicSize;
+        var horizontalExtent = verticalExtent * Camera.aspect;
+        
+        newPosition.y = Mathf.Clamp(newPosition.y, mapBounds.yMin + verticalExtent, mapBounds.yMax - verticalExtent);
+        newPosition.x = Mathf.Clamp(newPosition.x, mapBounds.xMin + horizontalExtent, mapBounds.xMax - horizontalExtent);
+        newPosition.z = -10.0f;
+        
+        transform.position = newPosition;
+    }
+
     private void OnEnable()
     {
         tapAction.action.performed += OnTapActionPerformed;
@@ -113,19 +129,7 @@ public sealed class FarmInput : MonoBehaviour
         Camera = GetComponent<Camera>();
         Camera.tag = "MainCamera";
     }
-
-    private void MoveCamera(Vector2 worldPosition)
-    {
-        var newPosition = new Vector3(worldPosition.x, worldPosition.y, -10.0f);
-        var movableMultiplier = (MaximumProjectionSize - Camera.orthographicSize) /
-                                (MaximumProjectionSize - MinimumProjectionSize);
-
-        newPosition.x = Mathf.Clamp(newPosition.x, -MovableWidth * movableMultiplier, MovableWidth * movableMultiplier);
-        newPosition.y = Mathf.Clamp(newPosition.y, -MovableHeight * movableMultiplier,
-            MovableHeight * movableMultiplier);
-        transform.position = newPosition;
-    }
-
+    
     private void HandleHolding(Vector2 currentPointerWorldPosition)
     {
         var isHolding = holdAction.action.phase == InputActionPhase.Performed;
@@ -195,10 +199,7 @@ public sealed class FarmInput : MonoBehaviour
         deltaWorldPosition *= -1.0f;
 
         var nextPosition = transform.position += deltaWorldPosition;
-        nextPosition.x = Mathf.Clamp(nextPosition.x, -MovableWidth, MovableWidth);
-        nextPosition.y = Mathf.Clamp(nextPosition.y, -MovableHeight, MovableWidth);
-        
-        MoveCamera(nextPosition);
+        transform.position = nextPosition;
     }
 
     private void HandleZoom()
@@ -217,20 +218,17 @@ public sealed class FarmInput : MonoBehaviour
 
             var scale = currentDelta.sqrMagnitude != 0.0f ? previousDelta.magnitude / currentDelta.magnitude : 1.0f;
             var previousOrthographicSize = Camera.orthographicSize;
-            Camera.orthographicSize = Mathf.Clamp(previousOrthographicSize * scale, MinimumProjectionSize, MaximumProjectionSize);
+            Camera.orthographicSize = previousOrthographicSize * scale;
         }
 
         var currentProjectionSize = Camera.orthographicSize;
-        var newProjectionSize = Mathf.Clamp(currentProjectionSize + _zoomMomentum * 0.07f, MinimumProjectionSize,
-            MaximumProjectionSize);
-        Camera.orthographicSize = newProjectionSize;
+        Camera.orthographicSize = currentProjectionSize + _zoomMomentum * 0.07f;
 
 
         var dampedMomentum = _zoomMomentum < 0.0f
             ? Mathf.Min(_zoomMomentum + Time.deltaTime * 5.0f, 0.0f)
             : Mathf.Max(_zoomMomentum - Time.deltaTime * 5.0f, 0.0f);
         _zoomMomentum = dampedMomentum;
-        MoveCamera(new Vector2(transform.position.x, transform.position.y));
     }
 
     private void OnTapActionPerformed(InputAction.CallbackContext context)
@@ -246,4 +244,6 @@ public sealed class FarmInput : MonoBehaviour
 
     private Vector2 GetCurrentPrimaryPointerWorldPosition() =>
         Camera.ScreenToWorldPoint(_primaryPointerData.CurrentScreenPosition);
+    
+    private float GetMaximumProjectionSize() => Mathf.Min(mapBounds.height / 2, mapBounds.width / 2 / Camera.aspect);
 }
