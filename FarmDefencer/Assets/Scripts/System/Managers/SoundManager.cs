@@ -34,30 +34,38 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
     [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float potatoDustVolume = 0.5f;
     [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float SweetPotatoVinylVolume = 0.5f;
 
+    public string CurrentBgmName { get; private set; }
+    
     /// <summary>
     /// 내부 캐시에서 Bgm을 불러와 재생하는 메소드.
     /// 캐시에 존재하지 않을 경우 Resources/_Bgm에서 불러와 캐시에 넣고 재생함.
     /// </summary>
-    public void PlayBgm(string name, float volume = 0.5f)
+    public void PlayBgm(string name, float volume = 0.5f, float speed = 1.0f)
     {
-        if (_bgmDictionary.ContainsKey(name) == false)
-        {
-            var newBgm = Resources.Load<AudioClip>($"_Bgm/{name}");
+	    if (!name.Equals(CurrentBgmName))
+	    {
+	        if (_bgmDictionary.ContainsKey(name) == false)
+	        {
+	            var newBgm = Resources.Load<AudioClip>($"_Bgm/{name}");
 
-            if (newBgm == null)
-            {
-                Debug.LogError($"존재하지 않는 BGM: {name}");
-                return;
-            }
-            _bgmDictionary.Add(name, newBgm);
-        }
+	            if (newBgm == null)
+	            {
+	                Debug.LogError($"존재하지 않는 BGM: {name}");
+	                return;
+	            }
+	            _bgmDictionary.Add(name, newBgm);
+	        }
 
-        var bgm = _bgmDictionary[name];
+	        var bgm = _bgmDictionary[name];
 
-        _bgmAudioSource1.Stop();
-        _bgmAudioSource1.clip = bgm;
+	        _bgmAudioSource1.Stop();
+	        _bgmAudioSource1.clip = bgm;
+			_bgmAudioSource1.Play();
+	    }
+	    
         _bgmAudioSource1.volume = volume;
-        _bgmAudioSource1.Play();
+        _bgmAudioSource1.pitch = speed;
+        CurrentBgmName = name;
     }
     public void StopBgm()
     {
