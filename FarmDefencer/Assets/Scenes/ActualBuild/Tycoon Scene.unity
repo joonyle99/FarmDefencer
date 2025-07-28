@@ -4247,7 +4247,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pathLineRenderer: {fileID: 0}
-  _pathLineDuration: 0.3
   _gridCellPrefab: {fileID: 0}
   _originGridPath: []
   LastPlacedGridCell: {fileID: 0}
@@ -8329,6 +8328,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1928820690}
     m_Modifications:
+    - target: {fileID: 921467438528749887, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
+      propertyPath: wateringOffset.y
+      value: -300
+      objectReference: {fileID: 0}
     - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -8409,6 +8412,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2032411694175156702, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1964832882}
     - target: {fileID: 8808794803560234487, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
       propertyPath: m_Name
       value: TutorialWateringCan
@@ -11348,6 +11355,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 921467438528749887, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
+      propertyPath: wateringOffset.y
+      value: -300
+      objectReference: {fileID: 0}
     - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -11432,18 +11443,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1964832882}
-    - target: {fileID: 4976254586582533374, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4976254586582533374, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4976254586582533374, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8808794803560234487, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
       propertyPath: m_Name
       value: WateringCan

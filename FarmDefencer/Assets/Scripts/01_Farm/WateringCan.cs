@@ -17,7 +17,7 @@ public sealed class WateringCan :
 	IPointerExitHandler
 {
 	[InfoBox("실제 물주기 판정이 판정이 발생할 위치의 물뿌리개 몸체로부터의 오프셋. 화면 해상도 기준.")]
-	[SerializeField] private Vector2 wateringOffset = new Vector2(512.0f, -512.0f);
+	[SerializeField] private Vector2 wateringOffset = new(216.0f, -300.0f);
 	public Vector2 WateringOffset => wateringOffset;
 	
 	public int InputPriority => IFarmInputLayer.Priority_WateringCan;
@@ -29,7 +29,7 @@ public sealed class WateringCan :
 
 	private Vector2 _currentWateringWorldPosition;
 	private Vector2 _initialScreenLocalPosition; // 이 물뿌리개를 사용하지 않을 때 위치할 화면 위치. 에디터 상에서 놓은 위치를 기억해서 사용함.
-	private RectTransform _rectTransform;
+	private RectTransform _rootRectTransform;
 	private Func<bool> _isWaterable;
 
 	[SpineAnimation]
@@ -79,11 +79,11 @@ public sealed class WateringCan :
 			OnUsingStateChanged();
 		}
 
+		var adjustedPosition = pointerEventData.position + new Vector2(-3.0f, 3.0f);
 		// 물뿌리개 위치를 현재 커서 위치로 옮기기
-		_rectTransform.anchoredPosition = pointerEventData.position;
+		_rootRectTransform.anchoredPosition = adjustedPosition;
 		// 물뿌리개의 월드 위치 구하기
-		var pointerScreenPosition = pointerEventData.position;
-		var wateringScreenPosition = pointerScreenPosition + wateringOffset;
+		var wateringScreenPosition = adjustedPosition + wateringOffset;
 		_currentWateringWorldPosition = Camera.main.ScreenToWorldPoint(wateringScreenPosition);
 	}
 
@@ -95,8 +95,8 @@ public sealed class WateringCan :
 
 	private void Awake()
 	{
-		_rectTransform = transform.Find("Root").GetComponent<RectTransform>();
-		_initialScreenLocalPosition = _rectTransform.localPosition;
+		_rootRectTransform = transform.Find("Root").GetComponent<RectTransform>();
+		_initialScreenLocalPosition = _rootRectTransform.localPosition;
 
 		_skeletonGraphic = transform.Find("Root/Animation").GetComponent<SkeletonGraphic>();
 		_spineAnimationState = _skeletonGraphic.AnimationState;
@@ -128,7 +128,7 @@ public sealed class WateringCan :
 
 	private void MoveToInitialPosition()
 	{
-		_rectTransform.localPosition = _initialScreenLocalPosition;
+		_rootRectTransform.localPosition = _initialScreenLocalPosition;
 		Using = false;
 		OnUsingStateChanged();
 	}

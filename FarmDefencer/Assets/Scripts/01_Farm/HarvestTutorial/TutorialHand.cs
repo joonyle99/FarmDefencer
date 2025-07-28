@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class TutorialHand : MonoBehaviour
 {
-    private static readonly Vector2 HandZeroOffset = new Vector2(-0.5f, -0.8f);
-    private static readonly Vector2 HandBeginOffset = new Vector2(-2.0f, -2.3f);
+    private static readonly Vector2 HandZeroOffset = new(-0.5f, -0.8f);
+    private static readonly Vector2 HandBeginOffset = new(-2.0f, -2.3f);
+    private static readonly Vector2 DummyWateringCanOffset = new(-1.5f, 1.5f);
     
     private EffectPlayer _effectPlayer;
     private SpriteRenderer _hand;
@@ -98,6 +99,7 @@ public class TutorialHand : MonoBehaviour
         _text = transform.Find("Text").GetComponent<TMP_Text>();
         _hand = transform.Find("Hand").GetComponent<SpriteRenderer>();
         _dummyWateringCan = transform.Find("DummyWateringCan").GetComponent<SkeletonAnimation>();
+        _dummyWateringCan.transform.localPosition = DummyWateringCanOffset;
     }
 
     private void Action_SingleTap()
@@ -217,7 +219,6 @@ public class TutorialHand : MonoBehaviour
                     _effectPlayer.PlayTapEffect(transform.position);
                 }
             }
-            return;
         }
     }
 
@@ -247,5 +248,5 @@ public class TutorialHand : MonoBehaviour
         }
         
         _hand.transform.localPosition = Vector2.Lerp(rightPosition, HandBeginOffset, (currentFrame % 0.5f) / 0.5f);
-    }   
+    }
 }
