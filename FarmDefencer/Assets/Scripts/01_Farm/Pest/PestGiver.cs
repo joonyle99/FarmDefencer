@@ -16,6 +16,8 @@ public sealed class PestGiver
 
     public bool IsWarningShowing => _pestWarningUI.IsWarningShowing;
 
+    public bool IsPestRunning => _runningPests.Count > 0;
+    
     [Serializable]
     public struct PestPrefabData
     {

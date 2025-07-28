@@ -7738,6 +7738,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911982a6f0e14bd4b88047c9f5a89f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fastBgmStartTime: 150
+  fastBgmSpeedMultiplier: 2
   ignoreSaveFile: 0
   farm: {fileID: 876821029}
   quotaContext: {fileID: 287826021}

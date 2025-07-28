@@ -47,13 +47,6 @@ public sealed class FarmManager : MonoBehaviour
         {
             // 디버그용 할당 코드 등 여기에...
             quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
-            harvestTutorialGiver.AddTutorial("product_potato");
-            harvestTutorialGiver.AddTutorial("product_corn");
-            harvestTutorialGiver.AddTutorial("product_cabbage");
-            harvestTutorialGiver.AddTutorial("product_cucumber");
-            harvestTutorialGiver.AddTutorial("product_eggplant");
-            harvestTutorialGiver.AddTutorial("product_sweetpotato");
-            harvestTutorialGiver.AddTutorial("product_mushroom");
         }
         else
 #endif
@@ -129,6 +122,7 @@ public sealed class FarmManager : MonoBehaviour
         quotaContext.Init(GetProductEntry);
 
         farm.Init(
+            () => pestGiver.IsPestRunning,
             entry => quotaContext.TryGetQuota(entry.ProductName, out var quota) ? quota : 0,
             OnFarmQuotaFilledHandler,
             farmUI.ToggleCropGuide);

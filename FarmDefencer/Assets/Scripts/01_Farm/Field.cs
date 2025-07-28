@@ -40,6 +40,7 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
     }
 
     private bool _isAvailable;
+    private Func<bool> _isPestRunning;
 
     public Crop TopLeftCrop => _crops[FieldSize.x * (FieldSize.y - 1)];
 
@@ -151,7 +152,7 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
             return true;
         }
 
-        if (SignAABB(worldPosition))
+        if (SignAABB(worldPosition) && !_isPestRunning())
         {
             _onCropSignClicked?.Invoke();
             return true;
@@ -184,9 +185,13 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
         return false;
     }
 
-    public void Init(Func<ProductEntry, int> getQuotaFunction, Action<ProductEntry, Vector2, int> fillQuotaFunction,
+    public void Init(
+        Func<bool> isPestRunningFunction,
+        Func<ProductEntry, int> getQuotaFunction, 
+        Action<ProductEntry, Vector2, int> fillQuotaFunction,
         Action<ProductEntry> signClickedHandler)
     {
+        _isPestRunning = isPestRunningFunction;
         Array.ForEach(
             _crops,
             crop => crop.Init(() => getQuotaFunction(ProductEntry),
