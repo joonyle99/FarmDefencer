@@ -1,9 +1,5 @@
-using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
-using Sirenix.Utilities.Editor;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -22,7 +18,7 @@ public class VolumeControl : PropertyAttribute
         Group = group;
     }
 }
-
+#if UNITY_EDITOR
 public class VolumeControlEditor : EditorWindow
 {
     private List<GameObject> _prefabs = new List<GameObject>();
@@ -238,3 +234,4 @@ public class VolumeControlEditor : EditorWindow
         }
     }
 }
+#endif
