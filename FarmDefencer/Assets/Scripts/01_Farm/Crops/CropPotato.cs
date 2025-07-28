@@ -103,10 +103,6 @@ public sealed class CropPotato : Crop
 			_currentState)
 
 			(initialPosition + deltaPosition, transform.position);
-		if (GetCurrentStage(_currentState) == PotatoStage.Harvested)
-		{
-			SoundManager.Instance.StopSfx();
-		}
 	}
 
 	public override void OnWatering()
@@ -231,11 +227,18 @@ public sealed class CropPotato : Crop
 		SoundManager.Instance.PlaySfx("SFX_T_potato_dust", SoundManager.Instance.potatoDustVolume);
 	};
 
-	private static readonly Func<PotatoState, PotatoState, bool> StopDustSfxEffectCondition = (beforeState, afterState) => afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f;
+	private static readonly Func<PotatoState, PotatoState, bool> StopDustSfxEffectCondition = (beforeState, afterState) => afterState.HoldingTime == 0.0f && beforeState.HoldingTime > 0.0f && !beforeState.Harvested && !afterState.Harvested;
 	private static readonly Action<Vector2, Vector2> StopDustSfxEffect = (_, _) =>
 	{
 		EffectPlayer.SceneGlobalInstance.StopVfx();
 		SoundManager.Instance.StopSfx();
+	};
+
+	private static readonly Action<Vector2, Vector2> StopDustEffectAndPlayHarvestSfxEffect = (_, _) =>
+	{
+		EffectPlayer.SceneGlobalInstance.StopVfx();
+		SoundManager.Instance.StopSfx();
+		SoundManager.Instance.PlaySfx("SFX_T_harvest");
 	};
 
 	[Pure]
@@ -257,6 +260,7 @@ public sealed class CropPotato : Crop
 		(HoldEffectCondition, HoldEffect),
 		(QuotaFilledEffectCondition, QuotaFilledEffect),
 		(StopDustSfxEffectCondition, StopDustSfxEffect),
-		(PlayDustSfxEffectCondition, PlayDustSfxEffect)
+		(PlayDustSfxEffectCondition, PlayDustSfxEffect),
+		(HarvestEffectCondition, StopDustEffectAndPlayHarvestSfxEffect)
 	};
 }
