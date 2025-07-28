@@ -81,6 +81,11 @@ public sealed class FarmManager : MonoBehaviour
             farmInput.InputPriorityCut = 0;
         }
 
+        if (pestGiver.IsWarningShowing)
+        {
+            farmInput.FullZoomOut();
+        }
+
         wateringCan.gameObject.SetActive(!harvestTutorialGiver.IsPlayingTutorial);
         weatherShopUI.gameObject.SetActive(!harvestTutorialGiver.IsPlayingTutorial);
         goDefenceUI.gameObject.SetActive(farmClock.CurrentDaytime >= farmClock.LengthOfDaytime && !harvestTutorialGiver.IsPlayingTutorial);
