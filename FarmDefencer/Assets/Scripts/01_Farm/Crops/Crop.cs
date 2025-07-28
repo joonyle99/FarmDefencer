@@ -42,8 +42,8 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 		bool Harvested { get; set; }
 	}
 
-	protected const float WaterWaitingDeadSeconds = 300.0f;
-	protected const float WaterWaitingResetSeconds = 300.0f;
+	protected const float WaterWaitingDeadSeconds = 90.0f;
+	protected const float WaterWaitingResetSeconds = 60.0f;
 	protected const float MultipleTouchSecondsCriterion = 0.5f; // 연속 탭 동작 판정 시간. 이 시간 이내로 다시 탭 해야 연속 탭으로 간주됨
 	protected const float PlowDeltaPositionCrierion = 0.25f; // 밭 문지르기 동작 판정 기준 (가로 방향 위치 델타)
 
