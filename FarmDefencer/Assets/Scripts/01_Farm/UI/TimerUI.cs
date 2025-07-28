@@ -36,7 +36,7 @@ public sealed class TimerUI : MonoBehaviour
             
             var degrees = 360.0f / 12 * (-mapToDraw + 2.0f) + 90.0f;
             var adjustedMapImageRadius = radius * 1.75f;
-            if (mapToDraw == 2)
+            if (mapToDraw != 3)
             {
                 adjustedMapImageRadius *= 1.25f;
             }
