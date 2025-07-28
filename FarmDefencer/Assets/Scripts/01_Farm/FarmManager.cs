@@ -10,6 +10,10 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public sealed class FarmManager : MonoBehaviour
 {
+    [Header("조정 가능 수치")] 
+    [SerializeField] private float fastBgmStartTime = 150.0f;
+    [SerializeField] private float fastBgmSpeedMultiplier = 2.0f;
+    
     [Header("디버그용 세이브 무시")] [SerializeField]
     private bool ignoreSaveFile;
 
@@ -83,6 +87,8 @@ public sealed class FarmManager : MonoBehaviour
         wateringCan.gameObject.SetActive(!harvestTutorialGiver.IsPlayingTutorial);
         weatherShopUI.gameObject.SetActive(!harvestTutorialGiver.IsPlayingTutorial);
         goDefenceUI.gameObject.SetActive(farmClock.CurrentDaytime >= farmClock.LengthOfDaytime && !harvestTutorialGiver.IsPlayingTutorial);
+        
+        SoundManager.Instance.PlayBgm("BGM_T_main_origin", 0.5f, farmClock.CurrentDaytime > fastBgmStartTime ? fastBgmSpeedMultiplier : 1.0f);
     }
 
     private void QuotaContextChangedHandler()
