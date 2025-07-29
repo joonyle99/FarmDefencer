@@ -67,7 +67,7 @@ public sealed class FarmManager : MonoBehaviour
 
         Application.wantsToQuit += SaveOnQuit;
         
-        //harvestTutorialGiver.PlayTutorialsToDo(productDatabase.Products, IsProductAvailableNow);
+        harvestTutorialGiver.PlayTutorialsToDo(productDatabase.Products, IsProductAvailableNow);
     }
 
     private void Update()

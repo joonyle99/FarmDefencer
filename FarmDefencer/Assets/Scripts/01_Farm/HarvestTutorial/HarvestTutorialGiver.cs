@@ -178,6 +178,7 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer, IFarm
         _tutorialHand = transform.GetComponentInChildren<TutorialHand>();
 
         _signRectTransform = transform.Find("SignCanvas/Sign").GetComponent<RectTransform>();
+        _signRectTransform.gameObject.SetActive(false);
     }
     
     private void Update()
@@ -206,10 +207,10 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer, IFarm
                 && newTutorial.TargetCrop is not CropPotato
                 && newTutorial.TargetCrop is not CropCorn)
             {
-                _signRectTransform.anchoredPosition = new Vector2(0, 800.0f);
+                _signRectTransform.anchoredPosition = new Vector2(0, Screen.height);
                 _signRectTransform.gameObject.SetActive(true);
 
-                Sequence sequence = DOTween.Sequence();
+                var sequence = DOTween.Sequence();
 
                 sequence.Append(_signRectTransform.DOAnchorPosY(0.0f, 1.0f).SetEase(Ease.OutBounce))
                     .AppendInterval(2.0f)
