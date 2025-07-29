@@ -48,7 +48,6 @@ public sealed class PestWarningUI : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log($"{Screen.currentResolution}");
         var policeLinesObject = transform.Find("PoliceLines").gameObject;
         for (var i = 0; i < policeLineDatas.Length; ++i)
         {

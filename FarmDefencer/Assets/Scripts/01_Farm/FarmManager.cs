@@ -31,6 +31,7 @@ public sealed class FarmManager : MonoBehaviour
     [SerializeField] private FarmUI farmUI;
     [SerializeField] private FarmInput farmInput;
     [SerializeField] private ProductDatabase productDatabase;
+    [SerializeField] private HarvestAnimationPlayer harvestAnimationPlayer;
     [SerializeField] private WateringCan wateringCan;
     [SerializeField] private HarvestTutorialGiver harvestTutorialGiver;
     [SerializeField] private WeatherShopUI weatherShopUI;
@@ -127,7 +128,8 @@ public sealed class FarmManager : MonoBehaviour
             { 
                 SerializeToSaveFile();
                 SceneManager.LoadScene("Main Scene");
-            });
+            },
+            (productEntry, duration, screenFrom, screenTo) => harvestAnimationPlayer.PlayScreenAnimation(productEntry, duration, screenFrom, screenFrom, ()=>{}));
 
         wateringCan.Init(() => !farmClock.Paused, 
             
@@ -159,7 +161,8 @@ public sealed class FarmManager : MonoBehaviour
             GetProductEntry,
             () => farmClock.CurrentDaytime,
             () => farmClock.Paused,
-            EarnGold);
+            EarnGold,
+            (productEntry, duration, worldFrom, worldTo) => harvestAnimationPlayer.PlayWorldAnimation(productEntry, duration, worldFrom, worldTo, () => {}));
     }
 
     private void OnQuotaContextChanged()
@@ -217,7 +220,7 @@ public sealed class FarmManager : MonoBehaviour
 
     private void OnFarmQuotaFilledHandler(ProductEntry entry, Vector2 cropWorldPosition, int quota)
     {
-        var quotaAfterPestsEat = pestGiver.LetPestsEat(entry.ProductName, quota);
+        var quotaAfterPestsEat = pestGiver.LetPestsEat(entry.ProductName, cropWorldPosition, quota);
 
         if (quotaAfterPestsEat > 0)
         {

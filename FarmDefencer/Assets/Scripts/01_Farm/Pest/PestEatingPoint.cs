@@ -28,18 +28,17 @@ public sealed class PestEatingPoint : MonoBehaviour, IFarmSerializable
         Refresh();
     }
 
-    public int LetPestsEat(int count)
+    public int LetPestsEat(Vector2 cropWorldPosition, int count)
     {
         var remainder = count;
         while (_pests.Count > 0 && remainder > 0)
         {
             var frontPest = _pests[0];
-            remainder = frontPest.Eat(remainder);
+            remainder = frontPest.Eat(cropWorldPosition, remainder);
 
             if (frontPest.RemainingCropEatCount <= 0)
             {
                 _pests.RemoveAt(0);
-                Destroy(frontPest.gameObject);
             }
         }
 

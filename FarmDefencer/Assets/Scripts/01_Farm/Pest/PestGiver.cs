@@ -27,14 +27,18 @@ public sealed class PestGiver
         public GameObject Prefab => prefab;
     }
 
-    [Tooltip("앞에서 출발한 해충과의 최소 시간 간격")] [SerializeField] private float minimumPestSpawnInterval = 0.1f;
-    [Tooltip("앞에서 출발한 해충과의 최대 시간 간격")] [SerializeField] private float maximumPestSpawnInterval = 1.0f;
-    [Tooltip("지그재그로 움직이다가 곧장 도착지로 향하기 시작하는 거리 기준")] [SerializeField] private float pestBeginDirectToDestinationCriterion = 5.0f;
-    [Tooltip("해충 클릭 판정되는 크기")] [SerializeField] private float pestClickSize = 0.1f; // 해충 클릭 판정되는 크기.
-    [Tooltip("잡힌 해충 사라지는데 걸리는 시간")] [SerializeField] private float pestDieTime = 0.5f; // 해충 잡았을 때 투명해져 완전히 사라질때까지 걸리는 시간.
-    [Tooltip("해충 웨이브 발생하는 최소 시각")] [SerializeField] private float minimumRandomPestSpawnDaytime = 30.0f;
-    [Tooltip("해충 웨이브 발생하는 최대 시각")] [SerializeField] private float maximumRandomPestSpawnDaytime = 200.0f;
-    [Tooltip("해충 프리팹들")][SerializeField] private List<PestPrefabData> pestPrefabs;
+    [Header("앞에서 출발한 해충과의 최소 시간 간격")] [SerializeField] private float minimumPestSpawnInterval = 0.1f;
+    [Header("앞에서 출발한 해충과의 최대 시간 간격")] [SerializeField] private float maximumPestSpawnInterval = 1.0f;
+    [Header("지그재그로 움직이다가 곧장 도착지로 향하기 시작하는 거리 기준")] [SerializeField] private float pestBeginDirectToDestinationCriterion = 5.0f;
+    [Header("해충 클릭 판정되는 크기")] [SerializeField] private float pestClickSize = 0.1f;
+    [Header("잡힌 해충 사라지는데 걸리는 시간")] [SerializeField] private float pestDieTime = 0.5f;
+    [Header("다 훔쳐간 사라지는데 걸리는 시간")] [SerializeField] private float pestFleeTime = 1.0f;
+    [Header("해충 웨이브 발생하는 최소 시각")] [SerializeField] private float minimumRandomPestSpawnDaytime = 30.0f;
+    [Header("해충 웨이브 발생하는 최대 시각")] [SerializeField] private float maximumRandomPestSpawnDaytime = 200.0f;
+    [Header("해충 지그재그 파장")] [SerializeField] private float wavelength = 1.0f;
+    [Header("해충 지그재그 진폭")] [SerializeField] private float amplitude = 1.0f;
+    [Header("수확한 작물 해충한테 날라가는데 걸리는 시간")] [SerializeField] private float stealAnimationDuration = 0.2f;
+    [Header("해충 프리팹들")][SerializeField] private List<PestPrefabData> pestPrefabs;
     [Header("해충 스폰 규칙")] [SerializeField] private PestSpawnRule pestSpawnRule;
     [Header("해충 속도 규칙")] [SerializeField] private PestSpeedRule pestSpeedRule;
 
@@ -47,6 +51,7 @@ public sealed class PestGiver
     private Dictionary<PestOrigin, Vector2> _pestOrigins;
     private PestWarningUI _pestWarningUI;
     private float _remainingNextRunTime;
+    private Action<ProductEntry, float, Vector2, Vector2> _playPestStealFromFieldAnimation;
     
     // 저장되는 값들
     private float _pestSpawnTime;
@@ -59,22 +64,25 @@ public sealed class PestGiver
         Func<string, ProductEntry> getProductEntry,
         Func<float> getDaytime,
         Func<bool> isFarmPaused,
-        Action<int> onPestCatchGoldEarned)
+        Action<int> onPestCatchGoldEarned,
+        Action<ProductEntry, float, Vector2, Vector2> playPestStealFromFieldAnimation)
     {
         _isProductAvailable = isProductAvailable;
         _getProductEntry = getProductEntry;
         _getDaytime = getDaytime;
         _isFarmPaused = isFarmPaused;
         _onPestCatchGoldEarned = onPestCatchGoldEarned;
+        _playPestStealFromFieldAnimation = playPestStealFromFieldAnimation;
     }
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="productName"></param>
+    /// <param name="cropWorldPosition"></param>
     /// <param name="count">먹고 남은 개수.</param>
     /// <returns></returns>
-    public int LetPestsEat(string productName, int count) => _pestEatingPoints[productName].LetPestsEat(count);
+    public int LetPestsEat(string productName, Vector2 cropWorldPosition, int count) => _pestEatingPoints[productName].LetPestsEat(cropWorldPosition, count);
 
     public void ReserveRandomPestSpawn()
     {
@@ -268,11 +276,19 @@ public sealed class PestGiver
         var pestObject = Instantiate(pestPrefab, _runningPestParentObject.transform);
         pestObject.name = $"Pest_{pestSize}";
 
-        var pestComponent = pestObject.AddComponent<Pest>();
+        var pestComponent = pestObject.GetComponent<Pest>();
         pestComponent.Init(
             pestSize,
             pestDieTime,
-            pestBeginDirectToDestinationCriterion);
+            pestFleeTime,
+            pestBeginDirectToDestinationCriterion,
+            wavelength,
+            amplitude,
+            (targetProductName, worldFrom, worldTo) =>
+            {
+                var targetProduct = _getProductEntry(targetProductName);
+                _playPestStealFromFieldAnimation(targetProduct, stealAnimationDuration, worldFrom, worldTo);
+            });
 
         return pestComponent;
     }

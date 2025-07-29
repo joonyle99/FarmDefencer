@@ -9,11 +9,13 @@ using UnityEngine.UI;
 /// </summary>
 public sealed class HarvestInventory : MonoBehaviour
 {
+    [SerializeField] private float harvestedProductFlyToBoxAnimationDuration = 0.5f;
+    
     private ProductDatabase _productDatabase;
-    private HarvestAnimationPlayer _harvestAnimationPlayer;
     private Image _drawer;
     private Dictionary<ProductEntry, HarvestBox> _harvestBoxes;
     private Animator _quotaAssignAnimator;
+    private Action<ProductEntry, float, Vector2, Vector2> _playScreenHarvestAnimation;
 
     public void UpdateInventory(Func<ProductEntry, bool> isProductAvailable, Func<ProductEntry, int> getQuota, Func<ProductEntry> getHotProduct, Func<ProductEntry> getSpecialProduct)
     {
@@ -54,9 +56,11 @@ public sealed class HarvestInventory : MonoBehaviour
         StartCoroutine(HarvestAnimationCoroutine(productEntry, cropScreenPosition, count));
     }
 
-    public void Init(ProductDatabase database)
+    public void Init(ProductDatabase database, Action<ProductEntry, float, Vector2, Vector2> playScreenHarvestAnimation)
     {
         _productDatabase = database;
+        _playScreenHarvestAnimation = playScreenHarvestAnimation;
+        
         foreach (var entry in _productDatabase.Products)
         {
             var harvestBoxTransform = transform.Find($"BoxArea/HarvestBox_{entry.ProductName}");
@@ -78,7 +82,6 @@ public sealed class HarvestInventory : MonoBehaviour
 
     private void Awake()
     {
-        _harvestAnimationPlayer = GetComponentInChildren<HarvestAnimationPlayer>();
         _harvestBoxes = new();
         _quotaAssignAnimator = GetComponentInChildren<Animator>();
         _quotaAssignAnimator.gameObject.SetActive(false);
@@ -92,7 +95,7 @@ public sealed class HarvestInventory : MonoBehaviour
 
         for (var i = 0; i < count; i++)
         {
-            _harvestAnimationPlayer.PlayAnimation(productEntry, cropScreenPosition, toPosition, () => { });
+            _playScreenHarvestAnimation(productEntry, harvestedProductFlyToBoxAnimationDuration, cropScreenPosition, toPosition);
             yield return new WaitForSeconds(0.1f);
         }
         

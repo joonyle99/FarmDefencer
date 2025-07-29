@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public sealed class FarmUI : MonoBehaviour
@@ -14,14 +13,15 @@ public sealed class FarmUI : MonoBehaviour
 	public void Init(FarmInput farmInput,
 		ProductDatabase productDatabase,
 		Action onBattleButtonClicked,
-		Action onQuitRequested)
+		Action onQuitRequested,
+		Action<ProductEntry, float, Vector2, Vector2> playScreenHarvestAnimation)
 	{
 		farmInput.RegisterInputLayer(_cropGuide);
 		
 		_battleButton.onClick.AddListener(() => onBattleButtonClicked());
 		// TODO 실제 설정창 구현하기
 		_settingButton.onClick.AddListener(() => onQuitRequested());
-		_harvestInventory.Init(productDatabase);
+		_harvestInventory.Init(productDatabase, playScreenHarvestAnimation);
 	}
 
 	public void PlayProductFillAnimation(ProductEntry entry, Vector2 cropWorldPosition, int count)

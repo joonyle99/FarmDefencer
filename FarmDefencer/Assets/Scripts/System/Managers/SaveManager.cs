@@ -40,6 +40,20 @@ public sealed class SaveManager : JoonyleGameDevKit.Singleton<SaveManager>
             return _loadedSave;
         }
     }
+
+    /// <summary>
+    /// 세이브 파일에 저장되어 있는 타이쿤 남은 재배 가능 시간을 가져오는 메소드.
+    /// </summary>
+    /// <returns></returns>
+    public float GetRemainingHarvestableTime()
+    {
+        if (LoadedSave["FarmClock"] is JObject jsonFarmClock)
+        {
+            return jsonFarmClock["CurrentDaytime"]?.Value<float>() ?? 0.0f;
+        }
+
+        return 0.0f;
+    }
     
     /// <summary>
     /// 세이브 파일을 로컬 저장소에 저장하며, LoadedSave도 jsonObject로 설정하는 메소드.
