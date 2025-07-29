@@ -34,10 +34,18 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer, IFarm
     private RectTransform _signRectTransform;
 
     private float _lastInputTime;
+    private Action<ProductEntry> _showCropGuide;
+    private Func<bool> _isCropGuideShowing;
     
     // 저장되는 값
     private List<string> _finishedTutorials;
 
+    public void Init(Action<ProductEntry> showCropGuide, Func<bool> isCropGuideShowing)
+    {
+        _showCropGuide = showCropGuide;
+        _isCropGuideShowing = isCropGuideShowing;
+    }
+    
     public void PlayTutorialsToDo(
         IReadOnlyList<ProductEntry> productEntries, 
         Func<ProductEntry, bool> isCropUnlocked)
@@ -61,6 +69,24 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer, IFarm
     {
         if (!gameObject.activeSelf
             ||_currentTutorialField is null)
+        {
+            return false;
+        }
+
+        if (_currentTutorialField.State == HarvestTutorialField.TutorialState.ShouldClickSign)
+        {
+            var cropSignPosition = _currentTutorialField.CropSignWorldPosition;
+            if (Mathf.Abs(worldPosition.x - cropSignPosition.x) < 0.5f &&
+                Mathf.Abs(worldPosition.y - cropSignPosition.y) < 0.5f)
+            {
+                _currentTutorialField.State = HarvestTutorialField.TutorialState.ShouldCloseGuide;
+                _showCropGuide(_currentTutorialField.ProductEntry);
+                return true;
+            }
+            return false;
+        }
+
+        if (_currentTutorialField.State == HarvestTutorialField.TutorialState.ShouldCloseGuide)
         {
             return false;
         }
@@ -190,9 +216,31 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer, IFarm
                     .AppendCallback(() => _signRectTransform.gameObject.SetActive(false));
             }
         }
-        
-        _tutorialHand.transform.position = _currentTutorialField.TargetCrop.transform.position;
-        _tutorialHand.SetTutorialHandMotion(_currentTutorialField.TargetCrop.RequiredCropAction);
+
+        if (_currentTutorialField.State == HarvestTutorialField.TutorialState.ShouldClickSign)
+        {
+            _tutorialHand.transform.position = _currentTutorialField.CropSignWorldPosition;
+            _tutorialHand.SetTutorialHandMotion(RequiredCropAction.SingleTap);
+        }
+        else if (_currentTutorialField.State == HarvestTutorialField.TutorialState.ShouldCloseGuide)
+        {
+            var emptyScreenPosition = new Vector2(Screen.width, Screen.height / 2.0f) + new Vector2(-200.0f, -100.0f);
+            var emptyWorldPosition = Camera.main.ScreenToWorldPoint(emptyScreenPosition);
+            emptyWorldPosition.z = 0.0f;
+            
+            _tutorialHand.transform.position = emptyWorldPosition;
+            _tutorialHand.SetTutorialHandMotion(RequiredCropAction.SingleTap);
+
+            if (!_isCropGuideShowing())
+            {
+                _currentTutorialField.State = HarvestTutorialField.TutorialState.Crop;
+            }
+        }
+        else
+        {
+            _tutorialHand.transform.position = _currentTutorialField.TargetCrop.transform.position;
+            _tutorialHand.SetTutorialHandMotion(_currentTutorialField.TargetCrop.RequiredCropAction);
+        }
 
         if (_currentTutorialField.Done)
         {

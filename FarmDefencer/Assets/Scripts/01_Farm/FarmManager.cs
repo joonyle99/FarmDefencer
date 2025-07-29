@@ -91,6 +91,8 @@ public sealed class FarmManager : MonoBehaviour
         weatherShopUI.gameObject.SetActive(!harvestTutorialGiver.IsPlayingTutorial);
         goDefenceUI.gameObject.SetActive(farmClock.CurrentDaytime >= farmClock.LengthOfDaytime && !harvestTutorialGiver.IsPlayingTutorial);
         
+        harvestTutorialGiver.Init(farmUI.ToggleCropGuide, () => farmUI.IsCropGuideShowing);
+        
         SoundManager.Instance.PlayBgm("BGM_T_main_origin", 0.25f, farmClock.CurrentDaytime > fastBgmStartTime ? fastBgmSpeedMultiplier : 1.0f);
     }
     

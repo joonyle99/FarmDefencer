@@ -10,6 +10,8 @@ public sealed class FarmUI : MonoBehaviour
 	private Button _battleButton;
 	private Button _settingButton;
 
+	public bool IsCropGuideShowing => _cropGuide.gameObject.activeSelf;
+
 	public void Init(FarmInput farmInput,
 		ProductDatabase productDatabase,
 		Action onBattleButtonClicked,

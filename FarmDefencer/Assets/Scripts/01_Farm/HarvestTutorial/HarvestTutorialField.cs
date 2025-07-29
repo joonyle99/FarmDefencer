@@ -2,6 +2,12 @@ using UnityEngine;
 
 public sealed class HarvestTutorialField : MonoBehaviour
 {
+    public enum TutorialState
+    {
+        ShouldClickSign,
+        ShouldCloseGuide,
+        Crop
+    }
     private const float TimeMultiplierWhenWaiting = 7.0f;
 
     public ProductEntry ProductEntry => _field.ProductEntry;
@@ -12,6 +18,9 @@ public sealed class HarvestTutorialField : MonoBehaviour
     private Field _field;
 
     public Crop TargetCrop => _field.TopLeftCrop;
+    public Vector2 CropSignWorldPosition => _field.CropSignWorldPosition;
+    
+    public TutorialState State;
 
     private void Awake()
     {

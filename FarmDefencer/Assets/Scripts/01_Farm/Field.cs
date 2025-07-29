@@ -29,6 +29,8 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
     private SpriteRenderer _backgroundRenderer; // 0번 자식 오브젝트에 할당
     private SpriteRenderer _fieldLockedRenderer; // 1번 자식 오브젝트에 할당
 
+    public Vector2 CropSignWorldPosition => _cropSign.transform.position;
+    
     public bool IsAvailable
     {
         get { return _isAvailable; }

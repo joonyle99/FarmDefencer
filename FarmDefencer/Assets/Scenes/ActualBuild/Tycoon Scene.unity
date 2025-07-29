@@ -2055,8 +2055,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specialProductTurnInterval: 4
-  quotaFillingRule: {fileID: 11400000, guid: d0b06943c37a14448a5c77c28076931b, type: 2}
-  cropUnlockRule: {fileID: 11400000, guid: 84c0711eb9f330c45a210f5249fa4a8c, type: 2}
+  quotaFillingRule: {fileID: 11400000, guid: 4c9682779cb74714c954c77112331b12, type: 2}
+  cropUnlockRule: {fileID: 11400000, guid: 8d41974c20ae0ff428480f40ff09b428, type: 2}
 --- !u!4 &287826022
 Transform:
   m_ObjectHideFlags: 0
@@ -5342,9 +5342,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -448409883
-  m_SortingLayer: 7
-  m_SortingOrder: 0
+  m_SortingLayerID: -1951324203
+  m_SortingLayer: 8
+  m_SortingOrder: 200
   m_Sprite: {fileID: -8613906636842752052, guid: 60570e168d84e3c4284f0a38c2357201, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -7831,12 +7831,12 @@ MonoBehaviour:
   farmClock: {fileID: 790447940}
   penaltyGiver: {fileID: 1187482620}
   pestGiver: {fileID: 1346437755}
+  harvestTutorialGiver: {fileID: 1928820689}
   farmUI: {fileID: 257351987}
   farmInput: {fileID: 2078747845}
   productDatabase: {fileID: 11400000, guid: 306ee76be7a6f2c4a962c5707f74017f, type: 2}
   harvestAnimationPlayer: {fileID: 578216665}
   wateringCan: {fileID: 731689267}
-  harvestTutorialGiver: {fileID: 1928820689}
   weatherShopUI: {fileID: 59965878}
   goDefenceUI: {fileID: 1429330862}
   weatherGiver: {fileID: 2120870755}
