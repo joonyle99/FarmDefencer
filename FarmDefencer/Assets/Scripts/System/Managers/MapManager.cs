@@ -104,6 +104,7 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
             MaximumUnlockedStageIndex = 1;
         }
 
+        Debug.Log($"Cleared, {MaximumUnlockedMapIndex}:{MaximumUnlockedStageIndex}");
         OnMapChanged?.Invoke(CurrentMap);
     }
 

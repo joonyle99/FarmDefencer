@@ -2,9 +2,12 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using Newtonsoft.Json.Linq;
 using Sirenix.OdinInspector;
+using System;
+using Newtonsoft.Json;
 
-public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
+public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer, IFarmSerializable
 {
     [InfoBox("입력한 이후 잠시 튜토리얼 손이 안 보이는 시간을 정함.")]
     [SerializeField] private float hideTimeAfterInput = 1.0f;
@@ -19,7 +22,7 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
     [SerializeField] private GameObject Prefab_Field_Mushroom;
     public int InputPriority => IFarmInputLayer.Priority_HarvestTutorialGiver; 
     
-    private List<string> _tutorials; // Product Name 저장
+    private List<string> _onGoingTutorials; // Product Name 저장
 
     public bool IsPlayingTutorial => _currentTutorialField is not null;
 
@@ -31,12 +34,27 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
     private RectTransform _signRectTransform;
 
     private float _lastInputTime;
+    
+    // 저장되는 값
+    private List<string> _finishedTutorials;
 
-    public void AddTutorial(string product)
+    public void PlayTutorialsToDo(
+        IReadOnlyList<ProductEntry> productEntries, 
+        Func<ProductEntry, bool> isCropUnlocked)
     {
-        _tutorials.Add(product);
-        enabled = true;
-        _background.gameObject.SetActive(true);
+        foreach (var productEntry in productEntries)
+        {
+            if (isCropUnlocked(productEntry) && !_finishedTutorials.Contains(productEntry.ProductName))
+            {
+                _onGoingTutorials.Add(productEntry.ProductName);
+            }
+        }
+
+        if (_onGoingTutorials.Count > 0)
+        {
+            enabled = true;
+            _background.gameObject.SetActive(true);
+        }
     }
     
     public bool OnTap(Vector2 worldPosition)
@@ -86,10 +104,38 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
         
         return false;
     }
+    
+    public JObject Serialize()
+    {
+        var jsonObject = new JObject();
+        var jsonFinishedTutorials = new JArray();
+        foreach (var finishedTutorial in _finishedTutorials)
+        {
+            jsonFinishedTutorials.Add(finishedTutorial);
+        }
+        jsonObject.Add("FinishedTutorials", jsonFinishedTutorials);
+        return jsonObject;
+    }
 
+    public void Deserialize(JObject json)
+    {
+        if (json["FinishedTutorials"] is JArray jsonFinishedTutorials)
+        {
+            foreach (var jsonFinishedTutorial in jsonFinishedTutorials)
+            {
+                var finishedTutorial = jsonFinishedTutorial.Value<string>();
+                if (finishedTutorial is not null)
+                {
+                    _finishedTutorials.Add(finishedTutorial);
+                }
+            }
+        }
+    }
+    
     private void Awake()
     {
-        _tutorials = new();
+        _finishedTutorials = new();
+        _onGoingTutorials = new();
         _background = transform.Find("Background").GetComponent<SpriteRenderer>();
         
         _tutorialWateringCan = transform.Find("TutorialWateringCan").GetComponent<WateringCan>();
@@ -110,20 +156,20 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
     
     private void Update()
     {
-        if (!_tutorials.Any())
+        if (!_onGoingTutorials.Any())
         {
             gameObject.SetActive(false);
             return;
         }
 
-        var currentTutorialProductName = _tutorials[0];
+        var currentTutorialProductName = _onGoingTutorials[0];
         if (_currentTutorialField is null ||
             !_currentTutorialField.ProductEntry.ProductName.Equals(currentTutorialProductName))
         {
             var newTutorial = InstantiateTutorial(currentTutorialProductName);
             if (newTutorial is null)
             {
-                _tutorials.RemoveAt(0);
+                _onGoingTutorials.RemoveAt(0);
                 return;
             }
 
@@ -151,7 +197,8 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer
         if (_currentTutorialField.Done)
         {
             AssignTutorial(null);
-            _tutorials.RemoveAt(0);
+            _finishedTutorials.Add(currentTutorialProductName);
+            _onGoingTutorials.RemoveAt(0);
         }
     }
 

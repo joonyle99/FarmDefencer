@@ -24,8 +24,6 @@ public sealed class DefenceSceneTransitioner : MonoBehaviour
 
     private void OnLeavingDefenceSceneState()
     {
-        ResourceManager.Instance.SurvivedMonsters.Clear();
-        
         // 여기 Json 접근에서 발생할 수 있는 NullReferenceException은 기본적으로 그냥 두는게 맞음(타이쿤에서 저장이 잘 되면 절대 뜨지 않는 예외고 그 외의 경우에는 떠야 함)
         // 그래도 디펜스 씬 디버그 플레이 시를 감안해서 catch
         try
@@ -35,7 +33,7 @@ public sealed class DefenceSceneTransitioner : MonoBehaviour
             // if (중도포기)
             //    OnDropOut() <-- 여기서 웨이브 시작 전 or 시작 이후도 처리함.
             // else
-            //    OnCompleted() <-- 승리 또는 패배 처리.
+            OnCompleted(); // <-- 승리 또는 패배 처리.
             
             var loadedSave = SaveManager.Instance.LoadedSave;
             loadedSave["ResourceManager"] = ResourceManager.Instance.Serialize();
