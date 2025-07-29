@@ -10,36 +10,33 @@ using Random = UnityEngine.Random;
 
 public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
 {
-    public const int SpecialProductTurnInterval = 4;
-    [Serializable]
-    public class QuotaRules
-    {
-        [SerializeField] private MapEntry map;
-        public MapEntry Map => map;
-        
-        [SerializeField] private QuotaFillingRule quotaFillingRule;
-        public QuotaFillingRule QuotaFillingRule => quotaFillingRule;
-
-        [SerializeField] private SpecialProductBonusRule specialProductBonusRule;
-        public SpecialProductBonusRule SpecialProductBonusRule => specialProductBonusRule;
-    }
-    
-    public event Action QuotaContextUpdated;
-    
     [CanBeNull] public ProductEntry SpecialProduct { get; private set; }
     [CanBeNull] public ProductEntry HotProduct { get; private set; }
-    
-    [SerializeField] private QuotaRules[] quotaRules;
-    
+
+    [SerializeField] private int specialProductTurnInterval = 4;
+
+    [SerializeField] private QuotaFillingRule quotaFillingRule;
+    [SerializeField] private CropUnlockRule cropUnlockRule;
+
     private Dictionary<ProductEntry, int> _remainingQuotas; // 키가 없으면 잠긴 작물
-    
+
     private Func<string, ProductEntry> _getProductEntry;
+    private Action _onQuotaFilled;
+    private Action _onQuotaAssigned;
 
     private int _turn;
-    
+
     public bool IsAllQuotaFilled => _remainingQuotas.Values.All(v => v <= 0);
 
-    public void Init(Func<string, ProductEntry> getProductEntry) => _getProductEntry = getProductEntry;
+    public void Init(
+        Func<string, ProductEntry> getProductEntry,
+        Action onQuotaFilled,
+        Action onQuotaAssigned)
+    {
+        _getProductEntry = getProductEntry;
+        _onQuotaFilled = onQuotaFilled;
+        _onQuotaAssigned = onQuotaAssigned;
+    }
 
     public JObject Serialize()
     {
@@ -75,17 +72,22 @@ public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
                 Debug.LogError($"{productName}에 해당하는 ProductEntry를 찾지 못했습니다.");
                 continue;
             }
+
             _remainingQuotas.Add(entry, quota);
         }
-        
+
         _turn = json.Property("Turn")?.Value.Value<int>() ?? 0;
-        HotProduct = json.Property("HotProduct")?.Value.Value<string>() is string hotProductName ? _getProductEntry(hotProductName) : null;
-        SpecialProduct = json.Property("SpecialProduct")?.Value.Value<string>() is string specialProductName ? _getProductEntry(specialProductName) : null;
-        
-        QuotaContextUpdated?.Invoke();
+        HotProduct = json.Property("HotProduct")?.Value.Value<string>() is string hotProductName
+            ? _getProductEntry(hotProductName)
+            : null;
+        SpecialProduct = json.Property("SpecialProduct")?.Value.Value<string>() is string specialProductName
+            ? _getProductEntry(specialProductName)
+            : null;
+
+        _onQuotaFilled();
     }
 
-    public bool IsProductAvailable(ProductEntry product) => _remainingQuotas.ContainsKey(product);
+    public bool IsProductAvailable(ProductEntry product, int currentMapId, int currentStageId) => cropUnlockRule.IsCropUnlocked(product.ProductName, currentMapId, currentStageId);
 
     public bool TryGetQuota(string productName, out int quota)
     {
@@ -102,19 +104,20 @@ public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
     /// <returns>Hot, Special 작물을 고려한 가격.</returns>
     public int FillQuota(string productName, int quota, int currentMapId)
     {
-        var (productEntry, remainingQuota) = _remainingQuotas.FirstOrDefault(q => q.Key.ProductName.Equals(productName));
+        var (productEntry, remainingQuota) =
+            _remainingQuotas.FirstOrDefault(q => q.Key.ProductName.Equals(productName));
         if (productEntry is null)
         {
             Debug.LogError($"{productName} 에 해당하는 주문량 정보를 찾지 못하였습니다.");
             return 0;
         }
-        
+
         if (quota > remainingQuota)
         {
             Debug.LogWarning($"{productName} 의 남은 주문량 {remainingQuota} 보다 많은 {quota} 만큼의 주문량을 채우려고 시도했습니다.");
             quota = remainingQuota;
         }
-        
+
         var totalPrice = productEntry.Price * quota;
         if (productEntry == HotProduct)
         {
@@ -122,8 +125,9 @@ public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
         }
         else if (productEntry == SpecialProduct && _remainingQuotas[productEntry] == quota)
         {
-            var ruleForMap = quotaRules.FirstOrDefault(r => r.Map.MapId == currentMapId);
-            if (ruleForMap is not null && ruleForMap.SpecialProductBonusRule.TryGetBonusOf(productName, out var bonusPrice))
+            var ruleForMap = quotaFillingRule.Entries.FirstOrDefault(r => r.TargetMap.MapId == currentMapId);
+            if (ruleForMap is not null &&
+                ruleForMap.SpecialProductBonusRule.TryGetBonusOf(productName, out var bonusPrice))
             {
                 totalPrice += bonusPrice;
             }
@@ -132,21 +136,21 @@ public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
                 Debug.LogError($"{currentMapId} 에 해당하는 Special Product Bonus Rule을 찾을 수 없습니다.");
             }
         }
-        
+
         _remainingQuotas[productEntry] -= quota;
-        QuotaContextUpdated?.Invoke();
+        _onQuotaFilled();
 
         return totalPrice;
     }
 
-    public void AssignQuotas(int currentMapId)
+    public void AssignQuotas(int currentMapId, int currentStageId)
     {
         _remainingQuotas.Clear();
-        
-        _turn = (_turn + 1) % SpecialProductTurnInterval;
-        var isSpecial = _turn == SpecialProductTurnInterval - 1;
 
-        var ruleForMap = quotaRules.FirstOrDefault(r => r.Map.MapId == currentMapId);
+        _turn = (_turn + 1) % specialProductTurnInterval;
+        var isSpecial = _turn == specialProductTurnInterval - 1;
+
+        var ruleForMap = quotaFillingRule.Entries.FirstOrDefault(r => r.TargetMap.MapId == currentMapId);
         if (ruleForMap is null)
         {
             Debug.LogError($"{currentMapId} 에 해당하는 QuotaFillingRuleForMap을 찾을 수 없습니다.");
@@ -154,20 +158,25 @@ public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
         }
 
         var quotaSum = 0;
-        foreach (var ruleEntry in ruleForMap.QuotaFillingRule.Entries)
+        foreach (var ruleEntry in ruleForMap.Entries)
         {
+            if (!cropUnlockRule.IsCropUnlocked(ruleEntry.TargetProduct.ProductName, currentMapId, currentStageId))
+            {
+                continue;
+            }
+            
             var (minimum, maximum) = ruleEntry.Range;
             if (maximum < minimum)
             {
-                Debug.LogError($"{ruleEntry.Crop.ProductName}에 해당하는 QuotaFillingRuleEntry의 개수 범위가 잘못되었습니다.");
+                Debug.LogError($"{ruleEntry.TargetProduct.ProductName}에 해당하는 QuotaFillingRuleEntry의 개수 범위가 잘못되었습니다.");
                 continue;
             }
 
             var quota = Random.Range(minimum, maximum + 1);
-            _remainingQuotas[ruleEntry.Crop] = quota;
+            _remainingQuotas[ruleEntry.TargetProduct] = quota;
             quotaSum += quota;
         }
-        
+
         var random = Random.Range(0, quotaSum);
         foreach (var (productEntry, quota) in _remainingQuotas)
         {
@@ -179,10 +188,10 @@ public sealed class QuotaContext : MonoBehaviour, IFarmSerializable
                 break;
             }
         }
-        
-        QuotaContextUpdated?.Invoke();
+
+        _onQuotaAssigned();
     }
-    
+
     private void Awake()
     {
         _remainingQuotas = new();

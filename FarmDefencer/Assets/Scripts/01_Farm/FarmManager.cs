@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
@@ -47,7 +45,7 @@ public sealed class FarmManager : MonoBehaviour
         if (ignoreSaveFile)
         {
             // 디버그용 할당 코드 등 여기에...
-            quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
+            quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId, MapManager.Instance.CurrentStageIndex);
         }
         else
 #endif
@@ -57,14 +55,14 @@ public sealed class FarmManager : MonoBehaviour
 
         penaltyGiver.SpawnMonsters(MapManager.Instance.CurrentMap.MapId, ResourceManager.Instance.SurvivedMonsters);
         ResourceManager.Instance.SurvivedMonsters.Clear();
-        farmUI.PlayQuotaAssignAnimation(productEntry => quotaContext.IsProductAvailable(productEntry),
+        farmUI.PlayQuotaAssignAnimation(IsProductAvailableNow,
             productEntry => quotaContext.TryGetQuota(productEntry.ProductName, out var quota) ? quota : 0);
 
         if (farmClock.CurrentDaytime == 0.0f)
         {
             farmInput.FullZoomOut();
             pestGiver.ReserveRandomPestSpawn();
-            quotaContext.AssignQuotas(MapManager.Instance.CurrentMapIndex);
+            quotaContext.AssignQuotas(MapManager.Instance.CurrentMapIndex, MapManager.Instance.CurrentStageIndex);
         }
 
         Application.wantsToQuit += SaveOnQuit;
@@ -113,7 +111,7 @@ public sealed class FarmManager : MonoBehaviour
         farmClock.AddPauseCondition(() => weatherGiver.IsWeatherOnGoing);
         farmClock.AddPauseCondition(() => pestGiver.IsWarningShowing);
 
-        quotaContext.Init(GetProductEntry);
+        quotaContext.Init(GetProductEntry, OnQuotaFilled, OnQuotaAssigned);
 
         farm.Init(
             () => pestGiver.IsPestRunning,
@@ -129,7 +127,7 @@ public sealed class FarmManager : MonoBehaviour
                 SerializeToSaveFile();
                 SceneManager.LoadScene("Main Scene");
             },
-            (productEntry, duration, screenFrom, screenTo) => harvestAnimationPlayer.PlayScreenAnimation(productEntry, duration, screenFrom, screenFrom, ()=>{}));
+            (productEntry, duration, screenFrom, screenTo) => harvestAnimationPlayer.PlayScreenAnimation(productEntry, duration, screenFrom, screenTo, ()=>{}));
 
         wateringCan.Init(() => !farmClock.Paused, 
             
@@ -139,8 +137,6 @@ public sealed class FarmManager : MonoBehaviour
             });
         
         penaltyGiver.Init(farm);
-
-        quotaContext.QuotaContextUpdated += OnQuotaContextChanged;
 
         weatherShopUI.Init(OnWeatherShopItemBought);
         weatherShopUI.AddItem(new SunItem(20 + MapManager.Instance.CurrentMap.MapId*10));
@@ -157,7 +153,7 @@ public sealed class FarmManager : MonoBehaviour
         weatherGiver.Init(farm.ApplyCropCommand);
 
         pestGiver.Init(
-            productName => quotaContext.IsProductAvailable(GetProductEntry(productName)),
+            productName =>IsProductAvailableNow(GetProductEntry(productName)),
             GetProductEntry,
             () => farmClock.CurrentDaytime,
             () => farmClock.Paused,
@@ -165,19 +161,26 @@ public sealed class FarmManager : MonoBehaviour
             (productEntry, duration, worldFrom, worldTo) => harvestAnimationPlayer.PlayWorldAnimation(productEntry, duration, worldFrom, worldTo, () => {}));
     }
 
-    private void OnQuotaContextChanged()
+    private void OnQuotaFilled()
     {
         UpdateHarvestInventory();
-        farm.UpdateAvailability(productEntry => quotaContext.IsProductAvailable(productEntry));
+        farm.UpdateAvailability(IsProductAvailableNow);
 
         if (quotaContext.IsAllQuotaFilled)
         {
-            quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
-            farmUI.PlayQuotaAssignAnimation(productEntry => quotaContext.IsProductAvailable(productEntry),
-                productEntry => quotaContext.TryGetQuota(productEntry.ProductName, out var quota) ? quota : 0);
+            quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId, MapManager.Instance.CurrentStageIndex);
         }
     }
 
+    private void OnQuotaAssigned()
+    {
+        farmUI.PlayQuotaAssignAnimation(
+            IsProductAvailableNow,
+            productEntry => quotaContext.TryGetQuota(productEntry.ProductName, out var quota) ? quota : 0);
+    }
+
+    private bool IsProductAvailableNow(ProductEntry productEntry) => quotaContext.IsProductAvailable(productEntry,
+        MapManager.Instance.CurrentMap.MapId, MapManager.Instance.CurrentStageIndex);
     
     private void DeserializeFromSaveFile()
     {
@@ -236,7 +239,7 @@ public sealed class FarmManager : MonoBehaviour
     private void UpdateHarvestInventory()
     {
         farmUI.UpdateHarvestInventory(
-            productEntry => quotaContext.IsProductAvailable(productEntry),
+            IsProductAvailableNow,
             productEntry => quotaContext.TryGetQuota(productEntry.ProductName, out var outQuota) ? outQuota : 0,
             () => quotaContext.HotProduct,
             () => quotaContext.SpecialProduct);
