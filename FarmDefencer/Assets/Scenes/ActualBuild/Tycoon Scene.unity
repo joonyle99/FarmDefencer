@@ -2055,8 +2055,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specialProductTurnInterval: 4
-  quotaFillingRule: {fileID: 11400000, guid: 4c9682779cb74714c954c77112331b12, type: 2}
-  cropUnlockRule: {fileID: 11400000, guid: 8d41974c20ae0ff428480f40ff09b428, type: 2}
+  quotaFillingRule: {fileID: 11400000, guid: d0b06943c37a14448a5c77c28076931b, type: 2}
+  cropUnlockRule: {fileID: 11400000, guid: 84c0711eb9f330c45a210f5249fa4a8c, type: 2}
 --- !u!4 &287826022
 Transform:
   m_ObjectHideFlags: 0
