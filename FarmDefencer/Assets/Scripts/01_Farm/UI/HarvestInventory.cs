@@ -114,6 +114,8 @@ public sealed class HarvestInventory : MonoBehaviour
                 harvestBox.Blink(glowAnimationLength);
             }
         }
+        
+        SoundManager.Instance.PlaySfx("SFX_T_order_reset");
 
         while (elapsed < glowAnimationLength)
         {

@@ -92,20 +92,7 @@ public sealed class FarmManager : MonoBehaviour
         
         SoundManager.Instance.PlayBgm("BGM_T_main_origin", 0.25f, farmClock.CurrentDaytime > fastBgmStartTime ? fastBgmSpeedMultiplier : 1.0f);
     }
-
-    private void QuotaContextChangedHandler()
-    {
-        UpdateHarvestInventory();
-        farm.UpdateAvailability(productEntry => quotaContext.IsProductAvailable(productEntry));
-
-        if (quotaContext.IsAllQuotaFilled)
-        {
-            quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
-            farmUI.PlayQuotaAssignAnimation(productEntry => quotaContext.IsProductAvailable(productEntry),
-                productEntry => quotaContext.TryGetQuota(productEntry.ProductName, out var quota) ? quota : 0);
-        }
-    }
-
+    
     private void InitializeDependencies()
     {
         farmInput.RegisterInputLayer(farm);
@@ -151,7 +138,7 @@ public sealed class FarmManager : MonoBehaviour
         
         penaltyGiver.Init(farm);
 
-        quotaContext.QuotaContextUpdated += QuotaContextChangedHandler;
+        quotaContext.QuotaContextUpdated += OnQuotaContextChanged;
 
         weatherShopUI.Init(OnWeatherShopItemBought);
         weatherShopUI.AddItem(new SunItem(20 + MapManager.Instance.CurrentMap.MapId*10));
@@ -175,6 +162,20 @@ public sealed class FarmManager : MonoBehaviour
             EarnGold);
     }
 
+    private void OnQuotaContextChanged()
+    {
+        UpdateHarvestInventory();
+        farm.UpdateAvailability(productEntry => quotaContext.IsProductAvailable(productEntry));
+
+        if (quotaContext.IsAllQuotaFilled)
+        {
+            quotaContext.AssignQuotas(MapManager.Instance.CurrentMap.MapId);
+            farmUI.PlayQuotaAssignAnimation(productEntry => quotaContext.IsProductAvailable(productEntry),
+                productEntry => quotaContext.TryGetQuota(productEntry.ProductName, out var quota) ? quota : 0);
+        }
+    }
+
+    
     private void DeserializeFromSaveFile()
     {
         var saveJson = SaveManager.Instance.LoadedSave;
