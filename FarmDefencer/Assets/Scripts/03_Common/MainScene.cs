@@ -13,6 +13,8 @@ public sealed class MainScene : MonoBehaviour
     private Button _battleButton;
     private TimerUI _timerUI;
     private Button _debugResetSaveAndRestartButton;
+    private Image _farmIcon;
+    private Image _battleIcon;
     
     private void Awake()
     {
@@ -20,8 +22,10 @@ public sealed class MainScene : MonoBehaviour
         
         _farmButton = transform.Find("FarmButton").GetComponent<Button>();
         _farmButton.onClick.AddListener(OnFarmButtonClicked);        
+        _farmIcon = transform.Find("FarmButton/FarmIcon").GetComponent<Image>();
         _battleButton = transform.Find("BattleButton").GetComponent<Button>();
         _battleButton.onClick.AddListener(OnBattleButtonClicked);
+        _battleIcon = transform.Find("BattleButton/BattleIcon").GetComponent<Image>();
         _harvestableTimeText = transform.Find("FarmButton/HarvestableTimeText").GetComponent<TMP_Text>();
         _availableCoinText = transform.Find("BattleButton/AvailableCoinText").GetComponent<TMP_Text>();
         _timerUI = GameObject.Find("TimerUI").GetComponent<TimerUI>();
@@ -46,9 +50,19 @@ public sealed class MainScene : MonoBehaviour
         var remainingDaytimeMinutes = remainingDaytimeSpan.Minutes;
         var remainingDaytimeSeconds = remainingDaytimeSpan.Seconds;
         _harvestableTimeText.text = $"남은 재배 가능 시간\n:{remainingDaytimeMinutes:D2}분 {remainingDaytimeSeconds:D2}초";
+        if (currentDaytime >= lengthOfDaytime)
+        {
+            _farmButton.interactable = false;
+            _farmIcon.color = _farmButton.colors.disabledColor;
+        }
         
         // 사용 가능 코인 설정
         _availableCoinText.text = $"사용 가능 코인\n:{ResourceManager.Instance.Gold}";
+        if (ResourceManager.Instance.Gold <= 0)
+        {
+            _battleButton.interactable = false;
+            _battleIcon.color = _battleButton.colors.disabledColor;
+        }
         
         _timerUI.Init(MapManager.Instance.CurrentMapIndex, MapManager.Instance.CurrentStageIndex, () => (lengthOfDaytime - currentDaytime) / lengthOfDaytime);
     }
