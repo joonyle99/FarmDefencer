@@ -16,20 +16,30 @@ public sealed class WateringCan :
 	IPointerUpHandler,
 	IPointerExitHandler
 {
-	[InfoBox("실제 물주기 판정이 판정이 발생할 위치의 물뿌리개 몸체로부터의 오프셋. 화면 해상도 기준.")]
-	[SerializeField] private Vector2 wateringOffset = new(216.0f, -300.0f);
-	public Vector2 WateringOffset => wateringOffset;
+	[InfoBox("실제 물주기 판정이 판정이 발생할 위치의 물뿌리개 몸체로부터의 오프셋. 월드 좌표 기준.")]
+	[SerializeField] private Vector2 wateringOffset = new(1.0f, -1.0f);
 	
 	public int InputPriority => IFarmInputLayer.Priority_WateringCan;
 
 	// 물 주기 판정이 가해지는 watering 애니메이션에서의 시각
 	private const float WateringAnimationTimePoint = 0.5f;
 	private Action<Vector2> _onWatering;
-	public bool Using { get; private set; }
+	private bool _using;
 
-	private Vector2 _currentWateringWorldPosition;
-	private Vector2 _initialScreenLocalPosition; // 이 물뿌리개를 사용하지 않을 때 위치할 화면 위치. 에디터 상에서 놓은 위치를 기억해서 사용함.
-	private RectTransform _rootRectTransform;
+	public bool Using
+	{
+		get => _using;
+		private set
+		{
+			if (_using == value)
+			{
+				return;
+			}
+			_using = value;
+			OnUsingStateChanged();
+		}
+	}
+
 	private Func<bool> _isWaterable;
 
 	[SpineAnimation]
@@ -39,8 +49,8 @@ public sealed class WateringCan :
 	[SerializeField]
 	private string wateringAnimationName;
 
-	private SkeletonGraphic _skeletonGraphic;
-	private Spine.AnimationState _spineAnimationState;
+	private SkeletonAnimation _worldWateringCan;
+	private SkeletonGraphic _uiWateringCan;
 	private bool _isWateredThisTime; // 이벤트 중복 호출 방지용
 
 	public bool OnTap(Vector2 worldPosition)
@@ -54,7 +64,7 @@ public sealed class WateringCan :
 	}
 
 	public void OnPointerDown(PointerEventData eventData) => OnDrag(eventData);
-	public void OnPointerUp(PointerEventData pointerEventData) => MoveToInitialPosition();
+	public void OnPointerUp(PointerEventData pointerEventData) => Using = false;
 
 	public void OnPointerExit(PointerEventData pointerEventData)
 	{
@@ -65,26 +75,18 @@ public sealed class WateringCan :
 	{
 		if (!_isWaterable())
 		{
-			if (Using)
-			{
-				MoveToInitialPosition();
-			}
-
+			Using = false;
 			return;
 		}
-
-		if (!Using)
-		{
-			Using = true;
-			OnUsingStateChanged();
-		}
-
-		var adjustedPosition = pointerEventData.position + new Vector2(-3.0f, 3.0f);
-		// 물뿌리개 위치를 현재 커서 위치로 옮기기
-		_rootRectTransform.anchoredPosition = adjustedPosition;
+		
+		Using = true;
+		
 		// 물뿌리개의 월드 위치 구하기
-		var wateringScreenPosition = adjustedPosition + wateringOffset;
-		_currentWateringWorldPosition = Camera.main.ScreenToWorldPoint(wateringScreenPosition);
+		var pointerScreenPosition = pointerEventData.position;
+		
+		var worldWateringCanPosition = Camera.main.ScreenToWorldPoint(pointerScreenPosition);
+		worldWateringCanPosition.z = -5.0f;
+		_worldWateringCan.transform.position = worldWateringCanPosition;
 	}
 
 	public void Init(Func<bool> isWaterable, Action<Vector2> onWatering)
@@ -95,11 +97,13 @@ public sealed class WateringCan :
 
 	private void Awake()
 	{
-		_rootRectTransform = transform.Find("Root").GetComponent<RectTransform>();
-		_initialScreenLocalPosition = _rootRectTransform.localPosition;
+		_uiWateringCan = transform.Find("UI/Animation").GetComponent<SkeletonGraphic>();
+		_worldWateringCan = transform.Find("World").GetComponent<SkeletonAnimation>();
+	}
 
-		_skeletonGraphic = transform.Find("Root/Animation").GetComponent<SkeletonGraphic>();
-		_spineAnimationState = _skeletonGraphic.AnimationState;
+	private void Start()
+	{
+		OnUsingStateChanged();
 	}
 
 	private void Update()
@@ -109,12 +113,7 @@ public sealed class WateringCan :
 			return;
 		}
 
-		var currentTrackEntry = _spineAnimationState.GetCurrent(0);
-		if (currentTrackEntry.Animation.Name != wateringAnimationName)
-		{
-			return;
-		}
-
+		var currentTrackEntry = _worldWateringCan.AnimationState.GetCurrent(0);
 		if (currentTrackEntry.AnimationTime < WateringAnimationTimePoint)
 		{
 			_isWateredThisTime = false;
@@ -122,26 +121,25 @@ public sealed class WateringCan :
 		else if (!_isWateredThisTime)
 		{
 			_isWateredThisTime = true;
-			_onWatering?.Invoke(_currentWateringWorldPosition);
+			_onWatering?.Invoke(new Vector2(_worldWateringCan.transform.position.x + wateringOffset.x - 0.5f, _worldWateringCan.transform.position.y + wateringOffset.y - 0.5f));
+			_onWatering?.Invoke(new Vector2(_worldWateringCan.transform.position.x + wateringOffset.x + 0.5f, _worldWateringCan.transform.position.y + wateringOffset.y - 0.5f));
+			_onWatering?.Invoke(new Vector2(_worldWateringCan.transform.position.x + wateringOffset.x - 0.5f, _worldWateringCan.transform.position.y + wateringOffset.y + 0.5f));
+			_onWatering?.Invoke(new Vector2(_worldWateringCan.transform.position.x + wateringOffset.x + 0.5f, _worldWateringCan.transform.position.y + wateringOffset.y + 0.5f));
 		}
-	}
-
-	private void MoveToInitialPosition()
-	{
-		_rootRectTransform.localPosition = _initialScreenLocalPosition;
-		Using = false;
-		OnUsingStateChanged();
 	}
 
 	private void OnUsingStateChanged()
 	{
+		_worldWateringCan.gameObject.SetActive(Using);
+		_uiWateringCan.gameObject.SetActive(!Using);
+		
 		if (Using)
 		{
-			_spineAnimationState.SetAnimation(0, wateringAnimationName, true);
+			_worldWateringCan.AnimationState.SetAnimation(0, wateringAnimationName, true);
 		}
 		else
 		{
-			_spineAnimationState.SetAnimation(0, idleAnimationName, true).MixDuration = 0.0f;
+			_worldWateringCan.AnimationState.SetAnimation(0, idleAnimationName, true).MixDuration = 0.0f;
 		}
 	}
 }

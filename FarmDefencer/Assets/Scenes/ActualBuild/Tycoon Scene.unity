@@ -6006,8 +6006,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!224 &1242917488 stripped
-RectTransform:
+--- !u!4 &1242917488 stripped
+Transform:
   m_CorrespondingSourceObject: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
   m_PrefabInstance: {fileID: 1628651917}
   m_PrefabAsset: {fileID: 0}
@@ -8247,41 +8247,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1928820690}
     m_Modifications:
-    - target: {fileID: 921467438528749887, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: wateringOffset.y
-      value: -300
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
+    - target: {fileID: 739875419610131157, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1964832882}
+    - target: {fileID: 739875419610131157, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1951324203
       objectReference: {fileID: 0}
     - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8312,14 +8284,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -8331,10 +8295,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2032411694175156702, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_Camera
+    - target: {fileID: 3673494026022465013, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
+      propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1964832882}
+      objectReference: {fileID: 0}
     - target: {fileID: 8808794803560234487, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
       propertyPath: m_Name
       value: TutorialWateringCan
@@ -11312,41 +11276,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 921467438528749887, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: wateringOffset.y
-      value: -300
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
+    - target: {fileID: 739875419610131157, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1964832882}
+    - target: {fileID: 739875419610131157, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1951324203
       objectReference: {fileID: 0}
     - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11377,14 +11313,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -11396,10 +11324,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2032411694175156702, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_Camera
+    - target: {fileID: 3673494026022465013, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
+      propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1964832882}
+      objectReference: {fileID: 0}
     - target: {fileID: 8808794803560234487, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
       propertyPath: m_Name
       value: WateringCan
