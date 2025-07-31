@@ -26,6 +26,10 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
 {
     public GameState CurrentState { get; private set; } = GameState.None;
 
+    public bool IsBuildState => CurrentState == GameState.Build;
+    public bool IsWaveState => CurrentState == GameState.Wave || CurrentState == GameState.WaveAfter;
+    public bool IsDefenceState => IsBuildState || IsWaveState || CurrentState == GameState.DefenceEnd;
+
     public event Action OnNormalState;
     public event Action OnPauseState;
     public event Action OnBuildState;
@@ -45,6 +49,8 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     /// EndingUI까지 모두 보여준 후 다른 씬으로 이동해야 할 때 호출되는 이벤트
     /// </summary>
     public event Action OnLeavingDefenceSceneState;
+
+    public event Action OnChangeState;
 
     private void Start()
     {
@@ -85,6 +91,8 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
                 HandleLeavingDefenceSceneState();
                 break;
         }
+
+        OnChangeState?.Invoke();
     }
 
     // Common

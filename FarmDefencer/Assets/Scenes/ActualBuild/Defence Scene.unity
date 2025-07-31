@@ -843,8 +843,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pathLineRenderer: {fileID: 3119231953507566084, guid: f92605f6a83016948b58f9e8c0d1e8e4, type: 3}
   _gridCellPrefab: {fileID: 5452235141227775536, guid: 20e9a4561dd28f94996acde895b08146, type: 3}
-  _originGridPath: []
-  LastPlacedGridCell: {fileID: 0}
 --- !u!483693784 &841568041
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -2514,7 +2512,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 215
+    m_Bits: 471
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -4202,6 +4200,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 696016014011819012, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TogglePause
+      objectReference: {fileID: 0}
     - target: {fileID: 771498834663216545, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4334,6 +4336,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2247186252378043101, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TogglePlaySpeed
+      objectReference: {fileID: 0}
     - target: {fileID: 2484883561858454181, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4386,6 +4392,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4743690470678740053, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TogglePause
+      objectReference: {fileID: 0}
+    - target: {fileID: 5192919759373167278, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5631493883785434268, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4433,6 +4447,14 @@ PrefabInstance:
     - target: {fileID: 6189539546324419127, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6921255967379411339, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8036292464417983805, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TogglePlaySpeed
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
