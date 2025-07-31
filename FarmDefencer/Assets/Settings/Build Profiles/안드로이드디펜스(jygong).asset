@@ -10,27 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 15003, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: "New Android\u2122 Profile"
+  m_Name: "\uC548\uB4DC\uB85C\uC774\uB4DC\uB514\uD39C\uC2A4(jygong)"
   m_EditorClassIdentifier: 
   m_AssetVersion: 1
   m_BuildTarget: 13
   m_Subtarget: 0
   m_PlatformId: b9b35072a6f44c2e863f17467ea3dc13
   m_PlatformBuildProfile:
-    rid: 7399898405430886401
-  m_OverrideGlobalSceneList: 0
+    rid: 6707469664956710913
+  m_OverrideGlobalSceneList: 1
   m_Scenes:
-  - m_enabled: 1
+  - m_enabled: 0
+    m_path: Assets/Scenes/ActualBuild/Title Scene.unity
+  - m_enabled: 0
     m_path: Assets/Scenes/ActualBuild/Main Scene.unity
-  - m_enabled: 1
+  - m_enabled: 0
     m_path: Assets/Scenes/ActualBuild/Tycoon Scene.unity
   - m_enabled: 1
     m_path: Assets/Scenes/ActualBuild/Defence Scene.unity
-  - m_enabled: 1
-    m_path: Assets/Scenes/ActualBuild/MapStageSelectScenes/MapStageSelectScene_Forest.unity
-  - m_enabled: 1
+  - m_enabled: 0
+    m_path: Assets/Scenes/ActualBuild/MapStageSelectScenes/MapStageSelectScene_forest.unity
+  - m_enabled: 0
     m_path: Assets/Scenes/ActualBuild/MapStageSelectScenes/MapStageSelectScene_beach.unity
-  - m_enabled: 1
+  - m_enabled: 0
     m_path: Assets/Scenes/ActualBuild/MapStageSelectScenes/MapStageSelectScene_cave.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
@@ -38,10 +40,10 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 7399898405430886401
+    - rid: 6707469664956710913
       type: {class: AndroidPlatformBuildSettings, ns: UnityEditor.Android, asm: UnityEditor.Android.Extensions}
       data:
-        m_Development: 0
+        m_Development: 1
         m_ConnectProfiler: 0
         m_BuildWithDeepProfilingSupport: 0
         m_AllowDebugging: 0
@@ -55,10 +57,10 @@ MonoBehaviour:
         m_BuildSubtarget: 0
         m_BuildSystem: 1
         m_ExportAsGoogleAndroidProject: 0
-        m_DebugSymbolLevel: 1
+        m_DebugSymbolLevel: 4
         m_DebugSymbolFormat: 5
         m_CurrentDeploymentTargetId: __builtin__target_default
-        m_BuildType: 2
+        m_BuildType: 1
         m_BuildAppBundle: 0
         m_IPAddressToConnect: 
         m_SymlinkSources: 0
