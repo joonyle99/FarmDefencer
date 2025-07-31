@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      pest_warning_paper_0: 808425518472208704
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

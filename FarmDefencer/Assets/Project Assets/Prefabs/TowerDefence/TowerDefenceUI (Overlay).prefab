@@ -1482,7 +1482,7 @@ MonoBehaviour:
   _successLine: {fileID: 2560082008426730116}
   _failureLine: {fileID: 390156481072751359}
   _monsterUI: {fileID: 158443525620360211}
-  _endingVolume: 0.5
+  endingVolume: 0.1
 --- !u!1 &1418338398791621534
 GameObject:
   m_ObjectHideFlags: 0
@@ -6574,8 +6574,8 @@ MonoBehaviour:
   _collapsedY: -240
   _duration: 0.5
   _isExpanded: 0
-  _expandVolume: 0.5
-  _collapseVolume: 0.5
+  expandVolume: 0.5
+  collapseVolume: 0.5
 --- !u!1 &6538512482504052215
 GameObject:
   m_ObjectHideFlags: 0

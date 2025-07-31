@@ -912,13 +912,13 @@ MonoBehaviour:
   ambVolume: 1
   songVolume: 0.1
   coinVolume: 0.5
-  waterVolume: 0.5
-  plantVolume: 0.5
-  harvestVolume: 0.5
+  waterVolume: 0.8
+  plantVolume: 0.8
+  harvestVolume: 0.8
   cabbageShakeVolume: 0.5
   eggPlantLeafDropVolume: 0.5
   mushroomShotVolume: 0.5
-  potatoDustVolume: 0.5
+  potatoDustVolume: 0.8
   SweetPotatoVinylVolume: 0.5
 --- !u!81 &8396262421793352476
 AudioListener:
