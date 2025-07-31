@@ -6,108 +6,106 @@ public class ProcessUI : MonoBehaviour
     [Header("━━━━━━━━ Process UI ━━━━━━━━")]
     [Space]
 
-    [SerializeField] private Button _fightButton;
-    [SerializeField] private Button _pauseButton;
-    [SerializeField] private Button _resumeButton;
+    [SerializeField] private Button _fightButton; // build state
+
+    [SerializeField] private Button _pauseButton; // wave state / wave after state
+    [SerializeField] private Button _resumeButton; // wave state / wave after state
 
     [Space]
 
     [SerializeField] private Button _playX1Button;
     [SerializeField] private Button _playX2Button;
 
-    private WaveSystem _waveSystem;
+    private bool _isPaused = false;
+    private bool _isPlayX2 = false;
 
-    private float _savedTimeScale;
+    private float _savedTimeScale = 1f;
 
-    private void Awake()
-    {
-        _waveSystem = FindFirstObjectByType<WaveSystem>();
-    }
     private void Start()
     {
-        Initialize();
-    }
+        GameStateManager.Instance.OnChangeState -= RefreshButton;
+        GameStateManager.Instance.OnChangeState += RefreshButton;
 
-    public void ResetButton01()
-    {
+        _isPaused = false;
+        _isPlayX2 = false;
+
         _fightButton.gameObject.SetActive(true);
-        _pauseButton.gameObject.SetActive(false);
+
         _resumeButton.gameObject.SetActive(false);
-    }
-    public void ResetButton02()
-    {
-        _playX2Button.gameObject.SetActive(true);
+        _pauseButton.gameObject.SetActive(false);
+
         _playX1Button.gameObject.SetActive(false);
-    }
-    public void Initialize()
-    {
-        ResetButton01();
-        //ResetButton02();
+        _playX2Button.gameObject.SetActive(true);
     }
 
-    // 1
+    public void RefreshButton()
+    {
+        var isBuildState = GameStateManager.Instance.CurrentState is GameState.Build;
+        var isWaveState = GameStateManager.Instance.CurrentState is GameState.Wave || GameStateManager.Instance.CurrentState is GameState.WaveAfter;
+
+        _fightButton.gameObject.SetActive(isBuildState);
+
+        _resumeButton.gameObject.SetActive(isWaveState && _isPaused);
+        _pauseButton.gameObject.SetActive(isWaveState && !_isPaused);
+
+        _playX1Button.gameObject.SetActive(_isPlayX2);
+        _playX2Button.gameObject.SetActive(!_isPlayX2);
+    }
+
     public void Fight()
     {
-        if (GameStateManager.Instance.CurrentState is not GameState.Build)
+        if (GameStateManager.Instance.IsBuildState == false)
+        {
             return;
+        }
 
         GameStateManager.Instance.ChangeState(GameState.Wave);
-
-        _fightButton.gameObject.SetActive(false);
-        _pauseButton.gameObject.SetActive(true);
-
-        _playX2Button.gameObject.SetActive(true);
-        _playX1Button.gameObject.SetActive(false);
-    }
-    public void Pause()
-    {
-        if (GameStateManager.Instance.CurrentState is not GameState.Wave
-            && GameStateManager.Instance.CurrentState is not GameState.WaveAfter)
-            return;
-
-        // pause 시점의 timeScale을 저장
-        _savedTimeScale = Time.timeScale;
-        Time.timeScale = 0f;
-
-        _pauseButton.gameObject.SetActive(false);
-        _resumeButton.gameObject.SetActive(true);
-    }
-    public void Resume()
-    {
-        if (GameStateManager.Instance.CurrentState is not GameState.Wave
-            && GameStateManager.Instance.CurrentState is not GameState.WaveAfter)
-            return;
-
-        // pause 시점의 timeScale을 복원
-        Time.timeScale = _savedTimeScale;
-
-        _pauseButton.gameObject.SetActive(true);
-        _resumeButton.gameObject.SetActive(false);
     }
 
-    // 2
-    public void PlayX1()
+    public void TogglePause()
     {
-        if (GameStateManager.Instance.CurrentState is not GameState.Wave
-            && GameStateManager.Instance.CurrentState is not GameState.WaveAfter)
+        if (GameStateManager.Instance.IsWaveState == false)
+        {
             return;
+        }
 
-        Time.timeScale = 1f;
-        _savedTimeScale = Time.timeScale;
+        _isPaused = !_isPaused;
 
-        _playX2Button.gameObject.SetActive(true);
-        _playX1Button.gameObject.SetActive(false);
+        if (_isPaused)
+        {
+            // pause 시점의 timeScale을 저장
+            _savedTimeScale = Time.timeScale;
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = _savedTimeScale;
+        }
+
+        _resumeButton.gameObject.SetActive(_isPaused);
+        _pauseButton.gameObject.SetActive(!_isPaused);
     }
-    public void PlayX2()
+    public void TogglePlaySpeed()
     {
-        if (GameStateManager.Instance.CurrentState is not GameState.Wave
-            && GameStateManager.Instance.CurrentState is not GameState.WaveAfter)
+        if (GameStateManager.Instance.IsWaveState == false)
+        {
             return;
+        }
 
-        Time.timeScale = 3f;
+        _isPlayX2 = !_isPlayX2;
+
+        if (_isPlayX2)
+        {
+            Time.timeScale = 2f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+
         _savedTimeScale = Time.timeScale;
 
-        _playX2Button.gameObject.SetActive(false);
-        _playX1Button.gameObject.SetActive(true);
+        _playX1Button.gameObject.SetActive(_isPlayX2);
+        _playX2Button.gameObject.SetActive(!_isPlayX2);
     }
 }
