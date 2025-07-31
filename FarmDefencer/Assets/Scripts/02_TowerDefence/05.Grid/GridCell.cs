@@ -64,15 +64,10 @@ public class GridCell : MonoBehaviour
         //isUsableText.color = (isUsable == true) ? Color.blue : Color.red;
     }
 
-    /// <summary>
-    /// UpgradePanel을 보여주기 위한 마우스 클릭 이벤트
-    /// </summary>
-    private void OnMouseDown()
+    public void OnTouch()
     {
         // 현재 타워 건설 상태가 아니라면 이벤트를 처리하지 않는다
-        if (GameStateManager.Instance.CurrentState is not GameState.Build
-            && GameStateManager.Instance.CurrentState is not GameState.Wave
-            && GameStateManager.Instance.CurrentState is not GameState.WaveAfter)
+        if (GameStateManager.Instance.IsDefenceState == false)
         {
             return;
         }

@@ -80,10 +80,12 @@ public class GridMap : MonoBehaviour
     private int[] _dx = new int[4] { -1, 0, 1, 0 };
     private int[] _dy = new int[4] { 0, 1, 0, -1 };
 
-    public GridCell LastPlacedGridCell = null;
+    public GridCell LastPlacedGridCell { get; set; }
     private bool _isFirstCalcPath = true;
     private Coroutine _drawPathCo;
     private LineRenderer _pathLineObject;
+    private int _targetLayerIndex;
+    private int _targetLayerMask;
 
     private void Awake()
     {
@@ -138,6 +140,9 @@ public class GridMap : MonoBehaviour
 
         _myGridMap = new GridCell[_height, _width];
         _prevDistanceCost = new int[_height, _width];
+
+        _targetLayerIndex = LayerMask.NameToLayer("GridCell");
+        _targetLayerMask = 1 << _targetLayerIndex;
     }
     private void Start()
     {
@@ -145,6 +150,27 @@ public class GridMap : MonoBehaviour
         GameStateManager.Instance.OnBuildState += CreateGridMap;
         GameStateManager.Instance.OnBuildState -= FindPathOnStart;
         GameStateManager.Instance.OnBuildState += FindPathOnStart;
+    }
+    private void Update()
+    {
+        //distanceCostText.text = distanceCost.ToString($"D{2}");
+        //isUsableText.text = isUsable.ToString();
+        //isUsableText.color = (isUsable == true) ? Color.blue : Color.red;
+
+        // gridCell touch input
+        if (Touchscreen.current != null)
+        {
+            if (Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+            {
+                Vector2 touchPos = Touchscreen.current.primaryTouch.position.ReadValue();
+                HandleTouch(touchPos);
+            }
+        }
+        else if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            Vector2 clickPos = Mouse.current.position.ReadValue();
+            HandleTouch(clickPos);
+        }
     }
 
     private void OnDestroy()
@@ -513,6 +539,23 @@ public class GridMap : MonoBehaviour
             {
                 Destroy(_pathLineObject.gameObject);
                 _pathLineObject = null;
+            }
+        }
+    }
+
+    // touch
+    private void HandleTouch(Vector2 screenPos)
+    {
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+        Vector2 worldPos2D = new Vector2(worldPos.x, worldPos.y);
+        RaycastHit2D hit = Physics2D.Raycast(worldPos2D, Vector2.zero, 0f, _targetLayerMask);
+
+        if (hit.collider != null)
+        {
+            GridCell gridCell = hit.collider.GetComponent<GridCell>();
+            if (gridCell != null)
+            {
+                gridCell.OnTouch();
             }
         }
     }
