@@ -161,7 +161,7 @@ public sealed class CropSweetpotato : Crop
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
-			Water,
+			OnWateringFunctions[GetCurrentStage(_currentState)],
 			_currentState)
 
 			(transform.position, transform.position);
@@ -572,7 +572,28 @@ public sealed class CropSweetpotato : Crop
 		{SweetpotatoStage.Mature, HarvestIfFiveTap },
 		{SweetpotatoStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, beforeState.RemainingSweetpotatoCount) },
 	};
+	
+	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, SweetpotatoState>> OnWateringFunctions = new()
+	{
+		{SweetpotatoStage.Unplowed, DoNothing },
 
+		{SweetpotatoStage.Stage1_Dead, Water },
+		{SweetpotatoStage.Stage1_BeforeWater, Water },
+		{SweetpotatoStage.Stage1_Growing, DoNothing },
+
+		{SweetpotatoStage.Stage2_BeforeWater, Water },
+		{SweetpotatoStage.Stage2_Dead, Water },
+		{SweetpotatoStage.Stage2_Growing, DoNothing },
+
+		{SweetpotatoStage.Stage3_BeforeWrap, DoNothing },
+		{SweetpotatoStage.Stage3_AfterWrap, DoNothing },
+
+		{SweetpotatoStage.Stage4, DoNothing },
+
+		{SweetpotatoStage.Mature, DoNothing },
+		{SweetpotatoStage.Harvested, DoNothing },
+	};
+	
 	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, Vector2, Vector2, bool, float, SweetpotatoState>> OnHoldFunctions = new()
 	{
 		{SweetpotatoStage.Unplowed, Plow },

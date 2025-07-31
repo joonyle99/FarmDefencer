@@ -112,7 +112,7 @@ public sealed class CropPotato : Crop
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
-			Water,
+			WaterForNeedOnce,
 			_currentState)
 
 			(transform.position, transform.position);

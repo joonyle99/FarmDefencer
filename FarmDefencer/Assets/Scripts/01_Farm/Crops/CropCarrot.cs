@@ -91,7 +91,7 @@ public sealed class CropCarrot : Crop
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
-			Water,
+			WaterForNeedOnce,
 			_currentState)
 
 			(transform.position, transform.position);

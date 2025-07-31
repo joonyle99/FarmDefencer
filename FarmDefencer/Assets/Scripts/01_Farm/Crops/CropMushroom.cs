@@ -172,7 +172,7 @@ public sealed class CropMushroom : Crop
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
-			Water,
+			OnWateringFunctions[GetCurrentStage(_currentState)],
 			_currentState)
 
 			(transform.position, transform.position);
@@ -509,6 +509,26 @@ public sealed class CropMushroom : Crop
 		{MushroomStage.Harvested, FillQuotaOneAndResetIfSucceeded },
 	};
 
+	private static readonly Dictionary<MushroomStage, Func<MushroomState, MushroomState>> OnWateringFunctions = new()
+	{
+		{MushroomStage.Unplowed, DoNothing },
+
+		{MushroomStage.Stage1_Dead, Water },
+		{MushroomStage.Stage1_BeforeWater, Water },
+		{MushroomStage.Stage1_Growing, DoNothing },
+
+		{MushroomStage.Stage2_BeforeWater, Water },
+		{MushroomStage.Stage2_Dead, Water },
+		{MushroomStage.Stage2_Growing, DoNothing },
+
+		{MushroomStage.Stage3_BeforeInoculation, DoNothing },
+		{MushroomStage.Stage3_AfterInoculation, DoNothing },
+
+		{MushroomStage.Mature, DoNothing },
+		{MushroomStage.Booming, DoNothing },
+		{MushroomStage.Harvested, DoNothing },
+	};
+	
 	private static readonly Dictionary<MushroomStage, Func<MushroomState, Vector2, Vector2, bool, float, MushroomState>> OnHoldFunctions = new()
 	{
 		{MushroomStage.Unplowed, Plow },

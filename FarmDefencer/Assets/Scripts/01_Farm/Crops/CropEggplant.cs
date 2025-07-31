@@ -108,18 +108,7 @@ public sealed class CropEggplant : Crop
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
-			(beforeState)
-			=>
-			{
-				var nextState = beforeState;
-				if (beforeState.Planted
-				&& !beforeState.Watered
-				&& (beforeState.GrowthSeconds < Stage1_GrowthSeconds || beforeState.TrelisPlaced))
-				{
-					nextState.Watered = true;
-				}
-				return nextState;
-			},
+			OnWateringFunctions[GetCurrentStage(_currentState)],
 			_currentState)
 
 			(transform.position, transform.position);
@@ -239,6 +228,26 @@ public sealed class CropEggplant : Crop
 		{EggplantStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
 	};
 
+	private static readonly Dictionary<EggplantStage, Func<EggplantState, EggplantState>> OnWateringFunctions = new()
+	{
+		{EggplantStage.Seed, DoNothing },
+
+		{EggplantStage.Stage1_Dead, Water },
+		{EggplantStage.Stage1_BeforeWater, Water },
+		{EggplantStage.Stage1_Growing, DoNothing },
+
+		{EggplantStage.Stage2_BeforeTrelis, DoNothing },
+		{EggplantStage.Stage2_BeforeWater, Water },
+		{EggplantStage.Stage2_Dead, Water },
+		{EggplantStage.Stage2_Growing, DoNothing },
+
+		{EggplantStage.Stage3_FullLeaves, DoNothing },
+		{EggplantStage.Stage3_HalfLeaves, DoNothing },
+
+		{EggplantStage.Mature, DoNothing },
+		{EggplantStage.Harvested, DoNothing },
+	};
+	
 	private static readonly Dictionary<EggplantStage, Func<EggplantState, RequiredCropAction>> GetRequiredCropActionFunctions = new()
 	{
 		{EggplantStage.Seed, _ => RequiredCropAction.SingleTap },

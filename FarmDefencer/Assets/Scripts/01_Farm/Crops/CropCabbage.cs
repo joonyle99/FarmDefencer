@@ -118,7 +118,7 @@ public sealed class CropCabbage : Crop
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
-			Water,
+			OnWateringFunctions[GetCurrentStage(_currentState)],
 			_currentState)
 
 			(transform.position, transform.position);
@@ -336,6 +336,21 @@ public sealed class CropCabbage : Crop
 		{CabbageStage.Stage1_BeforeWater, DoNothing_OnHold },
 		{CabbageStage.Stage1_Dead, DoNothing_OnHold },
 		{CabbageStage.Stage1_Growing, DoNothing_OnHold },
+	};
+	
+	private static readonly Dictionary<CabbageStage, Func<CabbageState, CabbageState>> OnWateringFunctions = new()
+	{
+		{CabbageStage.Seed, DoNothing },
+		{CabbageStage.Harvested, DoNothing },
+		{CabbageStage.Mature, DoNothing },
+
+		{CabbageStage.Stage2_BeforeWater, Water },
+		{CabbageStage.Stage2_Dead, Water },
+		{CabbageStage.Stage2_Growing, DoNothing },
+
+		{CabbageStage.Stage1_BeforeWater, Water },
+		{CabbageStage.Stage1_Dead, Water },
+		{CabbageStage.Stage1_Growing, DoNothing },
 	};
 
 	private static readonly Dictionary<CabbageStage, Func<CabbageState, RequiredCropAction>> GetRequiredCropActionFunctions = new()

@@ -134,15 +134,31 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 	/// <typeparam name="TState"></typeparam>
 	/// <param name="beforeState"></param>
 	/// <returns></returns>
-	protected static TState Water<TState>(TState beforeState) where TState : struct, ICommonCropState
+	protected static TState WaterForNeedOnce<TState>(TState beforeState) where TState : struct, ICommonCropState
 	{
 		var nextState = beforeState;
 		if (beforeState.Planted && !beforeState.Watered)
 		{
 			nextState.Watered = true;
+			nextState.WaterWaitingSeconds = 0.0f;
 		}
 		return nextState;
 	}
+	
+	/// <summary>
+	/// 다음 상태의 Watered를 true로 변경하는 메소드. 물을 줄 수 있는지 검증을 한 후에 호출해야 함.
+	/// </summary>
+	/// <typeparam name="TState"></typeparam>
+	/// <param name="beforeState"></param>
+	/// <returns></returns>
+	protected static TState Water<TState>(TState beforeState) where TState : struct, ICommonCropState
+	{
+		var nextState = beforeState;
+		nextState.Watered = true;
+		nextState.WaterWaitingSeconds = 0.0f;
+		return nextState;
+	}
+	
 	protected static TState Plant<TState>(TState beforeState) where TState : struct, ICommonCropState { beforeState.Planted = true; return beforeState; }
 	protected static TState WaitWater<TState>(TState beforeState, float deltaTime) where TState : struct, ICommonCropState { beforeState.WaterWaitingSeconds += deltaTime; return beforeState; }
 	protected static TState Grow<TState>(TState beforeState, float deltaTime) where TState : struct, ICommonCropState { beforeState.GrowthSeconds += deltaTime; return beforeState; }

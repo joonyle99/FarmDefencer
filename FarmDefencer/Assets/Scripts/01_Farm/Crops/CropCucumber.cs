@@ -105,18 +105,7 @@ public sealed class CropCucumber : Crop
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
-			(beforeState)
-			=>
-			{
-				var nextState = beforeState;
-				if (beforeState.Planted
-				&& !beforeState.Watered
-				&& (beforeState.GrowthSeconds < Stage1_GrowthSeconds || beforeState.ShortTrelisPlaced))
-				{
-					nextState.Watered = true;
-				}
-				return nextState;
-			},
+			OnWateringFunctions[GetCurrentStage(_currentState)],
 			_currentState)
 
 			(transform.position, transform.position);
@@ -230,6 +219,25 @@ public sealed class CropCucumber : Crop
 
 		{CucumberStage.Mature, Harvest },
 		{CucumberStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
+	};	
+	
+	private static readonly Dictionary<CucumberStage, Func<CucumberState, CucumberState>> OnWateringFunctions = new()
+	{
+		{CucumberStage.Seed, DoNothing },
+
+		{CucumberStage.Stage1_Dead, Water },
+		{CucumberStage.Stage1_BeforeWater, Water },
+		{CucumberStage.Stage1_Growing, DoNothing },
+
+		{CucumberStage.Stage2_BeforeShortTrelis, DoNothing },
+		{CucumberStage.Stage2_Dead, Water },
+		{CucumberStage.Stage2_BeforeWater, Water },
+		{CucumberStage.Stage2_Growing, DoNothing },
+
+		{CucumberStage.Stage3, DoNothing },
+
+		{CucumberStage.Mature, DoNothing },
+		{CucumberStage.Harvested, DoNothing },
 	};	
 	
 	private static readonly Dictionary<CucumberStage, Func<CucumberState, RequiredCropAction>> GetRequiredCropActionFunctions = new()

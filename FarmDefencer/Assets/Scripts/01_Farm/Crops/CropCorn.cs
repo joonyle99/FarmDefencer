@@ -107,7 +107,7 @@ public sealed class CropCorn : Crop
 			Effects,
 			GetQuota,
 			NotifyQuotaFilled,
-			Water,
+			OnWateringFunctions[GetCurrentStage(_currentState)],
 			_currentState)
 
 			(transform.position, transform.position);
@@ -194,6 +194,21 @@ public sealed class CropCorn : Crop
 
 		{CornStage.Stage1_Dead, DoNothing },
 		{CornStage.Stage1_BeforeWater, DoNothing },
+		{CornStage.Stage1_Growing, DoNothing },
+	};
+	
+	private static readonly Dictionary<CornStage, Func<CornState, CornState>> OnWateringFunctions = new()
+	{
+		{CornStage.Seed, DoNothing },
+		{CornStage.Mature, DoNothing },
+		{CornStage.Harvested, DoNothing },
+
+		{CornStage.Stage2_Dead, Water },
+		{CornStage.Stage2_BeforeWater, Water },
+		{CornStage.Stage2_Growing, DoNothing },
+
+		{CornStage.Stage1_Dead, Water },
+		{CornStage.Stage1_BeforeWater, Water },
 		{CornStage.Stage1_Growing, DoNothing },
 	};
 	
