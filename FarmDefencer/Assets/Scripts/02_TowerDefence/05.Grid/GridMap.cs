@@ -519,11 +519,6 @@ public class GridMap : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f); // delay for last point
 
-        if (isFirst)
-        {
-            yield return new WaitWhile(() => GameStateManager.Instance.CurrentState == GameState.Build);
-        }
-
         Destroy(_pathLineObject.gameObject);
         _pathLineObject = null;
     }
