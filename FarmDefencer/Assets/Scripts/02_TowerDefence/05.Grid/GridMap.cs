@@ -1,11 +1,12 @@
-using System;
-using UnityEngine;
-using JoonyleGameDevKit;
-using System.Collections;
-using UnityEngine.Tilemaps;
-using System.Collections.Generic;
-using Random = UnityEngine.Random;
 using DG.Tweening;
+using JoonyleGameDevKit;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// GridMap의 각 Cell은 이동할 수 있는 땅인지의 정보를 가지며,
@@ -67,11 +68,8 @@ public class GridMap : MonoBehaviour
     private Vector2Int[] _oppositePoints;
 
     [SerializeField] private LineRenderer _pathLineRenderer;
-
-    [Space]
-
     [SerializeField] private GridCell _gridCellPrefab;
-    [SerializeField] private List<GridCell> _originGridPath;
+    private List<GridCell> _originGridPath;
     public List<GridCell> OriginGridPath => _originGridPath;
 
     private GridCell[,] _myGridMap;
@@ -460,8 +458,8 @@ public class GridMap : MonoBehaviour
     }
     public IEnumerator DrawPathCo(List<GridCell> gridPath, bool isFirst, Color? endColor = null)
     {
-        var cellMoveTime = isFirst ? 0.1f : 0.1f;
-        var delayTime = isFirst ? 0f : 0f;
+        var cellMoveTime = isFirst ? 0.15f : 0.15f;
+        var delayTime = isFirst ? 0.1f : 0.1f;
 
         yield return new WaitForSeconds(delayTime);
 

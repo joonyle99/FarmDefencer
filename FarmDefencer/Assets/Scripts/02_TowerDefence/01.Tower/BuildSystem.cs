@@ -26,6 +26,10 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
 
     // progress bar
     [SerializeField] private ProgressBar _progressBar;
+
+    [Space]
+
+    // build duration
     [SerializeField] private float _buildDuration = 20f;
     private float _buildTimer = 0f;
 
