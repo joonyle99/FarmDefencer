@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -14,10 +15,12 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 {
     private Dictionary<string, AudioClip> _bgmDictionary;
     private Dictionary<string, List<AudioClip>> _sfxDictionary;
+    private Dictionary<string, AudioClip> _ambDictionary;
 
 	[SerializeField] private AudioSource _bgmAudioSource1;
     [SerializeField] private AudioSource _bgmAudioSource2;
     [SerializeField] private AudioSource _sfxAudioSource;
+    [SerializeField] private AudioSource _ambAudioSource;
 
     [VolumeControl][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float ambVolume = 0.5f;
     [VolumeControl][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float songVolume = 0.5f;
@@ -34,7 +37,8 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
     [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float potatoDustVolume = 0.5f;
     [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float SweetPotatoVinylVolume = 0.5f;
 
-    public string CurrentBgmName { get; private set; }
+    [CanBeNull] public string CurrentBgmName { get; private set; }
+    [CanBeNull] public string CurrentAmbName { get; private set; }
     
     /// <summary>
     /// 내부 캐시에서 Bgm을 불러와 재생하는 메소드.
@@ -67,13 +71,62 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
         _bgmAudioSource1.pitch = speed;
         CurrentBgmName = name;
     }
+    
     public void StopBgm()
     {
         if (_bgmAudioSource1.isPlaying)
         {
             _bgmAudioSource1.Stop();
+            CurrentBgmName = null;
         }
     }
+    
+    public void StopBgmIf(string bgmName)
+    {
+	    if (_bgmAudioSource1.isPlaying && CurrentBgmName is not null && CurrentBgmName.Equals(bgmName))
+	    {
+		    _bgmAudioSource1.Stop();
+		    CurrentBgmName = null;
+	    }
+    }
+    
+    public void PlayAmb(string ambName, float volume = 0.5f, float speed = 1.0f)
+    {
+	    if (!ambName.Equals(CurrentAmbName))
+	    {
+		    if (_ambDictionary.ContainsKey(ambName) == false)
+		    {
+			    var newAmb = Resources.Load<AudioClip>($"_Amb/{ambName}");
+
+			    if (newAmb is null)
+			    {
+				    Debug.LogError($"존재하지 않는 AMB: {ambName}");
+				    return;
+			    }
+			    _ambDictionary.Add(ambName, newAmb);
+		    }
+
+		    var amb = _ambDictionary[ambName];
+
+		    _ambAudioSource.Stop();
+		    _ambAudioSource.clip = amb;
+		    _ambAudioSource.Play();
+	    }
+	    
+	    _ambAudioSource.volume = volume;
+	    _ambAudioSource.pitch = speed;
+	    CurrentAmbName = ambName;
+    }
+    
+    public void StopAmbIf(string ambName)
+    {
+	    if (_ambAudioSource.isPlaying && CurrentAmbName is not null && CurrentAmbName.Equals(ambName))
+	    {
+		    _ambAudioSource.Stop();
+		    CurrentAmbName = null;
+	    }
+    }
+    
     public void PlayMapAmb()
     {
         var currentMap = MapManager.Instance.CurrentMap;
@@ -197,5 +250,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 
 		_sfxDictionary = new Dictionary<string, List<AudioClip>>();
         _bgmDictionary = new Dictionary<string, AudioClip>();
+        _ambDictionary = new Dictionary<string, AudioClip>();
     }
 }
