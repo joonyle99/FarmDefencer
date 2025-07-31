@@ -37,6 +37,8 @@ public sealed class FarmManager : MonoBehaviour
     [SerializeField] private WeatherGiver weatherGiver;
     [SerializeField] private TimerUI timerUI;
     [SerializeField] private FarmDebugUI farmDebugUI;
+    
+    private bool CanGoDefence => !weatherGiver.IsWeatherOnGoing && !pestGiver.IsWarningShowing && !harvestTutorialGiver.IsPlayingTutorial;
 
     private void Start()
     {
@@ -94,6 +96,11 @@ public sealed class FarmManager : MonoBehaviour
         harvestTutorialGiver.Init(farmUI.ToggleCropGuide, () => farmUI.IsCropGuideShowing);
         
         SoundManager.Instance.PlayBgm("BGM_T_main_origin", 0.25f, farmClock.CurrentDaytime > fastBgmStartTime ? fastBgmSpeedMultiplier : 1.0f);
+
+        if (!pestGiver.IsPestRunning)
+        {
+            SoundManager.Instance.PlayAmb("AMB_T_main");
+        }
     }
     
     private void InitializeDependencies()
@@ -131,7 +138,8 @@ public sealed class FarmManager : MonoBehaviour
                 SerializeToSaveFile();
                 SceneManager.LoadScene("Main Scene");
             },
-            (productEntry, duration, screenFrom, screenTo) => harvestAnimationPlayer.PlayScreenAnimation(productEntry, duration, screenFrom, screenTo, ()=>{}));
+            (productEntry, duration, screenFrom, screenTo) => harvestAnimationPlayer.PlayScreenAnimation(productEntry, duration, screenFrom, screenTo, ()=>{}),
+            () => CanGoDefence);
 
         wateringCan.Init(() => !farmClock.Paused, 
             
@@ -214,6 +222,11 @@ public sealed class FarmManager : MonoBehaviour
 
     private void OpenDefenceScene()
     {
+        if (!CanGoDefence)
+        {
+            return;
+        }
+        
         MapManager.Instance.CurrentMapIndex = MapManager.Instance.MaximumUnlockedMapIndex;
         MapManager.Instance.CurrentStageIndex = MapManager.Instance.MaximumUnlockedStageIndex;
 

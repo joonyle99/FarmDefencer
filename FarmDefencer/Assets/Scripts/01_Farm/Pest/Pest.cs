@@ -155,6 +155,7 @@ public sealed class Pest : MonoBehaviour
         _remainingClickCount -= 1;
         if (_remainingClickCount <= 0)
         {
+            SoundManager.Instance.PlaySfx("SFX_T_pest_catch");
             StartCoroutine(CoDie());
         }
     }

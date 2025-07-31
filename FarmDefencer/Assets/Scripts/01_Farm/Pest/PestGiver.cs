@@ -92,10 +92,19 @@ public sealed class PestGiver
 
     public void OnFarmUpdate(float deltaTime)
     {
+        if (IsPestRunning)
+        {
+            SoundManager.Instance.PlayAmb("AMB_T_pest_sirenamb");    
+        }
+        else
+        {
+            SoundManager.Instance.StopAmbIf("AMB_T_pest_sirenamb");
+        }
+        
         if (_isPestSpawnReserved && _getDaytime() >= _pestSpawnTime)
         {
             _isPestSpawnReserved = false;
-            
+            SoundManager.Instance.PlaySfx("SFX_T_pest_siren");
             _pestWarningUI.ShowWarning();
             var pestSpawnList = CreatePestSpawnRule(_isProductAvailable, pestSpawnRule);
             var availableProducts = GetAvailableTargetProducts(_isProductAvailable, _getProductEntry);
