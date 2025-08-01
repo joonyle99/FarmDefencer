@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using Sirenix.OdinInspector;
 using System;
 using Newtonsoft.Json;
+using UnityEngine.UI;
 
 public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer, IFarmSerializable
 {
@@ -32,6 +33,7 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer, IFarm
     private WateringCan _tutorialWateringCan;
     private TutorialHand _tutorialHand;
     private RectTransform _signRectTransform;
+    private Button _skipTutorialButton;
 
     private float _lastInputTime;
     private Action<ProductEntry> _showCropGuide;
@@ -179,6 +181,9 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer, IFarm
 
         _signRectTransform = transform.Find("SignCanvas/Sign").GetComponent<RectTransform>();
         _signRectTransform.gameObject.SetActive(false);
+        
+        _skipTutorialButton = transform.Find("DebugCanvas/SkipTutorialButton").GetComponent<Button>();
+        _skipTutorialButton.onClick.AddListener(OnSkipTutorialButtonClicked);
     }
     
     private void Update()
@@ -289,5 +294,13 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer, IFarm
         var harvestTutorial = instantiated.AddComponent<HarvestTutorialField>();
 
         return harvestTutorial;
+    }
+
+    private void OnSkipTutorialButtonClicked()
+    {
+        if (_currentTutorialField is not null)
+        {
+            _currentTutorialField.Done = true;
+        }
     }
 }

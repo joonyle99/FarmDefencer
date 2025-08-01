@@ -12,7 +12,7 @@ public sealed class HarvestTutorialField : MonoBehaviour
 
     public ProductEntry ProductEntry => _field.ProductEntry;
 
-    public bool Done { get; private set; }
+    public bool Done { get; set; }
 
     public Field Field => _field;
     private Field _field;
