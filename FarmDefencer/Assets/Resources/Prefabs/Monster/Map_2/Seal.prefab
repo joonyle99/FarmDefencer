@@ -183,8 +183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f64264dfc9b1f49ab5fda2efdc8920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextMeshPro1: {fileID: 0}
-  TextMeshPro2: {fileID: 0}
 --- !u!58 &3216986904248962249
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -219,8 +217,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.13832927, y: 2.7105715}
-  m_Radius: 1.6
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
 --- !u!50 &1543992766888672360
 Rigidbody2D:
   serializedVersion: 5
@@ -273,7 +271,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a18c4236f6596f46afedecd77bac26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 0.7
   _arrivalThreshold: 0.05
   eTime: 0
   distance: 0
@@ -293,13 +290,13 @@ MonoBehaviour:
   _maxHp: 300
   _targetPoint: {fileID: 3677401387006666995}
   _originFactory: {fileID: 0}
-  _monsterName: seal
   _monsterData: {fileID: 11400000, guid: 313537187f556e844aba64dea2ee0423, type: 2}
   _headPoint: {fileID: 770041322740542243}
   IdleAnimationName: idle
   WalkAnimationName: walk
   WalkDamagedAnimationName: walk_damaged
   DissappearAnimationName: disappear
+  deadVolume: 0.5
 --- !u!210 &1519744171091044436
 SortingGroup:
   m_ObjectHideFlags: 0

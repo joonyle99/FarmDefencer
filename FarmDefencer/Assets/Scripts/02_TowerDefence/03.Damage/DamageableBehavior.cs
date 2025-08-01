@@ -86,6 +86,9 @@ public abstract class DamageableBehavior : MonoBehaviour
     protected GridMovement gridMovement;
     public GridMovement GridMovement => gridMovement;
 
+    private CircleCollider2D _damagableCollider;
+    public CircleCollider2D DamagableColiider => _damagableCollider;
+
     //protected Dictionary<Status, Coroutine> activeEffects = new();
     protected Coroutine tickDamageCo;
 
@@ -104,6 +107,7 @@ public abstract class DamageableBehavior : MonoBehaviour
 
         spineController = GetComponentInChildren<SpineController>();
         gridMovement = GetComponent<GridMovement>();
+        _damagableCollider = GetComponent<CircleCollider2D>();
 
         startHp = MaxHp;
     }

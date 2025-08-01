@@ -152,8 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f64264dfc9b1f49ab5fda2efdc8920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextMeshPro1: {fileID: 0}
-  TextMeshPro2: {fileID: 0}
 --- !u!58 &3216986904248962249
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -188,8 +186,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.13832927, y: 2.7105715}
-  m_Radius: 1.6
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
 --- !u!50 &1543992766888672360
 Rigidbody2D:
   serializedVersion: 5
@@ -242,7 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a18c4236f6596f46afedecd77bac26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 1
   _arrivalThreshold: 0.05
   eTime: 0
   distance: 0
@@ -262,13 +259,13 @@ MonoBehaviour:
   _maxHp: 185
   _targetPoint: {fileID: 6219046591756985945}
   _originFactory: {fileID: 0}
-  _monsterName: capybara
   _monsterData: {fileID: 11400000, guid: ddf6d432ae3ea314b9ade90852750543, type: 2}
   _headPoint: {fileID: 9077063170434922975}
   IdleAnimationName: idle
   WalkAnimationName: walk
   WalkDamagedAnimationName: walk_damaged
   DissappearAnimationName: disappear
+  deadVolume: 0.5
 --- !u!210 &1519744171091044436
 SortingGroup:
   m_ObjectHideFlags: 0

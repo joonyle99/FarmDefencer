@@ -14,6 +14,5 @@ public sealed class DefenceSceneOpenContext : MonoBehaviour
         
         MapManager.Instance.InvokeOnMapChanged();
         GameStateManager.Instance.ChangeState(GameState.Build);
-        Destroy(gameObject);
     }
 }

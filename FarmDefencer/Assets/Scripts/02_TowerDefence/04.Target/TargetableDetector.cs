@@ -14,37 +14,20 @@ public class TargetableDetector : MonoBehaviour
     [SerializeField] private int _widthRange;
     [SerializeField] private int _heightRange;
 
-    private List<TargetableBehavior> _currentTargets = new(BUCKET_CAPACITY);
-
     private const int BUCKET_CAPACITY = 100;
-
-    // private TargetableBehavior _currentTarget;
+    private List<TargetableBehavior> _currentTargets = new(BUCKET_CAPACITY);
 
     public event Action<TargetableBehavior> OnEnterTarget;
     public event Action<TargetableBehavior> OnExitTarget;
     // public event Action<TargetableBehavior> OnAccquireTarget;       // when you get current target
 
+    private Tower _tower;
     private HashSet<GridCell> _paintedCells = new();
 
-    public TargetableBehavior GetFrontTarget()
+    private void Awake()
     {
-        if (_currentTargets.Count == 0)
-        {
-            return null;
-        }
-
-        return _currentTargets[0];
+        _tower = GetComponentInParent<Tower>();
     }
-    public TargetableBehavior GetBackTarget()
-    {
-        if (_currentTargets.Count == 0)
-        {
-            return null;
-        }
-
-        return _currentTargets[_currentTargets.Count - 1];
-    }
-
     private void Update()
     {
         DetectTargets();
@@ -81,8 +64,14 @@ public class TargetableDetector : MonoBehaviour
     //
     private void DetectTargets()
     {
+        var thisCell = _tower.OccupyingGridCell;
+        if (thisCell == null)
+        {
+            return;
+        }
+
         // get origin cell
-        var thisCellPos = DefenceContext.Current.GridMap.WorldToCell(transform.position);
+        var thisCellPos = thisCell.cellPosition;
 
         // new targets
         // 중복 타겟 방지를 위해 HashSet을 사용한다.
@@ -93,8 +82,9 @@ public class TargetableDetector : MonoBehaviour
         {
             for (int heightOffset = -_heightRange; heightOffset <= _heightRange; heightOffset++)
             {
-                var offset = new Vector3Int(widthOffset, heightOffset, 0);
-                if (offset == Vector3Int.zero)
+                var offset = new Vector2Int(widthOffset, heightOffset);
+
+                if (offset == Vector2Int.zero)
                 {
                     // 현재 위치는 탐지 범위에 포함되지 않는다.
                     continue;
@@ -103,6 +93,7 @@ public class TargetableDetector : MonoBehaviour
                 var targetCellPos = thisCellPos + offset;
 
                 var targetCell = DefenceContext.Current.GridMap.GetCell(targetCellPos.x, targetCellPos.y);
+                //if (targetCell == null || targetCell.IsEmptyUsableCell == false)
                 if (targetCell == null)
                 {
                     // 유효하지 않는 셀이라면 탐지 범위에 포함되지 않는다. (e.g 맵 밖)
@@ -112,6 +103,8 @@ public class TargetableDetector : MonoBehaviour
                 // overlap circle
                 var radius = DefenceContext.Current.GridMap.UnitCellSize / 2f;
                 var targetColliders = Physics2D.OverlapCircleAll(targetCell.worldPosition, radius, _targetLayerMask);
+
+                JoonyleGameDevKit.Painter.DebugDrawPlus(targetCell.worldPosition, Color.red, radius, 0.1f);
 
                 // detected targets
                 foreach (var targetCollider in targetColliders)
@@ -260,6 +253,25 @@ public class TargetableDetector : MonoBehaviour
         //         // JoonyleGameDevKit.Painter.DebugDrawPlus(targetCell.transform.position, Color.red, DefenceContext.Current.GridMap.UnitCellSize / 2f, 5f);
         //     }
         // }
+    }
+
+    public TargetableBehavior GetFrontTarget()
+    {
+        if (_currentTargets.Count == 0)
+        {
+            return null;
+        }
+
+        return _currentTargets[0];
+    }
+    public TargetableBehavior GetBackTarget()
+    {
+        if (_currentTargets.Count == 0)
+        {
+            return null;
+        }
+
+        return _currentTargets[_currentTargets.Count - 1];
     }
 }
 
