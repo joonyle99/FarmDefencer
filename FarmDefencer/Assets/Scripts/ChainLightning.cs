@@ -73,7 +73,7 @@ public class ChainLightning : MonoBehaviour
             // 라인 렌더러에 타겟 추가
             _appliedTargets.Add(target);
             _lineRenderer.positionCount += 1;
-            _lineRenderer.SetPosition(_appliedTargets.Count, target.transform.position);
+            _lineRenderer.SetPosition(_appliedTargets.Count, target.TargetPoint.position);
 
             // 다음 전이까지 0.1초 대기
             yield return new WaitForSeconds(0.1f);
