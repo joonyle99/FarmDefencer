@@ -38,6 +38,7 @@ public class UpgradeUI : MonoBehaviour
     [Space]
 
     [Header("ETC")]
+    [SerializeField] private Button _upgradeButton;
     [SerializeField] private Sprite _normalUpgradeSprite;
     [SerializeField] private Sprite _maxUpgradeSprite;
 
@@ -179,7 +180,10 @@ public class UpgradeUI : MonoBehaviour
         var upgradeImage = _upgradeUI.GetComponent<Image>();
         upgradeImage.sprite = isMaxLevel ? _maxUpgradeSprite : _normalUpgradeSprite;
 
-        // 3. Upgrade Image의 자식들 활성화/비활성화
+        // 3. 버튼 클릭 비활성화
+        _upgradeButton.interactable = isMaxLevel ? false : true;
+
+        // 4. Upgrade Image의 자식들 활성화/비활성화
         void SetChildrenActive(Transform parent, bool isActive)
         {
             foreach (Transform child in parent)
