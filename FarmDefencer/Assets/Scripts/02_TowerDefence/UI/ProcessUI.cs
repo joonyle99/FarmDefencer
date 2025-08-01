@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ProcessUI : MonoBehaviour
@@ -124,14 +125,19 @@ public class ProcessUI : MonoBehaviour
         _playX1Button.gameObject.SetActive(GameStateManager.Instance.IsPlayX2);
         _playX2Button.gameObject.SetActive(!GameStateManager.Instance.IsPlayX2);
     }
+
     public void Setting()
     {
-        var isBuildState = GameStateManager.Instance.IsBuildState;
-        var isWaveState = GameStateManager.Instance.IsWaveState;
+        //var isBuildState = GameStateManager.Instance.IsBuildState;
+        //var isWaveState = GameStateManager.Instance.IsWaveState;
 
-        if (isBuildState == false || isWaveState == false)
-        {
-            return;
-        }
+        //if (isBuildState == false || isWaveState == false)
+        //{
+        //    return;
+        //}
+
+        // 중단하시겠습까?
+
+        SceneManager.LoadScene("Main Scene");
     }
 }
