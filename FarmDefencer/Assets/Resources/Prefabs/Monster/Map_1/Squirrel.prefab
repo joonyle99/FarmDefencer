@@ -296,7 +296,7 @@ MonoBehaviour:
   WalkAnimationName: walk
   WalkDamagedAnimationName: walk_damaged
   DissappearAnimationName: disappear
-  deadVolume: 0.5
+  deadVolume: 0.3
 --- !u!210 &1519744171091044436
 SortingGroup:
   m_ObjectHideFlags: 0

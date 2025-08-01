@@ -909,8 +909,8 @@ MonoBehaviour:
   _bgmAudioSource2: {fileID: 1390226041370120174}
   _sfxAudioSource: {fileID: 846582086370651982}
   _ambAudioSource: {fileID: 8771982848698843837}
-  ambVolume: 1
-  songVolume: 0.1
+  ambVolume: 0.8
+  songVolume: 0.08
   coinVolume: 0.5
   waterVolume: 0.8
   plantVolume: 0.8
@@ -920,6 +920,10 @@ MonoBehaviour:
   mushroomShotVolume: 0.5
   potatoDustVolume: 0.8
   SweetPotatoVinylVolume: 0.5
+  pestSirenVolume: 0.5
+  pestCatchVolume: 0.5
+  orderResetVolume: 0.3
+  eatCropsVolume: 0.5
 --- !u!81 &8396262421793352476
 AudioListener:
   m_ObjectHideFlags: 0
