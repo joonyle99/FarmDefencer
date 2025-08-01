@@ -111,12 +111,12 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     private void HandleBuildState()
     {
         OnBuildState?.Invoke();
-        SoundManager.Instance.PlayMapAmb();
+        SoundManager.Instance.PlayDefenceMapAmb();
     }
     private void HandleWaveState()
     {
         OnWaveState?.Invoke();
-        SoundManager.Instance.PlayMapSong();
+        SoundManager.Instance.PlayDefenceMapSong();
     }
     private void HandleWaveAfterState()
     {

@@ -1,7 +1,8 @@
+using Newtonsoft.Json.Linq;
+using Sirenix.OdinInspector;
+using Spine.Unity;
 using System;
 using System.Collections;
-using Newtonsoft.Json.Linq;
-using Spine.Unity;
 using UnityEngine;
 
 [Serializable]
@@ -155,7 +156,7 @@ public sealed class Pest : MonoBehaviour
         _remainingClickCount -= 1;
         if (_remainingClickCount <= 0)
         {
-            SoundManager.Instance.PlaySfx("SFX_T_pest_catch");
+            SoundManager.Instance.PlaySfx("SFX_T_pest_catch", SoundManager.Instance.pestCatchVolume);
             StartCoroutine(CoDie());
         }
     }

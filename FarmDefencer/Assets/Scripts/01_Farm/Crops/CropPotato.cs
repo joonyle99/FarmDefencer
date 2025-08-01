@@ -238,7 +238,7 @@ public sealed class CropPotato : Crop
 	{
 		EffectPlayer.SceneGlobalInstance.StopVfx();
 		SoundManager.Instance.StopSfx();
-		SoundManager.Instance.PlaySfx("SFX_T_harvest");
+		SoundManager.Instance.PlaySfx("SFX_T_harvest", SoundManager.Instance.harvestVolume);
 	};
 
 	[Pure]

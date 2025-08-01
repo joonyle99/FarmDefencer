@@ -1,9 +1,9 @@
-using UnityEngine;
-using System.Collections.Generic;
-using System;
-using System.Collections;
-using System.Linq;
 using Newtonsoft.Json.Linq;
+using Sirenix.OdinInspector;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public sealed class PestGiver 
@@ -94,7 +94,7 @@ public sealed class PestGiver
     {
         if (IsPestRunning)
         {
-            SoundManager.Instance.PlayAmb("AMB_T_pest_sirenamb");    
+            SoundManager.Instance.PlayAmb("AMB_T_pest_sirenamb", SoundManager.Instance.ambVolume);    
         }
         else
         {
@@ -104,7 +104,7 @@ public sealed class PestGiver
         if (_isPestSpawnReserved && _getDaytime() >= _pestSpawnTime)
         {
             _isPestSpawnReserved = false;
-            SoundManager.Instance.PlaySfx("SFX_T_pest_siren");
+            SoundManager.Instance.PlaySfx("SFX_T_pest_siren", SoundManager.Instance.pestSirenVolume);
             _pestWarningUI.ShowWarning();
             var pestSpawnList = CreatePestSpawnRule(_isProductAvailable, pestSpawnRule);
             var availableProducts = GetAvailableTargetProducts(_isProductAvailable, _getProductEntry);

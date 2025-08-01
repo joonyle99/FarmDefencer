@@ -137,7 +137,7 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmS
 
         if (spawnedSomething)
         {
-            SoundManager.Instance.PlaySfx("SFX_T_eat_crops");
+            SoundManager.Instance.PlaySfx("SFX_T_eat_crops", SoundManager.Instance.eatCropsVolume);
         }
     }
 

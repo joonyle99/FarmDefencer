@@ -36,6 +36,10 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
     [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float mushroomShotVolume = 0.5f;
     [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float potatoDustVolume = 0.5f;
     [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float SweetPotatoVinylVolume = 0.5f;
+    [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float pestSirenVolume = 0.5f;
+    [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float pestCatchVolume = 0.5f;
+    [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float orderResetVolume = 0.5f;
+    [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float eatCropsVolume = 0.5f;
 
     [CanBeNull] public string CurrentBgmName { get; private set; }
     [CanBeNull] public string CurrentAmbName { get; private set; }
@@ -127,13 +131,13 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 	    }
     }
     
-    public void PlayMapAmb()
+    public void PlayDefenceMapAmb()
     {
         var currentMap = MapManager.Instance.CurrentMap;
         var mapAmbName = $"BGM_D_{currentMap.MapCode}_amb";
         PlayBgm(mapAmbName, ambVolume);
     }
-    public void PlayMapSong()
+    public void PlayDefenceMapSong()
     {
         var currentMap = MapManager.Instance.CurrentMap;
         var mapSongName = $"BGM_D_{currentMap.MapCode}_song";
