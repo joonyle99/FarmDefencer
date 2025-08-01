@@ -16,6 +16,10 @@ public class ProcessUI : MonoBehaviour
     [SerializeField] private Button _playX1Button;
     [SerializeField] private Button _playX2Button;
 
+    [Space]
+
+    [SerializeField] private Button _settingButton;
+
     private bool _isPaused = false;
     private bool _isPlayX2 = false;
 
@@ -33,31 +37,36 @@ public class ProcessUI : MonoBehaviour
 
         _fightButton.gameObject.SetActive(true);
 
-        _resumeButton.gameObject.SetActive(false);
         _pauseButton.gameObject.SetActive(false);
+        _resumeButton.gameObject.SetActive(false);
 
         _playX1Button.gameObject.SetActive(false);
         _playX2Button.gameObject.SetActive(true);
+
+        _settingButton.gameObject.SetActive(true);
     }
 
     public void RefreshButton()
     {
-        var isBuildState = GameStateManager.Instance.CurrentState is GameState.Build;
-        var isWaveState = GameStateManager.Instance.CurrentState is GameState.Wave || GameStateManager.Instance.CurrentState is GameState.WaveAfter;
+        var isBuildState = GameStateManager.Instance.IsBuildState;
+        var isWaveState = GameStateManager.Instance.IsWaveState;
 
-        // TODO: 임시 코드.. 이벤트 리스너 등록 타이밍을 조절해야 한다
-        if (_fightButton == null || _pauseButton == null || _resumeButton == null || _playX1Button == null || _playX2Button == null)
+        if (_fightButton == null ||
+            _pauseButton == null ||
+            _resumeButton == null ||
+            _playX1Button == null ||
+            _playX2Button == null)
         {
             return;
         }
 
-        _fightButton.gameObject.SetActive(isBuildState);
+        _fightButton?.gameObject.SetActive(isBuildState);
 
-        _resumeButton.gameObject.SetActive(isWaveState && _isPaused);
-        _pauseButton.gameObject.SetActive(isWaveState && !_isPaused);
+        _resumeButton?.gameObject.SetActive(isWaveState && _isPaused);
+        _pauseButton?.gameObject.SetActive(isWaveState && !_isPaused);
 
-        _playX1Button.gameObject.SetActive(_isPlayX2);
-        _playX2Button.gameObject.SetActive(!_isPlayX2);
+        _playX1Button?.gameObject.SetActive(_isPlayX2);
+        _playX2Button?.gameObject.SetActive(!_isPlayX2);
     }
 
     public void Fight()
@@ -84,10 +93,12 @@ public class ProcessUI : MonoBehaviour
             // pause 시점의 timeScale을 저장
             _savedTimeScale = Time.timeScale;
             Time.timeScale = 0f;
+            SoundManager.Instance.PauseAll();
         }
         else
         {
             Time.timeScale = _savedTimeScale;
+            SoundManager.Instance.ResumeAll();
         }
 
         _resumeButton.gameObject.SetActive(_isPaused);
@@ -96,6 +107,11 @@ public class ProcessUI : MonoBehaviour
     public void TogglePlaySpeed()
     {
         if (GameStateManager.Instance.IsWaveState == false)
+        {
+            return;
+        }
+
+        if (_isPaused)
         {
             return;
         }
@@ -115,5 +131,15 @@ public class ProcessUI : MonoBehaviour
 
         _playX1Button.gameObject.SetActive(_isPlayX2);
         _playX2Button.gameObject.SetActive(!_isPlayX2);
+    }
+    public void Setting()
+    {
+        var isBuildState = GameStateManager.Instance.IsBuildState;
+        var isWaveState = GameStateManager.Instance.IsWaveState;
+
+        if (isBuildState == false || isWaveState == false)
+        {
+            return;
+        }
     }
 }

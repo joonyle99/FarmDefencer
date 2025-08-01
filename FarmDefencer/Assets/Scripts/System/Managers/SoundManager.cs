@@ -18,9 +18,11 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
     private Dictionary<string, AudioClip> _ambDictionary;
 
 	[SerializeField] private AudioSource _bgmAudioSource1;
-    [SerializeField] private AudioSource _bgmAudioSource2;
-    [SerializeField] private AudioSource _sfxAudioSource;
+    //[SerializeField] private AudioSource _bgmAudioSource2;
     [SerializeField] private AudioSource _ambAudioSource;
+    [SerializeField] private AudioSource _sfxAudioSource;
+
+    [Space]
 
     [VolumeControl][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float ambVolume = 0.5f;
     [VolumeControl][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float songVolume = 0.5f;
@@ -75,7 +77,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
         _bgmAudioSource1.pitch = speed;
         CurrentBgmName = name;
     }
-    
     public void StopBgm()
     {
         if (_bgmAudioSource1.isPlaying)
@@ -84,7 +85,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
             CurrentBgmName = null;
         }
     }
-    
     public void StopBgmIf(string bgmName)
     {
 	    if (_bgmAudioSource1.isPlaying && CurrentBgmName is not null && CurrentBgmName.Equals(bgmName))
@@ -93,7 +93,7 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 		    CurrentBgmName = null;
 	    }
     }
-    
+
     public void PlayAmb(string ambName, float volume = 0.5f, float speed = 1.0f)
     {
 	    if (!ambName.Equals(CurrentAmbName))
@@ -121,7 +121,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 	    _ambAudioSource.pitch = speed;
 	    CurrentAmbName = ambName;
     }
-    
     public void StopAmbIf(string ambName)
     {
 	    if (_ambAudioSource.isPlaying && CurrentAmbName is not null && CurrentAmbName.Equals(ambName))
@@ -131,6 +130,7 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 	    }
     }
     
+    // TODO: 수정 예정
     public void PlayDefenceMapAmb()
     {
         var currentMap = MapManager.Instance.CurrentMap;
@@ -246,6 +246,19 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
             log += "=====================\n";
         }
         Debug.Log(log);
+    }
+
+    public void PauseAll()
+    {
+        _bgmAudioSource1.Pause();
+        _sfxAudioSource.Pause();
+        _ambAudioSource.Pause();
+    }
+    public void ResumeAll()
+    {
+        _bgmAudioSource1.UnPause();
+        _sfxAudioSource.UnPause();
+        _ambAudioSource.UnPause();
     }
 
 	protected override void Awake()
