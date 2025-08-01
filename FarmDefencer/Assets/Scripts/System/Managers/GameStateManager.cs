@@ -52,6 +52,10 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
 
     public event Action OnChangeState;
 
+    public bool IsPause { get; private set; } = false;
+    public bool IsPlayX2 { get; private set; } = false;
+    private float _savedTimeScale = 1f;
+
     private void Start()
     {
         ChangeState(GameState.Normal);
@@ -135,5 +139,46 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     private void HandleLeavingDefenceSceneState()
     {
         OnLeavingDefenceSceneState?.Invoke();
+    }
+
+    public void TogglePause()
+    {
+        // TODO: Pause를 하지 못하는 상황 체크
+
+        IsPause = !IsPause;
+
+        if (IsPause)
+        {
+            // pause 시점의 timeScale을 저장
+            _savedTimeScale = Time.timeScale;
+            Time.timeScale = 0f;
+            SoundManager.Instance.PauseAll();
+        }
+        else
+        {
+            Time.timeScale = _savedTimeScale;
+            SoundManager.Instance.ResumeAll();
+        }
+    }
+
+    public void TogglePlaySpeed()
+    {
+        if (IsPause)
+        {
+            return;
+        }
+
+        IsPlayX2 = !IsPlayX2;
+
+        if (IsPlayX2)
+        {
+            Time.timeScale = 2f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+
+        _savedTimeScale = Time.timeScale;
     }
 }

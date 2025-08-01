@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,10 +21,9 @@ public class ProcessUI : MonoBehaviour
 
     [SerializeField] private Button _settingButton;
 
-    private bool _isPaused = false;
-    private bool _isPlayX2 = false;
+    [Space]
 
-    private float _savedTimeScale = 1f;
+    [SerializeField] private TextMeshProUGUI _stageText;
 
     private void Awake()
     {
@@ -32,9 +32,6 @@ public class ProcessUI : MonoBehaviour
     }
     private void Start()
     {
-        _isPaused = false;
-        _isPlayX2 = false;
-
         _fightButton.gameObject.SetActive(true);
 
         _pauseButton.gameObject.SetActive(false);
@@ -44,6 +41,8 @@ public class ProcessUI : MonoBehaviour
         _playX2Button.gameObject.SetActive(true);
 
         _settingButton.gameObject.SetActive(true);
+
+        _stageText.text = $"{MapManager.Instance.CurrentMapIndex}-{MapManager.Instance.CurrentStageIndex}";
     }
 
     public void RefreshButton()
@@ -60,13 +59,13 @@ public class ProcessUI : MonoBehaviour
             return;
         }
 
-        _fightButton?.gameObject.SetActive(isBuildState);
+        _fightButton.gameObject.SetActive(isBuildState);
 
-        _resumeButton?.gameObject.SetActive(isWaveState && _isPaused);
-        _pauseButton?.gameObject.SetActive(isWaveState && !_isPaused);
+        _resumeButton.gameObject.SetActive(isWaveState && GameStateManager.Instance.IsPause);
+        _pauseButton.gameObject.SetActive(isWaveState && !GameStateManager.Instance.IsPause);
 
-        _playX1Button?.gameObject.SetActive(_isPlayX2);
-        _playX2Button?.gameObject.SetActive(!_isPlayX2);
+        _playX1Button.gameObject.SetActive(GameStateManager.Instance.IsPlayX2);
+        _playX2Button.gameObject.SetActive(!GameStateManager.Instance.IsPlayX2);
     }
 
     public void Fight()
@@ -86,23 +85,10 @@ public class ProcessUI : MonoBehaviour
             return;
         }
 
-        _isPaused = !_isPaused;
+        GameStateManager.Instance.TogglePause();
 
-        if (_isPaused)
-        {
-            // pause 시점의 timeScale을 저장
-            _savedTimeScale = Time.timeScale;
-            Time.timeScale = 0f;
-            SoundManager.Instance.PauseAll();
-        }
-        else
-        {
-            Time.timeScale = _savedTimeScale;
-            SoundManager.Instance.ResumeAll();
-        }
-
-        _resumeButton.gameObject.SetActive(_isPaused);
-        _pauseButton.gameObject.SetActive(!_isPaused);
+        _resumeButton.gameObject.SetActive(GameStateManager.Instance.IsPause);
+        _pauseButton.gameObject.SetActive(!GameStateManager.Instance.IsPause);
     }
     public void TogglePlaySpeed()
     {
@@ -111,26 +97,10 @@ public class ProcessUI : MonoBehaviour
             return;
         }
 
-        if (_isPaused)
-        {
-            return;
-        }
+        GameStateManager.Instance.TogglePlaySpeed();
 
-        _isPlayX2 = !_isPlayX2;
-
-        if (_isPlayX2)
-        {
-            Time.timeScale = 2f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
-
-        _savedTimeScale = Time.timeScale;
-
-        _playX1Button.gameObject.SetActive(_isPlayX2);
-        _playX2Button.gameObject.SetActive(!_isPlayX2);
+        _playX1Button.gameObject.SetActive(GameStateManager.Instance.IsPlayX2);
+        _playX2Button.gameObject.SetActive(!GameStateManager.Instance.IsPlayX2);
     }
     public void Setting()
     {
