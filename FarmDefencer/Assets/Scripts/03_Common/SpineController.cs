@@ -10,11 +10,13 @@ public class ColorEffect
     public Color color = Color.white;
     public float duration = 0f;
     public float eTime = 0f;
+    public bool isContinuous = false;
 
-    public ColorEffect(Color color, float duration)
+    public ColorEffect(Color color, float duration, bool isContinuous = false)
     {
         this.color = color;
         this.duration = duration;
+        this.isContinuous = isContinuous;
     }
 }
 
@@ -98,6 +100,12 @@ public class SpineController : MonoBehaviour
         {
             var colorEffect = _colorEffectList[index];
 
+            // 시간 업데이트를 하지 않는 경우 (e.g 타워 4의 레이저)
+            if (colorEffect.isContinuous)
+            {
+                continue;
+            }
+
             colorEffect.eTime += Time.deltaTime;
             if (colorEffect.eTime >= colorEffect.duration)
             {
@@ -157,6 +165,10 @@ public class SpineController : MonoBehaviour
     public void AddColorEffect(ColorEffect colorEffect)
     {
         _colorEffectList.Add(colorEffect);
+    }
+    public void RemoveColorEffect(ColorEffect colorEffect)
+    {
+        _colorEffectList.Remove(colorEffect);
     }
 
     public void InitShootingBone()

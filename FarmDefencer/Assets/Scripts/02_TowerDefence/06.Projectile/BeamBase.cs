@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class BeamBase : MonoBehaviour
@@ -14,8 +15,8 @@ public abstract class BeamBase : MonoBehaviour
     protected float slowRate;
     protected float slowDuration;
 
-    protected TargetableBehavior currentTarget;
-    protected Tower currentTower;
+    protected Tower caster;
+    protected TargetableBehavior target;
 
     protected bool isTriggered = false;
 
@@ -33,29 +34,29 @@ public abstract class BeamBase : MonoBehaviour
         // TODO: A to B 선 그리기 (쭈욱 뻗어나가는 연출이 있으면 좋을 것 같다)
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, currentTarget.transform.position);
+        lineRenderer.SetPosition(1, target.TargetPoint.position);
     }
     private void Update()
     {
         if (isTriggered)
         {
             // 타겟이 없으면 파괴
-            if (currentTarget == null || currentTarget.gameObject.activeSelf == false)
+            if (target == null || target.gameObject.activeSelf == false)
             {
-                Destroy(gameObject);
+                OnDestroyFunc();
                 return;
             }
 
             if (elapsedTime > stayDuration)
             {
-                Destroy(gameObject);
+                OnDestroyFunc();
                 return;
             }
 
             // 공격 범위를 벗어날 경우 공격 중지
-            if (currentTower.Detector.IsIncludeTarget(currentTarget) == false)
+            if (caster.Detector.IsIncludeTarget(target) == false)
             {
-                Destroy(gameObject);
+                OnDestroyFunc();
                 return;
             }
 
@@ -68,7 +69,7 @@ public abstract class BeamBase : MonoBehaviour
             }
 
             lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.SetPosition(1, currentTarget.TargetPoint.position);
+            lineRenderer.SetPosition(1, target.TargetPoint.position);
 
             elapsedTime += Time.deltaTime;
             elapsedInterval += Time.deltaTime;
@@ -86,7 +87,7 @@ public abstract class BeamBase : MonoBehaviour
     }
     public void SetTarget(TargetableBehavior target)
     {
-        currentTarget = target;
+        this.target = target;
     }
 
     public void SetStayDuration(float duration)
@@ -99,7 +100,7 @@ public abstract class BeamBase : MonoBehaviour
     }
     public void SetTower(Tower tower)
     {
-        currentTower = tower;
+        caster = tower;
     }
 
     public int GetDamage()
@@ -108,7 +109,7 @@ public abstract class BeamBase : MonoBehaviour
     }
     public TargetableBehavior GetTarget()
     {
-        return currentTarget;
+        return target;
     }
 
     protected abstract void DealDamage();
@@ -117,5 +118,15 @@ public abstract class BeamBase : MonoBehaviour
     public void Trigger()
     {
         isTriggered = true;
+    }
+
+    private void OnDestroyFunc()
+    {
+        Destroy(gameObject);
+        OnEndFunc();
+    }
+    protected virtual void OnEndFunc()
+    {
+
     }
 }
