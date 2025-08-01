@@ -49,10 +49,12 @@ public sealed class SaveManager : JoonyleGameDevKit.Singleton<SaveManager>
     {
         if (LoadedSave["FarmClock"] is JObject jsonFarmClock)
         {
-            return jsonFarmClock["CurrentDaytime"]?.Value<float>() ?? 0.0f;
+            var lengthOfDaytime = jsonFarmClock["LengthOfDaytime"]?.Value<float>() ?? 300.0f;
+            var currentDaytime = jsonFarmClock["CurrentDaytime"]?.Value<float>() ?? 0.0f;
+            return lengthOfDaytime - currentDaytime;
         }
 
-        return 0.0f;
+        return 300.0f;
     }
     
     /// <summary>
