@@ -68,7 +68,11 @@ public class EndingUI : MonoBehaviour, IVolumeControl
 
     private void ShowEnding(EndingType endingType)
     {
-        SoundManager.Instance.PlaySfx($"SFX_D_stage_{ConvertToEndingText(endingType)}", endingVolume);
+        SoundManager.Instance.PlaySfx($"SFX_D_stage_{ConvertToEndingText(endingType)}", endingVolume, 1.0f, () =>
+        {
+            // on complete
+            GameStateManager.Instance.ChangeState(GameState.LeavingDefenceScene);
+        });
 
         // fade
         _fadeImage.gameObject.SetActive(true);
@@ -98,9 +102,6 @@ public class EndingUI : MonoBehaviour, IVolumeControl
         _successLine.DOFade(1f, _duration).SetEase(Ease.InOutSine);
         _failureLine.DOFade(1f, _duration).SetEase(Ease.InOutSine);
 
-        // TODO 임시 GameState 전환 코루틴
-        StartCoroutine(DoChangeStateToLeavingDefenceScene());
-
         // monster
         _monsterUI.ShowMonsterUI(endingType);
     }
@@ -117,12 +118,5 @@ public class EndingUI : MonoBehaviour, IVolumeControl
         }
 
         return "";
-    }
-
-    // TODO 실제 UI 표시 이후 GameState 전환 로직을 구현하기 전 임시 로직. 단순히 2초 대기 후 GameState를 LeavingDefenceScene으로 바꾸는 코루틴.
-    private IEnumerator DoChangeStateToLeavingDefenceScene()
-    {
-        yield return new WaitForSeconds(2.0f);
-        GameStateManager.Instance.ChangeState(GameState.LeavingDefenceScene);
     }
 }

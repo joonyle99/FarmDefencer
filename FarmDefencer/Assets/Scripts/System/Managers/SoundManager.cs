@@ -1,7 +1,8 @@
-using System.Collections.Generic;
 using JetBrains.Annotations;
-using UnityEngine;
 using Sirenix.OdinInspector;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// 게임에 필요한 사운드를 관리하는 매니저입니다
@@ -170,7 +171,7 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
             Debug.LogError($"사운드 데이터에 오디오 클립이 비어있습니다.: {soundData.audioName}");
         }
     }
-    public void PlaySfx(string name, float volume = 0.5f, float pitch = 1.0f)
+    public void PlaySfx(string name, float volume = 0.5f, float pitch = 1.0f, System.Action onComplete = null)
 	{
 		if (_sfxDictionary.ContainsKey(name) == false)
 		{
@@ -209,22 +210,26 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 			return;
 		}
 
-		// Single SFX
+        // Single SFX
+        AudioClip sfx = null;
 		if (sfxList.Count == 1)
         {
-            var sfx = sfxList[0];
+            sfx = sfxList[0];
             _sfxAudioSource.PlayOneShot(sfx, volume);
-            return;
         }
 		// Multiple SFX
 		else if (sfxList.Count > 1)
         {
             var randomoIndex = Random.Range(0, sfxList.Count);
-            var sfx = sfxList[randomoIndex];
+            sfx = sfxList[randomoIndex];
             _sfxAudioSource.PlayOneShot(sfx, volume);
-			return;
         }
-	}
+
+        if (onComplete != null)
+        {
+            StartCoroutine(InvokeAfterSeconds(sfx.length, onComplete));
+        }
+    }
     public void StopSfx()
     {
         if (_sfxAudioSource.isPlaying)
@@ -261,7 +266,13 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
         _ambAudioSource.UnPause();
     }
 
-	protected override void Awake()
+    private IEnumerator InvokeAfterSeconds(float seconds, System.Action callback)
+    {
+        yield return new WaitForSeconds(seconds);
+        callback?.Invoke();
+    }
+    
+    protected override void Awake()
 	{
 		base.Awake();
 
