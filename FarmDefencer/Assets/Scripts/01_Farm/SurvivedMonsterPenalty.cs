@@ -16,10 +16,10 @@ public sealed class SurvivedMonsterPenalty : ScriptableObject
     [System.Serializable]
     public class MonsterPenaltyData
     {
-        [SerializeField] private string monster;
+        [SerializeField] private MonsterData monster;
         [SerializeField] private CropProbabilityData[] cropProbabilities;
 
-        public string Monster => monster;
+        public MonsterData Monster => monster;
         public CropProbabilityData[] CropProbabilityDatas => cropProbabilities;
     }
 

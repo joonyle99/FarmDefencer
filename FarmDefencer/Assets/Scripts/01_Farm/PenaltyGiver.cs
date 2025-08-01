@@ -113,9 +113,10 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmS
             return;
         }
 
+        bool spawnedSomething = false;
         foreach (var monster in monsters)
         {
-            var penalty = penaltyContext.MonsterPenaltyDatas.FirstOrDefault(m => m.Monster.Equals(monster));
+            var penalty = penaltyContext.MonsterPenaltyDatas.FirstOrDefault(m => m.Monster.Name.Equals(monster));
             if (penalty is null)
             {
                 Debug.LogError(
@@ -130,7 +131,13 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmS
                 continue;
             }
 
+            spawnedSomething = true;
             SpawnMonsterAt(monster, cropPosition, productEntry.ProductName);
+        }
+
+        if (spawnedSomething)
+        {
+            SoundManager.Instance.PlaySfx("SFX_T_eat_crops");
         }
     }
 

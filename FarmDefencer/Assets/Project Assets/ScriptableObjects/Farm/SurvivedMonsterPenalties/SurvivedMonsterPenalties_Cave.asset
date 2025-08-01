@@ -13,9 +13,75 @@ MonoBehaviour:
   m_Name: SurvivedMonsterPenalties_Cave
   m_EditorClassIdentifier: 
   monsterPenaltyDatas:
-  - monster: 
-    cropProbabilities: []
-  - monster: 
-    cropProbabilities: []
-  - monster: 
-    cropProbabilities: []
+  - monster: {fileID: 11400000, guid: eac46cdb67d9e6246b0c29f7ca1bf276, type: 2}
+    cropProbabilities:
+    - targetCrop: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
+      probability: 0.1
+    - targetCrop: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
+      probability: 0.4
+    - targetCrop: {fileID: 11400000, guid: bbf41d007f26d6049ba7c478bd5f3ecd, type: 2}
+      probability: 0.5
+  - monster: {fileID: 11400000, guid: 5f15dfc30b8404146bf2ff08c0180c4d, type: 2}
+    cropProbabilities:
+    - targetCrop: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
+      probability: 0.05
+    - targetCrop: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
+      probability: 0.05
+    - targetCrop: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
+      probability: 0.15
+    - targetCrop: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
+      probability: 0.2
+    - targetCrop: {fileID: 11400000, guid: bbf41d007f26d6049ba7c478bd5f3ecd, type: 2}
+      probability: 0.55
+  - monster: {fileID: 11400000, guid: 35e59b1d1eb461e4fa289bc6c7645d2b, type: 2}
+    cropProbabilities:
+    - targetCrop: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
+      probability: 0.02
+    - targetCrop: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
+      probability: 0.03
+    - targetCrop: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
+      probability: 0.05
+    - targetCrop: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
+      probability: 0.12
+    - targetCrop: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
+      probability: 0.13
+    - targetCrop: {fileID: 11400000, guid: 7dafbc71fcd9c0846b0f38a024abc95b, type: 2}
+      probability: 0.15
+    - targetCrop: {fileID: 11400000, guid: bbf41d007f26d6049ba7c478bd5f3ecd, type: 2}
+      probability: 0.5
+  - monster: {fileID: 11400000, guid: a9c27a761577a7540b81346fe9abd587, type: 2}
+    cropProbabilities:
+    - targetCrop: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
+      probability: 0.02
+    - targetCrop: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
+      probability: 0.03
+    - targetCrop: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
+      probability: 0.05
+    - targetCrop: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
+      probability: 0.06
+    - targetCrop: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
+      probability: 0.07
+    - targetCrop: {fileID: 11400000, guid: 7dafbc71fcd9c0846b0f38a024abc95b, type: 2}
+      probability: 0.07
+    - targetCrop: {fileID: 11400000, guid: bbf41d007f26d6049ba7c478bd5f3ecd, type: 2}
+      probability: 0.3
+    - targetCrop: {fileID: 11400000, guid: cc99559fa3cd81c4f9e227728fe5fe8c, type: 2}
+      probability: 0.4
+  - monster: {fileID: 11400000, guid: cb3490e4945b9e346842f1122a059420, type: 2}
+    cropProbabilities:
+    - targetCrop: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
+      probability: 0.02
+    - targetCrop: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
+      probability: 0.03
+    - targetCrop: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
+      probability: 0.05
+    - targetCrop: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
+      probability: 0.06
+    - targetCrop: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
+      probability: 0.07
+    - targetCrop: {fileID: 11400000, guid: 7dafbc71fcd9c0846b0f38a024abc95b, type: 2}
+      probability: 0.07
+    - targetCrop: {fileID: 11400000, guid: bbf41d007f26d6049ba7c478bd5f3ecd, type: 2}
+      probability: 0.2
+    - targetCrop: {fileID: 11400000, guid: cc99559fa3cd81c4f9e227728fe5fe8c, type: 2}
+      probability: 0.5

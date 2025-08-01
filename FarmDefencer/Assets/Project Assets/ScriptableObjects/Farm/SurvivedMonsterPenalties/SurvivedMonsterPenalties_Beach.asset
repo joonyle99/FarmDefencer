@@ -13,9 +13,61 @@ MonoBehaviour:
   m_Name: SurvivedMonsterPenalties_Beach
   m_EditorClassIdentifier: 
   monsterPenaltyDatas:
-  - monster: 
-    cropProbabilities: []
-  - monster: 
-    cropProbabilities: []
-  - monster: 
-    cropProbabilities: []
+  - monster: {fileID: 11400000, guid: 11c4f70247be3f1479a34b4114ea5691, type: 2}
+    cropProbabilities:
+    - targetCrop: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
+      probability: 0.3
+    - targetCrop: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
+      probability: 0.7
+  - monster: {fileID: 11400000, guid: bda3fc6ab030ede4d91964c5be9dc269, type: 2}
+    cropProbabilities:
+    - targetCrop: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
+      probability: 0.2
+    - targetCrop: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
+      probability: 0.2
+    - targetCrop: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
+      probability: 0.3
+    - targetCrop: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
+      probability: 0.3
+  - monster: {fileID: 11400000, guid: f5daa50a9a2752b4fabf9ab4cd52bbef, type: 2}
+    cropProbabilities:
+    - targetCrop: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
+      probability: 0.1
+    - targetCrop: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
+      probability: 0.1
+    - targetCrop: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
+      probability: 0.1
+    - targetCrop: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
+      probability: 0.35
+    - targetCrop: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
+      probability: 0.2
+    - targetCrop: {fileID: 11400000, guid: 7dafbc71fcd9c0846b0f38a024abc95b, type: 2}
+      probability: 0.15
+  - monster: {fileID: 11400000, guid: 313537187f556e844aba64dea2ee0423, type: 2}
+    cropProbabilities:
+    - targetCrop: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
+      probability: 0.1
+    - targetCrop: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
+      probability: 0.1
+    - targetCrop: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
+      probability: 0.1
+    - targetCrop: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
+      probability: 0.15
+    - targetCrop: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
+      probability: 0.35
+    - targetCrop: {fileID: 11400000, guid: 7dafbc71fcd9c0846b0f38a024abc95b, type: 2}
+      probability: 0.2
+  - monster: {fileID: 11400000, guid: 07ba30ffef1ce0e47bcbff1f5a8b9159, type: 2}
+    cropProbabilities:
+    - targetCrop: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
+      probability: 0.1
+    - targetCrop: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
+      probability: 0.1
+    - targetCrop: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
+      probability: 0.1
+    - targetCrop: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
+      probability: 0.15
+    - targetCrop: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
+      probability: 0.2
+    - targetCrop: {fileID: 11400000, guid: 7dafbc71fcd9c0846b0f38a024abc95b, type: 2}
+      probability: 0.35

@@ -4290,8 +4290,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pathLineRenderer: {fileID: 0}
   _gridCellPrefab: {fileID: 0}
-  _originGridPath: []
-  LastPlacedGridCell: {fileID: 0}
 --- !u!1839735485 &774366447
 Tilemap:
   m_ObjectHideFlags: 0
