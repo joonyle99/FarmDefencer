@@ -47,7 +47,7 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     /// <summary>
     /// EndingUI까지 모두 보여준 후 다른 씬으로 이동해야 할 때 호출되는 이벤트
     /// </summary>
-    public event Action OnLeavingDefenceSceneState;
+    public event Action<EndingType> OnLeavingDefenceSceneState;
 
     public event Action OnChangeState;
 
@@ -60,7 +60,7 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
         ChangeState(GameState.Normal);
     }
 
-    public void ChangeState(GameState nextState)
+    public void ChangeState(GameState nextState, params object[] args)
     {
         if (CurrentState == nextState)
         {
@@ -88,7 +88,8 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
                 HandleDefenceEndState();
                 break;
             case GameState.LeavingDefenceScene :
-                HandleLeavingDefenceSceneState();
+                EndingType endingType = (EndingType)args[0];
+                HandleLeavingDefenceSceneState(endingType);
                 break;
         }
 
@@ -128,9 +129,9 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
         Time.timeScale = 1f;
     }
 
-    private void HandleLeavingDefenceSceneState()
+    private void HandleLeavingDefenceSceneState(EndingType endingType)
     {
-        OnLeavingDefenceSceneState?.Invoke();
+        OnLeavingDefenceSceneState?.Invoke(endingType);
     }
 
     public void TogglePause()

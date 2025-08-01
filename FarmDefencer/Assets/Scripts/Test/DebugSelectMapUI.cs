@@ -4,48 +4,55 @@ using UnityEngine.SceneManagement;
 
 public class DebugSelectMapUI : MonoBehaviour
 {
-    [SerializeField] private TMP_InputField _mapIndex;
-    [SerializeField] private TMP_InputField _stageIndex;
+    [SerializeField] private TMP_InputField _maxUnlockedMapIndex;
+    [SerializeField] private TMP_InputField _maxUnlockedStageIndex;
 
-    public void SelectMaximumUnlockedMap()
+    [Space]
+
+    [SerializeField] private TMP_InputField _currentMapIndex;
+    [SerializeField] private TMP_InputField _currentStageIndex;
+
+    public void SelectMap()
     {
         if (GameStateManager.Instance.CurrentState is not GameState.Normal)
         {
             return;
         }
 
-        var mapIndexStr = _mapIndex.text;
-        var stageIndexStr = _stageIndex.text;
+        var maxUnlockedMapIndexStr = _maxUnlockedMapIndex.text;
+        var maxUnlockedStageIndexStr = _maxUnlockedStageIndex.text;
 
-        if (int.TryParse(mapIndexStr, out int mapIndexInt) && int.TryParse(stageIndexStr, out int stageIndexInt))
+        var currentMapIndexStr = _currentMapIndex.text;
+        var currentStageIndexStr = _currentStageIndex.text;
+
+        if (int.TryParse(maxUnlockedMapIndexStr, out int mapIndexInt_1) && int.TryParse(maxUnlockedStageIndexStr, out int stageIndexInt_1) && int.TryParse(currentMapIndexStr, out int mapIndexInt_2) && int.TryParse(currentStageIndexStr, out int stageIndexInt_2))
         {
-            MapManager.Instance.Debug_SetMaximumUnlockedMap(mapIndexInt, stageIndexInt);
+            if (mapIndexInt_2 > mapIndexInt_1 || (mapIndexInt_1 == mapIndexInt_2 && stageIndexInt_2 > stageIndexInt_1))
+            {
+                Debug.LogWarning($"현재 맵 인덱스({mapIndexInt_2})와 스테이지 인덱스({stageIndexInt_2})는 최대 해금 맵 인덱스({mapIndexInt_1})와 스테이지 인덱스({stageIndexInt_1})보다 작아야 합니다.");
+                return;
+            }
+
+            if (mapIndexInt_1 < 1 || stageIndexInt_1 < 1 || mapIndexInt_2 < 1 || stageIndexInt_2 < 1)
+            {
+                Debug.LogWarning($"모든 인덱스는 1 이상이어야 합니다. - mapIndexInt_1({mapIndexInt_1}), stageIndexInt_1({stageIndexInt_1}), mapIndexInt_2({mapIndexInt_2}), stageIndexInt_2({stageIndexInt_2})");
+                return;
+            }
+
+            if (mapIndexInt_1 > 10 || stageIndexInt_1 > 10 || mapIndexInt_2 > 10 || stageIndexInt_2 > 10)
+            {
+                Debug.LogWarning($"모든 인덱스는 10 이하이어야 합니다. - mapIndexInt_1({mapIndexInt_1}), stageIndexInt_1({stageIndexInt_1}), mapIndexInt_2({mapIndexInt_2}), stageIndexInt_2({stageIndexInt_2})");
+                return;
+            }
+
+            MapManager.Instance.Debug_SetMaximumUnlockedMap(mapIndexInt_1, stageIndexInt_1);
+            MapManager.Instance.Debug_SetCurrentMap(mapIndexInt_2, stageIndexInt_2);
+
             ApplyMapManagerToSave();
         }
         else
         {
-            Debug.LogWarning($"입력한 '{mapIndexStr}' 또는 '{stageIndexStr}' 는 올바른 숫자가 아닙니다.");
-        }
-    }
-
-    public void SelectCurrentMap()
-    {
-        if (GameStateManager.Instance.CurrentState is not GameState.Normal)
-        {
-            return;
-        }
-
-        var mapIndexStr = _mapIndex.text;
-        var stageIndexStr = _stageIndex.text;
-
-        if (int.TryParse(mapIndexStr, out int mapIndexInt) && int.TryParse(stageIndexStr, out int stageIndexInt))
-        {
-            MapManager.Instance.Debug_SetCurrentMap(mapIndexInt, stageIndexInt);
-            ApplyMapManagerToSave();
-        }
-        else
-        {
-            Debug.LogWarning($"입력한 '{mapIndexStr}' 또는 '{stageIndexStr}' 는 올바른 숫자가 아닙니다.");
+            Debug.LogWarning($"올바른 숫자를 입력해주세요.");
         }
     }
 

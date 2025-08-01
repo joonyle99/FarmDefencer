@@ -1,6 +1,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmSerializable
@@ -19,10 +20,10 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
         get => _currentMapIndex;
         set
         {
-            if (value < 1 || value > MaximumUnlockedMapIndex)
-            {
-                Debug.LogError($"CurrentMapIndex는 {1} 이상 {MaximumUnlockedMapIndex} 이하여야 합니다. - value({value})");
-            }
+            //if (value < 1 || value > MaximumUnlockedMapIndex)
+            //{
+            //    Debug.LogError($"CurrentMapIndex는 {1} 이상 {MaximumUnlockedMapIndex} 이하여야 합니다. - value({value})");
+            //}
 
             _currentMapIndex = Math.Clamp(value, 1, MaximumUnlockedMapIndex);
 
@@ -40,11 +41,6 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
         get => _currentStageIndex;
         set
         {
-            if (value < 1 || value > MaximumUnlockedStageIndex)
-            {
-                Debug.LogError($"CurrentStageIndex는 {1} 이상 {MaximumUnlockedStageIndex} 이하여야 합니다. - value({value})");
-            }
-
             _currentStageIndex = Math.Clamp(value, 1, MaximumUnlockedStageIndex);
         }
     }
@@ -90,9 +86,13 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
     /// </summary>
     public void ClearCurrentStage()
     {
+        Debug.Log("ClearCurrentStage");
+
         if (CurrentMapIndex != MaximumUnlockedMapIndex || CurrentStageIndex != MaximumUnlockedStageIndex || // 최신 스테이지를 클리어한게 아니거나
             MaximumUnlockedMapIndex == 3 && MaximumUnlockedStageIndex == 10) // 마지막 스테이지라면 처리할게 없음
         {
+            Debug.Log("1111111111111");
+
             return;
         }
 
@@ -117,6 +117,8 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
 
         MaximumUnlockedMapIndex = mapIndex;
         MaximumUnlockedStageIndex = stageIndex;
+
+        Debug.Log($"MaximumUnlockedMapIndex: {MaximumUnlockedMapIndex}, MaximumUnlockedStageIndex: {MaximumUnlockedStageIndex}");
     }
 
     public void Debug_SetCurrentMap(int mapIndex, int stageIndex)
@@ -126,13 +128,10 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
             throw new ArgumentOutOfRangeException(nameof(mapIndex));
         }
 
-        MaximumUnlockedMapIndex = mapIndex;
-        MaximumUnlockedStageIndex = stageIndex;
-
         CurrentMapIndex = mapIndex;
         CurrentStageIndex = stageIndex;
 
-        OnMapChanged?.Invoke(CurrentMap);
+        Debug.Log($"CurrentMapIndex: {CurrentMapIndex}, CurrentStageIndex: {CurrentStageIndex}");
     }
 
     protected override void Awake()

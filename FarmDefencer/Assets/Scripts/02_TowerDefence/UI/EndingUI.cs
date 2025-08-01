@@ -16,6 +16,7 @@ public enum EndingType
 {
     Success,
     Failure,
+    GiveUp, // 중도 포기
 }
 
 public class EndingUI : MonoBehaviour, IVolumeControl
@@ -71,7 +72,7 @@ public class EndingUI : MonoBehaviour, IVolumeControl
         SoundManager.Instance.PlaySfx($"SFX_D_stage_{ConvertToEndingText(endingType)}", endingVolume, 1.0f, () =>
         {
             // on complete
-            GameStateManager.Instance.ChangeState(GameState.LeavingDefenceScene);
+            GameStateManager.Instance.ChangeState(GameState.LeavingDefenceScene, endingType);
         });
 
         // fade
