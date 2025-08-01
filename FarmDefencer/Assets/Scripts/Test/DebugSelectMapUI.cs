@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DebugSelectMapUI : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class DebugSelectMapUI : MonoBehaviour
         if (int.TryParse(mapIndexStr, out int mapIndexInt) && int.TryParse(stageIndexStr, out int stageIndexInt))
         {
             MapManager.Instance.Debug_SetMaximumUnlockedMap(mapIndexInt, stageIndexInt);
+            ApplyMapManagerToSave();
         }
         else
         {
@@ -39,6 +41,7 @@ public class DebugSelectMapUI : MonoBehaviour
         if (int.TryParse(mapIndexStr, out int mapIndexInt) && int.TryParse(stageIndexStr, out int stageIndexInt))
         {
             MapManager.Instance.Debug_SetCurrentMap(mapIndexInt, stageIndexInt);
+            ApplyMapManagerToSave();
         }
         else
         {
@@ -51,5 +54,13 @@ public class DebugSelectMapUI : MonoBehaviour
         var defenceSceneOpenContextObject = new GameObject("DefenceSceneOpenContext");
         defenceSceneOpenContextObject.AddComponent<DefenceSceneOpenContext>();
         DontDestroyOnLoad(defenceSceneOpenContextObject);
+    }
+
+    private void ApplyMapManagerToSave()
+    {
+        var loadedSave = SaveManager.Instance.LoadedSave;
+        loadedSave["MapManager"] = MapManager.Instance.Serialize();
+        SaveManager.Instance.FlushSave();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

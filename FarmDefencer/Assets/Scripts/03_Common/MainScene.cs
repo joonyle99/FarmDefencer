@@ -64,7 +64,7 @@ public sealed class MainScene : MonoBehaviour
             _battleIcon.color = _battleButton.colors.disabledColor;
         }
         
-        _timerUI.Init(MapManager.Instance.CurrentMapIndex, MapManager.Instance.CurrentStageIndex, () => (lengthOfDaytime - currentDaytime) / lengthOfDaytime);
+        _timerUI.Init(MapManager.Instance.MaximumUnlockedMapIndex, MapManager.Instance.MaximumUnlockedStageIndex, () => (lengthOfDaytime - currentDaytime) / lengthOfDaytime);
     }
 
     private void OnFarmButtonClicked()
