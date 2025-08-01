@@ -38,7 +38,7 @@ public sealed class FarmManager : MonoBehaviour
     [SerializeField] private TimerUI timerUI;
     [SerializeField] private FarmDebugUI farmDebugUI;
     
-    private bool CanGoDefence => !weatherGiver.IsWeatherOnGoing && !pestGiver.IsWarningShowing && !harvestTutorialGiver.IsPlayingTutorial;
+    private bool CanGoDefence => !weatherGiver.IsWeatherOnGoing && !pestGiver.IsWarningShowing && !harvestTutorialGiver.IsPlayingTutorial && ResourceManager.Instance.Gold > 0;
 
     private void Start()
     {
