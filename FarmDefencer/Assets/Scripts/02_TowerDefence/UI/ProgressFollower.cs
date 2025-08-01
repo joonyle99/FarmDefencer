@@ -23,7 +23,8 @@ public class ProgressFollower : MonoBehaviour
         _progressBar.OnFinished += StopAnimator;
 
         _startPos = _rectTransform.anchoredPosition;
-        _endPos = _startPos - new Vector3(_progressBar.GetBarWidth(), 0, 0);
+        var barWidth = _progressBar.GetBarWidth();
+        _endPos = _startPos - new Vector3(barWidth - barWidth * 0.06f, 0, 0);
     }
 
     private void OnDestroy()
@@ -41,12 +42,12 @@ public class ProgressFollower : MonoBehaviour
 
     private void PlayAnimator()
     {
-        _animator.gameObject.SetActive(true);
+        //_animator.gameObject.SetActive(true);
         _animator.Play("Play");
     }
     private void StopAnimator()
     {
-        _animator.Play("Stop");
-        _animator.gameObject.SetActive(false);
+        //_animator.Play("Stop");
+        //_animator.gameObject.SetActive(false);
     }
 }
