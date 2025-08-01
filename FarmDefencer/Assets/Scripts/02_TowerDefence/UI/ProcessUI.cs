@@ -21,11 +21,13 @@ public class ProcessUI : MonoBehaviour
 
     private float _savedTimeScale = 1f;
 
-    private void Start()
+    private void Awake()
     {
         GameStateManager.Instance.OnChangeState -= RefreshButton;
         GameStateManager.Instance.OnChangeState += RefreshButton;
-
+    }
+    private void Start()
+    {
         _isPaused = false;
         _isPlayX2 = false;
 
@@ -42,6 +44,12 @@ public class ProcessUI : MonoBehaviour
     {
         var isBuildState = GameStateManager.Instance.CurrentState is GameState.Build;
         var isWaveState = GameStateManager.Instance.CurrentState is GameState.Wave || GameStateManager.Instance.CurrentState is GameState.WaveAfter;
+
+        // TODO: 임시 코드.. 이벤트 리스너 등록 타이밍을 조절해야 한다
+        if (_fightButton == null || _pauseButton == null || _resumeButton == null || _playX1Button == null || _playX2Button == null)
+        {
+            return;
+        }
 
         _fightButton.gameObject.SetActive(isBuildState);
 
