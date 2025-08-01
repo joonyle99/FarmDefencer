@@ -125,8 +125,8 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmS
 
             if (!_farm.TryGetLockableCropPositionFromProbability(penalty.CropProbabilityDatas, out var cropPosition, out var productEntry))
             {
-                Debug.LogError(
-                    $"PenaltyGiver.SpawnMonsters()에서 MapId {mapId} Monster {monster} (이)가 파괴할 작물을 찾지 못하였습니다.");
+                Debug.Log(
+                    $"PenaltyGiver.SpawnMonsters()에서 MapId {mapId} Monster {monster} (이)가 파괴할 만한 남은 작물이 없습니다.");
                 continue;
             }
 
