@@ -29,16 +29,16 @@ public sealed class LightningProjectile : LinearProjectile
         chainLightning.Initialize(caster, targets, damager.GetDamage());
     }
 
-    public List<DamageableBehavior> FindTargetsWithDFS(DamageableBehavior startTarget, int maxDepth)
+    public List<TargetableBehavior> FindTargetsWithDFS(TargetableBehavior startTarget, int maxDepth)
     {
-        var targets = new List<DamageableBehavior>();
-        var visited = new HashSet<DamageableBehavior>();
+        var targets = new List<TargetableBehavior>();
+        var visited = new HashSet<TargetableBehavior>();
 
         // 첫 타겟 추가
         targets.Add(startTarget);
         visited.Add(startTarget);
 
-        void FindNextTarget(DamageableBehavior currTarget, int depth)
+        void FindNextTarget(TargetableBehavior currTarget, int depth)
         {
             // DFS 종료 조건
             if (depth >= maxDepth)

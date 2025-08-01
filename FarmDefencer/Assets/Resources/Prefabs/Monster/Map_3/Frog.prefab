@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 715444437786129574}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.6, z: 0}
+  m_LocalPosition: {x: 0, y: 2.48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -288,7 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 4159104016721875392}
   _maxHp: 100
-  _targetPoint: {fileID: 0}
+  _targetPoint: {fileID: 3677401387006666995}
   _originFactory: {fileID: 0}
   _monsterData: {fileID: 11400000, guid: 35e59b1d1eb461e4fa289bc6c7645d2b, type: 2}
   _headPoint: {fileID: 0}

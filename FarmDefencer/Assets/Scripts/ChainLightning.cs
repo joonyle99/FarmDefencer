@@ -7,12 +7,12 @@ public class ChainLightning : MonoBehaviour
     private LineRenderer _lineRenderer;
 
     private Tower _caster;
-    private List<DamageableBehavior> _targetsToApply;
+    private List<TargetableBehavior> _targetsToApply;
 
     private int _damage;
 
-    private List<DamageableBehavior> _appliedTargets = new List<DamageableBehavior>();
-    public List<DamageableBehavior> AppliedTargets => _appliedTargets;
+    private List<TargetableBehavior> _appliedTargets = new List<TargetableBehavior>();
+    public List<TargetableBehavior> AppliedTargets => _appliedTargets;
 
     public int MaxCount = 3;
 
@@ -32,11 +32,11 @@ public class ChainLightning : MonoBehaviour
            }
 
             // index: 0은 caster의 위치이므로 제외한다
-            _lineRenderer.SetPosition(i + 1, appliedTarget.transform.position);
+            _lineRenderer.SetPosition(i + 1, appliedTarget.TargetPoint.position);
         }
     }
 
-    public void Initialize(Tower caster, List<DamageableBehavior> targets, int damage)
+    public void Initialize(Tower caster, List<TargetableBehavior> targets, int damage)
     {
         _lineRenderer.positionCount = 1;
         _lineRenderer.SetPosition(0, caster.transform.position);

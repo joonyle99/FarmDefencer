@@ -257,7 +257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 4159104016721875392}
   _maxHp: 100
-  _targetPoint: {fileID: 0}
+  _targetPoint: {fileID: 6219046591756985945}
   _originFactory: {fileID: 0}
   _monsterData: {fileID: 11400000, guid: 5f15dfc30b8404146bf2ff08c0180c4d, type: 2}
   _headPoint: {fileID: 0}
@@ -334,7 +334,7 @@ Transform:
   m_GameObject: {fileID: 6488918020086107474}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.8, z: 0}
+  m_LocalPosition: {x: 0, y: 1.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
