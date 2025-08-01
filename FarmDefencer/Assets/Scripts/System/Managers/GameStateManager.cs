@@ -31,7 +31,6 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     public bool IsDefenceState => IsBuildState || IsWaveState || CurrentState == GameState.DefenceEnd;
 
     public event Action OnNormalState;
-    public event Action OnPauseState;
     public event Action OnBuildState;
     /// <summary>
     /// 웨이브가 시작되기 직전에 호출되는 이벤트
@@ -76,9 +75,6 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
             case GameState.Normal:
                 HandleNormalState();
                 break;
-            case GameState.Pause:
-                HandlePauseState();
-                break;
             case GameState.Build:
                 HandleBuildState();
                 break;
@@ -103,10 +99,6 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     private void HandleNormalState()
     {
         OnNormalState?.Invoke();
-    }
-    private void HandlePauseState()
-    {
-        OnPauseState?.Invoke();
     }
 
     // Tycoon

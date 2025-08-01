@@ -24,7 +24,7 @@ public class ProgressFollower : MonoBehaviour
 
         _startPos = _rectTransform.anchoredPosition;
         var barWidth = _progressBar.GetBarWidth();
-        _endPos = _startPos - new Vector3(barWidth - barWidth * 0.06f, 0, 0);
+        _endPos = _startPos - new Vector3(barWidth - barWidth * 0.07f, 0, 0);
     }
 
     private void OnDestroy()
