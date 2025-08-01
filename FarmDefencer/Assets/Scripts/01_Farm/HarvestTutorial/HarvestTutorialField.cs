@@ -39,12 +39,18 @@ public sealed class HarvestTutorialField : MonoBehaviour
 
         _field.Init(() => true, _ => 9999, (_, _, _) => { Done = true; SoundManager.Instance.PlaySfx("SFX_T_coin", SoundManager.Instance.coinVolume); }, _ => { });
 
-        foreach (var spriteRendererComponent in _field.GetComponentsInChildren(typeof(SpriteRenderer)))
+        foreach (var spriteRendererComponent in _field.GetComponentsInChildren<SpriteRenderer>())
         {
-            var spriteRenderer = spriteRendererComponent as SpriteRenderer;
-            var sortingOrder = spriteRenderer.sortingOrder;
-            spriteRenderer.sortingOrder = 10000 +  SortingLayer.GetLayerValueFromID(spriteRenderer.sortingLayerID) * 1000 + sortingOrder;
-            spriteRenderer.sortingLayerName = "Mask";
+            var sortingOrder = spriteRendererComponent.sortingOrder;
+            spriteRendererComponent.sortingOrder = 10000 +  SortingLayer.GetLayerValueFromID(spriteRendererComponent.sortingLayerID) * 1000 + sortingOrder;
+            spriteRendererComponent.sortingLayerName = "Mask";
+        }
+
+        foreach (var meshRendererComponent in _field.GetComponentsInChildren<MeshRenderer>())
+        {
+            var sortingOrder = meshRendererComponent.sortingOrder;
+            meshRendererComponent.sortingOrder = 11000 +  SortingLayer.GetLayerValueFromID(meshRendererComponent.sortingLayerID) * 1000 + sortingOrder;
+            meshRendererComponent.sortingLayerName = "Mask";
         }
 
         if (TargetCrop is CropSweetpotato cropSweetpotato)
