@@ -184,8 +184,10 @@ public class GridMap : MonoBehaviour
 
     public void CreateGridMap()
     {
-        var departureSprite = Resources.Load<Sprite>($"Texture/GridMap/{MapManager.Instance.CurrentMap.MapCode}_departure");
-        var arrivalSprite = Resources.Load<Sprite>($"Texture/GridMap/{MapManager.Instance.CurrentMap.MapCode}_arrival");
+        var departureResPath = $"Texture/GridMap/{MapManager.Instance.CurrentMap.MapCode}_departure";
+        var departureSprite = Resources.Load<Sprite>(departureResPath);
+        var arrivalResPath = $"Texture/GridMap/{MapManager.Instance.CurrentMap.MapCode}_arrival";
+        var arrivalSprite = Resources.Load<Sprite>(arrivalResPath);
 
         for (int h = 0; h < _height; h++)
         {
@@ -207,6 +209,7 @@ public class GridMap : MonoBehaviour
                 {
                     _myGridMap[h, w].UnUsable();
                     _myGridMap[h, w].SetSprite(cellPos == StartCellPoint ? departureSprite : arrivalSprite);
+                    Debug.Log($"start cell point: {StartCellPoint}, departureResPath: {departureResPath}");
                 }
             }
         }
