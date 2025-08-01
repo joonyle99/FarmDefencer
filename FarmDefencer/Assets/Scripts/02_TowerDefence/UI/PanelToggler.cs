@@ -53,7 +53,7 @@ public class PanelToggler : MonoBehaviour, IVolumeControl
 
         var targetY = _isExpanded ? _expandedY : _collapsedY;
         //var ease = _isExpanded ? Ease.OutBack : Ease.InCubic;
-        _panel.DOAnchorPosY(targetY, _duration).SetEase(Ease.OutBack);
+        _panel.DOAnchorPosY(targetY, _duration).SetEase(Ease.OutBack).SetUpdate(true);
 
         var targetSprite = _isExpanded ? _expandedSprite : _collapsedSprite;
         _buttonImage.sprite = targetSprite;

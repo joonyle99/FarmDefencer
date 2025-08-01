@@ -25,10 +25,20 @@ public class ProcessUI : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _stageText;
 
+    [Space]
+
+    [SerializeField] private RectTransform _pauseBlocker;
+    [SerializeField] private RectTransform _mainButtons;
+    private RectTransform _mainButtonsOriginParent;
+
+    private PanelToggler _panelToggler;
+
     private void Awake()
     {
         GameStateManager.Instance.OnChangeState -= RefreshButton;
         GameStateManager.Instance.OnChangeState += RefreshButton;
+
+        _panelToggler = FindFirstObjectByType<PanelToggler>();
     }
     private void Start()
     {
@@ -43,6 +53,8 @@ public class ProcessUI : MonoBehaviour
         _settingButton.gameObject.SetActive(true);
 
         _stageText.text = $"{MapManager.Instance.CurrentMapIndex}-{MapManager.Instance.CurrentStageIndex}";
+
+        _mainButtonsOriginParent = _mainButtons.parent as RectTransform;
     }
 
     public void RefreshButton()
@@ -86,6 +98,16 @@ public class ProcessUI : MonoBehaviour
         }
 
         GameStateManager.Instance.TogglePause();
+
+        // Pause 상태에 열려져 있다면 패널을 닫는다.
+        // Resume 상태에 닫혀져 있다면 패널을 연다.
+        if (GameStateManager.Instance.IsPause == _panelToggler.IsExpanded)
+        {
+            _panelToggler.TogglePanel();
+        }
+
+        _mainButtons.SetParent(GameStateManager.Instance.IsPause ? _pauseBlocker : _mainButtonsOriginParent, false);
+        _pauseBlocker.gameObject.SetActive(GameStateManager.Instance.IsPause);
 
         _resumeButton.gameObject.SetActive(GameStateManager.Instance.IsPause);
         _pauseButton.gameObject.SetActive(!GameStateManager.Instance.IsPause);
