@@ -182,6 +182,11 @@ public class GridMap : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        StopDrawPath();
+    }
+
     public void CreateGridMap()
     {
         var departureResPath = $"Texture/GridMap/{MapManager.Instance.CurrentMap.MapCode}_departure";

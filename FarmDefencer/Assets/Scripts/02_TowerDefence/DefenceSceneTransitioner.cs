@@ -14,13 +14,13 @@ public sealed class DefenceSceneTransitioner : MonoBehaviour
     /// ResourceManager에 반환할 돈을 반환하고, 추가할 생존 몬스터를 추가함.
     /// </summary>
     public static void HandleGiveUp() => OnGiveUp();
-    
-    private void Awake()
+
+    private void OnEnable()
     {
         GameStateManager.Instance.OnLeavingDefenceSceneState += OnLeavingDefenceSceneState;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         if (GameStateManager.Instance is not null)
         {
