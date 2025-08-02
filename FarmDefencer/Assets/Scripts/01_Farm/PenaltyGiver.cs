@@ -116,7 +116,7 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmS
         bool spawnedSomething = false;
         foreach (var monster in monsters)
         {
-            var penalty = penaltyContext.MonsterPenaltyDatas.FirstOrDefault(m => m.Monster.Name.Equals(monster));
+            var penalty = penaltyContext.MonsterPenaltyDatas.FirstOrDefault(m => m.Monster.Name.ToLower().Equals(monster));
             if (penalty is null)
             {
                 Debug.LogError(
