@@ -137,7 +137,12 @@ public class ProcessUI : MonoBehaviour
         //}
 
         // 중단하시겠습까?
-
+        
+        DefenceSceneTransitioner.HandleGiveUp();
+        SaveManager.Instance.LoadedSave["MapManager"] = MapManager.Instance.Serialize();
+        SaveManager.Instance.LoadedSave["ResourceManager"] = ResourceManager.Instance.Serialize();
+        SaveManager.Instance.FlushSave();
+        
         SceneManager.LoadScene("Main Scene");
     }
 }
