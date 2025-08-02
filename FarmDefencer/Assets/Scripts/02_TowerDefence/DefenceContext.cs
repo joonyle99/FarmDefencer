@@ -45,6 +45,11 @@ public class DefenceContext : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        GameStateManager.Instance.ChangeState(GameState.Normal);
+    }
+
     private void OnEnable()
     {
         MapManager.Instance.OnMapChanged += BackgroundVideoHandler;
