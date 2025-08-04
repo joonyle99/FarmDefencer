@@ -214,6 +214,7 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer, IFarm
             {
                 _signRectTransform.anchoredPosition = new Vector2(0, Screen.height);
                 _signRectTransform.gameObject.SetActive(true);
+                SoundManager.Instance.PlaySfx("SFX_T_unlock");
 
                 var sequence = DOTween.Sequence();
 
