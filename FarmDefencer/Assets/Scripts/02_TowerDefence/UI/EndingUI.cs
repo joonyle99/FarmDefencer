@@ -69,7 +69,7 @@ public class EndingUI : MonoBehaviour, IVolumeControl
 
     private void ShowEnding(EndingType endingType)
     {
-        SoundManager.Instance.PlaySfx($"SFX_D_stage_{ConvertToEndingText(endingType)}", endingVolume, 1.0f, () =>
+        SoundManager.Instance.PlaySfx($"SFX_D_stage_{ConvertToEndingText(endingType)}", endingVolume, () =>
         {
             // on complete
             GameStateManager.Instance.ChangeState(GameState.LeavingDefenceScene, endingType);

@@ -95,7 +95,7 @@ public sealed class FarmManager : MonoBehaviour
         
         harvestTutorialGiver.Init(farmUI.ToggleCropGuide, () => farmUI.IsCropGuideShowing);
         
-        SoundManager.Instance.PlayBgm("BGM_T_main_origin", SoundManager.Instance.songVolume, farmClock.CurrentDaytime > fastBgmStartTime ? fastBgmSpeedMultiplier : 1.0f);
+        SoundManager.Instance.PlayBgm("BGM_T_main_origin", SoundManager.Instance.songVolume);
 
         if (!pestGiver.IsPestRunning)
         {

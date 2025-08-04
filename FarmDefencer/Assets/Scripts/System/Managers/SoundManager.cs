@@ -1,8 +1,11 @@
+using System;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// 게임에 필요한 사운드를 관리하는 매니저입니다
@@ -17,6 +20,8 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
     private Dictionary<string, AudioClip> _bgmDictionary;
     private Dictionary<string, List<AudioClip>> _sfxDictionary;
     private Dictionary<string, AudioClip> _ambDictionary;
+
+    private List<(AudioClip, float)> _sfxPlayQueue;
 
 	[SerializeField] private AudioSource _bgmAudioSource1;
     //[SerializeField] private AudioSource _bgmAudioSource2;
@@ -51,7 +56,7 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
     /// 내부 캐시에서 Bgm을 불러와 재생하는 메소드.
     /// 캐시에 존재하지 않을 경우 Resources/_Bgm에서 불러와 캐시에 넣고 재생함.
     /// </summary>
-    public void PlayBgm(string name, float volume = 0.5f, float speed = 1.0f)
+    public void PlayBgm(string name, float volume = 0.5f)
     {
 	    if (!name.Equals(CurrentBgmName))
 	    {
@@ -75,7 +80,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 	    }
 	    
         _bgmAudioSource1.volume = volume;
-        _bgmAudioSource1.pitch = speed;
         CurrentBgmName = name;
     }
     public void StopBgm()
@@ -95,7 +99,7 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 	    }
     }
 
-    public void PlayAmb(string ambName, float volume = 0.5f, float speed = 1.0f)
+    public void PlayAmb(string ambName, float volume = 0.5f)
     {
 	    if (!ambName.Equals(CurrentAmbName))
 	    {
@@ -119,7 +123,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 	    }
 	    
 	    _ambAudioSource.volume = volume;
-	    _ambAudioSource.pitch = speed;
 	    CurrentAmbName = ambName;
     }
     public void StopAmbIf(string ambName)
@@ -156,22 +159,26 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
     /// 2. PlayOneShot()
     /// 3. AudioSource.volume: 0.8f volumeScale: 0.5f = 0.4f
     /// </summary>
-    public void PlaySfx(AudioClip audioClip, float volume = 0.5f, float pitch = 1.0f)
+    public void PlaySfx(AudioClip audioClip, float volume = 0.5f)
     {
-        _sfxAudioSource.PlayOneShot(audioClip, volume);
+	    if (_sfxPlayQueue.Any(pair => pair.Item1 == audioClip))
+	    {
+		    return;
+	    }
+	    _sfxPlayQueue.Add((audioClip, volume));
     }
-    public void PlaySfx(SoundData soundData, float volume = 0.5f, float pitch = 1.0f)
+    public void PlaySfx(SoundData soundData, float volume = 0.5f)
     {
         if (soundData.audioClip != null)
         {
-            _sfxAudioSource.PlayOneShot(soundData.audioClip, volume);
+	        PlaySfx(soundData.audioClip, volume);
         }
         else
         {
             Debug.LogError($"사운드 데이터에 오디오 클립이 비어있습니다.: {soundData.audioName}");
         }
     }
-    public void PlaySfx(string name, float volume = 0.5f, float pitch = 1.0f, System.Action onComplete = null)
+    public void PlaySfx(string name, float volume = 0.5f, Action onComplete = null)
 	{
 		if (_sfxDictionary.ContainsKey(name) == false)
 		{
@@ -199,8 +206,7 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 
             _sfxDictionary.Add(name, newSfxList);
 		}
-
-		_sfxAudioSource.pitch = pitch;
+		
 		var sfxList = _sfxDictionary[name];
 
 		// 유효하지 않은 경우
@@ -215,14 +221,14 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 		if (sfxList.Count == 1)
         {
             sfx = sfxList[0];
-            _sfxAudioSource.PlayOneShot(sfx, volume);
+            PlaySfx(sfx, volume);
         }
 		// Multiple SFX
 		else if (sfxList.Count > 1)
         {
             var randomoIndex = Random.Range(0, sfxList.Count);
             sfx = sfxList[randomoIndex];
-            _sfxAudioSource.PlayOneShot(sfx, volume);
+            PlaySfx(sfx, volume);
         }
 
         if (onComplete != null)
@@ -275,9 +281,19 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
     protected override void Awake()
 	{
 		base.Awake();
-
+		
 		_sfxDictionary = new Dictionary<string, List<AudioClip>>();
         _bgmDictionary = new Dictionary<string, AudioClip>();
         _ambDictionary = new Dictionary<string, AudioClip>();
+        _sfxPlayQueue = new List<(AudioClip, float)>();
+    }
+
+    private void Update()
+    {
+	    foreach (var (audioClip, volume) in _sfxPlayQueue)
+	    {
+		    _sfxAudioSource.PlayOneShot(audioClip, volume);
+	    }
+	    _sfxPlayQueue.Clear();
     }
 }
