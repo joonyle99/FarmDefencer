@@ -934,12 +934,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 654edb161d866f64787d6112e5cab969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProCamera2D: {fileID: 0}
-  GridMap: {fileID: 774366446}
-  BuildSystem: {fileID: 0}
-  WaveSystem: {fileID: 0}
-  BuildUI: {fileID: 0}
-  UpgradeUI: {fileID: 0}
+  gridMap: {fileID: 0}
+  buildSystem: {fileID: 0}
+  waveSystem: {fileID: 0}
+  buildUI: {fileID: 0}
+  upgradeUI: {fileID: 0}
 --- !u!4 &170695490
 Transform:
   m_ObjectHideFlags: 0

@@ -89,6 +89,9 @@ public sealed class PestEatingPoint : MonoBehaviour, IFarmSerializable
         _pests = new List<Pest>();
         _countText = transform.Find("Count").GetComponent<TMP_Text>();
         Refresh();
+        var meshRenderer = transform.Find("Count").GetComponent<MeshRenderer>();
+        meshRenderer.sortingLayerName = "UI";
+        meshRenderer.sortingOrder = 100;
     }
 
     private void Refresh()
