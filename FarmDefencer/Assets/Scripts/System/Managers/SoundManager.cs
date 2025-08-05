@@ -50,13 +50,14 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
     [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float eatCropsVolume = 0.5f;
 
     [CanBeNull] public string CurrentBgmName { get; private set; }
+    public float CurrentBgmTime => _bgmAudioSource1.time;
     [CanBeNull] public string CurrentAmbName { get; private set; }
     
     /// <summary>
     /// 내부 캐시에서 Bgm을 불러와 재생하는 메소드.
     /// 캐시에 존재하지 않을 경우 Resources/_Bgm에서 불러와 캐시에 넣고 재생함.
     /// </summary>
-    public void PlayBgm(string name, float volume = 0.5f)
+    public void PlayBgm(string name, float volume = 0.5f, float playbackTime = 0.0f)
     {
 	    if (!name.Equals(CurrentBgmName))
 	    {
@@ -77,6 +78,7 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 	        _bgmAudioSource1.Stop();
 	        _bgmAudioSource1.clip = bgm;
 			_bgmAudioSource1.Play();
+			_bgmAudioSource1.time = playbackTime;
 	    }
 	    
         _bgmAudioSource1.volume = volume;

@@ -94,13 +94,13 @@ public sealed class FarmManager : MonoBehaviour
         goDefenceUI.gameObject.SetActive(farmClock.CurrentDaytime >= farmClock.LengthOfDaytime && !harvestTutorialGiver.IsPlayingTutorial);
         
         harvestTutorialGiver.Init(farmUI.ToggleCropGuide, () => farmUI.IsCropGuideShowing);
-        
-        SoundManager.Instance.PlayBgm("BGM_T_main_origin", SoundManager.Instance.songVolume);
 
         if (!pestGiver.IsPestRunning)
         {
             SoundManager.Instance.PlayAmb("AMB_T_main", SoundManager.Instance.ambVolume);
         }
+        
+        ProcessBgm();
     }
     
     private void InitializeDependencies()
@@ -290,6 +290,42 @@ public sealed class FarmManager : MonoBehaviour
     {
         SerializeToSaveFile();
         return true;
+    }
+
+    private void ProcessBgm()
+    {
+        // BGM 교체
+        var shouldPlayFastBgm = farmClock.CurrentDaytime / farmClock.LengthOfDaytime > 0.5f;
+        if (shouldPlayFastBgm)
+        {
+            var fastSpeedBgmTime = 0.0f;
+            if (SoundManager.Instance.CurrentBgmName is not null &&
+                SoundManager.Instance.CurrentBgmName.Equals("BGM_T_main_origin_song"))
+            {
+                var normalSpeedBgmTime = SoundManager.Instance.CurrentBgmTime;
+                fastSpeedBgmTime = normalSpeedBgmTime / 1.7f;
+            }
+            SoundManager.Instance.PlayBgm("BGM_T_main_fast_song", SoundManager.Instance.songVolume, fastSpeedBgmTime);
+        }
+        else
+        {
+            var normalSpeedBgmTime = 0.0f;
+            if (SoundManager.Instance.CurrentBgmName is not null &&
+                SoundManager.Instance.CurrentBgmName.Equals("BGM_T_main_fast_song"))
+            {
+                var fastSpeedBgmTime = SoundManager.Instance.CurrentBgmTime;
+                normalSpeedBgmTime = fastSpeedBgmTime * 1.7f;
+            }
+            SoundManager.Instance.PlayBgm("BGM_T_main_origin_song", SoundManager.Instance.songVolume, normalSpeedBgmTime);
+        }
+        
+        // 리버브 적용
+        var currentBgmTime = SoundManager.Instance.CurrentBgmTime;
+        if (currentBgmTime - Time.deltaTime < 0.0f)
+        {
+            var reverbSfxName = shouldPlayFastBgm ? "SFX_T_main_fast_reverb" : "SFX_T_main_origin_reverb";
+            SoundManager.Instance.PlaySfx(reverbSfxName, SoundManager.Instance.songVolume);
+        }
     }
 
     private void OnDestroy()
