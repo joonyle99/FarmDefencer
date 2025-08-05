@@ -12,6 +12,7 @@ public sealed class GoDefenceUI : MonoBehaviour, IFarmInputLayer
     
     private void Awake()
     {
+		gameObject.SetActive(false);
         _goDefenceButton = GetComponentInChildren<Button>();
         _skeletonGraphic = GetComponentInChildren<SkeletonGraphic>();
         ApplyStageIndex();
@@ -29,7 +30,11 @@ public sealed class GoDefenceUI : MonoBehaviour, IFarmInputLayer
         return gameObject.activeSelf;
     }
 
-    private void OnEnable() => ApplyStageIndex();
+    private void OnEnable()
+    {
+        SoundManager.Instance.PlaySfx("SFX_C_alarm");
+        ApplyStageIndex();
+    }
 
     private void ApplyStageIndex()
     {
