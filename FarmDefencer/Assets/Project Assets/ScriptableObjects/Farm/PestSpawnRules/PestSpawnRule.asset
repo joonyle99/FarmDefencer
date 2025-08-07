@@ -17,41 +17,41 @@ MonoBehaviour:
     leftSmallCount: 0
     leftMediumCount: 0
     leftLargeCount: 0
-    rightSmallCount: 5
-    rightMediumCount: 5
-    rightLargeCount: 3
+    rightSmallCount: 3
+    rightMediumCount: 3
+    rightLargeCount: 1
   - preconditionEnabledProduct: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
+    leftSmallCount: 2
+    leftMediumCount: 1
+    leftLargeCount: 0
+    rightSmallCount: 2
+    rightMediumCount: 2
+    rightLargeCount: 1
+  - preconditionEnabledProduct: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
+    leftSmallCount: 2
+    leftMediumCount: 3
+    leftLargeCount: 0
+    rightSmallCount: 2
+    rightMediumCount: 2
+    rightLargeCount: 1
+  - preconditionEnabledProduct: {fileID: 11400000, guid: 7dafbc71fcd9c0846b0f38a024abc95b, type: 2}
     leftSmallCount: 2
     leftMediumCount: 2
     leftLargeCount: 1
-    rightSmallCount: 5
-    rightMediumCount: 5
-    rightLargeCount: 3
-  - preconditionEnabledProduct: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
-    leftSmallCount: 3
-    leftMediumCount: 3
-    leftLargeCount: 3
-    rightSmallCount: 4
-    rightMediumCount: 3
-    rightLargeCount: 4
-  - preconditionEnabledProduct: {fileID: 11400000, guid: 7dafbc71fcd9c0846b0f38a024abc95b, type: 2}
-    leftSmallCount: 4
-    leftMediumCount: 4
-    leftLargeCount: 4
-    rightSmallCount: 4
-    rightMediumCount: 4
-    rightLargeCount: 4
+    rightSmallCount: 3
+    rightMediumCount: 2
+    rightLargeCount: 1
   - preconditionEnabledProduct: {fileID: 11400000, guid: bbf41d007f26d6049ba7c478bd5f3ecd, type: 2}
-    leftSmallCount: 5
-    leftMediumCount: 5
-    leftLargeCount: 4
-    rightSmallCount: 5
-    rightMediumCount: 4
-    rightLargeCount: 4
+    leftSmallCount: 3
+    leftMediumCount: 2
+    leftLargeCount: 1
+    rightSmallCount: 3
+    rightMediumCount: 2
+    rightLargeCount: 1
   - preconditionEnabledProduct: {fileID: 11400000, guid: cc99559fa3cd81c4f9e227728fe5fe8c, type: 2}
-    leftSmallCount: 5
-    leftMediumCount: 5
-    leftLargeCount: 5
-    rightSmallCount: 5
-    rightMediumCount: 5
-    rightLargeCount: 5
+    leftSmallCount: 3
+    leftMediumCount: 2
+    leftLargeCount: 1
+    rightSmallCount: 3
+    rightMediumCount: 3
+    rightLargeCount: 1

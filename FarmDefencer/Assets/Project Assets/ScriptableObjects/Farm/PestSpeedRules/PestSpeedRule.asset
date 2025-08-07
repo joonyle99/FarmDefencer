@@ -14,23 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pestSpeedRuleEntries:
   - preconditionCurrentMap: {fileID: 11400000, guid: 469c6bef7dd249949a7b8eeb0f2cb2fd, type: 2}
-    smallPestMinimumSpeed: 10
-    smallPestMaximumSpeed: 10
-    mediumPestMinimumSpeed: 10
-    mediumPestMaximumSpeed: 10
-    largePestMinimumSpeed: 10
-    largePestMaximumSpeed: 10
+    smallPestMinimumSpeed: 5
+    smallPestMaximumSpeed: 8
+    mediumPestMinimumSpeed: 3
+    mediumPestMaximumSpeed: 5
+    largePestMinimumSpeed: 2
+    largePestMaximumSpeed: 3
   - preconditionCurrentMap: {fileID: 11400000, guid: d3f7f1726e9b95244b71fd8ff050326f, type: 2}
-    smallPestMinimumSpeed: 20
-    smallPestMaximumSpeed: 20
-    mediumPestMinimumSpeed: 20
-    mediumPestMaximumSpeed: 20
-    largePestMinimumSpeed: 20
-    largePestMaximumSpeed: 20
+    smallPestMinimumSpeed: 5
+    smallPestMaximumSpeed: 10
+    mediumPestMinimumSpeed: 3
+    mediumPestMaximumSpeed: 6
+    largePestMinimumSpeed: 2
+    largePestMaximumSpeed: 3
   - preconditionCurrentMap: {fileID: 11400000, guid: 2b13a58732621a141a17b0b5078b3f12, type: 2}
-    smallPestMinimumSpeed: 30
-    smallPestMaximumSpeed: 30
-    mediumPestMinimumSpeed: 30
-    mediumPestMaximumSpeed: 30
-    largePestMinimumSpeed: 30
-    largePestMaximumSpeed: 30
+    smallPestMinimumSpeed: 7
+    smallPestMaximumSpeed: 10
+    mediumPestMinimumSpeed: 3
+    mediumPestMaximumSpeed: 7
+    largePestMinimumSpeed: 2
+    largePestMaximumSpeed: 4
