@@ -39,6 +39,7 @@ public class GridCell : MonoBehaviour
     public int distanceCost;
 
     public bool isUsable;
+    public bool isPlacable;
     public Tower occupiedTower;
 
     public bool IsEmpty => occupiedTower == null;
@@ -110,21 +111,19 @@ public class GridCell : MonoBehaviour
             }
         }
 
-        var flag = true;
-        isUsable = false; // 타워를 설치하려고 하는 곳을 경로 타일로 사용하지 않도록 하기 위함
-
+        isPlacable = false; // 타워를 설치하려고 하는 곳을 경로 타일로 사용하지 않도록 하기 위함
         bool result = gridMap.FindPathAll();
+        isPlacable = true;
+
+        var successFlag = true;
+
         if (result == false)
         {
-            isUsable = true;
-
             Debug.Log("failed to find path (origin path or each path)");
-            flag = false;
+            successFlag = false;
         }
 
-        isUsable = true;
-
-        return flag;
+        return successFlag;
     }
 
     // sprite

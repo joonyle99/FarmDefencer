@@ -317,8 +317,6 @@ public class GridMap : MonoBehaviour
 
         Queue<Vector2Int> queue = new Queue<Vector2Int>();
         queue.Enqueue(StartCellPoint);
-
-        // 시작 지점의 거리 비용은 0으로 초기화
         _myGridMap[StartCellPoint.y, StartCellPoint.x].distanceCost = 0;
 
         while (queue.Count > 0)

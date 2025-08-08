@@ -3,7 +3,6 @@ using Spine.Unity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using Sirenix.OdinInspector;
 
 public enum FadeType

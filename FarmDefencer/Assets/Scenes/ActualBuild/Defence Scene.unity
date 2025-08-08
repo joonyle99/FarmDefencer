@@ -336,7 +336,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 755706060}
-  - component: {fileID: 755706059}
+  - component: {fileID: 755706063}
   - component: {fileID: 755706062}
   - component: {fileID: 755706061}
   m_Layer: 0
@@ -346,23 +346,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &755706059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 755706058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 654edb161d866f64787d6112e5cab969, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridMap: {fileID: 841568040}
-  buildSystem: {fileID: 507113565}
-  waveSystem: {fileID: 1231187496}
-  buildUI: {fileID: 1985991845}
-  upgradeUI: {fileID: 1467483121}
 --- !u!4 &755706060
 Transform:
   m_ObjectHideFlags: 0
@@ -428,6 +411,23 @@ VideoPlayer:
   m_WaitForFirstFrame: 0
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
+--- !u!114 &755706063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755706058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 654edb161d866f64787d6112e5cab969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridMap: {fileID: 841568040}
+  buildSystem: {fileID: 507113565}
+  waveSystem: {fileID: 1231187496}
+  buildUI: {fileID: 1985991845}
+  upgradeUI: {fileID: 1467483121}
 --- !u!1 &841568038
 GameObject:
   m_ObjectHideFlags: 0
