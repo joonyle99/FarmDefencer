@@ -8,6 +8,13 @@ using Sirenix.OdinInspector;
 /// </summary>
 public class BuildSystem : MonoBehaviour, IVolumeControl
 {
+    private enum ColorState
+    {
+        None,
+        Red,
+        Blue,
+    }
+
     [Header("━━━━━━━━ Build System ━━━━━━━━")]
     [Space]
 
@@ -35,7 +42,14 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
 
     // dynamic variable
     private Tower _ghostTower;
-    private GridCell _hoveringGridCell;
+    private GridCell _occupiedCellByGhost;
+    public GridCell OccupiedCellByGhost => _occupiedCellByGhost;
+
+    private ColorState _prevSpineColorState;
+    private ColorState _prevDetectorColorState;
+
+    private ColorState _spineColorState;
+    private ColorState _detectorColorState;
 
     [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float buildSuccessVolume = 0.5f;
     [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float buildFailureVolume = 0.5f;
@@ -46,8 +60,13 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
         GameStateManager.Instance.OnBuildState += InitBuildTimer;
         GameStateManager.Instance.OnBuildState -= InitProgressBar;
         GameStateManager.Instance.OnBuildState += InitProgressBar;
-    }
 
+        _prevSpineColorState = ColorState.None;
+        _prevDetectorColorState = ColorState.None;
+
+        _spineColorState = ColorState.None;
+        _detectorColorState = ColorState.None;
+    }
     private void OnDestroy()
     {
         if (GameStateManager.Instance is not null)
@@ -56,25 +75,72 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
             GameStateManager.Instance.OnBuildState -= InitProgressBar;
         }
     }
-
     private void Update()
     {
-        if (GameStateManager.Instance.CurrentState is not GameState.Build)
-            return;
-
-        _buildTimer += Time.deltaTime;
-
-        if (_buildTimer < _buildDuration)
+        if (GameStateManager.Instance.IsBuildState)
         {
-            var remainBuildTime = _buildDuration - _buildTimer;
-            _progressBar.UpdateProgressBar(remainBuildTime, _buildDuration);
+            _buildTimer += Time.deltaTime;
+
+            if (_buildTimer < _buildDuration)
+            {
+                var remainBuildTime = _buildDuration - _buildTimer;
+                _progressBar.UpdateProgressBar(remainBuildTime, _buildDuration);
+            }
+            else
+            {
+                _buildTimer = 0f;
+                _progressBar.UpdateProgressBar(0f, _buildDuration);
+
+                GameStateManager.Instance.ChangeState(GameState.Wave);
+            }
         }
-        else
-        {
-            _buildTimer = 0f;
-            _progressBar.UpdateProgressBar(0f, _buildDuration);
 
-            GameStateManager.Instance.ChangeState(GameState.Wave);
+        if (GameStateManager.Instance.IsDefenceState)
+        {
+            if (_ghostTower != null)
+            {
+                if (true)
+                {
+                    if (_spineColorState == ColorState.None)
+                    {
+                        _ghostTower.SpineController.ResetColor();
+                    }
+                    else if (_spineColorState == ColorState.Blue)
+                    {
+                        _ghostTower.SpineController.SetColor(ConstantConfig.BLUE_GHOST);
+                    }
+                    else if (_spineColorState == ColorState.Red)
+                    {
+                        _ghostTower.SpineController.SetColor(ConstantConfig.RED_GHOST);
+                    }
+                }
+
+                if (true)
+                {
+                    if (_detectorColorState == ColorState.None)
+                    {
+                        _ghostTower.Detector.EraseRange();
+                    }
+                    else if (_detectorColorState == ColorState.Blue)
+                    {
+                        _ghostTower.Detector.PaintRange(ConstantConfig.BLUE_RANGE);
+                    }
+                    else if (_detectorColorState == ColorState.Red)
+                    {
+                        _ghostTower.Detector.PaintRange(ConstantConfig.RED_RANGE);
+                    }
+                }
+
+                if (_occupiedCellByGhost != null)
+                {
+                    var monsters = _occupiedCellByGhost.monstersInCell;
+                    if (monsters.Count > 0)
+                    {
+                        _ghostTower.SpineController.SetColor(ConstantConfig.RED_GHOST);
+                        _ghostTower.Detector.PaintRange(ConstantConfig.RED_RANGE);
+                    }
+                }
+            }
         }
     }
 
@@ -119,9 +185,13 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
         {
             MoveGhostTower(worldPos);
 
-            _ghostTower.SpineController.SetColor(ConstantConfig.RED_GHOST);
-            _ghostTower.Detector.EraseRange();
-            _hoveringGridCell = null;
+            _prevSpineColorState = _spineColorState;
+            _prevDetectorColorState = _detectorColorState;
+
+            _spineColorState = ColorState.Red;
+            _detectorColorState = ColorState.None;
+
+            _occupiedCellByGhost = null;
         }
         else
         {
@@ -135,18 +205,26 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
             {
                 MoveGhostTower(gridCell.worldPosition);
 
-                _ghostTower.SpineController.SetColor(ConstantConfig.RED_GHOST);
-                _ghostTower.Detector.PaintRange(ConstantConfig.RED_RANGE);
-                _hoveringGridCell = gridCell;
+                _prevSpineColorState = _spineColorState;
+                _prevDetectorColorState = _detectorColorState;
+
+                _spineColorState = ColorState.Red;
+                _detectorColorState = ColorState.Red;
+
+                _occupiedCellByGhost = gridCell;
             }
             // 그 이외의 모든 경우는 빈 셀이고 사용 가능한 셀인 경우
             else
             {
                 MoveGhostTower(gridCell.worldPosition);
 
-                _ghostTower.SpineController.ResetColor();
-                _ghostTower.Detector.PaintRange(ConstantConfig.BLUE_RANGE);
-                _hoveringGridCell = gridCell;
+                _prevSpineColorState = _spineColorState;
+                _prevDetectorColorState = _detectorColorState;
+
+                _spineColorState = ColorState.None;
+                _detectorColorState = ColorState.Blue;
+
+                _occupiedCellByGhost = gridCell;
             }
         }
     }
@@ -156,6 +234,12 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
         {
             return;
         }
+
+        _prevSpineColorState = _spineColorState;
+        _prevDetectorColorState = _detectorColorState;
+
+        _spineColorState = ColorState.None;
+        _detectorColorState = ColorState.None;
 
         _ghostTower.SpineController.ResetColor();
         _ghostTower.Detector.EraseRange();
@@ -167,7 +251,7 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
         }
 
         // 호버링 중인 셀이 없는 경우
-        if (_hoveringGridCell == null)
+        if (_occupiedCellByGhost == null)
         {
             CancelBuild();
             return;
@@ -181,16 +265,16 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
         }
 
         // 셀이 비어있지 않거나 사용 불가능한 경우
-        if (!EmptyGridCell(_hoveringGridCell) || !UsableGridCell(_hoveringGridCell))
+        if (!EmptyGridCell(_occupiedCellByGhost) || !UsableGridCell(_occupiedCellByGhost))
         {
             CancelBuild();
             return;
         }
 
-        DefenceContext.Current.GridMap.LastPlacedGridCell = _hoveringGridCell;
+        DefenceContext.Current.GridMap.LastPlacedGridCell = _occupiedCellByGhost;
 
         //
-        if (!CheckPath(_hoveringGridCell))
+        if (!CheckPath(_occupiedCellByGhost))
         {
             CancelBuild();
             return;
@@ -200,7 +284,7 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
 
         DefenceContext.Current.GridMap.LastPlacedGridCell = null;
 
-        _hoveringGridCell = null;
+        _occupiedCellByGhost = null;
         _ghostTower = null;
     }
 
@@ -232,8 +316,8 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
     }
     private void PlaceGhostTower()
     {
-        _hoveringGridCell.Occupy(_ghostTower);
-        _hoveringGridCell.UnUsable();
+        _occupiedCellByGhost.Occupy(_ghostTower);
+        _occupiedCellByGhost.UnUsable();
 
         _ghostTower.Activate();
         _ghostTower.SpineController.ResetColor();
@@ -255,7 +339,7 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
             _ghostTower = null;
         }
 
-        _hoveringGridCell = null;
+        _occupiedCellByGhost = null;
     }
 
     //
@@ -288,7 +372,7 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
     }
     private bool SameGridCell(GridCell newGridCell)
     {
-        return newGridCell == _hoveringGridCell;
+        return newGridCell == _occupiedCellByGhost;
     }
     private bool EmptyGridCell(GridCell newGridCell)
     {

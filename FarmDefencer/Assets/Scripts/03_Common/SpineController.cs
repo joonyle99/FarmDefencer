@@ -143,6 +143,12 @@ public class SpineController : MonoBehaviour
         {
             return;
         }
+
+        if (IsSameColor(color))
+        {
+            return;
+        }
+
         _skeletonAnimation.Skeleton.SetColor(color);
     }
     public void ResetColor()
@@ -152,11 +158,20 @@ public class SpineController : MonoBehaviour
             return;
         }
 
+        if (IsSameColor(_originalColor))
+        {
+            return;
+        }
+
         _skeletonAnimation.Skeleton.SetColor(_originalColor);
     }
     public bool IsOriginalColor()
     {
         return GetColor() == _originalColor;
+    }
+    public bool IsSameColor(Color color)
+    {
+        return GetColor() == color;
     }
     public bool IsDifferentColor(Color color)
     {
