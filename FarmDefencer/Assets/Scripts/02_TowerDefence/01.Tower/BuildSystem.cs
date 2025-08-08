@@ -131,7 +131,7 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
                 return;
             }
             // 비어있지 않거나 사용 불가능(시작점 혹은 도착점 등)인 경우
-            else if (!EmptyGridCell(gridCell) || !UsableGridCell(gridCell) || !CheckPath(gridCell))
+            else if (!EmptyGridCell(gridCell) || !UsableGridCell(gridCell) || !CheckPath(gridCell, true))
             {
                 MoveGhostTower(gridCell.worldPosition);
 
@@ -265,10 +265,10 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
             || GameStateManager.Instance.CurrentState is GameState.Wave
             || GameStateManager.Instance.CurrentState is GameState.WaveAfter;
     }
-    private bool CheckPath(GridCell gridCell)
+    private bool CheckPath(GridCell gridCell, bool isDirty = false)
     {
         // gridCell을 기준으로 경로를 탐색하여 타워를 설치할 수 있는지 확인한다
-        return gridCell.CheckPath();
+        return gridCell.CheckPath(isDirty);
     }
     private bool EnoughGold(Tower tower)
     {

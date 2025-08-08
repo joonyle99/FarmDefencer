@@ -206,6 +206,7 @@ public class GridMap : MonoBehaviour
                 _myGridMap[h, w].cellPosition = cellPos;
                 _myGridMap[h, w].worldPosition = worldPos;
                 _myGridMap[h, w].isUsable = true;
+                _myGridMap[h, w].isPlacable = true;
                 _myGridMap[h, w].distanceCost = -1;
                 _myGridMap[h, w].prevGridCell = null;
 
@@ -338,6 +339,7 @@ public class GridMap : MonoBehaviour
                 if (nextPos.x < 0 || nextPos.x >= _width || nextPos.y < 0 || nextPos.y >= _height) continue;
                 if (_myGridMap[nextPos.y, nextPos.x].distanceCost != -1) continue;
                 if (_myGridMap[nextPos.y, nextPos.x].isUsable == false && nextPos != EndCellPoint) continue;
+                if (_myGridMap[nextPos.y, nextPos.x].isPlacable == false) continue;
 
                 queue.Enqueue(nextPos);
 
@@ -382,6 +384,7 @@ public class GridMap : MonoBehaviour
                 if (nextPos.x < 0 || nextPos.x >= _width || nextPos.y < 0 || nextPos.y >= _height) continue;
                 if (_myGridMap[nextPos.y, nextPos.x].distanceCost != -1) continue;
                 if (_myGridMap[nextPos.y, nextPos.x].isUsable == false && nextPos != endCellPoint) continue;
+                if (_myGridMap[nextPos.y, nextPos.x].isPlacable == false) continue;
 
                 queue.Enqueue(nextPos);
 
