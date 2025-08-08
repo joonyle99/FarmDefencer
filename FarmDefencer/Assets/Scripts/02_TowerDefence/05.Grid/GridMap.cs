@@ -164,12 +164,18 @@ public class GridMap : MonoBehaviour
             {
                 Vector2 touchPos = Touchscreen.current.primaryTouch.position.ReadValue();
                 HandleTouch(touchPos);
+                return;
             }
         }
-        else if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+
+        if (Mouse.current != null)
         {
-            Vector2 clickPos = Mouse.current.position.ReadValue();
-            HandleTouch(clickPos);
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                Vector2 clickPos = Mouse.current.position.ReadValue();
+                HandleTouch(clickPos);
+                return;
+            }
         }
     }
 
