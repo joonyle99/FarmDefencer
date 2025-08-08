@@ -1,7 +1,7 @@
+using Sirenix.OdinInspector;
 using Spine.Unity;
 using System;
 using UnityEngine;
-using Sirenix.OdinInspector;
 
 /// <summary>
 ///
@@ -24,7 +24,18 @@ public sealed class Tower : TargetableBehavior, IVolumeControl
     public int ID => _id;
     public int CurrentLevel
     {
-        get => _level;
+        get
+        {
+            if (ID == 0)
+            {
+                var mapIndex = MapManager.Instance.CurrentMapIndex;
+                var level = Mathf.Clamp(mapIndex, 1, MaxLevel);
+                _level = level;
+                return _level;
+            }
+
+            return _level;
+        }
         set
         {
             _level = Mathf.Clamp(value, 1, MaxLevel);
@@ -56,7 +67,21 @@ public sealed class Tower : TargetableBehavior, IVolumeControl
     [Header("Data")]
     [SerializeField] private TowerLevelData[] _levelData;
     public TowerLevelData[] LevelData => _levelData;
-    public TowerLevelData DefaultLevelData => _levelData[0];
+    public TowerLevelData DefaultLevelData
+    {
+        get
+        {
+            if (ID == 0)
+            {
+                var mapIndex = MapManager.Instance.CurrentMapIndex;
+                var level = Mathf.Clamp(mapIndex, 1, MaxLevel);
+                var levelIndex = Mathf.Clamp(level - 1, 0, MaxLevel - 1);
+                return _levelData[levelIndex];
+            }
+
+            return _levelData[0];
+        }
+    }
     public TowerLevelData CurrentLevelData => _levelData[CurrentLevel - 1];
 
     [Header("Animation")]
@@ -143,6 +168,8 @@ public sealed class Tower : TargetableBehavior, IVolumeControl
         // TODO: 이후에 Try 함수를 만들어서 OnEnable, Start, Setter 등 사용하는 곳에서 호출해주어 구독을 빼먹지 않도록 한다..
         spineController.SkeletonAnimation.AnimationState.Event -= HandleSpineEvent;
         spineController.SkeletonAnimation.AnimationState.Event += HandleSpineEvent;
+
+        spineController.SetAnimation(IdleAnimation, true);
     }
     private void Update()
     {

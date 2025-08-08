@@ -18,8 +18,13 @@ public class TowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointe
     private void Start()
     {
         var availableTowers = DefenceContext.Current.BuildSystem.AvailableTowers;
-        var defaultLevel = availableTowers[selectedIndex].DefaultLevelData.ValueCost;
-        _cost.text = defaultLevel.ToString();
+        var targetTower = availableTowers[selectedIndex];
+
+        var deaultIcon = targetTower.DefaultLevelData.Icon;
+        var defaultCost = targetTower.DefaultLevelData.ValueCost;
+
+        _icon.sprite = deaultIcon;
+        _cost.text = defaultCost.ToString();
     }
 
     public void OnPointerDown(PointerEventData eventData)

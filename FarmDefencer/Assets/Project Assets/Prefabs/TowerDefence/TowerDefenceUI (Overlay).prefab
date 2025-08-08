@@ -1150,7 +1150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8703986307316726819
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1224,8 +1224,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c0338176330bef45a2ac7d918824e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mapIndex: {fileID: 20797167325419564}
-  _stageIndex: {fileID: 1616652240141949904}
+  _maxUnlockedMapIndex: {fileID: 0}
+  _maxUnlockedStageIndex: {fileID: 0}
+  _currentMapIndex: {fileID: 0}
+  _currentStageIndex: {fileID: 0}
 --- !u!1 &1006045065795553149
 GameObject:
   m_ObjectHideFlags: 0
@@ -2253,7 +2255,6 @@ GameObject:
   - component: {fileID: 6095018350435945997}
   - component: {fileID: 9119603000908606553}
   - component: {fileID: 7712078431811612082}
-  - component: {fileID: 2771387743098012367}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -2318,18 +2319,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2771387743098012367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1976824502373647215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59c46710196ac354a81ca5a3e5b6b687, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2071923499466875244
 GameObject:
   m_ObjectHideFlags: 0
@@ -6210,7 +6199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.7058824}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.50980395}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6484,7 +6473,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5633589555608636203}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2634175202699904370}
+        m_TargetAssemblyTypeName: ProcessUI, Assembly-CSharp
+        m_MethodName: Setting
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5256224632055534483
 GameObject:
   m_ObjectHideFlags: 0
