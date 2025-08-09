@@ -108,12 +108,16 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     private void HandleBuildState()
     {
         OnBuildState?.Invoke();
+
         SoundManager.Instance.PlayDefenceMapAmb();
+        SoundManager.Instance.PlayDefenceMapSong();
     }
     private void HandleWaveState()
     {
         OnWaveState?.Invoke();
-        SoundManager.Instance.PlayDefenceMapSong();
+
+        // build state로 옮김
+        //SoundManager.Instance.PlayDefenceMapSong();
     }
     private void HandleWaveAfterState()
     {

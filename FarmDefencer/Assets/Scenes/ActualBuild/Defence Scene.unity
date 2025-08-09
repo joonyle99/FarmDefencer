@@ -538,7 +538,7 @@ MonoBehaviour:
   waveSystem: {fileID: 1231187496}
   buildUI: {fileID: 1985991845}
   upgradeUI: {fileID: 1467483121}
-  processUI: {fileID: 0}
+  processUI: {fileID: 8116497467158467144}
 --- !u!1 &841568038
 GameObject:
   m_ObjectHideFlags: 0
@@ -3109,6 +3109,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
+--- !u!114 &8116497467158467144 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2634175202699904370, guid: c1f85905aa32643489ea7b9adc920be5, type: 3}
+  m_PrefabInstance: {fileID: 8116497467158467143}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad6333abc62cc714783916504e420c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8197640319008509917
 PrefabInstance:
   m_ObjectHideFlags: 0
