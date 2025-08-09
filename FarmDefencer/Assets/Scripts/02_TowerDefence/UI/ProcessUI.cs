@@ -29,6 +29,7 @@ public class ProcessUI : MonoBehaviour
     [Space]
 
     [SerializeField] private RectTransform _pauseBlocker;
+    public RectTransform PauseBlocker => _pauseBlocker;
     [SerializeField] private RectTransform _mainButtons;
     private RectTransform _mainButtonsOriginParent;
 

@@ -3544,11 +3544,11 @@ RectTransform:
   - {fileID: 6463959457536657737}
   - {fileID: 5690025038307769632}
   - {fileID: 1424046076792213851}
-  - {fileID: 1100988956677630864}
   - {fileID: 2841383996007829131}
   - {fileID: 574440493385209170}
   - {fileID: 8703986307316726819}
   - {fileID: 4681339397229285342}
+  - {fileID: 1100988956677630864}
   - {fileID: 6475753147006226429}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6141,6 +6141,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _progressBar: {fileID: 539914167890523222}
+  _sprites:
+  - {fileID: -5348897134178678075, guid: 5b422d24283905d4e80e7ef03b1b8762, type: 3}
+  - {fileID: 8922840076692664309, guid: 11316a1c555b3f8439210d5ee54f1612, type: 3}
+  - {fileID: 7563451822442980753, guid: 9c9aed777ea7a1d449870d8eeb555d65, type: 3}
+  _animatorControllers:
+  - {fileID: 9100000, guid: e5022da30973b8a44bc43d447d22e072, type: 2}
+  - {fileID: 9100000, guid: bf875057ca55d124faad8f2463773682, type: 2}
+  - {fileID: 9100000, guid: e1860785db88fb54b9e810330a1ab769, type: 2}
 --- !u!1 &4899638393191927934
 GameObject:
   m_ObjectHideFlags: 0

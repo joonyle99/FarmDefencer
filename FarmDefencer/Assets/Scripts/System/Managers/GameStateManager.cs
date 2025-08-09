@@ -125,6 +125,8 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
         SoundManager.Instance.StopBgm();
 
         // TODO: Fight 버튼, 타워 설치, 등 불가능하게 막기
+        DefenceContext.Current.ProcessUI.PauseBlocker.gameObject.SetActive(true);
+
         // TODO: 게임 배속 복구하기
         Time.timeScale = 1f;
     }

@@ -18,6 +18,8 @@ public class DefenceContext : MonoBehaviour
     public BuildUI BuildUI => buildUI;
     [SerializeField] private UpgradeUI upgradeUI;
     public UpgradeUI UpgradeUI => upgradeUI;
+    [SerializeField] private ProcessUI processUI;
+    public ProcessUI ProcessUI => processUI;
 
     private void Awake()
     {
