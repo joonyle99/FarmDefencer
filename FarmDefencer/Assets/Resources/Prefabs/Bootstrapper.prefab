@@ -906,10 +906,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bgmAudioSource1: {fileID: 7790916876619879453}
-  _bgmAudioSource2: {fileID: 1390226041370120174}
-  _sfxAudioSource: {fileID: 846582086370651982}
   _ambAudioSource: {fileID: 8771982848698843837}
-  ambVolume: 0.8
+  _sfxAudioSource: {fileID: 846582086370651982}
+  ambVolume: 0.5
   songVolume: 0.08
   coinVolume: 0.5
   waterVolume: 0.8

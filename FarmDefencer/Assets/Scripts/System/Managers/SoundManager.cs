@@ -99,6 +99,14 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 		    CurrentBgmName = null;
 	    }
     }
+    public void SetBgmDoubleSpeed()
+    {
+        _bgmAudioSource1.pitch = 2.0f; // BGM을 2배속으로 재생
+    }
+    public void SetBgmNormalSpeed()
+    {
+        _bgmAudioSource1.pitch = 1.0f; // BGM을 1배속으로 재생
+    }
 
     public void PlayAmb(string ambName, float volume = 0.5f)
     {
@@ -126,6 +134,14 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 	    _ambAudioSource.volume = volume;
 	    CurrentAmbName = ambName;
     }
+    public void StopAmb()
+    {
+        if (_ambAudioSource.isPlaying)
+        {
+            _ambAudioSource.Stop();
+            CurrentAmbName = null;
+        }
+    }
     public void StopAmbIf(string ambName)
     {
 	    if (_ambAudioSource.isPlaying && CurrentAmbName is not null && CurrentAmbName.Equals(ambName))
@@ -134,7 +150,15 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 		    CurrentAmbName = null;
 	    }
     }
-    
+    public void SetAmbDoubleSpeed()
+    {
+        _ambAudioSource.pitch = 2.0f; // AMB를 2배속으로 재생
+    }
+    public void SetAmbNormalSpeed()
+    {
+        _ambAudioSource.pitch = 1.0f; // AMB를 1배속으로 재생
+    }
+
     // TODO: 수정 예정
     public void PlayDefenceMapAmb()
     {
@@ -243,6 +267,14 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
         {
             _sfxAudioSource.Stop();
         }
+    }
+    public void SetSfxDoubleSpeed()
+    {
+        _ambAudioSource.pitch = 2.0f; // SFX를 2배속으로 재생
+    }
+    public void SetSfxormalSpeed()
+    {
+        _ambAudioSource.pitch = 1.0f; // SFX를 1배속으로 재생
     }
     public void PrintSfxDictionary()
     {

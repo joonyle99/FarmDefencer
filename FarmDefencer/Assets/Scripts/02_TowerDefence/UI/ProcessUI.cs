@@ -116,7 +116,7 @@ public class ProcessUI : MonoBehaviour
     }
     public void TogglePlaySpeed()
     {
-        if (GameStateManager.Instance.IsWaveState == false)
+        if (GameStateManager.Instance.IsDefenceState == false)
         {
             return;
         }
@@ -125,6 +125,17 @@ public class ProcessUI : MonoBehaviour
 
         _playX1Button.gameObject.SetActive(GameStateManager.Instance.IsPlayX2);
         _playX2Button.gameObject.SetActive(!GameStateManager.Instance.IsPlayX2);
+
+        if (GameStateManager.Instance.IsPlayX2)
+        {
+            SoundManager.Instance.SetBgmDoubleSpeed();
+            SoundManager.Instance.SetAmbDoubleSpeed();
+        }
+        else
+        {
+            SoundManager.Instance.SetBgmNormalSpeed();
+            SoundManager.Instance.SetAmbNormalSpeed();
+        }
     }
 
     public void Setting()
@@ -138,7 +149,11 @@ public class ProcessUI : MonoBehaviour
         //}
 
         // 중단하시겠습까?
-        
+
+        SoundManager.Instance.StopBgm();
+        SoundManager.Instance.StopAmb();
+        SoundManager.Instance.StopSfx();
+
         DefenceSceneTransitioner.HandleGiveUp();
         SaveManager.Instance.LoadedSave["MapManager"] = MapManager.Instance.Serialize();
         SaveManager.Instance.LoadedSave["ResourceManager"] = ResourceManager.Instance.Serialize();
