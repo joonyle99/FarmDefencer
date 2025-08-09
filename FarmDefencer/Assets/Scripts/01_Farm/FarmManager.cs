@@ -55,7 +55,7 @@ public sealed class FarmManager : MonoBehaviour
             DeserializeFromSaveFile();
         }
 
-        penaltyGiver.SpawnMonsters(MapManager.Instance.MaximumUnlockedMapIndex, ResourceManager.Instance.SurvivedMonsters);
+        penaltyGiver.SpawnMonsters(MapManager.Instance.CurrentMapIndex, ResourceManager.Instance.SurvivedMonsters);
         ResourceManager.Instance.SurvivedMonsters.Clear();
         farmUI.PlayQuotaAssignAnimation(IsProductAvailableNow,
             productEntry => quotaContext.TryGetQuota(productEntry.ProductName, out var quota) ? quota : 0);
