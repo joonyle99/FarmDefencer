@@ -94,11 +94,11 @@ public sealed class PestGiver
     {
         if (IsPestRunning)
         {
-            SoundManager.Instance.PlayAmb("AMB_T_pest_sirenamb", SoundManager.Instance.ambVolume);    
+            SoundManager.Instance.PlayAmb("AMB_T_pest_siren", SoundManager.Instance.ambVolume);    
         }
         else
         {
-            SoundManager.Instance.StopAmbIf("AMB_T_pest_sirenamb");
+            SoundManager.Instance.StopAmbIf("AMB_T_pest_siren");
         }
         
         if (_isPestSpawnReserved && _getDaytime() >= _pestSpawnTime)

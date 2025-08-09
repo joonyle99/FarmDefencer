@@ -24,7 +24,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
     private List<(AudioClip, float)> _sfxPlayQueue;
 
 	[SerializeField] private AudioSource _bgmAudioSource1;
-    //[SerializeField] private AudioSource _bgmAudioSource2;
     [SerializeField] private AudioSource _ambAudioSource;
     [SerializeField] private AudioSource _sfxAudioSource;
 
@@ -140,13 +139,13 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
     public void PlayDefenceMapAmb()
     {
         var currentMap = MapManager.Instance.CurrentMap;
-        var mapAmbName = $"BGM_D_{currentMap.MapCode}_amb";
-        PlayBgm(mapAmbName, ambVolume);
+        var mapAmbName = $"AMB_D_{currentMap.MapCode}";
+        PlayAmb(mapAmbName, ambVolume);
     }
     public void PlayDefenceMapSong()
     {
         var currentMap = MapManager.Instance.CurrentMap;
-        var mapSongName = $"BGM_D_{currentMap.MapCode}_song";
+        var mapSongName = $"BGM_D_{currentMap.MapCode}";
         PlayBgm(mapSongName, songVolume);
     }
 

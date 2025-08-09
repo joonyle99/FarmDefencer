@@ -305,7 +305,7 @@ public sealed class FarmManager : MonoBehaviour
                 var normalSpeedBgmTime = SoundManager.Instance.CurrentBgmTime;
                 fastSpeedBgmTime = normalSpeedBgmTime / 1.7f;
             }
-            SoundManager.Instance.PlayBgm("BGM_T_main_fast_song", SoundManager.Instance.songVolume, fastSpeedBgmTime);
+            SoundManager.Instance.PlayBgm("BGM_T_main_fast", SoundManager.Instance.songVolume, fastSpeedBgmTime);
         }
         else
         {
@@ -316,7 +316,7 @@ public sealed class FarmManager : MonoBehaviour
                 var fastSpeedBgmTime = SoundManager.Instance.CurrentBgmTime;
                 normalSpeedBgmTime = fastSpeedBgmTime * 1.7f;
             }
-            SoundManager.Instance.PlayBgm("BGM_T_main_origin_song", SoundManager.Instance.songVolume, normalSpeedBgmTime);
+            SoundManager.Instance.PlayBgm("BGM_T_main_origin", SoundManager.Instance.songVolume, normalSpeedBgmTime);
         }
         
         // 리버브 적용
