@@ -1,4 +1,7 @@
+using System.Linq;
+using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ProgressFollower : MonoBehaviour
 {
@@ -6,11 +9,16 @@ public class ProgressFollower : MonoBehaviour
     private Vector3 _startPos;
     private Vector3 _endPos;
 
+    private Image _image;
     private Animator _animator;
     private RectTransform _rectTransform;
 
+    public Sprite[] _sprites;
+    public RuntimeAnimatorController[] _animatorControllers;
+
     private void Awake()
     {
+        _image = GetComponent<Image>();
         _animator = GetComponent<Animator>();
         _rectTransform = GetComponent<RectTransform>();
     }
@@ -42,8 +50,15 @@ public class ProgressFollower : MonoBehaviour
 
     private void PlayAnimator()
     {
+        var mapIndex = MapManager.Instance.CurrentMapIndex;
+
+        _image.sprite = _sprites[Mathf.Clamp(mapIndex - 1, 0, _sprites.Length - 1)];
+        _image.SetNativeSize();
+
+        _animator.runtimeAnimatorController = _animatorControllers[Mathf.Clamp(mapIndex - 1, 0, _animatorControllers.Length - 1)];
+
         //_animator.gameObject.SetActive(true);
-        _animator.Play("Play");
+        _animator.Play($"Play");
     }
     private void StopAnimator()
     {

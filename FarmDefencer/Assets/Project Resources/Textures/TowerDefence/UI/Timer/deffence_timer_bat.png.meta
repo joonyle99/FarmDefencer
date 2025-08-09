@@ -1,0 +1,910 @@
+fileFormatVersion: 2
+guid: 9c9aed777ea7a1d449870d8eeb555d65
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7563451822442980753
+    second: deffence_timer_bat_sheet_151x69_0
+  - first:
+      213: -2166709997390116260
+    second: deffence_timer_bat_sheet_151x69_1
+  - first:
+      213: 6596784062021970434
+    second: deffence_timer_bat_sheet_151x69_2
+  - first:
+      213: 471090518217450970
+    second: deffence_timer_bat_sheet_151x69_3
+  - first:
+      213: 5799029532960070091
+    second: deffence_timer_bat_sheet_151x69_4
+  - first:
+      213: -8049573738820701362
+    second: deffence_timer_bat_sheet_151x69_5
+  - first:
+      213: -3110792135892543590
+    second: deffence_timer_bat_sheet_151x69_6
+  - first:
+      213: 83295740442022950
+    second: deffence_timer_bat_sheet_151x69_7
+  - first:
+      213: -286433996172612343
+    second: deffence_timer_bat_sheet_151x69_8
+  - first:
+      213: 3342091425091765914
+    second: deffence_timer_bat_sheet_151x69_9
+  - first:
+      213: -5829288501823758497
+    second: deffence_timer_bat_sheet_151x69_10
+  - first:
+      213: 8964544833880666452
+    second: deffence_timer_bat_sheet_151x69_11
+  - first:
+      213: 1198898945954397591
+    second: deffence_timer_bat_sheet_151x69_12
+  - first:
+      213: 4516617421918684231
+    second: deffence_timer_bat_sheet_151x69_13
+  - first:
+      213: -2199278484428490792
+    second: deffence_timer_bat_sheet_151x69_14
+  - first:
+      213: -3535803199014676662
+    second: deffence_timer_bat_sheet_151x69_15
+  - first:
+      213: 6983128155968462617
+    second: deffence_timer_bat_sheet_151x69_16
+  - first:
+      213: 2964665687575551895
+    second: deffence_timer_bat_sheet_151x69_17
+  - first:
+      213: 5417518939262690064
+    second: deffence_timer_bat_sheet_151x69_18
+  - first:
+      213: 2267131844667689469
+    second: deffence_timer_bat_sheet_151x69_19
+  - first:
+      213: 8098310083543568267
+    second: deffence_timer_bat_sheet_151x69_20
+  - first:
+      213: -417734373311396974
+    second: deffence_timer_bat_sheet_151x69_21
+  - first:
+      213: 4767863942397020006
+    second: deffence_timer_bat_sheet_151x69_22
+  - first:
+      213: 908892207720379967
+    second: deffence_timer_bat_sheet_151x69_23
+  - first:
+      213: -2914681825426306466
+    second: deffence_timer_bat_sheet_151x69_24
+  - first:
+      213: 1800863099913983901
+    second: deffence_timer_bat_sheet_151x69_25
+  - first:
+      213: 6463224654915638968
+    second: deffence_timer_bat_sheet_151x69_26
+  - first:
+      213: 752365968809883751
+    second: deffence_timer_bat_sheet_151x69_27
+  - first:
+      213: -8646382130243818437
+    second: deffence_timer_bat_sheet_151x69_28
+  - first:
+      213: 1967255370602359771
+    second: deffence_timer_bat_sheet_151x69_29
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_0
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 631
+        width: 128
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 195ae701c57c6f860800000000000000
+      internalID: 7563451822442980753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_1
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 633
+        width: 134
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5a4642bcbc4ee1e0800000000000000
+      internalID: -2166709997390116260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_2
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 633
+        width: 139
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20a27c4372c7c8b50800000000000000
+      internalID: 6596784062021970434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_3
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 564
+        width: 143
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad5e7639456a98600800000000000000
+      internalID: 471090518217450970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_4
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 564
+        width: 147
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc9951ab2aa4a7050800000000000000
+      internalID: 5799029532960070091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_5
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 564
+        width: 149
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e437740455b2a4090800000000000000
+      internalID: -8049573738820701362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_6
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 495
+        width: 150
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a97db0ab80f34d4d0800000000000000
+      internalID: -3110792135892543590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_7
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 495
+        width: 150
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 624995cd80de72100800000000000000
+      internalID: 83295740442022950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_8
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 495
+        width: 149
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90d298e4cc1660cf0800000000000000
+      internalID: -286433996172612343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_9
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 426
+        width: 147
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a964977a17e716e20800000000000000
+      internalID: 3342091425091765914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_10
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 425
+        width: 144
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5f96831ef43a1fa0800000000000000
+      internalID: -5829288501823758497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_11
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 423
+        width: 141
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 451358cb706786c70800000000000000
+      internalID: 8964544833880666452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_12
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 352
+        width: 135
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79db3334d3853a010800000000000000
+      internalID: 1198898945954397591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_13
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 350
+        width: 130
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 744cdcb7d9f3eae30800000000000000
+      internalID: 4516617421918684231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_14
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 348
+        width: 129
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d7fa75eed79a71e0800000000000000
+      internalID: -2199278484428490792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_15
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 278
+        width: 128
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a475a0759bd4eeec0800000000000000
+      internalID: -3535803199014676662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_16
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 278
+        width: 131
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91f57854f0e09e060800000000000000
+      internalID: 6983128155968462617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_17
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 278
+        width: 133
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79fdab14cbb942920800000000000000
+      internalID: 2964665687575551895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_18
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 209
+        width: 133
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01324b2a5c4ee2b40800000000000000
+      internalID: 5417518939262690064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_19
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 209
+        width: 134
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df9c464a668767f10800000000000000
+      internalID: 2267131844667689469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_20
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 210
+        width: 134
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8f04924d1af26070800000000000000
+      internalID: 8098310083543568267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_21
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 141
+        width: 134
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 293cd4cfcc8e33af0800000000000000
+      internalID: -417734373311396974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_22
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 141
+        width: 133
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 667c7ff8efada2240800000000000000
+      internalID: 4767863942397020006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_23
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 142
+        width: 132
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f363b4cb5a80d9c00800000000000000
+      internalID: 908892207720379967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_24
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 73
+        width: 131
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5a8d2a8258fc87d0800000000000000
+      internalID: -2914681825426306466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_25
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 73
+        width: 129
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d975b7fa273fdf810800000000000000
+      internalID: 1800863099913983901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_26
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 74
+        width: 127
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b61bcb749cf1b950800000000000000
+      internalID: 6463224654915638968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_27
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 6
+        width: 124
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7687108ccd0f07a00800000000000000
+      internalID: 752365968809883751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_28
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 7
+        width: 121
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3c28865341e10880800000000000000
+      internalID: -8646382130243818437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_bat_sheet_151x69_29
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 8
+        width: 123
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdbab3b26581d4b10800000000000000
+      internalID: 1967255370602359771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      deffence_timer_bat_sheet_151x69_0: 7563451822442980753
+      deffence_timer_bat_sheet_151x69_1: -2166709997390116260
+      deffence_timer_bat_sheet_151x69_10: -5829288501823758497
+      deffence_timer_bat_sheet_151x69_11: 8964544833880666452
+      deffence_timer_bat_sheet_151x69_12: 1198898945954397591
+      deffence_timer_bat_sheet_151x69_13: 4516617421918684231
+      deffence_timer_bat_sheet_151x69_14: -2199278484428490792
+      deffence_timer_bat_sheet_151x69_15: -3535803199014676662
+      deffence_timer_bat_sheet_151x69_16: 6983128155968462617
+      deffence_timer_bat_sheet_151x69_17: 2964665687575551895
+      deffence_timer_bat_sheet_151x69_18: 5417518939262690064
+      deffence_timer_bat_sheet_151x69_19: 2267131844667689469
+      deffence_timer_bat_sheet_151x69_2: 6596784062021970434
+      deffence_timer_bat_sheet_151x69_20: 8098310083543568267
+      deffence_timer_bat_sheet_151x69_21: -417734373311396974
+      deffence_timer_bat_sheet_151x69_22: 4767863942397020006
+      deffence_timer_bat_sheet_151x69_23: 908892207720379967
+      deffence_timer_bat_sheet_151x69_24: -2914681825426306466
+      deffence_timer_bat_sheet_151x69_25: 1800863099913983901
+      deffence_timer_bat_sheet_151x69_26: 6463224654915638968
+      deffence_timer_bat_sheet_151x69_27: 752365968809883751
+      deffence_timer_bat_sheet_151x69_28: -8646382130243818437
+      deffence_timer_bat_sheet_151x69_29: 1967255370602359771
+      deffence_timer_bat_sheet_151x69_3: 471090518217450970
+      deffence_timer_bat_sheet_151x69_4: 5799029532960070091
+      deffence_timer_bat_sheet_151x69_5: -8049573738820701362
+      deffence_timer_bat_sheet_151x69_6: -3110792135892543590
+      deffence_timer_bat_sheet_151x69_7: 83295740442022950
+      deffence_timer_bat_sheet_151x69_8: -286433996172612343
+      deffence_timer_bat_sheet_151x69_9: 3342091425091765914
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

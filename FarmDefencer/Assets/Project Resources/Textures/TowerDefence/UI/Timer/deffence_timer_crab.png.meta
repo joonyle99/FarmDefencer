@@ -1,0 +1,676 @@
+fileFormatVersion: 2
+guid: 11316a1c555b3f8439210d5ee54f1612
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8922840076692664309
+    second: deffence_timer_crab_sheet_97x67_0
+  - first:
+      213: 1822112343920620380
+    second: deffence_timer_crab_sheet_97x67_1
+  - first:
+      213: 1538636529430025964
+    second: deffence_timer_crab_sheet_97x67_2
+  - first:
+      213: -8693893533606871773
+    second: deffence_timer_crab_sheet_97x67_3
+  - first:
+      213: 6866975305543983258
+    second: deffence_timer_crab_sheet_97x67_4
+  - first:
+      213: 3194421771849393991
+    second: deffence_timer_crab_sheet_97x67_5
+  - first:
+      213: 3660817877677924679
+    second: deffence_timer_crab_sheet_97x67_6
+  - first:
+      213: -5814446234311202773
+    second: deffence_timer_crab_sheet_97x67_7
+  - first:
+      213: 4624595636314604427
+    second: deffence_timer_crab_sheet_97x67_8
+  - first:
+      213: -2996388715406724189
+    second: deffence_timer_crab_sheet_97x67_9
+  - first:
+      213: 5331984994581214281
+    second: deffence_timer_crab_sheet_97x67_10
+  - first:
+      213: -2510412678752158854
+    second: deffence_timer_crab_sheet_97x67_11
+  - first:
+      213: -5691616254608677966
+    second: deffence_timer_crab_sheet_97x67_12
+  - first:
+      213: 7195059908843766226
+    second: deffence_timer_crab_sheet_97x67_13
+  - first:
+      213: 1399695085607083272
+    second: deffence_timer_crab_sheet_97x67_14
+  - first:
+      213: 3670757311905372880
+    second: deffence_timer_crab_sheet_97x67_15
+  - first:
+      213: -6245611141156727256
+    second: deffence_timer_crab_sheet_97x67_16
+  - first:
+      213: 1611992612978201844
+    second: deffence_timer_crab_sheet_97x67_17
+  - first:
+      213: 8121356681096146854
+    second: deffence_timer_crab_sheet_97x67_18
+  - first:
+      213: 4665196384191541649
+    second: deffence_timer_crab_sheet_97x67_19
+  - first:
+      213: 8018598641597475290
+    second: deffence_timer_crab_sheet_97x67_20
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 403
+        width: 92
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ffa2e646cb44db70800000000000000
+      internalID: 8922840076692664309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_1
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 404
+        width: 91
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c533e38d581794910800000000000000
+      internalID: 1822112343920620380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_2
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 404
+        width: 91
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce6dd1f75c55a5510800000000000000
+      internalID: 1538636529430025964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 337
+        width: 92
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32dfb46b4e5195780800000000000000
+      internalID: -8693893533606871773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_4
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 337
+        width: 93
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a90245858a56c4f50800000000000000
+      internalID: 6866975305543983258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_5
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 336
+        width: 94
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7476bdd3dadd45c20800000000000000
+      internalID: 3194421771849393991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_6
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 269
+        width: 94
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7416462c676ddc230800000000000000
+      internalID: 3660817877677924679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_7
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 269
+        width: 94
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b28e546c4ffee4fa0800000000000000
+      internalID: -5814446234311202773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_8
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 269
+        width: 93
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b838a54aa3ddd2040800000000000000
+      internalID: 4624595636314604427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_9
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 202
+        width: 92
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a37131c650ba66d0800000000000000
+      internalID: -2996388715406724189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_10
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 202
+        width: 92
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 944f9bd3a140ff940800000000000000
+      internalID: 5331984994581214281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_11
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 203
+        width: 92
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7b375b28f8392dd0800000000000000
+      internalID: -2510412678752158854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_12
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 136
+        width: 93
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b3e5320c215301b0800000000000000
+      internalID: -5691616254608677966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_13
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 136
+        width: 94
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d18944bddcf9d360800000000000000
+      internalID: 7195059908843766226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_14
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 136
+        width: 94
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80d5873b347bc6310800000000000000
+      internalID: 1399695085607083272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 69
+        width: 94
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0da99c0a35621f230800000000000000
+      internalID: 3670757311905372880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_16
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 69
+        width: 93
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 826912ef1c12359a0800000000000000
+      internalID: -6245611141156727256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_17
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 70
+        width: 92
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f49e15adb2fe5610800000000000000
+      internalID: 1611992612978201844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3
+        width: 91
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6af2bf66fdad4b070800000000000000
+      internalID: 8121356681096146854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_19
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 2
+        width: 91
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1917c27e46b1eb040800000000000000
+      internalID: 4665196384191541649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deffence_timer_crab_sheet_97x67_20
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 1
+        width: 92
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad9e8dceaf8c74f60800000000000000
+      internalID: 8018598641597475290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      deffence_timer_crab_sheet_97x67_0: 8922840076692664309
+      deffence_timer_crab_sheet_97x67_1: 1822112343920620380
+      deffence_timer_crab_sheet_97x67_10: 5331984994581214281
+      deffence_timer_crab_sheet_97x67_11: -2510412678752158854
+      deffence_timer_crab_sheet_97x67_12: -5691616254608677966
+      deffence_timer_crab_sheet_97x67_13: 7195059908843766226
+      deffence_timer_crab_sheet_97x67_14: 1399695085607083272
+      deffence_timer_crab_sheet_97x67_15: 3670757311905372880
+      deffence_timer_crab_sheet_97x67_16: -6245611141156727256
+      deffence_timer_crab_sheet_97x67_17: 1611992612978201844
+      deffence_timer_crab_sheet_97x67_18: 8121356681096146854
+      deffence_timer_crab_sheet_97x67_19: 4665196384191541649
+      deffence_timer_crab_sheet_97x67_2: 1538636529430025964
+      deffence_timer_crab_sheet_97x67_20: 8018598641597475290
+      deffence_timer_crab_sheet_97x67_3: -8693893533606871773
+      deffence_timer_crab_sheet_97x67_4: 6866975305543983258
+      deffence_timer_crab_sheet_97x67_5: 3194421771849393991
+      deffence_timer_crab_sheet_97x67_6: 3660817877677924679
+      deffence_timer_crab_sheet_97x67_7: -5814446234311202773
+      deffence_timer_crab_sheet_97x67_8: 4624595636314604427
+      deffence_timer_crab_sheet_97x67_9: -2996388715406724189
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
