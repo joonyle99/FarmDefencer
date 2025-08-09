@@ -24,34 +24,18 @@ public sealed class MapStageSelectSceneUI : MonoBehaviour
     private void Awake()
     {
         var mapCode = SceneManager.GetActiveScene().name.Split("_")[1];
-        SceneMapEntry = MapManager.Instance.GetMapEntryOf(mapCode);
+        SceneMapEntry = MapManager.Instance.GetMapEntryOf(mapCode.ToLower());
 
         // Current 정보 초기화
         // MapManager.Instance.CurrentMapIndex = MapManager.Instance.MaximumUnlockedMapIndex;
         // MapManager.Instance.CurrentStageIndex = MapManager.Instance.MaximumUnlockedStageIndex;
 
         _goPreviousMapButton = transform.Find("GoPreviousMapButton").GetComponent<Button>();
-        _goPreviousMapButton.gameObject.SetActive(SceneMapEntry.MapId > 1);
-        _goPreviousMapButton.onClick.AddListener(() => MoveToAnotherSelectSceneFor(SceneMapEntry.MapId - 1));
-
         _goNextMapButton = transform.Find("GoNextMapButton").GetComponent<Button>();
-        _goNextMapButton.gameObject.SetActive(SceneMapEntry.MapId < 3);
-        _goNextMapButton.interactable = SceneMapEntry.MapId + 1 <= MapManager.Instance.MaximumUnlockedMapIndex;
-        _goNextMapButton.onClick.AddListener(() => MoveToAnotherSelectSceneFor(SceneMapEntry.MapId + 1));
-
         _gold = transform.Find("Gold").GetComponent<CoinsUI>();
-        _gold.SetCoin(ResourceManager.Instance.Gold);
-
-        _infiniteModeButton = transform.Find("InfiniteModeButton").GetComponent<Button>();
-        _infiniteModeButton.interactable = false;
-
-        _settingButton = transform.Find("SettingButton").GetComponent<Button>();
-
-        // TODO 실제 설정창 구현하기
-        _settingButton.onClick.AddListener(() => SceneManager.LoadScene("Main Scene"));
-
         _debugCurrentMapCode = transform.Find("Debug_CurrentMapCode").GetComponent<TMP_Text>();
-        _debugCurrentMapCode.text = SceneMapEntry.MapCode;
+        _infiniteModeButton = transform.Find("InfiniteModeButton").GetComponent<Button>();
+        _settingButton = transform.Find("SettingButton").GetComponent<Button>();
     }
 
     private void Start()
@@ -65,6 +49,23 @@ public sealed class MapStageSelectSceneUI : MonoBehaviour
             stageButton.OnClicked += OnStageButtonClicked;
             stageButton.SetStageButtonEnabled(stageButton.MapIndex < maximumUnlockedMapIndex || stageButton.MapIndex == maximumUnlockedMapIndex && stageButton.StageIndex <= maximumUnlockedStageIndex);
         }
+        
+        _goPreviousMapButton.gameObject.SetActive(SceneMapEntry.MapId > 1);
+        _goPreviousMapButton.onClick.AddListener(() => MoveToAnotherSelectSceneFor(SceneMapEntry.MapId - 1));
+
+        _goNextMapButton.gameObject.SetActive(SceneMapEntry.MapId < 3);
+        _goNextMapButton.interactable = SceneMapEntry.MapId + 1 <= MapManager.Instance.MaximumUnlockedMapIndex;
+        _goNextMapButton.onClick.AddListener(() => MoveToAnotherSelectSceneFor(SceneMapEntry.MapId + 1));
+
+        _gold.SetCoin(ResourceManager.Instance.Gold);
+
+        _infiniteModeButton.interactable = false;
+
+
+        // TODO 실제 설정창 구현하기
+        _settingButton.onClick.AddListener(() => SceneManager.LoadScene("Main Scene"));
+
+        _debugCurrentMapCode.text = SceneMapEntry.MapCode;
     }
 
     private void OnStageButtonClicked(int mapIndex, int stageIndex)
