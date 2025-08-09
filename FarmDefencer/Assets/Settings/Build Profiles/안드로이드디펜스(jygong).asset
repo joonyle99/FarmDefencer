@@ -22,17 +22,17 @@ MonoBehaviour:
   m_Scenes:
   - m_enabled: 0
     m_path: Assets/Scenes/ActualBuild/Title Scene.unity
-  - m_enabled: 0
+  - m_enabled: 1
     m_path: Assets/Scenes/ActualBuild/Main Scene.unity
   - m_enabled: 0
     m_path: Assets/Scenes/ActualBuild/Tycoon Scene.unity
   - m_enabled: 1
     m_path: Assets/Scenes/ActualBuild/Defence Scene.unity
-  - m_enabled: 0
-    m_path: Assets/Scenes/ActualBuild/MapStageSelectScenes/MapStageSelectScene_forest.unity
-  - m_enabled: 0
+  - m_enabled: 1
+    m_path: Assets/Scenes/ActualBuild/MapStageSelectScenes/MapStageSelectScene_Forest.unity
+  - m_enabled: 1
     m_path: Assets/Scenes/ActualBuild/MapStageSelectScenes/MapStageSelectScene_beach.unity
-  - m_enabled: 0
+  - m_enabled: 1
     m_path: Assets/Scenes/ActualBuild/MapStageSelectScenes/MapStageSelectScene_cave.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
