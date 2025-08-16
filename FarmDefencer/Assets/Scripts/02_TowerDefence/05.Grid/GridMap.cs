@@ -150,10 +150,13 @@ public class GridMap : MonoBehaviour
     }
     private void Start()
     {
-        GameStateManager.Instance.OnBuildState -= CreateGridMap;
-        GameStateManager.Instance.OnBuildState += CreateGridMap;
-        GameStateManager.Instance.OnBuildState -= FindPathOnStart;
-        GameStateManager.Instance.OnBuildState += FindPathOnStart;
+        if (GameStateManager.Instance is not null)
+        {
+            GameStateManager.Instance.OnBuildState -= CreateGridMap;
+            GameStateManager.Instance.OnBuildState += CreateGridMap;
+            GameStateManager.Instance.OnBuildState -= FindPathOnStart;
+            GameStateManager.Instance.OnBuildState += FindPathOnStart;
+        }
     }
     private void Update()
     {
@@ -198,10 +201,9 @@ public class GridMap : MonoBehaviour
 
     public void CreateGridMap()
     {
-        var departureResPath = $"Texture/GridMap/{MapManager.Instance.CurrentMap.MapCode}_departure";
-        var departureSprite = Resources.Load<Sprite>(departureResPath);
-        var arrivalResPath = $"Texture/GridMap/{MapManager.Instance.CurrentMap.MapCode}_arrival";
-        var arrivalSprite = Resources.Load<Sprite>(arrivalResPath);
+        var mapCode = MapManager.Instance.CurrentMap.MapCode;
+        var departureSprite = ResourceCache.Get<Sprite>($"{mapCode}_departure");
+        var arrivalSprite = ResourceCache.Get<Sprite>($"{mapCode}_arrival");
 
         for (int h = 0; h < _height; h++)
         {

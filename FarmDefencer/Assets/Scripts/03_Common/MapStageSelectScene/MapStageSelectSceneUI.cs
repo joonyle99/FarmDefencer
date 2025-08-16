@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using TMPro;
+using System;
 
 [InfoBox("이 오브젝트를 배치한 씬의 이름은 MapStageSelectScene_{MapCode}로 둘 것.")]
 public sealed class MapStageSelectSceneUI : MonoBehaviour
@@ -61,7 +62,6 @@ public sealed class MapStageSelectSceneUI : MonoBehaviour
 
         _infiniteModeButton.interactable = false;
 
-
         // TODO 실제 설정창 구현하기
         _settingButton.onClick.AddListener(() => SceneManager.LoadScene("Main Scene"));
 
@@ -73,11 +73,18 @@ public sealed class MapStageSelectSceneUI : MonoBehaviour
         MapManager.Instance.CurrentMapIndex = mapIndex;
         MapManager.Instance.CurrentStageIndex = stageIndex;
 
-        var defenceSceneOpenContext = new GameObject("DefenceSceneOpenContext");
-        defenceSceneOpenContext.AddComponent<DefenceSceneOpenContext>();
-        DontDestroyOnLoad(defenceSceneOpenContext);
+        SceneLoadContext.NextSceneName = "Defence Scene";
+        Action handler = () =>
+        {
+            SceneLoadContext.OnSceneChanged = null;
 
-        SceneManager.LoadScene("Defence Scene");
+            var defenceSceneOpenContext = new GameObject("DefenceSceneOpenContext");
+            defenceSceneOpenContext.AddComponent<DefenceSceneOpenContext>();
+            DontDestroyOnLoad(defenceSceneOpenContext);
+        };
+        SceneLoadContext.OnSceneChanged += handler;
+
+        SceneManager.LoadScene("Loading Scene");
     }
 
     private void MoveToAnotherSelectSceneFor(int anotherMapId)

@@ -16,17 +16,47 @@ MonoBehaviour:
   m_GUID: 370d0f2830c8f5d4883008d2efaa0795
   m_SerializeEntries:
   - m_GUID: 0024f3ef2c8fb1e4b8b1a54255831844
-    m_Address: video_cave
+    m_Address: cave_video
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 158efef141e9a2147bce54e898f72666
+    m_Address: cave_arrival
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 21703b588c8fa90459e65f2dda92d81d
-    m_Address: video_forest
+    m_Address: forest_video
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2e2594c49efcf7c409ef0e6ce5dfcedc
+    m_Address: forest_arrival
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2e7e5d0beb9c45d418986f5f67e5a0a6
-    m_Address: video_beach
+    m_Address: beach_video
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a3514235dc061304695ccbb3941398b9
+    m_Address: beach_departure
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8c8e92cdb784364a99be2ab889b2109
+    m_Address: forest_departure
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce755bfeeb4dbbe40a7c7e991f64a7be
+    m_Address: beach_arrival
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f31a534a1bbe9134fa64b55f062ffb00
+    m_Address: cave_departure
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

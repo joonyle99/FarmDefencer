@@ -12,19 +12,22 @@ EditorBuildSettings:
     path: Assets/Scenes/ActualBuild/Main Scene.unity
     guid: 3f24c82f0fb05f94fac10494a00764be
   - enabled: 1
+    path: Assets/Scenes/ActualBuild/Loading Scene.unity
+    guid: 47ce34a608492ab4286d11cb49960f4c
+  - enabled: 1
     path: Assets/Scenes/ActualBuild/Tycoon Scene.unity
     guid: 49e7d3d3597e08949ab2f1d5bed1d810
   - enabled: 1
     path: Assets/Scenes/ActualBuild/Defence Scene.unity
     guid: 551a0fbec1091d24989be45886ee6fb5
   - enabled: 1
-    path: Assets/Scenes/ActualBuild/MapStageSelectScenes/MapStageSelectScene_forest.unity
+    path: Assets/Scenes/ActualBuild/StageSelect Scene/MapStageSelectScene_forest.unity
     guid: b9b7c4d223e48364186587c5e07d670e
   - enabled: 1
-    path: Assets/Scenes/ActualBuild/MapStageSelectScenes/MapStageSelectScene_beach.unity
+    path: Assets/Scenes/ActualBuild/StageSelect Scene/MapStageSelectScene_beach.unity
     guid: 06247940daf6722499d5125d1461a7a4
   - enabled: 1
-    path: Assets/Scenes/ActualBuild/MapStageSelectScenes/MapStageSelectScene_cave.unity
+    path: Assets/Scenes/ActualBuild/StageSelect Scene/MapStageSelectScene_cave.unity
     guid: bbfcf24cdfaf1ce40848cbd348f4190f
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 2a36d11738c3bdd44bf7982338b4bee1, type: 2}
