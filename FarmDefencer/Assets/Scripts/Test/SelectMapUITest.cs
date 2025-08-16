@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DebugSelectMapUI : MonoBehaviour
+public class SelectMapUITest : MonoBehaviour
 {
     [SerializeField] private TMP_InputField _maxUnlockedMapIndex;
     [SerializeField] private TMP_InputField _maxUnlockedStageIndex;
