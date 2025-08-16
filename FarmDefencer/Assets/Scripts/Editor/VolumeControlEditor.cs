@@ -4,20 +4,6 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-public interface IVolumeControl
-{
-
-}
-
-public class VolumeControl : PropertyAttribute
-{
-    public string Group;
-
-    public VolumeControl(string group = "Common")
-    {
-        Group = group;
-    }
-}
 #if UNITY_EDITOR
 public class VolumeControlEditor : EditorWindow
 {
