@@ -5,8 +5,8 @@ public class AudioLoopTest : MonoBehaviour
     public AudioSource audioSource1;
     public AudioSource audioSource2;
 
-    private float _forest01 = 87.000f;
-    private float _forest02 = 106.666f;
+    //private float _forest01 = 87.000f;
+    //private float _forest02 = 106.666f;
 
     private float _beach01 = 76.000f;
     private float _beach02 = 96.000f;

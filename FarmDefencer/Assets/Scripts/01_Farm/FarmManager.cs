@@ -8,9 +8,9 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public sealed class FarmManager : MonoBehaviour
 {
-    [Header("조정 가능 수치")] 
-    [SerializeField] private float fastBgmStartTime = 150.0f;
-    [SerializeField] private float fastBgmSpeedMultiplier = 1.5f;
+    //[Header("조정 가능 수치")] 
+    //[SerializeField] private float fastBgmStartTime = 150.0f;
+    //[SerializeField] private float fastBgmSpeedMultiplier = 1.5f;
     
     [Header("디버그용 세이브 무시")] [SerializeField]
     private bool ignoreSaveFile;
