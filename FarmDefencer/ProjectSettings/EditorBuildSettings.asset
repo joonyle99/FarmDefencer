@@ -27,5 +27,6 @@ EditorBuildSettings:
     path: Assets/Scenes/ActualBuild/MapStageSelectScenes/MapStageSelectScene_cave.unity
     guid: bbfcf24cdfaf1ce40848cbd348f4190f
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 2a36d11738c3bdd44bf7982338b4bee1, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 13ae7c0add592614f8cc9c847d92eb1d, type: 2}
   m_UseUCBPForAssetBundles: 0
