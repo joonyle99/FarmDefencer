@@ -23,7 +23,7 @@ public class GridMap : MonoBehaviour
     public int UnitCellSize => _cellSize.x;
 
     private Vector2Int _mapSize;
-    private Vector2Int _origin;
+    private Vector2Int _originPoint;
 
     private int _height;
     public int Height => _height;
@@ -93,7 +93,11 @@ public class GridMap : MonoBehaviour
 
         _cellSize = _tilemap.cellSize.ToVector2Int();
         _mapSize = _tilemap.size.ToVector2Int();
-        _origin = _tilemap.origin.ToVector2Int();
+        _originPoint = _tilemap.origin.ToVector2Int();
+
+        //Debug.Log($"_cellSize: {_cellSize}");
+        //Debug.Log($"_mapSize: {_mapSize}");
+        //Debug.Log($"_originPoint: {_originPoint}");
 
         _height = _mapSize.y;
         _width = _mapSize.x;
@@ -187,7 +191,6 @@ public class GridMap : MonoBehaviour
             GameStateManager.Instance.OnBuildState -= FindPathOnStart;
         }
     }
-
     private void OnDisable()
     {
         StopDrawPath();
@@ -221,7 +224,7 @@ public class GridMap : MonoBehaviour
                 {
                     _myGridMap[h, w].UnUsable();
                     _myGridMap[h, w].SetSprite(cellPos == StartCellPoint ? departureSprite : arrivalSprite);
-                    Debug.Log($"start cell point: {StartCellPoint}, departureResPath: {departureResPath}");
+                    //Debug.Log($"start cell point: {StartCellPoint}, departureResPath: {departureResPath}");
                 }
             }
         }

@@ -76,11 +76,11 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 
 	        _bgmAudioSource1.Stop();
 	        _bgmAudioSource1.clip = bgm;
-			_bgmAudioSource1.Play();
 			_bgmAudioSource1.time = playbackTime;
+            _bgmAudioSource1.volume = volume;
+            _bgmAudioSource1.Play();
 	    }
-	    
-        _bgmAudioSource1.volume = volume;
+
         CurrentBgmName = name;
     }
     public void StopBgm()
