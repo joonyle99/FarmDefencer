@@ -54,7 +54,7 @@ namespace Spine.Unity {
 		[DidReloadScripts]
 		private static void OnReloaded () {
 			// Force start when scripts are reloaded
-			EditorSkeletonPlayer[] editorSpineAnimations = FindObjectsOfType<EditorSkeletonPlayer>();
+			EditorSkeletonPlayer[] editorSpineAnimations = FindObjectsByType<EditorSkeletonPlayer>(FindObjectsSortMode.None);
 
 			foreach (EditorSkeletonPlayer editorSpineAnimation in editorSpineAnimations)
 				editorSpineAnimation.Start();
