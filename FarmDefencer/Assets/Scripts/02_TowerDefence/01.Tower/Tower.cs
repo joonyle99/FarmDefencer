@@ -266,7 +266,7 @@ public sealed class Tower : TargetableBehavior, IVolumeControl
         // detector
         Detector.EraseRange();
 
-        var upgradeUI = DefenceContext.Current.UpgradeUI;
+        var upgradeUI = DefenceContext.Current.DefenceUIController.UpgradeUI;
         upgradeUI.HidePanel();
         upgradeUI.ClearTower();
 

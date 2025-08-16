@@ -242,7 +242,7 @@ public class UpgradeUI : MonoBehaviour
         this.gameObject.SetActive(true);
 
         // Upgrade UI를 보여줄 때 BuildUI를 숨김
-        DefenceContext.Current.BuildUI.HidePanel();
+        DefenceContext.Current.DefenceUIController.BuildUI.HidePanel();
     }
     public void HidePanel()
     {
@@ -257,6 +257,6 @@ public class UpgradeUI : MonoBehaviour
         ClearTower();
 
         // Upgrade UI를 숨길 때 BuildUI를 보여줌
-        DefenceContext.Current.BuildUI.ShowPanel();
+        DefenceContext.Current.DefenceUIController.BuildUI.ShowPanel();
     }
 }

@@ -14,19 +14,20 @@ public class DefenceContext : MonoBehaviour
     public BuildSystem BuildSystem => buildSystem;
     [SerializeField] private WaveSystem waveSystem;
     public WaveSystem WaveSystem => waveSystem;
-    [SerializeField] private BuildUI buildUI;
-    public BuildUI BuildUI => buildUI;
-    [SerializeField] private UpgradeUI upgradeUI;
-    public UpgradeUI UpgradeUI => upgradeUI;
-    [SerializeField] private ProcessUI processUI;
-    public ProcessUI ProcessUI => processUI;
+    [SerializeField] private DefenceUIController defenceUIController;
+    public DefenceUIController DefenceUIController => defenceUIController;
 
     private void Awake()
     {
         Current = this;
-        _videoController = GetComponent<VideoController>();
 
-        if (GridMap != null && BuildSystem != null && WaveSystem != null)
+        _videoController = GetComponent<VideoController>();
+        if (_videoController == null)
+        {
+            Debug.LogError("VideoController is not assigned in DefenceContext.");
+        }
+
+        if (GridMap != null && BuildSystem != null && WaveSystem != null && DefenceUIController != null)
         {
             string log = "";
 
@@ -35,8 +36,7 @@ public class DefenceContext : MonoBehaviour
             log += $"{nameof(GridMap)} is ready.\n";
             log += $"{nameof(BuildSystem)} is ready.\n";
             log += $"{nameof(WaveSystem)} is ready.\n";
-            log += $"{nameof(BuildUI)} is ready.\n";
-            log += $"{nameof(UpgradeUI)} is ready.\n";
+            log += $"{nameof(DefenceUIController)} is ready.\n";
 
             Debug.Log(log);
         }
@@ -48,27 +48,30 @@ public class DefenceContext : MonoBehaviour
 
     private void Start()
     {
-        GameStateManager.Instance.ChangeState(GameState.Normal);
+        if (GameStateManager.Instance is not null)
+        {
+            GameStateManager.Instance.ChangeState(GameState.Normal);
+        }
     }
 
     private void OnEnable()
     {
-        MapManager.Instance.OnMapChanged += BackgroundVideoHandler;
+        if (MapManager.Instance is not null)
+        {
+            MapManager.Instance.OnMapChanged += BackgroundHandler;
+        }
     }
 
     private void OnDisable()
     {
-        if (GameStateManager.Instance is not null)
+        if (MapManager.Instance is not null)
         {
-            MapManager.Instance.OnMapChanged -= BackgroundVideoHandler;
+            MapManager.Instance.OnMapChanged -= BackgroundHandler;
         }
     }
 
-    private void BackgroundVideoHandler(MapEntry map)
+    private void BackgroundHandler(MapEntry map)
     {
-        //Debug.Log("Background Video Handler: " + map.name);
-
-        _videoController.StopVideo();
-        _videoController.PlayVideo(map.MapId);
+        _videoController.PlayVideo(map.MapCode);
     }
 }

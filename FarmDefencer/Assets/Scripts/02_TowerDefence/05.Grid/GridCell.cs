@@ -82,7 +82,7 @@ public class GridCell : MonoBehaviour
         // 타워가 설치되어 있다면 패널을 보여준다
         if (occupiedTower != null)
         {
-            var upgradeUI = DefenceContext.Current.UpgradeUI;
+            var upgradeUI = DefenceContext.Current.DefenceUIController.UpgradeUI;
 
             if (upgradeUI.IsActive)
             {
