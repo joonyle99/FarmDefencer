@@ -7,6 +7,21 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public interface IVolumeControl
+{
+
+}
+
+public class VolumeControl : PropertyAttribute
+{
+    public string Group;
+
+    public VolumeControl(string group = "Common")
+    {
+        Group = group;
+    }
+}
+
 /// <summary>
 /// 게임에 필요한 사운드를 관리하는 매니저입니다
 /// </summary>
