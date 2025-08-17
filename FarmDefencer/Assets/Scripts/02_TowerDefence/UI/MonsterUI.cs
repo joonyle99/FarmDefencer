@@ -14,18 +14,19 @@ public class MonsterUI : MonoBehaviour
             // 1. SkeletonDataAsset 로드
             var lowerName = monster.MonsterData.Name;
             var upperedName = char.ToUpper(lowerName[0]) + lowerName.Substring(1);
-            var dataPath = $"Spine/Monster/Map_{MapManager.Instance.CurrentMapIndex}/{upperedName}/monster_{lowerName}_SkeletonData";
-            var materialPath = $"Spine/Monster/Map_{MapManager.Instance.CurrentMapIndex}/{upperedName}/monster_{lowerName}_Material";
-            var skeletonData = Resources.Load<SkeletonDataAsset>(dataPath);
+            var skeletonDataName = $"monster_{lowerName}_SkeletonData";
+            var skeletonData = ResourceCache.Get<SkeletonDataAsset>(skeletonDataName);
             if (skeletonData == null)
             {
-                Debug.LogError($"SkeletonData is null: {dataPath}");
+                Debug.LogError($"SkeletonData is null: {skeletonDataName}");
                 continue;
             }
-            var skeletonMaterial = Resources.Load<Material>(materialPath);
+
+            var skeletonMaterialName = $"monster_{lowerName}_Material";
+            var skeletonMaterial = ResourceCache.Get<Material>(skeletonDataName);
             if (skeletonMaterial == null)
             {
-                Debug.LogError($"Material is null: {materialPath}");
+                Debug.LogError($"SkeletonMaterial is null: {skeletonMaterialName}");
                 continue;
             }
 

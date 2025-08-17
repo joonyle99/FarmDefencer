@@ -24,7 +24,7 @@ public sealed class LightningProjectile : LinearProjectile
         // ChainLightning (체인 라이트닝) 생성해 LightningEffector에 전달
         // 이 때 체인 라이트닝 게임 오브젝트는 씬의 루트에 생성
         // caster만 초기 설정하고 이후에 lightning effector에서 target을 추가하는 방식
-        var chainLightningPrefab = Resources.Load<ChainLightning>("Prefabs/ChainLightning");
+        var chainLightningPrefab = AssetCache.Get<ChainLightning>("ChainLightning");
         var chainLightning = Instantiate(chainLightningPrefab, Vector3.zero, Quaternion.identity);
         chainLightning.Initialize(caster, targets, damager.GetDamage());
     }

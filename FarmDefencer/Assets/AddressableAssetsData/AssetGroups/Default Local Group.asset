@@ -20,13 +20,43 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 086c4dddbbf7a5c45b26d26262b6748c
+    m_Address: monster_rabbit_Material
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0cca947f5e7bcaf468b3bd5225a8f2e7
+    m_Address: monster_squid_Material
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0db17264614785a4488c91b7618f7d56
+    m_Address: monster_spider_SkeletonData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 158efef141e9a2147bce54e898f72666
     m_Address: cave_arrival
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 17eed7693fe4f744c8422ba1c4f4aff7
+    m_Address: monster_crab_SkeletonData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1bfc990b0cc1f9342b554d48b6415ccd
+    m_Address: monster_blowfish_Material
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 21703b588c8fa90459e65f2dda92d81d
     m_Address: forest_video
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2d48317c66a3e4444b4b05afe2e717b7
+    m_Address: monster_bat_Material
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -40,8 +70,98 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 34438eea36c1cda4b8e078ee7e1456e2
+    m_Address: monster_squirrel_Material
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 344b965173e19674d8897533885a41a8
+    m_Address: monster_snake_SkeletonData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 35c9f9d0682fbc1479e07482db56b0dd
+    m_Address: monster_mole_Material
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5310f73422bb4d54fb3f942d640916fa
+    m_Address: monster_bat_SkeletonData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c81b4bf9b84c054f94b96de97e81038
+    m_Address: DamageText
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c9f3888bd7dd274bbc246734bb0ef0d
+    m_Address: monster_elephant_Material
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5e935615d9e480c42bdf5df98c65b80f
+    m_Address: monster_frog_SkeletonData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a6056d8652e9664380816e6e7a38cd7
+    m_Address: monster_snake_Material
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d944fc0544c2844d81c3f7730997d22
+    m_Address: monster_spider_Material
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 767531e0ef7a8794f9d3355a78d2edf4
+    m_Address: monster_cat_Material
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7768b94b18dd72f4ca85af018efed6cd
+    m_Address: monster_elephant_SkeletonData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 92cc7582c0f1efe419a934218c44969f
+    m_Address: monster_frog_Material
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95e57ef94c4e13a4f8cb5358090f60d5
+    m_Address: monster_squirrel_SkeletonData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9fd92f60db0720d429c52a6c4f213ede
+    m_Address: monster_seal_Material
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a3514235dc061304695ccbb3941398b9
     m_Address: beach_departure
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aad9b96e6a3da14418e3777ae1bfa06c
+    m_Address: monster_seal_SkeletonData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0f335c55aacd4e4293f87d254ca7d46
+    m_Address: monster_mole_SkeletonData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bfdea363165221d40ba6f906e5703acf
+    m_Address: monster_capybara_SkeletonData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c557a8fc2e0857e44b9d01b9e90b1c19
+    m_Address: monster_capybara_Material
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -55,8 +175,48 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d3ba1e65a3e320746935baf709d9d36f
+    m_Address: monster_blowfish_SkeletonData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e07a2530b042a2a45baff7c3bc12894f
+    m_Address: ChainLightning
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e0b73b15d0c744d418b5079294b709cc
+    m_Address: monster_turtle_Material
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e4251588495513646beb99ce1ebfdd6f
+    m_Address: monster_rabbit_SkeletonData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e89d7a7968facb8479433eb165af4659
+    m_Address: monster_cat_SkeletonData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f31a534a1bbe9134fa64b55f062ffb00
     m_Address: cave_departure
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fdbbb0a3ace74b2448345c2b906e6668
+    m_Address: monster_crab_Material
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe13c92113210c74fb8dbfc8095022da
+    m_Address: monster_squid_SkeletonData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe1e2c3fcf8d41f44a95862690071a09
+    m_Address: monster_turtle_SkeletonData
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -148,7 +148,7 @@ public abstract class Monster : TargetableBehavior, IProduct, IVolumeControl
 
         HP -= damage;
 
-        var damageTextPrefab = Resources.Load<DamageText>("Prefabs/DamageText");
+        var damageTextPrefab = AssetCache.Get<DamageText>("DamageText");
         var damageTextGo = Instantiate(damageTextPrefab, Vector3.zero, Quaternion.identity);
         damageTextGo.Init(damage.ToString(), type, HeadPoint);
 
