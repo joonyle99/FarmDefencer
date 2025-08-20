@@ -1,15 +1,16 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmSerializable
 {
     // map entry
     [SerializeField] private MapEntry[] _mapEntries;
-    public int MapCount => _mapEntries.Length;
-    public MapEntry CurrentMap => _mapEntries[Mathf.Clamp(CurrentMapIndex - 1, 0, MapCount - 1)];
+    public MapEntry CurrentMap => _mapEntries[Mathf.Clamp(CurrentMapIndex - 1, 0, MaxMapIdx - 1)];
+
+    public int MinMapIdx => 1;
+    public int MaxMapIdx => _mapEntries.Length;
 
     private int _currentMapIndex = 1;
     /// <summary>
@@ -110,7 +111,7 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
 
     public void Debug_SetMaximumUnlockedMap(int mapIndex, int stageIndex)
     {
-        if (mapIndex < 1 || mapIndex > MapCount || stageIndex < 1 || stageIndex > 10)
+        if (mapIndex < 1 || mapIndex > MaxMapIdx || stageIndex < 1 || stageIndex > 10)
         {
             throw new ArgumentOutOfRangeException(nameof(mapIndex));
         }
@@ -123,7 +124,7 @@ public sealed class MapManager : JoonyleGameDevKit.Singleton<MapManager>, IFarmS
 
     public void Debug_SetCurrentMap(int mapIndex, int stageIndex)
     {
-        if (mapIndex < 1 || mapIndex > MapCount || stageIndex < 1 || stageIndex > 10)
+        if (mapIndex < 1 || mapIndex > MaxMapIdx || stageIndex < 1 || stageIndex > 10)
         {
             throw new ArgumentOutOfRangeException(nameof(mapIndex));
         }

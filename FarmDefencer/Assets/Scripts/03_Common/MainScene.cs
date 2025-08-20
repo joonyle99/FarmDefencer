@@ -74,8 +74,7 @@ public sealed class MainScene : MonoBehaviour
 
     private void OnBattleButtonClicked()
     {
-        var currentMap = MapManager.Instance.CurrentMap;
-        SceneManager.LoadScene($"MapStageSelectScene_{currentMap.MapCode}");
+        SceneManager.LoadScene("World Scene");
     }
 
     private void OnResetSaveAndRestartButtonClicked()
