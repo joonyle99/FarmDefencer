@@ -5,6 +5,11 @@ public static class ConstantConfig
     // 모드
     public const bool DEBUG = true;
 
+    // 해상도
+    public const int DEFAULT_RESOLUTION_WIDTH = 2340;
+    public const int DEFAULT_RESOLUTION_HEIGHT = 1080;
+    public const float DEFAULT_SCREEN_ASPECT_RATIO = (float)DEFAULT_RESOLUTION_WIDTH / (float)DEFAULT_RESOLUTION_HEIGHT; // 가로 / 세로 비율
+
     // 색상
     public static readonly Color WHITE = new Color(1f, 1f, 1f, 1f); // original
     public static readonly Color WHITE_GHOST = new Color(1f, 1f, 1f, 0.7f);
