@@ -118,9 +118,9 @@ public class LoadingManager : MonoBehaviour
 {
     private async void Start()
     {
-        // cache 초기화
-        ResourceCache.Clear();
-        AssetCache.Clear();
+        //// cache 초기화
+        //ResourceCache.Clear();
+        //AssetCache.Clear();
 
         //////////////////////////////////////////////
 
@@ -151,9 +151,9 @@ public class LoadingManager : MonoBehaviour
         // 모든 리소스를 병렬 로드
         await Task.WhenAll(tasks);
 
-        //// 최소 로딩 시간 보장 (예: 2초)
-        //var minDelay = Task.Delay(2000);
-        //await Task.WhenAll(minDelay);
+        // 최소 로딩 시간 보장 (예: 2초)
+        var minDelay = Task.Delay(2000);
+        await Task.WhenAll(minDelay);
 
         SceneLoadContext.OnSceneChanged?.Invoke();
         SceneManager.LoadScene(SceneLoadContext.NextSceneName);
