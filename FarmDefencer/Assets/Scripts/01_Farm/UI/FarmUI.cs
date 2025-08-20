@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public sealed class FarmUI : MonoBehaviour
 {
-	private CoinsUI _coinsUI;
+	private CoinUI _coinUI;
 	private HarvestInventory _harvestInventory;
 	private CropGuide _cropGuide;
 	private Button _battleButton;
@@ -41,21 +41,21 @@ public sealed class FarmUI : MonoBehaviour
 	public void UpdateHarvestInventory(Func<ProductEntry, bool> isProductAvailable, Func<ProductEntry, int> getProductQuota, Func<ProductEntry> getHotProduct, Func<ProductEntry> getSpecialProduct)
 		=> _harvestInventory.UpdateInventory(isProductAvailable, getProductQuota, getHotProduct, getSpecialProduct);
 
-	public void PlayCoinAnimation() => _coinsUI.PlayAnimation();
+	public void PlayCoinAnimation() => _coinUI.PlayAnimation();
 	
 	private void Awake()
 	{
-		_coinsUI = GetComponentInChildren<CoinsUI>();
+		_coinUI = GetComponentInChildren<CoinUI>();
 		_harvestInventory = GetComponentInChildren<HarvestInventory>();
 		_cropGuide = GetComponentInChildren<CropGuide>();
 		_battleButton = transform.Find("BattleButton").GetComponent<Button>();
 		_settingButton = transform.Find("SettingButton").GetComponent<Button>();
-		ResourceManager.Instance.OnGoldChanged += _coinsUI.SetCoin;
+		ResourceManager.Instance.OnCoinChanged += _coinUI.SetCoin;
 	}
 
 	private void Start()
 	{
-		_coinsUI.SetCoin(ResourceManager.Instance.Gold);
+		_coinUI.SetCoin(ResourceManager.Instance.Coin);
 	}
 
 	private void Update()

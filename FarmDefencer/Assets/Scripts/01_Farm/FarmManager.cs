@@ -38,7 +38,7 @@ public sealed class FarmManager : MonoBehaviour
     [SerializeField] private TimerUI timerUI;
     [SerializeField] private FarmDebugUI farmDebugUI;
     
-    private bool CanGoDefence => !weatherGiver.IsWeatherOnGoing && !pestGiver.IsWarningShowing && !harvestTutorialGiver.IsPlayingTutorial && ResourceManager.Instance.Gold > 0;
+    private bool CanGoDefence => !weatherGiver.IsWeatherOnGoing && !pestGiver.IsWarningShowing && !harvestTutorialGiver.IsPlayingTutorial && ResourceManager.Instance.Coin > 0;
 
     private void Start()
     {
@@ -263,7 +263,7 @@ public sealed class FarmManager : MonoBehaviour
 
     private bool OnWeatherShopItemBought(WeatherShopItem item)
     {
-        if (ResourceManager.Instance.Gold < item.Price)
+        if (ResourceManager.Instance.Coin < item.Price)
         {
             return false;
         }
@@ -271,7 +271,7 @@ public sealed class FarmManager : MonoBehaviour
         var isWeatherGiven = weatherGiver.SetWeather(item);
         if (isWeatherGiven)
         {
-            ResourceManager.Instance.Gold -= item.Price;
+            ResourceManager.Instance.Coin -= item.Price;
         }
 
         return isWeatherGiven;
@@ -281,7 +281,7 @@ public sealed class FarmManager : MonoBehaviour
 
     private void EarnGold(int gold)
     {
-        ResourceManager.Instance.Gold += gold;
+        ResourceManager.Instance.Coin += gold;
         farmUI.PlayCoinAnimation();
         SoundManager.Instance.PlaySfx("SFX_T_coin", SoundManager.Instance.coinVolume);
     }

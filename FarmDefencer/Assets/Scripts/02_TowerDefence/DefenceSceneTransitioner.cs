@@ -86,7 +86,7 @@ public sealed class DefenceSceneTransitioner : MonoBehaviour
         if (isBeforeWave)
         {
             var totalCost = DefenceContext.Current.GridMap.CalculateAllOccupiedTowerCost();
-            ResourceManager.Instance.Gold += totalCost;
+            ResourceManager.Instance.Coin += totalCost;
             return;
         }
 

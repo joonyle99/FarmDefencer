@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5536090753897699987}
   - component: {fileID: 1954212476018388131}
   - component: {fileID: 5595168443003679272}
-  - component: {fileID: 200797055030519893}
+  - component: {fileID: 1767163452286951991}
   m_Layer: 5
-  m_Name: CoinsUI
+  m_Name: CoinUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &200797055030519893
+--- !u!114 &1767163452286951991
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4866944926555530505}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48c72c4d592c1f44ab4246125d7bbcea, type: 3}
+  m_Script: {fileID: 11500000, guid: 29d94a2c7b1f2c1498d051e300e71e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7197890708464872874

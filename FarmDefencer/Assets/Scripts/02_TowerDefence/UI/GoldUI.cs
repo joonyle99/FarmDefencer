@@ -12,10 +12,10 @@ public class GoldUI : MonoBehaviour
             return;
         }
 
-        SetGoldText(ResourceManager.Instance.Gold);
+        SetGoldText(ResourceManager.Instance.Coin);
 
-        ResourceManager.Instance.OnGoldChanged -= SetGoldText;
-        ResourceManager.Instance.OnGoldChanged += SetGoldText;
+        ResourceManager.Instance.OnCoinChanged -= SetGoldText;
+        ResourceManager.Instance.OnCoinChanged += SetGoldText;
     }
     private void OnDisable()
     {
@@ -24,7 +24,7 @@ public class GoldUI : MonoBehaviour
             return;
         }
 
-        ResourceManager.Instance.OnGoldChanged -= SetGoldText;
+        ResourceManager.Instance.OnCoinChanged -= SetGoldText;
     }
 
     public void SetGoldText(int gold)
