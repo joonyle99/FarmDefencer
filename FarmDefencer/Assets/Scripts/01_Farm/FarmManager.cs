@@ -230,12 +230,21 @@ public sealed class FarmManager : MonoBehaviour
         MapManager.Instance.CurrentMapIndex = MapManager.Instance.MaximumUnlockedMapIndex;
         MapManager.Instance.CurrentStageIndex = MapManager.Instance.MaximumUnlockedStageIndex;
 
-        var defenceSceneOpenContextObject = new GameObject("DefenceSceneOpenContext");
-        defenceSceneOpenContextObject.AddComponent<DefenceSceneOpenContext>();
-        DontDestroyOnLoad(defenceSceneOpenContextObject);
+        // 로딩 씬 설정
+        SceneLoadContext.NextSceneName = "Defence Scene";
+        SceneLoadContext.OnSceneChanged += () =>
+        {
+            SceneLoadContext.OnSceneChanged = null;
 
+            var defenceSceneOpenContext = new GameObject("DefenceSceneOpenContext");
+            defenceSceneOpenContext.AddComponent<DefenceSceneOpenContext>();
+            DontDestroyOnLoad(defenceSceneOpenContext);
+        };
+
+        SceneManager.LoadScene("Loading Scene");
+
+        // 데이터 저장
         SerializeToSaveFile();
-        SceneManager.LoadScene("Defence Scene");
     }
 
     private void OnFarmQuotaFilledHandler(ProductEntry entry, Vector2 cropWorldPosition, int quota)
