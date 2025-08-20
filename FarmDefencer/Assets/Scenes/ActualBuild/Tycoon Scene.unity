@@ -937,8 +937,7 @@ MonoBehaviour:
   gridMap: {fileID: 0}
   buildSystem: {fileID: 0}
   waveSystem: {fileID: 0}
-  buildUI: {fileID: 0}
-  upgradeUI: {fileID: 0}
+  defenceUIController: {fileID: 0}
 --- !u!4 &170695490
 Transform:
   m_ObjectHideFlags: 0
@@ -8085,8 +8084,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911982a6f0e14bd4b88047c9f5a89f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fastBgmStartTime: 150
-  fastBgmSpeedMultiplier: 2
   ignoreSaveFile: 0
   farm: {fileID: 876821029}
   quotaContext: {fileID: 287826021}
@@ -11765,7 +11762,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4866944926555530505, guid: e42ffe2561a76ef4fb5ce20a908932bb, type: 3}
       propertyPath: m_Name
-      value: CoinsUI
+      value: CoinUI
       objectReference: {fileID: 0}
     - target: {fileID: 5536090753897699987, guid: e42ffe2561a76ef4fb5ce20a908932bb, type: 3}
       propertyPath: m_Pivot.x
