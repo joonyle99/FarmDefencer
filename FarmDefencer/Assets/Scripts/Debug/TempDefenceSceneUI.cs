@@ -29,7 +29,7 @@ public class TempDefenceSceneUI : MonoBehaviour
         _coinInputButton = transform.Find("CoinButton").GetComponent<Button>();
         _coinInputButton.onClick.AddListener(() =>
         {
-            ResourceManager.Instance.Gold = int.Parse(_coinInputField.text);
+            ResourceManager.Instance.Coin = int.Parse(_coinInputField.text);
             _spawnMonsterInputField.text = "";
         });
     }

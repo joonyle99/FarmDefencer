@@ -3,35 +3,35 @@ using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 /// <summary>
-/// 게임에서 사용되는 자원(Gold, ...) 관리합니다.
+/// 게임에서 사용되는 자원(Coin, ...) 관리합니다.
 /// </summary>
 public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFarmSerializable
 {
     public List<string> SurvivedMonsters { get; private set; }
 
-    private int _gold;
-    public int Gold
+    private int _coin;
+    public int Coin
     {
-        get => _gold;
+        get => _coin;
         set
         {
-            _gold = value;
+            _coin = value;
 
-            if (_gold <= 0)
+            if (_coin <= 0)
             {
-                _gold = 0;
+                _coin = 0;
             }
 
-            OnGoldChanged?.Invoke(_gold);
+            OnCoinChanged?.Invoke(_coin);
         }
     }
 
-    public event System.Action<int> OnGoldChanged;
+    public event System.Action<int> OnCoinChanged;
 
     public JObject Serialize()
     {
         var jsonObject = new JObject();
-        jsonObject.Add("Gold", _gold);
+        jsonObject.Add("Gold", _coin);
 
         var jsonSurvivedMonsters = new JArray();
         foreach (var survivedMonster in SurvivedMonsters)
@@ -45,7 +45,7 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFa
 
     public void Deserialize(JObject json)
     {
-        Gold = json.ParsePropertyOrAssign("Gold", 0);
+        Coin = json.ParsePropertyOrAssign("Gold", 0);
 
         SurvivedMonsters.Clear();
         if (json["SurvivedMonsters"] is JArray jsonSurvivedMonsters)
@@ -83,7 +83,7 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFa
     // gold
     public bool TrySpendGold(int amount)
     {
-        if (Gold < amount)
+        if (Coin < amount)
         {
             Debug.Log($"You don't have enough gold to build this tower");
             return false;
@@ -93,18 +93,18 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFa
     }
     public void EarnGold(int amount)
     {
-        Gold += amount;
+        Coin += amount;
     }
     public void SpendGold(int amount)
     {
-        Gold -= amount;
+        Coin -= amount;
     }
     public void SetGold(int amount)
     {
-        Gold = amount;
+        Coin = amount;
     }
     public int GetGold()
     {
-        return Gold;
+        return Coin;
     }
 }
