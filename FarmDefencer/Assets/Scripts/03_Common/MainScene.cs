@@ -57,8 +57,8 @@ public sealed class MainScene : MonoBehaviour
         }
         
         // 사용 가능 코인 설정
-        _availableCoinText.text = $"사용 가능 코인\n:{ResourceManager.Instance.Gold}";
-        if (ResourceManager.Instance.Gold <= 0)
+        _availableCoinText.text = $"사용 가능 코인\n:{ResourceManager.Instance.Coin}";
+        if (ResourceManager.Instance.Coin <= 0)
         {
             _battleButton.interactable = false;
             _battleIcon.color = _battleButton.colors.disabledColor;
