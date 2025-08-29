@@ -714,7 +714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 3eded806a5ff53b438da57379aca8fb2, type: 2}
+  skeletonDataAsset: {fileID: 0}
   initialSkinName: 
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
@@ -768,7 +768,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e234c3d84cebec844b299b913dcca1b8, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8648,10 +8648,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2008981015831875493, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
+      propertyPath: skeletonDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3eded806a5ff53b438da57379aca8fb2, type: 2}
+    - target: {fileID: 3299675686854013501, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
+      propertyPath: skeletonDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3eded806a5ff53b438da57379aca8fb2, type: 2}
     - target: {fileID: 3673494026022465013, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8299898047436539471, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e234c3d84cebec844b299b913dcca1b8, type: 2}
     - target: {fileID: 8808794803560234487, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
       propertyPath: m_Name
       value: TutorialWateringCan
@@ -11630,14 +11642,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 739875419610131157, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1964832882}
-    - target: {fileID: 739875419610131157, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -1951324203
-      objectReference: {fileID: 0}
     - target: {fileID: 1631831429741090496, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -11678,10 +11682,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2008981015831875493, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
+      propertyPath: skeletonDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3eded806a5ff53b438da57379aca8fb2, type: 2}
+    - target: {fileID: 3299675686854013501, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
+      propertyPath: skeletonDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3eded806a5ff53b438da57379aca8fb2, type: 2}
     - target: {fileID: 3673494026022465013, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8299898047436539471, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e234c3d84cebec844b299b913dcca1b8, type: 2}
     - target: {fileID: 8808794803560234487, guid: a2397b2fe22595d499956997dd00ffa6, type: 3}
       propertyPath: m_Name
       value: WateringCan
