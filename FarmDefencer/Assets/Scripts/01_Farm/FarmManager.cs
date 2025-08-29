@@ -129,6 +129,11 @@ public sealed class FarmManager : MonoBehaviour
             () => pestGiver.IsPestRunning,
             entry => quotaContext.TryGetQuota(entry.ProductName, out var quota) ? quota : 0,
             OnFarmQuotaFilledHandler,
+            cropWorldPosition =>
+            {
+                EarnGold(1);
+                goldEarnEffectPlayer.PlayEffectAt(cropWorldPosition, 1);
+            },
             farmUI.ToggleCropGuide);
 
         farmUI.Init(farmInput,
@@ -299,7 +304,7 @@ public sealed class FarmManager : MonoBehaviour
         farmUI.PlayCoinAnimation();
         SoundManager.Instance.PlaySfx("SFX_T_coin", SoundManager.Instance.coinVolume);
     }
-
+    
     private bool SaveOnQuit()
     {
         SerializeToSaveFile();

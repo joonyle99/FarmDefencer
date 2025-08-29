@@ -171,12 +171,13 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFarm
     }
 
     public void Init(
-        Func<bool> isPestRunningFunction,
-        Func<ProductEntry, int> getQuotaFunction, 
-        Action<ProductEntry, Vector2, int> fillQuotaFunction,
-        Action<ProductEntry> signClickedHandler)
+        Func<bool> isPestRunning,
+        Func<ProductEntry, int> getQuota, 
+        Action<ProductEntry, Vector2, int> fillQuota,
+        Action<Vector2> onPlanted,
+        Action<ProductEntry> onSignClicked)
     {
-        Array.ForEach(_fields, field => field.Init(isPestRunningFunction, getQuotaFunction, fillQuotaFunction, signClickedHandler));
+        Array.ForEach(_fields, field => field.Init(isPestRunning, getQuota, fillQuota, onPlanted, onSignClicked));
     }
 
     private void Awake()

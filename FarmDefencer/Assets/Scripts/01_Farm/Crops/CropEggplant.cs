@@ -100,53 +100,65 @@ public sealed class CropEggplant : Crop
 			_currentState = state.Value;
 		}
 	}
+	
+	public override void OnTap(Vector2 worldPosition)
+	{
+		_currentState = CommonCropBehavior(
+			Effects,
+			GetQuota,
+			OnQuotaFilled,
+			OnPlanted,
+			OnTapFunctions[GetCurrentStage(_currentState)],
+			_currentState,
+			worldPosition, 
+			transform.position);
+	}
+
+	public override bool OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
+	{
+		_currentState = CommonCropBehavior(
+			Effects,
+			GetQuota,
+			OnQuotaFilled,
+			OnPlanted,
+			OnHoldFunctions[GetCurrentStage(_currentState)],
+			_currentState,
+			initialWorldPosition + deltaWorldPosition, 
+			transform.position);
+
+		return false;
+	}
 
 	public override void OnWatering()
 	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
 			GetQuota,
-			NotifyQuotaFilled,
+			OnQuotaFilled,
+			OnPlanted,
 			OnWateringFunctions[GetCurrentStage(_currentState)],
-			_currentState)
-
-			(transform.position, transform.position);
-	}
-
-	public override void OnTap(Vector2 worldPosition)
-	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
-			Effects,
-			GetQuota,
-			NotifyQuotaFilled,
-			OnTapFunctions[GetCurrentStage(_currentState)],
-			_currentState)
-
-			(worldPosition, transform.position);
+			_currentState,
+			transform.position,
+			transform.position);
 	}
 
 	public override void OnFarmUpdate(float deltaTime)
 	{
 		var currentStage = GetCurrentStage(_currentState);
 		GetSpriteAndApplyTo(currentStage)(_spriteRenderer);
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
+		_currentState = CommonCropBehavior(
 
 			Effects,
 			GetQuota,
-			NotifyQuotaFilled,
-			(beforeState)
-			=>
-			{
-				return OnFarmUpdateFunctions[currentStage](beforeState, deltaTime);
-			},
-			_currentState)
-
-			(transform.position, transform.position);
+			OnQuotaFilled,
+			OnPlanted,
+			beforeState => OnFarmUpdateFunctions[currentStage](beforeState, deltaTime),
+			_currentState,
+			transform.position, 
+			transform.position);
 	}
 
-	public override void ResetToInitialState() => _currentState = Reset(_currentState);
+	public override void ResetToInitialState() => _currentState = ResetCropState(_currentState);
 
 	private void Awake()
 	{
@@ -178,7 +190,7 @@ public sealed class CropEggplant : Crop
 
 	private static readonly Dictionary<EggplantStage, Func<EggplantState, float, EggplantState>> OnFarmUpdateFunctions = new()
 	{
-		{EggplantStage.Seed, (beforeState, deltaTime) => Reset(beforeState) },
+		{EggplantStage.Seed, (beforeState, deltaTime) => ResetCropState(beforeState) },
 
 		{EggplantStage.Stage1_Dead, WaitWater },
 		{EggplantStage.Stage1_BeforeWater, WaitWater },
@@ -210,7 +222,7 @@ public sealed class CropEggplant : Crop
 
 	private static readonly Dictionary<EggplantStage, Func<EggplantState, EggplantState>> OnTapFunctions = new()
 	{
-		{EggplantStage.Seed, Plant },
+		{EggplantStage.Seed, DoNothing },
 
 		{EggplantStage.Stage1_Dead, DoNothing },
 		{EggplantStage.Stage1_BeforeWater, DoNothing },
@@ -224,8 +236,28 @@ public sealed class CropEggplant : Crop
 		{EggplantStage.Stage3_FullLeaves, DropLeafIfDoubleTap },
 		{EggplantStage.Stage3_HalfLeaves, DropLeafIfDoubleTap },
 
-		{EggplantStage.Mature, Harvest },
+		{EggplantStage.Mature, DoNothing },
 		{EggplantStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
+	};
+	
+	private static readonly Dictionary<EggplantStage, Func<EggplantState, EggplantState>> OnHoldFunctions = new()
+	{
+		{EggplantStage.Seed, Plant },
+
+		{EggplantStage.Stage1_Dead, DoNothing },
+		{EggplantStage.Stage1_BeforeWater, DoNothing },
+		{EggplantStage.Stage1_Growing, DoNothing },
+
+		{EggplantStage.Stage2_BeforeTrelis, DoNothing },
+		{EggplantStage.Stage2_BeforeWater, DoNothing },
+		{EggplantStage.Stage2_Dead, DoNothing },
+		{EggplantStage.Stage2_Growing, DoNothing },
+
+		{EggplantStage.Stage3_FullLeaves, DoNothing },
+		{EggplantStage.Stage3_HalfLeaves, DoNothing },
+
+		{EggplantStage.Mature, Harvest },
+		{EggplantStage.Harvested, DoNothing },
 	};
 
 	private static readonly Dictionary<EggplantStage, Func<EggplantState, EggplantState>> OnWateringFunctions = new()

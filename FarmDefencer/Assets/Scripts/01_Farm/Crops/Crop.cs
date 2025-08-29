@@ -45,29 +45,31 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 	protected const float WaterWaitingDeadSeconds = 90.0f;
 	protected const float WaterWaitingResetSeconds = 60.0f;
 	protected const float MultipleTouchSecondsCriterion = 0.5f; // 연속 탭 동작 판정 시간. 이 시간 이내로 다시 탭 해야 연속 탭으로 간주됨
-	protected const float PlowDeltaPositionCrierion = 0.25f; // 밭 문지르기 동작 판정 기준 (가로 방향 위치 델타)
+	protected const float PlowDeltaPositionCriterion = 0.25f; // 밭 문지르기 동작 판정 기준 (가로 방향 위치 델타)
 
 	public abstract RequiredCropAction RequiredCropAction { get; }
 
-	private Func<int> _getQuota;
-	protected Func<int> GetQuota => _getQuota;
+	protected Func<int> GetQuota { get; private set; }
 
-	private Action<int> _notifyQuotaFilled; // Farm, Field 등에서는 FillQuota라는 이름이지만, Crop에서는 동작 중에 이미 Quota를 채우는 동작이 있어 명확한 이름 사용.
 	/// <summary>
+	/// Farm, Field 등에서는 FillQuota라는 이름이지만, Crop에서는 동일한 이름의 메소드가 있어서 다른 이름 사용.
 	/// 주문량을 채운 State에 대해 그 주문량만큼 외부 세계로 전달하는 함수.
 	/// 기본적으로 FarmManager에 의해 HarvestInventory에 연결됨.
 	/// </summary>
 	/// <remarks>반드시 GetQuota()로 여유 주문량을 검증한 후 호출할 것.</remarks>
-	protected Action<int> NotifyQuotaFilled => _notifyQuotaFilled;
+	protected Action<int> OnQuotaFilled { get; private set; }
+	
+	protected Action OnPlanted { get; private set; }
 
 	public abstract JObject Serialize();
 
 	public abstract void Deserialize(JObject json);
 
-	public void Init(Func<int> getQuotaFunction, Action<int> notifyQuotaFilledFunction)
+	public void Init(Func<int> getQuota, Action<int> onQuotaFilled, Action onPlanted)
 	{
-		_getQuota = getQuotaFunction;
-		_notifyQuotaFilled = notifyQuotaFilledFunction;
+		GetQuota = getQuota;
+		OnQuotaFilled = onQuotaFilled;
+		OnPlanted = onPlanted;
 	}
 
 	public bool AABB(Vector2 worldPosition) =>
@@ -85,11 +87,12 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 	/// <summary>
 	/// 한 손가락으로 꾹 누를 때의 동작을 정의.
 	/// </summary>
-	/// <param name="deltaWorldPosition">첫 홀드 위치.</param>
+	/// <param name="initialWorldPosition">첫 홀드 위치.</param>
 	/// <param name="deltaWorldPosition">첫 홀드 위치와 현재 홀드 위치의 차이.</param>
 	/// <param name="isEnd">홀드가 종료되어 마지막 액션인 경우 true.</param>
 	/// <param name="deltaHoldTime"></param>
-	public virtual void OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime) { }
+	public virtual bool OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd,
+		float deltaHoldTime) => false;
 
 	public virtual void OnWatering() { }
 
@@ -101,23 +104,27 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 	// 이하 함수 빌딩 블록
 
 
-	protected static Func<Vector2, Vector2, TState> HandleAction_NotifyFilledQuota_PlayEffectAt<TState>(
+	protected static TState CommonCropBehavior<TState>(
 		List<(Func<TState, TState, bool>, Action<Vector2, Vector2>)> effects,
 		Func<int> getQuotaFunction, Action<int> notifyQuotaFilledFunction,
+		Action onPlanted,
 		Func<TState, TState> transitionFunction,
-		TState beforeState)
+		TState beforeState,
+		Vector2 inputWorldPosition,
+		Vector2 cropPosition)
 		where TState : struct, ICommonCropState
 	{
 		beforeState.RemainingQuota = getQuotaFunction();
 		var nextState = transitionFunction(beforeState);
 		notifyQuotaFilledFunction(GetQuotaFilled(beforeState, nextState));
 
-		return
-			(inputWorldPosition, cropPosition) =>
-			{
-				PlayEffectAt(effects, beforeState, nextState)(inputWorldPosition, cropPosition);
-				return nextState;
-			};
+		if (IsJustPlanted(beforeState, nextState))
+		{
+			onPlanted();
+		}
+		
+		PlayEffectAt(effects, beforeState, nextState)(inputWorldPosition, cropPosition);
+		return nextState;
 	}
 
 	protected static void ApplySprite(Sprite sprite, SpriteRenderer spriteRenderer)
@@ -169,7 +176,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 	/// <typeparam name="TState"></typeparam>
 	/// <param name="beforeState"></param>
 	/// <returns></returns>
-	protected static TState Reset<TState>(TState beforeState) where TState : struct, ICommonCropState
+	protected static TState ResetCropState<TState>(TState beforeState) where TState : struct, ICommonCropState
 	{
 		var nextState = new TState() { RemainingQuota = beforeState.RemainingQuota };
 		return nextState;
@@ -177,6 +184,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 	protected static TState Harvest<TState>(TState beforeState) where TState : struct, ICommonCropState { beforeState.Harvested = true; return beforeState; }
 	protected static TState DoNothing<TState>(TState beforeState) where TState : struct, ICommonCropState => beforeState;
 	protected static int GetQuotaFilled<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => beforeState.RemainingQuota - afterState.RemainingQuota;
+	protected static bool IsJustPlanted<TState>(TState beforeState, TState afterState) where TState : struct, ICommonCropState => !beforeState.Planted && afterState.Planted;
 	protected static Action<Vector2, Vector2> PlayEffectAt<TState>(List<(Func<TState, TState, bool>, Action<Vector2, Vector2>)> effects, TState beforeState, TState afterState)
 	{
 		var targetEffects = effects.Where(effect => effect.Item1(beforeState, afterState)).ToList();
@@ -236,7 +244,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 		nextState.RemainingQuota -= quotaToFill;
 		if (quotaToFill == count)
 		{
-			nextState = Reset(nextState);
+			nextState = ResetCropState(nextState);
 		}
 
 		return nextState;
@@ -247,7 +255,6 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 	/// </summary>
 	/// <typeparam name="TState"></typeparam>
 	/// <param name="beforeState"></param>
-	/// <param name="count"></param>
 	/// <returns></returns>
 	protected static TState FillQuotaOneAndResetIfSucceeded<TState>(TState beforeState) where TState : struct, ICommonCropState => FillQuotaUptoAndResetIfEqual(beforeState, 1);
 }

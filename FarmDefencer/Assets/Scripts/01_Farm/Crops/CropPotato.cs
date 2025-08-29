@@ -77,45 +77,45 @@ public sealed class CropPotato : Crop
 
 	public override void OnTap(Vector2 inputWorldPosition)
 	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
 			GetQuota,
-			NotifyQuotaFilled,
+			OnQuotaFilled,
+			OnPlanted,
 			OnTapFunctions[GetCurrentStage(_currentState)],
-			_currentState)
-
-			(inputWorldPosition, transform.position);
+			_currentState,
+			inputWorldPosition, 
+			transform.position);
 	}
-
-	public override void OnHold(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
+	
+	public override bool OnHold(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
 	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		var currentStage = GetCurrentStage(_currentState);
+		_currentState = CommonCropBehavior(
 			Effects,
 			GetQuota,
-			NotifyQuotaFilled,
-			(beforeState)
-			=>
-			{
-				return OnHoldFunctions[GetCurrentStage(_currentState)](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime);
-			},
-			_currentState)
+			OnQuotaFilled,
+			OnPlanted,
+			beforeState
+			=> OnHoldFunctions[currentStage](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime),
+			_currentState,
+			initialPosition + deltaPosition, 
+			transform.position);
 
-			(initialPosition + deltaPosition, transform.position);
+		return currentStage == PotatoStage.Mature;
 	}
 
 	public override void OnWatering()
 	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
 			GetQuota,
-			NotifyQuotaFilled,
+			OnQuotaFilled,
+			OnPlanted,
 			WaterForNeedOnce,
-			_currentState)
-
-			(transform.position, transform.position);
+			_currentState,
+			transform.position, 
+			transform.position);
 	}
 
 	public override void OnFarmUpdate(float deltaTime)
@@ -123,22 +123,19 @@ public sealed class CropPotato : Crop
 		var currentStage = GetCurrentStage(_currentState);
 		ApplySpriteTo(currentStage)(_spriteRenderer);
 
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
 			GetQuota,
-			NotifyQuotaFilled,
-			(beforeState)
-			=>
-			{
-				return OnFarmUpdateFunctions[currentStage](beforeState, deltaTime);
-			},
-			_currentState)
-
-			(transform.position, transform.position);
+			OnQuotaFilled,
+			OnPlanted,
+			beforeState
+			=> OnFarmUpdateFunctions[currentStage](beforeState, deltaTime),
+			_currentState,
+			transform.position, 
+			transform.position);
 	}
 
-	public override void ResetToInitialState() => _currentState = Reset(_currentState);
+	public override void ResetToInitialState() => _currentState = ResetCropState(_currentState);
 
 	private void Awake()
 	{
@@ -160,7 +157,7 @@ public sealed class CropPotato : Crop
 
 	private static readonly Dictionary<PotatoStage, Func<PotatoState, float, PotatoState>> OnFarmUpdateFunctions = new()
 	{
-		{PotatoStage.Seed, (currentState, deltaTime) => Reset(currentState) },
+		{PotatoStage.Seed, (currentState, deltaTime) => ResetCropState(currentState) },
 		{PotatoStage.BeforeWater, WaitWater },
 		{PotatoStage.Dead, WaitWater },
 		{PotatoStage.Growing, Grow },
@@ -170,7 +167,7 @@ public sealed class CropPotato : Crop
 
 	private static readonly Dictionary<PotatoStage, Func<PotatoState, PotatoState>> OnTapFunctions = new()
 	{
-		{PotatoStage.Seed, Plant },
+		{PotatoStage.Seed, DoNothing },
 		{PotatoStage.BeforeWater, DoNothing },
 		{PotatoStage.Dead, DoNothing },
 		{PotatoStage.Growing, DoNothing },
@@ -180,7 +177,13 @@ public sealed class CropPotato : Crop
 
 	private static readonly Dictionary<PotatoStage, Func<PotatoState, Vector2, Vector2, bool, float, PotatoState>> OnHoldFunctions = new()
 	{
-		{PotatoStage.Seed, DoNothing_OnHold },
+		{
+			PotatoStage.Seed, (beforeState, _, _, _, _) => 
+			{
+				beforeState.Planted = true;
+				return beforeState; 
+			} 
+		},
 		{PotatoStage.BeforeWater, DoNothing_OnHold },
 		{PotatoStage.Dead, DoNothing_OnHold },
 		{PotatoStage.Growing, DoNothing_OnHold },

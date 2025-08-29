@@ -91,46 +91,61 @@ public sealed class CropCorn : Crop
 	
 	public override void OnTap(Vector2 inputWorldPosition)
 	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
+		_currentState = CommonCropBehavior(
 			Effects, 
 			GetQuota,
-			NotifyQuotaFilled,
+			OnQuotaFilled,
+			OnPlanted,
 			OnTapFunctions[GetCurrentStage(_currentState)],
-			_currentState)
+			_currentState,
+			inputWorldPosition, 
+			transform.position);
+	}
 
-			(inputWorldPosition, transform.position);
+	public override bool OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
+	{
+		_currentState = CommonCropBehavior(
+			Effects, 
+			GetQuota,
+			OnQuotaFilled,
+			OnPlanted,
+			OnHoldFunctions[GetCurrentStage(_currentState)],
+			_currentState,
+			initialWorldPosition + deltaWorldPosition, 
+			transform.position);
+
+		return false;
 	}
 
 	public override void OnWatering()
 	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
+		_currentState = CommonCropBehavior(
 			Effects,
 			GetQuota,
-			NotifyQuotaFilled,
+			OnQuotaFilled,
+			OnPlanted,
 			OnWateringFunctions[GetCurrentStage(_currentState)],
-			_currentState)
-
-			(transform.position, transform.position);
+			_currentState,
+			transform.position, 
+			transform.position);
 	}
 
 	public override void OnFarmUpdate(float deltaTime)
 	{
 		var currentStage = GetCurrentStage(_currentState);
 		ApplySpriteTo(currentStage)(_spriteRenderer);
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
+		_currentState = CommonCropBehavior(
 			Effects,
 			GetQuota,
-			NotifyQuotaFilled,
-			(beforeState) =>
-			{
-				return OnFarmUpdateFunctions[currentStage](beforeState, deltaTime);
-			},
-			_currentState)
-
-			(transform.position, transform.position);
+			OnQuotaFilled,
+			OnPlanted,
+			beforeState => OnFarmUpdateFunctions[currentStage](beforeState, deltaTime),
+			_currentState,
+			transform.position, 
+			transform.position);
 	}
 	
-	public override void ResetToInitialState() => _currentState = Reset(_currentState);
+	public override void ResetToInitialState() => _currentState = ResetCropState(_currentState);
 
 	private void Awake()
 	{
@@ -158,7 +173,7 @@ public sealed class CropCorn : Crop
 
 	private static readonly Dictionary<CornStage, Func<CornState, float, CornState>> OnFarmUpdateFunctions = new()
 	{
-		{CornStage.Seed, (currentState, _) => Reset(currentState) },
+		{CornStage.Seed, (currentState, _) => ResetCropState(currentState) },
 		{CornStage.Mature, (currentState, _) => DoNothing(currentState) },
 		{CornStage.Harvested, (currentState, _) => DoNothing(currentState) },
 
@@ -184,9 +199,24 @@ public sealed class CropCorn : Crop
 
 	private static readonly Dictionary<CornStage, Func<CornState, CornState>> OnTapFunctions = new()
 	{
+		{CornStage.Seed, DoNothing },
+		{CornStage.Mature, DoNothing },
+		{CornStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
+
+		{CornStage.Stage2_Dead, DoNothing },
+		{CornStage.Stage2_BeforeWater, DoNothing },
+		{CornStage.Stage2_Growing, DoNothing },
+
+		{CornStage.Stage1_Dead, DoNothing },
+		{CornStage.Stage1_BeforeWater, DoNothing },
+		{CornStage.Stage1_Growing, DoNothing },
+	};
+	
+	private static readonly Dictionary<CornStage, Func<CornState, CornState>> OnHoldFunctions = new()
+	{
 		{CornStage.Seed, Plant },
 		{CornStage.Mature, Harvest },
-		{CornStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
+		{CornStage.Harvested, DoNothing },
 
 		{CornStage.Stage2_Dead, DoNothing },
 		{CornStage.Stage2_BeforeWater, DoNothing },

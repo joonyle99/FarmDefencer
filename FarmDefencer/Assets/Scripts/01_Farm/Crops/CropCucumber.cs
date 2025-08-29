@@ -98,51 +98,63 @@ public sealed class CropCucumber : Crop
 		}
 	}
 	
-	public override void OnWatering()
-	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
-			Effects,
-			GetQuota,
-			NotifyQuotaFilled,
-			OnWateringFunctions[GetCurrentStage(_currentState)],
-			_currentState)
-
-			(transform.position, transform.position);
-	}
-
 	public override void OnTap(Vector2 worldPosition)
 	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
 			GetQuota,
-			NotifyQuotaFilled,
+			OnQuotaFilled,
+			OnPlanted,
 			OnTapFunctions[GetCurrentStage(_currentState)],
-			_currentState)
+			_currentState,
+			worldPosition, 
+			transform.position);
+	}
 
-			(worldPosition, transform.position);
+	public override bool OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
+	{
+		_currentState = CommonCropBehavior(
+			Effects,
+			GetQuota,
+			OnQuotaFilled,
+			OnPlanted,
+			OnHoldFunctions[GetCurrentStage(_currentState)],
+			_currentState,
+			initialWorldPosition + deltaWorldPosition, 
+			transform.position);
+
+		return false;
+	}
+	
+	public override void OnWatering()
+	{
+		_currentState = CommonCropBehavior(
+			Effects,
+			GetQuota,
+			OnQuotaFilled,
+			OnPlanted,
+			OnWateringFunctions[GetCurrentStage(_currentState)],
+			_currentState,
+			transform.position, 
+			transform.position);
 	}
 
 	public override void OnFarmUpdate(float deltaTime)
 	{
 		var currentStage = GetCurrentStage(_currentState);
 		GetSpriteAndApplyTo(currentStage)(_spriteRenderer);
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
-		Effects,
-		GetQuota,
-		NotifyQuotaFilled,
-		(beforeState) =>
-		{
-			return OnFarmUpdateFunctions[currentStage](beforeState, deltaTime);
-		},
-		_currentState)
-
-		(transform.position, transform.position);
+		_currentState = CommonCropBehavior(
+			Effects,
+			GetQuota,
+			OnQuotaFilled,
+			OnPlanted,
+			beforeState => OnFarmUpdateFunctions[currentStage](beforeState, deltaTime),
+			_currentState,
+			transform.position, 
+			transform.position);
 	}
 	
-	public override void ResetToInitialState() => _currentState = Reset(_currentState);
+	public override void ResetToInitialState() => _currentState = ResetCropState(_currentState);
 
 	private void Awake()
 	{
@@ -174,7 +186,7 @@ public sealed class CropCucumber : Crop
 
 	private static readonly Dictionary<CucumberStage, Func<CucumberState, float, CucumberState>> OnFarmUpdateFunctions = new()
 	{
-		{CucumberStage.Seed, (beforeState, deltaTime) => Reset(beforeState) },
+		{CucumberStage.Seed, (beforeState, deltaTime) => ResetCropState(beforeState) },
 
 		{CucumberStage.Stage1_Dead, WaitWater },
 		{CucumberStage.Stage1_BeforeWater, WaitWater },
@@ -204,7 +216,7 @@ public sealed class CropCucumber : Crop
 
 	private static readonly Dictionary<CucumberStage, Func<CucumberState, CucumberState>> OnTapFunctions = new()
 	{
-		{CucumberStage.Seed, Plant },
+		{CucumberStage.Seed, DoNothing },
 
 		{CucumberStage.Stage1_Dead, DoNothing },
 		{CucumberStage.Stage1_BeforeWater, DoNothing },
@@ -217,8 +229,27 @@ public sealed class CropCucumber : Crop
 
 		{CucumberStage.Stage3, (beforeState) => { beforeState.LongtrelisPlaced = true; return beforeState; } },
 
-		{CucumberStage.Mature, Harvest },
+		{CucumberStage.Mature, DoNothing },
 		{CucumberStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
+	};	
+	
+	private static readonly Dictionary<CucumberStage, Func<CucumberState, CucumberState>> OnHoldFunctions = new()
+	{
+		{CucumberStage.Seed, Plant },
+
+		{CucumberStage.Stage1_Dead, DoNothing },
+		{CucumberStage.Stage1_BeforeWater, DoNothing },
+		{CucumberStage.Stage1_Growing, DoNothing },
+
+		{CucumberStage.Stage2_BeforeShortTrelis, DoNothing },
+		{CucumberStage.Stage2_Dead, DoNothing },
+		{CucumberStage.Stage2_BeforeWater, DoNothing },
+		{CucumberStage.Stage2_Growing, DoNothing },
+
+		{CucumberStage.Stage3, DoNothing },
+
+		{CucumberStage.Mature, Harvest },
+		{CucumberStage.Harvested, DoNothing },
 	};	
 	
 	private static readonly Dictionary<CucumberStage, Func<CucumberState, CucumberState>> OnWateringFunctions = new()

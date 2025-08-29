@@ -74,49 +74,60 @@ public sealed class CropCarrot : Crop
 
 	public override void OnTap(Vector2 inputWorldPosition)
 	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
 			GetQuota,
-			NotifyQuotaFilled,
-			OnTapFunctions[GetCurrentStage(_currentState)], _currentState)
+			OnQuotaFilled,
+			OnPlanted,
+			OnTapFunctions[GetCurrentStage(_currentState)], 
+			_currentState,
+			inputWorldPosition, 
+			transform.position);
+	}
 
-			(inputWorldPosition, transform.position);
+	public override bool OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
+	{
+		_currentState = CommonCropBehavior(
+			Effects,
+			GetQuota,
+			OnQuotaFilled,
+			OnPlanted,
+			OnHoldFunctions[GetCurrentStage(_currentState)], 
+			_currentState,
+			initialWorldPosition + deltaWorldPosition, 
+			transform.position);
+
+		return false;
 	}
 
 	public override void OnWatering()
 	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
 			GetQuota,
-			NotifyQuotaFilled,
+			OnQuotaFilled,
+			OnPlanted,
 			WaterForNeedOnce,
-			_currentState)
-
-			(transform.position, transform.position);
+			_currentState,
+			transform.position, transform.position);
 	}
 	
-	public override void ResetToInitialState() => _currentState = Reset(_currentState);
+	public override void ResetToInitialState() => _currentState = ResetCropState(_currentState);
 
 	public override void OnFarmUpdate(float deltaTime)
 	{
 		var currentStage = GetCurrentStage(_currentState);
 		ApplySpriteTo(currentStage)(_spriteRenderer);
 
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
 			GetQuota,
-			NotifyQuotaFilled,
-			(beforeState)
-			=>
-			{
-				return OnFarmUpdateFunctions[currentStage](beforeState, deltaTime);
-			},
-			_currentState)
-	
-			(transform.position, transform.position);
+			OnQuotaFilled,
+			OnPlanted,
+			beforeState => OnFarmUpdateFunctions[currentStage](beforeState, deltaTime),
+			_currentState,
+			transform.position, 
+			transform.position);
 	}
 
 	private void Awake()
@@ -139,7 +150,7 @@ public sealed class CropCarrot : Crop
 
 	private static readonly Dictionary<CarrotStage, Func<CarrotState, float, CarrotState>> OnFarmUpdateFunctions = new()
 	{
-		{CarrotStage.Seed, (currentState, deltaTime) => Reset(currentState) },
+		{CarrotStage.Seed, (currentState, deltaTime) => ResetCropState(currentState) },
 		{CarrotStage.BeforeWater, WaitWater },
 		{CarrotStage.Dead, WaitWater },
 		{CarrotStage.Growing, Grow },
@@ -149,12 +160,22 @@ public sealed class CropCarrot : Crop
 
 	private static readonly Dictionary<CarrotStage, Func<CarrotState, CarrotState>> OnTapFunctions = new()
 	{
+		{CarrotStage.Seed, DoNothing },
+		{CarrotStage.BeforeWater, DoNothing },
+		{CarrotStage.Dead, DoNothing },
+		{CarrotStage.Growing, DoNothing },
+		{CarrotStage.Mature, DoNothing },
+		{CarrotStage.Harvested, FillQuotaOneAndResetIfSucceeded },
+	};
+	
+	private static readonly Dictionary<CarrotStage, Func<CarrotState, CarrotState>> OnHoldFunctions = new()
+	{
 		{CarrotStage.Seed, Plant },
 		{CarrotStage.BeforeWater, DoNothing },
 		{CarrotStage.Dead, DoNothing },
 		{CarrotStage.Growing, DoNothing },
 		{CarrotStage.Mature, Harvest },
-		{CarrotStage.Harvested, FillQuotaOneAndResetIfSucceeded },
+		{CarrotStage.Harvested, DoNothing },
 	};
 	
 	private static readonly Dictionary<CarrotStage, Func<CarrotState, RequiredCropAction>> GetRequiredCropActionFunctions = new()

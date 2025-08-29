@@ -137,45 +137,43 @@ public sealed class CropMushroom : Crop
 
 	public override void OnTap(Vector2 worldPosition)
 	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
 			GetQuota,
-			NotifyQuotaFilled,
+			OnQuotaFilled,
+			OnPlanted,
 			OnTapFunctions[GetCurrentStage(_currentState)],
-			_currentState)
-
-			(worldPosition, transform.position);
+			_currentState,
+			worldPosition, 
+			transform.position);
 	}
 
-	public override void OnHold(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
+	public override bool OnHold(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
 	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
 			GetQuota,
-			NotifyQuotaFilled,
-			(beforeState)
-			=>
-			{
-				return OnHoldFunctions[GetCurrentStage(_currentState)](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime);
-			},
-			_currentState)
+			OnQuotaFilled,
+			OnPlanted,
+			beforeState => OnHoldFunctions[GetCurrentStage(_currentState)](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime),
+			_currentState,
+			initialPosition + deltaPosition, 
+			transform.position);
 
-			(initialPosition + deltaPosition, transform.position);
+		return true;
 	}
 
 	public override void OnWatering()
 	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
 			GetQuota,
-			NotifyQuotaFilled,
+			OnQuotaFilled,
+			OnPlanted,
 			OnWateringFunctions[GetCurrentStage(_currentState)],
-			_currentState)
-
-			(transform.position, transform.position);
+			_currentState,
+			transform.position,
+			transform.position);
 	}
 
 	public override void OnFarmUpdate(float deltaTime)
@@ -184,19 +182,15 @@ public sealed class CropMushroom : Crop
 		GetSpriteAndApplyTo(currentStage)(_spriteRenderer);
 		GetSpriteAndApplyTo_PoisonousVarying(_currentState)(_spriteRenderer);
 
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
 			GetQuota,
-			NotifyQuotaFilled,
-			(beforeState)
-			=>
-			{
-				return OnFarmUpdateFunctions[GetCurrentStage(_currentState)](beforeState, deltaTime);
-			},
-			_currentState)
-
-			(transform.position, transform.position);
+			OnQuotaFilled,
+			OnPlanted,
+			beforeState => OnFarmUpdateFunctions[GetCurrentStage(_currentState)](beforeState, deltaTime),
+			_currentState,
+			transform.position, 
+			transform.position);
 
 		if (ForceHarvestOne && _currentState.IsPoisonous)
 		{
@@ -206,7 +200,7 @@ public sealed class CropMushroom : Crop
 		RenderInoculationAnimation();
 	}
 
-	public override void ResetToInitialState() => _currentState = Reset(_currentState);
+	public override void ResetToInitialState() => _currentState = ResetCropState(_currentState);
 
 	private void Awake()
 	{
@@ -391,7 +385,7 @@ public sealed class CropMushroom : Crop
 
 		if (nextState.BoomTimeElapsed >= BoomTime)
 		{
-			nextState = Reset(beforeState);
+			nextState = ResetCropState(beforeState);
 		}
 
 		return nextState;
@@ -422,7 +416,7 @@ public sealed class CropMushroom : Crop
 	{
 		var nextState = beforeState;
 		nextState.HoldingTime = beforeState.HoldingTime + deltaHoldTime;
-		if (Mathf.Abs(deltaPosition.x) >= PlowDeltaPositionCrierion)
+		if (Mathf.Abs(deltaPosition.x) >= PlowDeltaPositionCriterion)
 		{
 			nextState.Planted = true;
 		}
@@ -442,7 +436,7 @@ public sealed class CropMushroom : Crop
 			(beforeState, deltaTime) =>
 			{
 				var holdTime = beforeState.HoldingTime;
-				var reset = Reset(beforeState);
+				var reset = ResetCropState(beforeState);
 				reset.HoldingTime = holdTime;
 				return reset;
 			}
