@@ -37,6 +37,7 @@ public sealed class FarmManager : MonoBehaviour
     [SerializeField] private WeatherGiver weatherGiver;
     [SerializeField] private TimerUI timerUI;
     [SerializeField] private FarmDebugUI farmDebugUI;
+    [SerializeField] private GoldEarnEffectPlayer goldEarnEffectPlayer;
     
     private bool CanGoDefence => !weatherGiver.IsWeatherOnGoing && !pestGiver.IsWarningShowing && !harvestTutorialGiver.IsPlayingTutorial && ResourceManager.Instance.Coin > 0;
 
@@ -252,14 +253,17 @@ public sealed class FarmManager : MonoBehaviour
     {
         var quotaAfterPestsEat = pestGiver.LetPestsEat(entry.ProductName, cropWorldPosition, quota);
 
-        if (quotaAfterPestsEat > 0)
+        if (quotaAfterPestsEat <= 0)
         {
-            var goldEarnedFromSelling = quotaContext.FillQuota(entry.ProductName, quotaAfterPestsEat, MapManager.Instance.MaximumUnlockedMapIndex);
-            farmUI.PlayProductFillAnimation(entry, cropWorldPosition, quotaAfterPestsEat);
-            UpdateHarvestInventory();
-
-            EarnGold(goldEarnedFromSelling);
+            return;
         }
+
+        var goldEarnedFromSelling = quotaContext.FillQuota(entry.ProductName, quotaAfterPestsEat, MapManager.Instance.MaximumUnlockedMapIndex);
+        farmUI.PlayProductFillAnimation(entry, cropWorldPosition, quotaAfterPestsEat);
+        UpdateHarvestInventory();
+
+        EarnGold(goldEarnedFromSelling);
+        goldEarnEffectPlayer.PlayEffectAt(cropWorldPosition, goldEarnedFromSelling);
     }
 
     private void UpdateHarvestInventory()
