@@ -30,7 +30,7 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
     private SpriteRenderer _fieldLockedRenderer; // 1번 자식 오브젝트에 할당
 
     public Vector2 CropSignWorldPosition => _cropSign.transform.position;
-    
+
     public bool IsAvailable
     {
         get => _isAvailable;
@@ -185,12 +185,12 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
             _holdingCrop = null;
             return true;
         }
-        
+
         if (!IsAvailable)
         {
             return false;
         }
-        
+
         if (!_isHolding) // 첫 홀드 프레임. 홀드인지 스윕인지 판별해야 함.
         {
             if (TryFindCropAt(initialWorldPosition, out var crop)
@@ -209,7 +209,7 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
             _isHolding = true;
             return true;
         }
-        
+
         // 지속 홀드 프레임.
         if (_holdingCrop is not null)
         {
@@ -229,22 +229,16 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
 
     public void Init(
         Func<bool> isPestRunning,
-        Func<ProductEntry, int> getQuota, 
-        Action<ProductEntry, Vector2, int> fillQuota,
         Action<Vector2> onPlanted,
+        Action<Vector2, int> onSold,
         Action<ProductEntry> signClickedHandler)
     {
         _isPestRunning = isPestRunning;
         Array.ForEach(
             _crops,
-            crop => crop.Init(() => getQuota(ProductEntry),
-                (count) =>
-                {
-                    if (count > 0)
-                    {
-                        fillQuota(productEntry, crop.transform.position, count);
-                    }
-                },() => onPlanted(crop.transform.position)));
+            crop => crop.Init(
+                () => onPlanted(crop.transform.position),
+                count => onSold(crop.transform.position, count)));
         _onCropSignClicked = () => signClickedHandler(ProductEntry);
     }
 

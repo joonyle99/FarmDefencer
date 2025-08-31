@@ -15,7 +15,7 @@ public sealed class CropCarrot : Crop
 		public float GrowthSeconds { get; set; }
 		public bool Watered { get; set; }
 		public bool Harvested { get; set; }
-		public int RemainingQuota { get; set; }
+		public float DecayRatio { get; set; }
 	}
 
 	private enum CarrotStage
@@ -41,6 +41,11 @@ public sealed class CropCarrot : Crop
 	private CarrotState _currentState;
 	
 	public override RequiredCropAction RequiredCropAction => GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+
+	public override float? GaugeRatio =>
+		GetCurrentStage(_currentState) is CarrotStage.Mature or CarrotStage.Harvested
+			? 1.0f - _currentState.DecayRatio
+			: null;
 	
 	public override void ApplyCommand(CropCommand cropCommand)
 	{
@@ -76,9 +81,8 @@ public sealed class CropCarrot : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			OnQuotaFilled,
 			OnPlanted,
+			OnSold,
 			OnTapFunctions[GetCurrentStage(_currentState)], 
 			_currentState,
 			inputWorldPosition, 
@@ -89,9 +93,8 @@ public sealed class CropCarrot : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			OnQuotaFilled,
 			OnPlanted,
+			OnSold,
 			OnHoldFunctions[GetCurrentStage(_currentState)], 
 			_currentState,
 			initialWorldPosition + deltaWorldPosition, 
@@ -104,9 +107,8 @@ public sealed class CropCarrot : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			OnQuotaFilled,
 			OnPlanted,
+			OnSold,
 			WaterForNeedOnce,
 			_currentState,
 			transform.position, transform.position);
@@ -121,9 +123,8 @@ public sealed class CropCarrot : Crop
 
 		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			OnQuotaFilled,
 			OnPlanted,
+			OnSold,
 			beforeState => OnFarmUpdateFunctions[currentStage](beforeState, deltaTime),
 			_currentState,
 			transform.position, 
@@ -150,11 +151,11 @@ public sealed class CropCarrot : Crop
 
 	private static readonly Dictionary<CarrotStage, Func<CarrotState, float, CarrotState>> OnFarmUpdateFunctions = new()
 	{
-		{CarrotStage.Seed, (currentState, deltaTime) => ResetCropState(currentState) },
+		{CarrotStage.Seed, (currentState, _) => ResetCropState(currentState) },
 		{CarrotStage.BeforeWater, WaitWater },
 		{CarrotStage.Dead, WaitWater },
 		{CarrotStage.Growing, Grow },
-		{CarrotStage.Mature, DoNothing_OnFarmUpdate },
+		{CarrotStage.Mature, Decay },
 		{CarrotStage.Harvested, DoNothing_OnFarmUpdate },
 	};
 
@@ -165,7 +166,7 @@ public sealed class CropCarrot : Crop
 		{CarrotStage.Dead, DoNothing },
 		{CarrotStage.Growing, DoNothing },
 		{CarrotStage.Mature, DoNothing },
-		{CarrotStage.Harvested, FillQuotaOneAndResetIfSucceeded },
+		{CarrotStage.Harvested, ResetCropState },
 	};
 	
 	private static readonly Dictionary<CarrotStage, Func<CarrotState, CarrotState>> OnHoldFunctions = new()
@@ -204,7 +205,6 @@ public sealed class CropCarrot : Crop
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(HarvestEffectCondition, HarvestEffect_SoilDust),
-		(QuotaFilledEffectCondition, QuotaFilledEffect),
+		(HarvestEffectCondition, HarvestEffect_SoilDust)
 	};
 }

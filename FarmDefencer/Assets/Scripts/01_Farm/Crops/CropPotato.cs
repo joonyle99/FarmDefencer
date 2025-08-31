@@ -17,6 +17,7 @@ public sealed class CropPotato : Crop
 		public bool Harvested { get; set; }
 		public float HoldingTime { get; set; }
 		public int RemainingQuota { get; set; }
+		public float DecayRatio { get; set; }
 	}
 
 	private enum PotatoStage
@@ -44,6 +45,11 @@ public sealed class CropPotato : Crop
 
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+	
+	public override float? GaugeRatio =>
+		GetCurrentStage(_currentState) is PotatoStage.Mature or PotatoStage.Harvested
+			? 1.0f - _currentState.DecayRatio
+			: null;
 
 	public override void ApplyCommand(CropCommand cropCommand)
 	{
@@ -79,9 +85,8 @@ public sealed class CropPotato : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			OnQuotaFilled,
 			OnPlanted,
+			OnSold,
 			OnTapFunctions[GetCurrentStage(_currentState)],
 			_currentState,
 			inputWorldPosition, 
@@ -93,9 +98,8 @@ public sealed class CropPotato : Crop
 		var currentStage = GetCurrentStage(_currentState);
 		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			OnQuotaFilled,
 			OnPlanted,
+			OnSold,
 			beforeState
 			=> OnHoldFunctions[currentStage](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime),
 			_currentState,
@@ -109,9 +113,8 @@ public sealed class CropPotato : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			OnQuotaFilled,
 			OnPlanted,
+			OnSold,
 			WaterForNeedOnce,
 			_currentState,
 			transform.position, 
@@ -125,9 +128,8 @@ public sealed class CropPotato : Crop
 
 		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			OnQuotaFilled,
 			OnPlanted,
+			OnSold,
 			beforeState
 			=> OnFarmUpdateFunctions[currentStage](beforeState, deltaTime),
 			_currentState,
@@ -157,12 +159,12 @@ public sealed class CropPotato : Crop
 
 	private static readonly Dictionary<PotatoStage, Func<PotatoState, float, PotatoState>> OnFarmUpdateFunctions = new()
 	{
-		{PotatoStage.Seed, (currentState, deltaTime) => ResetCropState(currentState) },
+		{PotatoStage.Seed, (currentState, _) => ResetCropState(currentState) },
 		{PotatoStage.BeforeWater, WaitWater },
 		{PotatoStage.Dead, WaitWater },
 		{PotatoStage.Growing, Grow },
 		{PotatoStage.Mature, DoNothing_OnFarmUpdate },
-		{PotatoStage.Harvested, DoNothing_OnFarmUpdate },
+		{PotatoStage.Harvested, Decay },
 	};
 
 	private static readonly Dictionary<PotatoStage, Func<PotatoState, PotatoState>> OnTapFunctions = new()
@@ -172,7 +174,7 @@ public sealed class CropPotato : Crop
 		{PotatoStage.Dead, DoNothing },
 		{PotatoStage.Growing, DoNothing },
 		{PotatoStage.Mature, DoNothing },
-		{PotatoStage.Harvested, FillQuotaOneAndResetIfSucceeded },
+		{PotatoStage.Harvested, ResetCropState },
 	};
 
 	private static readonly Dictionary<PotatoStage, Func<PotatoState, Vector2, Vector2, bool, float, PotatoState>> OnHoldFunctions = new()
@@ -261,7 +263,6 @@ public sealed class CropPotato : Crop
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
 		(HoldEffectCondition, HoldEffect),
-		(QuotaFilledEffectCondition, QuotaFilledEffect),
 		(StopDustSfxEffectCondition, StopDustSfxEffect),
 		(PlayDustSfxEffectCondition, PlayDustSfxEffect),
 		(HarvestEffectCondition, StopDustEffectAndPlayHarvestSfxEffect)

@@ -1,45 +1,41 @@
 using UnityEngine;
 using System;
-using UnityEngine.UI;
+using System.Collections.Generic;
 
 public sealed class HarvestAnimationPlayer : MonoBehaviour
 {
-	private GameObject _screenAnimationObjectsRoot;
-	private GameObject _worldAnimationObjectsRoot;
-
-	public void PlayScreenAnimation(ProductEntry productEntry, float duration, Vector2 screenFrom, Vector2 screenTo, Action callback)
+	private HarvestAnimationObject _animationObjectToClone;
+	private List<HarvestAnimationObject> _animationObjectPool;
+	
+	public void PlayAnimation(ProductEntry productEntry, float duration, Vector2 screenFrom, Vector2 screenTo, Action callback)
 	{
-		var newAnimationObject = new GameObject("ScreenHarvestAnimationObject");
-		newAnimationObject.transform.parent = _screenAnimationObjectsRoot.transform;
+		if (_animationObjectPool.Count == 0)
+		{
+			var countToExtend = _animationObjectPool.Count + 1;
+			for (var i = 0; i < countToExtend; ++i)
+			{
+				var newAnimationObject = Instantiate(_animationObjectToClone, transform);
+				_animationObjectPool.Add(newAnimationObject.GetComponent<HarvestAnimationObject>());
+			}
+		}
 
-		newAnimationObject.AddComponent<Image>();
-		var animationComponent = newAnimationObject.AddComponent<ScreenHarvestAnimationObject>();
+		var animationComponent = _animationObjectPool[0];
+		_animationObjectPool.RemoveAt(0);
 		animationComponent.Play(
 			productEntry,
 			duration,
 			screenFrom,
-			screenTo, 
-			callback);
-	}
-	
-	public void PlayWorldAnimation(ProductEntry productEntry, float duration, Vector2 worldFrom, Vector2 worldTo, Action callback)
-	{
-		var newAnimationObject = new GameObject("WorldHarvestAnimationObject");
-		newAnimationObject.transform.parent = _worldAnimationObjectsRoot.transform;
-
-		newAnimationObject.AddComponent<SpriteRenderer>();
-		var animationComponent = newAnimationObject.AddComponent<WorldHarvestAnimationObject>();
-		animationComponent.Play(
-			productEntry,
-			duration,
-			worldFrom,
-			worldTo, 
-			callback);
+			screenTo,
+			() =>
+			{
+				_animationObjectPool.Add(animationComponent);
+				callback();
+			});
 	}
 
 	private void Awake()
 	{
-		_screenAnimationObjectsRoot = transform.Find("ScreenAnimationObjects").gameObject;
-		_worldAnimationObjectsRoot = transform.Find("WorldAnimationObjects").gameObject;
+		_animationObjectToClone = transform.Find("HarvestAnimationObject").GetComponent<HarvestAnimationObject>();
+		_animationObjectPool = new List<HarvestAnimationObject>();
 	}
 }

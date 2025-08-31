@@ -1,24 +1,32 @@
-using System;
 using System.Collections;
+using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public sealed class HarvestBox : MonoBehaviour
+public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 {
 	[SerializeField] private ProductEntry productEntry;
+	public ProductEntry ProductEntry => productEntry;
+	
 	private int _quota; // remaining count
 	public int Quota
 	{
 		get => _quota;
 		set
 		{
+			if (_quota <= 0 && value > 0)
+			{
+				SoundManager.Instance.PlaySfx("SFX_T_order_reset", SoundManager.Instance.orderResetVolume);
+				Blink();
+			}
+
+			IsAvailable = value > 0;
 			_quota = value;
 			_cropQuotaText.text = _quota.ToString();
 		}
 	}
-	public Vector2 ScreenPosition => _rectTransform.position;
-	public Vector2 UISize => _rectTransform.sizeDelta;
+
 	public bool IsAvailable
 	{
 		get
@@ -32,6 +40,7 @@ public sealed class HarvestBox : MonoBehaviour
 		}
 	}
 	private bool _isAvailable;
+	private float _blinkDuration;
 	private Image _hotImage;
 	private Image _specialImage;
 	private Image _boxImage;
@@ -39,10 +48,14 @@ public sealed class HarvestBox : MonoBehaviour
 	private Image _lockImage;
 	private Image _blinkImage;
 	private TMP_Text _cropQuotaText;
-	private RectTransform _rectTransform;
-	public RectTransform RectTransform => _rectTransform;
 
-	public void Blink(float duration) => StartCoroutine(DoBlink(duration));
+	public JObject Serialize() => new(_quota);
+
+	public void Deserialize(JObject json) => _quota = json.Value<int?>() ?? 0;
+	
+	public void Init(float blinkDuration) => _blinkDuration = blinkDuration;
+
+	public void Blink() => StartCoroutine(DoBlink());
 
 	public void ClearSpecialOrHot()
 	{
@@ -75,7 +88,6 @@ public sealed class HarvestBox : MonoBehaviour
 		_cropQuotaText = transform.Find("CropQuotaText").GetComponent<TMP_Text>();
 		_hotImage = transform.Find("HotImage").GetComponent<Image>();
 		_specialImage = transform.Find("SpecialImage").GetComponent<Image>();
-		_rectTransform = GetComponent<RectTransform>();
 
 		_lockImage.enabled = false;
 		IsAvailable = false;
@@ -90,13 +102,13 @@ public sealed class HarvestBox : MonoBehaviour
 		_cropQuotaText.text = _quota.ToString();
 	}
 
-	private IEnumerator DoBlink(float duration)
+	private IEnumerator DoBlink()
 	{
 		_blinkImage.enabled = true;
 		var elapsed = 0.0f;
-		while (elapsed < duration)
+		while (elapsed < _blinkDuration)
 		{
-			var x = elapsed / duration;
+			var x = elapsed / _blinkDuration;
 			var colorAlpha = -(2.0f * x - 1.0f) * (2.0f * x - 1.0f) + 1.0f; // 0->1->0 곡선
 
 			elapsed += Time.deltaTime;

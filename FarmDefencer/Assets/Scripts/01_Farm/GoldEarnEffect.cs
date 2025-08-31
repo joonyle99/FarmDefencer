@@ -7,42 +7,46 @@ using System;
 public sealed class GoldEarnEffect : MonoBehaviour
 {
     [SerializeField] private float textPopupScale = 1.0f;
-    [SerializeField] private float textDisappearSeconds = 0.5f;
+    [SerializeField] private float coinAnimationTime = 0.5f;
+    [SerializeField] private float disappearSeconds = 0.5f;
     [SerializeField] [SpineAnimation] private string goldEarnAnimationName;
     
+    public int GoldDisplaying { get; set; }
     private TMP_Text _text;
     private SkeletonAnimation _skeletonAnimation;
-    private bool _isPlayingEffect;
+    private Action<GoldEarnEffect> _callback;
+    
+    public void Init(Action<GoldEarnEffect> callback) => _callback = callback;
 
-    public void PlayEffect(int gold,  Action<GoldEarnEffect> callback)
+    public void PlayEffect(int gold)
     {
-        if (_isPlayingEffect)
+        if (gameObject.activeSelf)
         {
             return;
         }
-        _isPlayingEffect = true;
-        
         gameObject.SetActive(true);
-        _text.SetText($"+{gold}");
+
+        GoldDisplaying = gold;
         _skeletonAnimation.AnimationState.SetAnimation(0, goldEarnAnimationName, false);
-        StartCoroutine(CoPlayEffect(callback));
+        StartCoroutine(CoPlayEffect());
     }
     
     private void Awake()
     {
-        gameObject.SetActive(false);
         _text = transform.Find("Text").GetComponent<TMP_Text>();
-        transform.Find("Text").GetComponent<MeshRenderer>().sortingLayerName = "UI";
+        transform.Find("Text").GetComponent<MeshRenderer>().sortingLayerName = "VFX";
         _skeletonAnimation = transform.Find("Spine").GetComponent<SkeletonAnimation>();
     }
 
-    private IEnumerator CoPlayEffect(Action<GoldEarnEffect> callback)
+    private IEnumerator CoPlayEffect()
     {
+        yield return null;
         _text.alpha = 1.0f;
         var animationDuration = _skeletonAnimation.AnimationState.GetCurrent(0).Animation.Duration;
         var deltaTime = 0.0f;
-        while (!_skeletonAnimation.AnimationState.GetCurrent(0).IsComplete)
+        while (deltaTime < coinAnimationTime)
         {
+            _text.SetText($"+{GoldDisplaying}");
             deltaTime += Time.deltaTime;
             var textNextLocalPosition = _text.transform.localPosition;
 
@@ -53,15 +57,14 @@ public sealed class GoldEarnEffect : MonoBehaviour
         }
 
         deltaTime = 0.0f;
-        while (deltaTime < textDisappearSeconds)
+        while (deltaTime < disappearSeconds)
         {
             deltaTime += Time.deltaTime;
-            _text.alpha = 1.0f - deltaTime / textDisappearSeconds;
+            _text.alpha = 1.0f - deltaTime / disappearSeconds;
             yield return null;
         }
         
         gameObject.SetActive(false);
-        callback(this);
-        _isPlayingEffect = false;
+        _callback(this);
     }
 }

@@ -5,9 +5,6 @@ using Newtonsoft.Json.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-/// <summary>
-/// 자식으로는 반드시 Field 오브젝트만 가지게 할 것.
-/// </summary>
 public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFarmSerializable
 {
     private bool _isFarmPaused;
@@ -63,14 +60,6 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFarm
             }
             
             field.Deserialize((JObject)property.Value);
-        }
-    }
-
-    public void UpdateAvailability(Func<ProductEntry, bool> isFieldAvailable)
-    {
-        foreach (var field in _fields)
-        {
-            field.IsAvailable = isFieldAvailable(field.ProductEntry);
         }
     }
 
@@ -172,25 +161,36 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFarm
 
     public void Init(
         Func<bool> isPestRunning,
-        Func<ProductEntry, int> getQuota, 
-        Action<ProductEntry, Vector2, int> fillQuota,
+        Func<string, bool> isFieldAvailable,
         Action<Vector2> onPlanted,
+        Action<ProductEntry, Vector2, int> onSold,
         Action<ProductEntry> onSignClicked)
     {
-        Array.ForEach(_fields, field => field.Init(isPestRunning, getQuota, fillQuota, onPlanted, onSignClicked));
+        Array.ForEach(_fields,
+            field =>
+            {
+                field.IsAvailable = isFieldAvailable(field.ProductEntry.ProductName);
+                field.Init(isPestRunning, onPlanted,
+                    (cropWorldPosition, count) => onSold(field.ProductEntry, cropWorldPosition, count), onSignClicked);
+            });
     }
 
     private void Awake()
     {
-        _fields = new Field[transform.childCount];
+        var fields = new List<Field>();
 
-        for (int childIndex = 0; childIndex < transform.childCount; ++childIndex)
+        for (var childIndex = 0; childIndex < transform.childCount; ++childIndex)
         {
             var childObject = transform.GetChild(childIndex);
-            var fieldComponent = childObject.GetComponent<Field>();
+            if (!childObject.TryGetComponent<Field>(out var fieldComponent))
+            {
+                continue;
+            }
 
-            _fields[childIndex] = fieldComponent;
+            fields.Add(fieldComponent);
         }
+        
+        _fields = fields.ToArray();
     }
 
     private bool DoActionTo(Action<Field> action, Vector2 worldPosition)

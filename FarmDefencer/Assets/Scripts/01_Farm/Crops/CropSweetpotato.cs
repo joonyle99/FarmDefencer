@@ -23,6 +23,7 @@ public sealed class CropSweetpotato : Crop
 		public bool Wrapped { get; set; }
 		public float HoldingTime { get; set; }
 		public bool DeterminedCount { get; set; }
+		public float DecayRatio { get; set; }
 	}
 
 	private enum SweetpotatoStage
@@ -88,6 +89,11 @@ public sealed class CropSweetpotato : Crop
 
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+	
+	public override float? GaugeRatio =>
+		GetCurrentStage(_currentState) is SweetpotatoStage.Mature or SweetpotatoStage.Harvested
+			? 1.0f - _currentState.DecayRatio
+			: null;
 
 	public override void ApplyCommand(CropCommand cropCommand)
 	{
@@ -128,9 +134,8 @@ public sealed class CropSweetpotato : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			OnQuotaFilled,
 			OnPlanted,
+			OnSold,
 			OnTapFunctions[GetCurrentStage(_currentState)],
 			_currentState,
 			worldPosition, 
@@ -142,9 +147,8 @@ public sealed class CropSweetpotato : Crop
 		var currentStage = GetCurrentStage(_currentState);
 		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			OnQuotaFilled,
 			OnPlanted,
+			OnSold,
 			beforeState => OnHoldFunctions[currentStage](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime),
 			_currentState,
 			initialPosition + deltaPosition,
@@ -157,9 +161,8 @@ public sealed class CropSweetpotato : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			OnQuotaFilled,
 			OnPlanted,
+			OnSold,
 			OnWateringFunctions[GetCurrentStage(_currentState)],
 			_currentState,
 			transform.position,
@@ -174,9 +177,8 @@ public sealed class CropSweetpotato : Crop
 
 		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			OnQuotaFilled,
 			OnPlanted,
+			OnSold,
 			beforeState => OnFarmUpdateFunctions[currentStage](beforeState, deltaTime),
 			_currentState,
 			transform.position, 
@@ -279,7 +281,6 @@ public sealed class CropSweetpotato : Crop
 		(WrapEffectCondition, WrapEffect),
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(QuotaFilledEffectCondition, QuotaFilledEffect),
 		(HoldEffectCondition, HoldEffect),
 		(HoldStopEffectCondition, HoldStopEffect),
 		(TapEffectCondition, TapEffect),
@@ -545,7 +546,7 @@ public sealed class CropSweetpotato : Crop
 			}
 		},
 
-		{SweetpotatoStage.Mature, DoNothing_OnFarmUpdate },
+		{SweetpotatoStage.Mature, Decay },
 		{SweetpotatoStage.Harvested, DoNothing_OnFarmUpdate },
 	};
 
@@ -567,7 +568,7 @@ public sealed class CropSweetpotato : Crop
 		{SweetpotatoStage.Stage4, DoNothing },
 
 		{SweetpotatoStage.Mature, HarvestIfFiveTap },
-		{SweetpotatoStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, beforeState.RemainingSweetpotatoCount) },
+		{SweetpotatoStage.Harvested, ResetCropState },
 	};
 	
 	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, SweetpotatoState>> OnWateringFunctions = new()

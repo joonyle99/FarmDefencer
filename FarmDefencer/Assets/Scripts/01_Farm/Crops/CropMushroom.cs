@@ -26,6 +26,7 @@ public sealed class CropMushroom : Crop
 		public float HoldingTime { get; set; }
 		public bool IsPoisonous { get; set; }
 		public float BoomTimeElapsed { get; set; }
+		public float DecayRatio { get; set; }
 	}
 
 	private enum MushroomStage
@@ -99,6 +100,11 @@ public sealed class CropMushroom : Crop
 
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+	
+	public override float? GaugeRatio =>
+		GetCurrentStage(_currentState) is MushroomStage.Mature or MushroomStage.Harvested
+			? 1.0f - _currentState.DecayRatio
+			: null;
 
 	public override void ApplyCommand(CropCommand cropCommand)
 	{
@@ -139,9 +145,8 @@ public sealed class CropMushroom : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			OnQuotaFilled,
 			OnPlanted,
+			OnSold,
 			OnTapFunctions[GetCurrentStage(_currentState)],
 			_currentState,
 			worldPosition, 
@@ -152,9 +157,8 @@ public sealed class CropMushroom : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			OnQuotaFilled,
 			OnPlanted,
+			OnSold,
 			beforeState => OnHoldFunctions[GetCurrentStage(_currentState)](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime),
 			_currentState,
 			initialPosition + deltaPosition, 
@@ -167,9 +171,8 @@ public sealed class CropMushroom : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			OnQuotaFilled,
 			OnPlanted,
+			OnSold,
 			OnWateringFunctions[GetCurrentStage(_currentState)],
 			_currentState,
 			transform.position,
@@ -184,9 +187,8 @@ public sealed class CropMushroom : Crop
 
 		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			OnQuotaFilled,
 			OnPlanted,
+			OnSold,
 			beforeState => OnFarmUpdateFunctions[GetCurrentStage(_currentState)](beforeState, deltaTime),
 			_currentState,
 			transform.position, 
@@ -345,7 +347,6 @@ public sealed class CropMushroom : Crop
 		(HoldStopEffectCondition, HoldStopEffect),
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(QuotaFilledEffectCondition, QuotaFilledEffect),
 		(HoldEffectCondition, HoldEffect),
 		(TapEffectCondition, TapEffect),
 		(PlayShotSfxEffectCondition, PlayShotSfxEffect),
@@ -500,7 +501,7 @@ public sealed class CropMushroom : Crop
 
 		{MushroomStage.Mature, HarvestOnFiveTap },
 		{MushroomStage.Booming, DoNothing },
-		{MushroomStage.Harvested, FillQuotaOneAndResetIfSucceeded },
+		{MushroomStage.Harvested, ResetCropState },
 	};
 
 	private static readonly Dictionary<MushroomStage, Func<MushroomState, MushroomState>> OnWateringFunctions = new()
