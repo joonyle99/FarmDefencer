@@ -35,6 +35,10 @@ public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 		}
 		set
 		{
+			if (_isAvailable == value)
+			{
+				return;
+			}
 			_isAvailable = value;
 			OnAvailabilityChanged();
 		}

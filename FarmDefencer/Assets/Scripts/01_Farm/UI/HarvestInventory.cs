@@ -118,6 +118,7 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
         foreach (var productEntry in _harvestBoxes.Keys)
         {
             AssignQuotaOf(productEntry.ProductName, currentMapId, currentStageId);
+            _hotSpecialTurn = 0;
         }
     }
 
@@ -156,9 +157,8 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
         harvestBox.Quota = Random.Range(minimum, maximum + 1) / 10 * 10;
 
         // 핫, 스페셜 배정해야 할 때가 아니면 스킵
-        if ((HotProduct is not null || SpecialProduct is not null) &&
-            HotProduct != harvestBox.ProductEntry &&
-            SpecialProduct != harvestBox.ProductEntry)
+        if (HotProduct is not null && !HotProduct.ProductName.Equals(productName) ||
+            SpecialProduct is not null && !SpecialProduct.ProductName.Equals(productName))
         {
             return;
         }
@@ -191,6 +191,7 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
                 {
                     SpecialProduct = box.ProductEntry;
                     box.MarkSpecial();
+                    
                 }
                 else
                 {
