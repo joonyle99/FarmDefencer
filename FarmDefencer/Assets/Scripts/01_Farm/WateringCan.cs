@@ -51,7 +51,6 @@ public sealed class WateringCan :
 
 	private SkeletonAnimation _worldWateringCan;
 	private SkeletonGraphic _uiWateringCan;
-	private bool _isWateredThisTime; // 이벤트 중복 호출 방지용
 
 	public bool OnTap(Vector2 worldPosition)
 	{
@@ -113,19 +112,10 @@ public sealed class WateringCan :
 			return;
 		}
 
-		var currentTrackEntry = _worldWateringCan.AnimationState.GetCurrent(0);
-		if (currentTrackEntry.AnimationTime < WateringAnimationTimePoint)
-		{
-			_isWateredThisTime = false;
-		}
-		else if (!_isWateredThisTime)
-		{
-			_isWateredThisTime = true;
-			_onWatering?.Invoke(new Vector2(_worldWateringCan.transform.position.x + wateringOffset.x - 0.5f, _worldWateringCan.transform.position.y + wateringOffset.y - 0.5f));
-			_onWatering?.Invoke(new Vector2(_worldWateringCan.transform.position.x + wateringOffset.x + 0.5f, _worldWateringCan.transform.position.y + wateringOffset.y - 0.5f));
-			_onWatering?.Invoke(new Vector2(_worldWateringCan.transform.position.x + wateringOffset.x - 0.5f, _worldWateringCan.transform.position.y + wateringOffset.y + 0.5f));
-			_onWatering?.Invoke(new Vector2(_worldWateringCan.transform.position.x + wateringOffset.x + 0.5f, _worldWateringCan.transform.position.y + wateringOffset.y + 0.5f));
-		}
+		_onWatering?.Invoke(new Vector2(_worldWateringCan.transform.position.x + wateringOffset.x - 0.5f, _worldWateringCan.transform.position.y + wateringOffset.y - 0.5f));
+		_onWatering?.Invoke(new Vector2(_worldWateringCan.transform.position.x + wateringOffset.x + 0.5f, _worldWateringCan.transform.position.y + wateringOffset.y - 0.5f));
+		_onWatering?.Invoke(new Vector2(_worldWateringCan.transform.position.x + wateringOffset.x - 0.5f, _worldWateringCan.transform.position.y + wateringOffset.y + 0.5f));
+		_onWatering?.Invoke(new Vector2(_worldWateringCan.transform.position.x + wateringOffset.x + 0.5f, _worldWateringCan.transform.position.y + wateringOffset.y + 0.5f));
 	}
 
 	private void OnUsingStateChanged()
