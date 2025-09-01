@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapId: 3
   mapCode: cave
+  mapName: "\uB3D9\uAD74"
   monsters:
   - {fileID: 1560164754338435320, guid: 731143e25bfdea6488f1aa31efc50559, type: 3}
   - {fileID: 8091056638516497859, guid: d4240e065ba94e248918f53d93631554, type: 3}

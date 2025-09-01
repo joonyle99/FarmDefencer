@@ -1,8 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// 해당 맵에 존재하는 모든 스테이지 버튼을 초기화하고,
+/// 버튼 클릭 시 해당 스테이지로 이동하는 역할을 담당
+/// </summary>
 public class StageInitializer : MonoBehaviour
 {
+    /// <summary>
+    /// 해당 맵에 존재하는 모든 스테이지 버튼을 자식으로 가지고 있는 오브젝트
+    /// </summary>
     [SerializeField] private GameObject _stageButtons;
 
     private void Start()

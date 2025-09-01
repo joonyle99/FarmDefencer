@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapId: 2
   mapCode: beach
+  mapName: "\uD574\uBCC0"
   monsters:
   - {fileID: 8504615390514146694, guid: 83c5e4ce8fc25124589524377a783765, type: 3}
   - {fileID: 8244829762353483558, guid: 3020189df1f79bf409d60b0e79598c7b, type: 3}

@@ -30,11 +30,11 @@ public class WorldUI : MonoBehaviour
     {
         var map = MapManager.Instance.GetMapEntryOf(mapIdx);
         _travelMap = map;
-        _mapNameText.text = map.MapCode;
+        _mapNameText.text = map.MapName;
     }
     public void ChangeTravelMap(MapEntry map)
     {
         _travelMap = map;
-        _mapNameText.text = map.MapCode;
+        _mapNameText.text = map.MapName;
     }
 }
