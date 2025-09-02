@@ -127,12 +127,12 @@ public class LoadingManager : MonoBehaviour
 {
     private async void Start()
     {
-        //// cache 초기화
         ResourceCache.Clear();
         AssetCache.Clear();
 
         var mapEntry = MapManager.Instance.CurrentMap;
         var mapCode = mapEntry.MapCode;
+        //var mapResources = mapEntry.Resources;
 
         {
             var tasks = new List<Task>();
@@ -156,11 +156,53 @@ public class LoadingManager : MonoBehaviour
             tasks.Add(AssetCache.LoadAsync<DamageText>("DamageText"));
             tasks.Add(AssetCache.LoadAsync<ChainLightning>("ChainLightning"));
 
+            // TODO 이후에 SO 방식으로 개선하면 좋을것같음
+
+            //foreach (var resource in mapResources)
+            //{
+            //    var key = string.Empty;
+
+            //    switch (resource.temp)
+            //    {
+            //        case Temp.None:
+            //            key = resource.format;
+            //            break;
+            //        case Temp.MapCode:
+            //            key = resource.format.Replace("{MapCode}", mapCode);
+            //            break;
+            //        case Temp.MonterCode:
+            //            // TODO
+            //            break;
+            //        default:
+            //            key = resource.format;
+            //            break;
+            //    }
+
+            //    switch (resource.kind)
+            //    {
+            //        case ResourceKind.Sprite:
+            //            tasks.Add(ResourceCache.LoadAsync<Sprite>(key));
+            //            break;
+            //        case ResourceKind.Video:
+            //            tasks.Add(ResourceCache.LoadAsync<VideoClip>(key));
+            //            break;
+            //        case ResourceKind.Material:
+            //            tasks.Add(ResourceCache.LoadAsync<Material>(key));
+            //            break;
+            //        case ResourceKind.SkeletonData:
+            //            tasks.Add(ResourceCache.LoadAsync<SkeletonDataAsset>(key));
+            //            break;
+            //        case ResourceKind.Prefab:
+            //            tasks.Add(AssetCache.LoadAsync<Component>(key));
+            //            break;
+            //    }
+            //}
+
             // 모든 리소스를 병렬 로드
             await Task.WhenAll(tasks);
 
-            // 최소 로딩 시간 보장 (예: 1초)
-            var minDelay = Task.Delay(1000);
+            // 최소 로딩 시간 보장 (예: 1.5초)
+            var minDelay = Task.Delay(1500);
             await Task.WhenAll(minDelay);
         }
 
