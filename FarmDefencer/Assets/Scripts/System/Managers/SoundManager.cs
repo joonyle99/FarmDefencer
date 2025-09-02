@@ -66,7 +66,14 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
     [CanBeNull] public string CurrentBgmName { get; private set; }
     public float CurrentBgmTime => _bgmAudioSource1.time;
     [CanBeNull] public string CurrentAmbName { get; private set; }
-    
+
+    private Dictionary<string, float> _defenceMapSongRatio = new()
+    {
+        { "forest", 1.500f },
+        { "beach", 1.499f },
+        { "cave", 1.299f },
+    };
+
     /// <summary>
     /// 내부 캐시에서 Bgm을 불러와 재생하는 메소드.
     /// 캐시에 존재하지 않을 경우 Resources/_Bgm에서 불러와 캐시에 넣고 재생함.
@@ -145,7 +152,7 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 		    _ambAudioSource.clip = amb;
 		    _ambAudioSource.Play();
 	    }
-	    
+
 	    _ambAudioSource.volume = volume;
 	    CurrentAmbName = ambName;
     }
@@ -181,11 +188,31 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
         var mapAmbName = $"AMB_D_{currentMap.MapCode}";
         PlayAmb(mapAmbName, ambVolume);
     }
-    public void PlayDefenceMapSong()
+    public void PlayDefenceMapSong(bool isFast = false)
     {
         var currentMap = MapManager.Instance.CurrentMap;
-        var mapSongName = $"BGM_D_{currentMap.MapCode}";
-        PlayBgm(mapSongName, songVolume);
+        var originalSongName = $"BGM_D_{currentMap.MapCode}_{"original"}_song";
+        var fastSongName = $"BGM_D_{currentMap.MapCode}_{"fast"}_song";
+        var nextBgmName = isFast == false ? originalSongName : fastSongName;
+        var mapSongSpeedRatio = _defenceMapSongRatio[currentMap.MapCode];
+
+        // bgm만 교체하고 재생 시간을 유지함
+        // 1. 현재 original song 재생 중인데, 다음 재생할 bgm이 fast song인 경우
+        if (CurrentBgmName == originalSongName && nextBgmName == fastSongName)
+        {
+            var bgmTime = CurrentBgmTime / mapSongSpeedRatio; // bgm 길이 보정
+            PlayBgm(nextBgmName, songVolume, bgmTime);
+        }
+        // 2. 현재 fast song 재생 중인데, 다음 재생할 bgm이 original song인 경우
+        else if (CurrentBgmName == fastSongName && nextBgmName == originalSongName)
+        {
+            var bgmTime = CurrentBgmTime * mapSongSpeedRatio; // bgm 길이 보정
+            PlayBgm(nextBgmName, songVolume, bgmTime);
+        }
+        else
+        {
+            PlayBgm(nextBgmName, songVolume);
+        }
     }
 
     /// <summary>
@@ -246,7 +273,7 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 
             _sfxDictionary.Add(name, newSfxList);
 		}
-		
+
 		var sfxList = _sfxDictionary[name];
 
 		// 유효하지 않은 경우
@@ -325,11 +352,11 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
         yield return new WaitForSeconds(seconds);
         callback?.Invoke();
     }
-    
+
     protected override void Awake()
 	{
 		base.Awake();
-		
+
 		_sfxDictionary = new Dictionary<string, List<AudioClip>>();
         _bgmDictionary = new Dictionary<string, AudioClip>();
         _ambDictionary = new Dictionary<string, AudioClip>();

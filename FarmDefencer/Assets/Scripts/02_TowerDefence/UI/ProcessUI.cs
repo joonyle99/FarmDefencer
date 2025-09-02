@@ -128,13 +128,17 @@ public class ProcessUI : MonoBehaviour
 
         if (GameStateManager.Instance.IsPlayX2)
         {
-            SoundManager.Instance.SetBgmDoubleSpeed();
-            SoundManager.Instance.SetAmbDoubleSpeed();
+            //SoundManager.Instance.SetBgmDoubleSpeed();
+            //SoundManager.Instance.SetAmbDoubleSpeed();
+
+            SoundManager.Instance.PlayDefenceMapSong(true);
         }
         else
         {
-            SoundManager.Instance.SetBgmNormalSpeed();
-            SoundManager.Instance.SetAmbNormalSpeed();
+            //SoundManager.Instance.SetBgmNormalSpeed();
+            //SoundManager.Instance.SetAmbNormalSpeed();
+
+            SoundManager.Instance.PlayDefenceMapSong(false);
         }
     }
 
