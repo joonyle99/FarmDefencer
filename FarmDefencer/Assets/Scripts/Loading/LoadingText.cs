@@ -19,6 +19,6 @@ public class LoadingText : MonoBehaviour
             .AppendInterval(0.3f)
             .AppendCallback(() => _text.text = "LOADING...")
             .AppendInterval(0.3f)
-            .SetLoops(-1, LoopType.Restart);
+            .SetLoops(-1, LoopType.Restart); // -1: 무한 반복
     }
 }

@@ -40,6 +40,7 @@ public class StageInitializer : MonoBehaviour
 
         // 로딩 씬 설정
         SceneLoadContext.NextSceneName = "Defence Scene";
+        //SceneLoadContext.OnSceneChanged = null;
         SceneLoadContext.OnSceneChanged += () =>
         {
             SceneLoadContext.OnSceneChanged = null;
