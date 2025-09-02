@@ -11,9 +11,10 @@ public class MonsterUI : MonoBehaviour
 
         foreach (var monster in monsters)
         {
-            // 1. SkeletonDataAsset 로드
             var lowerName = monster.MonsterData.Name;
             var upperedName = char.ToUpper(lowerName[0]) + lowerName.Substring(1);
+
+            // 1. SkeletonDataAsset 로드
             var skeletonDataName = $"monster_{lowerName}_SkeletonData";
             var skeletonData = ResourceCache.Get<SkeletonDataAsset>(skeletonDataName);
             if (skeletonData == null)
@@ -22,8 +23,9 @@ public class MonsterUI : MonoBehaviour
                 continue;
             }
 
+            // 2. SkeletonMaterial 로드
             var skeletonMaterialName = $"monster_{lowerName}_Material";
-            var skeletonMaterial = ResourceCache.Get<Material>(skeletonDataName);
+            var skeletonMaterial = ResourceCache.Get<Material>(skeletonMaterialName);
             if (skeletonMaterial == null)
             {
                 Debug.LogError($"SkeletonMaterial is null: {skeletonMaterialName}");

@@ -36,7 +36,15 @@ public static class ResourceCache
     {
         if (_cachedHandles.TryGetValue(key, out var handle))
         {
-            return handle.Result as T;
+            if (handle.Result is T result)
+            {
+                return result;
+            }
+            else
+            {
+                Debug.LogError($"{key} is not of type {typeof(T).Name}, but {handle.Result?.GetType().Name}");
+                return null;
+            }
         }
 
         return null;
