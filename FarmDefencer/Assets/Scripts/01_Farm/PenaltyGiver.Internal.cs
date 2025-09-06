@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public partial class PenaltyGiver
 {
@@ -39,29 +40,24 @@ public partial class PenaltyGiver
 
     private class CropLocker
     {
-        private CropLock _cropLock;
-        private float _remainingTime;
+        public float RemainingTime { get; private set; }
 
-        public bool IsDone => _remainingTime <= 0.0f;
+        public bool IsDone => RemainingTime <= 0.0f;
 
-        public Vector2 LockPosition => _cropLock.transform.position;
-        public float RemainingTime => _remainingTime;
+        public Vector2 LockPosition { get; }
+        private Action<Vector2, float> _updateGauge;
 
-        public CropLocker(CropLock cropLock, float lockTime)
+        public CropLocker(Vector2 cropWorldPosition, float lockTime, Action<Vector2, float> updateGauge)
         {
-            _cropLock = cropLock;
-            _remainingTime = lockTime;
+            LockPosition = cropWorldPosition;
+            RemainingTime = lockTime;
+            _updateGauge = updateGauge;
         }
 
         public void UpdateLock(float deltaTime)
         {
-            _remainingTime -= deltaTime;
-            _cropLock.UpdateGauge(Mathf.Clamp01(_remainingTime / CropLockTime));
-        }
-
-        public void DestroyLock()
-        {
-            Destroy(_cropLock.gameObject);
+            RemainingTime -= deltaTime;
+            _updateGauge(LockPosition, Mathf.Clamp01(RemainingTime / CropLockTime));
         }
     }
 }

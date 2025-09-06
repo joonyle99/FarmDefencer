@@ -53,7 +53,7 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
         var jsonHarvestBoxes = new JObject();
         foreach (var (productEntry, harvestBox) in _harvestBoxes)
         {
-            jsonHarvestBoxes.Add(productEntry.ProductName, harvestBox.Quota);
+            jsonHarvestBoxes.Add(productEntry.ProductName, harvestBox.Serialize());
         }
 
         json.Add("HarvestBoxes", jsonHarvestBoxes);
@@ -69,7 +69,7 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
             {
                 var harvestBox = _harvestBoxes.FirstOrDefault(pair => pair.Key.ProductName.Equals(jsonHarvestBox.Name))
                     .Value;
-                harvestBox.Deserialize(jsonHarvestBox.Value<JObject>());
+                harvestBox.Deserialize(jsonHarvestBox.Value.Value<JObject>());
             }
         }
 

@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFarmSerializable
 {
+    private CropDisplay _cropDisplayToClone;
     private bool _isFarmPaused;
     private Field[] _fields;
 
@@ -133,9 +134,17 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFarm
         return found;
     }
 
-    public bool TryLockCropAt(Vector2 cropPosition) =>_fields.Any(field => field.TryLockCropAt(cropPosition));
+    public bool TryLockCropAt(Vector2 cropPosition) => _fields.Any(field => field.TryLockCropAt(cropPosition));
 
     public void UnlockCropAt(Vector2 cropPosition) => Array.ForEach(_fields, f => f.UnlockCropAt(cropPosition));
+
+    public void UpdateCropGaugeManuallyAt(Vector2 cropPosition, float gaugeRatio)
+    {
+        foreach (var field in _fields)
+        {
+            field.UpdateCropGaugeManually(cropPosition, gaugeRatio);
+        }
+    }
 
     public bool OnTap(Vector2 worldPosition) =>
         DoActionTo(field => field.OnTap(worldPosition), worldPosition);
@@ -170,8 +179,11 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFarm
             field =>
             {
                 field.IsAvailable = isFieldAvailable(field.ProductEntry.ProductName);
-                field.Init(isPestRunning, onPlanted,
-                    (cropWorldPosition, count) => onSold(field.ProductEntry, cropWorldPosition, count), onSignClicked);
+                field.Init(isPestRunning, 
+                    onPlanted,
+                    (cropWorldPosition, count) => onSold(field.ProductEntry, cropWorldPosition, count), 
+                    onSignClicked,
+                    _cropDisplayToClone);
             });
     }
 
@@ -191,6 +203,11 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFarm
         }
         
         _fields = fields.ToArray();
+    }
+
+    private void Start()
+    {
+        _cropDisplayToClone = transform.Find("CropDisplay").GetComponent<CropDisplay>();
     }
 
     private bool DoActionTo(Action<Field> action, Vector2 worldPosition)

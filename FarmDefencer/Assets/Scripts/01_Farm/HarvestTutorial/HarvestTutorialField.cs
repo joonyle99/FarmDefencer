@@ -48,7 +48,8 @@ public sealed class HarvestTutorialField : MonoBehaviour
                 SoundManager.Instance.PlaySfx("SFX_T_coin", SoundManager.Instance.coinVolume);
                 
             },
-            _ => { });
+            _ => { },
+            null);
 
         foreach (var spriteRendererComponent in _field.GetComponentsInChildren<SpriteRenderer>())
         {

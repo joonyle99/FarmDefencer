@@ -53,9 +53,9 @@ public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 	private Image _blinkImage;
 	private TMP_Text _cropQuotaText;
 
-	public JObject Serialize() => new(_quota);
+	public JObject Serialize() => new(new JProperty("Quota", _quota));
 
-	public void Deserialize(JObject json) => _quota = json.Value<int?>() ?? 0;
+	public void Deserialize(JObject json) => _quota = json["Quota"]?.Value<int?>() ?? 0;
 	
 	public void Init(float blinkDuration) => _blinkDuration = blinkDuration;
 
