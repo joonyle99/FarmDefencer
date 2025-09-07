@@ -11,9 +11,10 @@ public class TowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointe
     [SerializeField] private Image _background;
     [SerializeField] private Image _icon;
     [SerializeField] private Color _hoverColor;
-    private Color _normalColor = new Color(1f, 1f, 1f, 1f);
     [SerializeField] private TextMeshProUGUI _cost;
     [SerializeField] private int selectedIndex = 0;
+
+    private Color _normalColor = new Color(1f, 1f, 1f, 1f);
 
     private void Start()
     {
