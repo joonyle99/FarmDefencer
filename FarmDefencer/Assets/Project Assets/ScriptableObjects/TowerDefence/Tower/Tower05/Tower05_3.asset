@@ -22,9 +22,8 @@ MonoBehaviour:
   SlowRate: 0
   SlowDuration: 0
   ValueCost: 355000
-  SellCost: 225500
-  FireReady: {fileID: 8300000, guid: e78548deedea2d2458b4d90a0acf9ef5, type: 3}
-  FireShot: {fileID: 8300000, guid: 67250d290b860b54b9364e27818cbcfa, type: 3}
+  FireReady: {fileID: 0}
+  FireShot: {fileID: 8300000, guid: 9822441dccf5046c2b4565fe7aac68ea, type: 3}
   TickCount: 0
   TickInterval: 0
   TickDamage: 0
