@@ -10,14 +10,14 @@ public sealed class LaserBeam : BeamBase
     //[Header("──────── Laser Beam ────────")]
     //[Space]
 
+    //private SlowEffector _slowEffector;
+    //private bool _isSlowEffectApplied = false;
+
     private ColorEffect _colorEffect;
     private bool _isColorEffectApplied = false;
 
-    private SlowEffector _slowEffector;
-    private bool _isSlowEffectApplied = false;
-
     private AudioSource _audioSource;
-    [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float laserStayVolume = 0.5f;
+    [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float laserVolume = 0.5f;
 
     private void Awake()
     {
@@ -25,7 +25,7 @@ public sealed class LaserBeam : BeamBase
     }
     private void Start()
     {
-        _audioSource.volume = laserStayVolume;
+        _audioSource.volume = laserVolume;
         _audioSource.loop = true;
         _audioSource.Play();
     }

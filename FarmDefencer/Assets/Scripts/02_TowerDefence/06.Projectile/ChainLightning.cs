@@ -1,4 +1,5 @@
 using UnityEngine;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -14,9 +15,14 @@ public class ChainLightning : MonoBehaviour
     private List<TargetableBehavior> _appliedTargets = new List<TargetableBehavior>();
     public List<TargetableBehavior> AppliedTargets => _appliedTargets;
 
+    private AudioSource _audioSource;
+    [SerializeField] private List<AudioClip> _audioClips;
+    [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float lightningVolume = 0.5f;
+
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
+        _audioSource = GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -88,6 +94,15 @@ public class ChainLightning : MonoBehaviour
             // 라이트닝 효과 적용
             var lightningEffector = target.gameObject.AddComponent<LightningEffector>();
             lightningEffector.Activate(target);
+
+            // 사운드 재생
+            var audioClip = _audioClips[i];
+            if (audioClip != null)
+            {
+                _audioSource.clip = audioClip;
+                _audioSource.volume = lightningVolume;
+                _audioSource.Play();
+            }
 
             // 라인 렌더러에 타겟 추가
             _appliedTargets.Add(target);
