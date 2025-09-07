@@ -7,10 +7,8 @@ using System.Linq;
 /// </summary>
 public sealed class LightningProjectile : LinearProjectile
 {
-    [Header("──────── Lightning Projectile ────────")]
-    [Space]
-
-    public int MaxCount = 3;
+    //[Header("──────── Lightning Projectile ────────")]
+    //[Space]
 
     protected override void DealDamage()
     {
@@ -19,7 +17,7 @@ public sealed class LightningProjectile : LinearProjectile
     protected override void DealEffect()
     {
         // 모든 타겟을 미리 정해서 반환한다
-        var targets = FindTargetsWithDFS(target, MaxCount);
+        var targets = FindTargetsWithDFS(target, caster.CurrentLevelData.MaxTransitionCount);
 
         // ChainLightning (체인 라이트닝) 생성해 LightningEffector에 전달
         // 이 때 체인 라이트닝 게임 오브젝트는 씬의 루트에 생성

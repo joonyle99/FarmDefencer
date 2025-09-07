@@ -30,5 +30,4 @@ MonoBehaviour:
   TickDamage: 0
   StayDuration: 0
   DealInterval: 0
-  TEMP1: 0
-  TEMP2: 0
+  MaxTransitionCount: 5
