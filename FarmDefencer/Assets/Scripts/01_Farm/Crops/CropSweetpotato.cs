@@ -23,6 +23,7 @@ public sealed class CropSweetpotato : Crop
 		public bool Wrapped { get; set; }
 		public float HoldingTime { get; set; }
 		public bool DeterminedCount { get; set; }
+		public float DecayRatio { get; set; }
 	}
 
 	private enum SweetpotatoStage
@@ -88,6 +89,11 @@ public sealed class CropSweetpotato : Crop
 
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+	
+	public override float? GaugeRatio =>
+		GetCurrentStage(_currentState) is SweetpotatoStage.Mature or SweetpotatoStage.Harvested
+			? 1.0f - _currentState.DecayRatio
+			: null;
 
 	public override void ApplyCommand(CropCommand cropCommand)
 	{
@@ -126,45 +132,41 @@ public sealed class CropSweetpotato : Crop
 
 	public override void OnTap(Vector2 worldPosition)
 	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			NotifyQuotaFilled,
+			OnPlanted,
+			OnSold,
 			OnTapFunctions[GetCurrentStage(_currentState)],
-			_currentState)
-
-			(worldPosition, transform.position);
+			_currentState,
+			worldPosition, 
+			transform.position);
 	}
 
-	public override void OnHold(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
+	public override bool OnHold(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
 	{
 		var currentStage = GetCurrentStage(_currentState);
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			NotifyQuotaFilled,
-			(beforeState) =>
-			{
-				return OnHoldFunctions[currentStage](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime);
-			},
-			_currentState)
+			OnPlanted,
+			OnSold,
+			beforeState => OnHoldFunctions[currentStage](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime),
+			_currentState,
+			initialPosition + deltaPosition,
+			transform.position);
 
-			(initialPosition+deltaPosition, transform.position);
+		return true;
 	}
 
 	public override void OnWatering()
 	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			NotifyQuotaFilled,
+			OnPlanted,
+			OnSold,
 			OnWateringFunctions[GetCurrentStage(_currentState)],
-			_currentState)
-
-			(transform.position, transform.position);
+			_currentState,
+			transform.position,
+			transform.position);
 	}
 
 	public override void OnFarmUpdate(float deltaTime)
@@ -173,18 +175,15 @@ public sealed class CropSweetpotato : Crop
 		GetSpriteAndApplyTo(currentStage)(_spriteRenderer);
 		GetSpriteAndApplyTo_CountVarying(_currentState)(_spriteRenderer);
 
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			NotifyQuotaFilled,
-			(beforeState) =>
-			{
-				return OnFarmUpdateFunctions[currentStage](beforeState, deltaTime);
-			},
-			_currentState)
-
-			(transform.position, transform.position);
+			OnPlanted,
+			OnSold,
+			beforeState => OnFarmUpdateFunctions[currentStage](beforeState, deltaTime),
+			_currentState,
+			transform.position, 
+			transform.position);
+		
 		if (ForceHarvestOne && _currentState.DeterminedCount)
 		{
 			_currentState.InitialDeterminedSweetpotatoCount = 1;
@@ -192,7 +191,7 @@ public sealed class CropSweetpotato : Crop
 		}
 	}
 
-	public override void ResetToInitialState() => _currentState = Reset(_currentState);
+	public override void ResetToInitialState() => _currentState = ResetCropState(_currentState);
 
 	private void Awake()
 	{
@@ -282,7 +281,6 @@ public sealed class CropSweetpotato : Crop
 		(WrapEffectCondition, WrapEffect),
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(QuotaFilledEffectCondition, QuotaFilledEffect),
 		(HoldEffectCondition, HoldEffect),
 		(HoldStopEffectCondition, HoldStopEffect),
 		(TapEffectCondition, TapEffect),
@@ -385,7 +383,7 @@ public sealed class CropSweetpotato : Crop
 			{
 				if (nextState.RemainingSweetpotatoCount == 0)
 				{
-					nextState = Reset(nextState);
+					nextState = ResetCropState(nextState);
 				}
 				else
 				{
@@ -487,7 +485,7 @@ public sealed class CropSweetpotato : Crop
 		{
 			var nextState = beforeState;
 			nextState.HoldingTime += deltaHoldTime;
-			if (Mathf.Abs(deltaPosition.x) >= PlowDeltaPositionCrierion)
+			if (Mathf.Abs(deltaPosition.x) >= PlowDeltaPositionCriterion)
 			{
 				nextState.Planted = true;
 			}
@@ -507,7 +505,7 @@ public sealed class CropSweetpotato : Crop
 			(beforeState, deltaTime) =>
 			{
 				var holdTime = beforeState.HoldingTime;
-				var reset = Reset(beforeState);
+				var reset = ResetCropState(beforeState);
 				reset.HoldingTime = holdTime;
 				return reset;
 			}
@@ -548,7 +546,7 @@ public sealed class CropSweetpotato : Crop
 			}
 		},
 
-		{SweetpotatoStage.Mature, DoNothing_OnFarmUpdate },
+		{SweetpotatoStage.Mature, Decay },
 		{SweetpotatoStage.Harvested, DoNothing_OnFarmUpdate },
 	};
 
@@ -570,7 +568,7 @@ public sealed class CropSweetpotato : Crop
 		{SweetpotatoStage.Stage4, DoNothing },
 
 		{SweetpotatoStage.Mature, HarvestIfFiveTap },
-		{SweetpotatoStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, beforeState.RemainingSweetpotatoCount) },
+		{SweetpotatoStage.Harvested, ResetCropState },
 	};
 	
 	private static readonly Dictionary<SweetpotatoStage, Func<SweetpotatoState, SweetpotatoState>> OnWateringFunctions = new()

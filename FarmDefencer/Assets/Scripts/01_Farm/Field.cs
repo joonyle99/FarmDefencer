@@ -30,10 +30,10 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
     private SpriteRenderer _fieldLockedRenderer; // 1번 자식 오브젝트에 할당
 
     public Vector2 CropSignWorldPosition => _cropSign.transform.position;
-    
+
     public bool IsAvailable
     {
-        get { return _isAvailable; }
+        get => _isAvailable;
         set
         {
             _isAvailable = value;
@@ -43,6 +43,8 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
 
     private bool _isAvailable;
     private Func<bool> _isPestRunning;
+    private bool _isHolding;
+    private Crop _holdingCrop;
 
     public Crop TopLeftCrop => _crops[FieldSize.x * (FieldSize.y - 1)];
 
@@ -99,6 +101,7 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
         {
             if (!_lockedCrops.Contains(crop))
             {
+                crop.CropDisplay.ManualMode = true;
                 crop.ResetToInitialState();
                 crop.gameObject.SetActive(false);
             }
@@ -109,6 +112,17 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
         return false;
     }
 
+    public void UpdateCropGaugeManually(Vector2 cropPosition, float ratio)
+    {
+        if (!TryFindCropAt(cropPosition, out var crop) ||
+            !crop.CropDisplay.ManualMode)
+        {
+            return;
+        }
+
+        crop.CropDisplay.UpdateGauge(ratio);
+    }
+    
     public bool IsCropLockable(Vector2 cropPosition) =>
         TryFindCropAt(cropPosition, out var crop) && !_lockedCrops.Contains(crop);
 
@@ -139,6 +153,7 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
         // Unlock동작은 잠금상태에 무관하게 동작
         if (TryFindCropAt(cropPosition, out var crop))
         {
+            crop.CropDisplay.ManualMode = false;
             crop.gameObject.SetActive(true);
             _lockedCrops.Remove(crop);
         }
@@ -176,34 +191,69 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
     public bool OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd,
         float deltaHoldTime)
     {
-        if (IsAvailable
-            && TryFindCropAt(initialWorldPosition, out var crop)
-            && !_lockedCrops.Contains(crop))
+        if (isEnd)
         {
-            crop.OnHold(initialWorldPosition, deltaWorldPosition, isEnd, deltaHoldTime);
+            _holdingCrop?.OnHold(initialWorldPosition, deltaWorldPosition, true, deltaHoldTime);
+            _isHolding = false;
+            _holdingCrop = null;
             return true;
         }
 
-        return false;
+        if (!IsAvailable)
+        {
+            return false;
+        }
+
+        if (!_isHolding) // 첫 홀드 프레임. 홀드인지 스윕인지 판별해야 함.
+        {
+            if (TryFindCropAt(initialWorldPosition, out var crop)
+                && !_lockedCrops.Contains(crop))
+            {
+                if (crop.OnHold(initialWorldPosition, deltaWorldPosition, false, deltaHoldTime))
+                {
+                    _holdingCrop = crop;
+                }
+            }
+            else
+            {
+                _holdingCrop = null;
+            }
+
+            _isHolding = true;
+            return true;
+        }
+
+        // 지속 홀드 프레임.
+        if (_holdingCrop is not null)
+        {
+            _holdingCrop.OnHold(initialWorldPosition, deltaWorldPosition, false, deltaHoldTime);
+        }
+        else
+        {
+            if (TryFindCropAt(initialWorldPosition + deltaWorldPosition, out var crop)
+                && !_lockedCrops.Contains(crop))
+            {
+                crop.OnHold(initialWorldPosition, deltaWorldPosition, true, deltaHoldTime);
+            }
+        }
+
+        return true;
     }
 
     public void Init(
-        Func<bool> isPestRunningFunction,
-        Func<ProductEntry, int> getQuotaFunction, 
-        Action<ProductEntry, Vector2, int> fillQuotaFunction,
-        Action<ProductEntry> signClickedHandler)
+        Func<bool> isPestRunning,
+        Action<Vector2> onPlanted,
+        Action<Vector2, int> onSold,
+        Action<ProductEntry> signClickedHandler,
+        CropDisplay cropDisplayObjectToClone)
     {
-        _isPestRunning = isPestRunningFunction;
+        _isPestRunning = isPestRunning;
         Array.ForEach(
             _crops,
-            crop => crop.Init(() => getQuotaFunction(ProductEntry),
-                (count) =>
-                {
-                    if (count > 0)
-                    {
-                        fillQuotaFunction(productEntry, crop.transform.position, count);
-                    }
-                }));
+            crop => crop.Init(
+                () => onPlanted(crop.transform.position),
+                count => onSold(crop.transform.position, count),
+                cropDisplayObjectToClone));
         _onCropSignClicked = () => signClickedHandler(ProductEntry);
     }
 

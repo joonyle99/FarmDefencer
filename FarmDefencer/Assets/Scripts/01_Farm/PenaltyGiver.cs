@@ -94,7 +94,7 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmS
                 }
                 
                 var lockTime = jsonCropLockerObject["RemainingTime"].Value<float?>() ?? CropLockTime;
-                SpawnCropLockerAt(new Vector2(x, y), lockTime);
+                SpawnCropLockerAt(new Vector2(x, y), lockTime, _farm.UpdateCropGaugeManuallyAt);
             }
         }
     }
@@ -172,7 +172,7 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmS
                      .Where(m => m.IsDone))
         {
             // 잠금 스폰
-            SpawnCropLockerAt(expiredMonster.EatingPosition, CropLockTime);
+            SpawnCropLockerAt(expiredMonster.EatingPosition, CropLockTime, _farm.UpdateCropGaugeManuallyAt);
             
             // 몬스터 삭제
             DestroyMonster(expiredMonster);
@@ -184,7 +184,6 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmS
     private void DestroyLocker(CropLocker locker)
     {
         _farm.UnlockCropAt(locker.LockPosition);
-        locker.DestroyLock();
     }
 
     private void DestroyMonster(EatingMonster monster) => monster.DestroyMonster();
@@ -235,14 +234,9 @@ public sealed partial class PenaltyGiver : MonoBehaviour, IFarmUpdatable, IFarmS
         _survivedMonsters.Add(penaltyPlayingData);
     }
 
-    private void SpawnCropLockerAt(Vector2 cropWorldPosition, float lockTime)
+    private void SpawnCropLockerAt(Vector2 cropWorldPosition, float lockTime, Action<Vector2, float> updateGauge)
     {
-        // CropLock 오브젝트 스폰
-        var cropLockObject = Instantiate(cropLockPrefab, transform);
-        var cropLockComponent = cropLockObject.GetComponent<CropLock>();
-        cropLockObject.transform.position = cropWorldPosition;
-            
-        var cropLocker = new CropLocker(cropLockComponent, lockTime);
+        var cropLocker = new CropLocker(cropWorldPosition, lockTime, updateGauge);
         _cropLockers.Add(cropLocker);
     }
 }

@@ -23,6 +23,7 @@ public sealed class CropCabbage : Crop
 		public float Shake { get; set; }
 		public int ShakeCount { get; set; }
 		public bool WasLastShakeLeftSide { get; set; }
+		public float DecayRatio { get; set; }
 	}
 
 	private enum CabbageStage
@@ -63,6 +64,11 @@ public sealed class CropCabbage : Crop
 
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+	
+	public override float? GaugeRatio =>
+		GetCurrentStage(_currentState) is CabbageStage.Mature or CabbageStage.Harvested
+			? 1.0f - _currentState.DecayRatio
+			: null;
 
 	public override void ApplyCommand(CropCommand cropCommand)
 	{
@@ -101,44 +107,42 @@ public sealed class CropCabbage : Crop
 
 	public override void OnTap(Vector2 worldPosition)
 	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			NotifyQuotaFilled,
-			OnTapFunctions[GetCurrentStage(_currentState)], _currentState)
-
-			(worldPosition, transform.position);
+			OnPlanted,
+			OnSold,
+			OnTapFunctions[GetCurrentStage(_currentState)],
+			_currentState,
+			worldPosition,
+			transform.position);
 	}
 
 	public override void OnWatering()
 	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			NotifyQuotaFilled,
+			OnPlanted,
+			OnSold,
 			OnWateringFunctions[GetCurrentStage(_currentState)],
-			_currentState)
-
-			(transform.position, transform.position);
+			_currentState,
+			transform.position,
+			transform.position);
 	}
 
-	public override void OnHold(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
+	public override bool OnHold(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
 	{
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		var currentStage = GetCurrentStage(_currentState);
+		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			NotifyQuotaFilled,
-			(beforeState)
-			=>
-			{
-				return OnHoldFunctions[GetCurrentStage(_currentState)](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime);
-			},
-			_currentState)
+			OnPlanted,
+			OnSold,
+			beforeState
+			=> OnHoldFunctions[currentStage](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime),
+			_currentState,
+			initialPosition + deltaPosition,
+			transform.position);
 
-			(initialPosition + deltaPosition, transform.position);
+		return currentStage == CabbageStage.Mature;
 	}
 
 	public override void OnFarmUpdate(float deltaTime)
@@ -158,22 +162,17 @@ public sealed class CropCabbage : Crop
 			_harvestCropLayerObject.SetActive(false);
 		}
 
-		_currentState = HandleAction_NotifyFilledQuota_PlayEffectAt(
-
+		_currentState = CommonCropBehavior(
 			Effects,
-			GetQuota,
-			NotifyQuotaFilled,
-			(beforeState)
-			=>
-			{
-				return OnFarmUpdateFunctions[currentStage](beforeState, deltaTime);
-			},
-			_currentState)
-
-			(transform.position, transform.position);
+			OnPlanted,
+			OnSold,
+			beforeState => OnFarmUpdateFunctions[currentStage](beforeState, deltaTime),
+			_currentState,
+			transform.position, 
+			transform.position);
 	}
 
-	public override void ResetToInitialState() => _currentState = Reset(_currentState);
+	public override void ResetToInitialState() => _currentState = ResetCropState(_currentState);
 
 	private void Awake()
 	{
@@ -216,7 +215,6 @@ public sealed class CropCabbage : Crop
 		(HarvestEffectCondition, HarvestEffect_SoilParticle),
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(QuotaFilledEffectCondition, QuotaFilledEffect),
 		(ShakeEffectCondition, ShakeEffect),
 		(ShakeSfxEffectConditionFor(1), ShakeSfxEffectFor(1)),
 		(ShakeSfxEffectConditionFor(2), ShakeSfxEffectFor(2)),
@@ -283,9 +281,9 @@ public sealed class CropCabbage : Crop
 
 	private static readonly Dictionary<CabbageStage, Func<CabbageState, float, CabbageState>> OnFarmUpdateFunctions = new()
 	{
-		{CabbageStage.Seed, (currentState, _) => Reset(currentState) },
-		{CabbageStage.Mature, (currentState, _) => DoNothing(currentState) },
-		{CabbageStage.Harvested, (currentState, _) => DoNothing(currentState) },
+		{CabbageStage.Seed, (currentState, _) => ResetCropState(currentState) },
+		{CabbageStage.Mature, Decay },
+		{CabbageStage.Harvested, DoNothing_OnFarmUpdate },
 
 		{CabbageStage.Stage2_Dead, WaitWater },
 		{CabbageStage.Stage2_BeforeWater, WaitWater },
@@ -309,8 +307,8 @@ public sealed class CropCabbage : Crop
 
 	private static readonly Dictionary<CabbageStage, Func<CabbageState, CabbageState>> OnTapFunctions = new()
 	{
-		{CabbageStage.Seed, Plant },
-		{CabbageStage.Harvested, (beforeState) => FillQuotaUptoAndResetIfEqual(beforeState, 1) },
+		{CabbageStage.Seed, DoNothing },
+		{CabbageStage.Harvested, ResetCropState },
 		{CabbageStage.Mature, DoNothing },
 
 		{CabbageStage.Stage2_Dead, DoNothing },
@@ -322,10 +320,16 @@ public sealed class CropCabbage : Crop
 		{CabbageStage.Stage1_Growing, DoNothing },
 	};
 
-
 	private static readonly Dictionary<CabbageStage, Func<CabbageState, Vector2, Vector2, bool, float, CabbageState>> OnHoldFunctions = new()
 	{
-		{CabbageStage.Seed, DoNothing_OnHold },
+		{
+			CabbageStage.Seed, 
+			(beforeState, _, _, _, _) => 
+			{
+				beforeState.Planted = true; 
+				return beforeState; 
+			} 
+		},
 		{CabbageStage.Harvested, DoNothing_OnHold },
 		{CabbageStage.Mature, ShakeAndHarvest },
 

@@ -16,60 +16,60 @@ MonoBehaviour:
   - targetMap: {fileID: 11400000, guid: 469c6bef7dd249949a7b8eeb0f2cb2fd, type: 2}
     entries:
     - targetProduct: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
-      minimumCount: 10
-      maximumCount: 20
+      minimumCount: 1000
+      maximumCount: 2000
     - targetProduct: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
-      minimumCount: 5
-      maximumCount: 15
+      minimumCount: 500
+      maximumCount: 1500
     - targetProduct: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
-      minimumCount: 3
-      maximumCount: 10
+      minimumCount: 300
+      maximumCount: 1000
     specialProductBonusRule: {fileID: 11400000, guid: 074d1c613d4868f4cbe4f9afc46e167a, type: 2}
   - targetMap: {fileID: 11400000, guid: d3f7f1726e9b95244b71fd8ff050326f, type: 2}
     entries:
     - targetProduct: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
       minimumCount: 0
-      maximumCount: 7
+      maximumCount: 700
     - targetProduct: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
       minimumCount: 0
-      maximumCount: 9
+      maximumCount: 900
     - targetProduct: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
       minimumCount: 0
-      maximumCount: 11
+      maximumCount: 1100
     - targetProduct: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
-      minimumCount: 4
-      maximumCount: 10
+      minimumCount: 400
+      maximumCount: 1000
     - targetProduct: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
-      minimumCount: 4
-      maximumCount: 8
+      minimumCount: 400
+      maximumCount: 800
     - targetProduct: {fileID: 11400000, guid: 7dafbc71fcd9c0846b0f38a024abc95b, type: 2}
-      minimumCount: 3
-      maximumCount: 7
+      minimumCount: 300
+      maximumCount: 700
     specialProductBonusRule: {fileID: 11400000, guid: 4d66b6897631f2b4e9ed33be4a3b7d1a, type: 2}
   - targetMap: {fileID: 11400000, guid: 2b13a58732621a141a17b0b5078b3f12, type: 2}
     entries:
     - targetProduct: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
       minimumCount: 0
-      maximumCount: 5
+      maximumCount: 500
     - targetProduct: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
       minimumCount: 0
-      maximumCount: 7
+      maximumCount: 700
     - targetProduct: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
       minimumCount: 0
-      maximumCount: 7
+      maximumCount: 700
     - targetProduct: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
-      minimumCount: 4
-      maximumCount: 8
+      minimumCount: 400
+      maximumCount: 800
     - targetProduct: {fileID: 11400000, guid: 7b4f33946f5fcdf4ba630e65db5f37bc, type: 2}
-      minimumCount: 4
-      maximumCount: 8
+      minimumCount: 400
+      maximumCount: 800
     - targetProduct: {fileID: 11400000, guid: 7dafbc71fcd9c0846b0f38a024abc95b, type: 2}
-      minimumCount: 3
-      maximumCount: 7
+      minimumCount: 300
+      maximumCount: 700
     - targetProduct: {fileID: 11400000, guid: bbf41d007f26d6049ba7c478bd5f3ecd, type: 2}
-      minimumCount: 5
-      maximumCount: 10
+      minimumCount: 500
+      maximumCount: 1000
     - targetProduct: {fileID: 11400000, guid: cc99559fa3cd81c4f9e227728fe5fe8c, type: 2}
-      minimumCount: 3
-      maximumCount: 7
+      minimumCount: 300
+      maximumCount: 700
     specialProductBonusRule: {fileID: 11400000, guid: 3f5bb973b8acc214caf8a19a6865a367, type: 2}
