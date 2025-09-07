@@ -9,12 +9,10 @@ public class ChainLightning : MonoBehaviour
     private Tower _caster;
     private List<TargetableBehavior> _targetsToApply;
 
-    private int _damage;
+    private List<int> _damageList;
 
     private List<TargetableBehavior> _appliedTargets = new List<TargetableBehavior>();
     public List<TargetableBehavior> AppliedTargets => _appliedTargets;
-
-    public int MaxCount = 3;
 
     private void Awake()
     {
@@ -43,16 +41,37 @@ public class ChainLightning : MonoBehaviour
 
         _caster = caster;
         _targetsToApply = targets;
+        _damageList = new List<int>(targets.Count);
 
-        _damage = damage;
+        float rate = 0.6f;
+
+        for (int i = 0; i < targets.Count; i++)
+        {
+            var _damage = 0;
+
+            if (i == 0)
+            {
+                _damage = Mathf.FloorToInt(damage * 0.5f);
+            }
+            else
+            {
+                _damage = Mathf.FloorToInt(_damageList[i - 1] * rate);
+                rate = Mathf.Max(rate - 0.2f, 0f);
+            }
+
+            _damageList.Add(_damage);
+        }
 
         StartCoroutine(ChainLightningRoutine());
     }
 
     private IEnumerator ChainLightningRoutine()
     {
-        foreach (var target in _targetsToApply)
+         for (int i = 0; i<_targetsToApply.Count; i++)
         {
+            var target = _targetsToApply[i];
+            var damage = _damageList[i];
+
             if (target == null || target.gameObject.activeInHierarchy == false || target.IsDead == true)
             {
                 continue;
@@ -64,7 +83,7 @@ public class ChainLightning : MonoBehaviour
             }
 
             // 데미지 적용
-            target.TakeDamage(_damage, DamageType.Lightning);
+            target.TakeDamage(damage, DamageType.Lightning);
 
             // 라이트닝 효과 적용
             var lightningEffector = target.gameObject.AddComponent<LightningEffector>();
