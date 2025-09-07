@@ -16,7 +16,6 @@ public class TowerLevelData : ScriptableObject
     [FoldoutGroup("능력치 - 슬로우")] public float SlowDuration;
 
     [BoxGroup("비용")] public int ValueCost;
-    [BoxGroup("비용")] public int SellCost;
 
     [BoxGroup("사운드")] public AudioClip FireReady;
     [BoxGroup("사운드")] public AudioClip FireShot;

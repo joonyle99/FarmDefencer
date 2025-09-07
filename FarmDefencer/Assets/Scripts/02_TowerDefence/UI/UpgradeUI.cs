@@ -114,8 +114,8 @@ public class UpgradeUI : MonoBehaviour
         SetAttackRate(tower.CurrentLevelData.AttackRate);
         SetSlowRate(tower.CurrentLevelData.SlowRate);
 
-        SetSellCost(tower.CurrentLevelData.SellCost);
-        SetUpgradeCost(tower.CurrentUpgradeCost);
+        SetSellCost(tower.SellCost);
+        SetUpgradeCost(tower.UpgradeCost);
 
         _tower = tower;
     }

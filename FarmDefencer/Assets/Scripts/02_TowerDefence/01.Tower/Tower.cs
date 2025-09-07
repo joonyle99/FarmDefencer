@@ -50,11 +50,20 @@ public sealed class Tower : TargetableBehavior, IVolumeControl
         {
             _cost = Mathf.Max(value, 0);
             OnCostChanged?.Invoke(_cost);
-            OnSellCostChanged?.Invoke(CurrentLevelData.SellCost);
-            OnUpgradeCostChanged?.Invoke(CurrentUpgradeCost);
+            OnSellCostChanged?.Invoke(SellCost);
+            OnUpgradeCostChanged?.Invoke(UpgradeCost);
         }
     }
-    public int CurrentUpgradeCost
+    public int SellCost
+    {
+        get
+        {
+            var halfValueCost = Mathf.FloorToInt(CurrentLevelData.ValueCost * 0.5f);
+            var prevUpgradeCost = CurrentLevelData.ValueCost - PrevLevelData.ValueCost;
+            return halfValueCost + Mathf.FloorToInt(prevUpgradeCost * 0.3f);
+        }
+    }
+    public int UpgradeCost
     {
         get
         {
@@ -83,7 +92,6 @@ public sealed class Tower : TargetableBehavior, IVolumeControl
         }
     }
     public TowerLevelData CurrentLevelData => _levelData[CurrentLevel - 1];
-    public int SellCost => Mathf.FloorToInt(CurrentLevelData.ValueCost * 0.5f) + (CurrentLevelData.ValueCost - PrevLevelData.ValueCost);
     public TowerLevelData PrevLevelData => _levelData[Mathf.Max(CurrentLevel - 2, 0)];
     public TowerLevelData NextLevelData => _levelData[Mathf.Min(CurrentLevel, MaxLevel - 1)];
 
@@ -263,7 +271,7 @@ public sealed class Tower : TargetableBehavior, IVolumeControl
         _occupyingGridCell.Usable();
         _occupyingGridCell.DeleteOccupiedTower();
 
-        ResourceManager.Instance.EarnGold(CurrentLevelData.SellCost);
+        ResourceManager.Instance.EarnGold(SellCost);
         SoundManager.Instance.PlaySfx("SFX_D_tower_remove", removeVolume);
 
         // detector
@@ -291,7 +299,7 @@ public sealed class Tower : TargetableBehavior, IVolumeControl
             return;
         }
 
-        var result = ResourceManager.Instance.TrySpendGold(CurrentUpgradeCost);
+        var result = ResourceManager.Instance.TrySpendGold(UpgradeCost);
         if (result == false)
         {
             Debug.Log("골드가 부족하여 타워를 업그레이드 할 수 없습니다");
