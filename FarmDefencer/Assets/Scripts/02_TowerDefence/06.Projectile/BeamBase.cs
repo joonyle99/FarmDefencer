@@ -102,8 +102,8 @@ public abstract class BeamBase : MonoBehaviour
 
     private void OnDestroyFunc()
     {
-        OnEndFunc();
         Destroy(gameObject);
+        OnEndFunc();
     }
     protected virtual void OnEndFunc()
     {

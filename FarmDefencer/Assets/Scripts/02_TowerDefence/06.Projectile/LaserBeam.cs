@@ -1,3 +1,6 @@
+using UnityEngine;
+using Sirenix.OdinInspector;
+
 /// <summary>
 /// 일반적인 레이저 빔
 /// 지속적인 데미지를 줍니다
@@ -13,6 +16,19 @@ public sealed class LaserBeam : BeamBase
     private SlowEffector _slowEffector;
     private bool _isSlowEffectApplied = false;
 
+    private AudioSource _audioSource;
+    [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float laserStayVolume = 0.5f;
+
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
+    private void Start()
+    {
+        _audioSource.volume = laserStayVolume;
+        _audioSource.loop = true;
+        _audioSource.Play();
+    }
     protected override void DealDamage()
     {
         damager.DealDamage(target, DamageType.Laser);
@@ -40,8 +56,8 @@ public sealed class LaserBeam : BeamBase
 
     protected override void OnEndFunc()
     {
-        _isSlowEffectApplied = false;
-        _slowEffector.DeActivate();
+        //_isSlowEffectApplied = false;
+        //_slowEffector.DeActivate();
 
         _isColorEffectApplied = false;
         target.SpineController.RemoveColorEffect(_colorEffect);

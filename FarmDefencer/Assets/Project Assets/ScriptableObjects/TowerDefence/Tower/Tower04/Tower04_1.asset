@@ -22,13 +22,11 @@ MonoBehaviour:
   SlowRate: 1.2
   SlowDuration: 0
   ValueCost: 50000
-  SellCost: 25000
   FireReady: {fileID: 0}
-  FireShot: {fileID: 0}
+  FireShot: {fileID: 8300000, guid: 08334ebee5cc4453ea19a08d805bc419, type: 3}
   TickCount: 0
   TickInterval: 0
   TickDamage: 0
   StayDuration: 1.2
   DealInterval: 0.1
-  TEMP1: 0
-  TEMP2: 0
+  MaxTransitionCount: 0
