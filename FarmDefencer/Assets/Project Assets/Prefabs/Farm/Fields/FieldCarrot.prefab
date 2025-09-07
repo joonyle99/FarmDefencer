@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 2087011997581693108}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.5, y: -1.5, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: -1, y: -1.5, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3111933055057161420}
@@ -127,8 +127,8 @@ Transform:
   m_GameObject: {fileID: 3160583515815583821}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 2, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
+  m_LocalPosition: {x: 1.5, y: 0.4, z: 0}
+  m_LocalScale: {x: 0.12, y: 0.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3111933055057161420}
@@ -177,12 +177,12 @@ SpriteRenderer:
   m_SortingLayerID: 1229108509
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5066722471800133463, guid: 96c7563106460e54ab16d504ab55da4b, type: 3}
+  m_Sprite: {fileID: -1009563216247180225, guid: 2848cb44562460e47a503d3558c1f542, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.86, y: 4.79}
+  m_Size: {x: 39.144447, y: 18.21}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cropPrefab: {fileID: 7695424892220933664, guid: ed7e1018e94fca44787f20ebd01a4104, type: 3}
   productEntry: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
-  fieldSize: {x: 5, y: 5}
+  fieldSize: {x: 4, y: 2}
   cropBackgroundPrefab: {fileID: 46493413090147855, guid: 104ea3bc34e239644b573851c4b89c35, type: 3}
 --- !u!1001 &3112735463990331227
 PrefabInstance:
@@ -249,11 +249,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1541252992479689968, guid: ab87d65d04443bc4a970b54b1ed50285, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1541252992479689968, guid: ab87d65d04443bc4a970b54b1ed50285, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1541252992479689968, guid: ab87d65d04443bc4a970b54b1ed50285, type: 3}
       propertyPath: m_LocalPosition.z

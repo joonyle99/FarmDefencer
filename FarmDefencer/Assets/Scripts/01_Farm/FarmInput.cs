@@ -22,7 +22,7 @@ public sealed class FarmInput : MonoBehaviour
     private float minimumProjectionSize = 5.0f;
 
     [Header("카메라 이동 가능 맵 경계")] [SerializeField]
-    private Rect mapBounds = new(0.0f, 0.0f, 21.0f, 11.0f);
+    private Rect mapBounds = new(0.0f, 0.0f, 0.0f, 0.0f);
 
     [SerializeField] private InputActionReference tapAction;
     [SerializeField] private InputActionReference mouseWheelAction;
