@@ -17,10 +17,12 @@ public abstract class BeamBase : MonoBehaviour
     protected float elapsedTime = 0f;
     protected float elapsedInterval = 0f;
 
+    protected AudioSource audioSource;
     protected LineRenderer lineRenderer;
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         lineRenderer = GetComponent<LineRenderer>();
     }
     private void Start()

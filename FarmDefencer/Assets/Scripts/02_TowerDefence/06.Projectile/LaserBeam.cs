@@ -16,18 +16,13 @@ public sealed class LaserBeam : BeamBase
     private ColorEffect _colorEffect;
     private bool _isColorEffectApplied = false;
 
-    private AudioSource _audioSource;
     [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float laserVolume = 0.5f;
 
-    private void Awake()
-    {
-        _audioSource = GetComponent<AudioSource>();
-    }
     private void Start()
     {
-        _audioSource.volume = laserVolume;
-        _audioSource.loop = true;
-        _audioSource.Play();
+        audioSource.volume = laserVolume;
+        audioSource.loop = true;
+        audioSource.Play();
     }
     protected override void DealDamage()
     {
