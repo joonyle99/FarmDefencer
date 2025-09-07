@@ -6702,8 +6702,8 @@ MonoBehaviour:
   pestClickSize: 1.5
   pestDieTime: 0.5
   pestFleeTime: 1
-  minimumRandomPestSpawnDaytime: 10
-  maximumRandomPestSpawnDaytime: 250
+  minimumRandomPestSpawnDaytime: 1
+  maximumRandomPestSpawnDaytime: 1
   wavelength: 1
   amplitude: 1
   stealAnimationDuration: 0.2
