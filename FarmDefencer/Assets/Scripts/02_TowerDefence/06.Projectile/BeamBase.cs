@@ -8,8 +8,6 @@ public abstract class BeamBase : MonoBehaviour
 
     // 기본
     [SerializeField] protected Damager damager;
-    [SerializeField] protected float stayDuration;
-    [SerializeField] protected float dealInterval;
 
     protected Tower caster;
     protected TargetableBehavior target;
@@ -104,8 +102,8 @@ public abstract class BeamBase : MonoBehaviour
 
     private void OnDestroyFunc()
     {
-        Destroy(gameObject);
         OnEndFunc();
+        Destroy(gameObject);
     }
     protected virtual void OnEndFunc()
     {

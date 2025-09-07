@@ -19,10 +19,6 @@ public sealed class SlowEffector : EffectorBase
 
         // 슬로우 효과 적용
         affectedTarget.GridMovement.SpeedFactor *= _slowRate;
-
-        // 컬러 이펙트 적용
-        ColorEffect colorEffect = new ColorEffect(ConstantConfig.GREEN, _duration);
-        affectedTarget.SpineController.AddColorEffect(colorEffect);
     }
     protected override void OnDeactivate()
     {
