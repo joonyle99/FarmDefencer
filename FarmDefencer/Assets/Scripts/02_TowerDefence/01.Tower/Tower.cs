@@ -58,7 +58,7 @@ public sealed class Tower : TargetableBehavior, IVolumeControl
     {
         get
         {
-            var nextValueCost = _levelData[Mathf.Min(CurrentLevel, MaxLevel - 1)].ValueCost;
+            var nextValueCost = NextLevelData.ValueCost;
             var currValueCost = CurrentLevelData.ValueCost;
             return nextValueCost - currValueCost;
         }
@@ -83,6 +83,9 @@ public sealed class Tower : TargetableBehavior, IVolumeControl
         }
     }
     public TowerLevelData CurrentLevelData => _levelData[CurrentLevel - 1];
+    public int SellCost => Mathf.FloorToInt(CurrentLevelData.ValueCost * 0.5f) + (CurrentLevelData.ValueCost - PrevLevelData.ValueCost);
+    public TowerLevelData PrevLevelData => _levelData[Mathf.Max(CurrentLevel - 2, 0)];
+    public TowerLevelData NextLevelData => _levelData[Mathf.Min(CurrentLevel, MaxLevel - 1)];
 
     [Header("Animation")]
     [SpineAnimation] public string[] IdleAnimationNames;
