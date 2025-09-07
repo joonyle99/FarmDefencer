@@ -19,13 +19,11 @@ public sealed class CropMushroom : Crop
 		public float GrowthSeconds { get; set; }
 		public bool Watered { get; set; }
 		public bool Harvested { get; set; }
-		public int RemainingQuota { get; set; }
 		public float LastSingleTapTime { get; set; }
 		public int TapCount { get; set; }
 		public bool Inoculated { get; set; }
 		public float HoldingTime { get; set; }
 		public bool IsPoisonous { get; set; }
-		public float BoomTimeElapsed { get; set; }
 		public float DecayRatio { get; set; }
 	}
 
@@ -47,15 +45,12 @@ public sealed class CropMushroom : Crop
 		Mature,
 
 		Harvested,
-
-		Booming,
 	}
 
-	private const float Stage1_GrowthSeconds = 15.0f;
-	private const float Stage2_GrowthSeconds = 15.0f;
-	private const float Stage3_GrowthSeconds = 10.0f;
+	private const float Stage1_GrowthSeconds = 2.0f;
+	private const float Stage2_GrowthSeconds = 2.0f;
+	private const float Stage3_GrowthSeconds = 3.0f;
 	private const float PoisonousProbability = 0.65f;
-	private const float BoomTime = 5.0f; // 독버섯 수확 후 터져 없어질때까지 걸리는 시간
 	private const float InoculationHoldingTime = 2.0f;
 
 	[Space]
@@ -96,10 +91,12 @@ public sealed class CropMushroom : Crop
 	private SpriteRenderer _spriteRenderer;
 	private MushroomState _currentState;
 
-	public bool ForceHarvestOne { get; set; } = false;
+	public bool ForceHarvestOne { get; set; }
 
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+	
+	protected override int HarvestableCount => _currentState is { Harvested: true, IsPoisonous: false } ? 100 : 0;
 	
 	public override float? GaugeRatio =>
 		GetCurrentStage(_currentState) is MushroomStage.Mature or MushroomStage.Harvested
@@ -145,24 +142,18 @@ public sealed class CropMushroom : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			OnTapFunctions[GetCurrentStage(_currentState)],
 			_currentState,
-			worldPosition, 
-			transform.position);
+			worldPosition);
 	}
 
 	public override bool OnHold(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			beforeState => OnHoldFunctions[GetCurrentStage(_currentState)](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime),
 			_currentState,
-			initialPosition + deltaPosition, 
-			transform.position);
+			initialPosition + deltaPosition);
 
 		return true;
 	}
@@ -171,11 +162,8 @@ public sealed class CropMushroom : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			OnWateringFunctions[GetCurrentStage(_currentState)],
 			_currentState,
-			transform.position,
 			transform.position);
 	}
 
@@ -187,11 +175,8 @@ public sealed class CropMushroom : Crop
 
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			beforeState => OnFarmUpdateFunctions[GetCurrentStage(_currentState)](beforeState, deltaTime),
 			_currentState,
-			transform.position, 
 			transform.position);
 
 		if (ForceHarvestOne && _currentState.IsPoisonous)
@@ -255,7 +240,7 @@ public sealed class CropMushroom : Crop
 	private static MushroomStage GetCurrentStage(MushroomState state) => state switch
 	{
 		{ Planted: false } => MushroomStage.Unplowed,
-		{ Harvested: true, IsPoisonous: true } => MushroomStage.Booming,
+		{ Harvested: true, IsPoisonous: true } => MushroomStage.Harvested,
 		{ Harvested: true } => MushroomStage.Harvested,
 		{ GrowthSeconds: >= Stage1_GrowthSeconds + Stage2_GrowthSeconds + Stage3_GrowthSeconds } => MushroomStage.Mature,
 
@@ -355,7 +340,7 @@ public sealed class CropMushroom : Crop
 		(MushroomHarvestEffectCondition, MushroomHarvestEffect),
 	};
 
-	private static readonly Func<MushroomState, MushroomState> HarvestOnFiveTap =
+	private static readonly Func<MushroomState, MushroomState> HarvestOnTripleTap =
 		(beforeState) =>
 		{
 			var nextState = beforeState;
@@ -370,27 +355,17 @@ public sealed class CropMushroom : Crop
 				nextState.TapCount = 1;
 			}
 			nextState.LastSingleTapTime = currentTime;
-			if (nextState.TapCount >= 5)
+			if (nextState.TapCount >= 3)
 			{
 				nextState = Harvest(nextState);
+				if (beforeState.IsPoisonous)
+				{
+					nextState = ResetCropState(beforeState);
+				}
 			}
 
 			return nextState;
 		};
-
-	private static readonly Func<MushroomState, float, MushroomState> Boom =
-	(beforeState, deltaTime) =>
-	{
-		var nextState = beforeState;
-		nextState.BoomTimeElapsed += deltaTime;
-
-		if (nextState.BoomTimeElapsed >= BoomTime)
-		{
-			nextState = ResetCropState(beforeState);
-		}
-
-		return nextState;
-	};
 
 	private static readonly Func<MushroomState, Vector2, Vector2, bool, float, MushroomState> Inoculate =
 	(beforeState, initialWorldPosition, deltaPosition, isEnd, deltaHoldTime) =>
@@ -479,7 +454,6 @@ public sealed class CropMushroom : Crop
 		},
 
 		{MushroomStage.Mature, DoNothing_OnFarmUpdate },
-		{MushroomStage.Booming, Boom },
 		{MushroomStage.Harvested, DoNothing_OnFarmUpdate },
 
 	};
@@ -499,8 +473,7 @@ public sealed class CropMushroom : Crop
 		{MushroomStage.Stage3_BeforeInoculation, DoNothing },
 		{MushroomStage.Stage3_AfterInoculation, DoNothing },
 
-		{MushroomStage.Mature, HarvestOnFiveTap },
-		{MushroomStage.Booming, DoNothing },
+		{MushroomStage.Mature, HarvestOnTripleTap },
 		{MushroomStage.Harvested, ResetCropState },
 	};
 
@@ -520,7 +493,6 @@ public sealed class CropMushroom : Crop
 		{MushroomStage.Stage3_AfterInoculation, DoNothing },
 
 		{MushroomStage.Mature, DoNothing },
-		{MushroomStage.Booming, DoNothing },
 		{MushroomStage.Harvested, DoNothing },
 	};
 	
@@ -540,7 +512,6 @@ public sealed class CropMushroom : Crop
 		{MushroomStage.Stage3_AfterInoculation, DoNothing_OnHold },
 
 		{MushroomStage.Mature, DoNothing_OnHold },
-		{MushroomStage.Booming, DoNothing_OnHold },
 		{MushroomStage.Harvested, DoNothing_OnHold },
 	};
 
@@ -559,8 +530,7 @@ public sealed class CropMushroom : Crop
 		{MushroomStage.Stage3_BeforeInoculation, _ => RequiredCropAction.Hold_2 },
 		{MushroomStage.Stage3_AfterInoculation, _ => RequiredCropAction.None },
 
-		{MushroomStage.Mature, _ => RequiredCropAction.FiveTap },
-		{MushroomStage.Booming, _ => RequiredCropAction.None },
+		{MushroomStage.Mature, _ => RequiredCropAction.TripleTap },
 		{MushroomStage.Harvested, _ => RequiredCropAction.SingleTap },
 	};
 }

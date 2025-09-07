@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 293ef3bc999b0064faee19b6982a6a88
+guid: 7d2554c0406c25542b28295eb08fb661
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6940092911553946102
-    second: crop_guide_mushroom_0
+      213: 1245923002056253970
+    second: guide_carrot_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: crop_guide_mushroom_0
+      name: guide_carrot_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6f1216d9bb9205060800000000000000
-      internalID: 6940092911553946102
+      spriteID: 2122d038e586a4110800000000000000
+      internalID: 1245923002056253970
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      crop_guide_mushroom_0: 6940092911553946102
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

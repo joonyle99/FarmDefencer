@@ -34,10 +34,12 @@ public sealed class CropCorn : Crop
 		Stage2_Growing,
 	}
 
-	private const float Stage1_GrowthSeconds = 15.0f;
-	private const float Stage2_GrowthSeconds = 15.0f;
+	private const float Stage1_GrowthSeconds = 1.5f;
+	private const float Stage2_GrowthSeconds = 1.5f;
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+	
+	protected override int HarvestableCount => _currentState.Harvested ? 100 : 0;
 	
 	public override float? GaugeRatio =>
 		GetCurrentStage(_currentState) is CornStage.Mature or CornStage.Harvested
@@ -98,25 +100,19 @@ public sealed class CropCorn : Crop
 	public override void OnTap(Vector2 inputWorldPosition)
 	{
 		_currentState = CommonCropBehavior(
-			Effects, 
-			OnPlanted,
-			OnSold,
+			Effects,
 			OnTapFunctions[GetCurrentStage(_currentState)],
 			_currentState,
-			inputWorldPosition, 
-			transform.position);
+			inputWorldPosition);
 	}
 
 	public override bool OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
 	{
 		_currentState = CommonCropBehavior(
-			Effects, 
-			OnPlanted,
-			OnSold,
+			Effects,
 			OnHoldFunctions[GetCurrentStage(_currentState)],
 			_currentState,
-			initialWorldPosition + deltaWorldPosition, 
-			transform.position);
+			initialWorldPosition + deltaWorldPosition);
 
 		return false;
 	}
@@ -125,11 +121,8 @@ public sealed class CropCorn : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			OnWateringFunctions[GetCurrentStage(_currentState)],
 			_currentState,
-			transform.position, 
 			transform.position);
 	}
 
@@ -139,11 +132,8 @@ public sealed class CropCorn : Crop
 		ApplySpriteTo(currentStage)(_spriteRenderer);
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			beforeState => OnFarmUpdateFunctions[currentStage](beforeState, deltaTime),
 			_currentState,
-			transform.position, 
 			transform.position);
 	}
 	

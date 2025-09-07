@@ -2083,9 +2083,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0cc1086435753943b161a9f7422a86c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  harvestBulkAnimationTime: 0.2
-  harvestBulkSpread: 0.5
-  harvestedProductFlyToBoxAnimationDuration: 0.2
+  harvestBulkAnimationTime: 0.25
+  harvestBulkSpread: 10
+  harvestedProductFlyToBoxAnimationDuration: 1
   blinkDuration: 0.5
   specialProductTurnInterval: 4
   quotaFillingRule: {fileID: 11400000, guid: d0b06943c37a14448a5c77c28076931b, type: 2}
@@ -6702,8 +6702,8 @@ MonoBehaviour:
   pestClickSize: 1.5
   pestDieTime: 0.5
   pestFleeTime: 1
-  minimumRandomPestSpawnDaytime: 1
-  maximumRandomPestSpawnDaytime: 1
+  minimumRandomPestSpawnDaytime: 10
+  maximumRandomPestSpawnDaytime: 250
   wavelength: 1
   amplitude: 1
   stealAnimationDuration: 0.2
@@ -10773,14 +10773,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d4571a4ae475a745915624a42f642ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cropGuideImage_carrot: {fileID: 1410483304339041755, guid: 599ac5a98b779ed45a1cde0ac890b92b, type: 3}
-  cropGuideImage_potato: {fileID: 6567537973310776033, guid: 453d861ac9c44e34ebb8095cd98f9e90, type: 3}
-  cropGuideImage_corn: {fileID: 7792876914236157679, guid: 8154e2b38967d4d47901f514da354cfd, type: 3}
-  cropGuideImage_cabbage: {fileID: -2051378696425274611, guid: 46ec3b9ed556b414abf9fc921608771b, type: 3}
-  cropGuideImage_cucumber: {fileID: -7218159748931476319, guid: e00115439c7b8444a8da176b2a65e6c5, type: 3}
-  cropGuideImage_eggplant: {fileID: 8971362675534445170, guid: 56940cfe7e2fbc6448c04594abbd1698, type: 3}
-  cropGuideImage_sweetpotato: {fileID: -1822085296798445489, guid: 4023b82bb1b7f1340a3450c56f211ce3, type: 3}
-  cropGuideImage_mushroom: {fileID: 6940092911553946102, guid: 293ef3bc999b0064faee19b6982a6a88, type: 3}
+  cropGuideImage_carrot: {fileID: 1245923002056253970, guid: 7d2554c0406c25542b28295eb08fb661, type: 3}
+  cropGuideImage_potato: {fileID: 8084631490079194734, guid: 421af2a334cf957478868722d70dafbf, type: 3}
+  cropGuideImage_corn: {fileID: 4035350386728831919, guid: cd97d45042966cb478bbf892fcb095bd, type: 3}
+  cropGuideImage_cabbage: {fileID: 2520754190640424675, guid: 01a4f3f0fe0080f48a4f63415690b840, type: 3}
+  cropGuideImage_cucumber: {fileID: 703950747637553880, guid: f57490a37667ae24bad5ce936997f312, type: 3}
+  cropGuideImage_eggplant: {fileID: 8693953255383349640, guid: e03312acca535a545a56877c63ddba16, type: 3}
+  cropGuideImage_sweetpotato: {fileID: 3216417993405122135, guid: 23fd81678a38088489aba43ee1577b40, type: 3}
+  cropGuideImage_mushroom: {fileID: -376189334571289923, guid: ea3ebf09fbc9b3144a0a4507e5de431f, type: 3}
 --- !u!1 &2133304331
 GameObject:
   m_ObjectHideFlags: 0

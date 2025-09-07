@@ -19,7 +19,6 @@ public sealed class CropCabbage : Crop
 		public float GrowthSeconds { get; set; }
 		public bool Watered { get; set; }
 		public bool Harvested { get; set; }
-		public int RemainingQuota { get; set; }
 		public float Shake { get; set; }
 		public int ShakeCount { get; set; }
 		public bool WasLastShakeLeftSide { get; set; }
@@ -43,8 +42,8 @@ public sealed class CropCabbage : Crop
 
 	private const float DeltaShakeCriterion = 0.25f; // 배추 수확단계 흔들기 기준 (가로 방향 위치 델타)
 	private const int ShakeCountCriterion = 4; // 배추 수확 흔들기 횟수 기준
-	private const float Stage1_GrowthSeconds = 10.0f;
-	private const float Stage2_GrowthSeconds = 10.0f;
+	private const float Stage1_GrowthSeconds = 1.5f;
+	private const float Stage2_GrowthSeconds = 1.5f;
 
 	[SerializeField] private Sprite seedSprite;
 	[SerializeField] private Sprite harvestedSprite;
@@ -64,6 +63,8 @@ public sealed class CropCabbage : Crop
 
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+	
+	protected override int HarvestableCount => _currentState.Harvested ? 100 : 0;
 	
 	public override float? GaugeRatio =>
 		GetCurrentStage(_currentState) is CabbageStage.Mature or CabbageStage.Harvested
@@ -109,23 +110,17 @@ public sealed class CropCabbage : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			OnTapFunctions[GetCurrentStage(_currentState)],
 			_currentState,
-			worldPosition,
-			transform.position);
+			worldPosition);
 	}
 
 	public override void OnWatering()
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			OnWateringFunctions[GetCurrentStage(_currentState)],
 			_currentState,
-			transform.position,
 			transform.position);
 	}
 
@@ -134,13 +129,10 @@ public sealed class CropCabbage : Crop
 		var currentStage = GetCurrentStage(_currentState);
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			beforeState
 			=> OnHoldFunctions[currentStage](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime),
 			_currentState,
-			initialPosition + deltaPosition,
-			transform.position);
+			initialPosition + deltaPosition);
 
 		return currentStage == CabbageStage.Mature;
 	}
@@ -164,11 +156,8 @@ public sealed class CropCabbage : Crop
 
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			beforeState => OnFarmUpdateFunctions[currentStage](beforeState, deltaTime),
 			_currentState,
-			transform.position, 
 			transform.position);
 	}
 

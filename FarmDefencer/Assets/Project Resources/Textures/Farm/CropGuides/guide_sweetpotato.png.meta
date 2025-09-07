@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e00115439c7b8444a8da176b2a65e6c5
+guid: 23fd81678a38088489aba43ee1577b40
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7218159748931476319
-    second: crop_guide_cucumber_0
+      213: 3216417993405122135
+    second: guide_sweetpotato_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: crop_guide_cucumber_0
+      name: guide_sweetpotato_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1a4aae8a3f1f3db90800000000000000
-      internalID: -7218159748931476319
+      spriteID: 756461aaf1303ac20800000000000000
+      internalID: 3216417993405122135
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      crop_guide_cucumber_0: -7218159748931476319
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

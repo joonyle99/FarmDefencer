@@ -65,7 +65,7 @@ public sealed class FarmManager : MonoBehaviour
 
         Application.wantsToQuit += SaveOnQuit;
         
-        harvestInventory.AssignIfJustUnlocked(MapManager.Instance.CurrentMapIndex, MapManager.Instance.CurrentStageIndex);
+        harvestInventory.AssignIfJustUnlocked(MapManager.Instance.MaximumUnlockedMapIndex, MapManager.Instance.MaximumUnlockedStageIndex);
         harvestTutorialGiver.PlayTutorialsToDo(productDatabase.Products, IsProductAvailableNow);
     }
 
@@ -123,7 +123,7 @@ public sealed class FarmManager : MonoBehaviour
 
         farm.Init(
             () => pestGiver.IsPestRunning,
-            productName => harvestInventory.IsProductAvailable(productName, MapManager.Instance.CurrentMapIndex, MapManager.Instance.CurrentStageIndex),
+            productName => harvestInventory.IsProductAvailable(productName, MapManager.Instance.MaximumUnlockedMapIndex, MapManager.Instance.MaximumUnlockedStageIndex),
             cropWorldPosition =>
             {
                 EarnGold(1);
@@ -243,8 +243,8 @@ public sealed class FarmManager : MonoBehaviour
             entry.ProductName, 
             cropWorldPosition,
             count, 
-            MapManager.Instance.CurrentMapIndex,
-            MapManager.Instance.CurrentStageIndex,
+            MapManager.Instance.MaximumUnlockedMapIndex,
+            MapManager.Instance.MaximumUnlockedStageIndex,
             gold =>
             {
                 ResourceManager.Instance.Coin += gold;
