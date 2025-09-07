@@ -396,7 +396,6 @@ public sealed class Tower : TargetableBehavior, IVolumeControl
             projectile.SetCaster(this);
             projectile.SetTarget(CurrentTarget);
             projectile.SetDamage(CurrentLevelData.AttackDamage);
-            projectile.SetSlow(CurrentLevelData.SlowRate, CurrentLevelData.SlowDuration);
             projectile.Trigger();
         }
         else if (_beamPrefab != null)
@@ -410,13 +409,9 @@ public sealed class Tower : TargetableBehavior, IVolumeControl
                 return;
             }
 
-            // beam.SetCaster(this);
+            beam.SetCaster(this);
             beam.SetTarget(CurrentTarget);
             beam.SetDamage(CurrentLevelData.AttackDamage);
-            beam.SetSlow(CurrentLevelData.SlowRate, CurrentLevelData.SlowDuration);
-            beam.SetTower(this);
-            beam.SetStayDuration(CurrentLevelData.StayDuration);
-            beam.SetDealInterval(CurrentLevelData.DealInterval);
             beam.Trigger();
         }
 

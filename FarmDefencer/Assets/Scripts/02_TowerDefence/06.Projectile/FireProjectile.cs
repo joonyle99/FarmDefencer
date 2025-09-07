@@ -7,14 +7,8 @@ using UnityEngine;
 /// </summary>
 public sealed class FireProjectile : ParabolicProjectile
 {
-    [Header("──────── Fire Projectile ────────")]
-    [Space]
-
-    // TODO: 이거 tower stats에서 정할 수 있도록 한다
-
-    [SerializeField] private int _tickCount;
-    [SerializeField] private float _tickInterval;
-    [SerializeField] private int _tickDamage;
+    //[Header("──────── Fire Projectile ────────")]
+    //[Space]
 
     protected override void DealDamage()
     {
@@ -46,7 +40,7 @@ public sealed class FireProjectile : ParabolicProjectile
 
                 // 화상 효과 적용 (중복 적용 가능)
                 var burnEffector = monster.gameObject.AddComponent<BurnEffector>();
-                burnEffector.Activate(monster, _tickCount, _tickInterval, _tickDamage);
+                burnEffector.Activate(monster, caster.CurrentLevelData.TickCount, caster.CurrentLevelData.TickInterval, caster.CurrentLevelData.TickDamage);
             });
 
             // // 2) 셀 시각 효과

@@ -77,7 +77,7 @@ public class ResourceManager : JoonyleGameDevKit.Singleton<ResourceManager>, IFa
 
     public void Initialize()
     {
-        SetGold(400);
+        SetGold(999999999);
     }
 
     // gold

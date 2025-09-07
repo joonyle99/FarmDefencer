@@ -47,8 +47,8 @@ MonoBehaviour:
   _targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  _widthRange: 2
-  _heightRange: 2
+  _widthRange: 1
+  _heightRange: 1
 --- !u!1 &8016940742814412144
 GameObject:
   m_ObjectHideFlags: 0

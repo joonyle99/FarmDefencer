@@ -17,6 +17,6 @@ public sealed class PoisonProjectile : LinearProjectile
     {
         // 슬로우 효과 적용 (중복 적용 가능)
         var slowEffector = target.gameObject.AddComponent<SlowEffector>();
-        slowEffector.Activate(target, slowRate, slowDuration);
+        slowEffector.Activate(target, caster.CurrentLevelData.SlowRate, caster.CurrentLevelData.SlowDuration);
     }
 }

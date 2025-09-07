@@ -11,10 +11,6 @@ public abstract class BeamBase : MonoBehaviour
     [SerializeField] protected float stayDuration;
     [SerializeField] protected float dealInterval;
 
-    // 효과 - 슬로우
-    protected float slowRate;
-    protected float slowDuration;
-
     protected Tower caster;
     protected TargetableBehavior target;
 
@@ -47,7 +43,7 @@ public abstract class BeamBase : MonoBehaviour
                 return;
             }
 
-            if (elapsedTime > stayDuration)
+            if (elapsedTime > caster.CurrentLevelData.StayDuration)
             {
                 OnDestroyFunc();
                 return;
@@ -60,7 +56,7 @@ public abstract class BeamBase : MonoBehaviour
                 return;
             }
 
-            if (elapsedInterval > dealInterval)
+            if (elapsedInterval > caster.CurrentLevelData.DealInterval)
             {
                 elapsedInterval = 0f;
 
@@ -76,31 +72,17 @@ public abstract class BeamBase : MonoBehaviour
         }
     }
 
-    public void SetDamage(int damage)
+    public void SetCaster(Tower caster)
     {
-        damager.SetDamage(damage);
-    }
-    public void SetSlow(float slowRate, float slowDuration)
-    {
-        this.slowRate = slowRate;
-        this.slowDuration = slowDuration;
+        this.caster = caster;
     }
     public void SetTarget(TargetableBehavior target)
     {
         this.target = target;
     }
-
-    public void SetStayDuration(float duration)
+    public void SetDamage(int damage)
     {
-        stayDuration = duration;
-    }
-    public void SetDealInterval(float interval)
-    {
-        dealInterval = interval;
-    }
-    public void SetTower(Tower tower)
-    {
-        caster = tower;
+        damager.SetDamage(damage);
     }
 
     public int GetDamage()

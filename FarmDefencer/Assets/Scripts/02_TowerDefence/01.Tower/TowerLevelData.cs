@@ -21,6 +21,13 @@ public class TowerLevelData : ScriptableObject
     [BoxGroup("사운드")] public AudioClip FireReady;
     [BoxGroup("사운드")] public AudioClip FireShot;
 
-    [BoxGroup("기타 - 레이저 빔")] public float StayDuration;
-    [BoxGroup("기타 - 레이저 빔")] public float DealInterval;
+    [BoxGroup("기타 - 타워 2")] public float TickCount;
+    [BoxGroup("기타 - 타워 2")] public float TickInterval;
+    [BoxGroup("기타 - 타워 2")] public float TickDamage;
+
+    [BoxGroup("기타 - 타워 4")] public float StayDuration;
+    [BoxGroup("기타 - 타워 4")] public float DealInterval;
+
+    [BoxGroup("기타 - 타워 5")] public float TEMP1;
+    [BoxGroup("기타 - 타워 5")] public float TEMP2;
 }

@@ -47,8 +47,8 @@ MonoBehaviour:
   _targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  _widthRange: 2
-  _heightRange: 2
+  _widthRange: 1
+  _heightRange: 1
 --- !u!1 &8016940742814412144
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,10 +209,10 @@ MonoBehaviour:
   _flipAimer: {fileID: 4414608076142748444}
   _projectilePrefab: {fileID: 5744434242594404492, guid: 52e63b37e642a6d4e959958e588224f2, type: 3}
   _beamPrefab: {fileID: 0}
-  _removeVolume: 0.5
-  _upgradeVolume: 0.5
-  _fireReadyVolume: 0.5
-  _fireShotVolume: 0.5
+  removeVolume: 0.5
+  upgradeVolume: 0.5
+  fireReadyVolume: 0.5
+  fireShotVolume: 0.5
 --- !u!210 &5803083254459691797
 SortingGroup:
   m_ObjectHideFlags: 0

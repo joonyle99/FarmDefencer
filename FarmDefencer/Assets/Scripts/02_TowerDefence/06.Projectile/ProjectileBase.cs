@@ -9,10 +9,6 @@ public abstract class ProjectileBase : MonoBehaviour
     [SerializeField] protected Damager damager;
     [SerializeField] protected float moveDuration = 1.5f;
 
-    // 효과 - 슬로우
-    protected float slowRate;
-    protected float slowDuration;
-
     protected Tower caster;
     protected TargetableBehavior target;
 
@@ -53,16 +49,6 @@ public abstract class ProjectileBase : MonoBehaviour
             elapsedTime += Time.deltaTime;
         }
     }
-
-    public void SetDamage(int damage)
-    {
-        damager.SetDamage(damage);
-    }
-    public void SetSlow(float slowRate, float slowDuration)
-    {
-        this.slowRate = slowRate;
-        this.slowDuration = slowDuration;
-    }
     public void SetCaster(Tower caster)
     {
         this.caster = caster;
@@ -70,6 +56,10 @@ public abstract class ProjectileBase : MonoBehaviour
     public void SetTarget(TargetableBehavior target)
     {
         this.target = target;
+    }
+    public void SetDamage(int damage)
+    {
+        damager.SetDamage(damage);
     }
 
     public int GetDamage()

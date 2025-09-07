@@ -20,9 +20,14 @@ MonoBehaviour:
   AttackRate: 0
   SlowRate: 0
   SlowDuration: 0
-  ValueCost: 6
-  SellCost: 3
+  ValueCost: 6000
+  SellCost: 3000
   FireReady: {fileID: 0}
   FireShot: {fileID: 0}
+  TickCount: 0
+  TickInterval: 0
+  TickDamage: 0
   StayDuration: 0
   DealInterval: 0
+  TEMP1: 0
+  TEMP2: 0

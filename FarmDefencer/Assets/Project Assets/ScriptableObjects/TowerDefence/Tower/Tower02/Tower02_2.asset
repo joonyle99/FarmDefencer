@@ -21,9 +21,14 @@ MonoBehaviour:
   AttackRate: 1.8
   SlowRate: 0
   SlowDuration: 0
-  ValueCost: 80
-  SellCost: 57
+  ValueCost: 80000
+  SellCost: 56500
   FireReady: {fileID: 8300000, guid: e78548deedea2d2458b4d90a0acf9ef5, type: 3}
   FireShot: {fileID: 8300000, guid: becb16af88086704ead1d3dfae44b880, type: 3}
+  TickCount: 3
+  TickInterval: 1
+  TickDamage: 6
   StayDuration: 0
   DealInterval: 0
+  TEMP1: 0
+  TEMP2: 0
