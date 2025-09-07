@@ -16,8 +16,8 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
     [InfoBox("작물 한 뭉치가 얼마의 시간 내에 다 날아들어 가야 하는지")]
     [SerializeField] private float harvestBulkAnimationTime = 0.25f;
 
-    [InfoBox("시작점 작물 출발 위치를 얼마나 흩뿌릴지")] [SerializeField] private float harvestBulkSpread = 0.5f;
-    [SerializeField] private float harvestedProductFlyToBoxAnimationDuration = 0.25f;
+    [InfoBox("시작점 작물 출발 위치를 얼마나 흩뿌릴지")] [SerializeField] private float harvestBulkSpread = 2.5f;
+    [SerializeField] private float harvestedProductFlyToBoxAnimationDuration = 1.0f;
     [SerializeField] private float blinkDuration = 0.5f;
 
     [CanBeNull] public ProductEntry SpecialProduct { get; private set; }

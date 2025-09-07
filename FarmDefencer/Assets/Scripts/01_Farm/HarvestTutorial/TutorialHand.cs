@@ -76,9 +76,9 @@ public class TutorialHand : MonoBehaviour
                 Action_DoubleTap();
                 break;
             }
-            case RequiredCropAction.FiveTap:
+            case RequiredCropAction.TripleTap:
             {
-                Action_FiveTap();
+                Action_TripleTap();
                 break;
             }
             case RequiredCropAction.Drag:
@@ -181,7 +181,7 @@ public class TutorialHand : MonoBehaviour
         }
     }
 
-    private void Action_FiveTap()
+    private void Action_TripleTap()
     {
         const float duration = 3.0f;
         const float firstDuration = 0.5f;
@@ -201,9 +201,9 @@ public class TutorialHand : MonoBehaviour
             
         }
         
-        _text.text = "5Tap";
+        _text.text = "3Tap";
         
-        if (currentFrame < firstDuration + repeatDuration * 6)
+        if (currentFrame < firstDuration + repeatDuration * 4)
         {
             var repeatLocalFrame = currentFrame % repeatDuration;
             

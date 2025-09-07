@@ -24,7 +24,7 @@ public enum RequiredCropAction
     Hold_1,
     Hold_2,
     DoubleTap,
-    FiveTap,
+    TripleTap,
     Drag,
     Water,
 }
@@ -54,6 +54,8 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
     protected const float PlowDeltaPositionCriterion = 0.25f; // 밭 문지르기 동작 판정 기준 (가로 방향 위치 델타)
 
     public abstract RequiredCropAction RequiredCropAction { get; }
+    
+    protected abstract int HarvestableCount { get; }
 
     public abstract float? GaugeRatio { get; }
 
@@ -66,7 +68,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
     public abstract JObject Serialize();
 
     public abstract void Deserialize(JObject json);
-
+    
     public void Init(Action onPlanted, Action<int> onSold, CropDisplay cropDisplayObjectToClone)
     {
         OnPlanted = onPlanted;
@@ -112,25 +114,25 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 
     // 이하 함수 빌딩 블록
 
-    protected static TState CommonCropBehavior<TState>(
+    protected TState CommonCropBehavior<TState>(
         List<(Func<TState, TState, bool>, Action<Vector2, Vector2>)> effects,
-        Action onPlanted,
-        Action<int> onSold,
         Func<TState, TState> transitionFunction,
         TState beforeState,
-        Vector2 inputWorldPosition,
-        Vector2 cropPosition)
+        Vector2 inputWorldPosition)
         where TState : struct, ICommonCropState
     {
         var nextState = transitionFunction(beforeState);
         if (IsJustPlanted(beforeState, nextState))
         {
-            onPlanted();
+            OnPlanted();
         }
 
         if (beforeState.Harvested && !nextState.Harvested)
         {
-            onSold(GetHarvestableCount(beforeState.DecayRatio));
+            var freshness = 1.0f - beforeState.DecayRatio;
+            var finalHarvestableCount =  Mathf.CeilToInt(HarvestableCount * freshness);
+            
+            OnSold(finalHarvestableCount);
             nextState = ResetCropState(beforeState);
         }
 
@@ -139,7 +141,7 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
             nextState = ResetCropState(beforeState);
         }
 
-        PlayEffectAt(effects, beforeState, nextState)(inputWorldPosition, cropPosition);
+        PlayEffectAt(effects, beforeState, nextState)(inputWorldPosition, transform.position);
         return nextState;
     }
 
@@ -149,12 +151,6 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
         {
             spriteRenderer.sprite = sprite;
         }
-    }
-
-    protected static int GetHarvestableCount(float decayRatio)
-    {
-        var freshness = 1.0f - decayRatio;
-        return Mathf.CeilToInt(freshness * 10.0f) * 10;
     }
 
     /// <summary>

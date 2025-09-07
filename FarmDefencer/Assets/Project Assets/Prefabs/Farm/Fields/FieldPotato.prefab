@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824643793109225948}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -11, y: -7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cropPrefab: {fileID: 7695424892220933664, guid: 5374d7b0498d7bb4a92a049f5ce91fd2, type: 3}
   productEntry: {fileID: 11400000, guid: 0b5958d6c453d6944a3fe8a3cc23276e, type: 2}
-  fieldSize: {x: 3, y: 5}
+  fieldSize: {x: 3, y: 2}
   cropBackgroundPrefab: {fileID: 46493413090147855, guid: 104ea3bc34e239644b573851c4b89c35, type: 3}
 --- !u!1 &2173456556704109979
 GameObject:
@@ -77,8 +77,8 @@ Transform:
   m_GameObject: {fileID: 2173456556704109979}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 2, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
+  m_LocalPosition: {x: 1, y: 0.4, z: 0}
+  m_LocalScale: {x: 0.12, y: 0.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6468626157362919655}
@@ -127,12 +127,12 @@ SpriteRenderer:
   m_SortingLayerID: 1229108509
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -618899791083266325, guid: 0f3188063ed857544bba598ab5509925, type: 3}
+  m_Sprite: {fileID: 1081828861169438336, guid: f6045c2cdd7927b4582a90b9ad49d6e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.86, y: 4.79}
+  m_Size: {x: 29.30534, y: 18.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -165,8 +165,8 @@ Transform:
   m_GameObject: {fileID: 4579551377915943491}
   serializedVersion: 2
   m_LocalRotation: {x: 0.01090805, y: -0, z: -0, w: 0.9999405}
-  m_LocalPosition: {x: 2.25, y: 6.2, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: 2.75, y: 2.7, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6468626157362919655}
@@ -253,7 +253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1541252992479689968, guid: ab87d65d04443bc4a970b54b1ed50285, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1541252992479689968, guid: ab87d65d04443bc4a970b54b1ed50285, type: 3}
       propertyPath: m_LocalPosition.z

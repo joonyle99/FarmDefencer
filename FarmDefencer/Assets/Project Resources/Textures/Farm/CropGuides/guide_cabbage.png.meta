@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 599ac5a98b779ed45a1cde0ac890b92b
+guid: 01a4f3f0fe0080f48a4f63415690b840
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1410483304339041755
-    second: crop_guide_carrot_0
+      213: 2520754190640424675
+    second: guide_cabbage_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: crop_guide_carrot_0
+      name: guide_cabbage_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bdd6fbc971b039310800000000000000
-      internalID: 1410483304339041755
+      spriteID: 3e62333b4948bf220800000000000000
+      internalID: 2520754190640424675
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      crop_guide_carrot_0: 1410483304339041755
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

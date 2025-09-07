@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 408036199071748582}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cropPrefab: {fileID: 7695424892220933664, guid: f11c145bce3513544aa38877c53961fd, type: 3}
   productEntry: {fileID: 11400000, guid: c75bc55427612404491098a402516de1, type: 2}
-  fieldSize: {x: 2, y: 5}
+  fieldSize: {x: 2, y: 2}
   cropBackgroundPrefab: {fileID: 46493413090147855, guid: 104ea3bc34e239644b573851c4b89c35, type: 3}
 --- !u!1 &3440667380111371553
 GameObject:
@@ -78,8 +78,8 @@ Transform:
   m_GameObject: {fileID: 3440667380111371553}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.25, y: -1.5, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: -0.9, y: -1.5, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6909387553518923388}
@@ -178,8 +178,8 @@ Transform:
   m_GameObject: {fileID: 7302356156900613924}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 2, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.3, z: 1}
+  m_LocalPosition: {x: 0.5, y: 0.4, z: 0}
+  m_LocalScale: {x: 0.12, y: 0.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6909387553518923388}
@@ -228,12 +228,12 @@ SpriteRenderer:
   m_SortingLayerID: 1229108509
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -785292609715454678, guid: 12563833d989b4d4a8c17ff9492a1ea5, type: 3}
+  m_Sprite: {fileID: -2933811294009664875, guid: a85f30f71eab7a1429ef6a66b7c18a96, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.86, y: 4.79}
+  m_Size: {x: 18.88, y: 18.3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -253,7 +253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1541252992479689968, guid: ab87d65d04443bc4a970b54b1ed50285, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1541252992479689968, guid: ab87d65d04443bc4a970b54b1ed50285, type: 3}
       propertyPath: m_LocalPosition.z

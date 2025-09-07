@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   productName: product_cucumber
   productSprite: {fileID: 21300000, guid: 5c318d942de22d74e97c4c4f56651571, type: 3}
-  price: 9
+  price: 90

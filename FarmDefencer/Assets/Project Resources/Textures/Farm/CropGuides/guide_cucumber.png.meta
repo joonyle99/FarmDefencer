@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 12563833d989b4d4a8c17ff9492a1ea5
+guid: f57490a37667ae24bad5ce936997f312
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -785292609715454678
-    second: 500x200_land_0
+      213: 703950747637553880
+    second: guide_cucumber_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 500x200_land_0
+      name: guide_cucumber_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 4
-        width: 190
-        height: 493
+        x: 0
+        y: 0
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a2dbb2938841a15f0800000000000000
-      internalID: -785292609715454678
+      spriteID: 8da9e4ca97fe4c900800000000000000
+      internalID: 703950747637553880
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      500x200_land_0: -785292609715454678
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

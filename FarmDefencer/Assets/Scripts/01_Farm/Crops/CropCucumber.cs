@@ -16,9 +16,7 @@ public sealed class CropCucumber : Crop
         public float GrowthSeconds { get; set; }
         public bool Watered { get; set; }
         public bool Harvested { get; set; }
-        public int RemainingQuota { get; set; }
         public bool ShortTrellisPlaced { get; set; }
-        public bool LongTrellisPlaced { get; set; }
         public float DecayRatio { get; set; }
     }
 
@@ -40,8 +38,9 @@ public sealed class CropCucumber : Crop
         Stage3
     }
 
-    private const float Stage1_GrowthSeconds = 15.0f;
-    private const float Stage2_GrowthSeconds = 15.0f;
+    private const float Stage1_GrowthSeconds = 1.0f;
+    private const float Stage2_GrowthSeconds = 1.5f;
+    private const float Stage3_GrowthSeconds = 1.5f;
 
     [SerializeField] private Sprite seedSprite;
     [Space] [SerializeField] private Sprite stage1_beforeWaterSprite;
@@ -64,6 +63,8 @@ public sealed class CropCucumber : Crop
     public override RequiredCropAction RequiredCropAction =>
         GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
 
+    protected override int HarvestableCount => _currentState.Harvested ? 100 : 0;
+    
     public override float? GaugeRatio =>
         GetCurrentStage(_currentState) is CucumberStage.Mature or CucumberStage.Harvested
             ? 1.0f - _currentState.DecayRatio
@@ -108,12 +109,9 @@ public sealed class CropCucumber : Crop
     {
         _currentState = CommonCropBehavior(
             Effects,
-            OnPlanted,
-            OnSold,
             OnTapFunctions[GetCurrentStage(_currentState)],
             _currentState,
-            worldPosition,
-            transform.position);
+            worldPosition);
     }
 
     public override bool OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd,
@@ -121,12 +119,9 @@ public sealed class CropCucumber : Crop
     {
         _currentState = CommonCropBehavior(
             Effects,
-            OnPlanted,
-            OnSold,
             OnHoldFunctions[GetCurrentStage(_currentState)],
             _currentState,
-            initialWorldPosition + deltaWorldPosition,
-            transform.position);
+            initialWorldPosition + deltaWorldPosition);
 
         return false;
     }
@@ -135,11 +130,8 @@ public sealed class CropCucumber : Crop
     {
         _currentState = CommonCropBehavior(
             Effects,
-            OnPlanted,
-            OnSold,
             OnWateringFunctions[GetCurrentStage(_currentState)],
             _currentState,
-            transform.position,
             transform.position);
     }
 
@@ -149,11 +141,8 @@ public sealed class CropCucumber : Crop
         GetSpriteAndApplyTo(currentStage)(_spriteRenderer);
         _currentState = CommonCropBehavior(
             Effects,
-            OnPlanted,
-            OnSold,
             beforeState => OnFarmUpdateFunctions[currentStage](beforeState, deltaTime),
             _currentState,
-            transform.position,
             transform.position);
     }
 
@@ -171,7 +160,7 @@ public sealed class CropCucumber : Crop
     {
         { Planted: false } => CucumberStage.Seed,
         { Harvested: true } => CucumberStage.Harvested,
-        { LongTrellisPlaced: true } => CucumberStage.Mature,
+        { GrowthSeconds: >= Stage1_GrowthSeconds + Stage2_GrowthSeconds + Stage3_GrowthSeconds } => CucumberStage.Mature,
 
         { GrowthSeconds: >= Stage1_GrowthSeconds + Stage2_GrowthSeconds } => CucumberStage.Stage3,
 
@@ -218,7 +207,7 @@ public sealed class CropCucumber : Crop
             { CucumberStage.Stage2_BeforeWater, WaitWater },
             { CucumberStage.Stage2_Growing, Grow },
 
-            { CucumberStage.Stage3, DoNothing_OnFarmUpdate },
+            { CucumberStage.Stage3, Grow },
 
             { CucumberStage.Mature, Decay },
             { CucumberStage.Harvested, DoNothing_OnFarmUpdate },
@@ -243,15 +232,9 @@ public sealed class CropCucumber : Crop
         { CucumberStage.Stage2_BeforeWater, DoNothing },
         { CucumberStage.Stage2_Growing, DoNothing },
 
-        {
-            CucumberStage.Stage3, (beforeState) =>
-            {
-                beforeState.LongTrellisPlaced = true;
-                return beforeState;
-            }
-        },
+        { CucumberStage.Stage3, DoNothing },
 
-        { CucumberStage.Mature, DoNothing },
+        { CucumberStage.Mature, Harvest },
         { CucumberStage.Harvested, ResetCropState },
     };
 
@@ -307,7 +290,7 @@ public sealed class CropCucumber : Crop
             { CucumberStage.Stage2_BeforeWater, _ => RequiredCropAction.Water },
             { CucumberStage.Stage2_Growing, _ => RequiredCropAction.None },
 
-            { CucumberStage.Stage3, _ => RequiredCropAction.SingleTap },
+            { CucumberStage.Stage3, _ => RequiredCropAction.None },
 
             { CucumberStage.Mature, _ => RequiredCropAction.SingleTap },
             { CucumberStage.Harvested, _ => RequiredCropAction.SingleTap },
@@ -336,8 +319,7 @@ public sealed class CropCucumber : Crop
     };
 
     private static readonly Func<CucumberState, CucumberState, bool> TrellisEffectCondition =
-        (beforeState, afterState) => afterState.LongTrellisPlaced && !beforeState.LongTrellisPlaced ||
-                                     afterState.ShortTrellisPlaced && !beforeState.ShortTrellisPlaced;
+        (beforeState, afterState) => afterState.ShortTrellisPlaced && !beforeState.ShortTrellisPlaced;
 
     private static readonly Action<Vector2, Vector2> TrellisEffect = (inputWorldPosition, cropPosition) =>
     {

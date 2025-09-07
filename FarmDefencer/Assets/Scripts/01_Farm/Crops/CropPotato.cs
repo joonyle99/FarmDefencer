@@ -16,7 +16,6 @@ public sealed class CropPotato : Crop
 		public bool Watered { get; set; }
 		public bool Harvested { get; set; }
 		public float HoldingTime { get; set; }
-		public int RemainingQuota { get; set; }
 		public float DecayRatio { get; set; }
 	}
 
@@ -30,7 +29,7 @@ public sealed class CropPotato : Crop
 		Harvested
 	}
 
-	private const float MatureSeconds = 15.0f;
+	private const float MatureSeconds = 2.0f;
 	private const float HarvestHoldTime = 0.75f;
 
 	[SerializeField] private Sprite seedSprite;
@@ -45,6 +44,8 @@ public sealed class CropPotato : Crop
 
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+	
+	protected override int HarvestableCount => _currentState.Harvested ? 100 : 0;
 	
 	public override float? GaugeRatio =>
 		GetCurrentStage(_currentState) is PotatoStage.Mature or PotatoStage.Harvested
@@ -85,12 +86,9 @@ public sealed class CropPotato : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			OnTapFunctions[GetCurrentStage(_currentState)],
 			_currentState,
-			inputWorldPosition, 
-			transform.position);
+			inputWorldPosition);
 	}
 	
 	public override bool OnHold(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
@@ -98,13 +96,10 @@ public sealed class CropPotato : Crop
 		var currentStage = GetCurrentStage(_currentState);
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			beforeState
 			=> OnHoldFunctions[currentStage](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime),
 			_currentState,
-			initialPosition + deltaPosition, 
-			transform.position);
+			initialPosition + deltaPosition);
 
 		return currentStage == PotatoStage.Mature;
 	}
@@ -113,11 +108,8 @@ public sealed class CropPotato : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			WaterForNeedOnce,
 			_currentState,
-			transform.position, 
 			transform.position);
 	}
 
@@ -128,12 +120,9 @@ public sealed class CropPotato : Crop
 
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			beforeState
 			=> OnFarmUpdateFunctions[currentStage](beforeState, deltaTime),
 			_currentState,
-			transform.position, 
 			transform.position);
 	}
 

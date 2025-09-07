@@ -15,7 +15,6 @@ public sealed class CropSweetpotato : Crop
 		public float GrowthSeconds { get; set; }
 		public bool Watered { get; set; }
 		public bool Harvested { get; set; }
-		public int RemainingQuota { get; set; }
 		public float LastSingleTapTime { get; set; }
 		public int TapCount { get; set; }
 		public int RemainingSweetpotatoCount { get; set; } // 현재 남은 정상인 것의 개수
@@ -47,10 +46,10 @@ public sealed class CropSweetpotato : Crop
 		Harvested,
 	}
 
-	private const float Stage1_GrowthSeconds = 15.0f;
-	private const float Stage2_GrowthSeconds = 15.0f;
-	private const float Stage3_GrowthSeconds = 10.0f;
-	private const float Stage4_GrowthSeconds = 5.0f;
+	private const float Stage1_GrowthSeconds = 2.0f;
+	private const float Stage2_GrowthSeconds = 2.0f;
+	private const float Stage3_GrowthSeconds = 1.5f;
+	private const float Stage4_GrowthSeconds = 1.5f;
 	private const float WrapHoldingSecondsCriterion = 1.0f;
 
 	[SerializeField] private Sprite stage1_beforeWaterSprite;
@@ -85,10 +84,12 @@ public sealed class CropSweetpotato : Crop
 	private SpriteRenderer _spriteRenderer;
 	private SweetpotatoState _currentState;
 
-	public bool ForceHarvestOne { get; set; } = false;
+	public bool ForceHarvestOne { get; set; }
 
 	public override RequiredCropAction RequiredCropAction =>
 		GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
+	
+	protected override int HarvestableCount => _currentState.Harvested ? (100 * _currentState.RemainingSweetpotatoCount) : 0;
 	
 	public override float? GaugeRatio =>
 		GetCurrentStage(_currentState) is SweetpotatoStage.Mature or SweetpotatoStage.Harvested
@@ -134,12 +135,9 @@ public sealed class CropSweetpotato : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			OnTapFunctions[GetCurrentStage(_currentState)],
 			_currentState,
-			worldPosition, 
-			transform.position);
+			worldPosition);
 	}
 
 	public override bool OnHold(Vector2 initialPosition, Vector2 deltaPosition, bool isEnd, float deltaHoldTime)
@@ -147,12 +145,9 @@ public sealed class CropSweetpotato : Crop
 		var currentStage = GetCurrentStage(_currentState);
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			beforeState => OnHoldFunctions[currentStage](beforeState, initialPosition, deltaPosition, isEnd, deltaHoldTime),
 			_currentState,
-			initialPosition + deltaPosition,
-			transform.position);
+			initialPosition + deltaPosition);
 
 		return true;
 	}
@@ -161,11 +156,8 @@ public sealed class CropSweetpotato : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			OnWateringFunctions[GetCurrentStage(_currentState)],
 			_currentState,
-			transform.position,
 			transform.position);
 	}
 
@@ -177,11 +169,8 @@ public sealed class CropSweetpotato : Crop
 
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			beforeState => OnFarmUpdateFunctions[currentStage](beforeState, deltaTime),
 			_currentState,
-			transform.position, 
 			transform.position);
 		
 		if (ForceHarvestOne && _currentState.DeterminedCount)
@@ -364,7 +353,7 @@ public sealed class CropSweetpotato : Crop
 		_ => (_) => { }
 	};
 
-	private static readonly Func<SweetpotatoState, SweetpotatoState> HarvestIfFiveTap =
+	private static readonly Func<SweetpotatoState, SweetpotatoState> HarvestIfTripleTap =
 		(beforeState) =>
 		{
 			var nextState = beforeState;
@@ -379,7 +368,7 @@ public sealed class CropSweetpotato : Crop
 				nextState.TapCount = 1;
 			}
 			nextState.LastSingleTapTime = currentTime;
-			if (nextState.TapCount >= 5)
+			if (nextState.TapCount >= 3)
 			{
 				if (nextState.RemainingSweetpotatoCount == 0)
 				{
@@ -567,7 +556,7 @@ public sealed class CropSweetpotato : Crop
 
 		{SweetpotatoStage.Stage4, DoNothing },
 
-		{SweetpotatoStage.Mature, HarvestIfFiveTap },
+		{SweetpotatoStage.Mature, HarvestIfTripleTap },
 		{SweetpotatoStage.Harvested, ResetCropState },
 	};
 	
@@ -630,7 +619,7 @@ public sealed class CropSweetpotato : Crop
 
 		{SweetpotatoStage.Stage4, _ => RequiredCropAction.None },
 
-		{SweetpotatoStage.Mature, _ => RequiredCropAction.FiveTap },
+		{SweetpotatoStage.Mature, _ => RequiredCropAction.TripleTap },
 		{SweetpotatoStage.Harvested, _ => RequiredCropAction.SingleTap },
 	};
 }

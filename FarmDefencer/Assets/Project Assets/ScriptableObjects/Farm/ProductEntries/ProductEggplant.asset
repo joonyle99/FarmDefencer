@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   productName: product_eggplant
   productSprite: {fileID: 21300000, guid: 77e08b229176fda4c9e76e72457d94d4, type: 3}
-  price: 11
+  price: 110

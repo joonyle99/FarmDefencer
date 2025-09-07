@@ -36,4 +36,4 @@ MonoBehaviour:
     minStageIndex: 1
   - targetCrop: {fileID: 11400000, guid: cc99559fa3cd81c4f9e227728fe5fe8c, type: 2}
     minMapIndex: 3
-    minStageIndex: 5
+    minStageIndex: 10

@@ -28,7 +28,7 @@ public sealed class CropCarrot : Crop
 		Harvested
 	}
 
-	private const float MatureSeconds = 15.0f;
+	private const float MatureSeconds = 2.5f;
 
 	[SerializeField] private Sprite seedSprite;
 	[SerializeField] private Sprite matureSprite;
@@ -42,6 +42,8 @@ public sealed class CropCarrot : Crop
 	
 	public override RequiredCropAction RequiredCropAction => GetRequiredCropActionFunctions[GetCurrentStage(_currentState)](_currentState);
 
+	protected override int HarvestableCount => _currentState.Harvested ? 100 : 0;
+	
 	public override float? GaugeRatio =>
 		GetCurrentStage(_currentState) is CarrotStage.Mature or CarrotStage.Harvested
 			? 1.0f - _currentState.DecayRatio
@@ -81,24 +83,18 @@ public sealed class CropCarrot : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			OnTapFunctions[GetCurrentStage(_currentState)], 
 			_currentState,
-			inputWorldPosition, 
-			transform.position);
+			inputWorldPosition);
 	}
 
 	public override bool OnHold(Vector2 initialWorldPosition, Vector2 deltaWorldPosition, bool isEnd, float deltaHoldTime)
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			OnHoldFunctions[GetCurrentStage(_currentState)], 
 			_currentState,
-			initialWorldPosition + deltaWorldPosition, 
-			transform.position);
+			initialWorldPosition + deltaWorldPosition);
 
 		return false;
 	}
@@ -107,11 +103,9 @@ public sealed class CropCarrot : Crop
 	{
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			WaterForNeedOnce,
 			_currentState,
-			transform.position, transform.position);
+			transform.position);
 	}
 	
 	public override void ResetToInitialState() => _currentState = ResetCropState(_currentState);
@@ -123,11 +117,8 @@ public sealed class CropCarrot : Crop
 
 		_currentState = CommonCropBehavior(
 			Effects,
-			OnPlanted,
-			OnSold,
 			beforeState => OnFarmUpdateFunctions[currentStage](beforeState, deltaTime),
 			_currentState,
-			transform.position, 
 			transform.position);
 	}
 

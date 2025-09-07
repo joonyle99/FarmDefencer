@@ -104,11 +104,11 @@ MonoBehaviour:
   stage1_beforeWaterSprite: {fileID: -38436379460211280, guid: 9b47d2a1df8bf1840811499242fdae73, type: 3}
   stage1_deadSprite: {fileID: 3641188092932242446, guid: be80812cd60c2ad46bb78081a8d9121b, type: 3}
   stage1_growingSprite: {fileID: -4296200620010335966, guid: 155f7bfd29d60bf4396588d0ea59eafa, type: 3}
-  stage2_beforetrelisSprite: {fileID: -6717930171321577887, guid: c4ae92e52f434b146ae66df5dab51c5c, type: 3}
+  stage2_beforeTrellisSprite: {fileID: -6717930171321577887, guid: c4ae92e52f434b146ae66df5dab51c5c, type: 3}
   stage2_beforeWaterSprite: {fileID: -7898577524073931799, guid: c1b25f99d5645814db9cf93f216ddc19, type: 3}
   stage2_deadSprite: {fileID: -3656584184956693866, guid: bdecbf60c73c03040aedcf5626956828, type: 3}
   stage2_growingSprite: {fileID: -5371069837622984630, guid: 470ddf4a34d76344fbb59328d53222e9, type: 3}
-  stage3_fullLeavesSprite: {fileID: -6002999915008803418, guid: 414f7658aca51ba46b027ff5e24704c6, type: 3}
-  stage3_halfLeavesSprite: {fileID: 4691503470955889983, guid: 9a5d0462656156d45aab6265e394b394, type: 3}
+  stage3_sprite: {fileID: -6002999915008803418, guid: 414f7658aca51ba46b027ff5e24704c6, type: 3}
+  stage4_sprite: {fileID: 4691503470955889983, guid: 9a5d0462656156d45aab6265e394b394, type: 3}
   matureSprite: {fileID: 2587093651349233842, guid: 5644cc7c865da344a983e0ab744474f3, type: 3}
   harvestedSprite: {fileID: 8105551158342040979, guid: 20cdfae5cab522b44b284176a797073d, type: 3}

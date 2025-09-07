@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5793345201713138660}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.01090805, y: -0, z: -0, w: 0.9999405}
-  m_LocalPosition: {x: 2.25, y: 6.2, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.75, y: 2.7, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5167677345193612542}
-  m_LocalEulerAnglesHint: {x: 1.25, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &719054652935896789
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -126,7 +126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6557123191014924817}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6, y: -7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cropPrefab: {fileID: 7695424892220933664, guid: abba9eb9dad20aa4dad0bff8b38687d7, type: 3}
   productEntry: {fileID: 11400000, guid: e80edeed4113dee4db0744b1d37d1966, type: 2}
-  fieldSize: {x: 3, y: 5}
+  fieldSize: {x: 3, y: 2}
   cropBackgroundPrefab: {fileID: 46493413090147855, guid: 104ea3bc34e239644b573851c4b89c35, type: 3}
 --- !u!1 &7505178121837586658
 GameObject:
@@ -178,8 +178,8 @@ Transform:
   m_GameObject: {fileID: 7505178121837586658}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 2, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
+  m_LocalPosition: {x: 1, y: 0.4, z: 0}
+  m_LocalScale: {x: 0.12, y: 0.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5167677345193612542}
@@ -228,12 +228,12 @@ SpriteRenderer:
   m_SortingLayerID: 1229108509
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -618899791083266325, guid: 0f3188063ed857544bba598ab5509925, type: 3}
+  m_Sprite: {fileID: 1081828861169438336, guid: f6045c2cdd7927b4582a90b9ad49d6e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.86, y: 4.79}
+  m_Size: {x: 29.30534, y: 18.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -253,7 +253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1541252992479689968, guid: ab87d65d04443bc4a970b54b1ed50285, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1541252992479689968, guid: ab87d65d04443bc4a970b54b1ed50285, type: 3}
       propertyPath: m_LocalPosition.z

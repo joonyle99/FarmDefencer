@@ -61,8 +61,7 @@ public sealed class Pest : MonoBehaviour
         }
     }
 
-    private int _remainingCropEatCount;
-    public int RemainingCropEatCount => _remainingCropEatCount;
+    public int RemainingCropEatCount { get; private set; }
 
     // 저장되지 않는 값들
     private int _originalCropEatCount;
@@ -90,17 +89,17 @@ public sealed class Pest : MonoBehaviour
         PestSize = pestSize;
         _originalCropEatCount = pestSize switch
         {
-            PestSize.Large => 3,
-            PestSize.Medium => 2,
-            _ => 1
+            PestSize.Large => 150,
+            PestSize.Medium => 100,
+            _ => 50
         };
-        _remainingCropEatCount = _originalCropEatCount;
+        RemainingCropEatCount = _originalCropEatCount;
         
         _remainingClickCount = pestSize switch
         {
-            PestSize.Large => 3,
-            PestSize.Medium => 2,
-            _ => 1
+            PestSize.Large => 150,
+            PestSize.Medium => 100,
+            _ => 50
         };
         _dieTime = dieTime;
         _beginDirectToDestinationCriterion = beginDirectToDestinationCriterion;
@@ -130,17 +129,17 @@ public sealed class Pest : MonoBehaviour
     /// <returns>먹어서 할당량 채운 후 남은 개수.</returns>
     public int Eat(Vector2 cropWorldPosition, int amount)
     {
-        var edible = Math.Min(_remainingCropEatCount, amount);
+        var edible = Math.Min(RemainingCropEatCount, amount);
         var remainder = amount - edible;
 
-        _remainingCropEatCount -= edible;
-        StartCoroutine(CoPlayStealAnimation(cropWorldPosition, edible));
-        RefreshCropLiftingGraphic();
-        
-        if (_remainingCropEatCount <= 0)
-        {
-            StartCoroutine(CoFlee());
-        }
+        RemainingCropEatCount -= edible;
+        // StartCoroutine(CoPlayStealAnimation(cropWorldPosition, edible));
+        // RefreshCropLiftingGraphic();
+        //
+        // if (RemainingCropEatCount <= 0)
+        // {
+        //     StartCoroutine(CoFlee());
+        // }
 
         return remainder;
     }
@@ -213,7 +212,7 @@ public sealed class Pest : MonoBehaviour
         var jsonObject = new JObject();
         jsonObject.Add("PestSize", (int)PestSize);
         jsonObject.Add("State", (int)State);
-        jsonObject.Add("RemainingCropEatCount", _remainingCropEatCount);
+        jsonObject.Add("RemainingCropEatCount", RemainingCropEatCount);
         jsonObject.Add("Seed", Seed);
         jsonObject.Add("TargetProduct", TargetProduct);
         jsonObject.Add("X", transform.position.x);
@@ -237,7 +236,7 @@ public sealed class Pest : MonoBehaviour
         var destinationY = json["DestinationY"]?.Value<float>() ?? 0.0f;
         Destination = new Vector2(destinationX, destinationY);
 
-        _remainingCropEatCount = json["RemainingCropEatCount"]?.Value<int?>() ?? 0;
+        RemainingCropEatCount = json["RemainingCropEatCount"]?.Value<int?>() ?? 0;
         var x = json["X"]?.Value<float?>() ?? 0.0f;
         var position = transform.position;
         position.x = x;
@@ -332,7 +331,7 @@ public sealed class Pest : MonoBehaviour
         // 개미 스킨 적용
         if (PestSize == PestSize.Small)
         {
-            if (_remainingCropEatCount == 0)
+            if (RemainingCropEatCount == 0)
             {
                 _skeletonAnimation.skeleton.SetSkin(TargetProduct.Split("_")[1]);
             }
@@ -343,12 +342,12 @@ public sealed class Pest : MonoBehaviour
         }
         else
         {
-            for (int slotId = 1; slotId <= _originalCropEatCount; ++slotId)
+            for (int slotId = 1; slotId <= _originalCropEatCount / 50; ++slotId)
             {
                 var slotName = $"crop_{slotId}";
                 _skeletonAnimation.skeleton.SetAttachment(slotName, null);
             }
-            for (int slotId = 1; slotId <= _originalCropEatCount - _remainingCropEatCount; ++slotId)
+            for (int slotId = 1; slotId <= (_originalCropEatCount - RemainingCropEatCount) / 50; ++slotId)
             {
                 var slotName = $"crop_{slotId}";
                 _skeletonAnimation.skeleton.SetAttachment(slotName, $"eating/{TargetProduct.Split("_")[1]}_1");
