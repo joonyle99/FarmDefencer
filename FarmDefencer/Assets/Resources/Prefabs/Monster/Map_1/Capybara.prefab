@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1543992766888672360}
   - component: {fileID: 7300144381691796175}
   - component: {fileID: 5287113402474360036}
-  - component: {fileID: 1115794259428524055}
+  - component: {fileID: 7040225029569869249}
   - component: {fileID: 1519744171091044436}
   m_Layer: 7
   m_Name: Capybara
@@ -243,7 +243,7 @@ MonoBehaviour:
   _arrivalThreshold: 0.05
   eTime: 0
   distance: 0
---- !u!114 &1115794259428524055
+--- !u!114 &7040225029569869249
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -252,11 +252,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4172481917644167003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b2acef0a5c914d4ea96d810f1f1c010, type: 3}
+  m_Script: {fileID: 11500000, guid: d1fa8bbfee081eb42b7ec6f563a54e6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthBar: {fileID: 4159104016721875392}
-  _maxHp: 185
   _targetPoint: {fileID: 6219046591756985945}
   _originFactory: {fileID: 0}
   _monsterData: {fileID: 11400000, guid: ddf6d432ae3ea314b9ade90852750543, type: 2}
@@ -462,17 +460,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6740850065851687629, guid: ac73a8c8d91c83842bec0255423aebde, type: 3}
   m_PrefabInstance: {fileID: 6505670202219218649}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4159104016721875392 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7201488375193622297, guid: ac73a8c8d91c83842bec0255423aebde, type: 3}
-  m_PrefabInstance: {fileID: 6505670202219218649}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 147fb69bdcb6a004ba3f217407b487c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6032066207653392411 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 720290982818461378, guid: ac73a8c8d91c83842bec0255423aebde, type: 3}

@@ -16,11 +16,11 @@ MonoBehaviour:
   mapCode: forest
   mapName: "\uCD08\uC6D0"
   monsters:
-  - {fileID: 8488813293856363186, guid: 58e1d33d6e27d6f499f928c32673ef4a, type: 3}
-  - {fileID: 221480247723861646, guid: 4dcf527e597654e4799e2e212a0a49da, type: 3}
-  - {fileID: -3188579509310392443, guid: 19aebb7aec8d66b44938c9c7b1266771, type: 3}
-  - {fileID: 1115794259428524055, guid: 97399fbf276cc6f45ba6f0813de0e46c, type: 3}
-  - {fileID: 505854064816607841, guid: 1265832eb0d602d409315addab1e8710, type: 3}
+  - {fileID: 8747585771150212415, guid: 58e1d33d6e27d6f499f928c32673ef4a, type: 3}
+  - {fileID: 633951463519418004, guid: 4dcf527e597654e4799e2e212a0a49da, type: 3}
+  - {fileID: 7557860453111437829, guid: 19aebb7aec8d66b44938c9c7b1266771, type: 3}
+  - {fileID: 7040225029569869249, guid: 97399fbf276cc6f45ba6f0813de0e46c, type: 3}
+  - {fileID: 4780972749680531834, guid: 1265832eb0d602d409315addab1e8710, type: 3}
   crops:
   - carrot
   - corn
