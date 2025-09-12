@@ -208,6 +208,9 @@ public sealed class CropPotato : Crop
 		{PotatoStage.Harvested, _ => RequiredCropAction.SingleTap },
 	};
 
+	private static readonly Func<PotatoState, PotatoState, bool> MatureEffectCondition = (beforeState, afterState) => afterState.GrowthSeconds >= MatureSeconds && beforeState.GrowthSeconds < MatureSeconds;
+	private static readonly Action<Vector2, Vector2> MatureEffect = (_, cropWorldPosition) => EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilParticle", cropWorldPosition);
+	
 	private static readonly Func<PotatoState, PotatoState, bool> HoldEffectCondition = (beforeState, afterState) => afterState.HoldingTime > beforeState.HoldingTime;
 	private static readonly Action<Vector2, Vector2> HoldEffect = (inputWorldPosition, cropPosition) =>
 	{
@@ -254,6 +257,7 @@ public sealed class CropPotato : Crop
 		(HoldEffectCondition, HoldEffect),
 		(StopDustSfxEffectCondition, StopDustSfxEffect),
 		(PlayDustSfxEffectCondition, PlayDustSfxEffect),
-		(HarvestEffectCondition, StopDustEffectAndPlayHarvestSfxEffect)
+		(HarvestEffectCondition, StopDustEffectAndPlayHarvestSfxEffect),
+		(MatureEffectCondition, MatureEffect),
 	};
 }

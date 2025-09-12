@@ -268,10 +268,14 @@ public sealed class CropCorn : Crop
 		_ => (_) => { }
 	};
 
+	private static readonly Func<CornState, CornState, bool> GrowthEffectCondition = (beforeState, afterState) => afterState.GrowthSeconds >= Stage1_GrowthSeconds + Stage2_GrowthSeconds && beforeState.GrowthSeconds < Stage1_GrowthSeconds + Stage2_GrowthSeconds || afterState.GrowthSeconds >= Stage1_GrowthSeconds && beforeState.GrowthSeconds < Stage1_GrowthSeconds;
+	private static readonly Action<Vector2, Vector2> GrowthEffect = (_, cropWorldPosition) => EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilParticle", cropWorldPosition);
+	
 	private static List<(Func<CornState, CornState, bool>, Action<Vector2, Vector2>)> Effects = new()
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
 		(HarvestEffectCondition, HarvestEffect_SoilParticle),
+		(GrowthEffectCondition, GrowthEffect),
 	};
 }

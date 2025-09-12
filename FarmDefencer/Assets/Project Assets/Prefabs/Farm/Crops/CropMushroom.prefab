@@ -107,6 +107,7 @@ MonoBehaviour:
   stage2_beforeWaterSprite: {fileID: 5687606534127861334, guid: 9b1ca08f975cd95458767cd4931d935b, type: 3}
   stage2_deadSprite: {fileID: 8570217976540278184, guid: 09d6a7c37fcc9904f9440e2ca9c5fcdd, type: 3}
   stage2_growingSprite: {fileID: -4145705509535861541, guid: 39daceab827734d48ba3fe5abdd54620, type: 3}
+  stage3_sprite: {fileID: 6931849508725752192, guid: 0028416c49da8854fabd3046464497f8, type: 3}
   stage3_beforeInoculationSprite: {fileID: 6931849508725752192, guid: 0028416c49da8854fabd3046464497f8, type: 3}
   stage3_afterInoculationSprite: {fileID: 6931849508725752192, guid: 0028416c49da8854fabd3046464497f8, type: 3}
   mature_normalSprite: {fileID: 3333206966548326072, guid: 8a682a83d58262e439f17e3ff9ba141e, type: 3}

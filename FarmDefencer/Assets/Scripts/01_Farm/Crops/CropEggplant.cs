@@ -326,32 +326,34 @@ public sealed class CropEggplant : Crop
 	private static readonly Func<EggplantState, EggplantState, bool> TrellisEffectCondition = (beforeState, afterState) => afterState.TrellisPlaced && !beforeState.TrellisPlaced;
 	private static readonly Action<Vector2, Vector2> TrellisEffect = (inputWorldPosition, cropPosition) => EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilParticleWhite", cropPosition);
 
-	private static readonly Func<int, Func<EggplantState, EggplantState, bool>> LeafDropSfxEffectConditionFor = (leavesDropped) => (beforeState, afterState) => afterState.LeavesDropped && !beforeState.LeavesDropped;
-	private static readonly Func<int, Action<Vector2, Vector2>> LeafDropSfxEffectFor =
-		(leavesDropped) =>
-		(inputWorldPosition, cropPosition) =>
+	private static readonly Func<EggplantState, EggplantState, bool> LeftLeafDropSfxEffectCondition = (beforeState, afterState) => afterState.LeavesDropped && !beforeState.LeavesDropped;
+	private static readonly Action<Vector2, Vector2> LeftLeafDropSfxEffect =
+		(_, cropPosition) =>
 		{
-			SoundManager.Instance.PlaySfx($"SFX_T_eggplant_leaf_{leavesDropped}", SoundManager.Instance.eggPlantLeafDropVolume);
-			if (leavesDropped == 1)
-			{
-				EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilDustL", cropPosition);
-			}
-			else
-			{
-				EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilDustR", cropPosition);
-			}
+			SoundManager.Instance.PlaySfx($"SFX_T_eggplant_leaf_1", SoundManager.Instance.eggPlantLeafDropVolume); 
+			EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilDustL", cropPosition);
 		};
 
+	private static readonly Func<EggplantState, EggplantState, bool> GrowthEffect_1_Condition = (beforeState, afterState) => afterState.GrowthSeconds >= Stage1_GrowthSeconds && beforeState.GrowthSeconds < Stage1_GrowthSeconds;
+	private static readonly Action<Vector2, Vector2> GrowthEffect_1 = (_, cropWorldPosition) => EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilDust", cropWorldPosition);
+	
+	private static readonly Func<EggplantState, EggplantState, bool> GrowthEffect_2_Condition = (beforeState, afterState) => afterState.GrowthSeconds >= Stage1_GrowthSeconds + Stage2_GrowthSeconds && beforeState.GrowthSeconds < Stage1_GrowthSeconds + Stage2_GrowthSeconds;
+	private static readonly Action<Vector2, Vector2> GrowthEffect_2 = (_, cropWorldPosition) => EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilParticle", cropWorldPosition);
+	
+	private static readonly Func<EggplantState, EggplantState, bool> MatureEffectCondition = (beforeState, afterState) => afterState.GrowthSeconds >= Stage1_GrowthSeconds + Stage2_GrowthSeconds + Stage4_GrowthSeconds && beforeState.GrowthSeconds < Stage1_GrowthSeconds + Stage2_GrowthSeconds +Stage4_GrowthSeconds;
+	private static readonly Action<Vector2, Vector2> MatureEffect = (_, cropWorldPosition) => EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilDustR", cropWorldPosition);
 
-	private static List<(Func<EggplantState, EggplantState, bool>, Action<Vector2, Vector2>)> Effects = new List<(Func<EggplantState, EggplantState, bool>, Action<Vector2, Vector2>)>
+	private static List<(Func<EggplantState, EggplantState, bool>, Action<Vector2, Vector2>)> Effects = new()
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
 		(HarvestEffectCondition, HarvestEffect_SoilParticle),
 		(TapEffectCondition, TapEffect),
 		(TrellisEffectCondition, TrellisEffect),
-		(LeafDropSfxEffectConditionFor(1), LeafDropSfxEffectFor(1)),
-		(LeafDropSfxEffectConditionFor(2), LeafDropSfxEffectFor(2)),
+		(LeftLeafDropSfxEffectCondition, LeftLeafDropSfxEffect),
+		(GrowthEffect_1_Condition, GrowthEffect_1),
+		(GrowthEffect_2_Condition, GrowthEffect_2),
+		(MatureEffectCondition, MatureEffect),
 	};
 
 	private static EggplantState DropLeafIfDoubleTap(EggplantState beforeState)

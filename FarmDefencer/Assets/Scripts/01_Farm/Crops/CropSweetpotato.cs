@@ -235,6 +235,12 @@ public sealed class CropSweetpotato : Crop
 
 		_ => (_) => { }
 	};
+	
+	private static readonly Func<SweetpotatoState, SweetpotatoState, bool> GrowthEffect_1_3_Condition = (beforeState, afterState) => afterState.GrowthSeconds >= Stage1_GrowthSeconds && beforeState.GrowthSeconds < Stage1_GrowthSeconds || afterState.GrowthSeconds >= Stage1_GrowthSeconds + Stage2_GrowthSeconds + Stage3_GrowthSeconds && beforeState.GrowthSeconds < Stage1_GrowthSeconds + Stage2_GrowthSeconds + Stage3_GrowthSeconds;
+	private static readonly Action<Vector2, Vector2> GrowthEffect_1_3 = (_, cropWorldPosition) => EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilDust", cropWorldPosition);
+	
+	private static readonly Func<SweetpotatoState, SweetpotatoState, bool> GrowthEffect_2_4_Condition = (beforeState, afterState) => afterState.GrowthSeconds >= Stage1_GrowthSeconds + Stage2_GrowthSeconds && beforeState.GrowthSeconds < Stage1_GrowthSeconds + Stage2_GrowthSeconds || afterState.GrowthSeconds >= Stage1_GrowthSeconds + Stage2_GrowthSeconds + Stage3_GrowthSeconds + Stage4_GrowthSeconds && beforeState.GrowthSeconds < Stage1_GrowthSeconds + Stage2_GrowthSeconds + Stage3_GrowthSeconds + Stage4_GrowthSeconds;
+	private static readonly Action<Vector2, Vector2> GrowthEffect_2_4 = (_, cropWorldPosition) => EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilParticle", cropWorldPosition);
 
 	private static readonly Func<SweetpotatoState, SweetpotatoState, bool> HoldEffectCondition = (beforeState, afterState) => afterState.HoldingTime > beforeState.HoldingTime;
 	private static readonly Action<Vector2, Vector2> HoldEffect = (inputWorldPosition, cropPosition) =>
@@ -262,7 +268,7 @@ public sealed class CropSweetpotato : Crop
 		SoundManager.Instance.PlaySfx("SFX_T_sweet_vinyl", SoundManager.Instance.SweetPotatoVinylVolume);
 	};
 
-	private static readonly Func<SweetpotatoState, SweetpotatoState, bool> SweetpotatoHarvestEffectCondition = (beforeState, afterState) => afterState.TapCount == 2 && beforeState.TapCount != 2;
+	private static readonly Func<SweetpotatoState, SweetpotatoState, bool> SweetpotatoHarvestEffectCondition = (beforeState, afterState) => afterState.TapCount == 1 && beforeState.TapCount < 1;
 	private static readonly Action<Vector2, Vector2> SweetpotatoHarvestEffect = (_, cropPosition) => EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilDust", cropPosition);
 
 	private static readonly List<(Func<SweetpotatoState, SweetpotatoState, bool>, Action<Vector2, Vector2>)> Effects = new()
@@ -274,6 +280,8 @@ public sealed class CropSweetpotato : Crop
 		(HoldStopEffectCondition, HoldStopEffect),
 		(TapEffectCondition, TapEffect),
 		(SweetpotatoHarvestEffectCondition, SweetpotatoHarvestEffect),
+		(GrowthEffect_1_3_Condition, GrowthEffect_1_3),
+		(GrowthEffect_2_4_Condition, GrowthEffect_2_4),
 	};
 
 	/// <summary>

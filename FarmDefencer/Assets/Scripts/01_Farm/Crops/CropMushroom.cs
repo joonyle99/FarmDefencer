@@ -11,6 +11,12 @@ using Newtonsoft.Json.Linq;
 /// </summary>
 public sealed class CropMushroom : Crop
 {
+	private enum InoculationState
+	{
+		ShouldPlaceInjector,
+		BeforeInoculation,
+		AfterInoculation
+	}
 	[Serializable]
 	private struct MushroomState : ICommonCropState
 	{
@@ -19,10 +25,10 @@ public sealed class CropMushroom : Crop
 		public float GrowthSeconds { get; set; }
 		public bool Watered { get; set; }
 		public bool Harvested { get; set; }
-		public float LastSingleTapTime { get; set; }
-		public int TapCount { get; set; }
-		public bool Inoculated { get; set; }
 		public float HoldingTime { get; set; }
+		public int TapCount { get; set; }
+		public float LastSingleTapTime { get; set; }
+		public InoculationState InoculationState { get; set; }
 		public bool IsPoisonous { get; set; }
 		public float DecayRatio { get; set; }
 	}
@@ -39,6 +45,7 @@ public sealed class CropMushroom : Crop
 		Stage2_Dead,
 		Stage2_Growing,
 
+		Stage3,
 		Stage3_BeforeInoculation,
 		Stage3_AfterInoculation,
 
@@ -62,8 +69,7 @@ public sealed class CropMushroom : Crop
 	[SerializeField] private Sprite stage2_deadSprite;
 	[SerializeField] private Sprite stage2_growingSprite;
 	[Space]
-	[SerializeField] private Sprite stage3_beforeInoculationSprite;
-	[SerializeField] private Sprite stage3_afterInoculationSprite;
+	[SerializeField] private Sprite stage3_sprite;
 	[Space]
 	[SerializeField] private Sprite mature_normalSprite;
 	[SerializeField] private Sprite mature_poisonousSprite;
@@ -244,8 +250,9 @@ public sealed class CropMushroom : Crop
 		{ Harvested: true } => MushroomStage.Harvested,
 		{ GrowthSeconds: >= Stage1_GrowthSeconds + Stage2_GrowthSeconds + Stage3_GrowthSeconds } => MushroomStage.Mature,
 
-		{ GrowthSeconds: >= Stage1_GrowthSeconds + Stage2_GrowthSeconds, Inoculated: true } => MushroomStage.Stage3_AfterInoculation,
-		{ GrowthSeconds: >= Stage1_GrowthSeconds + Stage2_GrowthSeconds } => MushroomStage.Stage3_BeforeInoculation,
+		{ GrowthSeconds: >= Stage1_GrowthSeconds + Stage2_GrowthSeconds, InoculationState: InoculationState.ShouldPlaceInjector } => MushroomStage.Stage3,
+		{ GrowthSeconds: >= Stage1_GrowthSeconds + Stage2_GrowthSeconds, InoculationState: InoculationState.BeforeInoculation } => MushroomStage.Stage3_BeforeInoculation,
+		{ GrowthSeconds: >= Stage1_GrowthSeconds + Stage2_GrowthSeconds } => MushroomStage.Stage3_AfterInoculation,
 
 		{ GrowthSeconds: >= Stage1_GrowthSeconds, WaterWaitingSeconds: >= WaterWaitingDeadSeconds + WaterWaitingResetSeconds } => MushroomStage.Unplowed,
 		{ GrowthSeconds: >= Stage1_GrowthSeconds, WaterWaitingSeconds: >= WaterWaitingDeadSeconds } => MushroomStage.Stage2_Dead,
@@ -271,8 +278,7 @@ public sealed class CropMushroom : Crop
 		MushroomStage.Stage2_BeforeWater => (spriteRenderer) => ApplySprite(stage2_beforeWaterSprite, spriteRenderer),
 		MushroomStage.Stage2_Growing => (spriteRenderer) => ApplySprite(stage2_growingSprite, spriteRenderer),
 
-		MushroomStage.Stage3_BeforeInoculation => (spriteRenderer) => ApplySprite(stage3_beforeInoculationSprite, spriteRenderer),
-		MushroomStage.Stage3_AfterInoculation => (spriteRenderer) => ApplySprite(stage3_afterInoculationSprite, spriteRenderer),
+		MushroomStage.Stage3 or MushroomStage.Stage3_AfterInoculation or MushroomStage.Stage3_BeforeInoculation => (spriteRenderer) => ApplySprite(stage3_sprite, spriteRenderer),
 
 		MushroomStage.Mature => (spriteRenderer) => ApplySprite(null, spriteRenderer),
 
@@ -325,6 +331,12 @@ public sealed class CropMushroom : Crop
 	{
 		EffectPlayer.SceneGlobalInstance.StopVfx();
 	};
+	
+	private static readonly Func<MushroomState, MushroomState, bool> Growth1_Mature_PlaceInjector_EffectCondition = (beforeState, afterState) => afterState.GrowthSeconds >= Stage1_GrowthSeconds && beforeState.GrowthSeconds < Stage1_GrowthSeconds || afterState.GrowthSeconds >= Stage1_GrowthSeconds + Stage2_GrowthSeconds + Stage3_GrowthSeconds && beforeState.GrowthSeconds < Stage1_GrowthSeconds + Stage2_GrowthSeconds + Stage3_GrowthSeconds || afterState.InoculationState == InoculationState.BeforeInoculation && beforeState.InoculationState == InoculationState.ShouldPlaceInjector;
+	private static readonly Action<Vector2, Vector2> Growth1_Mature_PlaceInjector_Effect = (_, cropWorldPosition) => EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilParticle", cropWorldPosition);
+	
+	private static readonly Func<MushroomState, MushroomState, bool> Growth2_Inoculation_EffectCondition = (beforeState, afterState) => afterState.GrowthSeconds >= Stage1_GrowthSeconds + Stage2_GrowthSeconds && beforeState.GrowthSeconds < Stage1_GrowthSeconds + Stage2_GrowthSeconds || afterState.InoculationState == InoculationState.AfterInoculation && beforeState.InoculationState == InoculationState.BeforeInoculation;
+	private static readonly Action<Vector2, Vector2> Growth2_Inoculation_Effect = (_, cropWorldPosition) => EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilDust", cropWorldPosition);
 
 	private static readonly List<(Func<MushroomState, MushroomState, bool>, Action<Vector2, Vector2>)> Effects = new()
 	{
@@ -338,6 +350,8 @@ public sealed class CropMushroom : Crop
 		(StopShotSfxEffectCondition, StopShotSfxEffect),
 		(ShotDoneEffectCondition, ShotDoneEffect),
 		(MushroomHarvestEffectCondition, MushroomHarvestEffect),
+		(Growth1_Mature_PlaceInjector_EffectCondition, Growth1_Mature_PlaceInjector_Effect),
+		(Growth2_Inoculation_EffectCondition, Growth2_Inoculation_Effect),
 	};
 
 	private static readonly Func<MushroomState, MushroomState> HarvestOnTripleTap =
@@ -376,10 +390,10 @@ public sealed class CropMushroom : Crop
 
 		if (nextState.HoldingTime >= InoculationHoldingTime)
 		{
-			nextState.Inoculated = true;
+			nextState.InoculationState = InoculationState.AfterInoculation;
 		}
 
-		if (isEnd || nextState.Inoculated)
+		if (isEnd || nextState.InoculationState == InoculationState.AfterInoculation)
 		{
 			nextState.HoldingTime = 0.0f;
 		}
@@ -437,6 +451,7 @@ public sealed class CropMushroom : Crop
 		{MushroomStage.Stage2_Dead, WaitWater },
 		{MushroomStage.Stage2_Growing, Grow },
 
+		{MushroomStage.Stage3, DoNothing_OnFarmUpdate },
 		{MushroomStage.Stage3_BeforeInoculation, DoNothing_OnFarmUpdate },
 		{
 			MushroomStage.Stage3_AfterInoculation,
@@ -470,6 +485,15 @@ public sealed class CropMushroom : Crop
 		{MushroomStage.Stage2_Dead, DoNothing },
 		{MushroomStage.Stage2_Growing, DoNothing },
 
+		{
+			MushroomStage.Stage3,
+			beforeState =>
+			{
+				var nextState = beforeState;
+				nextState.InoculationState = InoculationState.BeforeInoculation;
+				return nextState;
+			}
+		},
 		{MushroomStage.Stage3_BeforeInoculation, DoNothing },
 		{MushroomStage.Stage3_AfterInoculation, DoNothing },
 
@@ -489,6 +513,7 @@ public sealed class CropMushroom : Crop
 		{MushroomStage.Stage2_Dead, Water },
 		{MushroomStage.Stage2_Growing, DoNothing },
 
+		{MushroomStage.Stage3, DoNothing },
 		{MushroomStage.Stage3_BeforeInoculation, DoNothing },
 		{MushroomStage.Stage3_AfterInoculation, DoNothing },
 
@@ -508,6 +533,7 @@ public sealed class CropMushroom : Crop
 		{MushroomStage.Stage2_Dead, DoNothing_OnHold },
 		{MushroomStage.Stage2_Growing, DoNothing_OnHold },
 
+		{MushroomStage.Stage3, DoNothing_OnHold },
 		{MushroomStage.Stage3_BeforeInoculation, Inoculate },
 		{MushroomStage.Stage3_AfterInoculation, DoNothing_OnHold },
 

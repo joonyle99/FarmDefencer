@@ -191,11 +191,16 @@ public sealed class CropCarrot : Crop
 		CarrotStage.Harvested when _spriteRenderer.sprite != harvestedSprite => (spriteRenderer) => spriteRenderer.sprite = harvestedSprite,
 		_ => (_) => { }
 	};
+	
+	private static readonly Func<CarrotState, CarrotState, bool> MatureEffectCondition = (beforeState, afterState) => afterState.GrowthSeconds >= MatureSeconds && beforeState.GrowthSeconds < MatureSeconds;
+        
+	private static readonly Action<Vector2, Vector2> MatureEffect = (_, cropWorldPosition) => EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilDust", cropWorldPosition);
 
 	private static List<(Func<CarrotState, CarrotState, bool>, Action<Vector2, Vector2>)> Effects = new()
 	{
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
-		(HarvestEffectCondition, HarvestEffect_SoilDust)
+		(HarvestEffectCondition, HarvestEffect_SoilDust),
+		(MatureEffectCondition, MatureEffect)
 	};
 }

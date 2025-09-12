@@ -320,18 +320,28 @@ public sealed class CropCucumber : Crop
 
     private static readonly Func<CucumberState, CucumberState, bool> TrellisEffectCondition =
         (beforeState, afterState) => afterState.ShortTrellisPlaced && !beforeState.ShortTrellisPlaced;
-
     private static readonly Action<Vector2, Vector2> TrellisEffect = (inputWorldPosition, cropPosition) =>
     {
         EffectPlayer.SceneGlobalInstance.PlayTapEffect(inputWorldPosition);
         EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilParticleWhite", cropPosition);
     };
 
+    private static readonly Func<CucumberState, CucumberState, bool> GrowthEffectCondition = (beforeState, afterState) => afterState.GrowthSeconds >= Stage1_GrowthSeconds + Stage2_GrowthSeconds && beforeState.GrowthSeconds < Stage1_GrowthSeconds + Stage2_GrowthSeconds || afterState.GrowthSeconds >= Stage1_GrowthSeconds && beforeState.GrowthSeconds < Stage1_GrowthSeconds;
+    private static readonly Action<Vector2, Vector2> GrowthEffect = (_, cropWorldPosition) => EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilDust", cropWorldPosition);
+
+    private static readonly Func<CucumberState, CucumberState, bool> MatureEffectCondition =
+        (beforeState, afterState) =>
+            afterState.GrowthSeconds >= Stage1_GrowthSeconds + Stage2_GrowthSeconds + Stage3_GrowthSeconds &&
+            beforeState.GrowthSeconds < Stage1_GrowthSeconds + Stage2_GrowthSeconds + Stage3_GrowthSeconds;
+    private static readonly Action<Vector2, Vector2> MatureEffect = (_, cropWorldPosition) => EffectPlayer.SceneGlobalInstance.PlayVfx("VFX_T_SoilParticle", cropWorldPosition);
+    
     private static List<(Func<CucumberState, CucumberState, bool>, Action<Vector2, Vector2>)> Effects = new()
     {
         (WaterEffectCondition, WaterEffect),
         (PlantEffectCondition, PlantEffect),
         (HarvestEffectCondition, HarvestEffect_SoilDust),
         (TrellisEffectCondition, TrellisEffect),
+        (GrowthEffectCondition, GrowthEffect),
+        (MatureEffectCondition, MatureEffect),
     };
 }
