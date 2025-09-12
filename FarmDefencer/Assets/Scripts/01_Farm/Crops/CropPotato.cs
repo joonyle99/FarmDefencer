@@ -152,8 +152,8 @@ public sealed class CropPotato : Crop
 		{PotatoStage.BeforeWater, WaitWater },
 		{PotatoStage.Dead, WaitWater },
 		{PotatoStage.Growing, Grow },
-		{PotatoStage.Mature, DoNothing_OnFarmUpdate },
-		{PotatoStage.Harvested, Decay },
+		{PotatoStage.Mature, Decay },
+		{PotatoStage.Harvested, DoNothing_OnFarmUpdate },
 	};
 
 	private static readonly Dictionary<PotatoStage, Func<PotatoState, PotatoState>> OnTapFunctions = new()

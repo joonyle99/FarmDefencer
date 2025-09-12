@@ -105,7 +105,7 @@ public sealed class CropMushroom : Crop
 	protected override int HarvestableCount => _currentState is { Harvested: true, IsPoisonous: false } ? 100 : 0;
 	
 	public override float? GaugeRatio =>
-		GetCurrentStage(_currentState) is MushroomStage.Mature or MushroomStage.Harvested
+		GetCurrentStage(_currentState) is MushroomStage.Mature or MushroomStage.Harvested && !_currentState.IsPoisonous
 			? 1.0f - _currentState.DecayRatio
 			: null;
 
@@ -468,7 +468,7 @@ public sealed class CropMushroom : Crop
 			}
 		},
 
-		{MushroomStage.Mature, DoNothing_OnFarmUpdate },
+		{MushroomStage.Mature, Decay },
 		{MushroomStage.Harvested, DoNothing_OnFarmUpdate },
 
 	};
