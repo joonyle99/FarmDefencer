@@ -1,0 +1,1404 @@
+fileFormatVersion: 2
+guid: 864efea937d3ceb41834906c8569efc2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4480862509019863767
+    second: monster_snale_0
+  - first:
+      213: -5090839412384860182
+    second: monster_snale_1
+  - first:
+      213: -900216103227598122
+    second: monster_snale_2
+  - first:
+      213: -1147042587646973311
+    second: monster_snale_3
+  - first:
+      213: -1730428288920814498
+    second: monster_snale_4
+  - first:
+      213: -6504412901881038916
+    second: monster_snale_5
+  - first:
+      213: 5849629048855834262
+    second: monster_snale_6
+  - first:
+      213: 8731383217534024830
+    second: monster_snale_7
+  - first:
+      213: -2944247960072787926
+    second: monster_snale_8
+  - first:
+      213: -2253121860697081839
+    second: monster_snale_9
+  - first:
+      213: 5859836915377318104
+    second: monster_snale_10
+  - first:
+      213: 8834284622625731220
+    second: monster_snale_11
+  - first:
+      213: -4021756315557179380
+    second: monster_snale_12
+  - first:
+      213: -1064207505558464280
+    second: monster_snale_13
+  - first:
+      213: 3358398040700094475
+    second: monster_snale_14
+  - first:
+      213: -316621045046784448
+    second: monster_snale_15
+  - first:
+      213: 8134770832833953052
+    second: monster_snale_16
+  - first:
+      213: 8896728568537186483
+    second: monster_snale_17
+  - first:
+      213: 7101719858037020557
+    second: monster_snale_18
+  - first:
+      213: -7328518998878120828
+    second: monster_snale_19
+  - first:
+      213: 2854232503461929393
+    second: monster_snale_20
+  - first:
+      213: -7129792976366356130
+    second: monster_snale_21
+  - first:
+      213: 9025130812184917746
+    second: monster_snale_22
+  - first:
+      213: -7677466835466437934
+    second: monster_snale_23
+  - first:
+      213: -3071638316146290145
+    second: monster_snale_24
+  - first:
+      213: 4759055542623906613
+    second: monster_snale_25
+  - first:
+      213: -5558569700173849962
+    second: monster_snale_26
+  - first:
+      213: -8308802792320047524
+    second: monster_snale_27
+  - first:
+      213: -8560113213680016895
+    second: monster_snale_28
+  - first:
+      213: -3177123439833264752
+    second: monster_snale_29
+  - first:
+      213: 2628986903689707108
+    second: monster_snale_30
+  - first:
+      213: -7142534026749515570
+    second: monster_snale_31
+  - first:
+      213: -6599435238397064107
+    second: monster_snale_32
+  - first:
+      213: -5617492875084200367
+    second: monster_snale_33
+  - first:
+      213: -3099248174250990543
+    second: monster_snale_34
+  - first:
+      213: 2249554426351816170
+    second: monster_snale_35
+  - first:
+      213: -8755101245633654640
+    second: monster_snale_36
+  - first:
+      213: 755885682920611876
+    second: monster_snale_37
+  - first:
+      213: -7088924934076747772
+    second: monster_snale_38
+  - first:
+      213: 8492956579261026922
+    second: monster_snale_39
+  - first:
+      213: 4728785553317234878
+    second: monster_snale_40
+  - first:
+      213: -1797669710337934278
+    second: monster_snale_41
+  - first:
+      213: -7117266466306974692
+    second: monster_snale_42
+  - first:
+      213: -5257051257469260495
+    second: monster_snale_43
+  - first:
+      213: 5596748244233498452
+    second: monster_snale_44
+  - first:
+      213: -1685725970822992459
+    second: monster_snale_45
+  - first:
+      213: -8497989979020926812
+    second: monster_snale_46
+  - first:
+      213: 7027060575785814196
+    second: monster_snale_47
+  - first:
+      213: 1248626847456749882
+    second: monster_snale_48
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: monster_snale_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 440
+        width: 129
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9256186e947c0d1c0800000000000000
+      internalID: -4480862509019863767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_1
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 422
+        width: 59
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae7fd30e684b959b0800000000000000
+      internalID: -5090839412384860182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_2
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 422
+        width: 103
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6da5802493ac183f0800000000000000
+      internalID: -900216103227598122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_3
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 422
+        width: 92
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18aae0508d2e410f0800000000000000
+      internalID: -1147042587646973311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_4
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 406
+        width: 73
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5c7691b3a84cf7e0800000000000000
+      internalID: -1730428288920814498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_5
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 393
+        width: 68
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb7b9e67deeabb5a0800000000000000
+      internalID: -6504412901881038916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_6
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 487
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69eabd490ae0e2150800000000000000
+      internalID: 5849629048855834262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_7
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 393
+        width: 68
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7c3ce686ca1c2970800000000000000
+      internalID: 8731383217534024830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_8
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 486
+        width: 26
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a286131641ee327d0800000000000000
+      internalID: -2944247960072787926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_9
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 486
+        width: 26
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 118bb71fa9d4bb0e0800000000000000
+      internalID: -2253121860697081839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_10
+      rect:
+        serializedVersion: 2
+        x: 674
+        y: 459
+        width: 43
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d829c6b0a2525150800000000000000
+      internalID: 5859836915377318104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_11
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 315
+        width: 119
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4927d48ee0fa99a70800000000000000
+      internalID: 8834284622625731220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_12
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 315
+        width: 119
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c00d70e60f9df28c0800000000000000
+      internalID: -4021756315557179380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_13
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 315
+        width: 119
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e812ef79ec2b31f0800000000000000
+      internalID: -1064207505558464280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_14
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 406
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b080c46793d6b9e20800000000000000
+      internalID: 3358398040700094475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_15
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 420
+        width: 81
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04ec29946d22b9bf0800000000000000
+      internalID: -316621045046784448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_16
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 369
+        width: 88
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1db64cf8f284e070800000000000000
+      internalID: 8134770832833953052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_17
+      rect:
+        serializedVersion: 2
+        x: 674
+        y: 420
+        width: 55
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b08ab60f77877b70800000000000000
+      internalID: 8896728568537186483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_18
+      rect:
+        serializedVersion: 2
+        x: 683
+        y: 369
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8752a895906e8260800000000000000
+      internalID: 7101719858037020557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_19
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 290
+        width: 96
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4841b267ccedb4a90800000000000000
+      internalID: -7328518998878120828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_20
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 290
+        width: 85
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b1e83be6554c9720800000000000000
+      internalID: 2854232503461929393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_21
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 290
+        width: 56
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e59bb913013ed0d90800000000000000
+      internalID: -7129792976366356130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_22
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 297
+        width: 106
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f6f6bf08a4bf3d70800000000000000
+      internalID: 9025130812184917746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_23
+      rect:
+        serializedVersion: 2
+        x: 701
+        y: 302
+        width: 69
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2da3e211798247590800000000000000
+      internalID: -7677466835466437934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_24
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 368
+        width: 44
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f121f97c9395f55d0800000000000000
+      internalID: -3071638316146290145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_25
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 358
+        width: 41
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53ba37c2dcf8b0240800000000000000
+      internalID: 4759055542623906613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_26
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 347
+        height: 314
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69a53e9ee4efbd2b0800000000000000
+      internalID: -5558569700173849962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_27
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 304
+        width: 55
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c566dfed1e331bc80800000000000000
+      internalID: -8308802792320047524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_28
+      rect:
+        serializedVersion: 2
+        x: 771
+        y: 271
+        width: 57
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 102a975b26e543980800000000000000
+      internalID: -8560113213680016895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_29
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 88
+        width: 245
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09dcb29801798e3d0800000000000000
+      internalID: -3177123439833264752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_30
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 212
+        width: 117
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46e3491f8a90c7420800000000000000
+      internalID: 2628986903689707108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_31
+      rect:
+        serializedVersion: 2
+        x: 713
+        y: 235
+        width: 57
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec8647b352f90ec90800000000000000
+      internalID: -7142534026749515570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_32
+      rect:
+        serializedVersion: 2
+        x: 771
+        y: 203
+        width: 62
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55cc521bd981a64a0800000000000000
+      internalID: -6599435238397064107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_33
+      rect:
+        serializedVersion: 2
+        x: 833
+        y: 213
+        width: 61
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 156815c2ef7aa02b0800000000000000
+      internalID: -5617492875084200367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_34
+      rect:
+        serializedVersion: 2
+        x: 894
+        y: 220
+        width: 56
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 134edfeb4324df4d0800000000000000
+      internalID: -3099248174250990543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_35
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 87
+        width: 119
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aed8b9505d5083f10800000000000000
+      internalID: 2249554426351816170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_36
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 171
+        width: 42
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0901d69bdc1af7680800000000000000
+      internalID: -8755101245633654640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_37
+      rect:
+        serializedVersion: 2
+        x: 756
+        y: 156
+        width: 82
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 420694516027d7a00800000000000000
+      internalID: 755885682920611876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_38
+      rect:
+        serializedVersion: 2
+        x: 838
+        y: 158
+        width: 72
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40032f8c4541f9d90800000000000000
+      internalID: -7088924934076747772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_39
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 166
+        width: 55
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a629bafd20b0dd570800000000000000
+      internalID: 8492956579261026922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_40
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 166
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb80974186500a140800000000000000
+      internalID: 4728785553317234878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_41
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 88
+        width: 40
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3cf3d34ce46d07e0800000000000000
+      internalID: -1797669710337934278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_42
+      rect:
+        serializedVersion: 2
+        x: 756
+        y: 93
+        width: 96
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1c19f79bd36a3d90800000000000000
+      internalID: -7117266466306974692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_43
+      rect:
+        serializedVersion: 2
+        x: 852
+        y: 97
+        width: 81
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13d26800cb33b07b0800000000000000
+      internalID: -5257051257469260495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_44
+      rect:
+        serializedVersion: 2
+        x: 881
+        y: 1
+        width: 119
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45f24d210e4abad40800000000000000
+      internalID: 5596748244233498452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_45
+      rect:
+        serializedVersion: 2
+        x: 933
+        y: 97
+        width: 79
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bde17039291b98e0800000000000000
+      internalID: -1685725970822992459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_46
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 2
+        width: 410
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a0e0ab6323111a80800000000000000
+      internalID: -8497989979020926812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_47
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 1
+        width: 121
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b88ddadc52258160800000000000000
+      internalID: 7027060575785814196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster_snale_48
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 1
+        width: 17
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a39eca39083045110800000000000000
+      internalID: 1248626847456749882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      monster_snale_0: -4480862509019863767
+      monster_snale_1: -5090839412384860182
+      monster_snale_10: 5859836915377318104
+      monster_snale_11: 8834284622625731220
+      monster_snale_12: -4021756315557179380
+      monster_snale_13: -1064207505558464280
+      monster_snale_14: 3358398040700094475
+      monster_snale_15: -316621045046784448
+      monster_snale_16: 8134770832833953052
+      monster_snale_17: 8896728568537186483
+      monster_snale_18: 7101719858037020557
+      monster_snale_19: -7328518998878120828
+      monster_snale_2: -900216103227598122
+      monster_snale_20: 2854232503461929393
+      monster_snale_21: -7129792976366356130
+      monster_snale_22: 9025130812184917746
+      monster_snale_23: -7677466835466437934
+      monster_snale_24: -3071638316146290145
+      monster_snale_25: 4759055542623906613
+      monster_snale_26: -5558569700173849962
+      monster_snale_27: -8308802792320047524
+      monster_snale_28: -8560113213680016895
+      monster_snale_29: -3177123439833264752
+      monster_snale_3: -1147042587646973311
+      monster_snale_30: 2628986903689707108
+      monster_snale_31: -7142534026749515570
+      monster_snale_32: -6599435238397064107
+      monster_snale_33: -5617492875084200367
+      monster_snale_34: -3099248174250990543
+      monster_snale_35: 2249554426351816170
+      monster_snale_36: -8755101245633654640
+      monster_snale_37: 755885682920611876
+      monster_snale_38: -7088924934076747772
+      monster_snale_39: 8492956579261026922
+      monster_snale_4: -1730428288920814498
+      monster_snale_40: 4728785553317234878
+      monster_snale_41: -1797669710337934278
+      monster_snale_42: -7117266466306974692
+      monster_snale_43: -5257051257469260495
+      monster_snale_44: 5596748244233498452
+      monster_snale_45: -1685725970822992459
+      monster_snale_46: -8497989979020926812
+      monster_snale_47: 7027060575785814196
+      monster_snale_48: 1248626847456749882
+      monster_snale_5: -6504412901881038916
+      monster_snale_6: 5849629048855834262
+      monster_snale_7: 8731383217534024830
+      monster_snale_8: -2944247960072787926
+      monster_snale_9: -2253121860697081839
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
