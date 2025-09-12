@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 6d08b953d2d2a8c4eaf49eb15f38e28f
+labels:
+- Tower
 PrefabImporter:
   externalObjects: {}
   userData: 

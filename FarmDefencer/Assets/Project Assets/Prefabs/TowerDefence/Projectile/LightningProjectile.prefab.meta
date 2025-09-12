@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 3bcdcd662c3736a48a134b0cb67baa82
+labels:
+- Projectile
 PrefabImporter:
   externalObjects: {}
   userData: 
