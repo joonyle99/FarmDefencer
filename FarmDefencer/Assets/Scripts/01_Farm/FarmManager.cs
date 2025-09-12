@@ -46,7 +46,7 @@ public sealed class FarmManager : MonoBehaviour
         if (ignoreSaveFile)
         {
             // 디버그용 할당 코드 등 여기에...
-            harvestInventory.ResetAllQuotas(MapManager.Instance.MaximumUnlockedMapIndex, MapManager.Instance.MaximumUnlockedStageIndex);
+            harvestInventory.ResetAllQuotas();
         }
         else
 #endif
@@ -61,7 +61,7 @@ public sealed class FarmManager : MonoBehaviour
         {
             farmInput.FullZoomOut();
             pestGiver.ReserveRandomPestSpawn();
-            harvestInventory.ResetAllQuotas(MapManager.Instance.MaximumUnlockedMapIndex, MapManager.Instance.MaximumUnlockedStageIndex);
+            harvestInventory.ResetAllQuotas();
         }
 
         Application.wantsToQuit += SaveOnQuit;
@@ -98,6 +98,13 @@ public sealed class FarmManager : MonoBehaviour
         }
         
         ProcessBgm();
+
+        var justPassedHalfOfDaytime = farmClock.CurrentDaytime >= farmClock.LengthOfDaytime * 0.5f &&
+                                      farmClock.CurrentDaytime - Time.deltaTime < farmClock.LengthOfDaytime * 0.5f;
+        if (justPassedHalfOfDaytime)
+        {
+            harvestInventory.RaisePriceOfNeverFilledQuotas();
+        }
     }
     
     private void InitializeDependencies()
@@ -123,6 +130,7 @@ public sealed class FarmManager : MonoBehaviour
 
         farm.Init(
             () => pestGiver.IsPestRunning,
+            productEntry => harvestInventory.GetPriceOf(productEntry.ProductName),
             productName => harvestInventory.IsProductAvailable(productName, MapManager.Instance.MaximumUnlockedMapIndex, MapManager.Instance.MaximumUnlockedStageIndex),
             cropWorldPosition =>
             {

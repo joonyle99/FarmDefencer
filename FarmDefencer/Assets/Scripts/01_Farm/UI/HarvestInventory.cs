@@ -91,6 +91,13 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
         }
     }
 
+    public (int, int) GetPriceOf(string productName)
+    {
+        var harvestBox = _harvestBoxes.Values.FirstOrDefault(box => box.IsAvailable && box.ProductEntry.ProductName == productName);
+        return harvestBox is null ? (0, 0) : harvestBox.Price;
+    }
+        
+
     public bool IsProductAvailable(string productName, int currentMapId, int currentStageId) => cropUnlockRule.IsCropUnlocked(productName, currentMapId, currentStageId);
 
     /// <summary>
@@ -118,11 +125,22 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
         StartCoroutine(CoSellProduct(harvestBox, cropWorldPosition, count, currentMapId, currentStageId, earnGold, playScreenHarvestAnimation, goldEarnEffect));
     }
 
-    public void ResetAllQuotas(int currentMapId, int currentStageId)
+    public void RaisePriceOfNeverFilledQuotas()
     {
-        foreach (var harvestBox in _harvestBoxes.Values)
+        foreach (var harvestBox in _harvestBoxes.Values.Where(box => box.IsAvailable))
         {
-            harvestBox.AssignQuota();
+            harvestBox.RaisePriceIfNeverFilled();
+        }
+    }
+    
+    /// <summary>
+    /// 낮 시작(0.0초) 에 호출될 것으로 기대되는 메소드.
+    /// </summary>
+    public void ResetAllQuotas()
+    {
+        foreach (var harvestBox in _harvestBoxes.Values.Where(box => box.IsAvailable))
+        {
+            harvestBox.ResetQuota();
         }
         
         _hotSpecialTurn = specialProductTurnInterval - 1; // 핫 스페셜 배정 시 0부터 시작하도록
@@ -131,7 +149,7 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
 
     private void SelectHotSpecialIfNeeded()
     {
-        if (_harvestBoxes.Values.Any(box => box.HotSpacialState != HotSpacialState.None))
+        if (_harvestBoxes.Values.Where(box => box.IsAvailable).Any(box => box.HotSpacialState != HotSpacialState.None))
         {
             return;
         }
@@ -142,7 +160,7 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
         var quotaSum = _harvestBoxes.Values.Sum(box => box.Quota);
         var random = Random.Range(0, quotaSum);
         
-        foreach (var box in _harvestBoxes.Values)
+        foreach (var box in _harvestBoxes.Values.Where(box => box.IsAvailable))
         {
             random -= box.Quota;
             if (random >= 0)
@@ -152,6 +170,20 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
         
             box.HotSpacialState = isSpecialTurn ? HotSpacialState.Special : HotSpacialState.Hot;
             break;
+        }
+    }
+
+    private void ResetCyclesIfNeeded()
+    {
+        if (_harvestBoxes.Values.Where(box => box.IsAvailable).Any(box => box.Cycle == 0))
+        {
+            return;
+        }
+        
+
+        foreach (var harvestBox in _harvestBoxes.Values.Where(box => box.IsAvailable))
+        {
+            harvestBox.ResetCycle();
         }
     }
 
@@ -202,6 +234,7 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
             if (reAssigned)
             {
                 SelectHotSpecialIfNeeded();
+                ResetCyclesIfNeeded();
             }
             count -= 1;
 

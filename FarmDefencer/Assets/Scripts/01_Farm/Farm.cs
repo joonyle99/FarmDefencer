@@ -170,6 +170,7 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFarm
 
     public void Init(
         Func<bool> isPestRunning,
+        Func<ProductEntry, (int, int)> getPrice,
         Func<string, bool> isFieldAvailable,
         Action<Vector2> onPlanted,
         Action<ProductEntry, Vector2, int> onSold,
@@ -180,6 +181,7 @@ public sealed class Farm : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFarm
             {
                 field.IsAvailable = isFieldAvailable(field.ProductEntry.ProductName);
                 field.Init(isPestRunning, 
+                    getPrice,
                     onPlanted,
                     (cropWorldPosition, count) => onSold(field.ProductEntry, cropWorldPosition, count), 
                     onSignClicked,

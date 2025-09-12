@@ -13,6 +13,13 @@ public enum HotSpacialState
 
 public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 {
+	private enum QuotaCycleState
+	{
+		NeverHarvested,
+		Normal,
+		PriceRaised,
+	}
+	
 	[SerializeField] private ProductEntry productEntry;
 	public ProductEntry ProductEntry => productEntry;
 	
@@ -22,12 +29,6 @@ public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 		get => _quota;
 		private set
 		{
-			if (_quota <= 0 && value > 0)
-			{
-				SoundManager.Instance.PlaySfx("SFX_T_order_reset", SoundManager.Instance.orderResetVolume);
-				Blink();
-			}
-
 			_quota = value;
 			_cropQuotaText.text = _quota.ToString();
 		}
@@ -46,7 +47,6 @@ public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 		}
 	}
 	
-	private float _blinkDuration;
 	private Image _hotImage;
 	private Image _specialImage;
 	private Image _boxImage;
@@ -54,22 +54,42 @@ public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 	private Image _lockImage;
 	private Image _blinkImage;
 	private TMP_Text _cropQuotaText;
+	
+	public bool IsAvailable { get; private set; }
+	
+	private float _blinkDuration;
 	private (int, int) _quotaRange;
 	private int _specialBonus;
-	
-	private int Cycle { get; set; } // 최소 -1
+	private QuotaCycleState _cycleState;
+	public int Cycle { get; private set; }
 
+	/// <summary>
+	/// (originalPrice, currentPrice)
+	/// </summary>
+	public (int, int) Price
+	{
+		get
+		{
+			var originalPrice = productEntry.Price;
+			var currentPrice = Mathf.RoundToInt(_cycleState == QuotaCycleState.PriceRaised ? originalPrice * 1.2f : originalPrice * Mathf.Pow(0.8f, Cycle));
+
+			return (originalPrice, currentPrice);
+		}
+	}
+	
 	public JObject Serialize()
 	{
 		var json = new JObject();
 		json["Quota"] = _quota;
 		json["HotSpacialState"] = (int)_hotSpacialState;
 		json["Cycle"] = Cycle;
+		json["CycleState"] = (int)_cycleState;
 		return json;
 	}
 
 	public void Deserialize(JObject json)
 	{
+		_cycleState = (QuotaCycleState)(json["CycleState"]?.Value<int>() ?? 0);
 		Cycle = json["Cycle"]?.Value<int>() ?? 0;
 		HotSpacialState = (HotSpacialState)(json["HotSpacialState"]?.Value<int>() ?? 0);
 		Quota = json["Quota"]?.Value<int>() ?? 0;
@@ -90,6 +110,8 @@ public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 		_specialImage.enabled = false;
 		_quotaRange = (minQuota, maxQuota);
 		_specialBonus = specialBonus;
+		
+		IsAvailable = isAvailable;
 	}
 
 	/// <summary>
@@ -100,6 +122,11 @@ public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 	{
 		Quota -= 1;
 		price = productEntry.Price;
+		if (_cycleState == QuotaCycleState.PriceRaised)
+		{
+			price = Mathf.RoundToInt(price * 1.2f);
+		}
+		
 		if (HotSpacialState == HotSpacialState.Hot)
 		{
 			price *= 2;
@@ -115,11 +142,43 @@ public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 			AssignQuota();
 		}
 	}
+
+	public void ResetCycle()
+	{
+		Cycle = 0;
+	}
+
+	public void RaisePriceIfNeverFilled()
+	{
+		if (_cycleState == QuotaCycleState.NeverHarvested)
+		{
+			_cycleState = QuotaCycleState.PriceRaised;
+		}
+	}
 	
-    public void AssignQuota()
+	/// <summary>
+	/// 낮 시작할 때(0.0초) 호출될 것을 기대하는 메소드.
+	/// </summary>
+    public void ResetQuota()
     {
 	    HotSpacialState = HotSpacialState.None;
         Quota = Random.Range(_quotaRange.Item1, _quotaRange.Item2 + 1) / 10 * 10;
+        SoundManager.Instance.PlaySfx("SFX_T_order_reset", SoundManager.Instance.orderResetVolume);
+        Blink();
+        
+        Cycle = 0;
+        _cycleState = QuotaCycleState.NeverHarvested;
+    }
+    
+    private void AssignQuota()
+    {
+	    HotSpacialState = HotSpacialState.None;
+	    Quota = Random.Range(_quotaRange.Item1, _quotaRange.Item2 + 1) / 10 * 10;
+	    SoundManager.Instance.PlaySfx("SFX_T_order_reset", SoundManager.Instance.orderResetVolume);
+	    Blink();
+	    
+	    Cycle += 1;
+	    _cycleState = QuotaCycleState.Normal;
     }
 
 	private void Blink() => StartCoroutine(DoBlink());

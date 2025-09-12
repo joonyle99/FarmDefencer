@@ -242,6 +242,7 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
 
     public void Init(
         Func<bool> isPestRunning,
+        Func<ProductEntry, (int, int)> getPrice,
         Action<Vector2> onPlanted,
         Action<Vector2, int> onSold,
         Action<ProductEntry> signClickedHandler,
@@ -255,6 +256,7 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
                 count => onSold(crop.transform.position, count),
                 cropDisplayObjectToClone));
         _onCropSignClicked = () => signClickedHandler(ProductEntry);
+        _cropSign.Init(ProductEntry, () => getPrice(ProductEntry));
     }
 
     public void Reset() => Array.ForEach(_crops, crop => crop.ResetToInitialState());
@@ -310,7 +312,7 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
             }
         }
 
-        _cropSign = GetComponentInChildren<CropSign>();
+        _cropSign = transform.Find("CropSign").GetComponent<CropSign>();
 
         OnAvailabilityChanged();
     }

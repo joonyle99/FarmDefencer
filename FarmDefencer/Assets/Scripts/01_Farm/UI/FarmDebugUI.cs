@@ -20,7 +20,7 @@ public sealed class FarmDebugUI : MonoBehaviour
 		_getDaytime = getRemainingDaytime;
 		
 		_setDaytimeButton.onClick.AddListener(() => setDaytime(0.0f));
-		_setDaytime5sButton.onClick.AddListener(() => setDaytime(295.0f));
+		_setDaytime5sButton.onClick.AddListener(() => setDaytime(145.0f));
 	}
 	
 	private void Awake()

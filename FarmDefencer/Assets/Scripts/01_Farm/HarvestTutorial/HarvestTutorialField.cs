@@ -41,6 +41,7 @@ public sealed class HarvestTutorialField : MonoBehaviour
 
         _field.Init(
             () => true,
+            _ => (0, 0),
             _ => { },
             (_, _) => 
             {                
