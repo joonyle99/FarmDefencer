@@ -20,9 +20,6 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
     [SerializeField] private float harvestedProductFlyToBoxAnimationDuration = 1.0f;
     [SerializeField] private float blinkDuration = 0.5f;
 
-    [CanBeNull] public ProductEntry SpecialProduct { get; private set; }
-    [CanBeNull] public ProductEntry HotProduct { get; private set; }
-
     [SerializeField] private int specialProductTurnInterval = 4;
 
     [SerializeField] private QuotaFillingRule quotaFillingRule;
@@ -38,17 +35,7 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
     {
         var json = new JObject();
 
-        json.Add(new JProperty("Turn", _hotSpecialTurn));
-
-        if (HotProduct is not null)
-        {
-            json.Add(new JProperty("HotProduct", HotProduct.ProductName));
-        }
-
-        if (SpecialProduct is not null)
-        {
-            json.Add(new JProperty("SpecialProduct", SpecialProduct.ProductName));
-        }
+        json.Add(new JProperty("HotSpecialTurn", _hotSpecialTurn));
 
         var jsonHarvestBoxes = new JObject();
         foreach (var (productEntry, harvestBox) in _harvestBoxes)
@@ -67,27 +54,40 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
         {
             foreach (var jsonHarvestBox in jsonHarvestBoxes.Properties())
             {
-                var harvestBox = _harvestBoxes.FirstOrDefault(pair => pair.Key.ProductName.Equals(jsonHarvestBox.Name))
-                    .Value;
+                var harvestBox = _harvestBoxes.FirstOrDefault(pair => pair.Key.ProductName == jsonHarvestBox.Name).Value;
                 harvestBox.Deserialize(jsonHarvestBox.Value.Value<JObject>());
             }
         }
 
-        _hotSpecialTurn = json.Property("Turn")?.Value.Value<int>() ?? 0;
-        HotProduct = json.Property("HotProduct")?.Value.Value<string>() is string hotProductName
-            ? _getProductEntry(hotProductName)
-            : null;
-        SpecialProduct = json.Property("SpecialProduct")?.Value.Value<string>() is string specialProductName
-            ? _getProductEntry(specialProductName)
-            : null;
+        _hotSpecialTurn = json.Property("HotSpecialTurn")?.Value.Value<int>() ?? 0;
     }
 
     public void Init(Func<string, ProductEntry> getProductEntry, int maxMapIndex, int maxStageIndex)
     {
         _getProductEntry = getProductEntry;
+        var ruleForMap = quotaFillingRule.Entries.FirstOrDefault(r => r.TargetMap.MapId == maxMapIndex);
+        if (ruleForMap is null)
+        {
+            Debug.LogError($"{maxMapIndex} 에 해당하는 QuotaFillingRuleForMap을 찾을 수 없습니다.");
+            return;
+        }
+        
         foreach (var harvestBox in _harvestBoxes.Values)
         {
-            harvestBox.Init(blinkDuration, cropUnlockRule.IsCropUnlocked(harvestBox.ProductEntry.ProductName, maxMapIndex, maxStageIndex));
+            var isCropUnlocked = cropUnlockRule.IsCropUnlocked(harvestBox.ProductEntry.ProductName, maxMapIndex, maxStageIndex);
+
+            var minimum = 0;
+            var maximum = 0;
+            var specialBonusPrice = 0;
+            if (isCropUnlocked)
+            {
+                var range = ruleForMap.Entries.First(entry => entry.TargetProduct.ProductName == harvestBox.ProductEntry.ProductName).Range;
+                minimum = range.Item1;
+                maximum = range.Item2;
+                ruleForMap.SpecialProductBonusRule.TryGetBonusOf(harvestBox.ProductEntry.ProductName,
+                    out specialBonusPrice);
+            }
+            harvestBox.Init(blinkDuration, isCropUnlocked, minimum, maximum, specialBonusPrice);
         }
     }
 
@@ -101,7 +101,8 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
     /// <param name="count"></param>
     /// <param name="currentMapId"></param>
     /// <param name="currentStageId"></param>
-    /// <param name="onGolearnGolddEarned"></param>
+    /// <param name="earnGold"></param>
+    /// <param name="playScreenHarvestAnimation"></param>
     /// <param name="goldEarnEffect"></param>
     public void SellProduct(
         string productName, 
@@ -113,103 +114,50 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
         Action<ProductEntry, float, Vector2, Vector2> playScreenHarvestAnimation,
         GoldEarnEffect goldEarnEffect)
     {
-        var harvestBox = _harvestBoxes.FirstOrDefault(pair => pair.Key.ProductName.Equals(productName)).Value;
+        var harvestBox = _harvestBoxes.FirstOrDefault(pair => pair.Key.ProductName == productName).Value;
         StartCoroutine(CoSellProduct(harvestBox, cropWorldPosition, count, currentMapId, currentStageId, earnGold, playScreenHarvestAnimation, goldEarnEffect));
     }
 
-    public void AssignAllQuotas(int currentMapId, int currentStageId)
-    {
-        foreach (var productEntry in _harvestBoxes.Keys)
-        {
-            AssignQuotaOf(productEntry.ProductName, currentMapId, currentStageId);
-            _hotSpecialTurn = 0;
-        }
-    }
-
-    public void AssignIfJustUnlocked(int currentMapId, int currentStageId)
+    public void ResetAllQuotas(int currentMapId, int currentStageId)
     {
         foreach (var harvestBox in _harvestBoxes.Values)
         {
-            if (harvestBox.Quota <= 0 &&
-                cropUnlockRule.IsCropUnlocked(harvestBox.ProductEntry.ProductName, currentMapId, currentStageId))
-            {
-                AssignQuotaOf(harvestBox.ProductEntry.ProductName, currentMapId, currentStageId);
-            }
-        }
-    }
-
-    public void AssignQuotaOf(string productName, int currentMapId, int currentStageId)
-    {
-        var harvestBox = _harvestBoxes.FirstOrDefault(pair => pair.Key.ProductName.Equals(productName)).Value;
-        harvestBox.Quota = 0;
-
-        var ruleForMap = quotaFillingRule.Entries.FirstOrDefault(r => r.TargetMap.MapId == currentMapId);
-        if (ruleForMap is null)
-        {
-            Debug.LogError($"{currentMapId} 에 해당하는 QuotaFillingRuleForMap을 찾을 수 없습니다.");
-            return;
-        }
-
-        if (!cropUnlockRule.IsCropUnlocked(harvestBox.ProductEntry.ProductName, currentMapId, currentStageId))
-        {
-            return;
-        }
-
-        var (minimum, maximum) = ruleForMap.Entries
-            .FirstOrDefault(entry => entry.TargetProduct.ProductName.Equals(productName)).Range;
-
-        harvestBox.Quota = Random.Range(minimum, maximum + 1) / 10 * 10;
-
-        // 핫, 스페셜 배정해야 할 때가 아니면 스킵
-        if (HotProduct is not null && !HotProduct.ProductName.Equals(productName) ||
-            SpecialProduct is not null && !SpecialProduct.ProductName.Equals(productName))
-        {
-            return;
-        }
-
-        foreach (var box in _harvestBoxes.Values)
-        {
-            box.ClearSpecialOrHot();
+            harvestBox.AssignQuota();
         }
         
-        HotProduct = null;
-        SpecialProduct = null;
+        _hotSpecialTurn = specialProductTurnInterval - 1; // 핫 스페셜 배정 시 0부터 시작하도록
+        SelectHotSpecialIfNeeded();
+    }
 
-        _hotSpecialTurn = (_hotSpecialTurn + 1) % specialProductTurnInterval;
-
-        var isSpecialTurn = _hotSpecialTurn == specialProductTurnInterval - 1;
-
-        var quotaSum = 0;
-        foreach (var box in _harvestBoxes.Values)
+    private void SelectHotSpecialIfNeeded()
+    {
+        if (_harvestBoxes.Values.Any(box => box.HotSpacialState != HotSpacialState.None))
         {
-            quotaSum += box.Quota;
+            return;
         }
-
+        
+        _hotSpecialTurn = (_hotSpecialTurn + 1) % specialProductTurnInterval;
+        var isSpecialTurn = _hotSpecialTurn == specialProductTurnInterval - 1;
+        
+        var quotaSum = _harvestBoxes.Values.Sum(box => box.Quota);
         var random = Random.Range(0, quotaSum);
+        
         foreach (var box in _harvestBoxes.Values)
         {
             random -= box.Quota;
-            if (random < 0)
+            if (random >= 0)
             {
-                if (isSpecialTurn)
-                {
-                    SpecialProduct = box.ProductEntry;
-                    box.MarkSpecial();
-                    
-                }
-                else
-                {
-                    HotProduct = box.ProductEntry;
-                    box.MarkHot();
-                }
-                break;
+                continue;
             }
+        
+            box.HotSpacialState = isSpecialTurn ? HotSpacialState.Special : HotSpacialState.Hot;
+            break;
         }
     }
 
     private void Awake()
     {
-        _harvestBoxes = new();
+        _harvestBoxes = new Dictionary<ProductEntry, HarvestBox>();
         _canvas = transform.Find("Canvas").GetComponent<Canvas>();
     }
 
@@ -234,26 +182,6 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
         goldEarnEffect.PlayEffect(0);
         while (count > 0)
         {
-            var price = harvestBox.ProductEntry.Price;
-            if (harvestBox.ProductEntry == HotProduct)
-            {
-                price *= 2;
-            }
-            else if (harvestBox.ProductEntry == SpecialProduct && harvestBox.Quota == 1)
-            {
-                var ruleForMap = quotaFillingRule.Entries.FirstOrDefault(r => r.TargetMap.MapId == currentMapId);
-                if (ruleForMap is not null &&
-                    ruleForMap.SpecialProductBonusRule.TryGetBonusOf(harvestBox.ProductEntry.ProductName,
-                        out var bonusPrice))
-                {
-                    price += bonusPrice;
-                }
-                else
-                {
-                    Debug.LogError($"{currentMapId} 에 해당하는 Special Product Bonus Rule을 찾을 수 없습니다.");
-                }
-            }
-
             if (count % 2 == 0)
             {
                 var spread = new Vector2(Random.Range(-harvestBulkSpread, harvestBulkSpread),
@@ -270,12 +198,12 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
                 SoundManager.Instance.PlaySfx("SFX_T_coin");
             }
 
-            harvestBox.Quota -= 1;
-            count -= 1;
-            if (harvestBox.Quota <= 0)
+            harvestBox.FillQuota(out var price, out var reAssigned);
+            if (reAssigned)
             {
-                AssignQuotaOf(harvestBox.ProductEntry.ProductName, currentMapId, currentStageId);
+                SelectHotSpecialIfNeeded();
             }
+            count -= 1;
 
             earnGold(price);
             goldEarnEffect.transform.position = cropWorldPosition;

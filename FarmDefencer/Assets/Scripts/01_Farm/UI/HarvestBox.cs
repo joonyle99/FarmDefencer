@@ -4,6 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum HotSpacialState
+{
+	None,
+	Hot,
+	Special
+}
+
 public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 {
 	[SerializeField] private ProductEntry productEntry;
@@ -13,7 +20,7 @@ public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 	public int Quota
 	{
 		get => _quota;
-		set
+		private set
 		{
 			if (_quota <= 0 && value > 0)
 			{
@@ -21,13 +28,24 @@ public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 				Blink();
 			}
 
-			IsAvailable = value > 0;
 			_quota = value;
 			_cropQuotaText.text = _quota.ToString();
 		}
 	}
 
-	public bool IsAvailable { get; private set; }
+	private HotSpacialState _hotSpacialState;
+
+	public HotSpacialState HotSpacialState
+	{
+		get => _hotSpacialState;
+		set
+		{
+			_hotImage.enabled = value == HotSpacialState.Hot;
+			_specialImage.enabled = value == HotSpacialState.Special;
+			_hotSpacialState = value;
+		}
+	}
+	
 	private float _blinkDuration;
 	private Image _hotImage;
 	private Image _specialImage;
@@ -36,37 +54,75 @@ public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 	private Image _lockImage;
 	private Image _blinkImage;
 	private TMP_Text _cropQuotaText;
+	private (int, int) _quotaRange;
+	private int _specialBonus;
+	
+	private int Cycle { get; set; } // 최소 -1
 
-	public JObject Serialize() => new(new JProperty("Quota", _quota));
+	public JObject Serialize()
+	{
+		var json = new JObject();
+		json["Quota"] = _quota;
+		json["HotSpacialState"] = (int)_hotSpacialState;
+		json["Cycle"] = Cycle;
+		return json;
+	}
 
-	public void Deserialize(JObject json) => Quota = json["Quota"]?.Value<int?>() ?? 0;
+	public void Deserialize(JObject json)
+	{
+		Cycle = json["Cycle"]?.Value<int>() ?? 0;
+		HotSpacialState = (HotSpacialState)(json["HotSpacialState"]?.Value<int>() ?? 0);
+		Quota = json["Quota"]?.Value<int>() ?? 0;
+	}
 
-	public void Init(float blinkDuration, bool isAvailable)
+	public void Init(float blinkDuration, bool isAvailable, int minQuota, int maxQuota, int specialBonus)
 	{
 		_blinkDuration = blinkDuration;
-		IsAvailable = isAvailable;
 		
-		var color = IsAvailable ? Color.white : new Color(0.4f, 0.4f, 0.4f, 1.0f);
+		var color = isAvailable ? Color.white : new Color(0.4f, 0.4f, 0.4f, 1.0f);
 		_boxImage.color = color;
 		_productImage.color = color;
-		_cropQuotaText.enabled = IsAvailable;
+		_cropQuotaText.enabled = isAvailable;
 		
-		_lockImage.enabled = !IsAvailable;
+		_lockImage.enabled = !isAvailable;
 		
 		_hotImage.enabled = false;
 		_specialImage.enabled = false;
+		_quotaRange = (minQuota, maxQuota);
+		_specialBonus = specialBonus;
 	}
 
-	public void Blink() => StartCoroutine(DoBlink());
-
-	public void ClearSpecialOrHot()
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns>새로 주문량 할당된 경우 true.</returns>
+	public void FillQuota(out int price, out bool reAssigned)
 	{
-		_hotImage.enabled = false;
-		_specialImage.enabled = false;
+		Quota -= 1;
+		price = productEntry.Price;
+		if (HotSpacialState == HotSpacialState.Hot)
+		{
+			price *= 2;
+		}
+		else if (HotSpacialState == HotSpacialState.Special && Quota == 0)
+		{
+			price += _specialBonus;
+		}
+		
+		reAssigned = Quota <= 0;
+		if (reAssigned)
+		{
+			AssignQuota();
+		}
 	}
+	
+    public void AssignQuota()
+    {
+	    HotSpacialState = HotSpacialState.None;
+        Quota = Random.Range(_quotaRange.Item1, _quotaRange.Item2 + 1) / 10 * 10;
+    }
 
-	public void MarkSpecial() => _specialImage.enabled = true;
-	public void MarkHot() => _hotImage.enabled = true;
+	private void Blink() => StartCoroutine(DoBlink());
 	
 	private void Awake()
 	{
@@ -79,7 +135,6 @@ public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 		_specialImage = transform.Find("SpecialImage").GetComponent<Image>();
 
 		_lockImage.enabled = false;
-		IsAvailable = false;
 		_blinkImage.enabled = false;
 		_specialImage.enabled = false;
 		_hotImage.enabled = false;

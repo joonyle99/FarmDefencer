@@ -46,7 +46,7 @@ public sealed class FarmManager : MonoBehaviour
         if (ignoreSaveFile)
         {
             // 디버그용 할당 코드 등 여기에...
-            harvestInventory.AssignAllQuotas(MapManager.Instance.MaximumUnlockedMapIndex, MapManager.Instance.MaximumUnlockedStageIndex);
+            harvestInventory.ResetAllQuotas(MapManager.Instance.MaximumUnlockedMapIndex, MapManager.Instance.MaximumUnlockedStageIndex);
         }
         else
 #endif
@@ -61,11 +61,11 @@ public sealed class FarmManager : MonoBehaviour
         {
             farmInput.FullZoomOut();
             pestGiver.ReserveRandomPestSpawn();
+            harvestInventory.ResetAllQuotas(MapManager.Instance.MaximumUnlockedMapIndex, MapManager.Instance.MaximumUnlockedStageIndex);
         }
 
         Application.wantsToQuit += SaveOnQuit;
         
-        harvestInventory.AssignIfJustUnlocked(MapManager.Instance.MaximumUnlockedMapIndex, MapManager.Instance.MaximumUnlockedStageIndex);
         harvestTutorialGiver.PlayTutorialsToDo(productDatabase.Products, IsProductAvailableNow);
     }
 
