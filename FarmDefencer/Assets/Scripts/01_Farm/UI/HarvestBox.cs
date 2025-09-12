@@ -27,23 +27,7 @@ public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 		}
 	}
 
-	public bool IsAvailable
-	{
-		get
-		{
-			return _isAvailable;
-		}
-		set
-		{
-			if (_isAvailable == value)
-			{
-				return;
-			}
-			_isAvailable = value;
-			OnAvailabilityChanged();
-		}
-	}
-	private bool _isAvailable;
+	public bool IsAvailable { get; private set; }
 	private float _blinkDuration;
 	private Image _hotImage;
 	private Image _specialImage;
@@ -56,8 +40,22 @@ public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 	public JObject Serialize() => new(new JProperty("Quota", _quota));
 
 	public void Deserialize(JObject json) => _quota = json["Quota"]?.Value<int?>() ?? 0;
-	
-	public void Init(float blinkDuration) => _blinkDuration = blinkDuration;
+
+	public void Init(float blinkDuration, bool isAvailable)
+	{
+		_blinkDuration = blinkDuration;
+		IsAvailable = isAvailable;
+		
+		var color = IsAvailable ? Color.white : new Color(0.4f, 0.4f, 0.4f, 1.0f);
+		_boxImage.color = color;
+		_productImage.color = color;
+		_cropQuotaText.enabled = IsAvailable;
+		
+		_lockImage.enabled = !IsAvailable;
+		
+		_hotImage.enabled = false;
+		_specialImage.enabled = false;
+	}
 
 	public void Blink() => StartCoroutine(DoBlink());
 
@@ -70,19 +68,6 @@ public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 	public void MarkSpecial() => _specialImage.enabled = true;
 	public void MarkHot() => _hotImage.enabled = true;
 	
-	private void OnAvailabilityChanged()
-	{
-		var color = _isAvailable ? Color.white : new Color(0.4f, 0.4f, 0.4f, 1.0f);
-		_boxImage.color = color;
-		_productImage.color = color;
-		_cropQuotaText.enabled = IsAvailable;
-		
-		_lockImage.enabled = !IsAvailable;
-		
-		_hotImage.enabled = false;
-		_specialImage.enabled = false;
-	}
-
 	private void Awake()
 	{
 		_boxImage = transform.Find("BoxImage").GetComponent<Image>();

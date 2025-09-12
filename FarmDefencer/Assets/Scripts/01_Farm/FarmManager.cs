@@ -119,7 +119,7 @@ public sealed class FarmManager : MonoBehaviour
         farmClock.AddPauseCondition(() => weatherGiver.IsWeatherOnGoing);
         farmClock.AddPauseCondition(() => pestGiver.IsWarningShowing);
 
-        harvestInventory.Init(GetProductEntry);
+        harvestInventory.Init(GetProductEntry, MapManager.Instance.MaximumUnlockedMapIndex, MapManager.Instance.MaximumUnlockedStageIndex);
 
         farm.Init(
             () => pestGiver.IsPestRunning,

@@ -82,9 +82,13 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
             : null;
     }
 
-    public void Init(Func<string, ProductEntry> getProductEntry)
+    public void Init(Func<string, ProductEntry> getProductEntry, int maxMapIndex, int maxStageIndex)
     {
         _getProductEntry = getProductEntry;
+        foreach (var harvestBox in _harvestBoxes.Values)
+        {
+            harvestBox.Init(blinkDuration, cropUnlockRule.IsCropUnlocked(harvestBox.ProductEntry.ProductName, maxMapIndex, maxStageIndex));
+        }
     }
 
     public bool IsProductAvailable(string productName, int currentMapId, int currentStageId) => cropUnlockRule.IsCropUnlocked(productName, currentMapId, currentStageId);
@@ -216,7 +220,6 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
         {
             var child = boxAreaObject.transform.GetChild(childIndex).gameObject;
             var harvestBox = child.GetComponent<HarvestBox>();
-            harvestBox.Init(blinkDuration);
             _harvestBoxes.Add(harvestBox.ProductEntry, harvestBox);
         }
     }
