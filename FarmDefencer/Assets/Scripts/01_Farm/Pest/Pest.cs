@@ -97,9 +97,9 @@ public sealed class Pest : MonoBehaviour
         
         _remainingClickCount = pestSize switch
         {
-            PestSize.Large => 150,
-            PestSize.Medium => 100,
-            _ => 50
+            PestSize.Large => 3,
+            PestSize.Medium => 2,
+            _ => 1
         };
         _dieTime = dieTime;
         _beginDirectToDestinationCriterion = beginDirectToDestinationCriterion;
