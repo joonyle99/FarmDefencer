@@ -63,22 +63,14 @@ public abstract class Crop : MonoBehaviour, IFarmUpdatable, IFarmSerializable
 
     protected Action<int> OnSold { get; private set; }
     
-    public CropDisplay CropDisplay { get; private set; }
-
     public abstract JObject Serialize();
 
     public abstract void Deserialize(JObject json);
     
-    public void Init(Action onPlanted, Action<int> onSold, CropDisplay cropDisplayObjectToClone)
+    public void Init(Action onPlanted, Action<int> onSold)
     {
         OnPlanted = onPlanted;
         OnSold = onSold;
-
-        if (cropDisplayObjectToClone is not null)
-        {
-            CropDisplay = Instantiate(cropDisplayObjectToClone.gameObject, transform).GetComponent<CropDisplay>();
-            CropDisplay.Init(() => GaugeRatio);
-        }
     }
 
     public bool AABB(Vector2 worldPosition) =>

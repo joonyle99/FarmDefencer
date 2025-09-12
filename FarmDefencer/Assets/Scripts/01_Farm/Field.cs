@@ -26,6 +26,7 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
     private HashSet<Crop> _lockedCrops;
 
     private Crop[] _crops;
+    private CropDisplay[] _cropDisplays;
     private SpriteRenderer _backgroundRenderer; // 0번 자식 오브젝트에 할당
     private SpriteRenderer _fieldLockedRenderer; // 1번 자식 오브젝트에 할당
 
@@ -97,11 +98,12 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
 
     public bool TryLockCropAt(Vector2 cropPosition)
     {
-        if (TryFindCropAt(cropPosition, out var crop))
+        if (TryFindCropAt(cropPosition, out var cropIndex))
         {
+            var crop = _crops[cropIndex];
             if (!_lockedCrops.Contains(crop))
             {
-                crop.CropDisplay.ManualMode = true;
+                _cropDisplays[cropIndex].ManualMode = true;
                 crop.ResetToInitialState();
                 crop.gameObject.SetActive(false);
             }
@@ -114,17 +116,17 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
 
     public void UpdateCropGaugeManually(Vector2 cropPosition, float ratio)
     {
-        if (!TryFindCropAt(cropPosition, out var crop) ||
-            !crop.CropDisplay.ManualMode)
+        if (!TryFindCropAt(cropPosition, out var cropIndex) ||
+            !_cropDisplays[cropIndex].ManualMode)
         {
             return;
         }
 
-        crop.CropDisplay.UpdateGauge(ratio);
+        _cropDisplays[cropIndex].UpdateGauge(ratio);
     }
     
     public bool IsCropLockable(Vector2 cropPosition) =>
-        TryFindCropAt(cropPosition, out var crop) && !_lockedCrops.Contains(crop);
+        TryFindCropAt(cropPosition, out var cropIndex) && !_lockedCrops.Contains(_crops[cropIndex]);
 
     public bool TryGetFirstLockableCropPosition(out Vector2 cropPosition)
     {
@@ -151,21 +153,21 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
     public void UnlockCropAt(Vector2 cropPosition)
     {
         // Unlock동작은 잠금상태에 무관하게 동작
-        if (TryFindCropAt(cropPosition, out var crop))
+        if (TryFindCropAt(cropPosition, out var cropIndex))
         {
-            crop.CropDisplay.ManualMode = false;
-            crop.gameObject.SetActive(true);
-            _lockedCrops.Remove(crop);
+            _cropDisplays[cropIndex].ManualMode = false;
+            _crops[cropIndex].gameObject.SetActive(true);
+            _lockedCrops.Remove(_crops[cropIndex]);
         }
     }
 
     public bool OnTap(Vector2 worldPosition)
     {
         if (IsAvailable
-            && TryFindCropAt(worldPosition, out var crop)
-            && !_lockedCrops.Contains(crop))
+            && TryFindCropAt(worldPosition, out var cropIndex)
+            && !_lockedCrops.Contains(_crops[cropIndex]))
         {
-            crop.OnTap(worldPosition);
+            _crops[cropIndex].OnTap(worldPosition);
             return true;
         }
 
@@ -181,10 +183,10 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
     public void OnWatering(Vector2 worldPosition)
     {
         if (IsAvailable
-            && TryFindCropAt(worldPosition, out var crop)
-            && !_lockedCrops.Contains(crop))
+            && TryFindCropAt(worldPosition, out var cropIndex)
+            && !_lockedCrops.Contains(_crops[cropIndex]))
         {
-            crop.OnWatering();
+            _crops[cropIndex].OnWatering();
         }
     }
 
@@ -206,12 +208,12 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
 
         if (!_isHolding) // 첫 홀드 프레임. 홀드인지 스윕인지 판별해야 함.
         {
-            if (TryFindCropAt(initialWorldPosition, out var crop)
-                && !_lockedCrops.Contains(crop))
+            if (TryFindCropAt(initialWorldPosition, out var cropIndex)
+                && !_lockedCrops.Contains(_crops[cropIndex]))
             {
-                if (crop.OnHold(initialWorldPosition, deltaWorldPosition, false, deltaHoldTime))
+                if (_crops[cropIndex].OnHold(initialWorldPosition, deltaWorldPosition, false, deltaHoldTime))
                 {
-                    _holdingCrop = crop;
+                    _holdingCrop = _crops[cropIndex];
                 }
             }
             else
@@ -230,10 +232,10 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
         }
         else
         {
-            if (TryFindCropAt(initialWorldPosition + deltaWorldPosition, out var crop)
-                && !_lockedCrops.Contains(crop))
+            if (TryFindCropAt(initialWorldPosition + deltaWorldPosition, out var cropIndex)
+                && !_lockedCrops.Contains(_crops[cropIndex]))
             {
-                crop.OnHold(initialWorldPosition, deltaWorldPosition, true, deltaHoldTime);
+                _crops[cropIndex].OnHold(initialWorldPosition, deltaWorldPosition, true, deltaHoldTime);
             }
         }
 
@@ -249,14 +251,27 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
         CropDisplay cropDisplayObjectToClone)
     {
         _isPestRunning = isPestRunning;
-        Array.ForEach(
-            _crops,
-            crop => crop.Init(
-                () => onPlanted(crop.transform.position),
-                count => onSold(crop.transform.position, count),
-                cropDisplayObjectToClone));
         _onCropSignClicked = () => signClickedHandler(ProductEntry);
         _cropSign.Init(ProductEntry, () => getPrice(ProductEntry));
+
+        for (var i = 0; i < _crops.Length; ++i)
+        {
+            var crop = _crops[i];
+            crop.Init(
+                () => onPlanted(crop.transform.position),
+                count => onSold(crop.transform.position, count));
+
+            if (cropDisplayObjectToClone is null)
+            {
+                continue;
+            }
+            var cropDisplay = Instantiate(cropDisplayObjectToClone, transform).GetComponent<CropDisplay>();
+            var cropDisplayPosition = crop.transform.position;
+            cropDisplayPosition.z = 0.0f;
+            cropDisplay.transform.position = cropDisplayPosition;
+            cropDisplay.Init(() => crop.GaugeRatio);
+            _cropDisplays[i] = cropDisplay;
+        }
     }
 
     public void Reset() => Array.ForEach(_crops, crop => crop.ResetToInitialState());
@@ -285,6 +300,7 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
     {
         _lockedCrops = new();
         _crops = new Crop[fieldSize.x * fieldSize.y];
+        _cropDisplays = new CropDisplay[fieldSize.x * fieldSize.y];
         _cropBackgrounds = new();
 
         _backgroundRenderer = transform.Find("Background").GetComponent<SpriteRenderer>();
@@ -321,20 +337,20 @@ public sealed class Field : MonoBehaviour, IFarmUpdatable, IFarmInputLayer, IFar
     /// 입력된 좌표에 해당되는 Crop을 검색해서 반환합니다.
     /// </summary>
     /// <param name="position"></param>
-    /// <param name="crop"></param>
+    /// <param name="cropIndex"></param>
     /// <returns>position에 해당하는 Crop이 존재할 경우 crop에 값이 할당되며 true 반환, 이외의 경우 crop에 null이 할당되며 false 반환</returns>
-    private bool TryFindCropAt(Vector2 position, out Crop crop)
+    private bool TryFindCropAt(Vector2 position, out int cropIndex)
     {
         var localPosition = new Vector2Int(Mathf.RoundToInt(position.x - transform.position.x),
             Mathf.RoundToInt(position.y - transform.position.y));
         if (localPosition.x < 0 || localPosition.x >= fieldSize.x
                                 || localPosition.y < 0 || localPosition.y >= fieldSize.y)
         {
-            crop = null;
+            cropIndex = -1;
             return false;
         }
 
-        crop = _crops[localPosition.y * fieldSize.x + localPosition.x];
+        cropIndex = localPosition.y * fieldSize.x + localPosition.x;
         return true;
     }
 
