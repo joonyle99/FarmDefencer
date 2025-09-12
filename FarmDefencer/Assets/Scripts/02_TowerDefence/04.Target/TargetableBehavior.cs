@@ -8,7 +8,7 @@ public abstract class TargetableBehavior : DamageableBehavior
     [Header("──────── TargetableBehavior ────────")]
     [Space]
 
-    [SerializeField] private Transform _targetPoint;
+    private Transform _targetPoint;
     public Transform TargetPoint
     {
         get
@@ -22,6 +22,27 @@ public abstract class TargetableBehavior : DamageableBehavior
         }
     }
 
+    private Transform _headPoint;
+    public Transform HeadPoint
+    {
+        get
+        {
+            if (_headPoint == null)
+            {
+                _headPoint = this.transform;
+            }
+
+            return _headPoint;
+        }
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _targetPoint = transform.Find("Center");
+        _headPoint = transform.Find("Head");
+    }
     protected override void OnEnable()
     {
         base.OnEnable();

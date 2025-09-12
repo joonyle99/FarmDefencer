@@ -39,23 +39,6 @@ public class Monster : TargetableBehavior, IProduct, IVolumeControl
 
     [Space]
 
-    [Header("Etc")]
-    [SerializeField] private Transform _headPoint;
-    public Transform HeadPoint
-    {
-        get
-        {
-            if (_headPoint == null)
-            {
-                _headPoint = this.transform;
-            }
-
-            return _headPoint;
-        }
-    }
-
-    [Space]
-
     [Header("Animation")]
     [SpineAnimation] public string IdleAnimationName;
     [SpineAnimation] public string WalkAnimationName;
