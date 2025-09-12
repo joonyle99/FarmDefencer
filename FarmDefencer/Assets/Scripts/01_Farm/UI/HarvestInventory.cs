@@ -226,7 +226,7 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
 
     private IEnumerator CoSellProduct(HarvestBox harvestBox, Vector2 cropWorldPosition, int count, int currentMapId, int currentStageId, Action<int> earnGold, Action<ProductEntry, float, Vector2, Vector2> playScreenHarvestAnimation, GoldEarnEffect goldEarnEffect)
     {
-        var interval = harvestBulkAnimationTime / count;
+        var interval = harvestBulkAnimationTime / count * 0.5f;
         var cropWorldPosition3 = new Vector3(cropWorldPosition.x, cropWorldPosition.y, 90.0f);
         Vector2 cropScreenPosition = Camera.main.WorldToScreenPoint(cropWorldPosition3);
         Vector2 harvestBoxScreenPosition = _canvas.worldCamera.WorldToScreenPoint(harvestBox.transform.position);

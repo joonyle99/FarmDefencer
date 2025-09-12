@@ -11,8 +11,7 @@ public sealed class PestEatingPoint : MonoBehaviour, IFarmSerializable
     public ProductEntry TargetProduct => targetProduct;
 
     private List<Pest> _pests;
-    public IReadOnlyList<Pest> Pests => _pests;
-        
+
     private TMP_Text _countText;
 
     private Func<PestSize, Pest> _pestFactory;
@@ -39,10 +38,10 @@ public sealed class PestEatingPoint : MonoBehaviour, IFarmSerializable
             if (frontPest.RemainingCropEatCount <= 0)
             {
                 _pests.RemoveAt(0);
+                Refresh();
             }
         }
 
-        Refresh();
         return remainder;
     }
     
@@ -104,7 +103,7 @@ public sealed class PestEatingPoint : MonoBehaviour, IFarmSerializable
         if (_pests.Count > 0)
         {
             _pests.ForEach(p => p.gameObject.SetActive(false));
-            _pests.First().gameObject.SetActive(true);
+            _pests[0].gameObject.SetActive(true);
         }
     }
 }

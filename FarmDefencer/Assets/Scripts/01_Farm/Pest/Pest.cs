@@ -133,13 +133,13 @@ public sealed class Pest : MonoBehaviour
         var remainder = amount - edible;
 
         RemainingCropEatCount -= edible;
-        // StartCoroutine(CoPlayStealAnimation(cropWorldPosition, edible));
-        // RefreshCropLiftingGraphic();
-        //
-        // if (RemainingCropEatCount <= 0)
-        // {
-        //     StartCoroutine(CoFlee());
-        // }
+        StartCoroutine(CoPlayStealAnimation(cropWorldPosition, edible));
+        RefreshCropLiftingGraphic();
+        
+        if (RemainingCropEatCount <= 0)
+        {
+            StartCoroutine(CoFlee());
+        }
 
         return remainder;
     }
@@ -281,10 +281,17 @@ public sealed class Pest : MonoBehaviour
 
     private IEnumerator CoPlayStealAnimation(Vector2 cropWorldPosition, int count)
     {
-        for (var i = 0; i < count; ++i)
+        var mainCamera = Camera.main;
+        var cropScreenPosition = RectTransformUtility.WorldToScreenPoint(mainCamera, cropWorldPosition);
+        var screenPosition = RectTransformUtility.WorldToScreenPoint(mainCamera, transform.position);
+        var interval = _fleeTime / count * 0.5f; // 도망가는 도중에라도 애니메이션을 끝내기 위해
+        
+        while (count > 0)
         {
-            _playPestStealFromFieldAnimation(TargetProduct, cropWorldPosition, transform.position);
-            yield return new WaitForSeconds(0.2f);
+            count -= 1;
+            _playPestStealFromFieldAnimation(TargetProduct, cropScreenPosition, screenPosition);
+
+            yield return new WaitForSeconds(interval);
         }
     }
     
