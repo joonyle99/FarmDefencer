@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1543992766888672360}
   - component: {fileID: 7300144381691796175}
   - component: {fileID: 5287113402474360036}
-  - component: {fileID: 8504615390514146694}
+  - component: {fileID: -1902954132089754802}
   - component: {fileID: 1519744171091044436}
   m_Layer: 7
   m_Name: Crab
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a1724d712b1fe469757ab67167933c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  demageableBehavior: {fileID: 8504615390514146694}
+  demageableBehavior: {fileID: 0}
 --- !u!114 &5287113402474360036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +243,7 @@ MonoBehaviour:
   _arrivalThreshold: 0.05
   eTime: 0
   distance: 0
---- !u!114 &8504615390514146694
+--- !u!114 &-1902954132089754802
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -252,15 +252,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4172481917644167003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d51d5f425d629654a9e6ae99749f7193, type: 3}
+  m_Script: {fileID: 11500000, guid: d1fa8bbfee081eb42b7ec6f563a54e6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthBar: {fileID: 4159104016721875392}
-  _maxHp: 145
-  _targetPoint: {fileID: 6219046591756985945}
   _originFactory: {fileID: 0}
   _monsterData: {fileID: 11400000, guid: 11c4f70247be3f1479a34b4114ea5691, type: 2}
-  _headPoint: {fileID: 9077063170434922975}
   IdleAnimationName: idle
   WalkAnimationName: walk
   WalkDamagedAnimationName: walk_damaged
@@ -462,17 +458,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6740850065851687629, guid: ac73a8c8d91c83842bec0255423aebde, type: 3}
   m_PrefabInstance: {fileID: 6505670202219218649}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4159104016721875392 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7201488375193622297, guid: ac73a8c8d91c83842bec0255423aebde, type: 3}
-  m_PrefabInstance: {fileID: 6505670202219218649}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 147fb69bdcb6a004ba3f217407b487c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6032066207653392411 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 720290982818461378, guid: ac73a8c8d91c83842bec0255423aebde, type: 3}

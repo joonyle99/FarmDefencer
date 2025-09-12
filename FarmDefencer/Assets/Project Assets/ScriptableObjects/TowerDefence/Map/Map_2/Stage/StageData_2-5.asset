@@ -13,15 +13,23 @@ MonoBehaviour:
   m_Name: StageData_2-5
   m_EditorClassIdentifier: 
   Waves:
-  - Monster: {fileID: 8244829762353483558, guid: 3020189df1f79bf409d60b0e79598c7b, type: 3}
+  - Monster: {fileID: -1560725057510073804, guid: 871f81cfd2528d74eb008bfec735d5b0, type: 3}
+    SpawnCountRange:
+      Start: 7
+      End: 9
+  - Monster: {fileID: 4927118703459673453, guid: 3020189df1f79bf409d60b0e79598c7b, type: 3}
     SpawnCountRange:
       Start: 6
-      End: 9
-  - Monster: {fileID: 6808927289791045662, guid: 871f81cfd2528d74eb008bfec735d5b0, type: 3}
+      End: 8
+  - Monster: {fileID: -1902954132089754802, guid: 83c5e4ce8fc25124589524377a783765, type: 3}
+    SpawnCountRange:
+      Start: 12
+      End: 15
+  - Monster: {fileID: -1560725057510073804, guid: 871f81cfd2528d74eb008bfec735d5b0, type: 3}
     SpawnCountRange:
       Start: 4
       End: 6
-  - Monster: {fileID: 4154301835580674965, guid: 50c583a48eb37834cb49f51de47d72f7, type: 3}
+  - Monster: {fileID: -3492091488127488039, guid: 50c583a48eb37834cb49f51de47d72f7, type: 3}
     SpawnCountRange:
-      Start: 3
-      End: 5
+      Start: 4
+      End: 6

@@ -16,11 +16,11 @@ MonoBehaviour:
   mapCode: beach
   mapName: "\uD574\uBCC0"
   monsters:
-  - {fileID: 8504615390514146694, guid: 83c5e4ce8fc25124589524377a783765, type: 3}
-  - {fileID: 8244829762353483558, guid: 3020189df1f79bf409d60b0e79598c7b, type: 3}
-  - {fileID: 6808927289791045662, guid: 871f81cfd2528d74eb008bfec735d5b0, type: 3}
-  - {fileID: 4154301835580674965, guid: 50c583a48eb37834cb49f51de47d72f7, type: 3}
-  - {fileID: 761433559861001395, guid: b97306ced56f74f4c957a74918b2b214, type: 3}
+  - {fileID: -1902954132089754802, guid: 83c5e4ce8fc25124589524377a783765, type: 3}
+  - {fileID: 4927118703459673453, guid: 3020189df1f79bf409d60b0e79598c7b, type: 3}
+  - {fileID: -1560725057510073804, guid: 871f81cfd2528d74eb008bfec735d5b0, type: 3}
+  - {fileID: -3492091488127488039, guid: 50c583a48eb37834cb49f51de47d72f7, type: 3}
+  - {fileID: 3264489395719985837, guid: b97306ced56f74f4c957a74918b2b214, type: 3}
   crops:
   - carrot
   - corn
