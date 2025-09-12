@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: frog
   Description: 
+  MaxHp: 680
   OriginMoveSpeed: 2

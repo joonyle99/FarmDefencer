@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: spider
   Description: 
+  MaxHp: 415
   OriginMoveSpeed: 2

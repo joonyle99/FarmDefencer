@@ -24,8 +24,8 @@ public abstract class DamageableBehavior : MonoBehaviour
     [Space]
 
     // status
-    [SerializeField] private int _maxHp = 100;
-    public int MaxHp => _maxHp;
+    protected int maxHp = 0;
+    public int MaxHp => maxHp;
     private int _hp;
     public int HP
     {
@@ -45,7 +45,7 @@ public abstract class DamageableBehavior : MonoBehaviour
                 Kill();
             }
 
-            if (_hp <= _maxHp / 2)
+            if (_hp <= maxHp / 2)
             {
                 _healthBar.ChangeToDanger();
             }

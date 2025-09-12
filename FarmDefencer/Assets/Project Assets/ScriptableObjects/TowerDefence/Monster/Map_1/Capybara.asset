@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: capybara
   Description: 
+  MaxHp: 450
   OriginMoveSpeed: 1

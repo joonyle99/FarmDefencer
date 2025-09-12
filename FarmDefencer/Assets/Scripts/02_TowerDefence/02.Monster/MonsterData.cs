@@ -7,6 +7,8 @@ public class MonsterData : ScriptableObject
     [BoxGroup("기본 정보")] public string Name;
     [BoxGroup("기본 정보")] public string Description;
 
+    [FoldoutGroup("능력치 - 체력")] public int MaxHp = 100;
+
     /// <summary>
     /// 몬스터가 이동하는 속도입니다.
     /// 기본 값은 1입니다. (1초에 1칸 이동)

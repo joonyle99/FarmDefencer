@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 /// <summary>
 ///
 /// </summary>
-public abstract class Monster : TargetableBehavior, IProduct, IVolumeControl
+public class Monster : TargetableBehavior, IProduct, IVolumeControl
 {
     #region Attributes
 
@@ -89,6 +89,8 @@ public abstract class Monster : TargetableBehavior, IProduct, IVolumeControl
     protected override void OnEnable()
     {
         base.OnEnable();
+
+        maxHp = _monsterData.MaxHp;
 
         InstantOpaque();
     }
