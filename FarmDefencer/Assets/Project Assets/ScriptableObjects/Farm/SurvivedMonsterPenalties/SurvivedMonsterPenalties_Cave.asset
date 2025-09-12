@@ -21,7 +21,7 @@ MonoBehaviour:
       probability: 0.4
     - targetCrop: {fileID: 11400000, guid: bbf41d007f26d6049ba7c478bd5f3ecd, type: 2}
       probability: 0.5
-  - monster: {fileID: 11400000, guid: 5f15dfc30b8404146bf2ff08c0180c4d, type: 2}
+  - monster: {fileID: 11400000, guid: 6b45193cb0620c249ae7b13cf6ff61df, type: 2}
     cropProbabilities:
     - targetCrop: {fileID: 11400000, guid: 9af364f61f809e042a0f9ae33b7daa52, type: 2}
       probability: 0.05

@@ -35,6 +35,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 14a72cf694a8ae643b7918542262f187
+    m_Address: monster_snale_SkeletonData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 158efef141e9a2147bce54e898f72666
     m_Address: cave_arrival
     m_ReadOnly: 0
