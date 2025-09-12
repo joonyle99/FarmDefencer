@@ -67,18 +67,47 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
     public float CurrentBgmTime => _bgmAudioSource1.time;
     [CanBeNull] public string CurrentAmbName { get; private set; }
 
-    private Dictionary<string, float> _defenceMapSongRatio = new()
+    private Dictionary<string, List<float>> _defenceBgmLengthList = new()
     {
-        { "forest", 1.500f },
-        { "beach", 1.499f },
-        { "cave", 1.299f },
+        { "forest", new List<float> { 96.000f, 64.000f } },
+        { "beach", new List<float> { 106.667f, 71.111f } },
+        { "cave", new List<float> { 85.333f, 65.641f } },
     };
+
+    private Coroutine _waitForFinishCo;
+    private IEnumerator WaitForFinishCo(AudioClip targetClip, Action onFinished)
+    {
+        while (true)
+        {
+            var remainTime = _bgmAudioSource1.clip.length - _bgmAudioSource1.time;
+            if (remainTime < Time.deltaTime * 2)
+            {
+                Debug.Log("BGM 루프 종료 감지");
+                break;
+            }
+
+            if (targetClip != _bgmAudioSource1.clip)
+            {
+                _waitForFinishCo = null;
+
+                yield break;
+            }
+
+            yield return null;
+
+            Debug.Log(remainTime);
+        }
+
+        _waitForFinishCo = null;
+
+        onFinished?.Invoke();
+    }
 
     /// <summary>
     /// 내부 캐시에서 Bgm을 불러와 재생하는 메소드.
     /// 캐시에 존재하지 않을 경우 Resources/_Bgm에서 불러와 캐시에 넣고 재생함.
     /// </summary>
-    public void PlayBgm(string name, float volume = 0.5f, float playbackTime = 0.0f)
+    public void PlayBgm(string name, float volume = 0.5f, float playbackTime = 0.0f, Action endCallback = null)
     {
 	    if (!name.Equals(CurrentBgmName))
 	    {
@@ -101,7 +130,19 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 			_bgmAudioSource1.time = playbackTime;
             _bgmAudioSource1.volume = volume;
             _bgmAudioSource1.Play();
-	    }
+
+            if (endCallback != null)
+            {
+                if (_waitForFinishCo != null)
+                {
+                    StopCoroutine(_waitForFinishCo);
+
+                    _waitForFinishCo = null;
+                }
+
+                _waitForFinishCo = StartCoroutine(WaitForFinishCo(bgm, endCallback));
+            }
+        }
 
         CurrentBgmName = name;
     }
@@ -191,27 +232,59 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
     public void PlayDefenceMapSong(bool isFast = false)
     {
         var currentMap = MapManager.Instance.CurrentMap;
+
         var originalSongName = $"BGM_D_{currentMap.MapCode}_{"original"}_song";
         var fastSongName = $"BGM_D_{currentMap.MapCode}_{"fast"}_song";
-        var nextBgmName = isFast == false ? originalSongName : fastSongName;
-        var mapSongSpeedRatio = _defenceMapSongRatio[currentMap.MapCode];
+
+        var nextBgmName = (isFast == false) ? originalSongName : fastSongName;
+
+        var origianlreverbName = $"SFX_D_{currentMap.MapCode}_{"original"}_reverb";
+        var fastreverbName = $"SFX_D_{currentMap.MapCode}_{"fast"}_reverb";
+
+        var defenceBgmLength = _defenceBgmLengthList[currentMap.MapCode];
+        if (defenceBgmLength == null || defenceBgmLength.Count < 2)
+        {
+            Debug.LogError($"BGM 길이 정보가 없습니다: {currentMap.MapCode}");
+            return;
+        }
 
         // bgm만 교체하고 재생 시간을 유지함
         // 1. 현재 original song 재생 중인데, 다음 재생할 bgm이 fast song인 경우
         if (CurrentBgmName == originalSongName && nextBgmName == fastSongName)
         {
-            var bgmTime = CurrentBgmTime / mapSongSpeedRatio; // bgm 길이 보정
-            PlayBgm(nextBgmName, songVolume, bgmTime);
+            // 현재 얼마나 재생되었는지 확인 (0 ~ 1)
+            var currentProcess = CurrentBgmTime / _bgmAudioSource1.clip.length;
+
+            var fastBgmLength = defenceBgmLength[1];
+            var fastBgmTime = fastBgmLength * currentProcess; // bgm 길이 보정
+            PlayBgm(nextBgmName, songVolume, fastBgmTime, () =>
+            {
+                Debug.Log("1번 등록");
+                PlaySfx(fastreverbName, songVolume);
+            });
         }
         // 2. 현재 fast song 재생 중인데, 다음 재생할 bgm이 original song인 경우
         else if (CurrentBgmName == fastSongName && nextBgmName == originalSongName)
         {
-            var bgmTime = CurrentBgmTime * mapSongSpeedRatio; // bgm 길이 보정
-            PlayBgm(nextBgmName, songVolume, bgmTime);
+            // 현재 얼마나 재생되었는지 확인 (0 ~ 1)
+            var currentProcess = CurrentBgmTime / _bgmAudioSource1.clip.length;
+
+            var originalBgmLength = defenceBgmLength[0];
+            var normalBgmTime = originalBgmLength * currentProcess; // bgm 길이 보정
+            PlayBgm(nextBgmName, songVolume, normalBgmTime, () =>
+            {
+                Debug.Log("2번 등록");
+                PlaySfx(origianlreverbName, songVolume);
+            });
         }
+        // 3. ...
         else
         {
-            PlayBgm(nextBgmName, songVolume);
+            PlayBgm(nextBgmName, songVolume, 0f, () =>
+            {
+                Debug.Log("3번 등록");
+                PlaySfx(origianlreverbName, songVolume);
+            });
         }
     }
 
