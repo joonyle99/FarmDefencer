@@ -94,8 +94,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
             }
 
             yield return null;
-
-            Debug.Log(remainTime);
         }
 
         _waitForFinishCo = null;
@@ -259,7 +257,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
             var fastBgmTime = fastBgmLength * currentProcess; // bgm 길이 보정
             PlayBgm(nextBgmName, songVolume, fastBgmTime, () =>
             {
-                Debug.Log("1번 등록");
                 PlaySfx(fastreverbName, songVolume);
             });
         }
@@ -273,7 +270,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
             var normalBgmTime = originalBgmLength * currentProcess; // bgm 길이 보정
             PlayBgm(nextBgmName, songVolume, normalBgmTime, () =>
             {
-                Debug.Log("2번 등록");
                 PlaySfx(origianlreverbName, songVolume);
             });
         }
@@ -282,7 +278,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
         {
             PlayBgm(nextBgmName, songVolume, 0f, () =>
             {
-                Debug.Log("3번 등록");
                 PlaySfx(origianlreverbName, songVolume);
             });
         }
