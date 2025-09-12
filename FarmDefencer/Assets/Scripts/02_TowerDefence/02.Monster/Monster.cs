@@ -212,22 +212,14 @@ public class Monster : TargetableBehavior, IProduct, IVolumeControl
         var t = Mathf.Clamp01(0f);
 
         spineController.Skeleton.A = t;
-
-        if (HealthBar != null)
-        {
-            HealthBar.SetAlpha(t);
-        }
+        HealthBar?.SetAlpha(t);
     }
     private void InstantOpaque()
     {
         var t = Mathf.Clamp01(1f);
 
         spineController.Skeleton.A = t;
-
-        if (HealthBar != null)
-        {
-            HealthBar.SetAlpha(t);
-        }
+        HealthBar?.SetAlpha(t);
     }
     private IEnumerator TransparentCo(float duration)
     {
@@ -239,11 +231,7 @@ public class Monster : TargetableBehavior, IProduct, IVolumeControl
             t = Mathf.Clamp01(1f - t);
 
             spineController.Skeleton.A = t;
-
-            if (HealthBar != null)
-            {
-                HealthBar.SetAlpha(t);
-            }
+            HealthBar?.SetAlpha(t);
 
             yield return null;
 

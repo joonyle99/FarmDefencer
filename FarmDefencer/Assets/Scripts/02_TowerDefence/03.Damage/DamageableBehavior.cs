@@ -18,10 +18,8 @@ public abstract class DamageableBehavior : MonoBehaviour
     [Header("──────── DamageableBehavior ────────")]
     [Space]
 
-    [SerializeField] private ProgressBar _healthBar;
-    public ProgressBar HealthBar => _healthBar;
-
-    [Space]
+    protected ProgressBar healthBar;
+    public ProgressBar HealthBar => healthBar;
 
     // status
     protected int maxHp = 0;
@@ -47,20 +45,14 @@ public abstract class DamageableBehavior : MonoBehaviour
 
             if (_hp <= maxHp / 2)
             {
-                _healthBar.ChangeToDanger();
+                healthBar?.ChangeToDanger();
             }
 
-            if (_healthBar != null)
-            {
-                _healthBar.UpdateProgressBar((float)_hp, (float)startHp);
-                //Debug.Log("_healthBar.UpdateProgressBar");
-            }
+            healthBar?.UpdateProgressBar((float)_hp, (float)startHp);
         }
     }
     //[SerializeField] private float _stunDuration = 0.03f;
     //public float StunDuration => _stunDuration;
-
-    [Space]
 
     // state
     private bool _isDead;
@@ -103,7 +95,7 @@ public abstract class DamageableBehavior : MonoBehaviour
             throw new System.NullReferenceException($"You should add DamageZone component");
         }
 
-        _healthBar = GetComponentInChildren<ProgressBar>();
+        healthBar = GetComponentInChildren<ProgressBar>();
 
         spineController = GetComponentInChildren<SpineController>();
         gridMovement = GetComponent<GridMovement>();
@@ -127,11 +119,8 @@ public abstract class DamageableBehavior : MonoBehaviour
     }
     protected virtual void Start()
     {
-        if (_healthBar != null)
-        {
-            _healthBar.UpdateProgressBar((float)_hp, (float)startHp);
-            _healthBar.SetDangerousThreshold(0.5f);
-        }
+        healthBar?.UpdateProgressBar((float)_hp, (float)startHp);
+        healthBar?.SetDangerousThreshold(0.5f);
     }
 
     // normal
