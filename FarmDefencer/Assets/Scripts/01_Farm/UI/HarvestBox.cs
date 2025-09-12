@@ -39,7 +39,7 @@ public sealed class HarvestBox : MonoBehaviour, IFarmSerializable
 
 	public JObject Serialize() => new(new JProperty("Quota", _quota));
 
-	public void Deserialize(JObject json) => _quota = json["Quota"]?.Value<int?>() ?? 0;
+	public void Deserialize(JObject json) => Quota = json["Quota"]?.Value<int?>() ?? 0;
 
 	public void Init(float blinkDuration, bool isAvailable)
 	{
