@@ -22,7 +22,7 @@ public abstract class DamageableBehavior : MonoBehaviour
     public ProgressBar HealthBar => healthBar;
 
     // status
-    protected int maxHp = 0;
+    protected int maxHp = 100;
     public int MaxHp => maxHp;
     private int _hp;
     public int HP
