@@ -553,6 +553,7 @@ public sealed class CropMushroom : Crop
 		{MushroomStage.Stage2_Dead, _ => RequiredCropAction.Water },
 		{MushroomStage.Stage2_Growing, _ => RequiredCropAction.None },
 
+		{MushroomStage.Stage3, _ => RequiredCropAction.SingleTap },
 		{MushroomStage.Stage3_BeforeInoculation, _ => RequiredCropAction.Hold_2 },
 		{MushroomStage.Stage3_AfterInoculation, _ => RequiredCropAction.None },
 
