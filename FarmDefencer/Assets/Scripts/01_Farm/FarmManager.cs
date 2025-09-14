@@ -305,6 +305,7 @@ public sealed class FarmManager : MonoBehaviour
                 SoundManager.Instance.CurrentBgmName.Equals("BGM_T_main_origin_song"))
             {
                 var normalSpeedBgmTime = SoundManager.Instance.CurrentBgmTime;
+                Debug.Log($"Time: {fastSpeedBgmTime}");
                 fastSpeedBgmTime = normalSpeedBgmTime / 1.7f;
             }
             SoundManager.Instance.PlayBgm("BGM_T_main_fast", SoundManager.Instance.songVolume, fastSpeedBgmTime);

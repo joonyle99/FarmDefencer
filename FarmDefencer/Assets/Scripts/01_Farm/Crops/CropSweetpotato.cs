@@ -276,6 +276,7 @@ public sealed class CropSweetpotato : Crop
 		(WrapEffectCondition, WrapEffect),
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
+		(HarvestEffectCondition, HarvestEffect_SoilDust),
 		(HoldEffectCondition, HoldEffect),
 		(HoldStopEffectCondition, HoldStopEffect),
 		(TapEffectCondition, TapEffect),

@@ -344,6 +344,7 @@ public sealed class CropMushroom : Crop
 		(HoldStopEffectCondition, HoldStopEffect),
 		(WaterEffectCondition, WaterEffect),
 		(PlantEffectCondition, PlantEffect),
+		(HarvestEffectCondition, HarvestEffect_SoilDust),
 		(HoldEffectCondition, HoldEffect),
 		(TapEffectCondition, TapEffect),
 		(PlayShotSfxEffectCondition, PlayShotSfxEffect),
