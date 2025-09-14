@@ -185,9 +185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1856f5fb396d8234c8904144892b0e14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthBar: {fileID: 0}
-  _maxHp: 100
-  _targetPoint: {fileID: 0}
   _detector: {fileID: 7505782182428129248}
   _id: 4
   _levelData:
@@ -212,7 +209,7 @@ MonoBehaviour:
   removeVolume: 0.5
   upgradeVolume: 0.5
   fireReadyVolume: 0.5
-  fireShotVolume: 0.5
+  fireShotVolume: 0.3
 --- !u!210 &5803083254459691797
 SortingGroup:
   m_ObjectHideFlags: 0
