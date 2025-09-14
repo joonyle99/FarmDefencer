@@ -302,7 +302,7 @@ public sealed class FarmManager : MonoBehaviour
         {
             var fastSpeedBgmTime = 0.0f;
             if (SoundManager.Instance.CurrentBgmName is not null &&
-                SoundManager.Instance.CurrentBgmName.Equals("BGM_T_main_origin_song"))
+                SoundManager.Instance.CurrentBgmName.Equals("BGM_T_main_origin"))
             {
                 var normalSpeedBgmTime = SoundManager.Instance.CurrentBgmTime;
                 Debug.Log($"Time: {fastSpeedBgmTime}");
@@ -314,7 +314,7 @@ public sealed class FarmManager : MonoBehaviour
         {
             var normalSpeedBgmTime = 0.0f;
             if (SoundManager.Instance.CurrentBgmName is not null &&
-                SoundManager.Instance.CurrentBgmName.Equals("BGM_T_main_fast_song"))
+                SoundManager.Instance.CurrentBgmName.Equals("BGM_T_main_fast"))
             {
                 var fastSpeedBgmTime = SoundManager.Instance.CurrentBgmTime;
                 normalSpeedBgmTime = fastSpeedBgmTime * 1.7f;
