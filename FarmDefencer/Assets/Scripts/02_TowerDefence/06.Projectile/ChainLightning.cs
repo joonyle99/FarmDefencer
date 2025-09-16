@@ -61,7 +61,7 @@ public class ChainLightning : MonoBehaviour
             }
             else
             {
-                _damage = Mathf.FloorToInt(_damageList[i - 1] * rate);
+                _damage = Mathf.Max(Mathf.FloorToInt(_damageList[i - 1] * rate), 1);
                 rate = Mathf.Max(rate - 0.2f, 0f);
             }
 
@@ -73,10 +73,9 @@ public class ChainLightning : MonoBehaviour
 
     private IEnumerator ChainLightningRoutine()
     {
-         for (int i = 0; i<_targetsToApply.Count; i++)
+        for (int i = 0; i < _targetsToApply.Count; i++)
         {
             var target = _targetsToApply[i];
-            var damage = _damageList[i];
 
             if (target == null || target.gameObject.activeInHierarchy == false || target.IsDead == true)
             {
@@ -89,19 +88,21 @@ public class ChainLightning : MonoBehaviour
             }
 
             // 데미지 적용
-            target.TakeDamage(damage, DamageType.Lightning);
+            var damageIdx = Mathf.Clamp(i, 0, _damageList.Count);
+            var damageValue = _damageList[damageIdx];
+            target.TakeDamage(damageValue, DamageType.Lightning);
 
             // 라이트닝 효과 적용
             var lightningEffector = target.gameObject.AddComponent<LightningEffector>();
             lightningEffector.Activate(target);
 
             // 사운드 재생
-            var audioClip = _audioClips[i];
-            if (audioClip != null)
+            // 5-1, 5-2, 5-3, 5-4를 출력하고 그 이후에는 항상 5-4출력
+            if (_audioClips != null && _audioClips.Count > 0)
             {
-                _audioSource.clip = audioClip;
-                _audioSource.volume = lightningVolume;
-                _audioSource.Play();
+                var audioIdx = Mathf.Clamp(i, 0, _audioClips.Count - 1);
+                var audioClip = _audioClips[audioIdx];
+                _audioSource.PlayOneShot(audioClip, lightningVolume);
             }
 
             // 라인 렌더러에 타겟 추가

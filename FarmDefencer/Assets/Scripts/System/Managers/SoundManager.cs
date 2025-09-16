@@ -433,10 +433,16 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 
     private void Update()
     {
+        if (_sfxPlayQueue == null || _sfxPlayQueue.Count == 0)
+        {
+            return;
+        }
+
 	    foreach (var (audioClip, volume) in _sfxPlayQueue)
 	    {
 		    _sfxAudioSource.PlayOneShot(audioClip, volume);
 	    }
+
 	    _sfxPlayQueue.Clear();
     }
 }
