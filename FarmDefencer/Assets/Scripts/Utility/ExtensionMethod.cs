@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace JoonyleGameDevKit
@@ -173,19 +175,36 @@ namespace JoonyleGameDevKit
             return defaultValue;
         }
 
-        // GameState
-        public static string ToString(this GameState gameState)
+        // SceneType
+        private static readonly Dictionary<SceneType, string> _sceneTypeToName = new()
         {
-            return gameState switch
-            {
-                GameState.Normal => "Normal",
-                GameState.Pause => "Pause",
-                GameState.DefenceEnd => "DefenceEnd",
-                GameState.Water => "Water",
-                GameState.Build => "Build",
-                GameState.Wave => "Wave",
-                _ => "Unknown"
-            };
-        }
+            { SceneType.Loading, "Loading Scene" },
+            { SceneType.Title, "Title Scene" },
+            { SceneType.Main, "Main Scene" },
+            { SceneType.Tycoon, "Tycoon Scene" },
+            { SceneType.World, "World Scene" },
+            { SceneType.Defence, "Defence Scene" },
+        };
+        private static readonly Dictionary<string, SceneType> _sceneNameToType = _sceneTypeToName.ToDictionary(x => x.Value, x => x.Key);
+        public static string ToSceneName(this SceneType sceneType) => _sceneTypeToName.GetValueOrDefault(sceneType, "Unknown SceneType");
+        public static SceneType ToSceneType(this string sceneName) => _sceneNameToType.GetValueOrDefault(sceneName, SceneType.None);
+
+        // GameState
+        private static readonly Dictionary<GameState, string> _gameStateToName = new()
+        {
+            { GameState.Loading, "Loading" },
+            { GameState.Title, "Title" },
+            { GameState.Main, "Main" },
+            { GameState.World, "World" },
+            { GameState.Tycoon, "Tycoon" },
+            { GameState.Build, "Build" },
+            { GameState.Wave, "Wave" },
+            { GameState.WaveAfter, "WaveAfter" },
+            { GameState.DefenceEnd, "DefenceEnd" },
+            { GameState.LeavingDefenceScene, "LeavingDefenceScene" },
+        };
+        private static readonly Dictionary<string, GameState> _nameToGameState = _gameStateToName.ToDictionary(x => x.Value, x => x.Key);
+        public static string ToName(this GameState gameState) => _gameStateToName.GetValueOrDefault(gameState, "Unknown GameState");
+        public static GameState ToGameState(this string name) => _nameToGameState.GetValueOrDefault(name, GameState.None);
     }
 }

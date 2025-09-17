@@ -59,7 +59,7 @@ public sealed class DefenceSceneTransitioner : MonoBehaviour
             Debug.LogError("NullReferenceException");
         }
 
-        SceneManager.LoadScene("Tycoon Scene");
+        SceneChangeManager.Instance.ChangeScene(SceneType.Tycoon);
     }
 
     private static void OnSuccess()

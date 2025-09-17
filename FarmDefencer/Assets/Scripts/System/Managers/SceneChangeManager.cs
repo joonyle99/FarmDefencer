@@ -64,7 +64,7 @@ public class SceneChangeManager : JoonyleGameDevKit.Singleton<SceneChangeManager
         yield return null;
 
         var sceneName = scene.name;
-        var sceneType = sceneName.ToType();
+        var sceneType = sceneName.ToSceneType();
         var defaultState = GetDefaultGameState(sceneType);
 
         GameStateManager.Instance.ChangeState(defaultState);
@@ -72,7 +72,7 @@ public class SceneChangeManager : JoonyleGameDevKit.Singleton<SceneChangeManager
 
     public void ChangeScene(SceneType sceneType)
     {
-        var sceneName = sceneType.ToName();
+        var sceneName = sceneType.ToSceneName();
 
         ChangeScene(sceneName);
     }

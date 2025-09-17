@@ -163,6 +163,6 @@ public class ProcessUI : MonoBehaviour
         SaveManager.Instance.LoadedSave["ResourceManager"] = ResourceManager.Instance.Serialize();
         SaveManager.Instance.FlushSave();
         
-        SceneManager.LoadScene("Main Scene");
+        SceneChangeManager.Instance.ChangeScene(SceneType.Main);
     }
 }

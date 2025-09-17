@@ -23,7 +23,7 @@ public class WorldUI : MonoBehaviour
 
     public void GoToMain()
     {
-        SceneManager.LoadScene("Main Scene");
+        SceneChangeManager.Instance.ChangeScene(SceneType.Main);
     }
 
     public void ChangeTravelMap(int mapIdx)

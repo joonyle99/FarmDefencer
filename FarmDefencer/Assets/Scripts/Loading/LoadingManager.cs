@@ -215,6 +215,6 @@ public class LoadingManager : MonoBehaviour
         }
 
         SceneLoadContext.OnSceneChanged?.Invoke();
-        SceneManager.LoadScene(SceneLoadContext.NextSceneName);
+        SceneChangeManager.Instance.ChangeScene(SceneLoadContext.NextSceneType);
     }
 }

@@ -69,17 +69,18 @@ public sealed class MainScene : MonoBehaviour
 
     private void OnFarmButtonClicked()
     {
-        SceneManager.LoadScene("Tycoon Scene");
+        SceneChangeManager.Instance.ChangeScene(SceneType.Tycoon);
     }
 
     private void OnBattleButtonClicked()
     {
-        SceneManager.LoadScene("World Scene");
+        SceneChangeManager.Instance.ChangeScene(SceneType.World);
     }
 
     private void OnResetSaveAndRestartButtonClicked()
     {
         SaveManager.Instance.WriteSave(new JObject());
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        var sceneName = SceneManager.GetActiveScene().name;
+        SceneChangeManager.Instance.ChangeScene(sceneName);
     }
 }

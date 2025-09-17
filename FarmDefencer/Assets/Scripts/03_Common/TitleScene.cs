@@ -101,6 +101,6 @@ public sealed class TitleScene : MonoBehaviour
 
     private void OnGameStartButtonPressed()
     {
-        SceneManager.LoadScene("Main Scene");
+        SceneChangeManager.Instance.ChangeScene(SceneType.Main);
     }
 }

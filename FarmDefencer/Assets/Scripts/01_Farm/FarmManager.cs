@@ -145,7 +145,7 @@ public sealed class FarmManager : MonoBehaviour
             () =>
             { 
                 SerializeToSaveFile();
-                SceneManager.LoadScene("Main Scene");
+                SceneChangeManager.Instance.ChangeScene(SceneType.Main);
             },
             () => CanGoDefence);
 
@@ -221,7 +221,7 @@ public sealed class FarmManager : MonoBehaviour
         MapManager.Instance.CurrentStageIndex = MapManager.Instance.MaximumUnlockedStageIndex;
 
         // 로딩 씬 설정
-        SceneLoadContext.NextSceneName = "Defence Scene";
+        SceneLoadContext.NextSceneType = SceneType.Defence;
         //SceneLoadContext.OnSceneChanged = null;
         SceneLoadContext.OnSceneChanged += () =>
         {
@@ -232,7 +232,7 @@ public sealed class FarmManager : MonoBehaviour
             DontDestroyOnLoad(defenceSceneOpenContext);
         };
 
-        SceneManager.LoadScene("Loading Scene");
+        SceneChangeManager.Instance.ChangeScene(SceneType.Loading);
 
         // 데이터 저장
         SerializeToSaveFile();

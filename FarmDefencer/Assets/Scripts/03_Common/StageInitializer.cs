@@ -39,7 +39,7 @@ public class StageInitializer : MonoBehaviour
         MapManager.Instance.CurrentStageIndex = stageIndex;
 
         // 로딩 씬 설정
-        SceneLoadContext.NextSceneName = "Defence Scene";
+        SceneLoadContext.NextSceneType = SceneType.Defence;
         //SceneLoadContext.OnSceneChanged = null;
         SceneLoadContext.OnSceneChanged += () =>
         {
@@ -50,6 +50,6 @@ public class StageInitializer : MonoBehaviour
             DontDestroyOnLoad(defenceSceneOpenContext);
         };
 
-        SceneManager.LoadScene("Loading Scene");
+        SceneChangeManager.Instance.ChangeScene(SceneType.Loading);
     }
 }
