@@ -36,5 +36,7 @@ public class WorldUI : MonoBehaviour
     {
         _travelMap = map;
         _mapNameText.text = map.MapName;
+
+        SoundManager.Instance.PlayDefenceAmb(map);
     }
 }
