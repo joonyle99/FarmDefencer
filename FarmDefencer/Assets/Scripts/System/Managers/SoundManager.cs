@@ -387,7 +387,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
             var currentProcess = CurrentBgmTime / _bgmAudioSource1.clip.length;
 
             var fastBgmLength = defenceBgmLengths[1].length;
-            Debug.Log($"{defenceBgmLengths[1].name}, {defenceBgmLengths[1].length}");
             var fastBgmTime = fastBgmLength * currentProcess; // bgm 길이 보정
             PlayBgm(nextBgmName, songVolume, fastBgmTime, () =>
             {
@@ -401,7 +400,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
             var currentProcess = CurrentBgmTime / _bgmAudioSource1.clip.length;
 
             var originalBgmLength = defenceBgmLengths[0].length;
-            Debug.Log($"{defenceBgmLengths[0].name}, {defenceBgmLengths[0].length}");
             var normalBgmTime = originalBgmLength * currentProcess; // bgm 길이 보정
             PlayBgm(nextBgmName, songVolume, normalBgmTime, () =>
             {
