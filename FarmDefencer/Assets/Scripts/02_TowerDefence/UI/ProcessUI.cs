@@ -131,14 +131,14 @@ public class ProcessUI : MonoBehaviour
             //SoundManager.Instance.SetBgmDoubleSpeed();
             //SoundManager.Instance.SetAmbDoubleSpeed();
 
-            SoundManager.Instance.PlayDefenceMapSong(true);
+            SoundManager.Instance.PlayDefenceBgm(MapManager.Instance.CurrentMap, true);
         }
         else
         {
             //SoundManager.Instance.SetBgmNormalSpeed();
             //SoundManager.Instance.SetAmbNormalSpeed();
 
-            SoundManager.Instance.PlayDefenceMapSong(false);
+            SoundManager.Instance.PlayDefenceBgm(MapManager.Instance.CurrentMap, false);
         }
     }
 

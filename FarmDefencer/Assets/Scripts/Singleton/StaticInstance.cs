@@ -1,4 +1,5 @@
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace JoonyleGameDevKit
 {
@@ -6,7 +7,7 @@ namespace JoonyleGameDevKit
     /// A static instance is similar to a singleton, but instead of destroying any new instances,
     /// it overrides the current instance. This is handy for resetting the state and saves you doing it manually
     /// </summary>
-    public abstract class StaticInstance<T> : MonoBehaviour where T : MonoBehaviour
+    public abstract class StaticInstance<T> : SerializedMonoBehaviour where T : MonoBehaviour
     {
         /// <summary>
         /// 어디에서나 접근할 수 있는 정적 인스턴스

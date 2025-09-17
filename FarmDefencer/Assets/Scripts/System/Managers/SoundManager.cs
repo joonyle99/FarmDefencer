@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Sirenix.Serialization;
 
 public interface IVolumeControl
 {
@@ -44,6 +45,10 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
 
     [Space]
 
+    [OdinSerialize] private Dictionary<string, List<AudioClip>> _defenceBgmClipMap;
+
+    [Space]
+
     [VolumeControl][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float ambVolume = 0.5f;
     [VolumeControl][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float songVolume = 0.5f;
 
@@ -66,13 +71,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
     [CanBeNull] public string CurrentBgmName { get; private set; }
     public float CurrentBgmTime => _bgmAudioSource1.time;
     [CanBeNull] public string CurrentAmbName { get; private set; }
-
-    private Dictionary<string, List<float>> _defenceBgmLengthList = new()
-    {
-        { "forest", new List<float> { 96.000f, 64.000f } },
-        { "beach", new List<float> { 106.667f, 71.111f } },
-        { "cave", new List<float> { 85.333f, 65.641f } },
-    };
 
     private Coroutine _waitForFinishCo;
     private IEnumerator WaitForFinishCo(AudioClip targetClip, Action onFinished)
@@ -169,6 +167,11 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
         _bgmAudioSource1.pitch = 1.0f; // BGM을 1배속으로 재생
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="ambName"></param>
+    /// <param name="volume"></param>
     public void PlayAmb(string ambName, float volume = 0.5f)
     {
 	    if (!ambName.Equals(CurrentAmbName))
@@ -218,69 +221,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
     public void SetAmbNormalSpeed()
     {
         _ambAudioSource.pitch = 1.0f; // AMB를 1배속으로 재생
-    }
-
-    // TODO: 수정 예정
-    public void PlayDefenceMapAmb()
-    {
-        var currentMap = MapManager.Instance.CurrentMap;
-        var mapAmbName = $"AMB_D_{currentMap.MapCode}";
-        PlayAmb(mapAmbName, ambVolume);
-    }
-    public void PlayDefenceMapSong(bool isFast = false)
-    {
-        var currentMap = MapManager.Instance.CurrentMap;
-
-        var originalSongName = $"BGM_D_{currentMap.MapCode}_{"original"}_song";
-        var fastSongName = $"BGM_D_{currentMap.MapCode}_{"fast"}_song";
-
-        var nextBgmName = (isFast == false) ? originalSongName : fastSongName;
-
-        var origianlreverbName = $"SFX_D_{currentMap.MapCode}_{"original"}_reverb";
-        var fastreverbName = $"SFX_D_{currentMap.MapCode}_{"fast"}_reverb";
-
-        var defenceBgmLength = _defenceBgmLengthList[currentMap.MapCode];
-        if (defenceBgmLength == null || defenceBgmLength.Count < 2)
-        {
-            Debug.LogError($"BGM 길이 정보가 없습니다: {currentMap.MapCode}");
-            return;
-        }
-
-        // bgm만 교체하고 재생 시간을 유지함
-        // 1. 현재 original song 재생 중인데, 다음 재생할 bgm이 fast song인 경우
-        if (CurrentBgmName == originalSongName && nextBgmName == fastSongName)
-        {
-            // 현재 얼마나 재생되었는지 확인 (0 ~ 1)
-            var currentProcess = CurrentBgmTime / _bgmAudioSource1.clip.length;
-
-            var fastBgmLength = defenceBgmLength[1];
-            var fastBgmTime = fastBgmLength * currentProcess; // bgm 길이 보정
-            PlayBgm(nextBgmName, songVolume, fastBgmTime, () =>
-            {
-                PlaySfx(fastreverbName, songVolume);
-            });
-        }
-        // 2. 현재 fast song 재생 중인데, 다음 재생할 bgm이 original song인 경우
-        else if (CurrentBgmName == fastSongName && nextBgmName == originalSongName)
-        {
-            // 현재 얼마나 재생되었는지 확인 (0 ~ 1)
-            var currentProcess = CurrentBgmTime / _bgmAudioSource1.clip.length;
-
-            var originalBgmLength = defenceBgmLength[0];
-            var normalBgmTime = originalBgmLength * currentProcess; // bgm 길이 보정
-            PlayBgm(nextBgmName, songVolume, normalBgmTime, () =>
-            {
-                PlaySfx(origianlreverbName, songVolume);
-            });
-        }
-        // 3. ...
-        else
-        {
-            PlayBgm(nextBgmName, songVolume, 0f, () =>
-            {
-                PlaySfx(origianlreverbName, songVolume);
-            });
-        }
     }
 
     /// <summary>
@@ -402,6 +342,7 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
         Debug.Log(log);
     }
 
+    //
     public void PauseAll()
     {
         _bgmAudioSource1.Pause();
@@ -415,6 +356,69 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
         _ambAudioSource.UnPause();
     }
 
+    //
+    public void PlayDefenceAmb(MapEntry map)
+    {
+        var mapAmbName = $"AMB_D_{map.MapCode}";
+        PlayAmb(mapAmbName, ambVolume);
+    }
+    public void PlayDefenceBgm(MapEntry map, bool isFast = false)
+    {
+        var originalSongName = $"BGM_D_{map.MapCode}_{"original"}_song";
+        var fastSongName = $"BGM_D_{map.MapCode}_{"fast"}_song";
+
+        var nextBgmName = (isFast == false) ? originalSongName : fastSongName;
+
+        var origianlreverbName = $"SFX_D_{map.MapCode}_{"original"}_reverb";
+        var fastreverbName = $"SFX_D_{map.MapCode}_{"fast"}_reverb";
+
+        var defenceBgmLengths = _defenceBgmClipMap[map.MapCode];
+        if (defenceBgmLengths == null || defenceBgmLengths.Count < 2)
+        {
+            Debug.LogError($"BGM 길이 정보가 없습니다: {map.MapCode}");
+            return;
+        }
+
+        // bgm만 교체하고 재생 시간을 유지함
+        // 1. 현재 original song 재생 중인데, 다음 재생할 bgm이 fast song인 경우
+        if (CurrentBgmName == originalSongName && nextBgmName == fastSongName)
+        {
+            // 현재 얼마나 재생되었는지 확인 (0 ~ 1)
+            var currentProcess = CurrentBgmTime / _bgmAudioSource1.clip.length;
+
+            var fastBgmLength = defenceBgmLengths[1].length;
+            Debug.Log($"{defenceBgmLengths[1].name}, {defenceBgmLengths[1].length}");
+            var fastBgmTime = fastBgmLength * currentProcess; // bgm 길이 보정
+            PlayBgm(nextBgmName, songVolume, fastBgmTime, () =>
+            {
+                PlaySfx(fastreverbName, songVolume);
+            });
+        }
+        // 2. 현재 fast song 재생 중인데, 다음 재생할 bgm이 original song인 경우
+        else if (CurrentBgmName == fastSongName && nextBgmName == originalSongName)
+        {
+            // 현재 얼마나 재생되었는지 확인 (0 ~ 1)
+            var currentProcess = CurrentBgmTime / _bgmAudioSource1.clip.length;
+
+            var originalBgmLength = defenceBgmLengths[0].length;
+            Debug.Log($"{defenceBgmLengths[0].name}, {defenceBgmLengths[0].length}");
+            var normalBgmTime = originalBgmLength * currentProcess; // bgm 길이 보정
+            PlayBgm(nextBgmName, songVolume, normalBgmTime, () =>
+            {
+                PlaySfx(origianlreverbName, songVolume);
+            });
+        }
+        // 3. ...
+        else
+        {
+            PlayBgm(nextBgmName, songVolume, 0f, () =>
+            {
+                PlaySfx(origianlreverbName, songVolume);
+            });
+        }
+    }
+
+    //
     private IEnumerator InvokeAfterSeconds(float seconds, System.Action callback)
     {
         yield return new WaitForSeconds(seconds);
@@ -430,7 +434,6 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
         _ambDictionary = new Dictionary<string, AudioClip>();
         _sfxPlayQueue = new List<(AudioClip, float)>();
     }
-
     private void Update()
     {
         if (_sfxPlayQueue == null || _sfxPlayQueue.Count == 0)
