@@ -1,18 +1,25 @@
+using JoonyleGameDevKit;
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public enum GameState
 {
     None,
 
-    // Common
-    Normal,
-    Pause,
+    // Loading
+    Loading,
+
+    // Title
+    Title,
+
+    // Main
+    Main,
+
+    // World
+    World,
 
     // Tycoon
-    Water,
-    TycoonEnd,
+    Tycoon,
 
     // Defence
     Build,
@@ -24,41 +31,41 @@ public enum GameState
 
 public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
 {
-    public GameState CurrentState { get; private set; } = GameState.None;
+    private GameState _currentState = GameState.None;
+    public GameState CurrentState => _currentState;
 
     public bool IsBuildState => CurrentState == GameState.Build;
     public bool IsWaveState => CurrentState == GameState.Wave || CurrentState == GameState.WaveAfter;
     public bool IsDefenceState => IsBuildState || IsWaveState || CurrentState == GameState.DefenceEnd;
 
-    public event Action OnNormalState;
+    // Loading
+    public event Action OnLoadingState;
+
+    // Title
+    public event Action OnTitleState;
+
+    // Main
+    public event Action OnMainState;
+
+    // World
+    public event Action OnWorldState;
+
+    // Tycoon
+    public event Action OnTycoonState;
+
+    // Defence
     public event Action OnBuildState;
-    /// <summary>
-    /// 웨이브가 시작되기 직전에 호출되는 이벤트
-    /// </summary>
     public event Action OnWaveState;
-    /// <summary>
-    /// 모든 웨이브가 끝난 후 호출되는 이벤트
-    /// </summary>
     public event Action OnWaveAfterState;
-    /// <summary>
-    /// 몬스터가 모두 사라진 후 호출되는 이벤트
-    /// </summary>
     public event Action OnDefenceEndState;
-    /// <summary>
-    /// EndingUI까지 모두 보여준 후 다른 씬으로 이동해야 할 때 호출되는 이벤트
-    /// </summary>
     public event Action<EndingType> OnLeavingDefenceSceneState;
 
+    //
     public event Action OnChangeState;
 
     public bool IsPause { get; private set; } = false;
     public bool IsPlayX2 { get; private set; } = false;
     private float _savedTimeScale = 1f;
-
-    private void Start()
-    {
-        ChangeState(GameState.Normal);
-    }
 
     public void ChangeState(GameState nextState, params object[] args)
     {
@@ -67,13 +74,26 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
             return;
         }
 
-        CurrentState = nextState;
-        Debug.Log($"<color=orange>Current State: {CurrentState.ToString()}</color>");
+        _currentState = nextState;
+
+        Debug.Log($"<color=orange>Current State: {CurrentState.ToName()}</color>");
 
         switch (CurrentState)
         {
-            case GameState.Normal:
-                HandleNormalState();
+            case GameState.Loading:
+                HandleLoadingState();
+                break;
+            case GameState.Title:
+                HandleTitleState();
+                break;
+            case GameState.Main:
+                HandleMainState();
+                break;
+            case GameState.World:
+                HandleWorldState();
+                break;
+            case GameState.Tycoon:
+                HandleTycoonState();
                 break;
             case GameState.Build:
                 HandleBuildState();
@@ -96,13 +116,41 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
         OnChangeState?.Invoke();
     }
 
-    // Common
-    private void HandleNormalState()
+    // Loading
+    private void HandleLoadingState()
     {
-        OnNormalState?.Invoke();
+        OnLoadingState?.Invoke();
+    }
+
+    // Title
+    private void HandleTitleState()
+    {
+        OnTitleState?.Invoke();
+    }
+    
+    // Main
+    private void HandleMainState()
+    {
+        OnMainState?.Invoke();
+
+        SoundManager.Instance.StopAmb();
+        SoundManager.Instance.StopBgm();
+    }
+    
+    // World
+    private void HandleWorldState()
+    {
+        OnWorldState?.Invoke();
+
+        SoundManager.Instance.StopAmb();
+        SoundManager.Instance.StopBgm();
     }
 
     // Tycoon
+    private void HandleTycoonState()
+    {
+        OnTycoonState?.Invoke();
+    }
 
     // Defence
     private void HandleBuildState()
@@ -115,9 +163,6 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     private void HandleWaveState()
     {
         OnWaveState?.Invoke();
-
-        // build state로 옮김
-        //SoundManager.Instance.PlayDefenceMapSong();
     }
     private void HandleWaveAfterState()
     {
@@ -134,7 +179,6 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
         // TODO: 게임 배속 복구하기
         Time.timeScale = 1f;
     }
-
     private void HandleLeavingDefenceSceneState(EndingType endingType)
     {
         OnLeavingDefenceSceneState?.Invoke(endingType);
@@ -159,7 +203,6 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
             SoundManager.Instance.ResumeAll();
         }
     }
-
     public void TogglePlaySpeed()
     {
         if (IsPause)
