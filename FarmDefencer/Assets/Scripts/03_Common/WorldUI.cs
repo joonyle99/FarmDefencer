@@ -29,8 +29,8 @@ public class WorldUI : MonoBehaviour
     public void ChangeTravelMap(int mapIdx)
     {
         var map = MapManager.Instance.GetMapEntryOf(mapIdx);
-        _travelMap = map;
-        _mapNameText.text = map.MapName;
+
+        ChangeTravelMap(map);
     }
     public void ChangeTravelMap(MapEntry map)
     {
