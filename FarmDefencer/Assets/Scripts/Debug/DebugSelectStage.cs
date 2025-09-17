@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SelectMapUITest : MonoBehaviour
+public class DebugSelectStage : MonoBehaviour
 {
     [SerializeField] private TMP_InputField _maxUnlockedMapIndex;
     [SerializeField] private TMP_InputField _maxUnlockedStageIndex;
@@ -14,7 +14,7 @@ public class SelectMapUITest : MonoBehaviour
 
     public void SelectMap()
     {
-        if (GameStateManager.Instance.CurrentState is not GameState.Normal)
+        if (GameStateManager.Instance.CurrentState is not GameState.Main)
         {
             return;
         }
