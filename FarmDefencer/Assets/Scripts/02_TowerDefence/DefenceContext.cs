@@ -46,14 +46,6 @@ public class DefenceContext : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        if (GameStateManager.Instance is not null)
-        {
-            GameStateManager.Instance.ChangeState(GameState.Normal);
-        }
-    }
-
     private void OnEnable()
     {
         if (MapManager.Instance is not null)

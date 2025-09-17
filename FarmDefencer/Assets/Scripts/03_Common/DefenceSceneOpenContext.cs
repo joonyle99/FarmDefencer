@@ -13,7 +13,6 @@ public sealed class DefenceSceneOpenContext : MonoBehaviour
         yield return null;
         
         MapManager.Instance.InvokeOnMapChanged();
-        GameStateManager.Instance.ChangeState(GameState.Build);
         
         Destroy(gameObject);
     }

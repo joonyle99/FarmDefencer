@@ -15,13 +15,13 @@ public sealed class MainScene : MonoBehaviour
     private Button _debugResetSaveAndRestartButton;
     private Image _farmIcon;
     private Image _battleIcon;
-    
+
     private void Awake()
     {
         Application.targetFrameRate = 60;
-        
+
         _farmButton = transform.Find("FarmButton").GetComponent<Button>();
-        _farmButton.onClick.AddListener(OnFarmButtonClicked);        
+        _farmButton.onClick.AddListener(OnFarmButtonClicked);
         _farmIcon = transform.Find("FarmButton/FarmIcon").GetComponent<Image>();
         _battleButton = transform.Find("BattleButton").GetComponent<Button>();
         _battleButton.onClick.AddListener(OnBattleButtonClicked);
@@ -39,12 +39,12 @@ public sealed class MainScene : MonoBehaviour
         var loadedSave = SaveManager.Instance.LoadedSave;
         MapManager.Instance.Deserialize(loadedSave["MapManager"] as JObject ?? new JObject());
         ResourceManager.Instance.Deserialize(loadedSave["ResourceManager"] as JObject ?? new JObject());
-        
+
         // 타이머 불러오기
         var jsonFarmClock = loadedSave["FarmClock"] ?? new JObject();
         var currentDaytime = jsonFarmClock["CurrentDaytime"]?.Value<float>() ?? 0.0f;
         var lengthOfDaytime = jsonFarmClock["LengthOfDaytime"]?.Value<float>() ?? 300.0f;
-        
+
         // 재배 가능 시간 설정
         var remainingDaytimeSpan = TimeSpan.FromSeconds(lengthOfDaytime - currentDaytime);
         var remainingDaytimeMinutes = remainingDaytimeSpan.Minutes;
@@ -55,7 +55,7 @@ public sealed class MainScene : MonoBehaviour
             _farmButton.interactable = false;
             _farmIcon.color = _farmButton.colors.disabledColor;
         }
-        
+
         // 사용 가능 코인 설정
         _availableCoinText.text = $"사용 가능 코인\n:{ResourceManager.Instance.Coin}";
         if (ResourceManager.Instance.Coin <= 0)
@@ -63,7 +63,7 @@ public sealed class MainScene : MonoBehaviour
             _battleButton.interactable = false;
             _battleIcon.color = _battleButton.colors.disabledColor;
         }
-        
+
         _timerUI.Init(MapManager.Instance.MaximumUnlockedMapIndex, MapManager.Instance.MaximumUnlockedStageIndex, () => (lengthOfDaytime - currentDaytime) / lengthOfDaytime);
     }
 

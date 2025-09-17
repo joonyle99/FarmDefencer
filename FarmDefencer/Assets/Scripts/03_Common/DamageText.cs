@@ -79,6 +79,7 @@ public class DamageText : MonoBehaviour
                 return ConstantConfig.PINK;
             case DamageType.Lightning:
                 return ConstantConfig.YELLOW;
+
             default:
                 return ConstantConfig.WHITE;
         }
