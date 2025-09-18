@@ -433,14 +433,13 @@ public sealed class Tower : TargetableBehavior, IVolumeControl
         }
     }
 
-    // hit
     public override void TakeDamage(int damage, DamageType type)
     {
-        HP -= damage;
+        throw new NotImplementedException();
     }
     public override void Kill()
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 
     #endregion
