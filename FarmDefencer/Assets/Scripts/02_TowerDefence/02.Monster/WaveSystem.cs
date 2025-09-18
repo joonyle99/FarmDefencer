@@ -107,6 +107,12 @@ public class WaveSystem : MonoBehaviour
             }
         }
     }
+    private void OnDestroy()
+    {
+        GameStateManager.Instance?.RemoveCallback(GameState.WaveInProgress, (Action)InitStageData);
+        GameStateManager.Instance?.RemoveCallback(GameState.WaveInProgress, (Action)InitProgressBar);
+        GameStateManager.Instance?.RemoveCallback(GameState.WaveInProgress, (Action)StartWaveProcess);
+    }
 
     private void InitStageData()
     {
