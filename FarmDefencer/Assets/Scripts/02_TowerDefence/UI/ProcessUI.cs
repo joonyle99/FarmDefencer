@@ -40,6 +40,7 @@ public class ProcessUI : MonoBehaviour
         GameStateManager.Instance?.AddCallback(GameState.Build, (Action)RefreshButton);
         GameStateManager.Instance?.AddCallback(GameState.WaveInProgress, (Action)RefreshButton);
         GameStateManager.Instance?.AddCallback(GameState.WaveCompleted, (Action)RefreshButton);
+        GameStateManager.Instance?.AddCallback(GameState.DefenceEnd, (Action)BlockProcess);
         GameStateManager.Instance?.AddCallback(GameState.DefenceEnd, (Action)RefreshButton);
 
         _panelToggler = FindFirstObjectByType<PanelToggler>();
@@ -65,10 +66,17 @@ public class ProcessUI : MonoBehaviour
         GameStateManager.Instance?.RemoveCallback(GameState.Build, (Action)RefreshButton);
         GameStateManager.Instance?.RemoveCallback(GameState.WaveInProgress, (Action)RefreshButton);
         GameStateManager.Instance?.RemoveCallback(GameState.WaveCompleted, (Action)RefreshButton);
+        GameStateManager.Instance?.RemoveCallback(GameState.DefenceEnd, (Action)BlockProcess);
         GameStateManager.Instance?.RemoveCallback(GameState.DefenceEnd, (Action)RefreshButton);
     }
 
-    public void RefreshButton()
+    private void BlockProcess()
+    {
+        Time.timeScale = 1f;
+        SoundManager.Instance.StopBgm();
+        _pauseBlocker.gameObject.SetActive(true);
+    }
+    private void RefreshButton()
     {
         var isBuildState = GameStateManager.Instance.IsBuildState;
         var isWaveState = GameStateManager.Instance.IsWaveState;
@@ -163,7 +171,7 @@ public class ProcessUI : MonoBehaviour
 
         // 중단하시겠습까?
 
-        DefenceSceneTransitioner.HandleGiveUp();
+        DefenceSceneTransitioner.OnGiveUp();
 
         SaveManager.Instance.LoadedSave["MapManager"] = MapManager.Instance.Serialize();
         SaveManager.Instance.LoadedSave["ResourceManager"] = ResourceManager.Instance.Serialize();

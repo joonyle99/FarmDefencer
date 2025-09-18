@@ -79,8 +79,6 @@ public class WaveSystem : MonoBehaviour
     public event System.Action<int> OnTotalSpawnCountChanged;
     public event System.Action<int> OnSurvivedCountChanged;
 
-    public event System.Action<EndingType> OnEnding;
-
     #endregion
 
     #region Functions
@@ -232,15 +230,13 @@ public class WaveSystem : MonoBehaviour
         {
             // 실패 시 설치한 타워 가격의 100%를 돌려줌
             ResourceManager.Instance.EarnGold(totalCost);
-
-            OnEnding?.Invoke(EndingType.Failure);
+            GameStateManager.Instance.ChangeState(GameState.DefenceEnd, EndingType.Failure);
         }
         else
         {
             // 성공 시 설치한 타워 가격의 50%를 돌려줌
             ResourceManager.Instance.EarnGold((int)(totalCost * 0.5f));
-
-            OnEnding?.Invoke(EndingType.Success);
+            GameStateManager.Instance.ChangeState(GameState.DefenceEnd, EndingType.Success);
         }
     }
 

@@ -40,7 +40,7 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     public bool IsWaveState => CurrentState == GameState.WaveInProgress || CurrentState == GameState.WaveCompleted;
     public bool IsDefenceState => IsBuildState || IsWaveState || CurrentState == GameState.DefenceEnd;
 
-    private Dictionary<GameState, HashSet<Delegate>> _stateCallbacks = new();
+    private Dictionary<GameState, List<Delegate>> _stateCallbacks = new();
 
     #endregion
 
@@ -63,7 +63,7 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
 
         _currentState = nextState;
 
-        if (_stateCallbacks.TryGetValue(nextState, out HashSet<Delegate> callbacks))
+        if (_stateCallbacks.TryGetValue(nextState, out List<Delegate> callbacks))
         {
             foreach (Delegate callback in callbacks)
             {
@@ -86,10 +86,13 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
     {
         if (_stateCallbacks.ContainsKey(state) == false)
         {
-            _stateCallbacks.Add(state, new HashSet<Delegate>());
+            _stateCallbacks.Add(state, new List<Delegate>());
         }
 
-        _stateCallbacks[state].Add(callback);
+        if (_stateCallbacks[state].Contains(callback) == false)
+        {
+            _stateCallbacks[state].Add(callback);
+        }
     }
     public void RemoveCallback(GameState state, Delegate callback)
     {
@@ -98,7 +101,10 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
             return;
         }
 
-        _stateCallbacks[state].Remove(callback);
+        if (_stateCallbacks[state].Contains(callback) == true)
+        {
+            _stateCallbacks[state].Remove(callback);
+        }
     }
 
     public void TogglePause()

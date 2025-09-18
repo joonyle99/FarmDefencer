@@ -8,22 +8,7 @@ using UnityEngine;
 /// </summary>
 public sealed class DefenceSceneTransitioner : MonoBehaviour
 {
-    /// <summary>
-    /// 중도 포기 상황에 대한 처리를 진행함.
-    /// ResourceManager에 반환할 돈을 반환하고, 추가할 생존 몬스터를 추가함.
-    /// </summary>
-    public static void HandleGiveUp() => OnGiveUp();
-
-    private void Awake()
-    {
-        GameStateManager.Instance?.AddCallback(GameState.DefenceEnd, (Action<EndingType>)OnLeavingDefenceSceneState);
-    }
-    private void OnDestroy()
-    {
-        GameStateManager.Instance?.RemoveCallback(GameState.DefenceEnd, (Action<EndingType>)OnLeavingDefenceSceneState);
-    }
-
-    private static void OnLeavingDefenceSceneState(EndingType endingType)
+    public static void DefenceToTycoon(EndingType endingType)
     {
         // 여기 Json 접근에서 발생할 수 있는 NullReferenceException은 기본적으로 그냥 두는게 맞음(타이쿤에서 저장이 잘 되면 절대 뜨지 않는 예외고 그 외의 경우에는 떠야 함)
         // 그래도 디펜스 씬 디버그 플레이 시를 감안해서 catch
@@ -75,8 +60,11 @@ public sealed class DefenceSceneTransitioner : MonoBehaviour
 
         SaveManager.Instance.LoadedSave["FarmClock"]["CurrentDaytime"] = 0.0f;
     }
-    private static void OnGiveUp()
-    {        
+    public static void OnGiveUp()
+    {
+        // 중도 포기 상황에 대한 처리를 진행함.
+        // ResourceManager에 반환할 돈을 반환하고, 추가할 생존 몬스터를 추가함.
+
         var isBeforeWave = (int)GameStateManager.Instance.CurrentState < (int)GameState.WaveInProgress;
         if (isBeforeWave)
         {

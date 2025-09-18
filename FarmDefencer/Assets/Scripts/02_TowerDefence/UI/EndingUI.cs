@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using System;
 
 public enum FadeType
 {
@@ -47,11 +48,12 @@ public class EndingUI : MonoBehaviour, IVolumeControl
 
     [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float endingVolume = 0.5f;
 
+    private void Awake()
+    {
+        GameStateManager.Instance?.AddCallback(GameState.DefenceEnd, (Action<EndingType>)ShowEnding);
+    }
     private void Start()
     {
-        DefenceContext.Current.WaveSystem.OnEnding -= ShowEnding;
-        DefenceContext.Current.WaveSystem.OnEnding += ShowEnding;
-
         // 색상 초기화
         _fadeImage.color = new Color(_fadeImage.color.r, _fadeImage.color.g, _fadeImage.color.b, 0f);
         _successImage.color = new Color(_successImage.color.r, _successImage.color.g, _successImage.color.b, 0f);
@@ -61,29 +63,13 @@ public class EndingUI : MonoBehaviour, IVolumeControl
     }
     private void OnDestroy()
     {
-        if (DefenceContext.Current == null) return;
-
-        DefenceContext.Current.WaveSystem.OnEnding -= ShowEnding;
+        GameStateManager.Instance?.RemoveCallback(GameState.DefenceEnd, (Action<EndingType>)ShowEnding);
     }
 
     private void ShowEnding(EndingType endingType)
     {
-        SoundManager.Instance.PlaySfx($"SFX_D_stage_{ConvertToEndingText(endingType)}", endingVolume, () =>
-        {
-            // on complete
-            GameStateManager.Instance.ChangeState(GameState.DefenceEnd, endingType);
-        });
-
-        // TODO: ...
-        {
-            SoundManager.Instance.StopBgm();
-
-            // TODO: Fight 버튼, 타워 설치, 등 불가능하게 막기
-            DefenceContext.Current.DefenceUIController.ProcessUI.PauseBlocker.gameObject.SetActive(true);
-
-            // TODO: 게임 배속 복구하기
-            Time.timeScale = 1f;
-        }
+        SoundManager.Instance.PlaySfx($"SFX_D_stage_{ConvertToEndingText(endingType)}", endingVolume, ()
+            => DefenceSceneTransitioner.DefenceToTycoon(endingType));
 
         // fade
         _fadeImage.gameObject.SetActive(true);
