@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public enum Status
@@ -24,7 +23,7 @@ public abstract class DamageableBehavior : MonoBehaviour
     // status
     protected int maxHp = 100;
     public int MaxHp => maxHp;
-    private int _hp;
+    private int _hp = 0;
     public int HP
     {
         get => _hp;
@@ -48,11 +47,9 @@ public abstract class DamageableBehavior : MonoBehaviour
                 healthBar?.ChangeToDanger();
             }
 
-            healthBar?.UpdateProgressBar((float)_hp, (float)startHp);
+            healthBar?.UpdateProgressBar((float)_hp, (float)MaxHp);
         }
     }
-    //[SerializeField] private float _stunDuration = 0.03f;
-    //public float StunDuration => _stunDuration;
 
     // state
     private bool _isDead;
@@ -65,12 +62,6 @@ public abstract class DamageableBehavior : MonoBehaviour
             spineController?.ResetColor();
         }
     }
-    //private bool _isStun;
-    //public bool IsStun { get { return _isStun; } protected set { _isStun = value; } }
-
-    // etc
-    protected int startHp;
-    public int StartHp => startHp;
 
     protected SpineController spineController;
     public SpineController SpineController => spineController;
@@ -81,7 +72,6 @@ public abstract class DamageableBehavior : MonoBehaviour
     private CircleCollider2D _damagableCollider;
     public CircleCollider2D DamagableColiider => _damagableCollider;
 
-    //protected Dictionary<Status, Coroutine> activeEffects = new();
     protected Coroutine tickDamageCo;
 
     protected bool isActivated = false;
@@ -100,14 +90,12 @@ public abstract class DamageableBehavior : MonoBehaviour
         spineController = GetComponentInChildren<SpineController>();
         gridMovement = GetComponent<GridMovement>();
         _damagableCollider = GetComponent<CircleCollider2D>();
-
-        startHp = MaxHp;
     }
     protected virtual void OnEnable()
     {
         IsDead = false;
 
-        HP = MaxHp;
+        _hp = MaxHp;
     }
     protected virtual void OnDisable()
     {
@@ -119,21 +107,13 @@ public abstract class DamageableBehavior : MonoBehaviour
     }
     protected virtual void Start()
     {
-        healthBar?.UpdateProgressBar((float)_hp, (float)startHp);
+        healthBar?.UpdateProgressBar((float)HP, (float)MaxHp);
         healthBar?.SetDangerousThreshold(0.5f);
     }
 
     // normal
     public abstract void TakeDamage(int damage, DamageType type);
     public abstract void Kill();
-
-    // stun
-    //public IEnumerator StunCo(float duration)
-    //{
-    //    IsStun = true;
-    //    yield return new WaitForSeconds(duration);
-    //    IsStun = false;
-    //}
 
     // activate
     public void Activate()

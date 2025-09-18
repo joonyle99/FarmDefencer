@@ -74,6 +74,7 @@ public class Monster : TargetableBehavior, IProduct, IVolumeControl
         base.OnEnable();
 
         maxHp = _monsterData.MaxHp;
+        HP = maxHp;
 
         InstantOpaque();
     }
