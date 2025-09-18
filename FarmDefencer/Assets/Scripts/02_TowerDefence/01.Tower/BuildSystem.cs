@@ -54,26 +54,18 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
     [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float buildSuccessVolume = 0.5f;
     [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float buildFailureVolume = 0.5f;
 
+    private void Awake()
+    {
+        GameStateManager.Instance?.AddCallback(GameState.Build, (Action)InitBuildTimer);
+        GameStateManager.Instance?.AddCallback(GameState.Build, (Action)InitProgressBar);
+    }
     private void Start()
     {
-        GameStateManager.Instance.OnBuildState -= InitBuildTimer;
-        GameStateManager.Instance.OnBuildState += InitBuildTimer;
-        GameStateManager.Instance.OnBuildState -= InitProgressBar;
-        GameStateManager.Instance.OnBuildState += InitProgressBar;
-
         _prevSpineColorState = ColorState.None;
         _prevDetectorColorState = ColorState.None;
 
         _spineColorState = ColorState.None;
         _detectorColorState = ColorState.None;
-    }
-    private void OnDestroy()
-    {
-        if (GameStateManager.Instance is not null)
-        {
-            GameStateManager.Instance.OnBuildState -= InitBuildTimer;
-            GameStateManager.Instance.OnBuildState -= InitProgressBar;
-        }
     }
     private void Update()
     {
@@ -91,7 +83,7 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
                 _buildTimer = 0f;
                 _progressBar.UpdateProgressBar(0f, _buildDuration);
 
-                GameStateManager.Instance.ChangeState(GameState.Wave);
+                GameStateManager.Instance.ChangeState(GameState.WaveInProgress);
             }
         }
 
@@ -142,6 +134,11 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
                 }
             }
         }
+    }
+    private void OnDestroy()
+    {
+        GameStateManager.Instance?.RemoveCallback(GameState.Build, (Action)InitBuildTimer);
+        GameStateManager.Instance?.RemoveCallback(GameState.Build, (Action)InitProgressBar);
     }
 
     private void InitBuildTimer()
@@ -346,8 +343,8 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
     private bool BuildableState()
     {
         return GameStateManager.Instance.CurrentState is GameState.Build
-            || GameStateManager.Instance.CurrentState is GameState.Wave
-            || GameStateManager.Instance.CurrentState is GameState.WaveAfter;
+            || GameStateManager.Instance.CurrentState is GameState.WaveInProgress
+            || GameStateManager.Instance.CurrentState is GameState.WaveCompleted;
     }
     private bool CheckPath(GridCell gridCell, bool isDirty = false)
     {

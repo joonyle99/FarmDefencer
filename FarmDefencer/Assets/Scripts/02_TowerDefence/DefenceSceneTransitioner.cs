@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 디펜스 씬의 종료 이후 다른 씬으로의 전환을 담당하고,
@@ -15,17 +14,13 @@ public sealed class DefenceSceneTransitioner : MonoBehaviour
     /// </summary>
     public static void HandleGiveUp() => OnGiveUp();
 
-    private void OnEnable()
+    private void Awake()
     {
-        GameStateManager.Instance.OnLeavingDefenceSceneState += OnLeavingDefenceSceneState;
+        GameStateManager.Instance?.AddCallback(GameState.DefenceEnd, (Action<EndingType>)OnLeavingDefenceSceneState);
     }
-
-    private void OnDisable()
+    private void OnDestroy()
     {
-        if (GameStateManager.Instance is not null)
-        {
-            GameStateManager.Instance.OnLeavingDefenceSceneState -= OnLeavingDefenceSceneState;
-        }
+        GameStateManager.Instance?.RemoveCallback(GameState.DefenceEnd, (Action<EndingType>)OnLeavingDefenceSceneState);
     }
 
     private static void OnLeavingDefenceSceneState(EndingType endingType)
@@ -82,7 +77,7 @@ public sealed class DefenceSceneTransitioner : MonoBehaviour
     }
     private static void OnGiveUp()
     {        
-        var isBeforeWave = (int)GameStateManager.Instance.CurrentState < (int)GameState.Wave;
+        var isBeforeWave = (int)GameStateManager.Instance.CurrentState < (int)GameState.WaveInProgress;
         if (isBeforeWave)
         {
             var totalCost = DefenceContext.Current.GridMap.CalculateAllOccupiedTowerCost();

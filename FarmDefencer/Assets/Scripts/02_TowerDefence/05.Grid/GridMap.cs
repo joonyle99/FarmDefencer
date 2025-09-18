@@ -147,16 +147,9 @@ public class GridMap : MonoBehaviour
 
         _targetLayerIndex = LayerMask.NameToLayer("GridCell");
         _targetLayerMask = 1 << _targetLayerIndex;
-    }
-    private void Start()
-    {
-        if (GameStateManager.Instance is not null)
-        {
-            GameStateManager.Instance.OnBuildState -= CreateGridMap;
-            GameStateManager.Instance.OnBuildState += CreateGridMap;
-            GameStateManager.Instance.OnBuildState -= FindPathOnStart;
-            GameStateManager.Instance.OnBuildState += FindPathOnStart;
-        }
+
+        GameStateManager.Instance?.AddCallback(GameState.Build, (Action)CreateGridMap);
+        GameStateManager.Instance?.AddCallback(GameState.Build, (Action)FindPathOnStart);
     }
     private void Update()
     {
@@ -185,14 +178,10 @@ public class GridMap : MonoBehaviour
             }
         }
     }
-
     private void OnDestroy()
     {
-        if (GameStateManager.Instance is not null)
-        {
-            GameStateManager.Instance.OnBuildState -= CreateGridMap;
-            GameStateManager.Instance.OnBuildState -= FindPathOnStart;
-        }
+        GameStateManager.Instance?.RemoveCallback(GameState.Build, (Action)CreateGridMap);
+        GameStateManager.Instance?.RemoveCallback(GameState.Build, (Action)FindPathOnStart);
     }
     private void OnDisable()
     {

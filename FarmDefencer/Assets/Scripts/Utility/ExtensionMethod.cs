@@ -198,10 +198,9 @@ namespace JoonyleGameDevKit
             { GameState.World, "World" },
             { GameState.Tycoon, "Tycoon" },
             { GameState.Build, "Build" },
-            { GameState.Wave, "Wave" },
-            { GameState.WaveAfter, "WaveAfter" },
+            { GameState.WaveInProgress, "WaveInProgress" },
+            { GameState.WaveCompleted, "WaveCompleted" },
             { GameState.DefenceEnd, "DefenceEnd" },
-            { GameState.LeavingDefenceScene, "LeavingDefenceScene" },
         };
         private static readonly Dictionary<string, GameState> _nameToGameState = _gameStateToName.ToDictionary(x => x.Value, x => x.Key);
         public static string ToName(this GameState gameState) => _gameStateToName.GetValueOrDefault(gameState, "Unknown GameState");

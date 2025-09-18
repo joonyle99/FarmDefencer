@@ -1,6 +1,6 @@
+using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ProcessUI : MonoBehaviour
@@ -37,8 +37,10 @@ public class ProcessUI : MonoBehaviour
 
     private void Awake()
     {
-        GameStateManager.Instance.OnChangeState -= RefreshButton;
-        GameStateManager.Instance.OnChangeState += RefreshButton;
+        GameStateManager.Instance?.AddCallback(GameState.Build, (Action)RefreshButton);
+        GameStateManager.Instance?.AddCallback(GameState.WaveInProgress, (Action)RefreshButton);
+        GameStateManager.Instance?.AddCallback(GameState.WaveCompleted, (Action)RefreshButton);
+        GameStateManager.Instance?.AddCallback(GameState.DefenceEnd, (Action)RefreshButton);
 
         _panelToggler = FindFirstObjectByType<PanelToggler>();
     }
@@ -57,6 +59,13 @@ public class ProcessUI : MonoBehaviour
         _stageText.text = $"{MapManager.Instance.CurrentMapIndex}-{MapManager.Instance.CurrentStageIndex}";
 
         _mainButtonsOriginParent = _mainButtons.parent as RectTransform;
+    }
+    private void OnDestroy()
+    {
+        GameStateManager.Instance?.RemoveCallback(GameState.Build, (Action)RefreshButton);
+        GameStateManager.Instance?.RemoveCallback(GameState.WaveInProgress, (Action)RefreshButton);
+        GameStateManager.Instance?.RemoveCallback(GameState.WaveCompleted, (Action)RefreshButton);
+        GameStateManager.Instance?.RemoveCallback(GameState.DefenceEnd, (Action)RefreshButton);
     }
 
     public void RefreshButton()
@@ -89,7 +98,7 @@ public class ProcessUI : MonoBehaviour
             return;
         }
 
-        GameStateManager.Instance.ChangeState(GameState.Wave);
+        GameStateManager.Instance.ChangeState(GameState.WaveInProgress);
     }
 
     public void TogglePause()
@@ -154,11 +163,8 @@ public class ProcessUI : MonoBehaviour
 
         // 중단하시겠습까?
 
-        SoundManager.Instance.StopBgm();
-        SoundManager.Instance.StopAmb();
-        SoundManager.Instance.StopSfx();
-
         DefenceSceneTransitioner.HandleGiveUp();
+
         SaveManager.Instance.LoadedSave["MapManager"] = MapManager.Instance.Serialize();
         SaveManager.Instance.LoadedSave["ResourceManager"] = ResourceManager.Instance.Serialize();
         SaveManager.Instance.FlushSave();
