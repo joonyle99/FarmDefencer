@@ -30,23 +30,32 @@ public class TowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointe
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        // background, icon 색상을 어둡게 변경
-        _background.color = _hoverColor;
-        _icon.color = _hoverColor;
+        if (GameStateManager.Instance.IsPlayableDefenceState == true)
+        {
+            // background, icon 색상을 어둡게 변경
+            _background.color = _hoverColor;
+            _icon.color = _hoverColor;
 
-        DefenceContext.Current.BuildSystem.selectedIndex = selectedIndex;
-        DefenceContext.Current.BuildSystem.Pick(eventData);
+            DefenceContext.Current.BuildSystem.selectedIndex = selectedIndex;
+            DefenceContext.Current.BuildSystem.Pick(eventData);
+        }
     }
     public void OnDrag(PointerEventData eventData)
     {
-        DefenceContext.Current.BuildSystem.Move(eventData);
+        if (GameStateManager.Instance.IsPlayableDefenceState == true)
+        {
+            DefenceContext.Current.BuildSystem.Move(eventData);
+        }
     }
     public void OnPointerUp(PointerEventData eventData)
     {
-        // background, icon 색상을 어둡게 원래로 변경
-        _background.color = _normalColor;
-        _icon.color = _normalColor;
+        if (GameStateManager.Instance.IsPlayableDefenceState == true)
+        {
+            // background, icon 색상을 어둡게 원래로 변경
+            _background.color = _normalColor;
+            _icon.color = _normalColor;
 
-        DefenceContext.Current.BuildSystem.Place(eventData);
+            DefenceContext.Current.BuildSystem.Place(eventData);
+        }
     }
 }
