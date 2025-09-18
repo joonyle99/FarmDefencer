@@ -92,6 +92,11 @@ public class GridCell : MonoBehaviour
     }
 
     // check
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="isDirty">타워를 설치하려고 하는 곳을 경로 타일로 사용하지 않도록 하기 위함</param>
+    /// <returns></returns>
     public bool CheckPath(bool isDirty)
     {
         var gridMap = DefenceContext.Current.GridMap;
@@ -112,6 +117,7 @@ public class GridCell : MonoBehaviour
         {
             isPlacable = false; // 타워를 설치하려고 하는 곳을 경로 타일로 사용하지 않도록 하기 위함
         }
+
         bool result = gridMap.FindPathAll();
 
         if (isDirty == false)
