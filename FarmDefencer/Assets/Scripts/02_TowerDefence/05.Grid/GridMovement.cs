@@ -255,7 +255,7 @@ public class GridMovement : MonoBehaviour
         {
             if (isArrived == true)
             {
-                Debug.Log("next grid cell is end cell point");
+                //Debug.Log("next grid cell is end cell point");
                 eachGridPath = new List<GridCell> { _nextGridCell };
             }
             else

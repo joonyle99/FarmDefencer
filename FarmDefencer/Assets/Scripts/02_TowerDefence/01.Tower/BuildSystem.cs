@@ -42,14 +42,12 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
 
     // dynamic variable
     private Tower _ghostTower;
-    private GridCell _occupiedCellByGhost;
-    public GridCell OccupiedCellByGhost => _occupiedCellByGhost;
+    private GridCell _occupiedCellByGhost; // ghost tower로 점유된 grid cell
 
-    private ColorState _prevSpineColorState;
-    private ColorState _prevDetectorColorState;
+    private ColorState _spineColorState; // ghost tower의 spine color
+    private ColorState _detectorColorState; // ghost tower의 detector color
 
-    private ColorState _spineColorState;
-    private ColorState _detectorColorState;
+    private bool _isBlocked = false;
 
     [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float buildSuccessVolume = 0.5f;
     [VolumeControl("Defence")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float buildFailureVolume = 0.5f;
@@ -61,9 +59,6 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
     }
     private void Start()
     {
-        _prevSpineColorState = ColorState.None;
-        _prevDetectorColorState = ColorState.None;
-
         _spineColorState = ColorState.None;
         _detectorColorState = ColorState.None;
     }
@@ -89,15 +84,41 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
 
         if (_ghostTower != null)
         {
+            if (_occupiedCellByGhost != null)
+            {
+                DefenceContext.Current.GridMap.LastPlacedGridCell = _occupiedCellByGhost; // for check path
+                var isPassed = CheckPath(_occupiedCellByGhost, true);
+                DefenceContext.Current.GridMap.LastPlacedGridCell = null; // for check path
+
+                if (isPassed)
+                {
+                    // 2. 기존에 경로를 찾을 수 없거나 몬스터가 해당 셀에 있는 경우로 인해 Red 표시해주고 있었을 때
+                    // 경로를 찾을 수 있게된다면 그 상태를 갱신해준다.
+                    if (_isBlocked == true && _spineColorState == ColorState.Red && _detectorColorState == ColorState.Red)
+                    {
+                        _spineColorState = ColorState.None;
+                        _detectorColorState = ColorState.Blue;
+
+                        _isBlocked = false;
+                    }
+                }
+                else
+                {
+                    // 1. 만약 경로를 찾을 수 없거나 몬스터가 해당 셀에 있는 경우, 타워 설치 못한다고 표시하기
+                    // 어짜피 Place 로직에서 한 번 더 하기 때문에 현재 로직은 보여주기용
+                    _ghostTower.SpineController.SetColor(ConstantConfig.RED_GHOST);
+                    _ghostTower.Detector.PaintRange(ConstantConfig.RED_RANGE);
+
+                    return;
+                }
+            }
+
+            // spine color
             if (true)
             {
                 if (_spineColorState == ColorState.None)
                 {
                     _ghostTower.SpineController.ResetColor();
-                }
-                else if (_spineColorState == ColorState.Blue)
-                {
-                    _ghostTower.SpineController.SetColor(ConstantConfig.BLUE_GHOST);
                 }
                 else if (_spineColorState == ColorState.Red)
                 {
@@ -105,6 +126,7 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
                 }
             }
 
+            // detector color
             if (true)
             {
                 if (_detectorColorState == ColorState.None)
@@ -117,16 +139,6 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
                 }
                 else if (_detectorColorState == ColorState.Red)
                 {
-                    _ghostTower.Detector.PaintRange(ConstantConfig.RED_RANGE);
-                }
-            }
-
-            if (_occupiedCellByGhost != null)
-            {
-                var monsters = _occupiedCellByGhost.monstersInCell;
-                if (monsters.Count > 0)
-                {
-                    _ghostTower.SpineController.SetColor(ConstantConfig.RED_GHOST);
                     _ghostTower.Detector.PaintRange(ConstantConfig.RED_RANGE);
                 }
             }
@@ -179,11 +191,10 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
         {
             MoveGhostTower(worldPos);
 
-            _prevSpineColorState = _spineColorState;
-            _prevDetectorColorState = _detectorColorState;
-
             _spineColorState = ColorState.Red;
             _detectorColorState = ColorState.None;
+
+            _isBlocked = false;
 
             _occupiedCellByGhost = null;
         }
@@ -195,15 +206,25 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
                 return;
             }
             // 비어있지 않거나 사용 불가능(시작점 혹은 도착점 등)인 경우
-            else if (!EmptyGridCell(gridCell) || !UsableGridCell(gridCell) || !CheckPath(gridCell, true))
+            else if (!EmptyGridCell(gridCell) || !UsableGridCell(gridCell))
             {
                 MoveGhostTower(gridCell.worldPosition);
 
-                _prevSpineColorState = _spineColorState;
-                _prevDetectorColorState = _detectorColorState;
+                _spineColorState = ColorState.Red;
+                _detectorColorState = ColorState.Red;
+
+                _isBlocked = false;
+
+                _occupiedCellByGhost = gridCell;
+            }
+            else if (!CheckPath(gridCell, true))
+            {
+                MoveGhostTower(gridCell.worldPosition);
 
                 _spineColorState = ColorState.Red;
                 _detectorColorState = ColorState.Red;
+
+                _isBlocked = true;
 
                 _occupiedCellByGhost = gridCell;
             }
@@ -212,11 +233,10 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
             {
                 MoveGhostTower(gridCell.worldPosition);
 
-                _prevSpineColorState = _spineColorState;
-                _prevDetectorColorState = _detectorColorState;
-
                 _spineColorState = ColorState.None;
                 _detectorColorState = ColorState.Blue;
+
+                _isBlocked = false;
 
                 _occupiedCellByGhost = gridCell;
             }
@@ -228,9 +248,6 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
         {
             return;
         }
-
-        _prevSpineColorState = _spineColorState;
-        _prevDetectorColorState = _detectorColorState;
 
         _spineColorState = ColorState.None;
         _detectorColorState = ColorState.None;
