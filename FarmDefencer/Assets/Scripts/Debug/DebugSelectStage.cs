@@ -14,11 +14,6 @@ public class DebugSelectStage : MonoBehaviour
 
     public void SelectMap()
     {
-        if (GameStateManager.Instance.CurrentState is not GameState.Main)
-        {
-            return;
-        }
-
         var maxUnlockedMapIndexStr = _maxUnlockedMapIndex.text;
         var maxUnlockedStageIndexStr = _maxUnlockedStageIndex.text;
 

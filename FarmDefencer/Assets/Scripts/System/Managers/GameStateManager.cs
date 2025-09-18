@@ -38,7 +38,7 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
 
     public bool IsBuildState => CurrentState == GameState.Build;
     public bool IsWaveState => CurrentState == GameState.WaveInProgress || CurrentState == GameState.WaveCompleted;
-    public bool IsDefenceState => IsBuildState || IsWaveState || CurrentState == GameState.DefenceEnd;
+    public bool IsPlayableDefenceState => IsBuildState || IsWaveState;
 
     private Dictionary<GameState, List<Delegate>> _stateCallbacks = new();
 

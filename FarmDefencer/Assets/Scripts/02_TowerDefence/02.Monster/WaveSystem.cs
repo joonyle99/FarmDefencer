@@ -91,23 +91,20 @@ public class WaveSystem : MonoBehaviour
     }
     private void Update()
     {
-        if (GameStateManager.Instance.CurrentState is not GameState.WaveInProgress
-            && GameStateManager.Instance.CurrentState is not GameState.WaveCompleted)
-            return;
-
-        // TODO: 남은 웨이브에 따라서...?
-        // 근데 웨이브 단위가 아닌 몬스터 단위로 해야 자연스러울 거 같은데
-        // 그러려면 나올 몬스터를 미리 다 정해놔야 하지 않을까..?
-        var remainWaveCount = _maxWaveCount - _currentWave;
-        if (remainWaveCount > 0)
+        if (GameStateManager.Instance.IsWaveState == true)
         {
-            _progressBar.UpdateProgressBar((float)remainWaveCount, (float)_maxWaveCount);
-        }
-        else
-        {
-            _progressBar.UpdateProgressBar(0f, (float)_maxWaveCount);
-
-            GameStateManager.Instance.ChangeState(GameState.WaveCompleted);
+            // TODO: 남은 웨이브에 따라서...?
+            // 근데 웨이브 단위가 아닌 몬스터 단위로 해야 자연스러울 거 같은데
+            // 그러려면 나올 몬스터를 미리 다 정해놔야 하지 않을까..?
+            var remainWaveCount = _maxWaveCount - _currentWave;
+            if (remainWaveCount > 0)
+            {
+                _progressBar.UpdateProgressBar((float)remainWaveCount, (float)_maxWaveCount);
+            }
+            else
+            {
+                _progressBar.UpdateProgressBar(0f, (float)_maxWaveCount);
+            }
         }
     }
 
@@ -150,8 +147,10 @@ public class WaveSystem : MonoBehaviour
     {
         // 모든 웨이브를 순회한다
         // 각 웨이브는 동일한 몬스터를 여러 번 스폰한다
-        foreach (var wave in _stageData.Waves)
+        for (int i = 0; i < _stageData.Waves.Count; i++)
         {
+            var wave = _stageData.Waves[i];
+
             // wave setting
             _currentWave++;
             _waitWaveTime = _waitWaveTimeRange.Random(); // 웨이브 대기 시간
@@ -188,9 +187,14 @@ public class WaveSystem : MonoBehaviour
                 _elapsedTime += Time.deltaTime;
             }
 
-            // 다음 웨이브 대기
-            yield return new WaitForSeconds(_waitWaveTime);
+            if (i < _stageData.Waves.Count - 1)
+            {
+                // 다음 웨이브 대기
+                yield return new WaitForSeconds(_waitWaveTime);
+            }
         }
+
+        GameStateManager.Instance.ChangeState(GameState.WaveCompleted);
 
         // 모든 웨이브가 종료되면 스테이지 종료 처리
         yield return new WaitUntil(() => CompleteStage == true);
@@ -200,10 +204,6 @@ public class WaveSystem : MonoBehaviour
     }
     public void StartWaveProcess()
     {
-        if (GameStateManager.Instance.CurrentState is not GameState.WaveInProgress
-            && GameStateManager.Instance.CurrentState is not GameState.WaveCompleted)
-            return;
-
         StartCoroutine(WaveProcessCo());
     }
     private IEnumerator WaveProcessCo()
@@ -220,9 +220,6 @@ public class WaveSystem : MonoBehaviour
     }
     private void CompleteStageProcess()
     {
-        if (GameStateManager.Instance.CurrentState is not GameState.WaveCompleted)
-            return;
-
         // 설치한 타워 가격의 총합
         var totalCost = DefenceContext.Current.GridMap.CalculateAllOccupiedTowerCost();
 

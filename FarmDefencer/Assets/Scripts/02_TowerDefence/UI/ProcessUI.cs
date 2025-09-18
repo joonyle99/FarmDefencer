@@ -78,9 +78,6 @@ public class ProcessUI : MonoBehaviour
     }
     private void RefreshButton()
     {
-        var isBuildState = GameStateManager.Instance.IsBuildState;
-        var isWaveState = GameStateManager.Instance.IsWaveState;
-
         if (_fightButton == null ||
             _pauseButton == null ||
             _resumeButton == null ||
@@ -90,10 +87,10 @@ public class ProcessUI : MonoBehaviour
             return;
         }
 
-        _fightButton.gameObject.SetActive(isBuildState);
+        _fightButton.gameObject.SetActive(GameStateManager.Instance.IsBuildState);
 
-        _resumeButton.gameObject.SetActive(isWaveState && GameStateManager.Instance.IsPause);
-        _pauseButton.gameObject.SetActive(isWaveState && !GameStateManager.Instance.IsPause);
+        _resumeButton.gameObject.SetActive(GameStateManager.Instance.IsWaveState && GameStateManager.Instance.IsPause);
+        _pauseButton.gameObject.SetActive(GameStateManager.Instance.IsWaveState && !GameStateManager.Instance.IsPause);
 
         _playX1Button.gameObject.SetActive(GameStateManager.Instance.IsPlayX2);
         _playX2Button.gameObject.SetActive(!GameStateManager.Instance.IsPlayX2);
@@ -101,61 +98,49 @@ public class ProcessUI : MonoBehaviour
 
     public void Fight()
     {
-        if (GameStateManager.Instance.IsBuildState == false)
+        if (GameStateManager.Instance.IsBuildState == true)
         {
-            return;
+            GameStateManager.Instance.ChangeState(GameState.WaveInProgress);
         }
-
-        GameStateManager.Instance.ChangeState(GameState.WaveInProgress);
     }
 
     public void TogglePause()
     {
-        if (GameStateManager.Instance.IsWaveState == false)
+        if (GameStateManager.Instance.IsWaveState == true)
         {
-            return;
+            GameStateManager.Instance.TogglePause();
+
+            // Pause 상태에 열려져 있다면 패널을 닫는다.
+            // Resume 상태에 닫혀져 있다면 패널을 연다.
+            if (GameStateManager.Instance.IsPause == _panelToggler.IsExpanded)
+            {
+                _panelToggler.TogglePanel();
+            }
+
+            _mainButtons.SetParent(GameStateManager.Instance.IsPause ? _pauseBlocker : _mainButtonsOriginParent, false);
+            _pauseBlocker.gameObject.SetActive(GameStateManager.Instance.IsPause);
+
+            _resumeButton.gameObject.SetActive(GameStateManager.Instance.IsPause);
+            _pauseButton.gameObject.SetActive(!GameStateManager.Instance.IsPause);
         }
-
-        GameStateManager.Instance.TogglePause();
-
-        // Pause 상태에 열려져 있다면 패널을 닫는다.
-        // Resume 상태에 닫혀져 있다면 패널을 연다.
-        if (GameStateManager.Instance.IsPause == _panelToggler.IsExpanded)
-        {
-            _panelToggler.TogglePanel();
-        }
-
-        _mainButtons.SetParent(GameStateManager.Instance.IsPause ? _pauseBlocker : _mainButtonsOriginParent, false);
-        _pauseBlocker.gameObject.SetActive(GameStateManager.Instance.IsPause);
-
-        _resumeButton.gameObject.SetActive(GameStateManager.Instance.IsPause);
-        _pauseButton.gameObject.SetActive(!GameStateManager.Instance.IsPause);
     }
     public void TogglePlaySpeed()
     {
-        if (GameStateManager.Instance.IsDefenceState == false)
+        if (GameStateManager.Instance.IsPlayableDefenceState == true)
         {
-            return;
-        }
+            GameStateManager.Instance.TogglePlaySpeed();
 
-        GameStateManager.Instance.TogglePlaySpeed();
+            _playX1Button.gameObject.SetActive(GameStateManager.Instance.IsPlayX2);
+            _playX2Button.gameObject.SetActive(!GameStateManager.Instance.IsPlayX2);
 
-        _playX1Button.gameObject.SetActive(GameStateManager.Instance.IsPlayX2);
-        _playX2Button.gameObject.SetActive(!GameStateManager.Instance.IsPlayX2);
-
-        if (GameStateManager.Instance.IsPlayX2)
-        {
-            //SoundManager.Instance.SetBgmDoubleSpeed();
-            //SoundManager.Instance.SetAmbDoubleSpeed();
-
-            SoundManager.Instance.PlayDefenceBgm(MapManager.Instance.CurrentMap, true);
-        }
-        else
-        {
-            //SoundManager.Instance.SetBgmNormalSpeed();
-            //SoundManager.Instance.SetAmbNormalSpeed();
-
-            SoundManager.Instance.PlayDefenceBgm(MapManager.Instance.CurrentMap, false);
+            if (GameStateManager.Instance.IsPlayX2)
+            {
+                SoundManager.Instance.PlayDefenceBgm(MapManager.Instance.CurrentMap, true);
+            }
+            else
+            {
+                SoundManager.Instance.PlayDefenceBgm(MapManager.Instance.CurrentMap, false);
+            }
         }
     }
 

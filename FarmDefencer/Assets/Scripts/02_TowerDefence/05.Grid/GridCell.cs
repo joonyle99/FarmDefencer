@@ -67,30 +67,27 @@ public class GridCell : MonoBehaviour
 
     public void OnTouch()
     {
-        // 현재 타워 건설 상태가 아니라면 이벤트를 처리하지 않는다
-        if (GameStateManager.Instance.IsDefenceState == false)
+        if (GameStateManager.Instance.IsPlayableDefenceState == true)
         {
-            return;
-        }
-
-        // 현재 포인터가 GridCell 위 (UI 요소 위) 에 있지 않다면 이벤트를 처리하지 않는다
-        if (EventSystem.current.IsPointerOverGameObject() == true)
-        {
-            return;
-        }
-
-        // 타워가 설치되어 있다면 패널을 보여준다
-        if (occupiedTower != null)
-        {
-            var upgradeUI = DefenceContext.Current.DefenceUIController.UpgradeUI;
-
-            if (upgradeUI.IsActive)
+            // 현재 포인터가 GridCell 위 (UI 요소 위) 에 있지 않다면 이벤트를 처리하지 않는다
+            if (EventSystem.current.IsPointerOverGameObject() == true)
             {
-                upgradeUI.HidePanel();
-                upgradeUI.ClearTower();
+                return;
             }
 
-            upgradeUI.ShowPanel(occupiedTower);
+            // 타워가 설치되어 있다면 패널을 보여준다
+            if (occupiedTower != null)
+            {
+                var upgradeUI = DefenceContext.Current.DefenceUIController.UpgradeUI;
+
+                if (upgradeUI.IsActive)
+                {
+                    upgradeUI.HidePanel();
+                    upgradeUI.ClearTower();
+                }
+
+                upgradeUI.ShowPanel(occupiedTower);
+            }
         }
     }
 

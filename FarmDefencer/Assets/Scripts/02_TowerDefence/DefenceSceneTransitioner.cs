@@ -62,22 +62,24 @@ public sealed class DefenceSceneTransitioner : MonoBehaviour
     }
     public static void OnGiveUp()
     {
-        // 중도 포기 상황에 대한 처리를 진행함.
-        // ResourceManager에 반환할 돈을 반환하고, 추가할 생존 몬스터를 추가함.
-
-        var isBeforeWave = (int)GameStateManager.Instance.CurrentState < (int)GameState.WaveInProgress;
-        if (isBeforeWave)
+        // Build 상태에서 중도 포기
+        if (GameStateManager.Instance.IsBuildState == true)
         {
+            // 사용한 돈을 모두 반환
             var totalCost = DefenceContext.Current.GridMap.CalculateAllOccupiedTowerCost();
             ResourceManager.Instance.Coin += totalCost;
-            return;
         }
-
-        foreach (var survivedMonster in DefenceContext.Current.WaveSystem.SurvivedMonsters)
+        // Wave 상태에서 중도 포기
+        else if (GameStateManager.Instance.IsWaveState == true)
         {
-            ResourceManager.Instance.SurvivedMonsters.Add(survivedMonster);
-        }
+            // 생존 몬스터를 추가함
+            foreach (var survivedMonster in DefenceContext.Current.WaveSystem.SurvivedMonsters)
+            {
+                ResourceManager.Instance.SurvivedMonsters.Add(survivedMonster);
+            }
 
-        SaveManager.Instance.LoadedSave["FarmClock"]["CurrentDaytime"] = 0.0f;
+            //
+            SaveManager.Instance.LoadedSave["FarmClock"]["CurrentDaytime"] = 0.0f;
+        }
     }
 }

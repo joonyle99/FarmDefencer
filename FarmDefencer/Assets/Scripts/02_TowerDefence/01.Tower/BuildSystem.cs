@@ -69,7 +69,7 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
     }
     private void Update()
     {
-        if (GameStateManager.Instance.IsBuildState)
+        if (GameStateManager.Instance.IsBuildState == true)
         {
             _buildTimer += Time.deltaTime;
 
@@ -87,50 +87,47 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
             }
         }
 
-        if (GameStateManager.Instance.IsDefenceState)
+        if (_ghostTower != null)
         {
-            if (_ghostTower != null)
+            if (true)
             {
-                if (true)
+                if (_spineColorState == ColorState.None)
                 {
-                    if (_spineColorState == ColorState.None)
-                    {
-                        _ghostTower.SpineController.ResetColor();
-                    }
-                    else if (_spineColorState == ColorState.Blue)
-                    {
-                        _ghostTower.SpineController.SetColor(ConstantConfig.BLUE_GHOST);
-                    }
-                    else if (_spineColorState == ColorState.Red)
-                    {
-                        _ghostTower.SpineController.SetColor(ConstantConfig.RED_GHOST);
-                    }
+                    _ghostTower.SpineController.ResetColor();
                 }
-
-                if (true)
+                else if (_spineColorState == ColorState.Blue)
                 {
-                    if (_detectorColorState == ColorState.None)
-                    {
-                        _ghostTower.Detector.EraseRange();
-                    }
-                    else if (_detectorColorState == ColorState.Blue)
-                    {
-                        _ghostTower.Detector.PaintRange(ConstantConfig.BLUE_RANGE);
-                    }
-                    else if (_detectorColorState == ColorState.Red)
-                    {
-                        _ghostTower.Detector.PaintRange(ConstantConfig.RED_RANGE);
-                    }
+                    _ghostTower.SpineController.SetColor(ConstantConfig.BLUE_GHOST);
                 }
-
-                if (_occupiedCellByGhost != null)
+                else if (_spineColorState == ColorState.Red)
                 {
-                    var monsters = _occupiedCellByGhost.monstersInCell;
-                    if (monsters.Count > 0)
-                    {
-                        _ghostTower.SpineController.SetColor(ConstantConfig.RED_GHOST);
-                        _ghostTower.Detector.PaintRange(ConstantConfig.RED_RANGE);
-                    }
+                    _ghostTower.SpineController.SetColor(ConstantConfig.RED_GHOST);
+                }
+            }
+
+            if (true)
+            {
+                if (_detectorColorState == ColorState.None)
+                {
+                    _ghostTower.Detector.EraseRange();
+                }
+                else if (_detectorColorState == ColorState.Blue)
+                {
+                    _ghostTower.Detector.PaintRange(ConstantConfig.BLUE_RANGE);
+                }
+                else if (_detectorColorState == ColorState.Red)
+                {
+                    _ghostTower.Detector.PaintRange(ConstantConfig.RED_RANGE);
+                }
+            }
+
+            if (_occupiedCellByGhost != null)
+            {
+                var monsters = _occupiedCellByGhost.monstersInCell;
+                if (monsters.Count > 0)
+                {
+                    _ghostTower.SpineController.SetColor(ConstantConfig.RED_GHOST);
+                    _ghostTower.Detector.PaintRange(ConstantConfig.RED_RANGE);
                 }
             }
         }
@@ -155,7 +152,7 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
     public void Pick(PointerEventData eventData)
     {
         // 빌드가 가능한 게임 상태인지, 돈이 충분한지 확인
-        if (BuildableState() && EnoughGold(SelectedTower))
+        if (GameStateManager.Instance.IsPlayableDefenceState == true && EnoughGold(SelectedTower))
         {
             Vector3 worldPos = ConvertToWorldPos(eventData.position);
             CreateGhostTower(worldPos);
@@ -340,12 +337,6 @@ public class BuildSystem : MonoBehaviour, IVolumeControl
     }
 
     //
-    private bool BuildableState()
-    {
-        return GameStateManager.Instance.CurrentState is GameState.Build
-            || GameStateManager.Instance.CurrentState is GameState.WaveInProgress
-            || GameStateManager.Instance.CurrentState is GameState.WaveCompleted;
-    }
     private bool CheckPath(GridCell gridCell, bool isDirty = false)
     {
         // gridCell을 기준으로 경로를 탐색하여 타워를 설치할 수 있는지 확인한다
