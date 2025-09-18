@@ -31,9 +31,10 @@ public class SceneChangeManager : JoonyleGameDevKit.Singleton<SceneChangeManager
     private void InitLoadedScene(Scene scene, LoadSceneMode mode)
     {
         // init sound
-        SoundManager.Instance.StopBgm();
-        SoundManager.Instance.StopAmb();
-        SoundManager.Instance.StopSfx();
+        SoundManager.Instance.StopAll();
+
+        // init speed
+        GameStateManager.Instance.InitTimeScale();
 
         // init game state
         StartCoroutine(InitDefaultGameState(scene));

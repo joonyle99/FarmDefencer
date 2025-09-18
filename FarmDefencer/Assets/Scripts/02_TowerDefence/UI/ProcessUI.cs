@@ -146,22 +146,15 @@ public class ProcessUI : MonoBehaviour
 
     public void Setting()
     {
-        //var isBuildState = GameStateManager.Instance.IsBuildState;
-        //var isWaveState = GameStateManager.Instance.IsWaveState;
+        if (GameStateManager.Instance.IsPlayableDefenceState == true)
+        {
+            DefenceSceneTransitioner.OnGiveUp();
 
-        //if (isBuildState == false || isWaveState == false)
-        //{
-        //    return;
-        //}
+            SaveManager.Instance.LoadedSave["MapManager"] = MapManager.Instance.Serialize();
+            SaveManager.Instance.LoadedSave["ResourceManager"] = ResourceManager.Instance.Serialize();
+            SaveManager.Instance.FlushSave();
 
-        // 중단하시겠습까?
-
-        DefenceSceneTransitioner.OnGiveUp();
-
-        SaveManager.Instance.LoadedSave["MapManager"] = MapManager.Instance.Serialize();
-        SaveManager.Instance.LoadedSave["ResourceManager"] = ResourceManager.Instance.Serialize();
-        SaveManager.Instance.FlushSave();
-        
-        SceneChangeManager.Instance.ChangeScene(SceneType.Main);
+            SceneChangeManager.Instance.ChangeScene(SceneType.Main);
+        }
     }
 }

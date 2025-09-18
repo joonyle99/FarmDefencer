@@ -31,7 +31,7 @@ public enum GameState
 
 public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
 {
-    #region State
+    #region State Variable
 
     private GameState _currentState = GameState.None;
     public GameState CurrentState => _currentState;
@@ -44,13 +44,20 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
 
     #endregion
 
-    #region Time
+    #region Time Variable
 
-    public bool IsPause { get; private set; } = false;
-    public bool IsPlayX2 { get; private set; } = false;
-    private float _savedTimeScale = 1f;
+    public bool IsPause { get; private set; }
+    public bool IsPlayX2 { get; private set; }
+    private float _lastTimeScale;
 
     #endregion
+
+    private void Start()
+    {
+        InitTimeScale();
+    }
+
+    #region State Function
 
     public void ChangeState(GameState nextState, params object[] args)
     {
@@ -107,6 +114,19 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
         }
     }
 
+    #endregion
+
+    #region Time Function
+
+    public void InitTimeScale()
+    {
+        IsPause = false;
+        IsPlayX2 = false;
+        _lastTimeScale = 1f;
+
+        Time.timeScale = _lastTimeScale;
+    }
+
     public void TogglePause()
     {
         // TODO: Pause를 하지 못하는 상황 체크
@@ -116,13 +136,13 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
         if (IsPause)
         {
             // pause 시점의 timeScale을 저장
-            _savedTimeScale = Time.timeScale;
+            _lastTimeScale = Time.timeScale;
             Time.timeScale = 0f;
             SoundManager.Instance.PauseAll();
         }
         else
         {
-            Time.timeScale = _savedTimeScale;
+            Time.timeScale = _lastTimeScale;
             SoundManager.Instance.ResumeAll();
         }
     }
@@ -144,6 +164,8 @@ public class GameStateManager : JoonyleGameDevKit.Singleton<GameStateManager>
             Time.timeScale = 1f;
         }
 
-        _savedTimeScale = Time.timeScale;
+        _lastTimeScale = Time.timeScale;
     }
+    
+    #endregion
 }

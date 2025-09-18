@@ -343,6 +343,12 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
     }
 
     //
+    public void StopAll()
+    {
+        StopBgm();
+        StopAmb();
+        StopSfx();
+    }
     public void PauseAll()
     {
         _bgmAudioSource1.Pause();
