@@ -12,6 +12,10 @@ public class VideoController : MonoBehaviour
     {
         _videoPlayer = GetComponent<VideoPlayer>();
     }
+    private void Start()
+    {
+        DefenceContext.Current.DefenceUIController.LoadingUI.gameObject.SetActive(true);
+    }
 
     public void PlayVideo(string mapCode)
     {
