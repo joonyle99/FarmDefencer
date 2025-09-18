@@ -90,7 +90,8 @@ public class ProgressBar : MonoBehaviour
 
     public float GetBarWidth()
     {
-        return _bar.GetComponent<RectTransform>().rect.width;
+        var rectTransform = _bar.GetComponent<RectTransform>();
+        return rectTransform.rect.width;
     }
     public float GetProgress()
     {
