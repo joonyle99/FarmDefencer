@@ -1,13 +1,9 @@
 using DG.Tweening;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-public class WorldPageController : MonoBehaviour, IDragHandler, IEndDragHandler
+public class WorldPageController : MonoBehaviour
 {
     [SerializeField] private WorldUI _worldUI;
     [SerializeField] private RectTransform _contentTransform;
@@ -26,15 +22,17 @@ public class WorldPageController : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private float _step;
     private int _curPage;
-    private List<float> _originPosXList = new List<float>();
+
+    private List<float> _originPosXList = new();
+
+    public int CurPage => _curPage;
+    public float CurPagePosX => -1 * _step * (_curPage - 1);
 
     public bool CanPrevPaging => _worldUI.TravelMap.MapId > MapManager.Instance.MinMapIdx;
     public bool CanNextPaging => _worldUI.TravelMap.MapId < MapManager.Instance.MaxMapIdx;
     public bool UnlockNextPaging => _worldUI.TravelMap.MapId < MapManager.Instance.MaximumUnlockedMapIndex;
 
-    public float TargetPosX => -1 * _step * (_curPage - 1);
-
-    private void Start()
+    private void Awake()
     {
         // 페이지 스텝 계산
         var child = _contentTransform.GetChild(0);
@@ -51,11 +49,13 @@ public class WorldPageController : MonoBehaviour, IDragHandler, IEndDragHandler
         }
 
         // 버튼 이벤트 등록
-        _prevButton.onClick.AddListener(() => PrevPage());
-        _nextButton.onClick.AddListener(() => NextPage());
-
+        _prevButton.onClick.AddListener(() => MovePrevPage());
+        _nextButton.onClick.AddListener(() => MoveNextPage());
+    }
+    private void Start()
+    {
         // 현재 페이지 초기화
-        InitCurrentPage();
+        InitCurrPage();
 
         // 페이지 위치 초기화
         MovePageInstant();
@@ -64,11 +64,11 @@ public class WorldPageController : MonoBehaviour, IDragHandler, IEndDragHandler
         Refresh();
     }
 
-    private void InitCurrentPage()
+    public void InitCurrPage()
     {
         _curPage = _worldUI.TravelMap.MapId;
     }
-    private void UpdateCurrentPage()
+    public void UpdateCurrPage()
     {
         var tempPage = -1;
         var curPosX = _contentTransform.anchoredPosition.x;
@@ -89,12 +89,49 @@ public class WorldPageController : MonoBehaviour, IDragHandler, IEndDragHandler
         {
             if (tempPage < _curPage)
             {
-                PrevPage(true);
+                MovePrevPage(true);
             }
             else
             {
-                NextPage(true);
+                MoveNextPage(true);
             }
+        }
+    }
+
+    public void MoveCurrPage(bool skipMove = false)
+    {
+        if (skipMove == false)
+        {
+            MovePageSmooth();
+        }
+        Refresh();
+    }
+    public void MovePrevPage(bool skipMove = false)
+    {
+        if (CanPrevPaging)
+        {
+            var prevPage = _curPage - 1;
+            _worldUI.ChangeTravelMap(prevPage);
+            _curPage = prevPage;
+            if (skipMove == false)
+            {
+                MovePageSmooth();
+            }
+            Refresh();
+        }
+    }
+    public void MoveNextPage(bool skipMove = false)
+    {
+        if (CanNextPaging)
+        {
+            var nextPage = _curPage + 1;
+            _worldUI.ChangeTravelMap(nextPage);
+            _curPage = nextPage;
+            if (skipMove == false)
+            {
+                MovePageSmooth();
+            }
+            Refresh();
         }
     }
 
@@ -111,58 +148,12 @@ public class WorldPageController : MonoBehaviour, IDragHandler, IEndDragHandler
         _nextButton.interactable = CanNextPaging && UnlockNextPaging;
     }
 
-    public void CurrPage(bool skipMove = false)
-    {
-        if (skipMove == false)
-        {
-            MovePageSmooth();
-        }
-        Refresh();
-    }
-    public void PrevPage(bool skipMove = false)
-    {
-        if (CanPrevPaging)
-        {
-            var prevPage = _curPage - 1;
-            _worldUI.ChangeTravelMap(prevPage);
-            _curPage = prevPage;
-            if (skipMove == false)
-            {
-                MovePageSmooth();
-            }
-            Refresh();
-        }
-    }
-    public void NextPage(bool skipMove = false)
-    {
-        if (CanNextPaging)
-        {
-            var nextPage = _curPage + 1;
-            _worldUI.ChangeTravelMap(nextPage);
-            _curPage = nextPage;
-            if (skipMove == false)
-            {
-                MovePageSmooth();
-            }
-            Refresh();
-        }
-    }
-
     private void MovePageInstant()
     {
-        _contentTransform.anchoredPosition = new Vector2(TargetPosX, _contentTransform.anchoredPosition.y);
+        _contentTransform.anchoredPosition = new Vector2(CurPagePosX, _contentTransform.anchoredPosition.y);
     }
     private void MovePageSmooth()
     {
-        _contentTransform.DOAnchorPosX(TargetPosX, _pagingDuration).SetEase(_pagingType);
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        UpdateCurrentPage();
-    }
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        CurrPage();
+        _contentTransform.DOAnchorPosX(CurPagePosX, _pagingDuration).SetEase(_pagingType);
     }
 }
