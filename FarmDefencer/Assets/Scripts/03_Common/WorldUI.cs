@@ -23,6 +23,7 @@ public class WorldUI : MonoBehaviour
 
     public void GoToMain()
     {
+        SoundManager.Instance.PlaySfx("SFX_C_ui", SoundManager.Instance.uiVolume);
         SceneChangeManager.Instance.ChangeScene(SceneType.Main);
     }
 

@@ -69,11 +69,13 @@ public sealed class MainScene : MonoBehaviour
 
     private void OnFarmButtonClicked()
     {
+        SoundManager.Instance.PlaySfx("SFX_C_ui", SoundManager.Instance.uiVolume);
         SceneChangeManager.Instance.ChangeScene(SceneType.Tycoon);
     }
 
     private void OnBattleButtonClicked()
     {
+        SoundManager.Instance.PlaySfx("SFX_C_ui", SoundManager.Instance.uiVolume);
         SceneChangeManager.Instance.ChangeScene(SceneType.World);
     }
 

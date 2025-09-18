@@ -145,6 +145,7 @@ public sealed class FarmManager : MonoBehaviour
             () =>
             { 
                 SerializeToSaveFile();
+                SoundManager.Instance.PlaySfx("SFX_C_ui", SoundManager.Instance.uiVolume);
                 SceneChangeManager.Instance.ChangeScene(SceneType.Main);
             },
             () => CanGoDefence);
@@ -216,7 +217,9 @@ public sealed class FarmManager : MonoBehaviour
         {
             return;
         }
-        
+
+        SoundManager.Instance.PlaySfx("SFX_C_ui", SoundManager.Instance.uiVolume);
+
         MapManager.Instance.CurrentMapIndex = MapManager.Instance.MaximumUnlockedMapIndex;
         MapManager.Instance.CurrentStageIndex = MapManager.Instance.MaximumUnlockedStageIndex;
 

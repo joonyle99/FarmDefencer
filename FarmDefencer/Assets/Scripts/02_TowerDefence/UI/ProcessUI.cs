@@ -154,6 +154,7 @@ public class ProcessUI : MonoBehaviour
             SaveManager.Instance.LoadedSave["ResourceManager"] = ResourceManager.Instance.Serialize();
             SaveManager.Instance.FlushSave();
 
+            SoundManager.Instance.PlaySfx("SFX_C_ui", SoundManager.Instance.uiVolume);
             SceneChangeManager.Instance.ChangeScene(SceneType.Main);
         }
     }

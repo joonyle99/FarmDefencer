@@ -1,13 +1,13 @@
+using Spine.Unity;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
-using Spine.Unity;
 
 public sealed class GoDefenceUI : MonoBehaviour, IFarmInputLayer
 {
     private Button _goDefenceButton;
     private SkeletonGraphic _skeletonGraphic;
-    
+
     public void Init(Action onGoDefenceButtonClicked) => _goDefenceButton.onClick.AddListener(() => onGoDefenceButtonClicked());
     
     private void Awake()
@@ -32,7 +32,7 @@ public sealed class GoDefenceUI : MonoBehaviour, IFarmInputLayer
 
     private void OnEnable()
     {
-        SoundManager.Instance.PlaySfx("SFX_C_alarm");
+        SoundManager.Instance.PlaySfx("SFX_C_alarm", SoundManager.Instance.alarmVolume);
         ApplyStageIndex();
     }
 

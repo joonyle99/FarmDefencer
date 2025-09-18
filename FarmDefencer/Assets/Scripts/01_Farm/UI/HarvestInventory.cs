@@ -227,7 +227,7 @@ public sealed class HarvestInventory : MonoBehaviour, IFarmSerializable
 
             if (count % 10 == 0)
             {
-                SoundManager.Instance.PlaySfx("SFX_T_coin");
+                SoundManager.Instance.PlaySfx("SFX_T_coin", SoundManager.Instance.coinVolume);
             }
 
             harvestBox.FillQuota(out var price, out var reAssigned);

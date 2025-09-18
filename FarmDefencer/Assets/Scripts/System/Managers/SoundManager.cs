@@ -67,6 +67,8 @@ public class SoundManager : JoonyleGameDevKit.Singleton<SoundManager>, IVolumeCo
     [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float pestCatchVolume = 0.5f;
     [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float orderResetVolume = 0.5f;
     [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float eatCropsVolume = 0.5f;
+    [VolumeControl("Common")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float uiVolume = 0.5f;
+    [VolumeControl("Common")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float alarmVolume = 0.5f;
 
     [CanBeNull] public string CurrentBgmName { get; private set; }
     public float CurrentBgmTime => _bgmAudioSource1.time;

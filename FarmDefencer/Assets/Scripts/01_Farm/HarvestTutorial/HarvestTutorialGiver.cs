@@ -42,6 +42,8 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer, IFarm
     // 저장되는 값
     private List<string> _finishedTutorials;
 
+    [VolumeControl("Tycoon")][BoxGroup("볼륨 조절")][Range(0f, 1f)] public float unlockVolume = 0.5f;
+
     public void Init(Action<ProductEntry> showCropGuide, Func<bool> isCropGuideShowing)
     {
         _showCropGuide = showCropGuide;
@@ -214,7 +216,7 @@ public sealed class HarvestTutorialGiver : MonoBehaviour, IFarmInputLayer, IFarm
             {
                 _signRectTransform.anchoredPosition = new Vector2(0, Screen.height);
                 _signRectTransform.gameObject.SetActive(true);
-                SoundManager.Instance.PlaySfx("SFX_T_unlock");
+                SoundManager.Instance.PlaySfx("SFX_T_unlock", unlockVolume);
 
                 var sequence = DOTween.Sequence();
 
