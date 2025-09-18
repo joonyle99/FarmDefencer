@@ -85,27 +85,16 @@ public class WaveSystem : MonoBehaviour
 
     #region Functions
 
-    private void Start()
+    private void Awake()
     {
-        GameStateManager.Instance.OnWaveState += InitStageData;
-        GameStateManager.Instance.OnWaveState += InitProgressBar;
-        GameStateManager.Instance.OnWaveState += StartWaveProcess;
+        GameStateManager.Instance?.AddCallback(GameState.WaveInProgress, (Action)InitStageData);
+        GameStateManager.Instance?.AddCallback(GameState.WaveInProgress, (Action)InitProgressBar);
+        GameStateManager.Instance?.AddCallback(GameState.WaveInProgress, (Action)StartWaveProcess);
     }
-
-    private void OnDestroy()
-    {
-        if (GameStateManager.Instance is not null)
-        {
-            GameStateManager.Instance.OnWaveState -= InitStageData;
-            GameStateManager.Instance.OnWaveState -= InitProgressBar;
-            GameStateManager.Instance.OnWaveState -= StartWaveProcess;
-        }
-    }
-
     private void Update()
     {
-        if (GameStateManager.Instance.CurrentState is not GameState.Wave
-            && GameStateManager.Instance.CurrentState is not GameState.WaveAfter)
+        if (GameStateManager.Instance.CurrentState is not GameState.WaveInProgress
+            && GameStateManager.Instance.CurrentState is not GameState.WaveCompleted)
             return;
 
         // TODO: 남은 웨이브에 따라서...?
@@ -120,7 +109,7 @@ public class WaveSystem : MonoBehaviour
         {
             _progressBar.UpdateProgressBar(0f, (float)_maxWaveCount);
 
-            GameStateManager.Instance.ChangeState(GameState.WaveAfter);
+            GameStateManager.Instance.ChangeState(GameState.WaveCompleted);
         }
     }
 
@@ -213,8 +202,8 @@ public class WaveSystem : MonoBehaviour
     }
     public void StartWaveProcess()
     {
-        if (GameStateManager.Instance.CurrentState is not GameState.Wave
-            && GameStateManager.Instance.CurrentState is not GameState.WaveAfter)
+        if (GameStateManager.Instance.CurrentState is not GameState.WaveInProgress
+            && GameStateManager.Instance.CurrentState is not GameState.WaveCompleted)
             return;
 
         StartCoroutine(WaveProcessCo());
@@ -229,15 +218,12 @@ public class WaveSystem : MonoBehaviour
     private void CompleteWaveProcess()
     {
         // Do Something
-        Debug.Log($"<color=orange>Complete {_currentWave} Wave</color>");
+        // Debug.Log($"<color=yellow>Complete {_currentWave} Wave</color>");
     }
     private void CompleteStageProcess()
     {
-        if (GameStateManager.Instance.CurrentState is not GameState.WaveAfter)
+        if (GameStateManager.Instance.CurrentState is not GameState.WaveCompleted)
             return;
-
-        // TODO: Fight 버튼, 타워 설치, 등 불가능하게 막기
-        GameStateManager.Instance.ChangeState(GameState.DefenceEnd);
 
         // 설치한 타워 가격의 총합
         var totalCost = DefenceContext.Current.GridMap.CalculateAllOccupiedTowerCost();

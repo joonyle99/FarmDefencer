@@ -71,8 +71,19 @@ public class EndingUI : MonoBehaviour, IVolumeControl
         SoundManager.Instance.PlaySfx($"SFX_D_stage_{ConvertToEndingText(endingType)}", endingVolume, () =>
         {
             // on complete
-            GameStateManager.Instance.ChangeState(GameState.LeavingDefenceScene, endingType);
+            GameStateManager.Instance.ChangeState(GameState.DefenceEnd, endingType);
         });
+
+        // TODO: ...
+        {
+            SoundManager.Instance.StopBgm();
+
+            // TODO: Fight 버튼, 타워 설치, 등 불가능하게 막기
+            DefenceContext.Current.DefenceUIController.ProcessUI.PauseBlocker.gameObject.SetActive(true);
+
+            // TODO: 게임 배속 복구하기
+            Time.timeScale = 1f;
+        }
 
         // fade
         _fadeImage.gameObject.SetActive(true);

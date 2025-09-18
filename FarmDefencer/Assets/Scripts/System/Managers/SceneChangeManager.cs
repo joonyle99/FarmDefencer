@@ -3,9 +3,6 @@ using JoonyleGameDevKit;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-/// <summary>
-/// 팜디펜서의 모든 씬을 관리한다
-/// </summary>
 public enum SceneType
 {
     None,
@@ -24,12 +21,32 @@ public class SceneChangeManager : JoonyleGameDevKit.Singleton<SceneChangeManager
     {
         base.Awake();
 
-        SceneManager.sceneLoaded -= HandleSceneLoaded;
-        SceneManager.sceneLoaded += HandleSceneLoaded;
+        SceneManager.sceneLoaded += InitLoadedScene;
     }
     private void OnDestroy()
     {
-        SceneManager.sceneLoaded -= HandleSceneLoaded;
+        SceneManager.sceneLoaded -= InitLoadedScene;
+    }
+
+    private void InitLoadedScene(Scene scene, LoadSceneMode mode)
+    {
+        // init sound
+        SoundManager.Instance.StopBgm();
+        SoundManager.Instance.StopAmb();
+        SoundManager.Instance.StopSfx();
+
+        // init game state
+        StartCoroutine(InitDefaultGameState(scene));
+    }
+    private IEnumerator InitDefaultGameState(Scene scene)
+    {
+        yield return null;
+
+        var sceneName = scene.name;
+        var sceneType = sceneName.ToSceneType();
+        var defaultState = GetDefaultGameState(sceneType);
+
+        GameStateManager.Instance.ChangeState(defaultState);
     }
 
     private GameState GetDefaultGameState(SceneType sceneType)
@@ -52,22 +69,6 @@ public class SceneChangeManager : JoonyleGameDevKit.Singleton<SceneChangeManager
             default:
                 return GameState.None;
         }
-    }
-
-    private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        StartCoroutine(SceneLoadedCo(scene));
-    }
-    private IEnumerator SceneLoadedCo(Scene scene)
-    {
-        // wait 1 frame to rigister game state handler
-        yield return null;
-
-        var sceneName = scene.name;
-        var sceneType = sceneName.ToSceneType();
-        var defaultState = GetDefaultGameState(sceneType);
-
-        GameStateManager.Instance.ChangeState(defaultState);
     }
 
     public void ChangeScene(SceneType sceneType)

@@ -45,6 +45,11 @@ public class DefenceContext : MonoBehaviour
             Debug.LogError("DefenceContext is not ready.");
         }
     }
+    private void Start()
+    {
+        SoundManager.Instance.PlayDefenceAmb(MapManager.Instance.CurrentMap);
+        SoundManager.Instance.PlayDefenceBgm(MapManager.Instance.CurrentMap);
+    }
 
     private void OnEnable()
     {
