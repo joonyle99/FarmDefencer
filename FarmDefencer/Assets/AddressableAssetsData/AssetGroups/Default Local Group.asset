@@ -15,13 +15,13 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 370d0f2830c8f5d4883008d2efaa0795
   m_SerializeEntries:
-  - m_GUID: 0024f3ef2c8fb1e4b8b1a54255831844
-    m_Address: cave_video
+  - m_GUID: 086c4dddbbf7a5c45b26d26262b6748c
+    m_Address: monster_rabbit_Material
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 086c4dddbbf7a5c45b26d26262b6748c
-    m_Address: monster_rabbit_Material
+  - m_GUID: 097309cf90d01fc4aa4779d358a4cd62
+    m_Address: cave_video
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -55,11 +55,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 21703b588c8fa90459e65f2dda92d81d
-    m_Address: forest_video
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2d48317c66a3e4444b4b05afe2e717b7
     m_Address: monster_bat_Material
     m_ReadOnly: 0
@@ -67,11 +62,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2e2594c49efcf7c409ef0e6ce5dfcedc
     m_Address: forest_arrival
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2e7e5d0beb9c45d418986f5f67e5a0a6
-    m_Address: beach_video
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -185,6 +175,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d2c4f19b071786e4ca2abe7ccb59e4f7
+    m_Address: forest_video
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d3ba1e65a3e320746935baf709d9d36f
     m_Address: monster_blowfish_SkeletonData
     m_ReadOnly: 0
@@ -212,6 +207,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f31a534a1bbe9134fa64b55f062ffb00
     m_Address: cave_departure
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fdb11932bf2facc4db93bdd9b122f67c
+    m_Address: beach_video
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
