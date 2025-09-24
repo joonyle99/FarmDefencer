@@ -3,7 +3,7 @@ using UnityEngine.Video;
 
 public class VideoController : MonoBehaviour
 {
-    [SerializeField] private Transform _background;
+    [SerializeField] private Transform _videoPaper;
     private VideoPlayer _videoPlayer;
 
     private void Awake()
@@ -21,8 +21,8 @@ public class VideoController : MonoBehaviour
             return;
         }
 
-        _background.gameObject.SetActive(true);
-        _background.transform.position = gridMap.CenterWorldPos;
+        _videoPaper.gameObject.SetActive(true);
+        _videoPaper.transform.position = gridMap.CenterWorldPos;
     }
     private void OnEnable()
     {

@@ -2002,9 +2002,9 @@ GameObject:
   - component: {fileID: 868308897}
   - component: {fileID: 868308893}
   - component: {fileID: 868308896}
+  - component: {fileID: 868308898}
   - component: {fileID: 868308895}
   - component: {fileID: 868308890}
-  - component: {fileID: 868308898}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -2134,7 +2134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7cb2131ac3c1034b95084b1ea86a681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _backgroundRenderer: {fileID: 2063676434}
 --- !u!114 &868308896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2147,7 +2146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e251f6950e14f48be51bae289654a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _background: {fileID: 2063676432}
+  _videoPaper: {fileID: 2063676432}
 --- !u!328 &868308897
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -2421,7 +2420,7 @@ GameObject:
   - component: {fileID: 2063676435}
   - component: {fileID: 2063676434}
   m_Layer: 0
-  m_Name: Background
+  m_Name: VideoPaper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
