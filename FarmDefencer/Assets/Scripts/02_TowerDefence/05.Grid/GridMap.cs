@@ -30,6 +30,9 @@ public class GridMap : MonoBehaviour
     private int _width;
     public int Width => _width;
 
+    private Vector2 _centerWorldPos;
+    public Vector2 CenterWorldPos => _centerWorldPos;
+
     // start / end targetPos
     public Vector2Int StartCellPoint { get; private set; }
     public Vector3 StartWorldPoint => CellToWorld(StartCellPoint.ToVector3Int());
@@ -95,12 +98,10 @@ public class GridMap : MonoBehaviour
         _mapSize = _tilemap.size.ToVector2Int();
         _originPoint = _tilemap.origin.ToVector2Int();
 
-        //Debug.Log($"_cellSize: {_cellSize}");
-        //Debug.Log($"_mapSize: {_mapSize}");
-        //Debug.Log($"_originPoint: {_originPoint}");
-
         _height = _mapSize.y;
         _width = _mapSize.x;
+
+        _centerWorldPos = new Vector2(_width / 2f, _height / 2f);
 
         var minX = 1;
         var minY = 1;

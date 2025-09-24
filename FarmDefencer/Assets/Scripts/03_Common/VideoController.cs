@@ -3,9 +3,7 @@ using UnityEngine.Video;
 
 public class VideoController : MonoBehaviour
 {
-    //[Header("──────── VideoController ────────")]
-    //[Space]
-
+    [SerializeField] private Transform _background;
     private VideoPlayer _videoPlayer;
 
     private void Awake()
@@ -14,9 +12,37 @@ public class VideoController : MonoBehaviour
     }
     private void Start()
     {
-        DefenceContext.Current.DefenceUIController.LoadingUI.gameObject.SetActive(true);
+        DefenceContext.Current?.DefenceUIController?.LoadingUI.gameObject.SetActive(true);
+
+        var gridMap = DefenceContext.Current.GridMap;
+
+        if (gridMap == null)
+        {
+            return;
+        }
+
+        _background.gameObject.SetActive(true);
+        _background.transform.position = gridMap.CenterWorldPos;
+    }
+    private void OnEnable()
+    {
+        if (MapManager.Instance is not null)
+        {
+            MapManager.Instance.OnMapChanged += HandleBackgroundVideo;
+        }
+    }
+    private void OnDisable()
+    {
+        if (MapManager.Instance is not null)
+        {
+            MapManager.Instance.OnMapChanged -= HandleBackgroundVideo;
+        }
     }
 
+    private void HandleBackgroundVideo(MapEntry map)
+    {
+        PlayVideo(map.MapCode);
+    }
     public void PlayVideo(string mapCode)
     {
         var videoClip = ResourceCache.Get<VideoClip>($"{mapCode}_video");
@@ -27,12 +53,11 @@ public class VideoController : MonoBehaviour
         _videoPlayer.Prepare();
         _videoPlayer.prepareCompleted += OnVideoPrepared;
     }
-
     private void OnVideoPrepared(VideoPlayer videoPlayer)
     {
         videoPlayer.prepareCompleted -= OnVideoPrepared;
         videoPlayer.Play();
 
-        DefenceContext.Current.DefenceUIController.LoadingUI.gameObject.SetActive(false);
+        DefenceContext.Current?.DefenceUIController?.LoadingUI.gameObject.SetActive(false);
     }
 }
