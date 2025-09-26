@@ -2134,6 +2134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7cb2131ac3c1034b95084b1ea86a681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveSpeed: 3
+  _zoomSpeed: 150
 --- !u!114 &868308896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2194,6 +2196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _contentRenderer: {fileID: 2063676434}
+  _minOrthograpicSize: 3
 --- !u!114 &1231187496 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5144188147709257072, guid: 54e7b290cc9254142987b8b22c6d3d23, type: 3}
@@ -2957,9 +2960,9 @@ SceneRoots:
   m_Roots:
   - {fileID: 327674816}
   - {fileID: 755706060}
-  - {fileID: 278503629}
   - {fileID: 7868551348502394872}
   - {fileID: 8197640319008509917}
+  - {fileID: 278503629}
   - {fileID: 678263504}
   - {fileID: 1611469693}
   - {fileID: 381404303}

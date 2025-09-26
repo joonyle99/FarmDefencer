@@ -4,6 +4,7 @@ using UnityEngine.Video;
 public class VideoController : MonoBehaviour
 {
     [SerializeField] private Transform _videoPaper;
+
     private VideoPlayer _videoPlayer;
 
     private void Awake()
@@ -12,6 +13,7 @@ public class VideoController : MonoBehaviour
     }
     private void Start()
     {
+        // GOGO: 임시 코드
         DefenceContext.Current?.DefenceUIController?.LoadingUI.gameObject.SetActive(true);
 
         var gridMap = DefenceContext.Current.GridMap;
@@ -28,18 +30,18 @@ public class VideoController : MonoBehaviour
     {
         if (MapManager.Instance is not null)
         {
-            MapManager.Instance.OnMapChanged += HandleBackgroundVideo;
+            MapManager.Instance.OnMapChanged += HandleVideo;
         }
     }
     private void OnDisable()
     {
         if (MapManager.Instance is not null)
         {
-            MapManager.Instance.OnMapChanged -= HandleBackgroundVideo;
+            MapManager.Instance.OnMapChanged -= HandleVideo;
         }
     }
 
-    private void HandleBackgroundVideo(MapEntry map)
+    private void HandleVideo(MapEntry map)
     {
         PlayVideo(map.MapCode);
     }
@@ -58,6 +60,7 @@ public class VideoController : MonoBehaviour
         videoPlayer.prepareCompleted -= OnVideoPrepared;
         videoPlayer.Play();
 
+        // GOGO: 임시 코드
         DefenceContext.Current?.DefenceUIController?.LoadingUI.gameObject.SetActive(false);
     }
 }
