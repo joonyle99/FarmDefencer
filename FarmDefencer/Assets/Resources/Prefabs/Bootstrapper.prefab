@@ -140,7 +140,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5134816359287579386}
+  - {fileID: 9019129527513772316}
   - {fileID: 7602377513724955604}
   - {fileID: 3985122136434378047}
   - {fileID: 6935947837864842248}
@@ -352,6 +352,38 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+--- !u!1 &3167066468956404453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9019129527513772316}
+  m_Layer: 0
+  m_Name: InputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9019129527513772316
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3167066468956404453}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5134816359287579386}
+  m_Father: {fileID: 2329614770682793687}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3202066468314873727
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,9 +620,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5134816359287579386}
-  - component: {fileID: 2792486438964417520}
+  - component: {fileID: 5097830171941965056}
   m_Layer: 0
-  m_Name: InputManager
+  m_Name: DefenceInputManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -609,9 +641,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2329614770682793687}
+  m_Father: {fileID: 9019129527513772316}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2792486438964417520
+--- !u!114 &5097830171941965056
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -620,18 +652,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4584752002382857284}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9761833c2a2371a42b1ae118b338e7c7, type: 3}
+  m_Script: {fileID: 11500000, guid: a04e233591840ae4882ca2cfdee10b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
 --- !u!1 &6184006915243889826
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,6 +1173,8 @@ MonoBehaviour:
   pestCatchVolume: 0.5
   orderResetVolume: 0.3
   eatCropsVolume: 0.5
+  uiVolume: 0.5
+  alarmVolume: 0.5
 --- !u!81 &8396262421793352476
 AudioListener:
   m_ObjectHideFlags: 0

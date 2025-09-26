@@ -1,0 +1,94 @@
+{
+    "name": "DefenceInput",
+    "maps": [
+        {
+            "name": "Defence Action Map",
+            "id": "fd05b56e-2e5d-4da1-b764-13fd02392ec7",
+            "actions": [
+                {
+                    "name": "PointerPosition",
+                    "type": "Value",
+                    "id": "342b1b47-a0c2-422f-9a7f-6406a65b1518",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "PointerDelta",
+                    "type": "Value",
+                    "id": "2dc0feb9-6f44-4331-9af3-0a1e8c6964f6",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "PointerPress",
+                    "type": "Button",
+                    "id": "92b82034-40e6-45bc-b5c2-e210d921302f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MouseScrollY",
+                    "type": "PassThrough",
+                    "id": "e88f8fd0-2619-4ce3-b1b4-350caeec6e3f",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7f58141e-dd07-41ac-91ef-a4a2ec2ac514",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseScrollY",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d481ada-806c-4060-8a5b-51a607304239",
+                    "path": "<Pointer>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PointerDelta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fbcf1a9b-14c3-4b33-ad31-40c2c865428f",
+                    "path": "<Pointer>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PointerPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd2facf5-6359-4b06-94b7-23cc2584abc0",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PointerPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
